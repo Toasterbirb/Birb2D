@@ -1,7 +1,8 @@
 #pragma once
 
 //#include <SDL2/SDL.h>
-#include </usr/include/SDL2/SDL.h>
+//#include </usr/include/SDL2/SDL.h>
+#include "../vendor/SDL2/SDL.h"
 #include <iostream>
 #include <cstdlib>
 

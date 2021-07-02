@@ -1,13 +1,39 @@
-#include <SDL2/SDL_render.h>
+//#include <SDL2/SDL_render.h>
 #include <iostream>
 
 #include "../include/RenderWindow.hpp"
+#include "../include/Audio.hpp"
 #include "../include/Entity.hpp"
 
 RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h)
 	:window(NULL), renderer(NULL)
 {
-	window = SDL_CreateWindow(p_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_w, p_h,
+	// INIT SDL STUFF
+	// Remember to call cleanUp function when closing the window
+	// You will have to call SDL_Quit() separately when closing the game
+
+	// Init SDL
+	if (SDL_Init(SDL_INIT_VIDEO) > 0)
+		std::cout << "SDL INIT FAILED: " << SDL_GetError() << "\n";
+
+	// Init SDL_image
+	if (!(IMG_Init(IMG_INIT_PNG)))
+		std::cout << "IMG_init has failed. Error: " << SDL_GetError() << "\n";
+
+	// Init SDL_ttf
+	if (TTF_Init() == -1) {
+		std::cout << "TTF_Init has failed. Error: " << TTF_GetError() << "\n";
+    	exit(2);
+	}
+
+	// Init SDL_mixer
+	Audio audio;
+	audio.initAudio(MIX_INIT_MP3);
+
+
+	window = SDL_CreateWindow(p_title,
+			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+			p_w, p_h,
 			SDL_WINDOW_SHOWN);
 
 	if (window == NULL)
@@ -99,6 +125,9 @@ int RenderWindow::getRefreshRate()
 
 void RenderWindow::cleanUp()
 {
+	TTF_Quit();
+	Mix_CloseAudio();
+	Mix_Quit();
 	SDL_DestroyWindow(window);
 }
 
