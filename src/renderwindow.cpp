@@ -5,8 +5,8 @@
 #include "../include/Audio.hpp"
 #include "../include/Entity.hpp"
 
-RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h)
-	:window(NULL), renderer(NULL)
+RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate)
+	:window(NULL), renderer(NULL), refresh_rate(p_refresh_rate)
 {
 	// INIT SDL STUFF
 	// Remember to call cleanUp function when closing the window

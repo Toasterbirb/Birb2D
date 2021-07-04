@@ -12,7 +12,7 @@
 class RenderWindow
 {
 public:
-	RenderWindow(const char* p_title, int p_w, int p_h);
+	RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate);
 	SDL_Texture* loadTexture(const char* p_filePath);
 	TTF_Font* loadFont(const char* p_filePath, const int p_fontSize);
 
@@ -35,6 +35,7 @@ public:
 	void render(Entity& p_entity);
 	void display();
 private:
+	int refresh_rate;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	Vector2f windowDimensions;
