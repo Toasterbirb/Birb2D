@@ -11,12 +11,10 @@ Entity::Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, SDL_Te
 	currentFrame.h = p_dimensions.y;
 	angle = 0;
 
-	SDL_Rect new_pos_rect;
-	new_pos_rect.x = p_pos.x;
-	new_pos_rect.y = p_pos.y;
-	new_pos_rect.w = currentFrame.w;
-	new_pos_rect.h = currentFrame.h;
-	pos_rect = new_pos_rect;
+	pos_rect.x = p_pos.x;
+	pos_rect.y = p_pos.y;
+	pos_rect.w = currentFrame.w;
+	pos_rect.h = currentFrame.h;
 }
 
 // Normal texture entity
@@ -28,12 +26,10 @@ Entity::Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, float 
 	currentFrame.w = p_dimensions.x;
 	currentFrame.h = p_dimensions.y;
 
-	SDL_Rect new_pos_rect;
-	new_pos_rect.x = p_pos.x;
-	new_pos_rect.y = p_pos.y;
-	new_pos_rect.w = currentFrame.w;
-	new_pos_rect.h = currentFrame.h;
-	pos_rect = new_pos_rect;
+	pos_rect.x = p_pos.x;
+	pos_rect.y = p_pos.y;
+	pos_rect.w = currentFrame.w;
+	pos_rect.h = currentFrame.h;
 }
 
 // Scalable texture entity
@@ -46,15 +42,13 @@ Entity::Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vect
 	currentFrame.h = p_dimensions.y * p_scaleMultiplier;
 	angle = 0;
 
-	SDL_Rect new_pos_rect;
-	new_pos_rect.x = p_pos.x;
-	new_pos_rect.y = p_pos.y;
-	new_pos_rect.w = currentFrame.w;
-	new_pos_rect.h = currentFrame.h;
-	pos_rect = new_pos_rect;
+	pos_rect.x = p_pos.x;
+	pos_rect.y = p_pos.y;
+	pos_rect.w = currentFrame.w;
+	pos_rect.h = currentFrame.h;
 }
 
-// Scalable texture entity
+// Scalable texture entity with custom angle
 Entity::Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vector2f p_dimensions, float p_angle, SDL_Texture* p_tex)
 :name(p_name), pos(p_pos), tex(p_tex), angle(p_angle)
 {
@@ -62,6 +56,11 @@ Entity::Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vect
 	currentFrame.y = 0;
 	currentFrame.w = p_dimensions.x * p_scaleMultiplier;
 	currentFrame.h = p_dimensions.y * p_scaleMultiplier;
+
+	pos_rect.x = p_pos.x;
+	pos_rect.y = p_pos.y;
+	pos_rect.w = currentFrame.w;
+	pos_rect.h = currentFrame.h;
 }
 
 SDL_Texture* Entity::getTex()
@@ -69,7 +68,7 @@ SDL_Texture* Entity::getTex()
 	return tex;
 }
 
-SDL_Rect Entity::getCurrentFrame()
+Rect Entity::getCurrentFrame()
 {
 	return currentFrame;
 }
@@ -85,7 +84,7 @@ Entity::Entity(const char* p_name, std::string p_text, Vector2f p_pos, Font* p_f
 	angle = 0;
 }
 
-// Text entity
+// Text entity with custom angle and texture
 Entity::Entity(const char* p_name, std::string p_text, Vector2f p_pos, Font* p_font, SDL_Texture* p_tex, float p_angle)
 :name(p_name), pos(p_pos), text(p_text), font(p_font), angle(p_angle), tex(p_tex)
 {
@@ -95,6 +94,7 @@ Entity::Entity(const char* p_name, std::string p_text, Vector2f p_pos, Font* p_f
 	currentFrame.h = font->getSize();
 }
 
+// Update the text of an existing text entity
 void Entity::updateText(std::string p_text, SDL_Texture* p_tex)
 {
 	if (p_text != text)
@@ -117,18 +117,17 @@ Vector2f& Entity::getPos()
 	return pos;
 }
 
+// Set the position of an entity
 void Entity::setPos(Vector2f p_pos)
 {
 	pos = p_pos;
-	SDL_Rect new_pos_rect;
-	new_pos_rect.x = p_pos.x;
-	new_pos_rect.y = p_pos.y;
-	new_pos_rect.w = currentFrame.w;
-	new_pos_rect.h = currentFrame.h;
-	pos_rect = new_pos_rect;
+	pos_rect.x = p_pos.x;
+	pos_rect.y = p_pos.y;
+	pos_rect.w = currentFrame.w;
+	pos_rect.h = currentFrame.h;
 }
 
-SDL_Rect* Entity::getRect()
+Rect* Entity::getRect()
 {
 	return &pos_rect;
 }

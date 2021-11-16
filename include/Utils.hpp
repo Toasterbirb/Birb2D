@@ -6,6 +6,24 @@
 #include <iostream>
 #include <cstdlib>
 
+struct Rect
+{
+	Rect()
+	:x(0.0f), y(0.0f), w(0.0f), h(0.0f)
+	{}
+
+	Rect(float p_x, float p_y, float p_w, float p_h)
+	:x(p_x), y(p_y), w(p_w), h(p_h)
+	{}
+
+	void print()
+	{
+		std::cout << x << ", " << y << ", " << w << ", " << h << std::endl;
+	}
+
+	float x, y, w, h;
+};
+
 namespace utils
 {
 	inline float hireTimeInSeconds()

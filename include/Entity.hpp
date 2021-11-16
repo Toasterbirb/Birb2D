@@ -10,6 +10,7 @@
 
 #include "../include/Math.hpp"
 #include "../include/Font.hpp"
+#include "../include/Utils.hpp"
 
 //SDL_Texture* renderStaticText(const char* p_text, Font* p_font);
 
@@ -30,7 +31,7 @@ public:
 
 	Vector2f& getPos();
 	void setPos(Vector2f p_pos);
-	SDL_Rect* getRect();
+	Rect* getRect();
 
 	float& getAngle();
 	void setAngle(float p_angle);
@@ -46,17 +47,17 @@ public:
 	//void setTexture(SDL_Texture* p_tex);
 
 	SDL_Texture* getTex();
-	SDL_Rect getCurrentFrame();
+	Rect getCurrentFrame();
 private:
 	std::string name;
 	Vector2f pos;
-	SDL_Rect pos_rect;
+	Rect pos_rect;
 	float angle;
 
 	// Text entity vars
 	std::string text;
 	Font* font;
 
-	SDL_Rect currentFrame;
+	Rect currentFrame;
 	SDL_Texture* tex;
 };

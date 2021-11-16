@@ -157,7 +157,8 @@ void RenderWindow::render(Entity& p_entity)
 		return;
 	}
 
-	SDL_Point center = {p_entity.getCurrentFrame().w / 2,p_entity.getCurrentFrame().h / 2};
+	Vector2f centerPoint(p_entity.getCurrentFrame().w / 2, p_entity.getCurrentFrame().h / 2);
+	SDL_Point center = { (int)centerPoint.x, (int)centerPoint.y };
 
 	if (SDL_RenderCopyEx(renderer, p_entity.getTex(), &src, &dst, p_entity.getAngle(), &center, SDL_FLIP_NONE) < 0)
 	{
