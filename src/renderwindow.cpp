@@ -4,9 +4,10 @@
 #include "../include/RenderWindow.hpp"
 #include "../include/Audio.hpp"
 #include "../include/Entity.hpp"
+#include "../include/Widgets.hpp"
 
 RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate)
-	:window(NULL), renderer(NULL), refresh_rate(p_refresh_rate)
+:window(NULL), renderer(NULL), refresh_rate(p_refresh_rate)
 {
 	// INIT SDL STUFF
 	// Remember to call cleanUp function when closing the window
@@ -34,7 +35,7 @@ RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_
 	window = SDL_CreateWindow(p_title,
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			p_w, p_h,
-			SDL_WINDOW_SHOWN);
+			SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
 	if (window == NULL)
 	{
@@ -45,6 +46,9 @@ RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_
 
 	windowDimensions.x = p_w;
 	windowDimensions.y = p_h;
+
+	// Init timestep
+	currentTime = utils::hireTimeInSeconds();
 }
 
 SDL_Texture* RenderWindow::loadTexture(const char* p_filePath)
@@ -72,29 +76,52 @@ TTF_Font* RenderWindow::loadFont(const char* p_filePath, const int p_fontSize)
 	return font;
 }
 
-SDL_Texture* RenderWindow::renderStaticText(const char* p_text, Font* p_font)
+void RenderWindow::SetWindowSize(int width, int height)
 {
-	SDL_Surface* surface = TTF_RenderText_Blended(p_font->getTTFFont(), p_text, p_font->getColor());
+	SDL_SetWindowSize(window, width, height);
+	Vector2int newDimensions(width, height);
+	windowDimensions = newDimensions;
+}
+
+void RenderWindow::ResetDrawColor()
+{
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+}
+
+void RenderWindow::DrawRect(SDL_Color color, Rect dimensions)
+{
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+	SDL_Rect rectangle = dimensions.getSDLRect();
+	SDL_RenderFillRect(renderer, &rectangle);
+	ResetDrawColor();
+}
+
+Texture RenderWindow::renderStaticTextTexture(const char* p_text, Font p_font)
+{
+	SDL_Surface* surface = TTF_RenderText_Blended(p_font.getTTFFont(), p_text, p_font.getColor());
 	if (surface == nullptr)
 	{
 		std::cout << "Error creating SDL_Surface: " << SDL_GetError() << std::endl;
-		return nullptr;
 	}
 
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 	if (texture == nullptr)
 	{
 		std::cout << "Error creating texture from surface: " << SDL_GetError() << std::endl;
-		return nullptr;
 	}
 
 	SDL_FreeSurface(surface);
-	return texture;
+
+	Texture tex;
+	tex.sdlTexture = texture;
+	tex.dimensions = Vector2int(surface->w, surface->h);
+	
+	return tex;
 }
 
 SDL_Texture* RenderWindow::renderTextEntity(Entity& textEntity)
 {
-	SDL_Surface* surface = TTF_RenderText_Blended(textEntity.getFont()->getTTFFont(), textEntity.getText().c_str(), textEntity.getFont()->getColor());
+	SDL_Surface* surface = TTF_RenderText_Blended(textEntity.getFont().getTTFFont(), textEntity.getText().c_str(), textEntity.getFont().getColor());
 
 	if (surface == nullptr)
 	{
@@ -124,6 +151,36 @@ int RenderWindow::getRefreshRate()
 	return refresh_rate;
 }
 
+void RenderWindow::InitSDL()
+{
+	// Init SDL
+	if (SDL_Init(SDL_INIT_VIDEO) > 0)
+	{
+		std::cout << "SDL INIT FAILED: " << SDL_GetError() << "\n";
+		exit(2);
+	}
+	
+	// Init SDL_image
+	if (!(IMG_Init(IMG_INIT_PNG)))
+	{
+		std::cout << "IMG_init has failed. Error: " << SDL_GetError() << "\n";
+		exit(2);
+	}
+
+	// Init SDL_ttf
+	if (TTF_Init() == -1)
+	{
+		std::cout << "TTF_Init has failed. Error: " << TTF_GetError() << "\n";
+		exit(2);
+	}
+}
+
+void RenderWindow::QuitSDL()
+{
+	TTF_Quit();
+	SDL_Quit();
+}
+
 void RenderWindow::cleanUp()
 {
 	TTF_Quit();
@@ -148,8 +205,8 @@ void RenderWindow::render(Entity& p_entity)
 	SDL_Rect dst;
 	dst.x = p_entity.getPos().x;
 	dst.y = p_entity.getPos().y;
-	dst.w = p_entity.getCurrentFrame().w;
-	dst.h = p_entity.getCurrentFrame().h;
+	dst.w = p_entity.getCurrentFrame().w * p_entity.getLocalScale();
+	dst.h = p_entity.getCurrentFrame().h * p_entity.getLocalScale();
 
 	if (dst.w == 0 || dst.h == 0)
 	{
@@ -170,4 +227,41 @@ void RenderWindow::render(Entity& p_entity)
 void RenderWindow::display()
 {
 	SDL_RenderPresent(renderer);
+}
+
+void RenderWindow::timestepStart()
+{
+	startTick = SDL_GetTicks();
+
+	float newTime = utils::hireTimeInSeconds();
+	float frameTime = newTime - currentTime;
+
+	if (frameTime > 0.25f)
+		frameTime = 0.25f;
+
+	currentTime = newTime;
+	accumulator += frameTime;
+}
+
+bool RenderWindow::timestepRunning()
+{
+	return (accumulator >= timeStep);
+}
+
+void RenderWindow::timestepStep()
+{
+	accumulator -= timeStep;
+}
+
+void RenderWindow::timestepEnd()
+{
+	int frameTicks = SDL_GetTicks() - startTick;
+
+	if (frameTicks < 1000 / refresh_rate)
+		SDL_Delay(1000 / refresh_rate - frameTicks);
+}
+
+float RenderWindow::getTimestepAlpha()
+{
+	return accumulator / timeStep;
 }

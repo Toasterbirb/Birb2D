@@ -1,9 +1,22 @@
 #include <stdio.h>
 #include "../include/Entity.hpp"
+#include "../include/Widgets.hpp"
+
+// Default empty entity
+Entity::Entity()
+{
+	name = "";
+	pos = Vector2f(0, 0);
+	angle = 0;
+	text = "";
+	Font defaultFont("../res/fonts/manaspace/manaspc.ttf", Widget::Colors::White, 32);
+	font = defaultFont;
+	tex = NULL;
+}
 
 // Normal texture entity
-Entity::Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, SDL_Texture* p_tex)
-:name(p_name), pos(p_pos), tex(p_tex)
+Entity::Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, Texture p_tex)
+:name(p_name), pos(p_pos), tex(p_tex.sdlTexture)
 {
 	currentFrame.x = 0;
 	currentFrame.y = 0;
@@ -18,8 +31,8 @@ Entity::Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, SDL_Te
 }
 
 // Normal texture entity
-Entity::Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, float p_angle, SDL_Texture* p_tex)
-:name(p_name), pos(p_pos), tex(p_tex), angle(p_angle)
+Entity::Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, float p_angle, Texture p_tex)
+:name(p_name), pos(p_pos), tex(p_tex.sdlTexture), angle(p_angle)
 {
 	currentFrame.x = 0;
 	currentFrame.y = 0;
@@ -33,13 +46,13 @@ Entity::Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, float 
 }
 
 // Scalable texture entity
-Entity::Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vector2f p_dimensions, SDL_Texture* p_tex)
-:name(p_name), pos(p_pos), tex(p_tex)
+Entity::Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vector2f p_dimensions, Texture p_tex)
+:name(p_name), pos(p_pos), tex(p_tex.sdlTexture), localScale(p_scaleMultiplier)
 {
 	currentFrame.x = 0;
 	currentFrame.y = 0;
-	currentFrame.w = p_dimensions.x * p_scaleMultiplier;
-	currentFrame.h = p_dimensions.y * p_scaleMultiplier;
+	currentFrame.w = p_dimensions.x;
+	currentFrame.h = p_dimensions.y;
 	angle = 0;
 
 	pos_rect.x = p_pos.x;
@@ -50,7 +63,7 @@ Entity::Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vect
 
 // Scalable texture entity with custom angle
 Entity::Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vector2f p_dimensions, float p_angle, SDL_Texture* p_tex)
-:name(p_name), pos(p_pos), tex(p_tex), angle(p_angle)
+:name(p_name), pos(p_pos), tex(p_tex), angle(p_angle), localScale(p_scaleMultiplier)
 {
 	currentFrame.x = 0;
 	currentFrame.y = 0;
@@ -74,24 +87,24 @@ Rect Entity::getCurrentFrame()
 }
 
 // Text entity
-Entity::Entity(const char* p_name, std::string p_text, Vector2f p_pos, Font* p_font)
+Entity::Entity(const char* p_name, std::string p_text, Vector2f p_pos, Font p_font)
 :name(p_name), pos(p_pos), text(p_text), font(p_font)
 {
 	currentFrame.x = 0;
 	currentFrame.y = 0;
-	currentFrame.w = font->getSize() * p_text.length() - font->getSize();
-	currentFrame.h = font->getSize();
+	currentFrame.w = font.getSize() * p_text.length() - font.getSize();
+	currentFrame.h = font.getSize();
 	angle = 0;
 }
 
 // Text entity with custom angle and texture
-Entity::Entity(const char* p_name, std::string p_text, Vector2f p_pos, Font* p_font, SDL_Texture* p_tex, float p_angle)
+Entity::Entity(const char* p_name, std::string p_text, Vector2f p_pos, Font p_font, SDL_Texture* p_tex, float p_angle)
 :name(p_name), pos(p_pos), text(p_text), font(p_font), angle(p_angle), tex(p_tex)
 {
 	currentFrame.x = 0;
 	currentFrame.y = 0;
-	currentFrame.w = font->getSize() * p_text.length() - font->getSize();
-	currentFrame.h = font->getSize();
+	currentFrame.w = font.getSize() * p_text.length() - font.getSize();
+	currentFrame.h = font.getSize();
 }
 
 // Update the text of an existing text entity
@@ -104,8 +117,8 @@ void Entity::updateText(std::string p_text, SDL_Texture* p_tex)
 
 		currentFrame.x = 0;
 		currentFrame.y = 0;
-		currentFrame.w = font->getSize() * p_text.length() - font->getSize();
-		currentFrame.h = font->getSize();
+		currentFrame.w = font.getSize() * p_text.length() - font.getSize();
+		currentFrame.h = font.getSize();
 
 		// Set texture
 		tex = p_tex;
@@ -142,7 +155,7 @@ void Entity::setAngle(float p_angle)
 	angle = p_angle;
 }
 
-Font* Entity::getFont()
+Font Entity::getFont()
 {
 	return font;
 }

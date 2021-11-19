@@ -21,12 +21,20 @@ font:
 renderwindow:
 	${CC} -c -g ${SRCDIR}/renderwindow.cpp ${FLAGS} -o ${outputDir}/renderwindow.o
 
-tests:
+widgets:
+	${CC} -c -g ${SRCDIR}/widgets.cpp ${FLAGS} -o ${outputDir}/widgets.o
+
+doctest:
 	${CC} -c -g ${SRCDIR}/tests.cpp ${FLAGS} -o ${outputDir}/tests.o
 
-final: builddir audio entity font renderwindow tests
+editor_main: 
+	${CC} -c -g ${SRCDIR}/editor.cpp ${FLAGS} -o ${outputDir}/editor.o
+
+test: builddir audio entity font renderwindow widgets doctest 
 	${CC} -g ${outputDir}/*.o ${FLAGS} -o ${outputDir}/${binary}_test
 
+final: builddir audio entity font renderwindow widgets editor_main
+	${CC} -g ${outputDir}/*.o ${FLAGS} -o ${outputDir}/editor
 
 clean:
-	rm -r ${outputDir}
+	rm -rf ${outputDir}
