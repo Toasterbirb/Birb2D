@@ -3,26 +3,49 @@
 #include "../include/RenderWindow.hpp"
 #include "../include/Widgets.hpp"
 #include "../include/Entity.hpp"
+#include "../include/Values.hpp"
+#include "../include/Logger.hpp"
 
 #include <iostream>
 #include <vector>
 
+void Entry();
 
+#ifndef PLATFORM_WIN
 int main(int argc, char* argv[])
 {
-	RenderWindow window("Birb2D Editor", 1280, 720, 60);
+	Entry();
+	return 0;
+}
+#else
+int WinMain(int argc, char* argv[])
+{
+	Entry();
+	return 0;
+}
+#endif
+
+void Entry()
+{
+	Debug::Log("Engine starpoint");
+	int refreshRate = 240;
+	Birb2D::RenderWindow window("Birb2D Editor", 1280, 720, refreshRate);
 
 	// ### Editor loop ###
-	std::vector<Entity> entities = {};
+	std::vector<Birb2D::Entity> entities = {};
 	
 	// Widgets
-	Font baseFont("../res/fonts/manaspace/manaspc.ttf", Widget::Colors::Black, 16);
-	Widget::TopBar topbar(window, 32, Widget::Colors::Black, baseFont);
-	Entity testText("Test text", "testing...", Vector2f(10, 10), baseFont);
+	Birb2D::Font baseFont("../res/fonts/manaspace/manaspc.ttf", Colors::Black, 16);
+	Birb2D::Font buttonFont("../res/fonts/freefont/FreeMono.ttf", Colors::Black, 12);
+	Birb2D::Widgets::TopBar topbar(window, 32, Colors::Black, baseFont);
+	
+	std::vector<Birb2D::Widgets::Widget> buttons;
+	Birb2D::Widgets::Widget testButton(window, Birb2D::Widgets::Button, Rect(50, 50, 120, 30), Colors::Green, "A button", Rect(5, 5, 96, 24), buttonFont);
+	buttons.push_back(testButton);
 
-	Texture texture;
+	Birb2D::Texture texture;
 	texture.sdlTexture = window.loadTexture("../res/textures/giga_stretch.png");
-	Entity testPicture("Test texture", Vector2f(0, 32), 0.4, Vector2f(1280, 720), texture);
+	Birb2D::Entity testPicture("Test texture", Vector2f(0, 32), 0.4, Vector2f(1280, 720), texture);
 
 	SDL_Event event;
 	bool editorRunning = true;
@@ -36,7 +59,7 @@ int main(int argc, char* argv[])
 				switch (event.type)
 				{
 					case (SDL_QUIT):
-						std::cout << "Quit event!" << std::endl;
+						Debug::Log("Quit event");
 						editorRunning = false;
 						break;
 
@@ -47,26 +70,31 @@ int main(int argc, char* argv[])
 						}
 						break;
 
+					case (SDL_MOUSEBUTTONDOWN):
+						for (int i = 0; i < (int)buttons.size(); i++)
+						{
+							buttons[i].refresh(Birb2D::Widgets::RefreshAction::Click);
+						}
+						break;
+
 					default:
 						break;
 				}
 
-				//if (event.type == SDL_QUIT)
-				//{
-				//}
 			}
 
 			window.timestepStep();
 		}
 		window.timestepEnd();
 
-		// ### Render stuff ###
+		// ###### Render stuff ######
 		window.clear();
 		topbar.refresh(window.getDimensions());
 		window.render(testPicture);
+		testButton.refresh(Birb2D::Widgets::RefreshAction::Render);
 
 		window.display();
-		// ####################
+		// ##########################
 	}
 
 	// ### End of editor loop ###
@@ -76,5 +104,4 @@ int main(int argc, char* argv[])
 	Mix_Quit();
 
 	window.QuitSDL();
-	return 0;
 }

@@ -6,7 +6,7 @@
 #include "../include/Entity.hpp"
 #include "../include/Widgets.hpp"
 
-RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate)
+Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate)
 :window(NULL), renderer(NULL), refresh_rate(p_refresh_rate)
 {
 	// INIT SDL STUFF
@@ -51,7 +51,7 @@ RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_
 	currentTime = utils::hireTimeInSeconds();
 }
 
-SDL_Texture* RenderWindow::loadTexture(const char* p_filePath)
+SDL_Texture* Birb2D::RenderWindow::loadTexture(const char* p_filePath)
 {
 	SDL_Texture* texture = NULL;
 	texture = IMG_LoadTexture(renderer, p_filePath);
@@ -62,7 +62,7 @@ SDL_Texture* RenderWindow::loadTexture(const char* p_filePath)
 	return texture;
 }
 
-TTF_Font* RenderWindow::loadFont(const char* p_filePath, const int p_fontSize)
+TTF_Font* Birb2D::RenderWindow::loadFont(const char* p_filePath, const int p_fontSize)
 {
 	// Load up a font
 	TTF_Font* font;
@@ -76,19 +76,19 @@ TTF_Font* RenderWindow::loadFont(const char* p_filePath, const int p_fontSize)
 	return font;
 }
 
-void RenderWindow::SetWindowSize(int width, int height)
+void Birb2D::RenderWindow::SetWindowSize(int width, int height)
 {
 	SDL_SetWindowSize(window, width, height);
 	Vector2int newDimensions(width, height);
 	windowDimensions = newDimensions;
 }
 
-void RenderWindow::ResetDrawColor()
+void Birb2D::RenderWindow::ResetDrawColor()
 {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void RenderWindow::DrawRect(SDL_Color color, Rect dimensions)
+void Birb2D::RenderWindow::DrawRect(SDL_Color color, Rect dimensions)
 {
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 	SDL_Rect rectangle = dimensions.getSDLRect();
@@ -96,9 +96,10 @@ void RenderWindow::DrawRect(SDL_Color color, Rect dimensions)
 	ResetDrawColor();
 }
 
-Texture RenderWindow::renderStaticTextTexture(const char* p_text, Font p_font)
+Birb2D::Texture Birb2D::RenderWindow::renderStaticTextTexture(const char* p_text, Font p_font)
 {
-	SDL_Surface* surface = TTF_RenderText_Blended(p_font.getTTFFont(), p_text, p_font.getColor());
+	//SDL_Surface* surface = TTF_RenderText_Blended(p_font.getTTFFont(), p_text, p_font.getColor());
+	SDL_Surface* surface = TTF_RenderText_Solid(p_font.getTTFFont(), p_text, p_font.getColor());
 	if (surface == nullptr)
 	{
 		std::cout << "Error creating SDL_Surface: " << SDL_GetError() << std::endl;
@@ -119,7 +120,7 @@ Texture RenderWindow::renderStaticTextTexture(const char* p_text, Font p_font)
 	return tex;
 }
 
-SDL_Texture* RenderWindow::renderTextEntity(Entity& textEntity)
+SDL_Texture* Birb2D::RenderWindow::renderTextEntity(Entity& textEntity)
 {
 	SDL_Surface* surface = TTF_RenderText_Blended(textEntity.getFont().getTTFFont(), textEntity.getText().c_str(), textEntity.getFont().getColor());
 
@@ -140,7 +141,7 @@ SDL_Texture* RenderWindow::renderTextEntity(Entity& textEntity)
 	return texture;
 }
 
-int RenderWindow::getRefreshRate()
+int Birb2D::RenderWindow::getRefreshRate()
 {
 	//int displayIndex = SDL_GetWindowDisplayIndex( window );
 
@@ -151,7 +152,30 @@ int RenderWindow::getRefreshRate()
 	return refresh_rate;
 }
 
-void RenderWindow::InitSDL()
+Vector2int Birb2D::RenderWindow::getCursorPosition()
+{
+	Vector2int pos;
+	SDL_GetMouseState(&pos.x, &pos.y);
+	return pos;
+}
+
+bool Birb2D::RenderWindow::cursorInRect(Rect rect)
+{
+	Vector2int cursorPos = getCursorPosition();
+
+	// Check for horizontal location
+	if (cursorPos.x > rect.x && cursorPos.x < rect.x + rect.w)
+	{
+		// Check for vertical location
+		if (cursorPos.y > rect.y && cursorPos.y < rect.y + rect.h)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void Birb2D::RenderWindow::InitSDL()
 {
 	// Init SDL
 	if (SDL_Init(SDL_INIT_VIDEO) > 0)
@@ -175,13 +199,13 @@ void RenderWindow::InitSDL()
 	}
 }
 
-void RenderWindow::QuitSDL()
+void Birb2D::RenderWindow::QuitSDL()
 {
 	TTF_Quit();
 	SDL_Quit();
 }
 
-void RenderWindow::cleanUp()
+void Birb2D::RenderWindow::cleanUp()
 {
 	TTF_Quit();
 	Mix_CloseAudio();
@@ -189,12 +213,12 @@ void RenderWindow::cleanUp()
 	SDL_DestroyWindow(window);
 }
 
-void RenderWindow::clear()
+void Birb2D::RenderWindow::clear()
 {
 	SDL_RenderClear(renderer);
 }
 
-void RenderWindow::render(Entity& p_entity)
+void Birb2D::RenderWindow::render(Entity& p_entity)
 {
 	SDL_Rect src;
 	src.x = p_entity.getCurrentFrame().x;
@@ -224,12 +248,12 @@ void RenderWindow::render(Entity& p_entity)
 	//SDL_RenderCopy(renderer, p_entity.getTex(), &src, &dst);
 }
 
-void RenderWindow::display()
+void Birb2D::RenderWindow::display()
 {
 	SDL_RenderPresent(renderer);
 }
 
-void RenderWindow::timestepStart()
+void Birb2D::RenderWindow::timestepStart()
 {
 	startTick = SDL_GetTicks();
 
@@ -243,17 +267,17 @@ void RenderWindow::timestepStart()
 	accumulator += frameTime;
 }
 
-bool RenderWindow::timestepRunning()
+bool Birb2D::RenderWindow::timestepRunning()
 {
 	return (accumulator >= timeStep);
 }
 
-void RenderWindow::timestepStep()
+void Birb2D::RenderWindow::timestepStep()
 {
 	accumulator -= timeStep;
 }
 
-void RenderWindow::timestepEnd()
+void Birb2D::RenderWindow::timestepEnd()
 {
 	int frameTicks = SDL_GetTicks() - startTick;
 
@@ -261,7 +285,7 @@ void RenderWindow::timestepEnd()
 		SDL_Delay(1000 / refresh_rate - frameTicks);
 }
 
-float RenderWindow::getTimestepAlpha()
+float Birb2D::RenderWindow::getTimestepAlpha()
 {
 	return accumulator / timeStep;
 }

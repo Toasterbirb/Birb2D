@@ -15,11 +15,12 @@ Documentation coming soon(tm).
 - [x] Basic input handling (currently at cave man stage)
 - [x] Entity system (Partially functional currently)
 - [ ] Basic UI functionality
-	- [ ] Buttons
+	- [x] Buttons
 	- [x] Text
+	- [ ] Dropdown menu
 	- [ ] Slider
 	- [ ] Input box
-	- [ ] Resizable UI
+	- [x] Resizable UI
 		- [ ] Resolution independent UI scaling
 		- [ ] Anchors
 - [x] Sound

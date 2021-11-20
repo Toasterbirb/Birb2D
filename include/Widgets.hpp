@@ -2,28 +2,58 @@
 #include "../include/Entity.hpp"
 #include "../include/Utils.hpp"
 #include "../include/RenderWindow.hpp"
+#include <vector>
+#include <functional>
 
-namespace Widget
+namespace Birb2D
 {
-	class TopBar
+	namespace Widgets
 	{
-		public:
-			TopBar(RenderWindow p_window, int barHeight, SDL_Color p_backgroundColor, Font font);
-			void refresh(Vector2int windowDimensions);
+		enum WidgetType
+		{
+			PlaceHolder, Button, Label, Slider, Picture, Dropdown
+		};
 
-		private:
-			Entity title;
-			Rect dimensions;
-			RenderWindow window;
-			SDL_Color backgroundColor;
-	};
+		enum RefreshAction
+		{
+			Render, Click
+		};
 
-	namespace Colors
-	{
-		static SDL_Color White = 	{ 255, 255, 255 };
-		static SDL_Color Black = 	{ 0, 0, 0 };
-		static SDL_Color Red = 		{ 255, 0, 0 };
-		static SDL_Color Green = 	{ 0, 255, 0 };
-		static SDL_Color Blue = 	{ 0, 0, 255 };
+		class Widget
+		{
+			public:
+				Widget(RenderWindow p_window, WidgetType type, Rect p_dimensions, SDL_Color p_backgroundColor);
+				Widget(RenderWindow p_window, WidgetType type, Rect p_dimensions, SDL_Color p_backgroundColor, std::string p_text, Font p_font);
+				Widget(RenderWindow p_window, WidgetType type, Rect p_dimensions, SDL_Color p_backgroundColor, std::string p_text, Rect text_dimensions, Font p_font);
+				WidgetType getType()
+				{
+					return type;
+				}
+				void refresh(RefreshAction refreshAction);
+
+			private:
+				WidgetType type;
+				Font font;
+				Entity text;
+				Rect dimensions;
+				RenderWindow window;
+				SDL_Color backgroundColor;
+				SDL_Color altBackgroundColor;
+				std::function<void()> onClick;
+		};
+
+		class TopBar
+		{
+			public:
+				TopBar(RenderWindow p_window, int barHeight, SDL_Color p_backgroundColor, Font font);
+				void refresh(Vector2int windowDimensions);
+
+			private:
+				Entity title;
+				Rect dimensions;
+				RenderWindow window;
+				SDL_Color backgroundColor;
+		};
+
 	}
 }

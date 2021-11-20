@@ -1,6 +1,5 @@
 #pragma once
-//#include <SDL2/SDL_events.h>
-#include "../vendor/SDL2/SDL_events.h"
+#include <SDL2/SDL_events.h>
 
 #define KEY_SPACEBAR (0x20)
 
