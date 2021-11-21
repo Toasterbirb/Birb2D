@@ -38,12 +38,12 @@ void Entry()
 
 	// ### Editor loop ###
 	std::vector<Birb2D::Entity> entities = {};
-	
+
 	// Widgets
 	Birb2D::Font baseFont("../res/fonts/manaspace/manaspc.ttf", Colors::Black, 16);
 	Birb2D::Font buttonFont("../res/fonts/freefont/FreeMono.ttf", Colors::White, 12);
 	Birb2D::Widgets::TopBar topbar(window, 32, Colors::Black, baseFont);
-	
+
 	std::vector<Birb2D::Widgets::Button> buttons;
 	Birb2D::Widgets::Button testButton(window, Rect(50, 50, 120, 30), Colors::LightGray, "A button", buttonFont, printHello);
 

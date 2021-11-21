@@ -34,3 +34,6 @@
 *.exe
 *.out
 *.app
+
+# Birb2D Custom Files
+log.txt
