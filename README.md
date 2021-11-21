@@ -8,6 +8,32 @@ Documentation coming soon(tm).
 
 ## External libraries
 - SDL2
+- doctest (included as a headerfile)
+
+## Building
+### Using CMake
+```sh
+mkdir build
+cd build
+cmake ..
+make -j4
+```
+
+### Using make (might be going away at some point)
+#### Editor
+```sh
+make -j4 editor
+```
+
+#### Ping Pong
+```sh
+make -j4 ping-pong
+```
+
+#### Run tests
+```sh
+make -j4 test
+```
 
 ## Roadmap
 - [x] Sprite rendering
