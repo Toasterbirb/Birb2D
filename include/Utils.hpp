@@ -1,10 +1,16 @@
 #pragma once
 
-//#include <SDL2/SDL.h>
-//#include </usr/include/SDL2/SDL.h>
-#include "../vendor/SDL2/SDL.h"
+#ifndef PLATFORM_WIN
+#include <SDL2/SDL.h>
+#else
+#include "../vendor/SDL2_win/SDL2/x86_64-w64-mingw32/include/SDL2/SDL.h"
+#endif
+
+#include "../include/Math.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <math.h>
+
 
 struct Rect
 {
@@ -19,6 +25,27 @@ struct Rect
 	void print()
 	{
 		std::cout << x << ", " << y << ", " << w << ", " << h << std::endl;
+	}
+
+	Rect getInt()
+	{
+		Rect roundedRect;
+		roundedRect.x = round(x);
+		roundedRect.y = round(y);
+		roundedRect.w = round(w);
+		roundedRect.h = round(h);
+
+		return roundedRect;
+	}
+
+	SDL_Rect getSDLRect()
+	{
+		SDL_Rect sdlrect;
+		sdlrect.h = h;
+		sdlrect.w = w;
+		sdlrect.x = x;
+		sdlrect.y = y;
+		return sdlrect;
 	}
 
 	float x, y, w, h;
@@ -48,4 +75,13 @@ namespace utils
 		float range = max - min;
 		return (random * range) + min;
 	}
+}
+
+namespace Birb2D
+{
+	struct Texture
+	{
+		SDL_Texture* sdlTexture;
+		Vector2int dimensions;
+	};
 }
