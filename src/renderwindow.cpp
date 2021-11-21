@@ -6,6 +6,7 @@
 #include "../include/Entity.hpp"
 #include "../include/Widgets.hpp"
 #include "../include/Logger.hpp"
+#include "../include/Values.hpp"
 
 Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate)
 :window(NULL), renderer(NULL), refresh_rate(p_refresh_rate)
@@ -15,18 +16,13 @@ Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_
 	// You will have to call SDL_Quit() separately when closing the game
 
 	// Init SDL
-	if (SDL_Init(SDL_INIT_VIDEO) > 0)
-		Debug::Log("SDL Init failed: " + (std::string)SDL_GetError(), Debug::error);
+	InitSDL();
 
 	// Init SDL_image
-	if (!(IMG_Init(IMG_INIT_PNG)))
-		Debug::Log("IMG_Init has failed" + (std::string)SDL_GetError(), Debug::error);
+	InitSDL_image();
 
 	// Init SDL_ttf
-	if (TTF_Init() == -1) {
-		Debug::Log("TTF_Init has failed: " + (std::string)TTF_GetError(), Debug::error);
-    	exit(2);
-	}
+	InitSDL_ttf();
 
 	// Init SDL_mixer
 	//Audio audio;
@@ -56,6 +52,50 @@ Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_
 	SDL_RenderClear(renderer);
 	SDL_RenderPresent(renderer);
 }
+
+void Birb2D::RenderWindow::InitSDL()
+{
+	// Check if SDL has already been initialized
+	if (Global::IsInit::SDL)
+		return;
+
+	Debug::Log("Initializing SDL...");
+	if (SDL_Init(SDL_INIT_VIDEO) > 0)
+		Debug::Log("SDL Init failed: " + (std::string)SDL_GetError(), Debug::error);
+	else
+		Global::IsInit::SDL = true;
+}
+
+void Birb2D::RenderWindow::InitSDL_image()
+{
+	// Check if SDL_image has already been initialized
+	if (Global::IsInit::SDL_image)
+		return;
+
+	Debug::Log("Initializing SDL_image...");
+	if (!(IMG_Init(IMG_INIT_PNG)))
+		Debug::Log("IMG_Init has failed" + (std::string)SDL_GetError(), Debug::error);
+	else
+		Global::IsInit::SDL_image = true;
+}
+
+void Birb2D::RenderWindow::InitSDL_ttf()
+{
+	// Check if SDL_ttf has already been initialized
+	if (Global::IsInit::SDL_ttf)
+		return;
+
+	Debug::Log("Initializing SDL_ttf...");
+	if (TTF_Init() == -1) {
+		Debug::Log("TTF_Init has failed: " + (std::string)TTF_GetError(), Debug::error);
+    	exit(2);
+	}
+	else
+	{
+		Global::IsInit::SDL_ttf = true;
+	}
+}
+
 
 SDL_Texture* Birb2D::RenderWindow::loadTexture(const char* p_filePath)
 {
@@ -183,14 +223,18 @@ bool Birb2D::RenderWindow::cursorInRect(Rect rect)
 
 void Birb2D::RenderWindow::cleanUp()
 {
+	Global::IsInit::SDL = false;
+	Global::IsInit::SDL_ttf = false;
+	Global::IsInit::SDL_image = false;
+
 	Debug::Log("TTF_Quit()");
 	TTF_Quit();
 
 	//Debug::Log("Mix_CloseAudio()");
 	//Mix_CloseAudio();
 
-	Debug::Log("Mix_Quit()");
-	Mix_Quit();
+	//Debug::Log("Mix_Quit()");
+	//Mix_Quit();
 
 	Debug::Log("SDL_DestroyWindow()");
 	SDL_DestroyWindow(window);

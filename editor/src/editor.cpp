@@ -1,10 +1,10 @@
-#include "../include/Audio.hpp"
-#include "../include/Editor.hpp"
-#include "../include/RenderWindow.hpp"
-#include "../include/Widgets.hpp"
-#include "../include/Entity.hpp"
-#include "../include/Values.hpp"
-#include "../include/Logger.hpp"
+#include "../../include/Audio.hpp"
+#include "../../include/Editor.hpp"
+#include "../../include/RenderWindow.hpp"
+#include "../../include/Widgets.hpp"
+#include "../../include/Entity.hpp"
+#include "../../include/Values.hpp"
+#include "../../include/Logger.hpp"
 
 #include <iostream>
 #include <vector>

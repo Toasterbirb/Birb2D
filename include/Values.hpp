@@ -7,6 +7,16 @@
 #include "../vendor/SDL2_win/SDL2/x86_64-w64-mingw32/include/SDL2/SDL.h"
 #endif
 
+namespace Global
+{
+	namespace IsInit
+	{
+		static bool SDL 		= false;
+		static bool SDL_ttf 	= false;
+		static bool SDL_image 	= false;
+	}
+}
+
 namespace Colors
 {
 	static SDL_Color White = 		{ 255, 255, 255, 255 };

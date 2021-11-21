@@ -22,6 +22,12 @@ namespace Birb2D
 	public:
 		RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate);
 
+		/* Init stuff */
+		static void InitSDL();
+		static void InitSDL_image();
+		static void InitSDL_ttf();
+		/* ---------- */
+
 		SDL_Texture* loadTexture(const char* p_filePath);
 		TTF_Font* loadFont(const char* p_filePath, const int p_fontSize);
 

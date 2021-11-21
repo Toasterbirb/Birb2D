@@ -1,23 +1,32 @@
 #ifndef DOCTEST_CONFIG_DISABLE
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 
 #endif
+//#include "../include/doctest.h"
+//#include "../include/RenderWindow.hpp"
+//#include "../include/Font.hpp"
+//#include "../include/Entity.hpp"
+//#include "../include/Utils.hpp"
+//#include "../include/Audio.hpp"
+//#include "../include/Events.hpp"
+//#include "../include/Values.hpp"
+//#include "../include/Logger.hpp"
 #include "../include/doctest.h"
-#include "../include/RenderWindow.hpp"
-#include "../include/Font.hpp"
-#include "../include/Entity.hpp"
-#include "../include/Utils.hpp"
-#include "../include/Audio.hpp"
-#include "../include/Events.hpp"
-#include "../include/Values.hpp"
-#include "../include/Logger.hpp"
+#include "../../include/RenderWindow.hpp"
+#include "../../include/Font.hpp"
+#include "../../include/Entity.hpp"
+#include "../../include/Utils.hpp"
+#include "../../include/Audio.hpp"
+#include "../../include/Events.hpp"
+#include "../../include/Values.hpp"
+#include "../../include/Logger.hpp"
 
 
 TEST_CASE("logging")
 {
-	CHECK_NOTHROW(Debug::Log("Log"));
-	CHECK_NOTHROW(Debug::Log("Log", Debug::log));
-	CHECK_NOTHROW(Debug::Log("Warning", Debug::warning));
-	CHECK_NOTHROW(Debug::Log("Error", Debug::error));
+	CHECK_NOTHROW(Debug::Log("Log (this is only a test)"));
+	CHECK_NOTHROW(Debug::Log("Log (this is only a test)", Debug::log));
+	CHECK_NOTHROW(Debug::Log("Warning (this is only a test)", Debug::warning));
+	CHECK_NOTHROW(Debug::Log("Error (this is only a test)", Debug::error));
 }
 
 // ### Entities ###
@@ -152,9 +161,21 @@ Birb2D::Font getTestFont()
 {
 	Birb2D::RenderWindow window("Test window", 1280, 720, 60);
 	SDL_Color color = {0, 0, 0, 0};
+	Debug::Log("Getting test font...");
 	Birb2D::Font font("../res/fonts/manaspace/manaspc.ttf", color, 32);
+	window.cleanUp();
 
 	return font;
+}
+
+TEST_CASE("load font")
+{
+	Birb2D::RenderWindow window("Test window", 1280, 720, 60);
+	SDL_Color color = {255, 255, 255, 255};
+	CHECK(Birb2D::Font("../res/fonts/manaspace/manaspc.ttf", color, 32).getColor().r == color.r);
+	CHECK(Birb2D::Font("../res/fonts/manaspace/manaspc.ttf", color, 32).getColor().g == color.g);
+	CHECK(Birb2D::Font("../res/fonts/manaspace/manaspc.ttf", color, 32).getColor().b == color.b);
+	window.cleanUp();
 }
 
 TEST_CASE("default font")
@@ -180,6 +201,7 @@ TEST_CASE("font with custom color")
 
 TEST_CASE("text entities")
 {
+	Debug::Log("Getting test font...");
 	Birb2D::Font font = getTestFont();
 	Birb2D::Entity text_entity("test text", "Testing... :)", Vector2f(15, 45), font);
 
@@ -192,6 +214,7 @@ TEST_CASE("text entities")
 
 TEST_CASE("text entity with custom angle and texture")
 {
+	Debug::Log("Getting test font...");
 	Birb2D::Font font = getTestFont();
 	SDL_Texture* texture;
 	Birb2D::Entity text_entity("test text", "Testing... :)", Vector2f(10, 10), font, texture, 34.44);
@@ -207,6 +230,7 @@ TEST_CASE("text entity with custom angle and texture")
 
 TEST_CASE("update the text of an existing text texture")
 {
+	Debug::Log("Getting test font...");
 	Birb2D::Font font = getTestFont();
 	Birb2D::Entity text_entity("test text", "Testing... :D)", Vector2f(0, 0), font);
 	text_entity.updateText("More testing... ;)", text_entity.getTex());

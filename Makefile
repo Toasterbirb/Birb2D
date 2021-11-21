@@ -38,7 +38,7 @@ scene:
 	${CC} -c -g ${SRCDIR}/scene.cpp ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/scene.o
 
 doctest:
-	${CC} -c -g ${SRCDIR}/tests.cpp ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/tests.o
+	${CC} -c -g ./tests/src/tests.cpp ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/tests.o
 
 test: builddir audio entity font renderwindow widgets values logger utils doctest
 	${CC} -g ${outputDir}/*.o ${SDL_FLAGS} -o ${outputDir}/${binary}_test
@@ -48,7 +48,7 @@ ping-pong: builddir audio entity font renderwindow widgets values logger utils s
 	${CC} -g ./games/Ping-Pong/src/*.cpp ${outputDir}/*.o ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/ping-pong
 
 editor: builddir audio entity font renderwindow widgets values logger utils
-	${CC} -g ${outputDir}/*.o ${SRCDIR}/editor.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/editor_playground
+	${CC} -g ${outputDir}/*.o ./editor/src/editor.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/editor_playground
 
 final: builddir audio entity font renderwindow widgets values logger utils editor
 	${CC} -g ${outputDir}/*.o ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/editor
