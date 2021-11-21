@@ -25,8 +25,8 @@ Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_
 	InitSDL_ttf();
 
 	// Init SDL_mixer
-	//Audio audio;
-	//audio.initAudio(MIX_INIT_MP3);
+	Audio audio;
+	audio.initAudio(MIX_INIT_MP3);
 
 
 	window = SDL_CreateWindow(p_title,
@@ -231,10 +231,10 @@ void Birb2D::RenderWindow::cleanUp()
 	TTF_Quit();
 
 	//Debug::Log("Mix_CloseAudio()");
-	//Mix_CloseAudio();
+	Mix_CloseAudio();
 
 	//Debug::Log("Mix_Quit()");
-	//Mix_Quit();
+	Mix_Quit();
 
 	Debug::Log("SDL_DestroyWindow()");
 	SDL_DestroyWindow(window);

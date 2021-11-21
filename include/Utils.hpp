@@ -1,10 +1,6 @@
 #pragma once
 
-#ifndef PLATFORM_WIN
 #include <SDL2/SDL.h>
-#else
-#include "../vendor/SDL2_win/SDL2/x86_64-w64-mingw32/include/SDL2/SDL.h"
-#endif
 
 #include "../include/Math.hpp"
 #include <iostream>

@@ -1,12 +1,7 @@
 #pragma once
 
-#ifndef PLATFORM_WIN
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-#else
-#include "../vendor/SDL2_win/SDL2/x86_64-w64-mingw32/include/SDL2/SDL.h"
-#include "../vendor/SDL2_win/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h"
-#endif
 
 #include <iostream>
 #include <string.h>

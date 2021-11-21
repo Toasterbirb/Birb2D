@@ -5,6 +5,16 @@
 #include "../include/Values.hpp"
 #include "../include/Logger.hpp"
 
+Birb2D::Widgets::Position::Anchor::Anchor()
+{
+	x = 0, y = 0;
+}
+
+Birb2D::Widgets::Position::Center::Center()
+{
+	x = 0, y = 0;
+}
+
 Birb2D::Widgets::Position::Anchor::Anchor(float p_x, float p_y)
 :x(p_x), y(p_y)
 {}

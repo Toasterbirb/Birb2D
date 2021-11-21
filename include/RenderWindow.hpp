@@ -1,15 +1,8 @@
 #pragma once
 
-#ifndef PLATFORM_WIN
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
-#else
-#include "../vendor/SDL2_win/SDL2/x86_64-w64-mingw32/include/SDL2/SDL.h"
-#include "../vendor/SDL2_win/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h"
-#include "../vendor/SDL2_win/SDL2_image-2.0.5/x86_64-w64-mingw32/include/SDL2/SDL_image.h"
-#endif
-
 
 #include "../include/Entity.hpp"
 #include "../include/Font.hpp"

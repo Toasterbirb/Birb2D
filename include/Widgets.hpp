@@ -33,6 +33,7 @@ namespace Birb2D
 				// Anchor position in window that the center point is moved relatively to
 				struct Anchor
 				{
+					Anchor();
 					Anchor(float p_x, float p_y);
 					float x, y;
 				};
@@ -40,6 +41,7 @@ namespace Birb2D
 				// Center point of the widget that the position sets
 				struct Center
 				{
+					Center();
 					Center(float p_x, float p_y);
 					float x, y;
 				};
@@ -78,12 +80,15 @@ namespace Birb2D
 		{
 			public:
 			   	Text(RenderWindow p_window, Vector2f location, std::string p_text, Font p_font, int p_z = 0);
+			   	Text(RenderWindow p_window, Vector2f location, Position::Anchor p_anchor, Position::Center p_center, std::string p_text, Font p_font, int p_z = 0);
 				void render();
 				int z;
 
 			private:
 				RenderWindow window;
 				Vector2f pos;
+				Position::Anchor anchor;
+				Position::Center center;
 				Font font;
 				std::string text;
 				Entity textEntity;
