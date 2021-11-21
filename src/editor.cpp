@@ -25,9 +25,14 @@ int WinMain(int argc, char* argv[])
 }
 #endif
 
+void printHello()
+{
+	Debug::Log("Button click working");
+}
+
 void Entry()
 {
-	Debug::Log("Engine starpoint");
+	Debug::Log("Engine startpoint");
 	int refreshRate = 240;
 	Birb2D::RenderWindow window("Birb2D Editor", 1280, 720, refreshRate);
 
@@ -36,11 +41,12 @@ void Entry()
 	
 	// Widgets
 	Birb2D::Font baseFont("../res/fonts/manaspace/manaspc.ttf", Colors::Black, 16);
-	Birb2D::Font buttonFont("../res/fonts/freefont/FreeMono.ttf", Colors::Black, 12);
+	Birb2D::Font buttonFont("../res/fonts/freefont/FreeMono.ttf", Colors::White, 12);
 	Birb2D::Widgets::TopBar topbar(window, 32, Colors::Black, baseFont);
 	
-	std::vector<Birb2D::Widgets::Widget> buttons;
-	Birb2D::Widgets::Widget testButton(window, Birb2D::Widgets::Button, Rect(50, 50, 120, 30), Colors::Green, "A button", Rect(5, 5, 96, 24), buttonFont);
+	std::vector<Birb2D::Widgets::Button> buttons;
+	Birb2D::Widgets::Button testButton(window, Rect(50, 50, 120, 30), Colors::LightGray, "A button", buttonFont, printHello);
+
 	buttons.push_back(testButton);
 
 	Birb2D::Texture texture;
@@ -56,13 +62,10 @@ void Entry()
 		{
 			while (SDL_PollEvent(&event) != 0)
 			{
+				window.handleBasicWindowEvents(event, &editorRunning);
+
 				switch (event.type)
 				{
-					case (SDL_QUIT):
-						Debug::Log("Quit event");
-						editorRunning = false;
-						break;
-
 					case (SDL_WINDOWEVENT):
 						if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 						{
@@ -98,10 +101,12 @@ void Entry()
 	}
 
 	// ### End of editor loop ###
+	Debug::Log("Closing the editor");
 
 	// Stop audio
 	Mix_CloseAudio();
 	Mix_Quit();
 
-	window.QuitSDL();
+	TTF_Quit();
+	SDL_Quit();
 }

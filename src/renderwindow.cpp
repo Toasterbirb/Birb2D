@@ -5,6 +5,7 @@
 #include "../include/Audio.hpp"
 #include "../include/Entity.hpp"
 #include "../include/Widgets.hpp"
+#include "../include/Logger.hpp"
 
 Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate)
 :window(NULL), renderer(NULL), refresh_rate(p_refresh_rate)
@@ -15,21 +16,21 @@ Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_
 
 	// Init SDL
 	if (SDL_Init(SDL_INIT_VIDEO) > 0)
-		std::cout << "SDL INIT FAILED: " << SDL_GetError() << "\n";
+		Debug::Log("SDL Init failed: " + (std::string)SDL_GetError(), Debug::error);
 
 	// Init SDL_image
 	if (!(IMG_Init(IMG_INIT_PNG)))
-		std::cout << "IMG_init has failed. Error: " << SDL_GetError() << "\n";
+		Debug::Log("IMG_Init has failed" + (std::string)SDL_GetError(), Debug::error);
 
 	// Init SDL_ttf
 	if (TTF_Init() == -1) {
-		std::cout << "TTF_Init has failed. Error: " << TTF_GetError() << "\n";
+		Debug::Log("TTF_Init has failed: " + (std::string)TTF_GetError(), Debug::error);
     	exit(2);
 	}
 
 	// Init SDL_mixer
-	Audio audio;
-	audio.initAudio(MIX_INIT_MP3);
+	//Audio audio;
+	//audio.initAudio(MIX_INIT_MP3);
 
 
 	window = SDL_CreateWindow(p_title,
@@ -39,7 +40,7 @@ Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_
 
 	if (window == NULL)
 	{
-		std::cout << "Window failed to init: " << SDL_GetError() << "\n";
+		Debug::Log("Window failed to init: " + (std::string)SDL_GetError(), Debug::error);
 	}
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -49,6 +50,11 @@ Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_
 
 	// Init timestep
 	currentTime = utils::hireTimeInSeconds();
+
+	// Set default background color of the window to black
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
 }
 
 SDL_Texture* Birb2D::RenderWindow::loadTexture(const char* p_filePath)
@@ -57,7 +63,7 @@ SDL_Texture* Birb2D::RenderWindow::loadTexture(const char* p_filePath)
 	texture = IMG_LoadTexture(renderer, p_filePath);
 
 	if (texture == NULL)
-		std::cout << "Failed to load texture: " << SDL_GetError() << "\n";
+		Debug::Log("Failed to load texture [" + (std::string)p_filePath + "]: " + (std::string)SDL_GetError(), Debug::error);
 
 	return texture;
 }
@@ -69,7 +75,7 @@ TTF_Font* Birb2D::RenderWindow::loadFont(const char* p_filePath, const int p_fon
 	font = TTF_OpenFont(p_filePath, p_fontSize);
 	if (!font)
 	{
-		std::cout << "Error while loading font [" << p_filePath << "]: " << TTF_GetError() << std::endl;
+		Debug::Log("Error while loading font [" + (std::string)p_filePath + "] TTF_Error: " + (std::string)TTF_GetError(), Debug::error);
 		exit(1);
 	}
 
@@ -102,13 +108,13 @@ Birb2D::Texture Birb2D::RenderWindow::renderStaticTextTexture(const char* p_text
 	SDL_Surface* surface = TTF_RenderText_Solid(p_font.getTTFFont(), p_text, p_font.getColor());
 	if (surface == nullptr)
 	{
-		std::cout << "Error creating SDL_Surface: " << SDL_GetError() << std::endl;
+		Debug::Log("Error creating SDL_Surface. Text: " + (std::string)p_text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 	}
 
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 	if (texture == nullptr)
 	{
-		std::cout << "Error creating texture from surface: " << SDL_GetError() << std::endl;
+		Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError(), Debug::error);
 	}
 
 	SDL_FreeSurface(surface);
@@ -126,14 +132,14 @@ SDL_Texture* Birb2D::RenderWindow::renderTextEntity(Entity& textEntity)
 
 	if (surface == nullptr)
 	{
-		std::cout << "Error creating SDL_Surface: " << SDL_GetError() << ". Entity: " << textEntity.getName() << ". Text: [" << textEntity.getText() << "]" << std::endl;
+		Debug::Log("Error creating SDL_Surface: " + (std::string)SDL_GetError() + ". Entity: " + textEntity.getName() + ". Text: [" + textEntity.getText() + "]", Debug::error);
 		return nullptr;
 	}
 
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 	if (texture == nullptr)
 	{
-		std::cout << "Error creating texture from surface: " << SDL_GetError() << ". Entity: " << textEntity.getName() << ". Text: [" << textEntity.getText() << "]" << std::endl;
+		Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError() + ". Entity: " + textEntity.getName() + ". Text: [" + textEntity.getText() + "]", Debug::error);
 		return nullptr;
 	}
 
@@ -175,41 +181,18 @@ bool Birb2D::RenderWindow::cursorInRect(Rect rect)
 	return false;
 }
 
-void Birb2D::RenderWindow::InitSDL()
-{
-	// Init SDL
-	if (SDL_Init(SDL_INIT_VIDEO) > 0)
-	{
-		std::cout << "SDL INIT FAILED: " << SDL_GetError() << "\n";
-		exit(2);
-	}
-	
-	// Init SDL_image
-	if (!(IMG_Init(IMG_INIT_PNG)))
-	{
-		std::cout << "IMG_init has failed. Error: " << SDL_GetError() << "\n";
-		exit(2);
-	}
-
-	// Init SDL_ttf
-	if (TTF_Init() == -1)
-	{
-		std::cout << "TTF_Init has failed. Error: " << TTF_GetError() << "\n";
-		exit(2);
-	}
-}
-
-void Birb2D::RenderWindow::QuitSDL()
-{
-	TTF_Quit();
-	SDL_Quit();
-}
-
 void Birb2D::RenderWindow::cleanUp()
 {
+	Debug::Log("TTF_Quit()");
 	TTF_Quit();
-	Mix_CloseAudio();
+
+	//Debug::Log("Mix_CloseAudio()");
+	//Mix_CloseAudio();
+
+	Debug::Log("Mix_Quit()");
 	Mix_Quit();
+
+	Debug::Log("SDL_DestroyWindow()");
 	SDL_DestroyWindow(window);
 }
 
@@ -234,7 +217,7 @@ void Birb2D::RenderWindow::render(Entity& p_entity)
 
 	if (dst.w == 0 || dst.h == 0)
 	{
-		std::cout << "ERROR! Texture with size of 0 in entity " << p_entity.getName() << std::endl;
+		Debug::Log("Texture with size of 0 in entity " + p_entity.getName(), Debug::warning);
 		return;
 	}
 
@@ -288,4 +271,15 @@ void Birb2D::RenderWindow::timestepEnd()
 float Birb2D::RenderWindow::getTimestepAlpha()
 {
 	return accumulator / timeStep;
+}
+
+void Birb2D::RenderWindow::handleBasicWindowEvents(SDL_Event event, bool *windowRunning)
+{
+	switch (event.type)
+	{
+		case (SDL_QUIT):
+			Debug::Log("Quitting...");
+			*windowRunning = false;
+			break;
+	}
 }

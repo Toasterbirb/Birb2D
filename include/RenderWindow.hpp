@@ -47,9 +47,6 @@ namespace Birb2D
 		Vector2int getCursorPosition();
 		bool cursorInRect(Rect rect);
 
-
-		void InitSDL();
-		void QuitSDL();
 		void cleanUp();
 		void clear();
 		void render(Entity& p_entity);
@@ -62,6 +59,10 @@ namespace Birb2D
 		void timestepEnd();
 		float getTimestepAlpha();
 		// --------------------
+
+		// Some basic event stuff
+		void handleBasicWindowEvents(SDL_Event event, bool *windowRunning);
+		// ----------------------
 		
 	private:
 		int refresh_rate;

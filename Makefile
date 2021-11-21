@@ -31,20 +31,29 @@ values:
 logger:
 	${CC} -c -g ${SRCDIR}/logger.cpp ${WarningFlags} -o ${outputDir}/logger.o
 
+utils:
+	${CC} -c -g ${SRCDIR}/utils.cpp ${WarningFlags} -o ${outputDir}/utils.o
+
+scene:
+	${CC} -c -g ${SRCDIR}/scene.cpp ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/scene.o
+
 doctest:
-	${CC} -c -g ${SRCDIR}/tests.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/tests.o
+	${CC} -c -g ${SRCDIR}/tests.cpp ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/tests.o
 
-editor_main: 
-	${CC} -c -g ${SRCDIR}/editor.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/editor.o
-
-test: builddir audio entity font renderwindow widgets values logger doctest 
+test: builddir audio entity font renderwindow widgets values logger utils doctest
 	${CC} -g ${outputDir}/*.o ${SDL_FLAGS} -o ${outputDir}/${binary}_test
 	cd ${outputDir} ; ./${binary}_test
 
-final: builddir audio entity font renderwindow widgets values logger editor_main
+ping-pong: builddir audio entity font renderwindow widgets values logger utils scene 
+	${CC} -g ./games/Ping-Pong/src/*.cpp ${outputDir}/*.o ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/ping-pong
+
+editor: builddir audio entity font renderwindow widgets values logger utils
+	${CC} -g ${outputDir}/*.o ${SRCDIR}/editor.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/editor_playground
+
+final: builddir audio entity font renderwindow widgets values logger utils editor
 	${CC} -g ${outputDir}/*.o ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/editor
 
-win: clean builddir
+win-editor: clean builddir
 	mkdir -p ${outputDir}/win
 	x86_64-w64-mingw32-g++ -DPLATFORM_WIN ./src/audio.cpp ./src/entity.cpp ./src/font.cpp ./src/renderwindow.cpp ./src/widgets.cpp ./src/values.cpp ./src/tests.cpp ${SDL_FLAGS} \
 		-I./vendor/SDL2_win/SDL2/x86_64-w64-mingw32/include \
@@ -69,4 +78,4 @@ run:
 	cd ${outputDir} && ./editor
 
 clean:
-	rm -rf ${outputDir}
+	rm -r ${outputDir}

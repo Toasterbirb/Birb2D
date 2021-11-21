@@ -1,6 +1,7 @@
 #include "../include/Logger.hpp"
 #include <ctime>
 #include <fstream>
+#include <SDL2/SDL.h>
 
 void Debug::Log(std::string text, Type type)
 {
@@ -35,17 +36,17 @@ void Debug::Log(std::string text, Type type)
 	switch (type)
 	{
 		case (Type::log):
-			printline = line + "\033[32m[Log] " + text + "\033[0m\n";
+			printline = line + "\033[32m[Log] " + text + "\033[0m";
 			line = line + "[Log] " + text + "\n";
 			break;
 
 		case (Type::warning):
-			printline = line + "\033[33m[Warning] " + text + "\033[0m\n";
+			printline = line + "\033[33m[Warning] " + text + "\033[0m";
 			line = line + "[Warning] " + text + "\n";
 			break;
 
 		case (Type::error):
-			printline = line + "\033[31m[ERROR] " + text + "\033[0m\n";
+			printline = line + "\033[31m[ERROR] " + text + "\033[0m";
 			line = line + "[ERROR] " + text + "\n";
 			break;
 
@@ -53,8 +54,38 @@ void Debug::Log(std::string text, Type type)
 			break;
 	}
 
+	// Add the text to list of debug lines
+	bool repeatingLine = false;
+
+	if (Debug::lines.size() > 0)
+	{
+		if (Debug::lines[Debug::lines.size() - 1] == text)
+		{
+			repeatingLine = true;
+			Debug::lines.push_back(text);
+		}
+		else if (Debug::lines.size() > 1)
+		{
+			Debug::lines.clear();
+			std::cout << "\n";
+		}
+		else
+		{
+			Debug::lines.clear();
+		}
+	}
+	else
+	{
+		Debug::lines.push_back(text);
+	}
+
 	// Print out the debug line
-	std::cout << printline;
+	if (!repeatingLine)
+		std::cout << printline << std::endl;
+	else
+	{
+		std::cout << printline << " (" << Debug::lines.size() << "x)" << "\t\r" << std::flush;
+	}
 
 	// Append the line to a logfile
 	std::ofstream outfile;
