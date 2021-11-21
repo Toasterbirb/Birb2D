@@ -13,6 +13,7 @@ namespace Birb2D
 	class RenderWindow
 	{
 	public:
+		RenderWindow();
 		RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate);
 
 		/* Init stuff */

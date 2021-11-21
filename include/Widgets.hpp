@@ -45,15 +45,14 @@ namespace Birb2D
 					Center(float p_x, float p_y);
 					float x, y;
 				};
-				Position(Anchor p_anchor, Center p_center);
-				Position(Anchor p_anchor, Center p_center, Vector2f p_offset);
-				Position(Vector2f p_anchor, Vector2f p_center);
-				Position(Vector2f p_anchor, Vector2f p_center, Vector2f p_offset);
+				Position(Vector2f p_absolutePosition);
+				Position(RenderWindow p_window, Anchor p_anchor, Center p_center, Vector2f p_offset);
 
 			private:
+				RenderWindow window;
 				Anchor anchor;
 				Center center;
-				Vector2f offset;
+				Vector2f position;
 		};
 
 		class Button
@@ -80,7 +79,7 @@ namespace Birb2D
 		{
 			public:
 			   	Text(RenderWindow p_window, Vector2f location, std::string p_text, Font p_font, int p_z = 0);
-			   	Text(RenderWindow p_window, Vector2f location, Position::Anchor p_anchor, Position::Center p_center, std::string p_text, Font p_font, int p_z = 0);
+			   	Text(RenderWindow p_window, Vector2f location, Position p_position, std::string p_text, Font p_font, int p_z = 0);
 				void render();
 				int z;
 

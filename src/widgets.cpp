@@ -24,21 +24,18 @@ Birb2D::Widgets::Position::Center::Center(float p_x, float p_y)
 {}
 
 /* ---- Centering and anchor stuff ---- */
-Birb2D::Widgets::Position::Position(Anchor p_anchor, Center p_center)
-:anchor(p_anchor), center(p_center)
+Birb2D::Widgets::Position::Position(Vector2f p_absolutePosition)
+:position(p_absolutePosition)
 {}
 
-Birb2D::Widgets::Position::Position(Anchor p_anchor, Center p_center, Vector2f p_offset)
-:anchor(p_anchor), center(p_center), offset(p_offset)
-{}
+Birb2D::Widgets::Position::Position(RenderWindow p_window, Anchor p_anchor, Center p_center, Vector2f p_offset)
+:window(p_window), anchor(p_anchor), center(p_center), position(p_offset)
+{
+	Vector2int winDimensions = p_window.getDimensions();
+	winDimensions.x *= anchor.x;
+	winDimensions.y *= anchor.y;
 
-Birb2D::Widgets::Position::Position(Vector2f p_anchor, Vector2f p_center)
-:anchor(Anchor(p_anchor.x, p_anchor.y)), center(Center(p_center.x, p_center.y))
-{}
-
-Birb2D::Widgets::Position::Position(Vector2f p_anchor, Vector2f p_center, Vector2f p_offset)
-:anchor(Anchor(p_anchor.x, p_anchor.y)), center(Center(p_center.x, p_center.y)), offset(p_offset)
-{}
+}
 /* ------------------------------------ */
 
 Birb2D::Widgets::Button::Button(RenderWindow p_window, Rect p_dimensions, SDL_Colour p_backgroundColor, std::string p_text, Font p_font, std::function<void()> p_onClick, int p_z)
@@ -107,7 +104,7 @@ Birb2D::Widgets::Text::Text(RenderWindow p_window, Vector2f p_pos, std::string p
 	Debug::Log("Text widget created!");
 }
 
-Birb2D::Widgets::Text::Text(RenderWindow p_window, Vector2f p_pos, Postion::Anchor p_anchor, Position::Center p_center, std::string p_text, Font p_font, int p_z)
+Birb2D::Widgets::Text::Text(RenderWindow p_window, Vector2f p_pos, Position::Anchor p_anchor, Position::Center p_center, std::string p_text, Font p_font, int p_z)
 :window(p_window), pos(p_pos), anchor(p_anchor), center(p_center), text(p_text), font(p_font), z(p_z)
 {
 	Debug::Log("Creating text widget [" + p_text + "]");
