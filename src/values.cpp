@@ -1,5 +1,5 @@
 #include <math.h>
-#include "../include/Values.hpp"
+#include "Values.hpp"
 
 SDL_Color Colors::ChangeColorIntensity(SDL_Color color, int delta)
 {

@@ -1,7 +1,8 @@
 #include <iostream>
-#include "../include/Audio.hpp"
-#include "../include/Logger.hpp"
+#include "Audio.hpp"
+#include "Logger.hpp"
 
+//** Initializes the SDL_mixer library. Needs to be called before any other audio features are used
 bool Audio::initAudio(int flags)
 {
 	Debug::Log("Initializing audio...");
@@ -30,6 +31,7 @@ bool Audio::initAudio(int flags)
 	return true;
 }
 
+//** Loads up a music file from given path. Shouldn't be used for short sound effects
 MusicFile::MusicFile(std::string p_filePath)
 :filePath(p_filePath)
 {
@@ -41,6 +43,7 @@ MusicFile::MusicFile(std::string p_filePath)
 	}
 }
 
+//** Loads up a sound file from given path. Used for shorter sound effects and not music
 SoundFile::SoundFile(std::string p_filePath)
 :filePath(p_filePath)
 {

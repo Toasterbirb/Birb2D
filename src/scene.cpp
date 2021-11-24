@@ -1,5 +1,5 @@
-#include "../include/Scene.hpp"
-#include "../include/Logger.hpp"
+#include "Scene.hpp"
+#include "Logger.hpp"
 
 Birb2D::Scene::Scene(std::string p_name, Birb2D::RenderWindow p_window, bool p_enabled, int p_layers)
 :name(p_name), window(p_window), enabled(p_enabled), layers(p_layers)

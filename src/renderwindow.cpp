@@ -1,12 +1,12 @@
 //#include <SDL2/SDL_render.h>
 #include <iostream>
 
-#include "../include/RenderWindow.hpp"
-#include "../include/Audio.hpp"
-#include "../include/Entity.hpp"
-#include "../include/Widgets.hpp"
-#include "../include/Logger.hpp"
-#include "../include/Values.hpp"
+#include "RenderWindow.hpp"
+#include "Audio.hpp"
+#include "Entity.hpp"
+#include "Widgets.hpp"
+#include "Logger.hpp"
+#include "Values.hpp"
 
 Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate)
 :window(NULL), renderer(NULL), refresh_rate(p_refresh_rate)

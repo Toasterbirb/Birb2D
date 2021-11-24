@@ -1,9 +1,9 @@
 #include <string.h>
-#include "../include/Widgets.hpp"
-#include "../include/Font.hpp"
-#include "../include/Utils.hpp"
-#include "../include/Values.hpp"
-#include "../include/Logger.hpp"
+#include "Widgets.hpp"
+#include "Font.hpp"
+#include "Utils.hpp"
+#include "Values.hpp"
+#include "Logger.hpp"
 
 Birb2D::Widgets::Position::Anchor::Anchor()
 {

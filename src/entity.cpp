@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "../include/Entity.hpp"
-#include "../include/Widgets.hpp"
-#include "../include/Values.hpp"
+#include "Entity.hpp"
+#include "Widgets.hpp"
+#include "Values.hpp"
 
 // Default empty entity
 Birb2D::Entity::Entity()
