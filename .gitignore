@@ -37,3 +37,6 @@
 
 # Birb2D Custom Files
 log.txt
+
+# Vim stuff
+.undodir
