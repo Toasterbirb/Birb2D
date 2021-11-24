@@ -5,5 +5,8 @@ multilingual = false
 src = "src"
 title = "Birb2D"
 
+[default]
+theme = "Navy"
+
 [build]
 build-dir = "../docs"
