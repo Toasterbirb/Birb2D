@@ -78,8 +78,8 @@ namespace Birb2D
 		class Text
 		{
 			public:
-			   	Text(RenderWindow p_window, Vector2f location, std::string p_text, Font p_font, int p_z = 0);
-			   	Text(RenderWindow p_window, Vector2f location, Position p_position, std::string p_text, Font p_font, int p_z = 0);
+			   	Text(RenderWindow p_window, Vector2f p_pos, std::string p_text, Font p_font, int p_z = 0);
+			   	Text(RenderWindow p_window, Vector2f p_pos, Position p_position, std::string p_text, Font p_font, int p_z = 0);
 				void render();
 				int z;
 

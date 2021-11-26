@@ -24,18 +24,18 @@ Birb2D::Widgets::Position::Center::Center(float p_x, float p_y)
 {}
 
 /* ---- Centering and anchor stuff ---- */
-Birb2D::Widgets::Position::Position(Vector2f p_absolutePosition)
-:position(p_absolutePosition)
-{}
-
-Birb2D::Widgets::Position::Position(RenderWindow p_window, Anchor p_anchor, Center p_center, Vector2f p_offset)
-:window(p_window), anchor(p_anchor), center(p_center), position(p_offset)
-{
-	Vector2int winDimensions = p_window.getDimensions();
-	winDimensions.x *= anchor.x;
-	winDimensions.y *= anchor.y;
-
-}
+//Birb2D::Widgets::Position::Position(Vector2f p_absolutePosition)
+//:position(p_absolutePosition)
+//{}
+//
+//Birb2D::Widgets::Position::Position(RenderWindow p_window, Anchor p_anchor, Center p_center, Vector2f p_offset)
+//:window(p_window), anchor(p_anchor), center(p_center), position(p_offset)
+//{
+//	Vector2int winDimensions = p_window.getDimensions();
+//	winDimensions.x *= anchor.x;
+//	winDimensions.y *= anchor.y;
+//
+//}
 /* ------------------------------------ */
 
 Birb2D::Widgets::Button::Button(RenderWindow p_window, Rect p_dimensions, SDL_Colour p_backgroundColor, std::string p_text, Font p_font, std::function<void()> p_onClick, int p_z)
@@ -94,18 +94,6 @@ void Birb2D::Widgets::Button::refresh(Birb2D::Widgets::RefreshAction refreshActi
 
 Birb2D::Widgets::Text::Text(RenderWindow p_window, Vector2f p_pos, std::string p_text, Font p_font, int p_z)
 :window(p_window), pos(p_pos), text(p_text), font(p_font), z(p_z)
-{
-	Debug::Log("Creating text widget [" + p_text + "]");
-	Texture textTexture = window.renderStaticTextTexture(p_text.c_str(), font);
-	if (textTexture.sdlTexture == NULL)
-		Debug::Log("Error creating textTexture: " + (std::string)SDL_GetError(), Debug::error);
-
-	textEntity = Birb2D::Entity("Text", Vector2f(pos.x, pos.y), Vector2f(textTexture.dimensions.x, textTexture.dimensions.y), textTexture);
-	Debug::Log("Text widget created!");
-}
-
-Birb2D::Widgets::Text::Text(RenderWindow p_window, Vector2f p_pos, Position::Anchor p_anchor, Position::Center p_center, std::string p_text, Font p_font, int p_z)
-:window(p_window), pos(p_pos), anchor(p_anchor), center(p_center), text(p_text), font(p_font), z(p_z)
 {
 	Debug::Log("Creating text widget [" + p_text + "]");
 	Texture textTexture = window.renderStaticTextTexture(p_text.c_str(), font);

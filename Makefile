@@ -4,6 +4,7 @@ outputDir=./build
 binary=birb2d
 WarningFlags=-Wpedantic -pedantic -Wall -Wextra
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+INCLUDES=-I./include
 
 all: final
 
@@ -11,34 +12,34 @@ builddir:
 	mkdir -p ${outputDir}
 
 audio:
-	${CC} -c -g ${SRCDIR}/audio.cpp -lSDL2_mixer ${WarningFlags} -o ${outputDir}/audio.o
+	${CC} -c -g ${SRCDIR}/audio.cpp -lSDL2_mixer ${INCLUDES} ${WarningFlags} -o ${outputDir}/audio.o
 
 entity:
-	${CC} -c -g ${SRCDIR}/entity.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/entity.o
+	${CC} -c -g ${SRCDIR}/entity.cpp ${SDL_FLAGS} ${INCLUDES} ${WarningFlags} -o ${outputDir}/entity.o
 
 font:
-	${CC} -c -g ${SRCDIR}/font.cpp -lSDL2_ttf ${WarningFlags} -o ${outputDir}/font.o
+	${CC} -c -g ${SRCDIR}/font.cpp -lSDL2_ttf ${INCLUDES} ${WarningFlags} -o ${outputDir}/font.o
 
 renderwindow:
-	${CC} -c -g ${SRCDIR}/renderwindow.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/renderwindow.o
+	${CC} -c -g ${SRCDIR}/renderwindow.cpp ${SDL_FLAGS} ${INCLUDES} ${WarningFlags} -o ${outputDir}/renderwindow.o
 
 widgets:
-	${CC} -c -g ${SRCDIR}/widgets.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/widgets.o
+	${CC} -c -g ${SRCDIR}/widgets.cpp ${SDL_FLAGS} ${INCLUDES} ${WarningFlags} -o ${outputDir}/widgets.o
 
 values:
-	${CC} -c -g ${SRCDIR}/values.cpp -lSDL2 ${WarningFlags} -o ${outputDir}/values.o
+	${CC} -c -g ${SRCDIR}/values.cpp -lSDL2 ${INCLUDES} ${WarningFlags} -o ${outputDir}/values.o
 
 logger:
-	${CC} -c -g ${SRCDIR}/logger.cpp ${WarningFlags} -o ${outputDir}/logger.o
+	${CC} -c -g ${SRCDIR}/logger.cpp ${INCLUDES} ${WarningFlags} -o ${outputDir}/logger.o
 
 utils:
-	${CC} -c -g ${SRCDIR}/utils.cpp ${WarningFlags} -o ${outputDir}/utils.o
+	${CC} -c -g ${SRCDIR}/utils.cpp ${INCLUDES} ${WarningFlags} -o ${outputDir}/utils.o
 
 scene:
-	${CC} -c -g ${SRCDIR}/scene.cpp ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/scene.o
+	${CC} -c -g ${SRCDIR}/scene.cpp ${INCLUDES} ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/scene.o
 
 doctest:
-	${CC} -c -g ./tests/src/tests.cpp ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/tests.o
+	${CC} -c -g ./tests/src/tests.cpp ${INCLUDES} ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/tests.o
 
 test: builddir audio entity font renderwindow widgets values logger utils doctest
 	${CC} -g ${outputDir}/*.o ${SDL_FLAGS} -o ${outputDir}/${binary}_test

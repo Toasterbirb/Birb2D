@@ -15,7 +15,7 @@ int main()
 	Debug::Log("Starting pinging and ponging");
 
 	// Game loop
-	bool holdingKeyDown = false
+	bool holdingKeyDown = false;
 
 	// Fonts
 	Birb2D::Font titleFont("../res/fonts/freefont/FreeMono.ttf", Colors::White, 64);
