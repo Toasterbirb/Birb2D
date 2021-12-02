@@ -166,26 +166,26 @@ Birb2D::Texture Birb2D::RenderWindow::renderStaticTextTexture(const char* p_text
 	return tex;
 }
 
-SDL_Texture* Birb2D::RenderWindow::renderTextEntity(Entity& textEntity)
-{
-	SDL_Surface* surface = TTF_RenderText_Blended(textEntity.getFont().getTTFFont(), textEntity.getText().c_str(), textEntity.getFont().getColor());
-
-	if (surface == nullptr)
-	{
-		Debug::Log("Error creating SDL_Surface: " + (std::string)SDL_GetError() + ". Entity: " + textEntity.getName() + ". Text: [" + textEntity.getText() + "]", Debug::error);
-		return nullptr;
-	}
-
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-	if (texture == nullptr)
-	{
-		Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError() + ". Entity: " + textEntity.getName() + ". Text: [" + textEntity.getText() + "]", Debug::error);
-		return nullptr;
-	}
-
-	SDL_FreeSurface(surface);
-	return texture;
-}
+//SDL_Texture* Birb2D::RenderWindow::renderTextEntity(Entity& textEntity)
+//{
+//	SDL_Surface* surface = TTF_RenderText_Blended(textEntity.getFont().getTTFFont(), textEntity.getText().c_str(), textEntity.getFont().getColor());
+//
+//	if (surface == nullptr)
+//	{
+//		Debug::Log("Error creating SDL_Surface: " + (std::string)SDL_GetError() + ". Entity: " + textEntity.getName() + ". Text: [" + textEntity.getText() + "]", Debug::error);
+//		return nullptr;
+//	}
+//
+//	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+//	if (texture == nullptr)
+//	{
+//		Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError() + ". Entity: " + textEntity.getName() + ". Text: [" + textEntity.getText() + "]", Debug::error);
+//		return nullptr;
+//	}
+//
+//	SDL_FreeSurface(surface);
+//	return texture;
+//}
 
 int Birb2D::RenderWindow::getRefreshRate()
 {
@@ -248,29 +248,42 @@ void Birb2D::RenderWindow::clear()
 void Birb2D::RenderWindow::render(Entity& p_entity)
 {
 	SDL_Rect src;
-	src.x = p_entity.getCurrentFrame().x;
-	src.y = p_entity.getCurrentFrame().y;
-	src.w = p_entity.getCurrentFrame().w;
-	src.h = p_entity.getCurrentFrame().h;
+	src.x = p_entity.rect.x;
+	src.y = p_entity.rect.y;
+	src.w = p_entity.rect.w;
+	src.h = p_entity.rect.h;
+	//src.x = p_entity.getCurrentFrame().x;
+	//src.y = p_entity.getCurrentFrame().y;
+	//src.w = p_entity.getCurrentFrame().w;
+	//src.h = p_entity.getCurrentFrame().h;
 
 	SDL_Rect dst;
-	dst.x = p_entity.getPos().x;
-	dst.y = p_entity.getPos().y;
-	dst.w = p_entity.getCurrentFrame().w * p_entity.getLocalScale();
-	dst.h = p_entity.getCurrentFrame().h * p_entity.getLocalScale();
+	dst.x = p_entity.rect.x;
+	dst.y = p_entity.rect.y;
+	dst.w = p_entity.rect.w * p_entity.localScale;
+	dst.h = p_entity.rect.h * p_entity.localScale;
+	//dst.x = p_entity.getPos().x;
+	//dst.y = p_entity.getPos().y;
+	//dst.w = p_entity.getCurrentFrame().w * p_entity.getLocalScale();
+	//dst.h = p_entity.getCurrentFrame().h * p_entity.getLocalScale();
 
 	if (dst.w == 0 || dst.h == 0)
 	{
-		Debug::Log("Texture with size of 0 in entity " + p_entity.getName(), Debug::warning);
+		Debug::Log("Texture with size of 0 in entity " + p_entity.name, Debug::warning);
 		return;
 	}
 
-	Vector2f centerPoint(p_entity.getCurrentFrame().w / 2, p_entity.getCurrentFrame().h / 2);
+	//Vector2f centerPoint(p_entity.getCurrentFrame().w / 2, p_entity.getCurrentFrame().h / 2);
+	Vector2f centerPoint(p_entity.rect.w / 2, p_entity.rect.h / 2);
 	SDL_Point center = { (int)centerPoint.x, (int)centerPoint.y };
 
-	if (SDL_RenderCopyEx(renderer, p_entity.getTex(), &src, &dst, p_entity.getAngle(), &center, SDL_FLIP_NONE) < 0)
+	//if (SDL_RenderCopyEx(renderer, p_entity.getTex(), &src, &dst, p_entity.getAngle(), &center, SDL_FLIP_NONE) < 0)
+	//{
+	//	std::cout << "Error during rendering: " << SDL_GetError() << ". Entity: " << p_entity.getName() << std::endl;
+	//}
+	if (SDL_RenderCopyEx(renderer, p_entity.sprite.texture.sdlTexture, &src, &dst, p_entity.angle, &center, SDL_FLIP_NONE) < 0)
 	{
-		std::cout << "Error during rendering: " << SDL_GetError() << ". Entity: " << p_entity.getName() << std::endl;
+		std::cout << "Error during rendering: " << SDL_GetError() << ". Entity: " << p_entity.name << std::endl;
 	}
 	//SDL_RenderCopy(renderer, p_entity.getTex(), &src, &dst);
 }

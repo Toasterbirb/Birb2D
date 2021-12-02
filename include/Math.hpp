@@ -13,6 +13,11 @@ struct Vector2f
 	:x(p_x), y(p_y)
 	{}
 
+	Vector2f getValue()
+	{
+		return Vector2f(x, y);
+	}
+
 	void print()
 	{
 		std::cout << x << ", " << y << std::endl;
@@ -37,6 +42,11 @@ struct Vector2int
 		y = std::round(p_y);
 	}
 
+	Vector2int getValue()
+	{
+		return Vector2int(x, y);
+	}
+
 	void print()
 	{
 		std::cout << x << ", " << y << std::endl;
@@ -54,6 +64,11 @@ struct Vector3f
 	Vector3f(float p_x, float p_y, float p_z)
 	:x(p_x), y(p_y), z(p_z)
 	{}
+
+	Vector3f getValue()
+	{
+		return Vector3f(x, y, z);
+	}
 
 	void print()
 	{
@@ -78,6 +93,11 @@ struct Vector3int
 		x = std::round(p_x);
 		y = std::round(p_y);
 		z = std::round(p_z);
+	}
+
+	Vector3int getValue()
+	{
+		return Vector3int(x, y, z);
 	}
 
 	void print()

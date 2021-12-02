@@ -1,70 +1,73 @@
 #pragma once
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include <iostream>
+#include <string.h>
 #include <SDL2/SDL_image.h>
-
-#include "../include/Math.hpp"
-#include "../include/Font.hpp"
-#include "../include/Utils.hpp"
-
-//SDL_Texture* renderStaticText(const char* p_text, Font* p_font);
+#include "Utils.hpp"
+#include "Font.hpp"
 
 namespace Birb2D
 {
 	class Entity
 	{
-	public:
-		// Normal texture entities
-		Entity();
-		Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, Texture p_tex);
-		Entity(const char* p_name, Vector2f p_pos, Vector2f p_dimensions, float p_angle, Texture p_tex);
+		public:
+			struct Sprite
+			{
+				Sprite();
+				Sprite(std::string p_filePath); // Initialize struct with a texture
+				Texture texture;
+				std::string filePath;
+			};
 
-		// Scalable texture entities
-		Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vector2f p_dimensions, Texture p_tex);
-		Entity(const char* p_name, Vector2f p_pos, float p_scaleMultiplier, Vector2f p_dimensions, float p_angle, SDL_Texture* p_tex);
+			struct Text
+			{
+				Text();
+				Text(std::string p_text, Birb2D::Font p_font);
+				std::string value;
+				Birb2D::Font font;
+				Rect frame; 		/* 	Frame for the text element inside of the entity.
+										The text frame could be smaller than the actual entity	*/
+			};
 
-		// Text entities
-		Entity(const char* p_name, std::string p_text, Vector2f p_pos, Birb2D::Font p_font);
-		Entity(const char* p_name, std::string p_text, Vector2f p_pos, Birb2D::Font p_font, SDL_Texture* p_tex, float p_angle);
 
-		Vector2f& getPos();
-		void setPos(Vector2f p_pos);
-		Rect* getRect();
+			Entity();
+			Entity(std::string p_name, Vector2f p_position);
+			Entity(std::string p_name, Rect p_rect);
+			Entity(std::string p_name, Rect p_rect, float p_angle);
+			Entity(std::string p_name, Rect p_rect, float p_angle, Vector2f p_objectCenter);
+			Entity(std::string p_name, Rect p_rect, float p_angle, Vector2f p_objectCenter, Vector2f p_anchor);
 
-		float& getAngle();
-		void setAngle(float p_angle);
+			std::string name = "Default entity"; 	/* Used to identify the entity */
+			Rect rect = Rect(0,0,0,0); 	/* Position and local scale */
+			float angle = 0; 			/* Rotation of the entity in 2D space */
 
-		Birb2D::Font getFont();
+			float localScale = 1;		/* 	Multiplier for the size of the entity. Useful when the original
+								   			size needs to be kept intact */
 
-		std::string getText();
+			int z = 0; 					/* 	Priority / depth. 0 is the default and the lowest priority.
+										   	Higher priority means, that the entity will be rendered on top
+								   			on other entities */
 
-		std::string getName();
+			/* Anchoring */
+			Vector2f objectCenter = Vector2f(0, 0); /* 	Center point of the entity. Entity position uses
+														this point as the top left corner. Values range
+														from 0f-1f 0,0 being the top left corner and 1,1
+														being the bottom right corner	*/
+			
+			Vector2f anchor = Vector2f(0, 0); 		/* 	Point on screen that the objectCenter is positioned
+														relatively to. For example, anchor 1,1 would be the
+														bottom right corner. If the center point would be 1,1
+														in that case, the entity would be positioned to the
+														bottom right corner and follow the corner when the
+														window is resized.	*/
 
-		void updateText(std::string p_text, SDL_Texture* p_tex);
-		//void setText(std::string p_text);
-		//void setTexture(SDL_Texture* p_tex);
-		
-		float getLocalScale()
-		{
-			return localScale;
-		}
-		
+			/* Extra stuff to make the entity show up on the screen */
+			Sprite sprite; 				/* 	Sprites allow entities to render stuff, like pictures,
+											animations etc. */
 
-		SDL_Texture* getTex();
-		Rect getCurrentFrame();
-	private:
-		std::string name;
-		Vector2f pos;
-		Rect pos_rect;
-		float localScale = 1.00f;
-		float angle;
+			Text text; 					/*  Text allows for creating text textures dynamically. 
+											The text in the texture can be changed runtime */
 
-		// Text entity vars
-		std::string text;
-		Birb2D::Font font;
-
-		Rect currentFrame;
-		SDL_Texture* tex;
 	};
+
+
 }

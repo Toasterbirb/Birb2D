@@ -45,6 +45,7 @@ test: builddir audio entity font renderwindow widgets values logger utils doctes
 	${CC} -g ${outputDir}/*.o ${SDL_FLAGS} -o ${outputDir}/${binary}_test
 	cd ${outputDir} ; ./${binary}_test
 
+
 ping-pong: builddir audio entity font renderwindow widgets values logger utils scene 
 	${CC} -g ./games/Ping-Pong/src/*.cpp ${outputDir}/*.o ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/ping-pong
 
@@ -80,3 +81,4 @@ run:
 
 clean:
 	rm -r ${outputDir}
+	rm *.o

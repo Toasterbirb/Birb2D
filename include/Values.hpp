@@ -2,6 +2,7 @@
 #pragma GCC diagnostic ignored "-Wunused-variable"
 
 #include <SDL2/SDL.h>
+#include "RenderWindow.hpp"
 
 namespace Global
 {

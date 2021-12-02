@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="autodoc/table_of_contents.html"><strong aria-hidden="true">2.</strong> Functions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="autodoc/audio.html"><strong aria-hidden="true">2.1.</strong> Audio</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="rendering.html"><strong aria-hidden="true">2.</strong> Rendering</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,36 +136,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="birb2d-functions"><a class="header" href="#birb2d-functions">Birb2D functions</a></h1>
-<p>This file is generated automatically. Please don't modify it, it will be overwritten.</p>
-<h2 id="files"><a class="header" href="#files">Files</a></h2>
-<ul>
-<li><a href="autodoc/./audio.html">Audio</a></li>
-<li><a href="autodoc/./entity.html">Entity</a></li>
-<li><a href="autodoc/./events.html">Events</a></li>
-<li><a href="autodoc/./font.html">Font</a></li>
-<li><a href="autodoc/./logger.html">Logger</a></li>
-<li><a href="autodoc/./math.html">Math</a></li>
-<li><a href="autodoc/./renderwindow.html">Renderwindow</a></li>
-<li><a href="autodoc/./scene.html">Scene</a></li>
-<li><a href="autodoc/./utils.html">Utils</a></li>
-<li><a href="autodoc/./values.html">Values</a></li>
-<li><a href="autodoc/./widgets.html">Widgets</a></li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="audio"><a class="header" href="#audio">Audio</a></h1>
-<details>
-	<summary>bool Audio::initAudio(int flags)</summary>
-<p>Initializes the SDL_mixer library. Needs to be called before any other audio features are used</p>
-</details>
-<details>
-	<summary>MusicFile::MusicFile(std::string p_filePath)</summary>
-<p>Loads up a music file from given path. Shouldn't be used for short sound effects</p>
-</details>
-<details>
-	<summary>SoundFile::SoundFile(std::string p_filePath)</summary>
-<p>Loads up a sound file from given path. Used for shorter sound effects and not music</p>
-</details>
-
+<div style="break-before: page; page-break-before: always;"></div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
@@ -180,20 +151,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>

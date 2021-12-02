@@ -60,11 +60,13 @@ namespace Birb2D
 			public:
 				Button(RenderWindow p_window, Rect p_dimensions, SDL_Color p_backgroundColor, std::string p_text, Font p_font, std::function<void()> p_onClick, int p_z = 0);
 				void refresh(RefreshAction refreshAction);
+				Entity getEntity();
 				int z;
 
 			private:
 				Font font;
 				std::string text;
+				Vector2f textOffset = Vector2f(3, 3);
 				Entity textEntity;
 				RenderWindow window;
 				Rect dimensions;

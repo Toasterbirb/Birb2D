@@ -4,8 +4,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
-#include "../include/Entity.hpp"
-#include "../include/Font.hpp"
+#include "Entity.hpp"
+#include "Font.hpp"
+#include "Utils.hpp"
 
 
 namespace Birb2D
@@ -30,7 +31,7 @@ namespace Birb2D
 		void DrawRect(SDL_Color color, Rect dimensions);
 
 		Texture renderStaticTextTexture(const char* p_text, Font p_font);
-		SDL_Texture* renderTextEntity(Entity& textEntity);
+		//SDL_Texture* renderTextEntity(Entity& textEntity);
 
 		int getRefreshRate();
 		SDL_Renderer* getRenderer()

@@ -47,7 +47,9 @@ Birb2D::Widgets::Button::Button(RenderWindow p_window, Rect p_dimensions, SDL_Co
 		Debug::Log("Error creating textTexture: " + (std::string)SDL_GetError(), Debug::error);
 
 	//textEntity = Birb2D::Entity("Button", Vector2f(dimensions.x + 3, dimensions.y + 3), Vector2f(dimensions.w - 3, dimensions.h - 3), textTexture);
-	textEntity = Birb2D::Entity("Button", Vector2f(dimensions.x + 3, dimensions.y + 3), Vector2f(textTexture.dimensions.x - 3, textTexture.dimensions.y - 3), textTexture);
+	//textEntity = Birb2D::Entity("Button", Vector2f(dimensions.x + 3, dimensions.y + 3), Vector2f(textTexture.dimensions.x - 3, textTexture.dimensions.y - 3), textTexture);
+	textEntity = Birb2D::Entity("Button", Rect(dimensions.x + textOffset.x, dimensions.y + textOffset.y, textTexture.dimensions.x - textOffset.x, textTexture.dimensions.y - textOffset.y));
+	textEntity.sprite.texture.sdlTexture = textTexture.sdlTexture;
 	altBackgroundColor = Colors::ChangeColorIntensity(backgroundColor, -70);
 
 	hoverDimensions.x = dimensions.x - 5;
@@ -57,7 +59,6 @@ Birb2D::Widgets::Button::Button(RenderWindow p_window, Rect p_dimensions, SDL_Co
 
 	Debug::Log("Creating button...");
 }
-
 
 void Birb2D::Widgets::Button::refresh(Birb2D::Widgets::RefreshAction refreshAction)
 {
@@ -92,6 +93,11 @@ void Birb2D::Widgets::Button::refresh(Birb2D::Widgets::RefreshAction refreshActi
 	}
 }
 
+Birb2D::Entity Birb2D::Widgets::Button::getEntity()
+{
+	return textEntity;
+}
+
 Birb2D::Widgets::Text::Text(RenderWindow p_window, Vector2f p_pos, std::string p_text, Font p_font, int p_z)
 :window(p_window), pos(p_pos), text(p_text), font(p_font), z(p_z)
 {
@@ -100,7 +106,10 @@ Birb2D::Widgets::Text::Text(RenderWindow p_window, Vector2f p_pos, std::string p
 	if (textTexture.sdlTexture == NULL)
 		Debug::Log("Error creating textTexture: " + (std::string)SDL_GetError(), Debug::error);
 
-	textEntity = Birb2D::Entity("Text", Vector2f(pos.x, pos.y), Vector2f(textTexture.dimensions.x, textTexture.dimensions.y), textTexture);
+	//textEntity = Birb2D::Entity("Text", Vector2f(pos.x, pos.y), Vector2f(textTexture.dimensions.x, textTexture.dimensions.y), textTexture);
+	// TODO: Add text entity back
+	textEntity = Birb2D::Entity("Text", Rect(pos.x, pos.y, textTexture.dimensions.x, textTexture.dimensions.y));
+	textEntity.text = Birb2D::Entity::Text(p_text, p_font);
 	Debug::Log("Text widget created!");
 }
 
@@ -118,7 +127,8 @@ Birb2D::Widgets::TopBar::TopBar(RenderWindow p_window, int barHeight, SDL_Color 
 	if (textTexture.sdlTexture == NULL)
 		Debug::Log("Error creating textTexture: " + (std::string)SDL_GetError(), Debug::error);
 
-	Entity titleEntity("Title", Vector2f(5, 8), Vector2f(textTexture.dimensions.x, textTexture.dimensions.y), textTexture);
+	//Entity titleEntity("Title", Vector2f(5, 8), Vector2f(textTexture.dimensions.x, textTexture.dimensions.y), textTexture);
+	Entity titleEntity("Title", Rect(5, 8, textTexture.dimensions.x, textTexture.dimensions.y));
 	title = titleEntity;
 }
 

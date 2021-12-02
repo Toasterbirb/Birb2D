@@ -1,15 +1,7 @@
 #ifndef DOCTEST_CONFIG_DISABLE
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 
 #endif
-//#include "../include/doctest.h"
-//#include "../include/RenderWindow.hpp"
-//#include "../include/Font.hpp"
-//#include "../include/Entity.hpp"
-//#include "../include/Utils.hpp"
-//#include "../include/Audio.hpp"
-//#include "../include/Events.hpp"
-//#include "../include/Values.hpp"
-//#include "../include/Logger.hpp"
+
 #include "../include/doctest.h"
 #include "../../include/RenderWindow.hpp"
 #include "../../include/Font.hpp"
@@ -19,6 +11,7 @@
 #include "../../include/Events.hpp"
 #include "../../include/Values.hpp"
 #include "../../include/Logger.hpp"
+#include "../../include/Widgets.hpp"
 
 
 TEST_CASE("logging")
@@ -33,137 +26,70 @@ TEST_CASE("logging")
 TEST_CASE("empty entity")
 {
 	Birb2D::Entity entity;
-	CHECK(entity.getName() == "");
-	CHECK(entity.getPos().x == 0);
-	CHECK(entity.getPos().y == 0);
-	CHECK(entity.getAngle() == 0);
-	CHECK(entity.getTex() == NULL);
-	CHECK(entity.getCurrentFrame().h == 0);
-	CHECK(entity.getCurrentFrame().w == 0);
-	CHECK(entity.getCurrentFrame().x == 0);
-	CHECK(entity.getCurrentFrame().y == 0);
-	CHECK(entity.getText() == "");
+	CHECK(entity.name == "Default entity");
+	CHECK(entity.rect.x == 0);
+	CHECK(entity.rect.y == 0);
+	CHECK(entity.rect.w == 0);
+	CHECK(entity.rect.h == 0);
+	CHECK(entity.angle == 0);
 }
 
-TEST_CASE("normal texture entity")
+TEST_CASE("entity with a texture")
 {
 	Birb2D::Texture texture;
-	Birb2D::Entity entity("test entity", Vector2f(0,10), Vector2f(100, 110), texture);
+	Birb2D::Entity entity("test entity", Rect(0, 10, 100, 110));
+	entity.sprite.texture = texture;
 
-	CHECK(entity.getName() == "test entity");
-	CHECK(entity.getPos().x == 0);
-	CHECK(entity.getPos().y == 10);
-	CHECK(entity.getRect()->h == 110);
-	CHECK(entity.getRect()->w == 100);
-	CHECK(entity.getRect()->x == 0);
-	CHECK(entity.getRect()->y == 10);
-	CHECK(entity.getTex() == texture.sdlTexture);
-	CHECK(entity.getAngle() == 0);
-	CHECK(entity.getCurrentFrame().x == 0);
-	CHECK(entity.getCurrentFrame().y == 0);
-	CHECK(entity.getCurrentFrame().w == 100);
-	CHECK(entity.getCurrentFrame().h == 110);
+	CHECK(entity.name == "test entity");
+	CHECK(entity.rect.x == 0);
+	CHECK(entity.rect.y == 10);
+	CHECK(entity.rect.h == 110);
+	CHECK(entity.rect.w == 100);
+	CHECK(entity.sprite.texture.sdlTexture == texture.sdlTexture);
+	CHECK(entity.angle == 0);
 }
 
-TEST_CASE("texture entity with custom angle")
+TEST_CASE("entity with texture and custom angle")
 {
 	Birb2D::Texture texture;
-	Birb2D::Entity entity("test entity", Vector2f(12, 24), Vector2f(50, 150), 45, texture);
-	Birb2D::Entity entity2("test entity", Vector2f(12, 24), Vector2f(50, 150), 390.44, texture);
+	Birb2D::Entity entity("test entity", Rect(12, 24, 50, 150), 45);
+	entity.sprite.texture = texture;
 
-	CHECK(entity.getName() == "test entity");
-	CHECK(entity.getPos().x == 12);
-	CHECK(entity.getPos().y == 24);
-	CHECK(entity.getRect()->w == 50);
-	CHECK(entity.getRect()->h == 150);
-	CHECK(entity.getRect()->x == 12);
-	CHECK(entity.getRect()->y == 24);
-	CHECK(entity.getAngle() == 45);
-	CHECK(entity2.getAngle() == 390.44f);
-	CHECK(entity.getTex() == texture.sdlTexture);
-	CHECK(entity.getCurrentFrame().x == 0);
-	CHECK(entity.getCurrentFrame().y == 0);
-	CHECK(entity.getCurrentFrame().w == 50);
-	CHECK(entity.getCurrentFrame().h == 150);
+	CHECK(entity.name == "test entity");
+	CHECK(entity.rect.x == 12);
+	CHECK(entity.rect.y == 24);
+	CHECK(entity.rect.w == 50);
+	CHECK(entity.rect.h == 150);
+	CHECK(entity.angle == 45);
+	CHECK(entity.sprite.texture.sdlTexture == texture.sdlTexture);
 }
 
-TEST_CASE("scalable texture entity with fractional scale")
+TEST_CASE("entity with a texture and custom local scale")
 {
 	Birb2D::Texture texture;
-	Birb2D::Entity entity("scalable test entity", Vector2f(24, 64), 2.53, Vector2f(25, 60), texture);
+	Birb2D::Entity entity("scalable test entity", Rect(24, 64, 25, 60));
+	entity.localScale = 2.53f;
+	entity.sprite.texture = texture;
 
-	CHECK(entity.getName() == "scalable test entity");
-	CHECK(entity.getPos().x == 24);
-	CHECK(entity.getPos().y == 64);
-	CHECK(entity.getRect()->x == 24);
-	CHECK(entity.getRect()->y == 64);
-	CHECK(entity.getAngle() == 0);
-	CHECK(entity.getTex() == texture.sdlTexture);
-	CHECK(entity.getCurrentFrame().x == 0);
-	CHECK(entity.getCurrentFrame().y == 0);
-	CHECK(entity.getCurrentFrame().w == 25);
-	CHECK(entity.getCurrentFrame().h == 60);
-	CHECK(entity.getLocalScale() == 2.53f);
+	CHECK(entity.name == "scalable test entity");
+	CHECK(entity.rect.x == 24);
+	CHECK(entity.rect.y == 64);
+	CHECK(entity.rect.w == 25);
+	CHECK(entity.rect.h == 60);
+	CHECK(entity.angle == 0);
+	CHECK(entity.sprite.texture.sdlTexture == texture.sdlTexture);
+	CHECK(entity.localScale == 2.53f);
 }
 
-TEST_CASE("scalable texture entity with even scale")
-{
-	Birb2D::Texture texture;
-	Birb2D::Entity entity("scalable test entity", Vector2f(24, 64), 3, Vector2f(25, 60), texture);
 
-	CHECK(entity.getName() == "scalable test entity");
-	CHECK(entity.getPos().x == 24);
-	CHECK(entity.getPos().y == 64);
-	CHECK(entity.getRect()->x == 24);
-	CHECK(entity.getRect()->y == 64);
-	CHECK(entity.getAngle() == 0);
-	CHECK(entity.getTex() == texture.sdlTexture);
-	CHECK(entity.getCurrentFrame().x == 0);
-	CHECK(entity.getCurrentFrame().y == 0);
-	CHECK(entity.getCurrentFrame().w == 25);
-	CHECK(entity.getCurrentFrame().h == 60);
-	CHECK(entity.getLocalScale() == 3);
-}
-
-TEST_CASE("scalable texture entity with fractional scale and custom angle")
-{
-	SDL_Texture* texture;
-	Birb2D::Entity entity("scalable test entity", Vector2f(24, 64), 2.53, Vector2f(25, 60), 45, texture);
-
-	CHECK(entity.getName() == "scalable test entity");
-	CHECK(entity.getPos().x == 24);
-	CHECK(entity.getPos().y == 64);
-	CHECK(entity.getCurrentFrame().w == 63.25);
-	CHECK(entity.getCurrentFrame().h == 151.8f);
-	CHECK(entity.getRect()->x == 24);
-	CHECK(entity.getRect()->y == 64);
-	CHECK(entity.getAngle() == 45);
-	CHECK(entity.getTex() == texture);
-}
-
-TEST_CASE("scalable texture entity with even scale and custom angle")
-{
-	SDL_Texture* texture;
-	Birb2D::Entity entity("scalable test entity", Vector2f(24, 64), 4, Vector2f(25, 60), 10.5, texture);
-
-	CHECK(entity.getName() == "scalable test entity");
-	CHECK(entity.getPos().x == 24);
-	CHECK(entity.getPos().y == 64);
-	CHECK(entity.getCurrentFrame().w == 100);
-	CHECK(entity.getCurrentFrame().h == 240);
-	CHECK(entity.getRect()->x == 24);
-	CHECK(entity.getRect()->y == 64);
-	CHECK(entity.getAngle() == 10.5);
-	CHECK(entity.getTex() == texture);
-}
 
 Birb2D::Font getTestFont()
 {
-	Birb2D::RenderWindow window("Test window", 1280, 720, 60);
+	//Birb2D::RenderWindow window("Test window", 1280, 720, 60);
 	SDL_Color color = {0, 0, 0, 0};
 	Debug::Log("Getting test font...");
 	Birb2D::Font font("../res/fonts/manaspace/manaspc.ttf", color, 32);
-	window.cleanUp();
+	//window.cleanUp();
 
 	return font;
 }
@@ -199,66 +125,29 @@ TEST_CASE("font with custom color")
 	CHECK(font.getSize() == 64);
 }
 
-TEST_CASE("text entities")
+TEST_CASE("entity with text")
 {
 	Debug::Log("Getting test font...");
 	Birb2D::Font font = getTestFont();
-	Birb2D::Entity text_entity("test text", "Testing... :)", Vector2f(15, 45), font);
+	Birb2D::Entity text_entity("test text", Vector2f(15, 45));
+	text_entity.text = Birb2D::Entity::Text("Testing... :)", font);
 
-	CHECK(text_entity.getName() == "test text");
-	CHECK(text_entity.getText() == "Testing... :)");
-	CHECK(text_entity.getPos().x == 15);
-	CHECK(text_entity.getPos().y == 45);
-	//CHECK(text_entity.getFont() == font);
+	CHECK(text_entity.name == "test text");
+	CHECK(text_entity.text.value == "Testing... :)");
+	CHECK(text_entity.rect.x == 15);
+	CHECK(text_entity.rect.y == 45);
+	CHECK(text_entity.text.font.getTTFFont() == font.getTTFFont());
 }
 
-TEST_CASE("text entity with custom angle and texture")
-{
-	Debug::Log("Getting test font...");
-	Birb2D::Font font = getTestFont();
-	SDL_Texture* texture;
-	Birb2D::Entity text_entity("test text", "Testing... :)", Vector2f(10, 10), font, texture, 34.44);
-
-	CHECK(text_entity.getName() == "test text");
-	CHECK(text_entity.getText() == "Testing... :)");
-	CHECK(text_entity.getPos().x == 10);
-	CHECK(text_entity.getPos().y == 10);
-	//CHECK(text_entity.getFont() == font);
-	CHECK(text_entity.getTex() == texture);
-	CHECK(text_entity.getAngle() == 34.44f);
-}
-
-TEST_CASE("update the text of an existing text texture")
-{
-	Debug::Log("Getting test font...");
-	Birb2D::Font font = getTestFont();
-	Birb2D::Entity text_entity("test text", "Testing... :D)", Vector2f(0, 0), font);
-	text_entity.updateText("More testing... ;)", text_entity.getTex());
-
-	CHECK_FALSE(text_entity.getText() == "Testing... :D");
-	CHECK(text_entity.getText() == "More testing... ;)");
-}
-
-TEST_CASE("change the position of an entity")
-{
-	Birb2D::Texture texture;
-	Birb2D::Entity entity("test entity", Vector2f(0, 0), Vector2f(10, 10), texture);
-	entity.setPos(Vector2f(505, 406));
-
-	CHECK(entity.getPos().x == 505);
-	CHECK(entity.getPos().y == 406);
-	CHECK_FALSE(entity.getPos().x == 0);
-	CHECK_FALSE(entity.getPos().y == 0);
-}
 
 TEST_CASE("change the angle of an entity")
 {
 	Birb2D::Texture texture;
-	Birb2D::Entity entity("test entity", Vector2f(0, 0), Vector2f(10, 10), texture);
-	entity.setAngle(34.45f);
+	Birb2D::Entity entity("test entity", Rect(0, 0, 10, 10));
+	entity.angle = 34.45f;
 
-	CHECK_FALSE(entity.getAngle() == 0);
-	CHECK(entity.getAngle() == 34.45f);
+	CHECK_FALSE(entity.angle == 0);
+	CHECK(entity.angle == 34.45f);
 }
 
 
@@ -357,4 +246,29 @@ TEST_CASE("Rect with rounded values (integer)")
 	CHECK(roundedRect.y == 20);
 	CHECK(roundedRect.w == 30);
 	CHECK(roundedRect.h == 41);
+}
+
+void ButtonTestMethod()
+{
+	Debug::Log("Buttons are working!");
+}
+
+TEST_CASE("Button widget")
+{
+	Debug::Log("Creating the window for button test...");
+	Birb2D::RenderWindow window("Test window", 1280, 720, 240);
+	Debug::Log("Window created! Getting test font...");
+	Birb2D::Font font = getTestFont();
+	Debug::Log("Test font got successfully");
+	Birb2D::Widgets::Button testButton(window, Rect(5, 10, 150, 45), Colors::Black, "Test text", font, ButtonTestMethod, 0);
+	Birb2D::Texture textTex = testButton.getEntity().sprite.texture;
+
+	CHECK(testButton.getEntity().rect.x == 5 + 3);
+	CHECK(testButton.getEntity().rect.y == 10 + 3);
+	CHECK(testButton.getEntity().rect.w == textTex.dimensions.x - 3);
+	CHECK(testButton.getEntity().rect.h == textTex.dimensions.y - 3);
+	CHECK(textTex.dimensions.x != 0);
+	CHECK(textTex.dimensions.y != 0);
+	CHECK(testButton.getEntity().anchor.x == 0);
+	CHECK(testButton.getEntity().anchor.y == 0);
 }
