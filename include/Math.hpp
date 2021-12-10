@@ -18,9 +18,9 @@ struct Vector2f
 		return Vector2f(x, y);
 	}
 
-	void print()
+	std::string print()
 	{
-		std::cout << x << ", " << y << std::endl;
+		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 	}
 
 	float x, y;
@@ -47,9 +47,9 @@ struct Vector2int
 		return Vector2int(x, y);
 	}
 
-	void print()
+	std::string print()
 	{
-		std::cout << x << ", " << y << std::endl;
+		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 	}
 
 	int x, y;
@@ -70,9 +70,9 @@ struct Vector3f
 		return Vector3f(x, y, z);
 	}
 
-	void print()
+	std::string print()
 	{
-		std::cout << x << ", " << y << ", " << z << std::endl;
+		return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 	}
 
 	float x, y, z;
@@ -100,9 +100,9 @@ struct Vector3int
 		return Vector3int(x, y, z);
 	}
 
-	void print()
+	std::string print()
 	{
-		std::cout << x << ", " << y << ", " << z << std::endl;
+		return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 	}
 
 	int x, y, z;

@@ -1,5 +1,5 @@
 #include "Entity.hpp"
-#include "RenderWindow.hpp"
+#include "Logger.hpp"
 #include "Values.hpp"
 
 Birb2D::Entity::Sprite::Sprite() {}
@@ -9,10 +9,12 @@ Birb2D::Entity::Sprite::Sprite(std::string filePath)
 }
 
 Birb2D::Entity::Text::Text() {}
-Birb2D::Entity::Text::Text(std::string p_text, Birb2D::Font p_font)
+Birb2D::Entity::Text::Text(std::string p_text, Birb2D::Font p_font, RenderWindow window)
 :value(p_text), font(p_font)
 {
-
+	texture = window.Birb2D::RenderWindow::renderStaticTextTexture(value.c_str(), font);
+	if (texture.sdlTexture == NULL)
+		Debug::Log("Could not render the texture for entity text! Text: [" + value + "].");
 }
 
 Birb2D::Entity::Entity() {}

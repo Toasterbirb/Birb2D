@@ -28,3 +28,13 @@ SDL_Rect Rect::getSDLRect()
 	sdlrect.y = y;
 	return sdlrect;
 }
+
+Birb2D::Texture::Texture()
+{
+	sdlTexture = NULL;
+	dimensions = Vector2int(-1, -1);
+}
+
+Birb2D::Texture::Texture(SDL_Texture* p_sdlTexture, Vector2int p_dimensions)
+:sdlTexture(p_sdlTexture), dimensions(p_dimensions)
+{}

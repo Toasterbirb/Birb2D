@@ -9,7 +9,7 @@
 #include "Values.hpp"
 
 Birb2D::RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h, int p_refresh_rate)
-:window(NULL), renderer(NULL), refresh_rate(p_refresh_rate)
+:window(NULL), refresh_rate(p_refresh_rate)
 {
 	// INIT SDL STUFF
 	// Remember to call cleanUp function when closing the window
@@ -277,15 +277,10 @@ void Birb2D::RenderWindow::render(Entity& p_entity)
 	Vector2f centerPoint(p_entity.rect.w / 2, p_entity.rect.h / 2);
 	SDL_Point center = { (int)centerPoint.x, (int)centerPoint.y };
 
-	//if (SDL_RenderCopyEx(renderer, p_entity.getTex(), &src, &dst, p_entity.getAngle(), &center, SDL_FLIP_NONE) < 0)
-	//{
-	//	std::cout << "Error during rendering: " << SDL_GetError() << ". Entity: " << p_entity.getName() << std::endl;
-	//}
 	if (SDL_RenderCopyEx(renderer, p_entity.sprite.texture.sdlTexture, &src, &dst, p_entity.angle, &center, SDL_FLIP_NONE) < 0)
 	{
-		std::cout << "Error during rendering: " << SDL_GetError() << ". Entity: " << p_entity.name << std::endl;
+		Debug::Log("Error during rendering: " + std::string(SDL_GetError()) + ". Entity: [" + p_entity.name + "]. Texture dimensions: " + p_entity.sprite.texture.dimensions.print(), Debug::error);
 	}
-	//SDL_RenderCopy(renderer, p_entity.getTex(), &src, &dst);
 }
 
 void Birb2D::RenderWindow::display()

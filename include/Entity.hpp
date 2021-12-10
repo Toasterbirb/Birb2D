@@ -2,11 +2,14 @@
 #include <iostream>
 #include <string.h>
 #include <SDL2/SDL_image.h>
+#include "RenderWindow.hpp"
 #include "Utils.hpp"
 #include "Font.hpp"
 
 namespace Birb2D
 {
+	class RenderWindow;
+
 	class Entity
 	{
 		public:
@@ -21,11 +24,13 @@ namespace Birb2D
 			struct Text
 			{
 				Text();
-				Text(std::string p_text, Birb2D::Font p_font);
+				Text(std::string p_text, Birb2D::Font p_font, RenderWindow p_window);
 				std::string value;
 				Birb2D::Font font;
-				Rect frame; 		/* 	Frame for the text element inside of the entity.
-										The text frame could be smaller than the actual entity	*/
+				Rect frame; 			/* 	Frame for the text element inside of the entity.
+											The text frame could be smaller than the actual entity	*/
+
+				Texture texture; 		/* 	Texture to store the text texture into */
 			};
 
 

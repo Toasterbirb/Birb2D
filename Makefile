@@ -81,4 +81,3 @@ run:
 
 clean:
 	rm -r ${outputDir}
-	rm *.o

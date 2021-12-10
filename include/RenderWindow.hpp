@@ -11,6 +11,8 @@
 
 namespace Birb2D
 {
+	class Entity;
+
 	class RenderWindow
 	{
 	public:
@@ -68,7 +70,7 @@ namespace Birb2D
 	private:
 		int refresh_rate;
 		SDL_Window* window;
-		SDL_Renderer* renderer;
+		SDL_Renderer* renderer = NULL;
 		Vector2int windowDimensions;
 
 		// Timestep

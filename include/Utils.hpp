@@ -55,6 +55,8 @@ namespace Birb2D
 {
 	struct Texture
 	{
+		Texture();
+		Texture(SDL_Texture* p_sdlTexture, Vector2int p_dimensions);
 		SDL_Texture* sdlTexture;
 		Vector2int dimensions;
 	};
