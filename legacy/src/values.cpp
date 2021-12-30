@@ -1,7 +1,6 @@
 #include <math.h>
 #include "Values.hpp"
 
-/* Dims or lightens color */
 SDL_Color Colors::ChangeColorIntensity(SDL_Color color, int delta)
 {
 	SDL_Color newColor = color;

@@ -1,83 +1,45 @@
 CC=g++
 SRCDIR=./src
+PONG_SRC=./games/Ping-Pong/src
 outputDir=./build
 binary=birb2d
 WarningFlags=-Wpedantic -pedantic -Wall -Wextra
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 INCLUDES=-I./include
 
-all: final
+all: test pong
 
-builddir:
-	mkdir -p ${outputDir}
+test: tests.o logger.o renderwindow.o values.o timestep.o
+	mkdir -p build
+	$(CC) $^ $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/test
 
-audio:
-	${CC} -c -g ${SRCDIR}/audio.cpp -lSDL2_mixer ${INCLUDES} ${WarningFlags} -o ${outputDir}/audio.o
+run_tests: test
+	./build/test
 
-entity:
-	${CC} -c -g ${SRCDIR}/entity.cpp ${SDL_FLAGS} ${INCLUDES} ${WarningFlags} -o ${outputDir}/entity.o
+pong: pong_main.o logger.o renderwindow.o timestep.o
+	mkdir -p build
+	$(CC) $^ $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/pong
 
-font:
-	${CC} -c -g ${SRCDIR}/font.cpp -lSDL2_ttf ${INCLUDES} ${WarningFlags} -o ${outputDir}/font.o
+pong_main.o: $(PONG_SRC)/main.cpp
+	$(CC) -c $(INCLUDES) $(SDL_FLAGS) $(WarningFlags) $^ -o pong_main.o
 
-renderwindow:
-	${CC} -c -g ${SRCDIR}/renderwindow.cpp ${SDL_FLAGS} ${INCLUDES} ${WarningFlags} -o ${outputDir}/renderwindow.o
+tests.o: $(SRCDIR)/tests.cpp
+	$(CC) -c $(INCLUDES) $(SDL_FLAGS) $(WarningFlags) $^ -o tests.o
 
-widgets:
-	${CC} -c -g ${SRCDIR}/widgets.cpp ${SDL_FLAGS} ${INCLUDES} ${WarningFlags} -o ${outputDir}/widgets.o
+logger.o: $(SRCDIR)/logger.cpp
+	$(CC) -c $^ -o logger.o
 
-values:
-	${CC} -c -g ${SRCDIR}/values.cpp -lSDL2 ${INCLUDES} ${WarningFlags} -o ${outputDir}/values.o
+renderwindow.o: $(SRCDIR)/renderwindow.cpp
+	$(CC) -c $(INCLUDES) -lSDL2 -lSDL2_image -lSDL2_ttf $(WarningFlags) $^ -o renderwindow.o
 
-logger:
-	${CC} -c -g ${SRCDIR}/logger.cpp ${INCLUDES} ${WarningFlags} -o ${outputDir}/logger.o
+values.o: $(SRCDIR)/values.cpp
+	$(CC) -c $(INCLUDES) -lSDL2 $(WarningFlags) $^ -o values.o
 
-utils:
-	${CC} -c -g ${SRCDIR}/utils.cpp ${INCLUDES} ${WarningFlags} -o ${outputDir}/utils.o
-
-scene:
-	${CC} -c -g ${SRCDIR}/scene.cpp ${INCLUDES} ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/scene.o
-
-doctest:
-	${CC} -c -g ./tests/src/tests.cpp ${INCLUDES} ${WarningFlags} ${SDL_FLAGS} -o ${outputDir}/tests.o
-
-test: builddir audio entity font renderwindow widgets values logger utils doctest
-	${CC} -g ${outputDir}/*.o ${SDL_FLAGS} -o ${outputDir}/${binary}_test
-	cd ${outputDir} ; ./${binary}_test
+timestep.o: $(SRCDIR)/timestep.cpp
+	$(CC) -c $(INCLUDES) -lSDL2 $(WarningFlags) $^ -o timestep.o
 
 
-ping-pong: builddir audio entity font renderwindow widgets values logger utils scene 
-	${CC} -g ./games/Ping-Pong/src/*.cpp ${outputDir}/*.o ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/ping-pong
-
-editor: builddir audio entity font renderwindow widgets values logger utils
-	${CC} -g ${outputDir}/*.o ./editor/src/editor.cpp ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/editor_playground
-
-final: builddir audio entity font renderwindow widgets values logger utils editor
-	${CC} -g ${outputDir}/*.o ${SDL_FLAGS} ${WarningFlags} -o ${outputDir}/editor
-
-win-editor: clean builddir
-	mkdir -p ${outputDir}/win
-	x86_64-w64-mingw32-g++ -DPLATFORM_WIN ./src/audio.cpp ./src/entity.cpp ./src/font.cpp ./src/renderwindow.cpp ./src/widgets.cpp ./src/values.cpp ./src/tests.cpp ${SDL_FLAGS} \
-		-I./vendor/SDL2_win/SDL2/x86_64-w64-mingw32/include \
-		-I./vendor/SDL2_win/SDL2_image-2.0.5/x86_64-w64-mingw32/include \
-		-I./vendor/SDL2_win/SDL2_mixer-2.0.4/x86_64-w64-mingw32/include \
-		-I./vendor/SDL2_win/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include \
-		-L./vendor/SDL2_win/SDL2/x86_64-w64-mingw32/lib \
-		-L./vendor/SDL2_win/SDL2_image-2.0.5/x86_64-w64-mingw32/lib \
-		-L./vendor/SDL2_win/SDL2_mixer-2.0.4/x86_64-w64-mingw32/lib \
-		-L./vendor/SDL2_win/SDL2_ttf-2.0.15/x86_64-w64-mingw32/lib \
-		-L./vendor/mingw-w64-dlls-4.9.2/ \
-		-static-libgcc \
-		-static-libstdc++ \
-		-o ${outputDir}/win/editor_win.exe
-	cp ./vendor/SDL2_win/SDL2/x86_64-w64-mingw32/bin/*.dll ${outputDir}/win/
-	cp ./vendor/SDL2_win/SDL2_ttf-2.0.15/x86_64-w64-mingw32/bin/*.dll ${outputDir}/win/
-	cp ./vendor/SDL2_win/SDL2_image-2.0.5/x86_64-w64-mingw32/bin/*.dll ${outputDir}/win/
-	cp ./vendor/SDL2_win/SDL2_mixer-2.0.4/x86_64-w64-mingw32/bin/*.dll ${outputDir}/win/
-	cp ./vendor/mingw-w64-dlls-4.9.2/*.dll ${outputDir}/win/
-
-run:
-	cd ${outputDir} && ./editor
-
+.PHONY: clean
 clean:
-	rm -r ${outputDir}
+	rm -f *.o log.txt
+	rm -rf $(outputDir)

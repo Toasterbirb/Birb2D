@@ -104,8 +104,11 @@ Birb2D::Widgets::Text::Text(RenderWindow p_window, Vector2f p_pos, std::string p
 	if (textTexture.sdlTexture == NULL)
 		Debug::Log("Error creating textTexture: " + (std::string)SDL_GetError(), Debug::error);
 
-	textEntity = Birb2D::Entity("Button Text", Rect(pos.x, pos.y, textTexture.dimensions.x, textTexture.dimensions.y));
-	textEntity.text = Birb2D::Entity::Text(p_text, p_font, window);
+	Debug::Log("Texture rect: " + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ", " + std::to_string(textTexture.dimensions.x) + ", " + std::to_string(textTexture.dimensions.y));
+
+	Rect textFrame = Rect(pos.x, pos.y, textTexture.dimensions.x, textTexture.dimensions.y);
+	textEntity = Birb2D::Entity("Button Text", textFrame);
+	textEntity.text = Birb2D::Entity::Text(p_text, p_font, textFrame, window);
 	Debug::Log("Text widget created!");
 }
 

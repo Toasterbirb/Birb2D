@@ -11,4 +11,4 @@ namespace Debug
 	};
 	void Log(std::string text, Type type = Type::log);
 	static std::vector<std::string> lines;
-}
+};
