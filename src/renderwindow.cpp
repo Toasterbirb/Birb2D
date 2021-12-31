@@ -151,6 +151,13 @@ namespace Birb2D
 
 	SDL_Texture* Resources::TextSprite(std::string text, TTF_Font* font, SDL_Color& color)
 	{
+		/* Check if the arguments are valid */
+		if (font == nullptr)
+		{
+			Debug::Log("Tried to render text with invalid font!");
+			return NULL;
+		}
+
 		SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);

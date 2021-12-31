@@ -9,6 +9,7 @@ namespace Birb2D
 {
 	struct TextComponent
 	{
+		TextComponent();
 		TextComponent(std::string p_text, TTF_Font* font, SDL_Color* p_color);
 		std::string text;
 		TTF_Font* font;
@@ -29,7 +30,7 @@ namespace Birb2D
 		Rect rect;
 		Vector2f localScale;
 
-		TextComponent* textComponent;
+		TextComponent textComponent;
 		void LoadSprite();
 		void SetBaseEntityValues();
 	};

@@ -16,13 +16,17 @@ test: tests.o logger.o renderwindow.o values.o timestep.o utils.o math.o
 run_tests: test
 	./build/test
 
-pong: pong_main.o logger.o renderwindow.o timestep.o entity.o utils.o
+pong: pong_main.o logger.o renderwindow.o timestep.o entity.o utils.o audio.o
 	mkdir -p build
 	rsync -av ./games/Ping-Pong/res ./build/
 	$(CC) $^ $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/pong
 
 pong_main.o: $(PONG_SRC)/pong_entry.cpp
 	$(CC) -c $(INCLUDES) $(SDL_FLAGS) $(WarningFlags) $^ -o pong_main.o
+
+
+audio.o: $(SRCDIR)/audio.cpp
+	$(CC) -c $(INCLUDES) $^ -o audio.o
 
 entity.o: $(SRCDIR)/entity.cpp
 	$(CC) -c $(INCLUDES) $^ -o entity.o
