@@ -115,7 +115,7 @@ void ResetBall(Vector2f* ballPosition, Vector2f* ballVector, Birb2D::Window wind
 	ballPosition->x = window.window_dimensions.x / 2.00f;
 	ballPosition->y = window.window_dimensions.y / 2.00f;
 	ballVector->x = baseBallVector.x;
-	ballVector->y = baseBallVector.y;
+	ballVector->y = baseBallVector.y * utils::randomFloat(-1.5, 1.5);
 
 	lastCollider 	= PlayerType::NoOne;
 	lastSide 		= Side::None;
@@ -240,6 +240,20 @@ int main(int argc, char **argv)
 				playerDimensions.y += playerSpeed;
 		}
 
+		/* Handle bot movement */
+		{
+			if (ballPosition.x > window.window_dimensions.x / 2.00f && lastCollider != PlayerType::Bot) // Only move the bot paddle if the ball is on its side and it hasn't hit the ball yet
+			{
+				if (ballPosition.y - (playerDimensions.h / 2.00f) > 0 && ballPosition.y + (playerDimensions.h / 2.00f) < window.window_dimensions.y)
+				{
+					if (ballPosition.y > botDimensions.y + (botDimensions.h / 2.00f))
+						botDimensions.y += botMovementSpeed;
+					else
+						botDimensions.y -= botMovementSpeed;
+				}
+			}
+		}
+
 		/* Ball movemement and colliders */
 		{
 			ballPosition.x += ballVector.x;
@@ -280,16 +294,6 @@ int main(int argc, char **argv)
 						playerDimensions.w, playerDimensions.h));
 
 				/* Bot */
-				if (ballPosition.x > window.window_dimensions.x / 2.00f) // Only move the bot paddle if the ball is on its side
-				{
-					if (ballPosition.y - (playerDimensions.h / 2.00f) > 0 && ballPosition.y + (playerDimensions.h / 2.00f) < window.window_dimensions.y)
-					{
-						if (ballPosition.y > botDimensions.y + (botDimensions.h / 2.00f))
-							botDimensions.y += botMovementSpeed;
-						else
-							botDimensions.y -= botMovementSpeed;
-					}
-				}
 
 				Birb2D::Render::DrawRect(Colors::White,
 						Rect(botDimensions.x, botDimensions.y,
