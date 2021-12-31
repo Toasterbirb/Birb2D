@@ -21,7 +21,7 @@ pong: pong_main.o logger.o renderwindow.o timestep.o entity.o utils.o
 	rsync -av ./games/Ping-Pong/res ./build/
 	$(CC) $^ $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/pong
 
-pong_main.o: $(PONG_SRC)/main.cpp
+pong_main.o: $(PONG_SRC)/pong_entry.cpp
 	$(CC) -c $(INCLUDES) $(SDL_FLAGS) $(WarningFlags) $^ -o pong_main.o
 
 entity.o: $(SRCDIR)/entity.cpp
