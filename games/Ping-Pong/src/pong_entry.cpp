@@ -27,8 +27,6 @@ void MirrorBallVector(Vector2f* ballVector, Side side, Side playerMovementDirect
 	float movementMultiplier = 1.00f;
 	if (playerMovementDirection != Side::None && side == Left && side != Top && side != Bottom)
 	{
-		std::cout << "Changing ball direction" << std::endl;
-
 		movementMultiplier = 1.10f;
 
 		/* Change the ball movement direction depending on the player movement */
@@ -86,7 +84,6 @@ void MirrorBallVector(Vector2f* ballVector, Side side, Side playerMovementDirect
 	}
 
 	lastSide = side;
-	std::cout << side << std::endl;
 }
 
 Side BallScreenBoundHit(Vector2f pos, int radius, Birb2D::Window window)
@@ -205,6 +202,7 @@ int main(int argc, char **argv)
 				/* Player movement */
 				if (event.type == SDL_KEYDOWN)
 				{
+					std::cout << event.key.keysym.scancode << std::endl;
 					switch (event.key.keysym.scancode)
 					{
 						/* Up arrow */
@@ -212,7 +210,15 @@ int main(int argc, char **argv)
 							playerMovementDirection = Side::Up;
 							break;
 
+						case (14):
+							playerMovementDirection = Side::Up;
+							break;
+
 						case (81):
+							playerMovementDirection = Side::Down;
+							break;
+
+						case (13):
 							playerMovementDirection = Side::Down;
 							break;
 						
