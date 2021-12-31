@@ -49,6 +49,11 @@ namespace utils
 		float range = max - min;
 		return (random * range) + min;
 	}
+
+	static void GetTextureDimensions(SDL_Texture* texture, int& x, int& y)
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &x, &y);
+	}
 }
 
 namespace Birb2D
@@ -60,4 +65,5 @@ namespace Birb2D
 		SDL_Texture* sdlTexture;
 		Vector2int dimensions;
 	};
+
 }

@@ -1,9 +1,11 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include "Utils.hpp"
+#include "Entity.hpp"
 
 namespace Birb2D
 {
@@ -43,9 +45,18 @@ namespace Birb2D
 		/* ---------------------- */
 	};
 
-	struct Render
+	struct Resources
 	{
 		static SDL_Texture* LoadTexture(std::string p_filePath);
-		static TTF_Font* LoadFont(std::string p_filePath, int p_fontSize);
+		static SDL_Texture* TextSprite(std::string text, TTF_Font* font, SDL_Color& color);
+		static TTF_Font* 	LoadFont(std::string p_filePath, int p_fontSize);
+	};
+
+	struct Render
+	{
+		static void DrawEntity(Entity& entity);
+		static void ResetDrawColor();
+		static void DrawRect(SDL_Color color, Rect dimensions);
+		static void DrawCircle(SDL_Color color, Vector2int pos, int radius);
 	};
 }
