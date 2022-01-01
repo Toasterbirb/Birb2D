@@ -41,7 +41,7 @@ make -j4 test
 - [x] Basic input handling (currently at cave man stage)
 - [x] Entity system (Partially functional currently)
 - [ ] Basic UI functionality
-	- [x] Buttons
+	- [ ] Buttons
 	- [x] Text
 	- [ ] Dropdown menu
 	- [ ] Slider

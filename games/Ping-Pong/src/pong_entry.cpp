@@ -230,22 +230,29 @@ int main(int argc, char **argv)
 				{
 					switch (event.key.keysym.scancode)
 					{
+						/* Arrow keys */
 						/* Up arrow */
 						case (82):
 							playerMovementDirection = Side::Up;
 							break;
 
-						case (14):
-							playerMovementDirection = Side::Up;
-							break;
-
+						/* Down arrow */
 						case (81):
 							playerMovementDirection = Side::Down;
 							break;
 
+						/* Vim keys */
+						/* k */
+						case (14):
+							playerMovementDirection = Side::Up;
+							break;
+
+						/* j */
 						case (13):
 							playerMovementDirection = Side::Down;
 							break;
+
+						/* Controller */
 						
 						default:
 							playerMovementDirection = Side::None;

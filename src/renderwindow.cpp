@@ -32,7 +32,7 @@ namespace Birb2D
 			return;
 
 		Debug::Log("Initializing SDL...");
-		if (SDL_Init(SDL_INIT_VIDEO) > 0)
+		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) > 0)
 		{
 			Debug::Log("SDL Init failed: " + (std::string)SDL_GetError(), Debug::error);
 			exit(2);
@@ -220,7 +220,6 @@ namespace Birb2D
 
 	void Render::DrawCircle(SDL_Color color, Vector2int pos, int radius)
 	{
-		//SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 		Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 		filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor);
 		ResetDrawColor();
