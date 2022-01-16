@@ -2,7 +2,6 @@
 #include <iostream>
 #include <math.h>
 
-
 struct Vector2f
 {
 	Vector2f()

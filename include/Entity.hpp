@@ -23,6 +23,9 @@ namespace Birb2D
 		Entity(std::string p_name, Vector2int pos, TextComponent p_textComponent);
 		Entity(std::string p_name, Vector2int pos, SDL_Texture* p_texture);
 
+		/* Make it possible to update the TextComponent */
+		void SetText(std::string newText);
+
 		std::string name;
 		SDL_Texture* sprite;
 

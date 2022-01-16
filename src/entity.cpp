@@ -15,6 +15,20 @@ namespace Birb2D
 	:text(p_text), font(p_font), color(p_color)
 	{}
 
+	void Entity::SetText(std::string newText)
+	{
+		/* Don't do anything if the text hasn't changed at all */
+		if (textComponent.text == newText)
+			return;
+
+		/* Destroy the old sprite */
+		SDL_DestroyTexture(sprite);
+
+		/* Create new text sprite */
+		textComponent.text = newText;
+		LoadSprite();
+	}
+
 	void Entity::SetBaseEntityValues()
 	{
 		angle = 0;
@@ -59,7 +73,7 @@ namespace Birb2D
 		/* There's a text component. Let's generate a text sprite for it */
 		if (textComponent.text != "")
 		{
-			Debug::Log("Loading a text sprite '" + name + "'");
+			//Debug::Log("Loading a text sprite '" + name + "'");
 			sprite = Resources::TextSprite(textComponent.text, textComponent.font, *textComponent.color);
 
 			if (sprite == nullptr)

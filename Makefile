@@ -2,7 +2,6 @@ CC=g++
 SRCDIR=./src
 PONG_SRC=./games/Ping-Pong/src
 outputDir=./build
-binary=birb2d
 WarningFlags=-Wpedantic -pedantic -Wall -Wextra
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
@@ -42,6 +41,9 @@ math.o: $(SRCDIR)/math.cpp
 
 renderwindow.o: $(SRCDIR)/renderwindow.cpp
 	$(CC) -c $(INCLUDES) $(WarningFlags) $^ -o renderwindow.o
+
+timer.o: $(SRCDIR)/timer.cpp
+	$(CC) -c $(INCLUDES) $(WarningFlags) $^ -o timer.o
 
 timestep.o: $(SRCDIR)/timestep.cpp
 	$(CC) -c $(INCLUDES) $(WarningFlags) $^ -o timestep.o

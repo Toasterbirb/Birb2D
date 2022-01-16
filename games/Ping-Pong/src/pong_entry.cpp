@@ -174,6 +174,7 @@ int main(int argc, char **argv)
 	{
 		// If found then erase it from string
 		workdir.erase(pos, std::string("/pong").length());
+		break;
 	}
 
 	Birb2D::Window window("Pong", Vector2int(1280, 720), 240);
