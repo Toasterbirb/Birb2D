@@ -5,6 +5,9 @@
 # Prerequisites
 *.d
 
+# Compiled docs
+[Dd]ocs/
+
 # Compiled Object files
 *.slo
 *.lo
