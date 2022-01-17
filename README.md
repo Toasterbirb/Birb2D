@@ -27,7 +27,7 @@ make -j$(nproc) pong
 
 ### Run tests
 ```sh
-make -j$(nproc= run_tests
+make -j$(nproc) run_tests
 ```
 
 ### Installation
