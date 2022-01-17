@@ -1,0 +1,114 @@
+\hypertarget{Math_8hpp_source}{}\doxysection{Math.\+hpp}
+\label{Math_8hpp_source}\index{include/Math.hpp@{include/Math.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{keyword}{struct }\mbox{\hyperlink{structVector2f}{Vector2f}}}
+\DoxyCodeLine{6 \{}
+\DoxyCodeLine{7     \mbox{\hyperlink{structVector2f}{Vector2f}}()}
+\DoxyCodeLine{8     :x(0.0f), y(0.0f)}
+\DoxyCodeLine{9     \{\}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11     \mbox{\hyperlink{structVector2f}{Vector2f}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y)}
+\DoxyCodeLine{12     :x(p\_x), y(p\_y)}
+\DoxyCodeLine{13     \{\}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \mbox{\hyperlink{structVector2f}{Vector2f}} getValue()}
+\DoxyCodeLine{16     \{}
+\DoxyCodeLine{17         \textcolor{keywordflow}{return} \mbox{\hyperlink{structVector2f}{Vector2f}}(x, y);}
+\DoxyCodeLine{18     \}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     std::string print()}
+\DoxyCodeLine{21     \{}
+\DoxyCodeLine{22         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}("{}} + std::to\_string(x) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(y) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keywordtype}{float} x, y;}
+\DoxyCodeLine{26 \};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{struct }\mbox{\hyperlink{structVector2int}{Vector2int}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30     \mbox{\hyperlink{structVector2int}{Vector2int}}()}
+\DoxyCodeLine{31     :x(0), y(0)}
+\DoxyCodeLine{32     \{\}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \mbox{\hyperlink{structVector2int}{Vector2int}}(\textcolor{keywordtype}{int} p\_x, \textcolor{keywordtype}{int} p\_y)}
+\DoxyCodeLine{35     :x(p\_x), y(p\_y)}
+\DoxyCodeLine{36     \{\}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \mbox{\hyperlink{structVector2int}{Vector2int}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y)}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         x = std::round(p\_x);}
+\DoxyCodeLine{41         y = std::round(p\_y);}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \mbox{\hyperlink{structVector2int}{Vector2int}} getValue()}
+\DoxyCodeLine{45     \{}
+\DoxyCodeLine{46         \textcolor{keywordflow}{return} \mbox{\hyperlink{structVector2int}{Vector2int}}(x, y);}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     std::string print()}
+\DoxyCodeLine{50     \{}
+\DoxyCodeLine{51         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}("{}} + std::to\_string(x) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(y) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{int} x, y;}
+\DoxyCodeLine{55 \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{struct }\mbox{\hyperlink{structVector3f}{Vector3f}}}
+\DoxyCodeLine{58 \{}
+\DoxyCodeLine{59     \mbox{\hyperlink{structVector3f}{Vector3f}}()}
+\DoxyCodeLine{60     :x(0.0f), y(0.0f), z(0.0f)}
+\DoxyCodeLine{61     \{\}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \mbox{\hyperlink{structVector3f}{Vector3f}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y, \textcolor{keywordtype}{float} p\_z)}
+\DoxyCodeLine{64     :x(p\_x), y(p\_y), z(p\_z)}
+\DoxyCodeLine{65     \{\}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \mbox{\hyperlink{structVector3f}{Vector3f}} getValue()}
+\DoxyCodeLine{68     \{}
+\DoxyCodeLine{69         \textcolor{keywordflow}{return} \mbox{\hyperlink{structVector3f}{Vector3f}}(x, y, z);}
+\DoxyCodeLine{70     \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     std::string print()}
+\DoxyCodeLine{73     \{}
+\DoxyCodeLine{74         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}("{}} + std::to\_string(x) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(y) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(z) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \textcolor{keywordtype}{float} x, y, z;}
+\DoxyCodeLine{78 \};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{keyword}{struct }\mbox{\hyperlink{structVector3int}{Vector3int}}}
+\DoxyCodeLine{81 \{}
+\DoxyCodeLine{82     \mbox{\hyperlink{structVector3int}{Vector3int}}()}
+\DoxyCodeLine{83     :x(0), y(0), z(0)}
+\DoxyCodeLine{84     \{\}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     \mbox{\hyperlink{structVector3int}{Vector3int}}(\textcolor{keywordtype}{int} p\_x, \textcolor{keywordtype}{int} p\_y, \textcolor{keywordtype}{int} p\_z)}
+\DoxyCodeLine{87     :x(p\_x), y(p\_y), z(p\_z)}
+\DoxyCodeLine{88     \{\}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \mbox{\hyperlink{structVector3int}{Vector3int}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y, \textcolor{keywordtype}{float} p\_z)}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92         x = std::round(p\_x);}
+\DoxyCodeLine{93         y = std::round(p\_y);}
+\DoxyCodeLine{94         z = std::round(p\_z);}
+\DoxyCodeLine{95     \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \mbox{\hyperlink{structVector3int}{Vector3int}} getValue()}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         \textcolor{keywordflow}{return} \mbox{\hyperlink{structVector3int}{Vector3int}}(x, y, z);}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     std::string print()}
+\DoxyCodeLine{103     \{}
+\DoxyCodeLine{104         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}("{}} + std::to\_string(x) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(y) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(z) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{105     \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{keywordtype}{int} x, y, z;}
+\DoxyCodeLine{108 \};}
+
+\end{DoxyCode}

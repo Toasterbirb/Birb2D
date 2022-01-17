@@ -7,6 +7,9 @@
 
 namespace Birb2D
 {
+	///
+	/// TextComponent contains details needed to generate a sprite for the Entity in case the Entity is used to display text.
+	///
 	struct TextComponent
 	{
 		TextComponent();
@@ -18,10 +21,10 @@ namespace Birb2D
 
 	struct Entity
 	{
-		Entity();
-		Entity(std::string p_name, Rect p_rect, SDL_Texture* p_texture);
-		Entity(std::string p_name, Vector2int pos, TextComponent p_textComponent);
-		Entity(std::string p_name, Vector2int pos, SDL_Texture* p_texture);
+		Entity(); /*!< Creates empty Entity object */
+		Entity(std::string p_name, Rect p_rect, SDL_Texture* p_texture); /*!< Creates an Entity with a SDL_Texture to render with custom scale */
+		Entity(std::string p_name, Vector2int pos, TextComponent p_textComponent); /*!< Creates a Text Entity using a TextComponent */
+		Entity(std::string p_name, Vector2int pos, SDL_Texture* p_texture); /*!< Creates an Entity with a SDL_Texture to render without specifying a scale */
 
 		/* Make it possible to update the TextComponent */
 		void SetText(std::string newText);
@@ -35,7 +38,7 @@ namespace Birb2D
 		Rect rect;
 		Vector2f localScale;
 
-		TextComponent textComponent;
+		TextComponent textComponent; /*!< Having a TextComponent in an Entity enables the rendering of Text */
 		void LoadSprite();
 		void ReloadSprite();
 		void SetBaseEntityValues();

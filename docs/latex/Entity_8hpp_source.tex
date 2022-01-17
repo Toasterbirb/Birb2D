@@ -1,0 +1,49 @@
+\hypertarget{Entity_8hpp_source}{}\doxysection{Entity.\+hpp}
+\label{Entity_8hpp_source}\index{include/Entity.hpp@{include/Entity.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <SDL2/SDL.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <SDL2/SDL\_ttf.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Utils.hpp"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }Birb2D}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{13     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb2D_1_1TextComponent}{TextComponent}}}
+\DoxyCodeLine{14     \{}
+\DoxyCodeLine{15         \mbox{\hyperlink{structBirb2D_1_1TextComponent}{TextComponent}}();}
+\DoxyCodeLine{16         \mbox{\hyperlink{structBirb2D_1_1TextComponent}{TextComponent}}(std::string p\_text, TTF\_Font* font, SDL\_Color* p\_color);}
+\DoxyCodeLine{17         std::string text;}
+\DoxyCodeLine{18         TTF\_Font* font;}
+\DoxyCodeLine{19         SDL\_Color* color;}
+\DoxyCodeLine{20     \};}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb2D_1_1Entity}{Entity}}}
+\DoxyCodeLine{23     \{}
+\DoxyCodeLine{24         \mbox{\hyperlink{structBirb2D_1_1Entity_ac6821a8b6c02e08f68f6d40f6fae95c1}{Entity}}(); }
+\DoxyCodeLine{25         \mbox{\hyperlink{structBirb2D_1_1Entity_a1a70be2670fe29108805af7136594046}{Entity}}(std::string p\_name, \mbox{\hyperlink{structRect}{Rect}} p\_rect, SDL\_Texture* p\_texture); }
+\DoxyCodeLine{26         \mbox{\hyperlink{structBirb2D_1_1Entity_ae98961ff983ed2f48b81ab61e402ac67}{Entity}}(std::string p\_name, \mbox{\hyperlink{structVector2int}{Vector2int}} pos, \mbox{\hyperlink{structBirb2D_1_1TextComponent}{TextComponent}} p\_textComponent); }
+\DoxyCodeLine{27         \mbox{\hyperlink{structBirb2D_1_1Entity_a6f7d1fde599d48cb1c3d561ddd5fe837}{Entity}}(std::string p\_name, \mbox{\hyperlink{structVector2int}{Vector2int}} pos, SDL\_Texture* p\_texture); }
+\DoxyCodeLine{29         \textcolor{comment}{/* Make it possible to update the TextComponent */}}
+\DoxyCodeLine{30         \textcolor{keywordtype}{void} SetText(std::string newText);}
+\DoxyCodeLine{31         \textcolor{keywordtype}{void} SetFont(TTF\_Font* font);}
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} SetColor(SDL\_Color* color);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         std::string name;}
+\DoxyCodeLine{35         SDL\_Texture* sprite;}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{keywordtype}{float} angle;}
+\DoxyCodeLine{38         \mbox{\hyperlink{structRect}{Rect}} rect;}
+\DoxyCodeLine{39         \mbox{\hyperlink{structVector2f}{Vector2f}} localScale;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \mbox{\hyperlink{structBirb2D_1_1TextComponent}{TextComponent}} \mbox{\hyperlink{structBirb2D_1_1Entity_a9c8657f2723020489a2531f236deae36}{textComponent}}; }
+\DoxyCodeLine{42         \textcolor{keywordtype}{void} LoadSprite();}
+\DoxyCodeLine{43         \textcolor{keywordtype}{void} ReloadSprite();}
+\DoxyCodeLine{44         \textcolor{keywordtype}{void} SetBaseEntityValues();}
+\DoxyCodeLine{45     \};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \}}
+
+\end{DoxyCode}

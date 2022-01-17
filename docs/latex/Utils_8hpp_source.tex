@@ -1,0 +1,75 @@
+\hypertarget{Utils_8hpp_source}{}\doxysection{Utils.\+hpp}
+\label{Utils_8hpp_source}\index{include/Utils.hpp@{include/Utils.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <SDL2/SDL.h>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}Math.hpp"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{struct }\mbox{\hyperlink{structRect}{Rect}}}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13     \mbox{\hyperlink{structRect}{Rect}}();}
+\DoxyCodeLine{14     \mbox{\hyperlink{structRect}{Rect}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y, \textcolor{keywordtype}{float} p\_w, \textcolor{keywordtype}{float} p\_h);}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keywordtype}{void} print()}
+\DoxyCodeLine{17     \{}
+\DoxyCodeLine{18         std::cout << x << \textcolor{stringliteral}{"{}, "{}} << y << \textcolor{stringliteral}{"{}, "{}} << w << \textcolor{stringliteral}{"{}, "{}} << h << std::endl;}
+\DoxyCodeLine{19     \}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \mbox{\hyperlink{structRect}{Rect}} getInt();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     SDL\_Rect getSDLRect();}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keywordtype}{float} x, y, w, h;}
+\DoxyCodeLine{26 \};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }utils}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30     \textcolor{keyword}{inline} \textcolor{keywordtype}{float} hireTimeInSeconds()}
+\DoxyCodeLine{31     \{}
+\DoxyCodeLine{32         \textcolor{keywordtype}{float} t = SDL\_GetTicks();}
+\DoxyCodeLine{33         t *= 0.001f;}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \textcolor{keywordflow}{return} t;}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} randomInt(\textcolor{keywordtype}{int} min, \textcolor{keywordtype}{int} max)}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         srand(time(0));}
+\DoxyCodeLine{41         \textcolor{keywordtype}{float} value = rand() \% (max + 1 -\/ min) + min;}
+\DoxyCodeLine{42         \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keyword}{inline} \textcolor{keywordtype}{float} randomFloat(\textcolor{keywordtype}{float} min, \textcolor{keywordtype}{float} max)}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{47         srand(time(0));}
+\DoxyCodeLine{48         \textcolor{keywordtype}{float} random = ((float) rand()) / (\textcolor{keywordtype}{float}) RAND\_MAX;}
+\DoxyCodeLine{49         \textcolor{keywordtype}{float} range = max -\/ min;}
+\DoxyCodeLine{50         \textcolor{keywordflow}{return} (random * range) + min;}
+\DoxyCodeLine{51     \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keyword}{static} \textcolor{keywordtype}{void} GetTextureDimensions(SDL\_Texture* texture, \textcolor{keywordtype}{int}\& x, \textcolor{keywordtype}{int}\& y)}
+\DoxyCodeLine{54     \{}
+\DoxyCodeLine{55         SDL\_QueryTexture(texture, NULL, NULL, \&x, \&y);}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{namespace }Birb2D}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb2D_1_1Texture}{Texture}}}
+\DoxyCodeLine{62     \{}
+\DoxyCodeLine{63         \mbox{\hyperlink{structBirb2D_1_1Texture}{Texture}}();}
+\DoxyCodeLine{64         \mbox{\hyperlink{structBirb2D_1_1Texture}{Texture}}(SDL\_Texture* p\_sdlTexture, \mbox{\hyperlink{structVector2int}{Vector2int}} p\_dimensions);}
+\DoxyCodeLine{65         SDL\_Texture* sdlTexture;}
+\DoxyCodeLine{66         \mbox{\hyperlink{structVector2int}{Vector2int}} dimensions;}
+\DoxyCodeLine{67     \};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \}}
+
+\end{DoxyCode}
