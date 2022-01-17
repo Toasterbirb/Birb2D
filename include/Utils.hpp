@@ -2,7 +2,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "../include/Math.hpp"
+#include "Math.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <math.h>

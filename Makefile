@@ -6,7 +6,7 @@ WarningFlags=-Wpedantic -pedantic -Wall -Wextra
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
 
-all: test pong
+all: test pong engine_lib
 
 test: tests.o logger.o renderwindow.o values.o timestep.o utils.o math.o
 	mkdir -p build
@@ -23,6 +23,9 @@ pong: pong_main.o logger.o renderwindow.o timestep.o entity.o utils.o audio.o
 pong_main.o: $(PONG_SRC)/pong_entry.cpp
 	$(CC) -c $(INCLUDES) $(SDL_FLAGS) $(WarningFlags) $^ -o pong_main.o
 
+engine_lib: audio.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o
+	mkdir -p build
+	ld -r $^ -o $(outputDir)/birb2d_lib
 
 audio.o: $(SRCDIR)/audio.cpp
 	$(CC) -c $(INCLUDES) $^ -o audio.o
