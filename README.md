@@ -15,6 +15,11 @@ Documentation coming soon(tm).
 - doctest (included as a headerfile)
 
 ## Building
+### Generate documentation
+```sh
+doxygen doxygen_config
+```
+
 ### Shared library
 ```sh
 make -j$(nproc) engine_lib
