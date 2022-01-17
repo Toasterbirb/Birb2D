@@ -8,31 +8,36 @@ Documentation coming soon(tm).
 
 ## External libraries
 - SDL2
+- SDL2_image
+- SDL2_ttf
+- SDL2_mixer
+- SDL2_gfx
 - doctest (included as a headerfile)
 
 ## Building
-### Using CMake
+### Shared library
 ```sh
-mkdir build
-cd build
-cmake ..
-make -j4
+make -j$(nproc) engine_lib
 ```
 
-### Using make (might be going away at some point)
-#### Editor
+### Pong
 ```sh
-make -j4 editor
+make -j$(nproc) pong
 ```
 
-#### Ping Pong
+### Run tests
 ```sh
-make -j4 ping-pong
+make -j$(nproc= run_tests
 ```
 
-#### Run tests
+### Installation
+Simply compile the shared library and copy the headerfiles with
 ```sh
-make -j4 test
+make -j$(nproc) install
+```
+to uninstall, run the following
+```sh
+make uninstall
 ```
 
 ## Roadmap
