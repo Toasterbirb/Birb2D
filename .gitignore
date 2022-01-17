@@ -2,6 +2,9 @@
 [Bb]uild/
 [Pp]layground/
 
+# compiled docs
+[Dd]ocs/
+
 # Prerequisites
 *.d
 
