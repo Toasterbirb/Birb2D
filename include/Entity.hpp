@@ -25,6 +25,8 @@ namespace Birb2D
 
 		/* Make it possible to update the TextComponent */
 		void SetText(std::string newText);
+		void SetFont(TTF_Font* font);
+		void SetColor(SDL_Color* color);
 
 		std::string name;
 		SDL_Texture* sprite;
@@ -35,6 +37,7 @@ namespace Birb2D
 
 		TextComponent textComponent;
 		void LoadSprite();
+		void ReloadSprite();
 		void SetBaseEntityValues();
 	};
 

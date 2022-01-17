@@ -106,6 +106,10 @@ namespace Birb2D
 
 	std::string Timer::SplitDigitalFormat(double previousmills)
 	{
+		/* Return default 00:00 if time hasn't passed */
+		if (!running && ElapsedMilliseconds() == 0)
+			return "00:00";
+
 		double elapsedMilliseconds 	= ElapsedMilliseconds() - previousmills;
 		double elapsedMinutes 		= std::floor(CalcMinutes(elapsedMilliseconds));
 		double elapsedSeconds 		= std::floor(CalcSeconds(elapsedMilliseconds)) - (elapsedMinutes * 60);

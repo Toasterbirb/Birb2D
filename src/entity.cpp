@@ -21,12 +21,30 @@ namespace Birb2D
 		if (textComponent.text == newText)
 			return;
 
-		/* Destroy the old sprite */
-		SDL_DestroyTexture(sprite);
-
-		/* Create new text sprite */
 		textComponent.text = newText;
-		LoadSprite();
+		ReloadSprite();
+	}
+
+	void Entity::SetFont(TTF_Font* font)
+	{
+		/* Don't do anything if the font hasn't changed at all */
+		if (textComponent.font == font)
+			return;
+
+		textComponent.font = font;
+		ReloadSprite();
+	}
+
+	void Entity::SetColor(SDL_Color* color)
+	{
+		/* Don't do anything if the color hasn't changed at all */
+		if (color->a == textComponent.color->a
+			&& color->r == textComponent.color->r
+			&& color->g == textComponent.color->g
+			&& color->b == textComponent.color->b) return;
+
+		textComponent.color = color;
+		ReloadSprite();
 	}
 
 	void Entity::SetBaseEntityValues()
@@ -87,5 +105,14 @@ namespace Birb2D
 				rect.h = h;
 			}
 		}
+	}
+
+	void Entity::ReloadSprite()
+	{
+		/* Destroy the old sprite */
+		SDL_DestroyTexture(sprite);
+
+		/* Create new text sprite */
+		LoadSprite();
 	}
 }

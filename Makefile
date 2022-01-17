@@ -2,7 +2,7 @@ CC=g++
 SRCDIR=./src
 PONG_SRC=./games/Ping-Pong/src
 outputDir=./build
-CFLAGS=-fPIC
+CFLAGS=-fPIC -O2
 WarningFlags=-Wpedantic -pedantic -Wall -Wextra
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
@@ -31,11 +31,12 @@ engine_obj: audio.o entity.o logger.o math.o renderwindow.o timer.o timestep.o u
 
 engine_lib: audio.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o
 	mkdir -p build
-	g++ -shared -o $(outputDir)/$(LIBFILE) $^
+	g++ -shared $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
 
 install: engine_lib
 	cp $(outputDir)/$(LIBFILE) /usr/local/lib/
-	cp -r ./include /usr/local/include/birb2d
+	mkdir -p /usr/local/include/birb2d
+	cp ./include/* /usr/local/include/birb2d/
 
 uninstall:
 	rm -f /usr/local/lib/$(LIBFILE)
