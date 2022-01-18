@@ -4,15 +4,18 @@
 
 namespace Birb
 {
-	Window::Window(std::string p_title, Vector2int p_window_dimensions, int p_refresh_rate)
-	:refresh_rate(p_refresh_rate), window_dimensions(p_window_dimensions), win_title(p_title)
+	Window::Window(std::string p_title, Vector2int p_window_dimensions, int p_refresh_rate, bool resizable)
+	:refresh_rate(p_refresh_rate), window_dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions), win_title(p_title)
 	{
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
 		InitSDL_ttf();
 		InitSDL_image();
 
-		win = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_window_dimensions.x, p_window_dimensions.y, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+		if (resizable)
+			win = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_window_dimensions.x, p_window_dimensions.y, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+		else
+			win = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_window_dimensions.x, p_window_dimensions.y, SDL_WINDOW_SHOWN);
 
 		if (win == NULL)
 			Debug::Log("Window failed to init: " + (std::string)SDL_GetError(), Debug::error);
@@ -103,6 +106,8 @@ namespace Birb
 	{
 		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
 		window_dimensions = dimensions;
+		window_dimensions_multiplier.x = (float)window_dimensions.x / (float)original_window_dimensions.x;
+		window_dimensions_multiplier.y = (float)window_dimensions.y / (float)original_window_dimensions.y;
 	}
 
 	void Window::EventTick(SDL_Event event, bool* GameRunning)
@@ -123,6 +128,11 @@ namespace Birb
 			default:
 				break;
 		}
+	}
+
+	bool Window::PollEvents()
+	{
+		return (SDL_PollEvent(&event) != 0);
 	}
 
 	SDL_Texture* Resources::LoadTexture(std::string p_filePath)
@@ -216,6 +226,14 @@ namespace Birb
 		SDL_Rect rectangle = dimensions.getSDLRect();
 		SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
 		ResetDrawColor();
+	}
+
+	void Render::DrawRect(SDL_Color color, Rect dimensions, int width)
+	{
+		DrawRect(color, Rect(dimensions.x, dimensions.y, dimensions.w, width)); /* Top */
+		DrawRect(color, Rect(dimensions.x, dimensions.y + dimensions.h - width, dimensions.w, width)); /* Bottom */
+		DrawRect(color, Rect(dimensions.x, dimensions.y, width, dimensions.h)); /* Left */
+		DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
 	}
 
 	void Render::DrawCircle(SDL_Color color, Vector2int pos, int radius)

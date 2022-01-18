@@ -12,7 +12,7 @@ namespace Birb
 	struct Window
 	{
 		Window();
-		Window(std::string p_title, Vector2int p_window_dimensions, int p_refresh_rate);
+		Window(std::string p_title, Vector2int p_window_dimensions, int p_refresh_rate, bool resizable);
 
 		/* -- Init stuff functions -- */
 		static void InitSDL();
@@ -34,6 +34,8 @@ namespace Birb
 		/* -- Basic window events -- */
 		void SetWindowSize(Vector2int dimensions);
 		void EventTick(SDL_Event event, bool* GameRunning);
+		bool PollEvents();
+		SDL_Event event;
 		/* ------------------------- */
 
 		/* -- Window variables -- */
@@ -42,6 +44,8 @@ namespace Birb
 		SDL_Window* win;
 		SDL_Renderer* renderer = NULL;
 		Vector2int window_dimensions;
+		Vector2int original_window_dimensions;
+		Vector2f window_dimensions_multiplier; ///< Contains the difference between the current and old window dimensions. DO NOT MODIFY!
 		/* ---------------------- */
 	};
 
@@ -58,7 +62,8 @@ namespace Birb
 	{
 		static void DrawEntity(Entity& entity);
 		static void ResetDrawColor();
-		static void DrawRect(SDL_Color color, Rect dimensions);
+		static void DrawRect(SDL_Color color, Rect dimensions); 			///< Draw filled rect
+		static void DrawRect(SDL_Color color, Rect dimensions, int width); 	///< Draw hollow rect
 		static void DrawCircle(SDL_Color color, Vector2int pos, int radius);
 	};
 }

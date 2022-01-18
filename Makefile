@@ -16,11 +16,11 @@ test: tests.o logger.o renderwindow.o values.o timestep.o utils.o math.o
 run_tests: test
 	./build/test
 
-engine_obj: audio.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o
+engine_obj: audio.o entity.o logger.o math.o renderwindow.o physics.o timer.o timestep.o utils.o values.o
 	mkdir -p build
 	ld -r $^ -o $(outputDir)/birb2d.o
 
-engine_lib: audio.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o
+engine_lib: audio.o entity.o logger.o math.o renderwindow.o physics.o timer.o timestep.o utils.o values.o
 	mkdir -p build
 	g++ -shared $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
 
@@ -50,6 +50,9 @@ math.o: $(SRCDIR)/math.cpp
 
 renderwindow.o: $(SRCDIR)/renderwindow.cpp
 	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o renderwindow.o
+
+physics.o: $(SRCDIR)/physics.cpp
+	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o physics.o
 
 timer.o: $(SRCDIR)/timer.cpp
 	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o timer.o
