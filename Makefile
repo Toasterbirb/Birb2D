@@ -1,6 +1,5 @@
 CC=g++
 SRCDIR=./src
-PONG_SRC=./games/Ping-Pong/src
 outputDir=./build
 CFLAGS=-fPIC -O2
 WarningFlags=-Wpedantic -pedantic -Wall -Wextra
@@ -8,7 +7,7 @@ SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
 LIBFILE=libbirb2d.so
 
-all: test pong engine_lib
+all: test engine_lib
 
 test: tests.o logger.o renderwindow.o values.o timestep.o utils.o math.o
 	mkdir -p build
@@ -16,14 +15,6 @@ test: tests.o logger.o renderwindow.o values.o timestep.o utils.o math.o
 
 run_tests: test
 	./build/test
-
-pong: pong_main.o logger.o renderwindow.o timestep.o entity.o utils.o audio.o
-	mkdir -p build
-	rsync -av ./games/Ping-Pong/res ./build/
-	$(CC) $^ $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/pong
-
-pong_main.o: $(PONG_SRC)/pong_entry.cpp
-	$(CC) -c $(INCLUDES) $(SDL_FLAGS) $(WarningFlags) $^ -o pong_main.o
 
 engine_obj: audio.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o
 	mkdir -p build
@@ -34,12 +25,12 @@ engine_lib: audio.o entity.o logger.o math.o renderwindow.o timer.o timestep.o u
 	g++ -shared $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
 
 install: engine_lib
-	cp $(outputDir)/$(LIBFILE) /usr/local/lib/
+	cp $(outputDir)/$(LIBFILE) /usr/lib/
 	mkdir -p /usr/local/include/birb2d
 	cp ./include/* /usr/local/include/birb2d/
 
 uninstall:
-	rm -f /usr/local/lib/$(LIBFILE)
+	rm -f /usr/lib/$(LIBFILE)
 	rm -rf /usr/local/include/birb2d
 
 audio.o: $(SRCDIR)/audio.cpp
