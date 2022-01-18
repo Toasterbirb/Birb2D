@@ -1,6 +1,6 @@
 #include "Timer.hpp"
 
-namespace Birb2D
+namespace Birb
 {
 	void Timer::Start()
 	{

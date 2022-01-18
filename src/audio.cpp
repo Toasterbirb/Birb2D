@@ -2,7 +2,7 @@
 #include "Audio.hpp"
 #include "Logger.hpp"
 
-namespace Birb2D
+namespace Birb
 {
 	//** Initializes the SDL_mixer library. Needs to be called before any other audio features are used
 	bool Audio::Init(int flags)

@@ -2,7 +2,7 @@
 #include "Entity.hpp"
 #include "Renderwindow.hpp"
 
-namespace Birb2D
+namespace Birb
 {
 	TextComponent::TextComponent()
 	{

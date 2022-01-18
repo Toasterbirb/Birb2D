@@ -4,12 +4,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
-namespace Birb2D
+namespace Birb
 {
 	struct Audio
 	{
-		static bool Init(int flags);
+		static bool Init(int flags); ///< Initializes the SDL_mixer library
 
+		/// Used for short sound effects
 		class SoundFile
 		{
 		public:
@@ -25,6 +26,7 @@ namespace Birb2D
 			std::string filePath;
 		};
 
+		/// Used for longer audio pieces like music. Shouldn't be used for sound effects
 		class MusicFile
 		{
 		public:

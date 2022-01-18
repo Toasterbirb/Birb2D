@@ -3,7 +3,7 @@
 #include "Utils.hpp"
 #include "Values.hpp"
 
-namespace Birb2D
+namespace Birb
 {
 	void TimeStep::Init()
 	{

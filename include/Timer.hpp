@@ -3,8 +3,9 @@
 #include <cmath>
 #include <string>
 
-namespace Birb2D
+namespace Birb
 {
+	/// Class for timing things. Accurate down to milliseconds
 	class Timer
 	{
 	public:
@@ -15,12 +16,12 @@ namespace Birb2D
 		double ElapsedMinutes();
 		double ElapsedHours();
 
-		double CalcSeconds(double mills);
-		double CalcMinutes(double mills);
-		double CalcHours(double mills);
+		double CalcSeconds(double mills); 	///< Converts milliseconds into seconds
+		double CalcMinutes(double mills); 	///< Converts milliseconds into minutes
+		double CalcHours(double mills); 	///< Converts milliseconds into hours
 		
-		std::string DigitalFormat();
-		std::string SplitDigitalFormat(double previousmills);
+		std::string DigitalFormat(); 		///< Prints the current elapsed time in digital format (00:00:00:000)
+		std::string SplitDigitalFormat(double previousmills /**< [in] elapsed milliseconds of the previous split */); ///< Used for calculating digital time for a split during timing
 		bool running = false;
 
 	private:

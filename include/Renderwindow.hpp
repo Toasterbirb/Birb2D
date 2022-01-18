@@ -7,7 +7,7 @@
 #include "Utils.hpp"
 #include "Entity.hpp"
 
-namespace Birb2D
+namespace Birb
 {
 	struct Window
 	{
@@ -45,6 +45,7 @@ namespace Birb2D
 		/* ---------------------- */
 	};
 
+	/// Methods for loading different resources like fonts and textures
 	struct Resources
 	{
 		static SDL_Texture* LoadTexture(std::string p_filePath);
@@ -52,6 +53,7 @@ namespace Birb2D
 		static TTF_Font* 	LoadFont(std::string p_filePath, int p_fontSize);
 	};
 
+	/// Methods for rendering things
 	struct Render
 	{
 		static void DrawEntity(Entity& entity);

@@ -3,12 +3,15 @@
 #include <iostream>
 #include <string.h>
 
-namespace Debug
+namespace Birb
 {
-	enum Type
+	namespace Debug
 	{
-		log, warning, error
-	};
-	void Log(std::string text, Type type = Type::log);
-	static std::vector<std::string> lines;
+		enum Type
+		{
+			log, warning, error
+		};
+		void Log(std::string text, Type type = Type::log);
+		static std::vector<std::string> lines;
+	}
 }

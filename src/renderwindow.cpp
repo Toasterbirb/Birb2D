@@ -2,7 +2,7 @@
 #include "Values.hpp"
 #include "Logger.hpp"
 
-namespace Birb2D
+namespace Birb
 {
 	Window::Window(std::string p_title, Vector2int p_window_dimensions, int p_refresh_rate)
 	:refresh_rate(p_refresh_rate), window_dimensions(p_window_dimensions), win_title(p_title)
