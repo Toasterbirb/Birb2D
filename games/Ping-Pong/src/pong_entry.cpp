@@ -19,29 +19,17 @@ enum Side
 
 /* Variables */
 bool GameRunning = true;
-const Vector2f 	baseBallVector 	= { 6, 6 };
+const Birb::Vector2f 	baseBallVector 	= { 6, 6 };
 PlayerType 	lastCollider = PlayerType::NoOne;
 Side 		lastSide = Side::None;
 TTF_Font* 	scoreFont;
 
-Birb2D::Entity UpdatedScore(int score, Birb2D::Entity scoreEntity)
-{
-	if (scoreEntity.textComponent.text != std::to_string(score))
-	{
-		Birb2D::TextComponent textComponent(std::to_string(score), scoreFont, &Colors::White);
-		Birb2D::Entity newScore(scoreEntity.name, Vector2int(scoreEntity.rect.x, scoreEntity.rect.y), textComponent);
-		newScore.textComponent = textComponent;
-		return newScore;
-	}
-	return scoreEntity;
-}
-
-void MirrorBallVector(Vector2f* ballVector, Side side, Side playerMovementDirection)
+void MirrorBallVector(Birb::Vector2f* ballVector, Side side, Side playerMovementDirection)
 {
 	float movementMultiplier = 1.00f;
 	if (playerMovementDirection != Side::None && side == Left && side != Top && side != Bottom)
 	{
-		movementMultiplier = utils::randomFloat(1.10f, 1.30f);
+		movementMultiplier = Birb::utils::randomFloat(1.10f, 1.30f);
 
 		/* Change the ball movement direction depending on the player movement */
 		ballVector->x *= -1;
@@ -71,7 +59,7 @@ void MirrorBallVector(Vector2f* ballVector, Side side, Side playerMovementDirect
 	/* Prevent the ball from glitching into the walls */
 	if (side == lastSide)
 	{
-		Debug::Log("Cancelling repeating collision");
+		Birb::Debug::Log("Cancelling repeating collision");
 		return;
 	}
 
@@ -100,7 +88,7 @@ void MirrorBallVector(Vector2f* ballVector, Side side, Side playerMovementDirect
 	lastSide = side;
 }
 
-Side BallScreenBoundHit(Vector2f pos, int radius, Birb2D::Window window)
+Side BallScreenBoundHit(Birb::Vector2f pos, int radius, Birb::Window window)
 {
 	/* Top hit */
 	if (pos.y - radius < 0)
@@ -121,18 +109,18 @@ Side BallScreenBoundHit(Vector2f pos, int radius, Birb2D::Window window)
 	return Side::None;
 }
 
-void ResetBall(Vector2f* ballPosition, Vector2f* ballVector, Birb2D::Window window)
+void ResetBall(Birb::Vector2f* ballPosition, Birb::Vector2f* ballVector, Birb::Window window)
 {
 	ballPosition->x = window.window_dimensions.x / 2.00f;
 	ballPosition->y = window.window_dimensions.y / 2.00f;
 	ballVector->x = baseBallVector.x;
-	ballVector->y = baseBallVector.y * utils::randomFloat(-1.5, 1.5);
+	ballVector->y = baseBallVector.y * Birb::utils::randomFloat(-1.5, 1.5);
 
 	lastCollider 	= PlayerType::NoOne;
 	lastSide 		= Side::None;
 }
 
-void UpdateBallCollider(Rect* collider, Vector2f ballPosition, int ballSize)
+void UpdateBallCollider(Birb::Rect* collider, Birb::Vector2f ballPosition, int ballSize)
 {
 	collider->x = ballPosition.x - (ballSize / 2.00f);
 	collider->y = ballPosition.y - (ballSize / 2.00f);
@@ -140,7 +128,7 @@ void UpdateBallCollider(Rect* collider, Vector2f ballPosition, int ballSize)
 	collider->h = (float)ballSize;
 }
 
-Side BallPlayerCollision(Rect playerDimensions, Rect botDimensions, Rect ballCollider)
+Side BallPlayerCollision(Birb::Rect playerDimensions, Birb::Rect botDimensions, Birb::Rect ballCollider)
 {
 	SDL_Rect player 	= playerDimensions.getSDLRect();
 	SDL_Rect bot 		= botDimensions.getSDLRect();
@@ -163,8 +151,8 @@ Side BallPlayerCollision(Rect playerDimensions, Rect botDimensions, Rect ballCol
 
 int main(int argc, char **argv)
 {
-	Debug::Log("Starting Pong!");
-	Debug::Log("Working directory: " + (std::string)argv[0]);
+	Birb::Debug::Log("Starting Pong!");
+	Birb::Debug::Log("Working directory: " + (std::string)argv[0]);
 	std::string workdir = (std::string)argv[0];
 
 	size_t pos = std::string::npos;
@@ -177,8 +165,8 @@ int main(int argc, char **argv)
 		break;
 	}
 
-	Birb2D::Window window("Pong", Vector2int(1280, 720), 240);
-	Birb2D::TimeStep timeStep;
+	Birb::Window window("Pong", Birb::Vector2int(1280, 720), 240);
+	Birb::TimeStep timeStep;
 
 	/* Initialize timestep */
 	timeStep.Init();
@@ -186,35 +174,35 @@ int main(int argc, char **argv)
 	/* Gameloop variables */
 	SDL_Event event;
 	bool holdingKey = false;
-	scoreFont = Birb2D::Resources::LoadFont(workdir + "/res/fonts/manaspace/manaspc.ttf", 64);
+	scoreFont = Birb::Resources::LoadFont(workdir + "/res/fonts/manaspace/manaspc.ttf", 64);
 
 	/* Ball variables */
-	Vector2f 		ballVector 		= { 6, 6 };
-	Vector2f 		ballPosition 	= { window.window_dimensions.x / 2.00f, window.window_dimensions.y / 2.00f };
-	int 			ballSize 		= 8;
-	Rect 			ballCollider;
+	Birb::Vector2f 		ballVector 		= { 6, 6 };
+	Birb::Vector2f 		ballPosition 	= { window.window_dimensions.x / 2.00f, window.window_dimensions.y / 2.00f };
+	int 				ballSize 		= 8;
+	Birb::Rect 			ballCollider;
 
 	/* Player variables */
-	int 		playerSpeed 			= 8;
-	int 		playerSideOffset 		= 32;
-	Rect 		playerDimensions 		= { (float)playerSideOffset, window.window_dimensions.y / 2.00f - 50, 10, 100 };
-	Side 		playerMovementDirection = Side::None;
+	int 			playerSpeed 			= 8;
+	int 			playerSideOffset 		= 32;
+	Birb::Rect 		playerDimensions 		= { (float)playerSideOffset, window.window_dimensions.y / 2.00f - 50, 10, 100 };
+	Side 			playerMovementDirection = Side::None;
 
-	int 		botMovementSpeed 	= 5;
-	Rect 		botDimensions  		= playerDimensions;
+	int 			botMovementSpeed 	= 5;
+	Birb::Rect 		botDimensions  		= playerDimensions;
 	botDimensions.x = window.window_dimensions.x - playerDimensions.x - playerDimensions.w;
 
 	/* Score variables */
 	int playerScore = 0;
 	int botScore = 0;
-	Birb2D::Entity e_playerScore("Player score", Vector2int(window.window_dimensions.x / 2 - 150, 32), Birb2D::TextComponent("0", scoreFont, &Colors::White));
-	Birb2D::Entity e_botScore("Bot score", Vector2int(window.window_dimensions.x / 2 + 150 - 64, 32), Birb2D::TextComponent("0", scoreFont, &Colors::White));
+	Birb::Entity e_playerScore("Player score", Birb::Vector2int(window.window_dimensions.x / 2 - 150, 32), Birb::TextComponent("0", scoreFont, &Birb::Colors::White));
+	Birb::Entity e_botScore("Bot score", Birb::Vector2int(window.window_dimensions.x / 2 + 150 - 64, 32), Birb::TextComponent("0", scoreFont, &Birb::Colors::White));
 
 	/* Sounds */
-	Birb2D::Audio::Init(MIX_INIT_MP3);
-	Birb2D::Audio::SoundFile paddle_collision(workdir + "/res/sounds/paddle_collision.wav");
-	Birb2D::Audio::SoundFile player_lose(workdir + "/res/sounds/player_lose.wav");
-	Birb2D::Audio::SoundFile player_point(workdir + "/res/sounds/player_point.wav");
+	Birb::Audio::Init(MIX_INIT_MP3);
+	Birb::Audio::SoundFile paddle_collision(workdir + "/res/sounds/paddle_collision.wav");
+	Birb::Audio::SoundFile player_lose(workdir + "/res/sounds/player_lose.wav");
+	Birb::Audio::SoundFile player_point(workdir + "/res/sounds/player_point.wav");
 
 	while (GameRunning)
 	{
@@ -270,6 +258,10 @@ int main(int argc, char **argv)
 		}
 
 		timeStep.End();
+
+		/* Update score position */
+		e_playerScore.rect.x = window.window_dimensions.x / 2.00 - 150;
+		e_botScore.rect.x = window.window_dimensions.x / 2.00 + 150 - 64;
 
 		/* Handle player movement */
 		{
@@ -341,39 +333,39 @@ int main(int argc, char **argv)
 
 		{
 			/* Draw playfield divider */
-			Birb2D::Render::DrawRect(Colors::White, Rect((window.window_dimensions.x / 2.00f) - 4, 0, 8, window.window_dimensions.y));
+			Birb::Render::DrawRect(Birb::Colors::White, Birb::Rect((window.window_dimensions.x / 2.00f) - 4, 0, 8, window.window_dimensions.y));
 
 			/* Draw players */
 			{
 				/* Player */
-				Birb2D::Render::DrawRect(Colors::White,
-						Rect(playerDimensions.x, playerDimensions.y,
+				Birb::Render::DrawRect(Birb::Colors::White,
+						Birb::Rect(playerDimensions.x, playerDimensions.y,
 						playerDimensions.w, playerDimensions.h));
 
 				/* Bot */
 
-				Birb2D::Render::DrawRect(Colors::White,
-						Rect(botDimensions.x, botDimensions.y,
+				Birb::Render::DrawRect(Birb::Colors::White,
+						Birb::Rect(botDimensions.x, botDimensions.y,
 						botDimensions.w, botDimensions.h));
 			}
 
 			/* Draw the ball */
-			Birb2D::Render::DrawCircle(Colors::White,
-					Vector2int(ballPosition.x, ballPosition.y), 
+			Birb::Render::DrawCircle(Birb::Colors::White,
+					Birb::Vector2int(ballPosition.x, ballPosition.y), 
 					ballSize);
 
 			/* Draw score */	
-			e_playerScore 	= UpdatedScore(playerScore, e_playerScore);
-			e_botScore 		= UpdatedScore(botScore, e_botScore);
-			Birb2D::Render::DrawEntity(e_playerScore);
-			Birb2D::Render::DrawEntity(e_botScore);
+			e_playerScore.SetText(std::to_string(playerScore));
+			e_botScore.SetText(std::to_string(botScore));
+			Birb::Render::DrawEntity(e_playerScore);
+			Birb::Render::DrawEntity(e_botScore);
 		}
 
 		window.Display();
 		/* End of rendering */
 	}
 
-	Debug::Log("Starting cleanup...");
+	Birb::Debug::Log("Starting cleanup...");
 
 	/* Free sound effects */
 	player_lose.free();
@@ -382,6 +374,6 @@ int main(int argc, char **argv)
 
 	window.Cleanup();
 	SDL_Quit();
-	Debug::Log("Game should be closed now!");
+	Birb::Debug::Log("Game should be closed now!");
 	return 0;
 }
