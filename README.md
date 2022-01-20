@@ -15,7 +15,7 @@ Documentation coming soon(tm).
 - SDL2_ttf
 - SDL2_mixer
 - SDL2_gfx
-- doctest (included as a headerfile)
+- [doctest](https://github.com/doctest/doctest) (included as a headerfile)
 
 ## Building
 ### Generate documentation
