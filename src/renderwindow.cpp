@@ -102,6 +102,24 @@ namespace Birb
 		SDL_RenderPresent(Global::RenderVars::Renderer);
 	}
 
+	Vector2int Window::CursorPosition()
+	{
+		Vector2int pos;
+		SDL_GetMouseState(&pos.x, &pos.y);
+		return pos;
+	}
+
+	bool Window::CursorInRect(Rect rect)
+	{
+		Vector2int cursorPos = CursorPosition();
+
+		if (cursorPos.x > rect.x && cursorPos.x < rect.x + rect.w)
+			if (cursorPos.y > rect.y && cursorPos.y < rect.y + rect.h)
+				return true;
+
+		return false;
+	}
+
 	void Window::SetWindowSize(Vector2int dimensions)
 	{
 		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
@@ -180,6 +198,27 @@ namespace Birb
 		return texture;
 	}
 
+	SDL_Texture* Resources::TextSprite(std::string text, TTF_Font* font, SDL_Color& color, SDL_Color& bgColor)
+	{
+		/* Check if the arguments are valid */
+		if (font == nullptr)
+		{
+			Debug::Log("Tried to render text with invalid font!");
+			return NULL;
+		}
+
+		SDL_Surface* surface = TTF_RenderText_Shaded(font, text.c_str(), color, bgColor);
+		if (surface == nullptr)
+			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
+
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
+		if (texture == nullptr)
+			Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError(), Debug::error);
+
+		SDL_FreeSurface(surface);
+		return texture;
+	}
+
 	void Render::DrawEntity(Entity& entity)
 	{
 		if (entity.sprite == nullptr)
@@ -197,15 +236,65 @@ namespace Birb
 		int texHeight;
 		SDL_QueryTexture(entity.sprite, NULL, NULL, &texWidth, &texHeight);
 
-		src.x = 0;
-		src.y = 0;
-		src.w = texWidth;
-		src.h = texHeight;
+		if (entity.animationComponent.frameCount == 0)
+		{
+			src.x = 0;
+			src.y = 0;
+			src.w = texWidth;
+			src.h = texHeight;
 
-		dst.x = entity.rect.x;
-		dst.y = entity.rect.y;
-		dst.w = entity.rect.w * entity.localScale.x;
-		dst.h = entity.rect.h * entity.localScale.y;
+			dst.x = entity.rect.x;
+			dst.y = entity.rect.y;
+			dst.w = entity.rect.w * entity.localScale.x;
+			dst.h = entity.rect.h * entity.localScale.y;
+		}
+		else
+		{
+			/* Entity probably has an animation component */
+			//src.x = entity.animationComponent.curAtlasPosition.x;
+			//src.y = entity.animationComponent.curAtlasPosition.y;
+			Vector2int atlasPos = entity.getAtlasPosition(entity.animationComponent.frameIndex);
+			src.x = atlasPos.x;
+			src.y = atlasPos.y;
+			src.w = entity.animationComponent.spriteSize.x;
+			src.h = entity.animationComponent.spriteSize.y;
+
+			dst.x = entity.rect.x;
+			dst.y = entity.rect.y;
+			dst.w = src.w * entity.localScale.x;
+			dst.h = src.h * entity.localScale.y;
+
+
+
+			/* Set the current atlast position to the next frame */
+			if (entity.animationComponent.animationQueued || entity.animationComponent.loop)
+			{
+				if (entity.animationComponent.frameTimer.running && entity.animationComponent.frameTimer.ElapsedSeconds() >= (1.0 / entity.animationComponent.fps))
+				{
+					if (entity.animationComponent.frameIndex < entity.animationComponent.lastFrame)
+					{
+						entity.animationComponent.frameIndex++;
+						entity.animationComponent.frameTimer.Stop();
+						entity.animationComponent.frameTimer.Start();
+					}
+				}
+				else if (!entity.animationComponent.frameTimer.running)
+				{
+					/* Start the frame timer */
+					entity.animationComponent.frameTimer.Start();
+				}
+
+				if (entity.animationComponent.loop && entity.animationComponent.frameIndex >= entity.animationComponent.lastFrame)
+				{
+					entity.animationComponent.frameIndex = 0;
+				}
+				else if (entity.animationComponent.animationQueued && entity.animationComponent.frameIndex >= entity.animationComponent.lastFrame)
+				{
+					entity.animationComponent.frameIndex = entity.animationComponent.lastFrame;
+					entity.animationComponent.animationQueued = false;
+				}
+			}
+		}
 
 		centerPoint = Vector2int(entity.rect.w / 2, entity.rect.h / 2);
 		SDL_Point center = { centerPoint.x, centerPoint.y };

@@ -63,6 +63,6 @@ make uninstall
 		- [ ] Resolution independent UI scaling
 		- [ ] Anchors
 - [x] Sound
-- [ ] Animation
+- [x] Animation (sprite based animations supported)
 - [ ] Physics
 - [ ] To be continued...

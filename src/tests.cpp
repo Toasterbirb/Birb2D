@@ -22,7 +22,7 @@ TEST_CASE("logging")
 
 TEST_CASE("window and rendering functions")
 {
-	Birb::Window window("Title", Birb::Vector2int(1280, 720), 60);
+	Birb::Window window("Title", Birb::Vector2int(1280, 720), 60, false);
 	SDL_Texture* texture 	= Birb::Resources::LoadTexture("/home/toasterbirb/git/birb2d/res/textures/giga_stretch.png");
 	TTF_Font* font 			= Birb::Resources::LoadFont("/home/toasterbirb/git/birb2d/res/fonts/freefont/FreeMonoBold.ttf", 32);
 

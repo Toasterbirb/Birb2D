@@ -54,6 +54,7 @@ namespace Birb
 	{
 		static SDL_Texture* LoadTexture(std::string p_filePath);
 		static SDL_Texture* TextSprite(std::string text, TTF_Font* font, SDL_Color& color);
+		static SDL_Texture* TextSprite(std::string text, TTF_Font* font, SDL_Color& color, SDL_Color& bgColor);
 		static TTF_Font* 	LoadFont(std::string p_filePath, int p_fontSize);
 	};
 
