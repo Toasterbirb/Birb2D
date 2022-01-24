@@ -1,7 +1,7 @@
 # Birb2D
-Birb2D is a simplistic 2D game engine made by an amateur programmer, with the goal to learn how game engines and development is done in more depth and from a complete behind the scenes perspective.
+Birb2D is a small and delicate 2D game engine made as a learning project.
 
-Documentation coming soon(tm).
+Birb2D is not meant to be *production* quality, but there's a chance it can be used to make some games. Expect segfaults and all that usual stuff that come with newbie hobbyist C++ projects. If anyone ever picks this thing up and actually does something with it, definitely send it [my](https://github.com/Toasterbirb) way. I'd love to see it happen. Also any ideas or suggestions are welcome. Just know the scope, I'm not remaking Unity or Unreal Engine.
 
 ## Projects made with Birb2D
 - [Flappy Birb](https://github.com/Toasterbirb/Flappy-Birb)
@@ -54,7 +54,7 @@ make uninstall
 - [x] Basic input handling (currently at cave man stage)
 - [x] Entity system (Partially functional currently)
 - [ ] Basic UI functionality
-	- [ ] Buttons
+	- [x] Buttons
 	- [x] Text
 	- [ ] Dropdown menu
 	- [ ] Slider
