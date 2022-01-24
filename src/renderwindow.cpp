@@ -274,7 +274,6 @@ namespace Birb
 					if (entity.animationComponent.frameIndex < entity.animationComponent.lastFrame)
 					{
 						entity.animationComponent.frameIndex++;
-						entity.animationComponent.frameTimer.Stop();
 						entity.animationComponent.frameTimer.Start();
 					}
 				}
