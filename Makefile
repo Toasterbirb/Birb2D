@@ -1,7 +1,7 @@
 CC=g++
 SRCDIR=./src
 outputDir=./build
-CFLAGS=-fPIC -O2 -g
+CFLAGS=-fPIC -O2 -g -std=c++11
 WarningFlags=-Wpedantic -pedantic -Wall -Wextra
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
@@ -12,9 +12,9 @@ all: test engine_lib
 docs:
 	doxygen ./doxygen_config
 
-test: tests.o logger.o renderwindow.o values.o timestep.o utils.o math.o
+test: entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o tests.o
 	mkdir -p build
-	$(CC) $^ $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/test
+	$(CC) $^ $(CFLAGS) $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/test
 
 run_tests: test
 	./build/test

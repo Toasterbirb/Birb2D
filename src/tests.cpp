@@ -109,6 +109,106 @@ TEST_CASE("Vector3int with arguments")
     CHECK(Birb::Vector3int(1.53f, 5.21f, 2.45f).z == 2);
 }
 
+TEST_CASE("Distance calculation with 2D vectors")
+{
+	Birb::Vector2f pointAf(1.0f, 1.0f);
+	Birb::Vector2f pointBf(8.0f, 3.0f);
+
+	Birb::Vector2int pointAint(1, 1);
+	Birb::Vector2int pointBint(8, 3);
+
+	CHECK(Birb::Math::VectorDistance(pointAf, pointBf) == 7.2801098892805f);
+	CHECK(Birb::Math::VectorDistance(pointAint, pointBint) == 7.2801098892805f);
+}
+
+TEST_CASE("Distance calculation with 3D vectors")
+{
+	Birb::Vector3f pointAf(1.0f, 1.0f, 1.0f);
+	Birb::Vector3f pointBf(8.0f, 3.0f, 2.0f);
+
+	Birb::Vector3int pointAint(1, 1, 1);
+	Birb::Vector3int pointBint(8, 3, 2);
+
+	CHECK(std::roundf(Birb::Math::VectorDistance(pointAf, pointBf)) == std::roundf(7.3484792283495));
+	CHECK(std::roundf(Birb::Math::VectorDistance(pointAint, pointBint)) == std::roundf(7.3484692283495));
+}
+
+TEST_CASE("Calculate the centerpoint between two 2D vectors")
+{
+	Birb::Vector2f pointAf(1.0f, 1.0f);
+	Birb::Vector2f pointBf(8.0f, 3.0f);
+
+	Birb::Vector2int pointAint(1, 1);
+	Birb::Vector2int pointBint(8, 3);
+
+	Birb::Vector2f resultf = Birb::Math::CenterPoint(pointAf, pointBf);
+	Birb::Vector2f resultint = Birb::Math::CenterPoint(pointAint, pointBint);
+	Birb::Vector2f expectedResult(4.5f, 2.0f);
+
+	CHECK(resultf == expectedResult);
+	CHECK(resultint == expectedResult);
+}
+
+TEST_CASE("Calculate the centerpoint between two 3D vectors")
+{
+	Birb::Vector3f pointAf(1.0f, 1.0f, 1.0f);
+	Birb::Vector3f pointBf(8.0f, 3.0f, 2.0f);
+
+	Birb::Vector3int pointAint(1, 1, 1);
+	Birb::Vector3int pointBint(8, 3, 2);
+
+	Birb::Vector3f resultf = Birb::Math::CenterPoint(pointAf, pointBf);
+	Birb::Vector3f resultint = Birb::Math::CenterPoint(pointAint, pointBint);
+	Birb::Vector3f expectedResult(4.5f, 2.0f, 1.5f);
+
+	CHECK(resultf == expectedResult);
+	CHECK(resultint == expectedResult);
+}
+
+TEST_CASE("Vector2f operator overloads")
+{
+	Birb::Vector2f vecA(1.0f, 1.5f);
+	Birb::Vector2f vecB(2.0f, 3.2f);
+
+	CHECK(vecA + vecB == Birb::Vector2f(3.0f, 4.7f));
+	CHECK(vecA - vecB == Birb::Vector2f(-1.0f, -1.7f));
+	CHECK(vecA * vecB == Birb::Vector2f(2.0f, 4.8f));
+	CHECK(vecA / vecB == Birb::Vector2f(0.5f, 0.46875f));
+}
+
+TEST_CASE("Vector2int operator overloads")
+{
+	Birb::Vector2int vecA(4, 2);
+	Birb::Vector2int vecB(2, 3);
+
+	CHECK(vecA + vecB == Birb::Vector2int(6, 5));
+	CHECK(vecA - vecB == Birb::Vector2int(2, -1));
+	CHECK(vecA * vecB == Birb::Vector2int(8, 6));
+	CHECK(vecA / vecB == Birb::Vector2int(2, 1));
+}
+
+TEST_CASE("Vector3f operator overloads")
+{
+	Birb::Vector3f vecA(1.0f, 1.5f, 0.2f);
+	Birb::Vector3f vecB(2.0f, 3.2f, 2.0f);
+
+	CHECK(vecA + vecB == Birb::Vector3f(3.0f, 4.7f, 2.2f));
+	CHECK(vecA - vecB == Birb::Vector3f(-1.0f, -1.7f, -1.8f));
+	CHECK(vecA * vecB == Birb::Vector3f(2.0f, 4.8f, 0.4f));
+	CHECK(vecA / vecB == Birb::Vector3f(0.5f, 0.468750f, 0.1f));
+}
+
+TEST_CASE("Vector3int operator overloads")
+{
+	Birb::Vector3int vecA(4, 6, 5);
+	Birb::Vector3int vecB(2, 3, 2);
+
+	CHECK(vecA + vecB == Birb::Vector3int(6, 9, 7));
+	CHECK(vecA - vecB == Birb::Vector3int(2, 3, 3));
+	CHECK(vecA * vecB == Birb::Vector3int(8, 18, 10));
+	CHECK(vecA / vecB == Birb::Vector3int(2, 2, 3));
+}
+
 TEST_CASE("Default Rect")
 {
 	Birb::Rect defaultRect;

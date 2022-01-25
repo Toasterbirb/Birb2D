@@ -4,6 +4,7 @@
 
 namespace Birb
 {
+	/// Point in 2D space with floating point accuracy
 	struct Vector2f
 	{
 		Vector2f()
@@ -24,9 +25,36 @@ namespace Birb
 			return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 		}
 
+		/* Operator overloads */
+		Vector2f operator+(const Vector2f& other) const
+		{
+			return Vector2f(x + other.x, y + other.y);
+		}
+
+		Vector2f operator-(const Vector2f& other) const
+		{
+			return Vector2f(x - other.x, y - other.y);
+		}
+
+		Vector2f operator*(const Vector2f& other) const
+		{
+			return Vector2f(x * other.x, y * other.y);
+		}
+
+		Vector2f operator/(const Vector2f& other) const
+		{
+			return Vector2f(x / other.x, y / other.y);
+		}
+
+		bool operator==(const Vector2f& other) const
+		{
+			return (x == other.x && y == other.y);
+		}
+
 		float x, y;
 	};
 
+	/// Point in 2D space with integer accuracy
 	struct Vector2int
 	{
 		Vector2int()
@@ -53,9 +81,36 @@ namespace Birb
 			return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 		}
 
+		/* Operator overloads */
+		Vector2int operator+(const Vector2int& other) const
+		{
+			return Vector2int(x + other.x, y + other.y);
+		}
+
+		Vector2int operator-(const Vector2int& other) const
+		{
+			return Vector2int(x - other.x, y - other.y);
+		}
+
+		Vector2int operator*(const Vector2int& other) const
+		{
+			return Vector2int(x * other.x, y * other.y);
+		}
+
+		Vector2int operator/(const Vector2int& other) const
+		{
+			return Vector2int((int)std::round((float)x / other.x), (int)std::round((float)y / other.y));
+		}
+
+		bool operator==(const Vector2int& other) const
+		{
+			return (x == other.x && y == other.y);
+		}
+
 		int x, y;
 	};
 
+	/// Point in 3D space with floating point accuracy
 	struct Vector3f
 	{
 		Vector3f()
@@ -76,9 +131,36 @@ namespace Birb
 			return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 		}
 
+		/* Operator overloads */
+		Vector3f operator+(const Vector3f& other) const
+		{
+			return Vector3f(x + other.x, y + other.y, z + other.z);
+		}
+
+		Vector3f operator-(const Vector3f& other) const
+		{
+			return Vector3f(x - other.x, y - other.y, z - other.z);
+		}
+
+		Vector3f operator*(const Vector3f& other) const
+		{
+			return Vector3f(x * other.x, y * other.y, z * other.z);
+		}
+
+		Vector3f operator/(const Vector3f& other) const
+		{
+			return Vector3f(x / other.x, y / other.y, z / other.z);
+		}
+
+		bool operator==(const Vector3f& other) const
+		{
+			return (x == other.x && y == other.y && z == other.z);
+		}
+
 		float x, y, z;
 	};
 
+	/// Point in 3D space with integer accuracy
 	struct Vector3int
 	{
 		Vector3int()
@@ -106,6 +188,46 @@ namespace Birb
 			return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 		}
 
+		/* Operator overloads */
+		Vector3int operator+(const Vector3int& other) const
+		{
+			return Vector3int(x + other.x, y + other.y, z + other.z);
+		}
+
+		Vector3int operator-(const Vector3int& other) const
+		{
+			return Vector3int(x - other.x, y - other.y, z - other.z);
+		}
+
+		Vector3int operator*(const Vector3int& other) const
+		{
+			return Vector3int(x * other.x, y * other.y, z * other.z);
+		}
+
+		Vector3int operator/(const Vector3int& other) const
+		{
+			return Vector3int((int)std::round((float)x / other.x), (int)std::round((float)y / other.y), (int)std::round((float)z / other.z));
+		}
+
+		bool operator==(const Vector3int& other) const
+		{
+			return (x == other.x && y == other.y && z == other.z);
+		}
+
 		int x, y, z;
+	};
+
+	/// Misc math functions
+	struct Math
+	{
+		static float VectorDistance(Vector2f a, Vector2f b); ///< Calculate the distance between two 2D floating point vectors
+		static float VectorDistance(Vector2int a, Vector2int b); ///< Calculate the distance between two 2D integer vectors
+		static float VectorDistance(Vector3f a, Vector3f b); ///< Calculate the distance between two 3D floating point vectors
+		static float VectorDistance(Vector3int a, Vector3int b); ///< Calculate the distance between two 3D integer vectors
+
+		static Vector2f CenterPoint(Vector2f a, Vector2f b); ///< Calculate the center point between two 2D floating point vectors
+		static Vector2f CenterPoint(Vector2int a, Vector2int b); ///< Calculate the center point between two 2D integer vectors
+		static Vector3f CenterPoint(Vector3f a, Vector3f b); ///< Calculate the center point between two 3D floating point vectors
+		static Vector3f CenterPoint(Vector3int a, Vector3int b); ///< Calculate the center point between two 3D integer vectors
 	};
 }
