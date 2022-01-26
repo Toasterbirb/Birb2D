@@ -151,6 +151,12 @@ namespace Birb
 		localScale = Vector2f(1, 1);
 	}
 
+	Entity::Entity(std::string p_name)
+	:name(p_name)
+	{
+		SetBaseEntityValues();
+	}
+
 	Entity::Entity(std::string p_name, Rect p_rect, SDL_Texture* p_texture)
 	:name(p_name), sprite(p_texture), rect(p_rect)
 	{

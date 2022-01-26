@@ -43,8 +43,8 @@ namespace Birb
 		int refresh_rate;
 		SDL_Window* win;
 		SDL_Renderer* renderer = NULL;
-		Vector2int window_dimensions;
 		Vector2int original_window_dimensions;
+		Vector2int window_dimensions;
 		Vector2f window_dimensions_multiplier; ///< Contains the difference between the current and old window dimensions. DO NOT MODIFY!
 		/* ---------------------- */
 	};
@@ -56,6 +56,7 @@ namespace Birb
 		static SDL_Texture* TextSprite(std::string text, TTF_Font* font, SDL_Color& color);
 		static SDL_Texture* TextSprite(std::string text, TTF_Font* font, SDL_Color& color, SDL_Color& bgColor);
 		static TTF_Font* 	LoadFont(std::string p_filePath, int p_fontSize);
+		static Uint8* 		CopyTexturePixels(SDL_Surface* surface, int* width, int* height, int* pitch);
 	};
 
 	/// Methods for rendering things
@@ -65,6 +66,8 @@ namespace Birb
 		static void ResetDrawColor();
 		static void DrawRect(SDL_Color color, Rect dimensions); 			///< Draw filled rect
 		static void DrawRect(SDL_Color color, Rect dimensions, int width); 	///< Draw hollow rect
+		static void DrawLine(SDL_Color color, Vector2int pointA, Vector2int pointB);
 		static void DrawCircle(SDL_Color color, Vector2int pos, int radius);
+		static void SetRenderDrawColor(SDL_Color color);
 	};
 }

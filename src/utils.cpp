@@ -30,6 +30,24 @@ namespace Birb
 		sdlrect.y = y;
 		return sdlrect;
 	}
+
+	namespace utils
+	{
+		std::vector<Vector2int> SortPath(Vector2int startPoint, std::vector<Vector2int> points)
+		{
+			std::vector<Vector2int> result;
+			Vector2int closestPoint;
+			result.push_back(startPoint);
+
+			for (int i = 0; i < points.size(); i++)
+			{
+				closestPoint = Birb::Math::FindClosestPoint(result[result.size() - 1], points, result);
+				result.push_back(closestPoint);
+			}
+
+			return result;
+		}
+	}
 }
 
 //Birb2D::Texture::Texture()

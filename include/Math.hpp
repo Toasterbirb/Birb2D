@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <math.h>
+#include <vector>
 
 namespace Birb
 {
@@ -107,6 +108,11 @@ namespace Birb
 			return (x == other.x && y == other.y);
 		}
 
+		bool operator!=(const Vector2int& other) const
+		{
+			return (x == other.x && y == other.y);
+		}
+
 		int x, y;
 	};
 
@@ -153,6 +159,11 @@ namespace Birb
 		}
 
 		bool operator==(const Vector3f& other) const
+		{
+			return (x == other.x && y == other.y && z == other.z);
+		}
+
+		bool operator!=(const Vector3f& other) const
 		{
 			return (x == other.x && y == other.y && z == other.z);
 		}
@@ -214,6 +225,11 @@ namespace Birb
 			return (x == other.x && y == other.y && z == other.z);
 		}
 
+		bool operator!=(const Vector3int& other) const
+		{
+			return (x == other.x && y == other.y && z == other.z);
+		}
+
 		int x, y, z;
 	};
 
@@ -225,9 +241,21 @@ namespace Birb
 		static float VectorDistance(Vector3f a, Vector3f b); ///< Calculate the distance between two 3D floating point vectors
 		static float VectorDistance(Vector3int a, Vector3int b); ///< Calculate the distance between two 3D integer vectors
 
+		static int 			Lerp(int a, int b, float t); ///< Interpolate a value between two values given time t
+		static float 		Lerp(float a, float b, float t); ///< Interpolate a value between two values given time t
+		static Vector2f 	Lerp(Vector2f a, Vector2f b, float t); ///< Interpolate a point between two 2D floating point vectors given time t
+		static Vector2int 	Lerp(Vector2int a, Vector2int b, float t); ///< Interpolate a point between two 2D integer vectors given time t
+		static Vector3f 	Lerp(Vector3f a, Vector3f b, float t); ///< Interpolate a point between two 3D floating point vectors given time t
+		static Vector3int 	Lerp(Vector3int a, Vector3int b, float t); ///< Interpolate a point between two 3D integer vectors given time t
+
+		static float 	CenterPoint(float a, float b); ///< Calculate the "center" value between two 1D floats
 		static Vector2f CenterPoint(Vector2f a, Vector2f b); ///< Calculate the center point between two 2D floating point vectors
 		static Vector2f CenterPoint(Vector2int a, Vector2int b); ///< Calculate the center point between two 2D integer vectors
 		static Vector3f CenterPoint(Vector3f a, Vector3f b); ///< Calculate the center point between two 3D floating point vectors
 		static Vector3f CenterPoint(Vector3int a, Vector3int b); ///< Calculate the center point between two 3D integer vectors
+
+		static Vector2int FindClosestPoint(Vector2int point, Vector2int points[], int pointCount);
+		static Vector2int FindClosestPoint(Vector2int point, std::vector<Vector2int> points);
+		static Vector2int FindClosestPoint(Vector2int point, std::vector<Vector2int> points, std::vector<Vector2int> ignoredPoints);
 	};
 }

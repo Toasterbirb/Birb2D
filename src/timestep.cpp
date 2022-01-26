@@ -42,7 +42,7 @@ namespace Birb
 			SDL_Delay(1000 / Global::RenderVars::RefreshRate - frameTicks);
 	}
 
-	float TimeStep::getTimestepAlpha()
+	float TimeStep::deltaTime()
 	{
 		return accumulator / timeStep;
 	}

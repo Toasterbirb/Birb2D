@@ -12,6 +12,32 @@
 #include "Renderwindow.hpp"
 
 
+TEST_CASE("Random int")
+{
+	/* Make sure that the functions return a different value every time */
+	Birb::utils::InitRandomGen();
+
+	int valueCount = 50;
+	int values[valueCount];
+	for (int i = 0; i < valueCount; i++)
+		values[i] = Birb::utils::randomInt(0, 10);
+
+	/* Check if all of the values were the same */
+	int firstValue = values[0];
+	bool differentValueFound = false;
+	for (int i = 1; i < valueCount; i++)
+	{
+		std::cout << "[" << i << "] Randon value: " << values[i] << std::endl;
+		if (values[i] != firstValue)
+		{
+			differentValueFound = true;
+			//break;
+		}
+	}
+
+	CHECK(differentValueFound);
+}
+
 TEST_CASE("logging")
 {
 	CHECK_NOTHROW(Birb::Debug::Log("Log (this is only a test)"));
@@ -131,6 +157,80 @@ TEST_CASE("Distance calculation with 3D vectors")
 
 	CHECK(std::roundf(Birb::Math::VectorDistance(pointAf, pointBf)) == std::roundf(7.3484792283495));
 	CHECK(std::roundf(Birb::Math::VectorDistance(pointAint, pointBint)) == std::roundf(7.3484692283495));
+}
+
+TEST_CASE("Lerping / interpolation with integers")
+{
+	int a = 1;
+	int b = 10;
+
+	CHECK(Birb::Math::Lerp(a, b, 0) == 1);
+	CHECK(Birb::Math::Lerp(a, b, 0.5) == 6);
+	CHECK(Birb::Math::Lerp(a, b, 0.75) == 8);
+	CHECK(Birb::Math::Lerp(a, b, 1) == 10);
+}
+
+TEST_CASE("Lerping / interpolation with floats")
+{
+	float a = 1;
+	float b = 3;
+
+	CHECK(Birb::Math::Lerp(a, b, 0) == 1);
+	CHECK(Birb::Math::Lerp(a, b, 0.25) == 1.5f);
+	CHECK(Birb::Math::Lerp(a, b, 0.5) == 2);
+	CHECK(Birb::Math::Lerp(a, b, 1) == 3);
+}
+
+TEST_CASE("Lerping / interpolation with 2D float vectors")
+{
+	Birb::Vector2f vecAf = { 1.0f, 1.0f };
+	Birb::Vector2f vecBf = { 4.0f, 2.0f };
+
+	CHECK(Birb::Math::Lerp(vecAf, vecBf, 0) == Birb::Vector2f(1, 1));
+	CHECK(Birb::Math::Lerp(vecAf, vecBf, 0.5) == Birb::Vector2f(2.5, 1.5));
+	CHECK(Birb::Math::Lerp(vecAf, vecBf, 0.75) == Birb::Vector2f(3.25, 1.75));
+	CHECK(Birb::Math::Lerp(vecAf, vecBf, 1) == Birb::Vector2f(4, 2));
+}
+
+TEST_CASE("Lerping / interpolation with 2D integer vectors")
+{
+	Birb::Vector2int vecAint = { 10, 10 };
+	Birb::Vector2int vecBint = { 40, 20 };
+
+	CHECK(Birb::Math::Lerp(vecAint, vecBint, 0) == Birb::Vector2int(10, 10));
+	CHECK(Birb::Math::Lerp(vecAint, vecBint, 0.5) == Birb::Vector2int(25, 15));
+	CHECK(Birb::Math::Lerp(vecAint, vecBint, 0.75) == Birb::Vector2int(33, 18));
+	CHECK(Birb::Math::Lerp(vecAint, vecBint, 1) == Birb::Vector2int(40, 20));
+}
+
+TEST_CASE("Lerping / interpolation with 3D float vectors")
+{
+	Birb::Vector3f vecAf = { 1.0f, 1.0f, 1.0f };
+	Birb::Vector3f vecBf = { 4.0f, 2.0f, 3.0f };
+
+	CHECK(Birb::Math::Lerp(vecAf, vecBf, 0) == Birb::Vector3f(1, 1, 1));
+	CHECK(Birb::Math::Lerp(vecAf, vecBf, 0.5) == Birb::Vector3f(2.5, 1.5, 2));
+	CHECK(Birb::Math::Lerp(vecAf, vecBf, 0.75) == Birb::Vector3f(3.25, 1.75, 2.5));
+	CHECK(Birb::Math::Lerp(vecAf, vecBf, 1) == Birb::Vector3f(4, 2, 3));
+}
+
+TEST_CASE("Lerping / interpolation with 3D integer vectors")
+{
+	Birb::Vector3int vecAint = { 10, 10, 10 };
+	Birb::Vector3int vecBint = { 40, 20, 30 };
+
+	CHECK(Birb::Math::Lerp(vecAint, vecBint, 0) == Birb::Vector3int(10, 10, 10));
+	CHECK(Birb::Math::Lerp(vecAint, vecBint, 0.5) == Birb::Vector3int(25, 15, 20));
+	CHECK(Birb::Math::Lerp(vecAint, vecBint, 0.75) == Birb::Vector3int(33, 18, 25));
+	CHECK(Birb::Math::Lerp(vecAint, vecBint, 1) == Birb::Vector3int(40, 20, 30));
+}
+
+TEST_CASE("Calculate the centerpoint between two 1D floats")
+{
+	float a = 0;
+	float b = 10;
+
+	CHECK(Birb::Math::CenterPoint(a, b) == 5);
 }
 
 TEST_CASE("Calculate the centerpoint between two 2D vectors")

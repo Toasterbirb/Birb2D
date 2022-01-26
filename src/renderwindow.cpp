@@ -177,6 +177,53 @@ namespace Birb
 		return font;
 	}
 
+	Uint8* Resources::CopyTexturePixels(
+        SDL_Surface* surface, // surface to take pixels from
+        int* width,
+        int* height,
+        int* pitch)
+	{
+		Uint8* pixels = 0;
+		SDL_Surface* tmpSurface = 0;
+		SDL_Texture* texture = 0;
+		int sizeInBytes = 0;
+		void* tmpPixels = 0;
+		int tmpPitch = 0;
+		Uint32 pixelFormat = SDL_GetWindowPixelFormat(Global::RenderVars::MainWindow);
+
+		tmpSurface = SDL_ConvertSurfaceFormat(surface, pixelFormat, 0);
+		if (tmpSurface)
+			texture = SDL_CreateTexture(Global::RenderVars::Renderer, pixelFormat, SDL_TEXTUREACCESS_STREAMING, tmpSurface->w, tmpSurface->h);
+
+		if (texture)
+		{
+			if (width)
+				*width = tmpSurface->w;
+
+			if (height)
+				*height = tmpSurface->h;
+
+			if (pitch)
+				*pitch = tmpSurface->pitch;
+
+			sizeInBytes = tmpSurface->pitch * tmpSurface->h;
+			pixels = (Uint8*)malloc( sizeInBytes );
+			SDL_LockTexture(texture, 0, &tmpPixels, &tmpPitch);
+			memcpy(pixels, tmpSurface->pixels, sizeInBytes);
+			SDL_UnlockTexture(texture);
+		}
+
+		/* Cleanup stuff */
+		if (texture)
+			SDL_DestroyTexture(texture);
+
+		if (tmpSurface)
+			SDL_FreeSurface(tmpSurface);
+
+		return pixels;
+	}
+
+
 	SDL_Texture* Resources::TextSprite(std::string text, TTF_Font* font, SDL_Color& color)
 	{
 		/* Check if the arguments are valid */
@@ -310,7 +357,7 @@ namespace Birb
 
 	void Render::DrawRect(SDL_Color color, Rect dimensions)
 	{
-		SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
+		SetRenderDrawColor(color);
 		SDL_Rect rectangle = dimensions.getSDLRect();
 		SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
 		ResetDrawColor();
@@ -324,10 +371,22 @@ namespace Birb
 		DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
 	}
 
+	void Render::DrawLine(SDL_Color color, Vector2int pointA, Vector2int pointB)
+	{
+		SetRenderDrawColor(color);
+		SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
+		ResetDrawColor();
+	}
+
 	void Render::DrawCircle(SDL_Color color, Vector2int pos, int radius)
 	{
 		Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 		filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor);
 		ResetDrawColor();
+	}
+
+	void Render::SetRenderDrawColor(SDL_Color color)
+	{
+		SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 	}
 }
