@@ -27,7 +27,7 @@ TEST_CASE("Random int")
 	bool differentValueFound = false;
 	for (int i = 1; i < valueCount; i++)
 	{
-		std::cout << "[" << i << "] Randon value: " << values[i] << std::endl;
+		//std::cout << "[" << i << "] Randon value: " << values[i] << std::endl;
 		if (values[i] != firstValue)
 		{
 			differentValueFound = true;
@@ -337,4 +337,29 @@ TEST_CASE("Rect with rounded values (integer)")
     CHECK(roundedRect.y == 20);
     CHECK(roundedRect.w == 30);
     CHECK(roundedRect.h == 41);
+}
+
+TEST_CASE("Timer stop test")
+{
+	Birb::Debug::Log("Running timer tests, this might take a moment...");
+	Birb::Timer timer;
+	timer.Start();
+	SDL_Delay(1000);
+	timer.Stop();
+
+	CHECK(timer.ElapsedSeconds() == 1.00);
+
+	/* Make sure the timer actually stops after stopping it */
+	SDL_Delay(500);
+	CHECK(timer.ElapsedSeconds() == 1.00);
+}
+
+TEST_CASE("Timer accuracy test")
+{
+	Birb::Timer timer;
+	timer.Start();
+	SDL_Delay(123);
+	timer.Stop();
+
+	CHECK(timer.ElapsedMilliseconds() == 123);
 }
