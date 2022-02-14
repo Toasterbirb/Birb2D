@@ -28,11 +28,6 @@ doxygen doxygen_config
 make -j$(nproc) engine_lib
 ```
 
-### Pong
-```sh
-make -j$(nproc) pong
-```
-
 ### Run tests
 ```sh
 make -j$(nproc) run_tests
