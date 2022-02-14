@@ -260,5 +260,7 @@ namespace Birb
 		static Vector2int FindClosestPoint(Vector2int point, Vector2int points[], int pointCount);
 		static Vector2int FindClosestPoint(Vector2int point, std::vector<Vector2int> points);
 		static Vector2int FindClosestPoint(Vector2int point, std::vector<Vector2int> points, std::vector<Vector2int> ignoredPoints);
+
+		static double 	Round(double value, int decimal_points); ///< Rounds the given floating point value with specified accuracy
 	};
 }

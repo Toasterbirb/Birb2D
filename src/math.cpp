@@ -170,4 +170,10 @@ namespace Birb
 		}
 		return currentClosestPoint;
 	}
+
+	double Math::Round(double value, int decimal_points)
+	{
+		int multiplier = std::pow(10, decimal_points);
+		return std::round(value * multiplier) / multiplier;
+	}
 }

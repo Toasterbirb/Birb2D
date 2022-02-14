@@ -265,6 +265,22 @@ TEST_CASE("Calculate the centerpoint between two 3D vectors")
 	CHECK(resultint == expectedResult);
 }
 
+TEST_CASE("Rounding with specified accuracy")
+{
+	double value1 = 0.013333333;
+	float value2 = 0.017777777;
+
+	CHECK(Birb::Math::Round(value1, 6) == 0.013333);
+	CHECK(Birb::Math::Round(value1, 3) == 0.013);
+	CHECK(Birb::Math::Round(value1, 2) == 0.01);
+
+	CHECK(Birb::Math::Round(value2, 6) == 0.017778);
+	CHECK(Birb::Math::Round(value2, 3) == 0.018);
+	CHECK(Birb::Math::Round(value2, 2) == 0.02);
+}
+
+/* End of math things */
+
 TEST_CASE("Vector2f operator overloads")
 {
 	Birb::Vector2f vecA(1.0f, 1.5f);
