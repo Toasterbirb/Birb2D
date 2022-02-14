@@ -16,7 +16,7 @@ namespace Birb
 
 		namespace RenderVars
 		{
-			static int RefreshRate 	= 60;
+			static int RefreshRate = 240;
 			static SDL_Window* MainWindow;
 			static SDL_Renderer* Renderer;
 		}

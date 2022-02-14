@@ -241,6 +241,9 @@ namespace Birb
 		static float VectorDistance(Vector3f a, Vector3f b); ///< Calculate the distance between two 3D floating point vectors
 		static float VectorDistance(Vector3int a, Vector3int b); ///< Calculate the distance between two 3D integer vectors
 
+		static float 		Clamp(float value, float min, float max); ///< Clamp a float between the given values
+		static int 			Clamp(int value, int min, int max); ///< Clamp an integer between the given values
+
 		static int 			Lerp(int a, int b, float t); ///< Interpolate a value between two values given time t
 		static float 		Lerp(float a, float b, float t); ///< Interpolate a value between two values given time t
 		static Vector2f 	Lerp(Vector2f a, Vector2f b, float t); ///< Interpolate a point between two 2D floating point vectors given time t

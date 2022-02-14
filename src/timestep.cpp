@@ -1,21 +1,26 @@
 #include <SDL2/SDL.h>
 #include "Timestep.hpp"
-#include "Utils.hpp"
+//#include "Utils.hpp"
 #include "Values.hpp"
 
 namespace Birb
 {
-	void TimeStep::Init()
+	void TimeStep::Init(Window* p_mainWindow)
 	{
 		currentTime = utils::hireTimeInSeconds();
+		mainWindow = p_mainWindow;
 	}
 
 	void TimeStep::Start()
 	{
+		/* Start deltaTime timer */
+		//deltaTimer.Start();
+
 		startTick = SDL_GetTicks();
 
-		float newTime = utils::hireTimeInSeconds();
-		float frameTime = newTime - currentTime;
+		double newTime = utils::hireTimeInSeconds();
+		double frameTime = newTime - currentTime;
+		deltaTime = frameTime;
 
 		if (frameTime > 0.25f)
 			frameTime = 0.25f;
@@ -38,12 +43,12 @@ namespace Birb
 	{
 		int frameTicks = SDL_GetTicks() - startTick;
 
-		if (frameTicks < 1000 / Global::RenderVars::RefreshRate)
-			SDL_Delay(1000 / Global::RenderVars::RefreshRate - frameTicks);
+		if (frameTicks < 1000 / mainWindow->refresh_rate)
+			SDL_Delay(1000 / mainWindow->refresh_rate - frameTicks);
 	}
 
-	float TimeStep::deltaTime()
-	{
-		return accumulator / timeStep;
-	}
+	//float TimeStep::deltaTime()
+	//{
+	//	return (accumulator / timeStep);
+	//}
 }

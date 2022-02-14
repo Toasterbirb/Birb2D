@@ -22,14 +22,35 @@ namespace Birb
 		return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2) + std::pow(b.z - a.z, 2));
 	}
 
+	float Math::Clamp(float value, float min, float max)
+	{
+		if (value < min)
+			value = min;
+		else if (value > max)
+			value = max;
+
+		return value;
+	}
+
+	int Math::Clamp(int value, int min, int max)
+	{
+		if (value < min)
+			value = min;
+		else if (value > max)
+			value = max;
+
+		return value;
+	}
 
 	int Math::Lerp(int a, int b, float t)
 	{
+		t = Clamp(t, 0.0, 1.0f);
 		return std::round(a + (b - a) * t);
 	}
 	
 	float Math::Lerp(float a, float b, float t)
 	{
+		t = Clamp(t, 0.0, 1.0f);
 		return (a + (b - a) * t);
 	}
 

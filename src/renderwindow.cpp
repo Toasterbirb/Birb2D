@@ -23,7 +23,7 @@ namespace Birb
 		renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
 		/* Set some global rendering variables */
-		Global::RenderVars::RefreshRate = p_refresh_rate;
+		Global::RenderVars::RefreshRate = refresh_rate;
 		Global::RenderVars::MainWindow 	= win;
 		Global::RenderVars::Renderer 	= renderer;
 	}
@@ -233,7 +233,8 @@ namespace Birb
 			return NULL;
 		}
 
-		SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
+		//SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
+		SDL_Surface* surface = TTF_RenderText_Blended(font, text.c_str(), color);
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 
