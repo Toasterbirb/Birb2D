@@ -173,7 +173,6 @@ namespace Birb
 
 	double Math::Round(double value, int decimal_points)
 	{
-		int multiplier = std::pow(10, decimal_points);
-		return std::round(value * multiplier) / multiplier;
+		return std::round(value * std::pow(10, decimal_points)) / std::pow(10, decimal_points);
 	}
 }
