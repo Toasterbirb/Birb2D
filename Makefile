@@ -7,13 +7,16 @@ SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
 LIBFILE=libbirb2d.so
 
-all: test engine_lib
+all: test docs engine_lib run_tests
 
-docs:
+docs: clean_docs
 	doxygen ./doxygen_config
 	mv ./docs/html/* ./docs/
 	rm -r ./docs/html
 	rm -r ./docs/latex
+
+clean_docs:
+	rm -r ./docs
 
 test: filesystem.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o tests.o
 	mkdir -p build
@@ -86,4 +89,3 @@ values.o: $(SRCDIR)/values.cpp
 clean:
 	rm -f *.o log.txt
 	rm -rf $(outputDir)
-	rm -rf docs

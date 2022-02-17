@@ -45,16 +45,16 @@ namespace Birb
 			int frameIndex; ///< Current visible frame
 			int frameCount; ///< Total amount of sprites in the atlas
 			Vector2int spriteSize; ///< The size of one sprite in the atlas. Used for cropping
-			Timer frameTimer;
+			Timer frameTimer; ///< Timer that is used to play the animation at a set fps
 
-			bool animationQueued;
-			int lastFrame;
+			bool animationQueued; ///< Is the animation queued to start during the next rendering pass
+			int lastFrame; ///< Stop playing the animation when this frame is reached
 
 
-			void StartAnimation();
-			void StartAnimation(int startFrame);
-			void StartAnimation(int startFrame, int endFrame);
-			void ResetAnimationAtlas();
+			void StartAnimation(); ///< Start playing the animation from the first frame
+			void StartAnimation(int startFrame); ///< Start playing the animation from selected frame
+			void StartAnimation(int startFrame, int endFrame); ///< Start playing the animation with custom start and end frame
+			void ResetAnimationAtlas(); ///< Reset current frame to 0 and reset the lastFrame to frameCount - 1
 		};
 	}
 

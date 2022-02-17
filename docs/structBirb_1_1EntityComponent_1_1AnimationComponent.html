@@ -107,15 +107,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a55f698e57df997438540f0db3e6dc539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3620da67f84b3418d6190e9ba3ac5039"><td class="memItemLeft" align="right" valign="top"><a id="a3620da67f84b3418d6190e9ba3ac5039" name="a3620da67f84b3418d6190e9ba3ac5039"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>StartAnimation</b> ()</td></tr>
+<tr class="memdesc:a3620da67f84b3418d6190e9ba3ac5039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start playing the animation from the first frame. <br /></td></tr>
 <tr class="separator:a3620da67f84b3418d6190e9ba3ac5039"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ec634e7ff83316922aaea34e16fd42c"><td class="memItemLeft" align="right" valign="top"><a id="a8ec634e7ff83316922aaea34e16fd42c" name="a8ec634e7ff83316922aaea34e16fd42c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>StartAnimation</b> (int startFrame)</td></tr>
+<tr class="memdesc:a8ec634e7ff83316922aaea34e16fd42c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start playing the animation from selected frame. <br /></td></tr>
 <tr class="separator:a8ec634e7ff83316922aaea34e16fd42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65eceb6e03ddda182ef13e160898fb9e"><td class="memItemLeft" align="right" valign="top"><a id="a65eceb6e03ddda182ef13e160898fb9e" name="a65eceb6e03ddda182ef13e160898fb9e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>StartAnimation</b> (int startFrame, int endFrame)</td></tr>
+<tr class="memdesc:a65eceb6e03ddda182ef13e160898fb9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start playing the animation with custom start and end frame. <br /></td></tr>
 <tr class="separator:a65eceb6e03ddda182ef13e160898fb9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb85db81838726e3737ffd6f18b3d119"><td class="memItemLeft" align="right" valign="top"><a id="aeb85db81838726e3737ffd6f18b3d119" name="aeb85db81838726e3737ffd6f18b3d119"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetAnimationAtlas</b> ()</td></tr>
+<tr class="memdesc:aeb85db81838726e3737ffd6f18b3d119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset current frame to 0 and reset the lastFrame to frameCount - 1. <br /></td></tr>
 <tr class="separator:aeb85db81838726e3737ffd6f18b3d119"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -141,12 +145,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>frameCount</b></td></t
 <tr class="separator:a5bb1a785277897b38bd0261945d0030a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ca482c2991654a9a712bc077eded333"><td class="memItemLeft" align="right" valign="top"><a id="a0ca482c2991654a9a712bc077eded333" name="a0ca482c2991654a9a712bc077eded333"></a>
 <a class="el" href="classBirb_1_1Timer.html">Timer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>frameTimer</b></td></tr>
+<tr class="memdesc:a0ca482c2991654a9a712bc077eded333"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classBirb_1_1Timer.html" title="Class for timing things. Accurate down to milliseconds.">Timer</a> that is used to play the animation at a set fps. <br /></td></tr>
 <tr class="separator:a0ca482c2991654a9a712bc077eded333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4684a56e5cf00696f9524a4c18e298d7"><td class="memItemLeft" align="right" valign="top"><a id="a4684a56e5cf00696f9524a4c18e298d7" name="a4684a56e5cf00696f9524a4c18e298d7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>animationQueued</b></td></tr>
+<tr class="memdesc:a4684a56e5cf00696f9524a4c18e298d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the animation queued to start during the next rendering pass. <br /></td></tr>
 <tr class="separator:a4684a56e5cf00696f9524a4c18e298d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0157c36204eb6e384686a07a8b7caa52"><td class="memItemLeft" align="right" valign="top"><a id="a0157c36204eb6e384686a07a8b7caa52" name="a0157c36204eb6e384686a07a8b7caa52"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>lastFrame</b></td></tr>
+<tr class="memdesc:a0157c36204eb6e384686a07a8b7caa52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop playing the animation when this frame is reached. <br /></td></tr>
 <tr class="separator:a0157c36204eb6e384686a07a8b7caa52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rect_0',['rect',['../structBirb_1_1Entity.html#aa5ffa3831200c7764c5f35f9ad01fc25',1,'Birb::Entity']]]
+  ['original_5fwindow_5fdimensions_0',['original_window_dimensions',['../structBirb_1_1Window.html#ad55a282855aba062cc5bce10e0335933',1,'Birb::Window']]]
 ];
