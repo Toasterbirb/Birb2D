@@ -6,7 +6,7 @@
 *.d
 
 # Compiled docs
-[Dd]ocs/
+#[Dd]ocs/
 
 # Compiled Object files
 *.slo

@@ -1,0 +1,267 @@
+\hypertarget{Math_8hpp_source}{}\doxysection{Math.\+hpp}
+\label{Math_8hpp_source}\index{include/Math.hpp@{include/Math.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{namespace }Birb}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{9     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}}
+\DoxyCodeLine{10     \{}
+\DoxyCodeLine{11         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}()}
+\DoxyCodeLine{12         :x(0.0f), y(0.0f)}
+\DoxyCodeLine{13         \{\}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y)}
+\DoxyCodeLine{16         :x(p\_x), y(p\_y)}
+\DoxyCodeLine{17         \{\}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} getValue()}
+\DoxyCodeLine{20         \{}
+\DoxyCodeLine{21             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}(x, y);}
+\DoxyCodeLine{22         \}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         std::string print()}
+\DoxyCodeLine{25         \{}
+\DoxyCodeLine{26             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}("{}} + std::to\_string(x) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(y) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{27         \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         \textcolor{comment}{/* Operator overloads */}}
+\DoxyCodeLine{30         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} operator+(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{31 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{32             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}(x + other.x, y + other.y);}
+\DoxyCodeLine{33         \}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} operator-\/(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{36 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{37             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}(x -\/ other.x, y -\/ other.y);}
+\DoxyCodeLine{38         \}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} operator*(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{41 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{42             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}(x * other.x, y * other.y);}
+\DoxyCodeLine{43         \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} operator/(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{46 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{47             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}(x / other.x, y / other.y);}
+\DoxyCodeLine{48         \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{51 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{52             \textcolor{keywordflow}{return} (x == other.x \&\& y == other.y);}
+\DoxyCodeLine{53         \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \textcolor{keywordtype}{float} x, y;}
+\DoxyCodeLine{56     \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{59     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}}
+\DoxyCodeLine{60     \{}
+\DoxyCodeLine{61         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}()}
+\DoxyCodeLine{62         :x(0), y(0)}
+\DoxyCodeLine{63         \{\}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}(\textcolor{keywordtype}{int} p\_x, \textcolor{keywordtype}{int} p\_y)}
+\DoxyCodeLine{66         :x(p\_x), y(p\_y)}
+\DoxyCodeLine{67         \{\}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y)}
+\DoxyCodeLine{70         \{}
+\DoxyCodeLine{71             x = std::round(p\_x);}
+\DoxyCodeLine{72             y = std::round(p\_y);}
+\DoxyCodeLine{73         \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} getValue()}
+\DoxyCodeLine{76         \{}
+\DoxyCodeLine{77             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}(x, y);}
+\DoxyCodeLine{78         \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         std::string print()}
+\DoxyCodeLine{81         \{}
+\DoxyCodeLine{82             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}("{}} + std::to\_string(x) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(y) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{83         \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85         \textcolor{comment}{/* Operator overloads */}}
+\DoxyCodeLine{86         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} operator+(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{87 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{88             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}(x + other.x, y + other.y);}
+\DoxyCodeLine{89         \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} operator-\/(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{92 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{93             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}(x -\/ other.x, y -\/ other.y);}
+\DoxyCodeLine{94         \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} operator*(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{97 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{98             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}(x * other.x, y * other.y);}
+\DoxyCodeLine{99         \}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} operator/(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{102 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{103             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}((\textcolor{keywordtype}{int})std::round((\textcolor{keywordtype}{float})x / other.x), (\textcolor{keywordtype}{int})std::round((\textcolor{keywordtype}{float})y / other.y));}
+\DoxyCodeLine{104         \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106         \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{107 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{108             \textcolor{keywordflow}{return} (x == other.x \&\& y == other.y);}
+\DoxyCodeLine{109         \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111         \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{112 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{113             \textcolor{keywordflow}{return} (x == other.x \&\& y == other.y);}
+\DoxyCodeLine{114         \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116         \textcolor{keywordtype}{int} x, y;}
+\DoxyCodeLine{117     \};}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{120     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}}
+\DoxyCodeLine{121     \{}
+\DoxyCodeLine{122         \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}()}
+\DoxyCodeLine{123         :x(0.0f), y(0.0f), z(0.0f)}
+\DoxyCodeLine{124         \{\}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y, \textcolor{keywordtype}{float} p\_z)}
+\DoxyCodeLine{127         :x(p\_x), y(p\_y), z(p\_z)}
+\DoxyCodeLine{128         \{\}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130         \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} getValue()}
+\DoxyCodeLine{131         \{}
+\DoxyCodeLine{132             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}(x, y, z);}
+\DoxyCodeLine{133         \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         std::string print()}
+\DoxyCodeLine{136         \{}
+\DoxyCodeLine{137             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}("{}} + std::to\_string(x) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(y) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(z) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{138         \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140         \textcolor{comment}{/* Operator overloads */}}
+\DoxyCodeLine{141         \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} operator+(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{142 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{143             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}(x + other.x, y + other.y, z + other.z);}
+\DoxyCodeLine{144         \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146         \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} operator-\/(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{147 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{148             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}(x -\/ other.x, y -\/ other.y, z -\/ other.z);}
+\DoxyCodeLine{149         \}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151         \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} operator*(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{152 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{153             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}(x * other.x, y * other.y, z * other.z);}
+\DoxyCodeLine{154         \}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156         \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} operator/(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{157 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{158             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}(x / other.x, y / other.y, z / other.z);}
+\DoxyCodeLine{159         \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{162 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{163             \textcolor{keywordflow}{return} (x == other.x \&\& y == other.y \&\& z == other.z);}
+\DoxyCodeLine{164         \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166         \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{167 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{168             \textcolor{keywordflow}{return} (x == other.x \&\& y == other.y \&\& z == other.z);}
+\DoxyCodeLine{169         \}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171         \textcolor{keywordtype}{float} x, y, z;}
+\DoxyCodeLine{172     \};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{175     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}}
+\DoxyCodeLine{176     \{}
+\DoxyCodeLine{177         \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}()}
+\DoxyCodeLine{178         :x(0), y(0), z(0)}
+\DoxyCodeLine{179         \{\}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181         \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}(\textcolor{keywordtype}{int} p\_x, \textcolor{keywordtype}{int} p\_y, \textcolor{keywordtype}{int} p\_z)}
+\DoxyCodeLine{182         :x(p\_x), y(p\_y), z(p\_z)}
+\DoxyCodeLine{183         \{\}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185         \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y, \textcolor{keywordtype}{float} p\_z)}
+\DoxyCodeLine{186         \{}
+\DoxyCodeLine{187             x = std::round(p\_x);}
+\DoxyCodeLine{188             y = std::round(p\_y);}
+\DoxyCodeLine{189             z = std::round(p\_z);}
+\DoxyCodeLine{190         \}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192         \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} getValue()}
+\DoxyCodeLine{193         \{}
+\DoxyCodeLine{194             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}(x, y, z);}
+\DoxyCodeLine{195         \}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197         std::string print()}
+\DoxyCodeLine{198         \{}
+\DoxyCodeLine{199             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}("{}} + std::to\_string(x) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(y) + \textcolor{stringliteral}{"{}, "{}} + std::to\_string(z) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{200         \}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202         \textcolor{comment}{/* Operator overloads */}}
+\DoxyCodeLine{203         \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} operator+(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{204 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{205             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}(x + other.x, y + other.y, z + other.z);}
+\DoxyCodeLine{206         \}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208         \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} operator-\/(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{209 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{210             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}(x -\/ other.x, y -\/ other.y, z -\/ other.z);}
+\DoxyCodeLine{211         \}}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213         \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} operator*(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{214 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{215             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}(x * other.x, y * other.y, z * other.z);}
+\DoxyCodeLine{216         \}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218         \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} operator/(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{219 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{220             \textcolor{keywordflow}{return} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}((\textcolor{keywordtype}{int})std::round((\textcolor{keywordtype}{float})x / other.x), (\textcolor{keywordtype}{int})std::round((\textcolor{keywordtype}{float})y / other.y), (\textcolor{keywordtype}{int})std::round((\textcolor{keywordtype}{float})z / other.z));}
+\DoxyCodeLine{221         \}}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223         \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{224 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{225             \textcolor{keywordflow}{return} (x == other.x \&\& y == other.y \&\& z == other.z);}
+\DoxyCodeLine{226         \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228         \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{229 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{230             \textcolor{keywordflow}{return} (x == other.x \&\& y == other.y \&\& z == other.z);}
+\DoxyCodeLine{231         \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233         \textcolor{keywordtype}{int} x, y, z;}
+\DoxyCodeLine{234     \};}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{237     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Math}{Math}}}
+\DoxyCodeLine{238     \{}
+\DoxyCodeLine{239         \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{structBirb_1_1Math_aacb464341f980313adee49910f83f1a5}{VectorDistance}}(\mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} a, \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} b); }
+\DoxyCodeLine{240         \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{structBirb_1_1Math_acf863a5eb8f37a0ae980e4c69b2e780b}{VectorDistance}}(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} a, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} b); }
+\DoxyCodeLine{241         \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{structBirb_1_1Math_acf23cc2559d51e3f46ef13c8723ac0ef}{VectorDistance}}(\mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} a, \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} b); }
+\DoxyCodeLine{242         \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{structBirb_1_1Math_a1d650bba842395c07af4b8d5b7bc80f2}{VectorDistance}}(\mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} a, \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} b); }
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244         \textcolor{keyword}{static} \textcolor{keywordtype}{float}        \mbox{\hyperlink{structBirb_1_1Math_a92dad064cfe095e22decbaf73f56502a}{Clamp}}(\textcolor{keywordtype}{float} value, \textcolor{keywordtype}{float} min, \textcolor{keywordtype}{float} max); }
+\DoxyCodeLine{245         \textcolor{keyword}{static} \textcolor{keywordtype}{int}          \mbox{\hyperlink{structBirb_1_1Math_a6a77646848fb256358033001a448b286}{Clamp}}(\textcolor{keywordtype}{int} value, \textcolor{keywordtype}{int} min, \textcolor{keywordtype}{int} max); }
+\DoxyCodeLine{246 }
+\DoxyCodeLine{247         \textcolor{keyword}{static} \textcolor{keywordtype}{int}          \mbox{\hyperlink{structBirb_1_1Math_a08bda43e723235ea29022c2b65ab2653}{Lerp}}(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b, \textcolor{keywordtype}{float} t); }
+\DoxyCodeLine{248         \textcolor{keyword}{static} \textcolor{keywordtype}{float}        \mbox{\hyperlink{structBirb_1_1Math_a6a74d4e6e87a5ea5acec62b65e46e835}{Lerp}}(\textcolor{keywordtype}{float} a, \textcolor{keywordtype}{float} b, \textcolor{keywordtype}{float} t); }
+\DoxyCodeLine{249         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}}     \mbox{\hyperlink{structBirb_1_1Math_a35c17fd53b29bcec8385a2c8fbfe3e00}{Lerp}}(\mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} a, \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} b, \textcolor{keywordtype}{float} t); }
+\DoxyCodeLine{250         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}}     \mbox{\hyperlink{structBirb_1_1Math_adbeaff5e81c0496b6bd1100a91e4ba90}{Lerp}}(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} a, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} b, \textcolor{keywordtype}{float} t); }
+\DoxyCodeLine{251         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}}     \mbox{\hyperlink{structBirb_1_1Math_a6431545f78d9cd2e3677fe8bdf692918}{Lerp}}(\mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} a, \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} b, \textcolor{keywordtype}{float} t); }
+\DoxyCodeLine{252         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}}     \mbox{\hyperlink{structBirb_1_1Math_a9164f5bcc368bc638eb1a4ba6aea7c5c}{Lerp}}(\mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} a, \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} b, \textcolor{keywordtype}{float} t); }
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254         \textcolor{keyword}{static} \textcolor{keywordtype}{float}    \mbox{\hyperlink{structBirb_1_1Math_a1637d6ea8a3cd217fbd91e701571e5a9}{CenterPoint}}(\textcolor{keywordtype}{float} a, \textcolor{keywordtype}{float} b); }
+\DoxyCodeLine{255         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} \mbox{\hyperlink{structBirb_1_1Math_a5949234937ffaef5ed3856323dce593a}{CenterPoint}}(\mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} a, \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} b); }
+\DoxyCodeLine{256         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} \mbox{\hyperlink{structBirb_1_1Math_abadc1c392f9f0963e221643306b4fe74}{CenterPoint}}(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} a, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} b); }
+\DoxyCodeLine{257         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} \mbox{\hyperlink{structBirb_1_1Math_a938a36a9b24bcfe27aefaf38a313cdac}{CenterPoint}}(\mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} a, \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} b); }
+\DoxyCodeLine{258         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector3f}{Vector3f}} \mbox{\hyperlink{structBirb_1_1Math_adf3c804eaa5bb48eb7c9b28e3ecf934e}{CenterPoint}}(\mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} a, \mbox{\hyperlink{structBirb_1_1Vector3int}{Vector3int}} b); }
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} FindClosestPoint(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} point, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} points[], \textcolor{keywordtype}{int} pointCount);}
+\DoxyCodeLine{261         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} FindClosestPoint(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} point, std::vector<Vector2int> points);}
+\DoxyCodeLine{262         \textcolor{keyword}{static} \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} FindClosestPoint(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} point, std::vector<Vector2int> points, std::vector<Vector2int> ignoredPoints);}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264         \textcolor{keyword}{static} \textcolor{keywordtype}{double}   \mbox{\hyperlink{structBirb_1_1Math_afec5762d03934d2afc1a540e199c69fa}{Round}}(\textcolor{keywordtype}{double} value, \textcolor{keywordtype}{int} decimal\_points); }
+\DoxyCodeLine{265     \};}
+\DoxyCodeLine{266 \}}
+
+\end{DoxyCode}

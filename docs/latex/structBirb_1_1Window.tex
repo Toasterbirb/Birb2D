@@ -1,0 +1,76 @@
+\hypertarget{structBirb_1_1Window}{}\doxysection{Birb\+::Window Struct Reference}
+\label{structBirb_1_1Window}\index{Birb::Window@{Birb::Window}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a24bf565faaeb206431604ac563a515fa}\label{structBirb_1_1Window_a24bf565faaeb206431604ac563a515fa}} 
+{\bfseries Window} (std\+::string p\+\_\+title, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} p\+\_\+window\+\_\+dimensions, int p\+\_\+refresh\+\_\+rate, bool resizable)
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_abcbfd2cf0923af9235ad1045d6c2361d}\label{structBirb_1_1Window_abcbfd2cf0923af9235ad1045d6c2361d}} 
+void {\bfseries Clear} ()
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_ad783e2a2774419011c716003fb1cb5bd}\label{structBirb_1_1Window_ad783e2a2774419011c716003fb1cb5bd}} 
+void {\bfseries Display} ()
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_aac4c4c83e0effede2b210058b13ae48d}\label{structBirb_1_1Window_aac4c4c83e0effede2b210058b13ae48d}} 
+void {\bfseries Cleanup} ()
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a4714f32bd92ddb929f237c25eb3fbc1a}\label{structBirb_1_1Window_a4714f32bd92ddb929f237c25eb3fbc1a}} 
+\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} {\bfseries Cursor\+Position} ()
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a7fd1d74b8ef0ef54bf77a15e14dac888}\label{structBirb_1_1Window_a7fd1d74b8ef0ef54bf77a15e14dac888}} 
+bool {\bfseries Cursor\+In\+Rect} (\mbox{\hyperlink{structBirb_1_1Rect}{Rect}} rect)
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a7d8815127121223c9df6fb7c23ef3793}\label{structBirb_1_1Window_a7d8815127121223c9df6fb7c23ef3793}} 
+void {\bfseries Set\+Window\+Size} (\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} dimensions)
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_addbd8b7bbb5809d513200bb4b96aa55f}\label{structBirb_1_1Window_addbd8b7bbb5809d513200bb4b96aa55f}} 
+void {\bfseries Event\+Tick} (SDL\+\_\+\+Event event, bool $\ast$Game\+Running)
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a82185986266edc7aec8b7cad14225990}\label{structBirb_1_1Window_a82185986266edc7aec8b7cad14225990}} 
+bool {\bfseries Poll\+Events} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a2bb8275642c9fa8ea20d384c5d63487c}\label{structBirb_1_1Window_a2bb8275642c9fa8ea20d384c5d63487c}} 
+static void {\bfseries Init\+SDL} ()
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a83a284c50264780a280473f373802bba}\label{structBirb_1_1Window_a83a284c50264780a280473f373802bba}} 
+static void {\bfseries Init\+SDL\+\_\+ttf} ()
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a5c1ba2dfc97b34c1f3c4dbf0bf995d96}\label{structBirb_1_1Window_a5c1ba2dfc97b34c1f3c4dbf0bf995d96}} 
+static void {\bfseries Init\+SDL\+\_\+image} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a01d4370e790d56efd7fd1bddbc342486}\label{structBirb_1_1Window_a01d4370e790d56efd7fd1bddbc342486}} 
+SDL\+\_\+\+Event {\bfseries event}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a80953494f408ce4191e61d85e1957868}\label{structBirb_1_1Window_a80953494f408ce4191e61d85e1957868}} 
+std\+::string {\bfseries win\+\_\+title}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_ae10fe919d30d486431f82ecad5900656}\label{structBirb_1_1Window_ae10fe919d30d486431f82ecad5900656}} 
+int {\bfseries refresh\+\_\+rate}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a6ab8e8a9c7db806c4e3f1a7466fd9790}\label{structBirb_1_1Window_a6ab8e8a9c7db806c4e3f1a7466fd9790}} 
+SDL\+\_\+\+Window $\ast$ {\bfseries win}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_ab05dcaf4a7636b6d97869af1c1a45968}\label{structBirb_1_1Window_ab05dcaf4a7636b6d97869af1c1a45968}} 
+SDL\+\_\+\+Renderer $\ast$ {\bfseries renderer} = NULL
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a4f31ed6d9669c631374ef62aaebb57ae}\label{structBirb_1_1Window_a4f31ed6d9669c631374ef62aaebb57ae}} 
+\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} {\bfseries window\+\_\+dimensions}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_ad55a282855aba062cc5bce10e0335933}\label{structBirb_1_1Window_ad55a282855aba062cc5bce10e0335933}} 
+\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} {\bfseries original\+\_\+window\+\_\+dimensions}
+\item 
+\mbox{\Hypertarget{structBirb_1_1Window_a391ba3d65bbdc7cc5fca2a4fb661c626}\label{structBirb_1_1Window_a391ba3d65bbdc7cc5fca2a4fb661c626}} 
+\mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} {\bfseries window\+\_\+dimensions\+\_\+multiplier}
+\begin{DoxyCompactList}\small\item\em Contains the difference between the current and old window dimensions. DO NOT MODIFY! \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Renderwindow.\+hpp\end{DoxyCompactItemize}

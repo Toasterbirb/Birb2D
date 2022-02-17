@@ -1,0 +1,98 @@
+\hypertarget{Entity_8hpp_source}{}\doxysection{Entity.\+hpp}
+\label{Entity_8hpp_source}\index{include/Entity.hpp@{include/Entity.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <SDL2/SDL.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <SDL2/SDL\_ttf.h>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Utils.hpp"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Timer.hpp"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }Birb}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13     \textcolor{keyword}{namespace }EntityComponent}
+\DoxyCodeLine{14     \{}
+\DoxyCodeLine{16         \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1EntityComponent_1_1TextComponent}{TextComponent}}}
+\DoxyCodeLine{17         \{}
+\DoxyCodeLine{18             \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1TextComponent}{TextComponent}}();}
+\DoxyCodeLine{19             \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1TextComponent}{TextComponent}}(std::string p\_text, TTF\_Font* font, SDL\_Color* p\_color);}
+\DoxyCodeLine{20             \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1TextComponent}{TextComponent}}(std::string p\_text, TTF\_Font* font, SDL\_Color* p\_color, SDL\_Color* p\_bgColor);}
+\DoxyCodeLine{21             std::string text;}
+\DoxyCodeLine{22             TTF\_Font* font;}
+\DoxyCodeLine{23             SDL\_Color* \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1TextComponent_ac911da20da5f726bc66f0248e75441c6}{color}};  }
+\DoxyCodeLine{24             SDL\_Color* \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1TextComponent_ad7113910eab43717ec1778863dd7574b}{bgColor}}; }
+\DoxyCodeLine{25         \};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{28         \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1EntityComponent_1_1ClickComponent}{ClickComponent}}}
+\DoxyCodeLine{29         \{}
+\DoxyCodeLine{30             \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1ClickComponent}{ClickComponent}}();}
+\DoxyCodeLine{31             \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1ClickComponent}{ClickComponent}}(std::function<\textcolor{keywordtype}{void}()> p\_onClick);}
+\DoxyCodeLine{32             \textcolor{keywordtype}{bool} active;}
+\DoxyCodeLine{33             std::function<void()> onClick;}
+\DoxyCodeLine{34         \};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{37         \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent}{AnimationComponent}}}
+\DoxyCodeLine{38         \{}
+\DoxyCodeLine{39             \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent}{AnimationComponent}}();}
+\DoxyCodeLine{40             \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent}{AnimationComponent}}(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} p\_spriteSize, \textcolor{keywordtype}{int} p\_frameCount, \textcolor{keywordtype}{int} p\_fps);}
+\DoxyCodeLine{41             \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent}{AnimationComponent}}(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} p\_spriteSize, \textcolor{keywordtype}{int} p\_frameCount, \textcolor{keywordtype}{int} p\_fps, \textcolor{keywordtype}{bool} p\_loop);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43             \textcolor{keywordtype}{int} fps;}
+\DoxyCodeLine{44             \textcolor{keywordtype}{bool} \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent_a9a7e828c721637a65536f6db8d364ace}{loop}}; }
+\DoxyCodeLine{45             \textcolor{keywordtype}{int} \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent_a23bd6b1ebaf185764bee6e6bb1b6986a}{frameIndex}}; }
+\DoxyCodeLine{46             \textcolor{keywordtype}{int} \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent_a676905988b0edadc13a077014f21ed7c}{frameCount}}; }
+\DoxyCodeLine{47             \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent_a5bb1a785277897b38bd0261945d0030a}{spriteSize}}; }
+\DoxyCodeLine{48             \mbox{\hyperlink{classBirb_1_1Timer}{Timer}} frameTimer;}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50             \textcolor{keywordtype}{bool} animationQueued;}
+\DoxyCodeLine{51             \textcolor{keywordtype}{int} lastFrame;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54             \textcolor{keywordtype}{void} StartAnimation();}
+\DoxyCodeLine{55             \textcolor{keywordtype}{void} StartAnimation(\textcolor{keywordtype}{int} startFrame);}
+\DoxyCodeLine{56             \textcolor{keywordtype}{void} StartAnimation(\textcolor{keywordtype}{int} startFrame, \textcolor{keywordtype}{int} endFrame);}
+\DoxyCodeLine{57             \textcolor{keywordtype}{void} ResetAnimationAtlas();}
+\DoxyCodeLine{58         \};}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{62     }
+\DoxyCodeLine{64     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Entity}{Entity}}}
+\DoxyCodeLine{65     \{}
+\DoxyCodeLine{66         \mbox{\hyperlink{structBirb_1_1Entity_a8d67ebf31082e7d39330dfc460076b9b}{Entity}}(std::string p\_name); }
+\DoxyCodeLine{67         \mbox{\hyperlink{structBirb_1_1Entity_aaebc743d3ea787c891b2089c52eb2c0b}{Entity}}(std::string p\_name, \mbox{\hyperlink{structBirb_1_1Rect}{Rect}} p\_rect, SDL\_Texture* p\_texture);          }
+\DoxyCodeLine{68         \mbox{\hyperlink{structBirb_1_1Entity_a1aa4784cb0ee60ad7ff68e7a984d25d0}{Entity}}(std::string p\_name, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} pos, \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1TextComponent}{EntityComponent::TextComponent}} p\_textComponent);   }
+\DoxyCodeLine{69         \mbox{\hyperlink{structBirb_1_1Entity_a488855199455e51ab476ecb09a7acf17}{Entity}}(std::string p\_name, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} pos, SDL\_Texture* p\_texture);         }
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \textcolor{comment}{/* Make it possible to update the TextComponent */}}
+\DoxyCodeLine{72         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1Entity_aa39fb6460ae32fdc2c46f8362aa607b2}{SetText}}(std::string newText);   }
+\DoxyCodeLine{73         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1Entity_a002bfb3de02e27912fdc5710a3943103}{SetFont}}(TTF\_Font* font);        }
+\DoxyCodeLine{74         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1Entity_a03e4eed0172e40af727e6531f14f00d0}{SetColor}}(SDL\_Color* color);    }
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76         std::string \mbox{\hyperlink{structBirb_1_1Entity_a2b2a63878c6471604dc5cea9908ff55d}{name}};       }
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{comment}{/* Sprite handlings */}}
+\DoxyCodeLine{79         SDL\_Texture* \mbox{\hyperlink{structBirb_1_1Entity_a1dc94a2a24176a724460cdcb4f2bf33c}{sprite}};  }
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81         \textcolor{keywordtype}{float} \mbox{\hyperlink{structBirb_1_1Entity_aea8bf795a4c1f3642af91ea93c078d5f}{angle}};           }
+\DoxyCodeLine{82         \mbox{\hyperlink{structBirb_1_1Rect}{Rect}} \mbox{\hyperlink{structBirb_1_1Entity_aa5ffa3831200c7764c5f35f9ad01fc25}{rect}};              }
+\DoxyCodeLine{83         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} \mbox{\hyperlink{structBirb_1_1Entity_ada6ad633e3c5ca0fd8da78d940a35cf1}{localScale}};  }
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85         \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1TextComponent}{EntityComponent::TextComponent}} \mbox{\hyperlink{structBirb_1_1Entity_aa17a283a41de0abac1b2ec80d7d52459}{textComponent}};            }
+\DoxyCodeLine{86         \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1ClickComponent}{EntityComponent::ClickComponent}} \mbox{\hyperlink{structBirb_1_1Entity_a512b3bf5534492ac75a2226611ec2272}{clickComponent}};        }
+\DoxyCodeLine{87         \mbox{\hyperlink{structBirb_1_1EntityComponent_1_1AnimationComponent}{EntityComponent::AnimationComponent}} \mbox{\hyperlink{structBirb_1_1Entity_a3f819be6bd0f6b8e969b5c5b75dbbdf1}{animationComponent}}; }
+\DoxyCodeLine{88         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1Entity_a284908ef1b3d80b26a370cca4e83b83d}{LoadSprite}}();                }
+\DoxyCodeLine{89         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1Entity_ae77a4fb732f3f332d49d0cfb87eb4966}{ReloadSprite}}();            }
+\DoxyCodeLine{90         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1Entity_a506422d54e8c0cf57609037ad1811d30}{SetBaseEntityValues}}();  }
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92         \textcolor{comment}{/* Informational functions */}}
+\DoxyCodeLine{93         \textcolor{keywordtype}{bool} \mbox{\hyperlink{structBirb_1_1Entity_a654f37f1d1706fc74e75daf2ce1af183}{isHovering}}(); }
+\DoxyCodeLine{94         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} \mbox{\hyperlink{structBirb_1_1Entity_a5422053bbc842179d733ef204a8dd004}{getAtlasPosition}}(\textcolor{keywordtype}{int} frame); }
+\DoxyCodeLine{95     \};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \}}
+
+\end{DoxyCode}

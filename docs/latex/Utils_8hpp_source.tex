@@ -1,0 +1,112 @@
+\hypertarget{Utils_8hpp_source}{}\doxysection{Utils.\+hpp}
+\label{Utils_8hpp_source}\index{include/Utils.hpp@{include/Utils.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#pragma GCC diagnostic ignored "{}-\/Wunused-\/function"{}}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <SDL2/SDL.h>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Math.hpp"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <random>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{namespace }Birb}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Rect}{Rect}}}
+\DoxyCodeLine{16     \{}
+\DoxyCodeLine{17         \mbox{\hyperlink{structBirb_1_1Rect}{Rect}}();}
+\DoxyCodeLine{18         \mbox{\hyperlink{structBirb_1_1Rect}{Rect}}(\textcolor{keywordtype}{float} p\_x, \textcolor{keywordtype}{float} p\_y, \textcolor{keywordtype}{float} p\_w, \textcolor{keywordtype}{float} p\_h);}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} print()}
+\DoxyCodeLine{21         \{}
+\DoxyCodeLine{22             std::cout << x << \textcolor{stringliteral}{"{}, "{}} << y << \textcolor{stringliteral}{"{}, "{}} << w << \textcolor{stringliteral}{"{}, "{}} << h << std::endl;}
+\DoxyCodeLine{23         \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         \mbox{\hyperlink{structBirb_1_1Rect}{Rect}} getInt();}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27         SDL\_Rect getSDLRect();}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         \textcolor{keywordtype}{float} x, y, w, h;}
+\DoxyCodeLine{30     \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keyword}{namespace }utils}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         \textcolor{keyword}{inline} \textcolor{keywordtype}{float} hireTimeInSeconds()}
+\DoxyCodeLine{35         \{}
+\DoxyCodeLine{36             \textcolor{keywordtype}{float} t = SDL\_GetTicks();}
+\DoxyCodeLine{37             t *= 0.001f;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39             \textcolor{keywordflow}{return} t;}
+\DoxyCodeLine{40         \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{keyword}{static} \textcolor{keywordtype}{bool} RandomGenInitialized = \textcolor{keyword}{false};}
+\DoxyCodeLine{43         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitRandomGen()}
+\DoxyCodeLine{44         \{}
+\DoxyCodeLine{45             srand(time(0));}
+\DoxyCodeLine{46             RandomGenInitialized = \textcolor{keyword}{true};}
+\DoxyCodeLine{47         \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         \textcolor{keyword}{inline} \textcolor{keywordtype}{int} randomInt(\textcolor{keywordtype}{int} min, \textcolor{keywordtype}{int} max)}
+\DoxyCodeLine{50         \{}
+\DoxyCodeLine{51             \textcolor{keywordflow}{if} (!RandomGenInitialized)}
+\DoxyCodeLine{52                 InitRandomGen();}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54             \textcolor{keywordtype}{float} value = rand() \% (max + 1 -\/ min) + min;}
+\DoxyCodeLine{55             \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{56             }
+\DoxyCodeLine{57             \textcolor{comment}{//std::cout << time(0) << std::endl;}}
+\DoxyCodeLine{58             \textcolor{comment}{//std::minstd\_rand generator(time(0));}}
+\DoxyCodeLine{59             \textcolor{comment}{//std::uniform\_int\_distribution<int> distribution(min, max);}}
+\DoxyCodeLine{60             \textcolor{comment}{//return distribution(generator);}}
+\DoxyCodeLine{61         \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \textcolor{keyword}{inline} \textcolor{keywordtype}{float} randomFloat(\textcolor{keywordtype}{float} min, \textcolor{keywordtype}{float} max)}
+\DoxyCodeLine{64         \{}
+\DoxyCodeLine{65             \textcolor{keywordflow}{if} (!RandomGenInitialized)}
+\DoxyCodeLine{66                 InitRandomGen();}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68             \textcolor{keywordtype}{float} random = ((float) rand()) / (\textcolor{keywordtype}{float}) RAND\_MAX;}
+\DoxyCodeLine{69             \textcolor{keywordtype}{float} range = max -\/ min;}
+\DoxyCodeLine{70             \textcolor{keywordflow}{return} (random * range) + min;}
+\DoxyCodeLine{71         \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         \textcolor{keyword}{static} \textcolor{keywordtype}{void} GetTextureDimensions(SDL\_Texture* texture, \textcolor{keywordtype}{int}\& x, \textcolor{keywordtype}{int}\& y)}
+\DoxyCodeLine{74         \{}
+\DoxyCodeLine{75             SDL\_QueryTexture(texture, NULL, NULL, \&x, \&y);}
+\DoxyCodeLine{76         \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{keyword}{static} SDL\_Color TexturePixelToColor(Uint8* pixels, Vector2int pixelPosition, \textcolor{keywordtype}{int} textureWidth)}
+\DoxyCodeLine{79         \{}
+\DoxyCodeLine{80             \textcolor{comment}{// Some weird BGRA format}}
+\DoxyCodeLine{81             Uint8 b = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 0]; \textcolor{comment}{// Blue}}
+\DoxyCodeLine{82             Uint8 g = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 1]; \textcolor{comment}{// Green}}
+\DoxyCodeLine{83             Uint8 r = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 2]; \textcolor{comment}{// Red}}
+\DoxyCodeLine{84             Uint8 a = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 3]; \textcolor{comment}{// Alpha}}
+\DoxyCodeLine{85             }
+\DoxyCodeLine{86             SDL\_Color color = \{ r, g, b, a \};}
+\DoxyCodeLine{87             }
+\DoxyCodeLine{88             \textcolor{keywordflow}{return} color;}
+\DoxyCodeLine{89         \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91         std::vector<Vector2int> SortPath(Vector2int startPoint, std::vector<Vector2int> points);}
+\DoxyCodeLine{92     \}}
+\DoxyCodeLine{93 \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{comment}{//namespace Birb2D}}
+\DoxyCodeLine{96 \textcolor{comment}{//\{}}
+\DoxyCodeLine{97 \textcolor{comment}{//  /// Deprecated way of handling textures. Kept for now, but please don't use this}}
+\DoxyCodeLine{98 \textcolor{comment}{//  struct Texture}}
+\DoxyCodeLine{99 \textcolor{comment}{//  \{}}
+\DoxyCodeLine{100 \textcolor{comment}{//      Texture();}}
+\DoxyCodeLine{101 \textcolor{comment}{//      Texture(SDL\_Texture* p\_sdlTexture, Vector2int p\_dimensions);}}
+\DoxyCodeLine{102 \textcolor{comment}{//      SDL\_Texture* sdlTexture;}}
+\DoxyCodeLine{103 \textcolor{comment}{//      Vector2int dimensions;}}
+\DoxyCodeLine{104 \textcolor{comment}{//  \};}}
+\DoxyCodeLine{105 \textcolor{comment}{//}}
+\DoxyCodeLine{106 \textcolor{comment}{//\}}}
+
+\end{DoxyCode}

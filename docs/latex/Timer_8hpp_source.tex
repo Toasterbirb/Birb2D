@@ -1,0 +1,38 @@
+\hypertarget{Timer_8hpp_source}{}\doxysection{Timer.\+hpp}
+\label{Timer_8hpp_source}\index{include/Timer.hpp@{include/Timer.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }Birb}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{classBirb_1_1Timer}{Timer}}}
+\DoxyCodeLine{12     \{}
+\DoxyCodeLine{13     \textcolor{keyword}{public}:}
+\DoxyCodeLine{14         \textcolor{keywordtype}{void} Start();}
+\DoxyCodeLine{15         \textcolor{keywordtype}{void} Stop();}
+\DoxyCodeLine{16         \textcolor{keywordtype}{double} ElapsedMilliseconds();}
+\DoxyCodeLine{17         \textcolor{keywordtype}{double} ElapsedSeconds();}
+\DoxyCodeLine{18         \textcolor{keywordtype}{double} ElapsedMinutes();}
+\DoxyCodeLine{19         \textcolor{keywordtype}{double} ElapsedHours();}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21         \textcolor{keywordtype}{double} \mbox{\hyperlink{classBirb_1_1Timer_a6f216c147c7f4a7a5d1a7e6ddbc2baba}{CalcSeconds}}(\textcolor{keywordtype}{double} mills);    }
+\DoxyCodeLine{22         \textcolor{keywordtype}{double} \mbox{\hyperlink{classBirb_1_1Timer_af06f109359ffb8fbb3dc089814f7ac42}{CalcMinutes}}(\textcolor{keywordtype}{double} mills);    }
+\DoxyCodeLine{23         \textcolor{keywordtype}{double} \mbox{\hyperlink{classBirb_1_1Timer_a9df124f1afb4ff5980a6b71efafd3a38}{CalcHours}}(\textcolor{keywordtype}{double} mills);    }
+\DoxyCodeLine{24         }
+\DoxyCodeLine{25         std::string \mbox{\hyperlink{classBirb_1_1Timer_ab772595aaeb0713f8365d214c8912b69}{DigitalFormat}}();       }
+\DoxyCodeLine{26         std::string \mbox{\hyperlink{classBirb_1_1Timer_ab1b44c1e3fd7aba9a6001ddd105fb7bb}{SplitDigitalFormat}}(\textcolor{keywordtype}{double} previousmills ); }
+\DoxyCodeLine{27         \textcolor{keywordtype}{bool} running = \textcolor{keyword}{false};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keyword}{private}:}
+\DoxyCodeLine{30         std::chrono::time\_point<std::chrono::steady\_clock> startTime;}
+\DoxyCodeLine{31         std::chrono::time\_point<std::chrono::steady\_clock> endTime;}
+\DoxyCodeLine{32     \};}
+\DoxyCodeLine{33 \}}
+
+\end{DoxyCode}

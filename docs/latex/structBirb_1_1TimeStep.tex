@@ -1,0 +1,58 @@
+\hypertarget{structBirb_1_1TimeStep}{}\doxysection{Birb\+::Time\+Step Struct Reference}
+\label{structBirb_1_1TimeStep}\index{Birb::TimeStep@{Birb::TimeStep}}
+
+
+Limit the runtime speed and handle delta time.  
+
+
+
+
+{\ttfamily \#include $<$Timestep.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_a1b06bcb255d28e85bb633aa4130e3423}\label{structBirb_1_1TimeStep_a1b06bcb255d28e85bb633aa4130e3423}} 
+void {\bfseries Init} (\mbox{\hyperlink{structBirb_1_1Window}{Window}} $\ast$p\+\_\+main\+Window)
+\begin{DoxyCompactList}\small\item\em Reset the current\+Time variable. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_a78f1297547de6bf739cbba32ac60d7a7}\label{structBirb_1_1TimeStep_a78f1297547de6bf739cbba32ac60d7a7}} 
+void {\bfseries Start} ()
+\begin{DoxyCompactList}\small\item\em Start a new step. Call this in the beginning of the gameloop. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_a94c403de00f24d0c9ffd9c6e7ff9d6b8}\label{structBirb_1_1TimeStep_a94c403de00f24d0c9ffd9c6e7ff9d6b8}} 
+bool {\bfseries Running} ()
+\begin{DoxyCompactList}\small\item\em Check if the accumulator is empty yet. While this is true, handle input events etc. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_a866ecdd82e1af80cdc036863e187025e}\label{structBirb_1_1TimeStep_a866ecdd82e1af80cdc036863e187025e}} 
+void {\bfseries Step} ()
+\begin{DoxyCompactList}\small\item\em Deplete the accumulator. Speed determined by the value of time\+Step. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_aadde4100146289e70a218d96ec16a94e}\label{structBirb_1_1TimeStep_aadde4100146289e70a218d96ec16a94e}} 
+void {\bfseries End} ()
+\begin{DoxyCompactList}\small\item\em End the time\+Step and delay the rendering to stay within the refreshrate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_af619f80a31426da6610cc285b121aa32}\label{structBirb_1_1TimeStep_af619f80a31426da6610cc285b121aa32}} 
+\mbox{\hyperlink{structBirb_1_1Window}{Window}} $\ast$ {\bfseries main\+Window}
+\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_a29d528d7eda1ff0457073116fcf9740a}\label{structBirb_1_1TimeStep_a29d528d7eda1ff0457073116fcf9740a}} 
+const double {\bfseries time\+Step} = 0.\+01
+\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_a306cf109632af4e09a946296ab67838e}\label{structBirb_1_1TimeStep_a306cf109632af4e09a946296ab67838e}} 
+double {\bfseries accumulator} = 0.\+00
+\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_a2596118195d1d043907a9f5f26d9885b}\label{structBirb_1_1TimeStep_a2596118195d1d043907a9f5f26d9885b}} 
+double {\bfseries current\+Time}
+\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_aec3450e83fa345252bbada927310e8d0}\label{structBirb_1_1TimeStep_aec3450e83fa345252bbada927310e8d0}} 
+float {\bfseries delta\+Time}
+\item 
+\mbox{\Hypertarget{structBirb_1_1TimeStep_a05a67df245e8c0ce4e5b988d8c1484ca}\label{structBirb_1_1TimeStep_a05a67df245e8c0ce4e5b988d8c1484ca}} 
+int {\bfseries start\+Tick}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Limit the runtime speed and handle delta time. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Timestep.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,77 @@
+\hypertarget{Renderwindow_8hpp_source}{}\doxysection{Renderwindow.\+hpp}
+\label{Renderwindow_8hpp_source}\index{include/Renderwindow.hpp@{include/Renderwindow.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <SDL2/SDL.h>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <SDL2/SDL2\_gfxPrimitives.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <SDL2/SDL\_ttf.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <SDL2/SDL\_image.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Utils.hpp"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Entity.hpp"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }Birb}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Window}{Window}}}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         \mbox{\hyperlink{structBirb_1_1Window}{Window}}();}
+\DoxyCodeLine{15         \mbox{\hyperlink{structBirb_1_1Window}{Window}}(std::string p\_title, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} p\_window\_dimensions, \textcolor{keywordtype}{int} p\_refresh\_rate, \textcolor{keywordtype}{bool} resizable);}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17         \textcolor{comment}{/* -\/-\/ Init stuff functions -\/-\/ */}}
+\DoxyCodeLine{18         \textcolor{keyword}{static} \textcolor{keywordtype}{void} InitSDL();}
+\DoxyCodeLine{19         \textcolor{keyword}{static} \textcolor{keywordtype}{void} InitSDL\_ttf();}
+\DoxyCodeLine{20         \textcolor{keyword}{static} \textcolor{keywordtype}{void} InitSDL\_image();}
+\DoxyCodeLine{21         \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ */}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         \textcolor{comment}{/* -\/-\/ Rendering and cleanup functions -\/-\/ */}}
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} Clear();}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} Display();}
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} Cleanup();}
+\DoxyCodeLine{27         \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ */}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         \textcolor{comment}{/* -\/-\/ Cursor functions -\/-\/ */}}
+\DoxyCodeLine{30         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} CursorPosition();}
+\DoxyCodeLine{31         \textcolor{keywordtype}{bool} CursorInRect(\mbox{\hyperlink{structBirb_1_1Rect}{Rect}} rect);}
+\DoxyCodeLine{32         \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ */}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \textcolor{comment}{/* -\/-\/ Basic window events -\/-\/ */}}
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} SetWindowSize(\mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} dimensions);}
+\DoxyCodeLine{36         \textcolor{keywordtype}{void} EventTick(SDL\_Event event, \textcolor{keywordtype}{bool}* GameRunning);}
+\DoxyCodeLine{37         \textcolor{keywordtype}{bool} PollEvents();}
+\DoxyCodeLine{38         SDL\_Event event;}
+\DoxyCodeLine{39         \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ */}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \textcolor{comment}{/* -\/-\/ Window variables -\/-\/ */}}
+\DoxyCodeLine{42         std::string win\_title;}
+\DoxyCodeLine{43         \textcolor{keywordtype}{int} refresh\_rate;}
+\DoxyCodeLine{44         SDL\_Window* win;}
+\DoxyCodeLine{45         SDL\_Renderer* renderer = NULL;}
+\DoxyCodeLine{46         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} window\_dimensions;}
+\DoxyCodeLine{47         \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} original\_window\_dimensions;}
+\DoxyCodeLine{48         \mbox{\hyperlink{structBirb_1_1Vector2f}{Vector2f}} \mbox{\hyperlink{structBirb_1_1Window_a391ba3d65bbdc7cc5fca2a4fb661c626}{window\_dimensions\_multiplier}}; }
+\DoxyCodeLine{49         \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ */}}
+\DoxyCodeLine{50     \};}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{53     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Resources}{Resources}}}
+\DoxyCodeLine{54     \{}
+\DoxyCodeLine{55         \textcolor{keyword}{static} SDL\_Texture* LoadTexture(std::string p\_filePath);}
+\DoxyCodeLine{56         \textcolor{keyword}{static} SDL\_Texture* TextSprite(std::string text, TTF\_Font* font, SDL\_Color\& color);}
+\DoxyCodeLine{57         \textcolor{keyword}{static} SDL\_Texture* TextSprite(std::string text, TTF\_Font* font, SDL\_Color\& color, SDL\_Color\& bgColor);}
+\DoxyCodeLine{58         \textcolor{keyword}{static} TTF\_Font*    LoadFont(std::string p\_filePath, \textcolor{keywordtype}{int} p\_fontSize);}
+\DoxyCodeLine{59         \textcolor{keyword}{static} Uint8*       CopyTexturePixels(SDL\_Surface* surface, \textcolor{keywordtype}{int}* width, \textcolor{keywordtype}{int}* height, \textcolor{keywordtype}{int}* pitch);}
+\DoxyCodeLine{60     \};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{63     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1Render}{Render}}}
+\DoxyCodeLine{64     \{}
+\DoxyCodeLine{65         \textcolor{keyword}{static} \textcolor{keywordtype}{void} DrawEntity(\mbox{\hyperlink{structBirb_1_1Entity}{Entity}}\& entity);}
+\DoxyCodeLine{66         \textcolor{keyword}{static} \textcolor{keywordtype}{void} ResetDrawColor();}
+\DoxyCodeLine{67         \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1Render_af5942ba6c52537ac48dab5b4312c5c5f}{DrawRect}}(SDL\_Color color, \mbox{\hyperlink{structBirb_1_1Rect}{Rect}} dimensions);             }
+\DoxyCodeLine{68         \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1Render_ad14f7990839cd287f1bccd67d4adb2c7}{DrawRect}}(SDL\_Color color, \mbox{\hyperlink{structBirb_1_1Rect}{Rect}} dimensions, \textcolor{keywordtype}{int} width);  }
+\DoxyCodeLine{69         \textcolor{keyword}{static} \textcolor{keywordtype}{void} DrawLine(SDL\_Color color, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} pointA, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} pointB);}
+\DoxyCodeLine{70         \textcolor{keyword}{static} \textcolor{keywordtype}{void} DrawCircle(SDL\_Color color, \mbox{\hyperlink{structBirb_1_1Vector2int}{Vector2int}} pos, \textcolor{keywordtype}{int} radius);}
+\DoxyCodeLine{71         \textcolor{keyword}{static} \textcolor{keywordtype}{void} SetRenderDrawColor(SDL\_Color color);}
+\DoxyCodeLine{72     \};}
+\DoxyCodeLine{73 \}}
+
+\end{DoxyCode}

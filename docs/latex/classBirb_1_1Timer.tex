@@ -1,0 +1,78 @@
+\hypertarget{classBirb_1_1Timer}{}\doxysection{Birb\+::Timer Class Reference}
+\label{classBirb_1_1Timer}\index{Birb::Timer@{Birb::Timer}}
+
+
+Class for timing things. Accurate down to milliseconds.  
+
+
+
+
+{\ttfamily \#include $<$Timer.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_aebc66c7329db0a177da07e8533efa1a9}\label{classBirb_1_1Timer_aebc66c7329db0a177da07e8533efa1a9}} 
+void {\bfseries Start} ()
+\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_a1071aa4d8c4d2c515044971442e9e408}\label{classBirb_1_1Timer_a1071aa4d8c4d2c515044971442e9e408}} 
+void {\bfseries Stop} ()
+\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_a29cb474d1e9405cab70f887a0edfee82}\label{classBirb_1_1Timer_a29cb474d1e9405cab70f887a0edfee82}} 
+double {\bfseries Elapsed\+Milliseconds} ()
+\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_a2dbf2419ffcdc2928fe5bebe840e329a}\label{classBirb_1_1Timer_a2dbf2419ffcdc2928fe5bebe840e329a}} 
+double {\bfseries Elapsed\+Seconds} ()
+\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_ab4d9d9bd027701a277084ac4c4bbfba2}\label{classBirb_1_1Timer_ab4d9d9bd027701a277084ac4c4bbfba2}} 
+double {\bfseries Elapsed\+Minutes} ()
+\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_a8c126983afce9aecd0146963b3a92799}\label{classBirb_1_1Timer_a8c126983afce9aecd0146963b3a92799}} 
+double {\bfseries Elapsed\+Hours} ()
+\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_a6f216c147c7f4a7a5d1a7e6ddbc2baba}\label{classBirb_1_1Timer_a6f216c147c7f4a7a5d1a7e6ddbc2baba}} 
+double {\bfseries Calc\+Seconds} (double mills)
+\begin{DoxyCompactList}\small\item\em Converts milliseconds into seconds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_af06f109359ffb8fbb3dc089814f7ac42}\label{classBirb_1_1Timer_af06f109359ffb8fbb3dc089814f7ac42}} 
+double {\bfseries Calc\+Minutes} (double mills)
+\begin{DoxyCompactList}\small\item\em Converts milliseconds into minutes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_a9df124f1afb4ff5980a6b71efafd3a38}\label{classBirb_1_1Timer_a9df124f1afb4ff5980a6b71efafd3a38}} 
+double {\bfseries Calc\+Hours} (double mills)
+\begin{DoxyCompactList}\small\item\em Converts milliseconds into hours. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_ab772595aaeb0713f8365d214c8912b69}\label{classBirb_1_1Timer_ab772595aaeb0713f8365d214c8912b69}} 
+std\+::string {\bfseries Digital\+Format} ()
+\begin{DoxyCompactList}\small\item\em Prints the current elapsed time in digital format (00\+:00\+:00\+:000) \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classBirb_1_1Timer_ab1b44c1e3fd7aba9a6001ddd105fb7bb}{Split\+Digital\+Format}} (double previousmills)
+\begin{DoxyCompactList}\small\item\em Used for calculating digital time for a split during timing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBirb_1_1Timer_a4d23efc7593eef4cede87bb2a8e91815}\label{classBirb_1_1Timer_a4d23efc7593eef4cede87bb2a8e91815}} 
+bool {\bfseries running} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for timing things. Accurate down to milliseconds. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBirb_1_1Timer_ab1b44c1e3fd7aba9a6001ddd105fb7bb}\label{classBirb_1_1Timer_ab1b44c1e3fd7aba9a6001ddd105fb7bb}} 
+\index{Birb::Timer@{Birb::Timer}!SplitDigitalFormat@{SplitDigitalFormat}}
+\index{SplitDigitalFormat@{SplitDigitalFormat}!Birb::Timer@{Birb::Timer}}
+\doxysubsubsection{\texorpdfstring{SplitDigitalFormat()}{SplitDigitalFormat()}}
+{\footnotesize\ttfamily std\+::string Birb\+::\+Timer\+::\+Split\+Digital\+Format (\begin{DoxyParamCaption}\item[{double}]{previousmills }\end{DoxyParamCaption})}
+
+
+
+Used for calculating digital time for a split during timing. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em previousmills} & elapsed milliseconds of the previous split \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Timer.\+hpp\end{DoxyCompactItemize}

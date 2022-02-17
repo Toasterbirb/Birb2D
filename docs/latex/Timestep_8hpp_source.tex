@@ -1,0 +1,31 @@
+\hypertarget{Timestep_8hpp_source}{}\doxysection{Timestep.\+hpp}
+\label{Timestep_8hpp_source}\index{include/Timestep.hpp@{include/Timestep.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}Renderwindow.hpp"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{keyword}{namespace }Birb}
+\DoxyCodeLine{6 \{}
+\DoxyCodeLine{8     \textcolor{keyword}{struct }\mbox{\hyperlink{structBirb_1_1TimeStep}{TimeStep}}}
+\DoxyCodeLine{9     \{}
+\DoxyCodeLine{10         \textcolor{comment}{/* Functions */}}
+\DoxyCodeLine{11         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1TimeStep_a1b06bcb255d28e85bb633aa4130e3423}{Init}}(\mbox{\hyperlink{structBirb_1_1Window}{Window}}* p\_mainWindow);  }
+\DoxyCodeLine{12         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1TimeStep_a78f1297547de6bf739cbba32ac60d7a7}{Start}}();  }
+\DoxyCodeLine{13         \textcolor{keywordtype}{bool} \mbox{\hyperlink{structBirb_1_1TimeStep_a94c403de00f24d0c9ffd9c6e7ff9d6b8}{Running}}(); }
+\DoxyCodeLine{14         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1TimeStep_a866ecdd82e1af80cdc036863e187025e}{Step}}();    }
+\DoxyCodeLine{15         \textcolor{keywordtype}{void} \mbox{\hyperlink{structBirb_1_1TimeStep_aadde4100146289e70a218d96ec16a94e}{End}}();  }
+\DoxyCodeLine{16         \textcolor{comment}{//float deltaTime(); ///< Method to get deltatime}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{comment}{/* Variables */}}
+\DoxyCodeLine{19         \mbox{\hyperlink{structBirb_1_1Window}{Window}}* mainWindow;}
+\DoxyCodeLine{20         \textcolor{keyword}{const} \textcolor{keywordtype}{double} timeStep = 0.01;}
+\DoxyCodeLine{21         \textcolor{keywordtype}{double} accumulator = 0.00;}
+\DoxyCodeLine{22         \textcolor{keywordtype}{double} currentTime;}
+\DoxyCodeLine{23         \textcolor{keywordtype}{float} deltaTime;}
+\DoxyCodeLine{24         \textcolor{keywordtype}{int} startTick;}
+\DoxyCodeLine{25     \};}
+\DoxyCodeLine{26 \}}
+
+\end{DoxyCode}
