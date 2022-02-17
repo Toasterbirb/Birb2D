@@ -23,9 +23,9 @@ engine_lib: filesystem.o audio.o entity.o logger.o math.o renderwindow.o physics
 	mkdir -p build
 	g++ -shared -g $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
 
-static_engine_lib: audio.o entity.o logger.o math.o renderwindow.o physics.o timer.o timestep.o ui.o utils.o values.o
+static_engine_lib: filesystem.o audio.o entity.o logger.o math.o renderwindow.o physics.o timer.o timestep.o ui.o utils.o values.o
 	mkdir -p build
-	g++ -static $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
+	ar -crs $(outputDir)/libbirb2d.a $^
 
 install: engine_lib
 	cp $(outputDir)/$(LIBFILE) /usr/lib/
