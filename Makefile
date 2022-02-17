@@ -19,7 +19,7 @@ test: filesystem.o entity.o logger.o math.o renderwindow.o timer.o timestep.o ut
 run_tests: test
 	./build/test
 
-engine_lib: audio.o entity.o logger.o math.o renderwindow.o physics.o timer.o timestep.o ui.o utils.o values.o
+engine_lib: filesystem.o audio.o entity.o logger.o math.o renderwindow.o physics.o timer.o timestep.o ui.o utils.o values.o
 	mkdir -p build
 	g++ -shared -g $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
 

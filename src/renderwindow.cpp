@@ -84,8 +84,13 @@ namespace Birb
 
 	void Window::Cleanup()
 	{
+		IMG_Quit();
+		TTF_Quit();
+		SDL_Quit();
+
 		Global::IsInit::SDL = false;
 		Global::IsInit::SDL_image = false;
+		Global::IsInit::SDL_ttf = false;
 
 		Debug::Log("Destroying the window");
 		SDL_DestroyWindow(win);
