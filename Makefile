@@ -11,7 +11,9 @@ all: test engine_lib
 
 docs:
 	doxygen ./doxygen_config
-	ln ./docs/html/index.html ./docs/index.html
+	mv ./docs/html/* ./docs/
+	rm -r ./docs/html
+	rm -r ./docs/latex
 
 test: filesystem.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o tests.o
 	mkdir -p build
