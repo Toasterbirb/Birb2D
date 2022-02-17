@@ -83,4 +83,4 @@ values.o: $(SRCDIR)/values.cpp
 clean:
 	rm -f *.o log.txt
 	rm -rf $(outputDir)
-	rm -r docs
+	rm -rf docs
