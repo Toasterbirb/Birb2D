@@ -43,8 +43,8 @@ namespace Birb
 		int refresh_rate;
 		SDL_Window* win;
 		SDL_Renderer* renderer = NULL;
-		Vector2int original_window_dimensions;
 		Vector2int window_dimensions;
+		Vector2int original_window_dimensions;
 		Vector2f window_dimensions_multiplier; ///< Contains the difference between the current and old window dimensions. DO NOT MODIFY!
 		/* ---------------------- */
 	};

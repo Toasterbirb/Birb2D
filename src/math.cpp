@@ -125,7 +125,7 @@ namespace Birb
 		Vector2int currentClosestPoint = points[0];
 		float currentClosestDistance = VectorDistance(point, points[0]);
 
-		for (int i = 1; i < points.size(); i++)
+		for (int i = 1; i < (int)points.size(); i++)
 		{
 			float distance = VectorDistance(point, points[i]);
 
@@ -146,12 +146,12 @@ namespace Birb
 		float currentClosestDistance = VectorDistance(point, points[0]);
 
 		bool ignore;
-		for (int i = 1; i < points.size(); i++)
+		for (int i = 1; i < (int)points.size(); i++)
 		{
 			ignore = false;
 
 			/* Check if the point is in the ignore list */
-			for (int j = 0; j < ignoredPoints.size(); j++)
+			for (int j = 0; j < (int)ignoredPoints.size(); j++)
 				if (points[i] == ignoredPoints[j])
 					ignore = true;
 

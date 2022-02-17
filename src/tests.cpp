@@ -19,7 +19,7 @@ TEST_CASE("Random int")
 	Birb::utils::InitRandomGen();
 
 	int valueCount = 50;
-	int values[valueCount];
+	int values[50];
 	for (int i = 0; i < valueCount; i++)
 		values[i] = Birb::utils::randomInt(0, 10);
 

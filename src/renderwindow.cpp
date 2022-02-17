@@ -5,7 +5,7 @@
 namespace Birb
 {
 	Window::Window(std::string p_title, Vector2int p_window_dimensions, int p_refresh_rate, bool resizable)
-	:refresh_rate(p_refresh_rate), window_dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions), win_title(p_title)
+	:win_title(p_title), refresh_rate(p_refresh_rate), window_dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
 		/* Create a new window and initialize stuff for it */
 		InitSDL();

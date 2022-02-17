@@ -1,4 +1,5 @@
 #pragma once
+#pragma GCC diagnostic ignored "-Wunused-function"
 
 #include <SDL2/SDL.h>
 

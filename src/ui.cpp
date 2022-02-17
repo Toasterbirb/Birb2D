@@ -11,7 +11,7 @@ namespace Birb
 
 	void UI::PollButtons(Window window)
 	{
-		for (int i = 0; i < Buttons.size(); i++)
+		for (int i = 0; i < (int)Buttons.size(); i++)
 		{
 			/* Skip inactive buttons */
 			if (!Buttons[i].clickComponent.active)

@@ -39,7 +39,7 @@ namespace Birb
 			Vector2int closestPoint;
 			result.push_back(startPoint);
 
-			for (int i = 0; i < points.size(); i++)
+			for (int i = 0; i < (int)points.size(); i++)
 			{
 				closestPoint = Birb::Math::FindClosestPoint(result[result.size() - 1], points, result);
 				result.push_back(closestPoint);
