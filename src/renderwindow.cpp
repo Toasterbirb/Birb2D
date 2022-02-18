@@ -362,7 +362,7 @@ namespace Birb
 			}
 		}
 
-		centerPoint = Vector2int(entity.rect.w / 2, entity.rect.h / 2);
+		centerPoint = Vector2int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
 		SDL_Point center = { centerPoint.x, centerPoint.y };
 
 		if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite, &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
