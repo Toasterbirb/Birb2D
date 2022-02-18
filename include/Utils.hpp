@@ -22,6 +22,11 @@ namespace Birb
 			std::cout << x << ", " << y << ", " << w << ", " << h << std::endl;
 		}
 
+		std::string toString()
+		{
+			return std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(w) + ", " + std::to_string(h);
+		}
+
 		Rect getInt();
 
 		SDL_Rect getSDLRect();

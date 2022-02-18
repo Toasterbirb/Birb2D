@@ -52,6 +52,16 @@ TEST_CASE("window and rendering functions")
 	Birb::Window window("Title", Birb::Vector2int(1280, 720), 60, false);
 	SDL_Texture* texture 	= Birb::Resources::LoadTexture("/home/toasterbirb/git/birb2d/res/textures/giga_stretch.png");
 	TTF_Font* font 			= Birb::Resources::LoadFont("/home/toasterbirb/git/birb2d/res/fonts/freefont/FreeMonoBold.ttf", 32);
+	Birb::Entity testEntity("Test entity", Birb::Vector2int(10, 10), texture);
+	Birb::Entity secondEntityWithSameTexture("Second entity with the same texture", Birb::Rect(100, 100, 128 * 2, 72 * 2), texture);
+	Birb::Entity rotatedEntity("Rotated entity with custom localscale", Birb::Rect(300, 100, 128, 72), texture);
+	rotatedEntity.angle = 45;
+	rotatedEntity.localScale = Birb::Vector2f(3.5, 2);
+	Birb::Entity entityWithNegativeSize("Entity with negative size", Birb::Rect(300, 100, -128, 72), texture);
+
+
+	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::TextComponent("Hello World", font, &Birb::Colors::Red));
+	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::TextComponent("Hello World", font, &Birb::Colors::Red, &Birb::Colors::Black));
 
 	CHECK(window.win_title == "Title");
 	CHECK(window.window_dimensions.x == 1280);
@@ -63,7 +73,14 @@ TEST_CASE("window and rendering functions")
 	CHECK(font 		!= nullptr);
 
 	CHECK_NOTHROW(window.Clear());
+	CHECK(Birb::Render::DrawEntity(testEntity));
+	CHECK(Birb::Render::DrawEntity(secondEntityWithSameTexture));
+	CHECK(Birb::Render::DrawEntity(rotatedEntity));
+	CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
+	CHECK(Birb::Render::DrawEntity(textEntity));
+	CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
 	CHECK_NOTHROW(window.Display());
+	sleep(1);
 	CHECK_NOTHROW(window.Cleanup());
 
 	SDL_Quit();
@@ -383,6 +400,7 @@ TEST_CASE("Timer accuracy test")
 
 TEST_CASE("Filesystem directories")
 {
+	Birb::Debug::Log("Starting filesystem checks. There will be a few errors and they are deliberate");
 	std::string directoryPath = "./testing_directory";
 
 	/* Create a directory and check if it exists */

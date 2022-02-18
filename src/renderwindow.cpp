@@ -272,12 +272,19 @@ namespace Birb
 		return texture;
 	}
 
-	void Render::DrawEntity(Entity& entity)
+	bool Render::DrawEntity(Entity& entity)
 	{
 		if (entity.sprite == nullptr)
 		{
 			Debug::Log("Entity '" + entity.name + "' has no sprite to render", Debug::error);
-			return;
+			return false;
+		}
+
+		/* Check if the sprite would be even visible */
+		if (entity.rect.w <= 0 || entity.rect.h <= 0)
+		{
+			Birb::Debug::Log("Tried to render an entity with size of <= 0", Debug::Type::warning);
+			return false;
 		}
 
 		SDL_Rect src;
@@ -288,6 +295,12 @@ namespace Birb
 		int texWidth;
 		int texHeight;
 		SDL_QueryTexture(entity.sprite, NULL, NULL, &texWidth, &texHeight);
+
+		if (texWidth <= 0 || texHeight <= 0)
+		{
+			Birb::Debug::Log("Tried to render an entity with a texture with size of <= 0", Debug::Type::warning);
+			return false;
+		}
 
 		if (entity.animationComponent.frameCount == 0)
 		{
@@ -319,7 +332,7 @@ namespace Birb
 
 
 
-			/* Set the current atlast position to the next frame */
+			/* Set the current atlas position to the next frame */
 			if (entity.animationComponent.animationQueued || entity.animationComponent.loop)
 			{
 				if (entity.animationComponent.frameTimer.running && entity.animationComponent.frameTimer.ElapsedSeconds() >= (1.0 / entity.animationComponent.fps))
@@ -352,8 +365,23 @@ namespace Birb
 		SDL_Point center = { centerPoint.x, centerPoint.y };
 		//Debug::Log("Angle: " + std::to_string(entity.angle));
 
-		if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite, &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
-			Debug::Log("Error rendering [" + entity.name + "]. Error: " + SDL_GetError(), Debug::error);
+		/* Only use SDL_RenderCopyEx if the texture is rotated */
+		if (entity.angle == 0)
+		{
+			if (SDL_RenderCopy(Global::RenderVars::Renderer, entity.sprite, &src, &dst) < 0)
+				Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
+			else
+				return true;
+		}
+		else
+		{
+			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite, &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
+				Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
+			else
+				return true;
+		}
+
+		return false;
 	}
 
 	void Render::ResetDrawColor()

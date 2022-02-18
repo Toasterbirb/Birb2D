@@ -62,7 +62,7 @@ namespace Birb
 	/// Methods for rendering things
 	struct Render
 	{
-		static void DrawEntity(Entity& entity);
+		static bool DrawEntity(Entity& entity);
 		static void ResetDrawColor();
 		static void DrawRect(SDL_Color color, Rect dimensions); 			///< Draw filled rect
 		static void DrawRect(SDL_Color color, Rect dimensions, int width); 	///< Draw hollow rect
