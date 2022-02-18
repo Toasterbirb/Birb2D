@@ -149,6 +149,7 @@ namespace Birb
 	{
 		angle = 0;
 		localScale = Vector2f(1, 1);
+		active = true;
 	}
 
 	Entity::Entity(std::string p_name)

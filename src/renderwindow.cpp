@@ -274,6 +274,9 @@ namespace Birb
 
 	bool Render::DrawEntity(Entity& entity)
 	{
+		if (!entity.active)
+			return true;
+
 		if (entity.sprite == nullptr)
 		{
 			Debug::Log("Entity '" + entity.name + "' has no sprite to render", Debug::error);
