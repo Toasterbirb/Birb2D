@@ -317,8 +317,6 @@ namespace Birb
 		else
 		{
 			/* Entity probably has an animation component */
-			//src.x = entity.animationComponent.curAtlasPosition.x;
-			//src.y = entity.animationComponent.curAtlasPosition.y;
 			Vector2int atlasPos = entity.getAtlasPosition(entity.animationComponent.frameIndex);
 			src.x = atlasPos.x;
 			src.y = atlasPos.y;
@@ -363,23 +361,11 @@ namespace Birb
 
 		centerPoint = Vector2int(entity.rect.w / 2, entity.rect.h / 2);
 		SDL_Point center = { centerPoint.x, centerPoint.y };
-		//Debug::Log("Angle: " + std::to_string(entity.angle));
 
-		/* Only use SDL_RenderCopyEx if the texture is rotated */
-		if (entity.angle == 0)
-		{
-			if (SDL_RenderCopy(Global::RenderVars::Renderer, entity.sprite, &src, &dst) < 0)
-				Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
-			else
-				return true;
-		}
+		if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite, &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
+			Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
 		else
-		{
-			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite, &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
-				Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
-			else
-				return true;
-		}
+			return true;
 
 		return false;
 	}

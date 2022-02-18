@@ -50,10 +50,10 @@ TEST_CASE("logging")
 TEST_CASE("window and rendering functions")
 {
 	Birb::Window window("Title", Birb::Vector2int(1280, 720), 60, false);
-	SDL_Texture* texture 	= Birb::Resources::LoadTexture("/home/toasterbirb/git/birb2d/res/textures/giga_stretch.png");
+	SDL_Texture* texture 	= Birb::Resources::LoadTexture("/home/toasterbirb/git/birb2d/res/textures/birb.png");
 	TTF_Font* font 			= Birb::Resources::LoadFont("/home/toasterbirb/git/birb2d/res/fonts/freefont/FreeMonoBold.ttf", 32);
 	Birb::Entity testEntity("Test entity", Birb::Vector2int(10, 10), texture);
-	Birb::Entity secondEntityWithSameTexture("Second entity with the same texture", Birb::Rect(100, 100, 128 * 2, 72 * 2), texture);
+	Birb::Entity secondEntityWithSameTexture("Second entity with the same texture", Birb::Rect(200, 400, 128 * 2, 72 * 2), texture);
 	Birb::Entity rotatedEntity("Rotated entity with custom localscale", Birb::Rect(300, 100, 128, 72), texture);
 	rotatedEntity.angle = 45;
 	rotatedEntity.localScale = Birb::Vector2f(3.5, 2);
@@ -61,7 +61,7 @@ TEST_CASE("window and rendering functions")
 
 
 	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::TextComponent("Hello World", font, &Birb::Colors::Red));
-	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::TextComponent("Hello World", font, &Birb::Colors::Red, &Birb::Colors::Black));
+	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::TextComponent("Hello World", font, &Birb::Colors::Red, &Birb::Colors::White));
 
 	CHECK(window.win_title == "Title");
 	CHECK(window.window_dimensions.x == 1280);
