@@ -40,22 +40,22 @@ namespace Birb
 		return ElapsedMinutes() / 60.0;
 	}
 
-	double Timer::CalcSeconds(double mills)
+	double Timer::CalcSeconds(const double& mills)
 	{
 		return mills / 1000.0;
 	}
 
-	double Timer::CalcMinutes(double mills)
+	double Timer::CalcMinutes(const double& mills)
 	{
 		return mills / 1000.0 / 60.0;
 	}
 
-	double Timer::CalcHours(double mills)
+	double Timer::CalcHours(const double& mills)
 	{
 		return mills / 1000.0 / 60.0 / 60.0;
 	}
 
-	std::string DoubleDigitify(double value)
+	std::string DoubleDigitify(const double& value)
 	{
 		std::string valueString = std::to_string((int)std::floor(value));
 
@@ -68,7 +68,7 @@ namespace Birb
 			return valueString;
 	}
 
-	std::string TripleDigitify(double value)
+	std::string TripleDigitify(const double& value)
 	{
 		std::string valueString = std::to_string((int)std::floor(value));
 
@@ -104,7 +104,7 @@ namespace Birb
 		return digital_string;
 	}
 
-	std::string Timer::SplitDigitalFormat(double previousmills)
+	std::string Timer::SplitDigitalFormat(const double& previousmills)
 	{
 		/* Return default 00:00 if time hasn't passed */
 		if (!running && ElapsedMilliseconds() == 0)

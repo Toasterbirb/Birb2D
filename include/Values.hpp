@@ -33,6 +33,6 @@ namespace Birb
 		static SDL_Color DarkGray =     { 60, 	60, 	60, 	255 };
 		static SDL_Color LightGray =    { 180, 	180, 	180, 	255 };
 
-		SDL_Color ChangeColorIntensity(SDL_Color color, int delta);
+		SDL_Color ChangeColorIntensity(const SDL_Color& color, const int& delta);
 	}
 }

@@ -12,7 +12,7 @@ all: test docs engine_lib run_tests
 docs:
 	doxygen ./doxygen_config
 
-test: filesystem.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o tests.o
+test: audio.o filesystem.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o tests.o
 	mkdir -p build
 	$(CC) $^ $(CFLAGS) $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/test
 

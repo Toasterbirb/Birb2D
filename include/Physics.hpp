@@ -8,6 +8,6 @@ namespace Birb
 	namespace Physics
 	{
 		bool RectCollision(Rect rectA, Rect rectB);
-		bool EntityCollision(Entity entityA, Entity entityB);
+		bool EntityCollision(const Entity& entityA, const Entity& entityB);
 	}
 }

@@ -11,7 +11,7 @@ namespace Birb
 		{
 			log, warning, error
 		};
-		void Log(std::string text, Type type = Type::log);
+		void Log(const std::string& text, Type type = Type::log);
 		static std::vector<std::string> lines;
 	}
 }

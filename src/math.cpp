@@ -2,105 +2,113 @@
 
 namespace Birb
 {
-	float Math::VectorDistance(Vector2f a, Vector2f b)
+	float Math::VectorDistance(const Vector2f& a, const Vector2f& b)
 	{
 		return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
 	}
 
-	float Math::VectorDistance(Vector2int a, Vector2int b)
+	float Math::VectorDistance(const Vector2int& a, const Vector2int& b)
 	{
 		return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
 	}
 
-	float Math::VectorDistance(Vector3f a, Vector3f b)
+	float Math::VectorDistance(const Vector3f& a, const Vector3f& b)
 	{
 		return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2) + std::pow(b.z - a.z, 2));
 	}
 
-	float Math::VectorDistance(Vector3int a, Vector3int b)
+	float Math::VectorDistance(const Vector3int& a, const Vector3int& b)
 	{
 		return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2) + std::pow(b.z - a.z, 2));
 	}
 
-	float Math::Clamp(float value, float min, float max)
+	float Math::Clamp(const float& value, const float& min, const float& max)
 	{
 		if (value < min)
-			value = min;
+			return min;
 		else if (value > max)
-			value = max;
+			return max;
 
 		return value;
 	}
 
-	int Math::Clamp(int value, int min, int max)
+	double Math::Clamp(const double& value, const double& min, const double& max)
 	{
 		if (value < min)
-			value = min;
+			return min;
 		else if (value > max)
-			value = max;
+			return max;
 
 		return value;
 	}
 
-	int Math::Lerp(int a, int b, float t)
+	int Math::Clamp(const int& value, const int& min, const int& max)
 	{
-		t = Clamp(t, 0.0, 1.0f);
-		return std::round(a + (b - a) * t);
+		if (value < min)
+			return min;
+		else if (value > max)
+			return max;
+
+		return value;
+	}
+
+	int Math::Lerp(const int& a, const int& b, const float& t)
+	{
+		return std::round(a + (b - a) * Clamp(t, 0.0f, 1.0f));
 	}
 	
-	float Math::Lerp(float a, float b, float t)
+	float Math::Lerp(const float& a, const float& b, const float& t)
 	{
-		t = Clamp(t, 0.0, 1.0f);
-		return (a + (b - a) * t);
+		return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
 	}
 
-	Vector2f Math::Lerp(Vector2f a, Vector2f b, float t)
+	Vector2f Math::Lerp(const Vector2f& a, const Vector2f& b, const float& t)
 	{
 		return Vector2f(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
 	}
 
-	Vector2int Math::Lerp(Vector2int a, Vector2int b, float t)
+	Vector2int Math::Lerp(const Vector2int& a, const Vector2int& b, const float& t)
 	{
 		return Vector2int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
 	}
 
-	Vector3f Math::Lerp(Vector3f a, Vector3f b, float t)
+	Vector3f Math::Lerp(const Vector3f& a, const Vector3f& b, const float& t)
 	{
 		return Vector3f(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 	}
 
-	Vector3int Math::Lerp(Vector3int a, Vector3int b, float t)
+	Vector3int Math::Lerp(const Vector3int& a, const Vector3int& b, const float& t)
 	{
 		return Vector3int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 	}
 
 
-	float Math::CenterPoint(float a, float b)
+	float Math::CenterPoint(const float& a, const float& b)
 	{
 		return (a + b) / 2;
 	}
 
-	Vector2f Math::CenterPoint(Vector2f a, Vector2f b)
+	Vector2f Math::CenterPoint(const Vector2f& a, const Vector2f& b)
 	{
 		return Vector2f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y));
 	}
 
-	Vector2f Math::CenterPoint(Vector2int a, Vector2int b)
+	Vector2f Math::CenterPoint(const Vector2int& a, const Vector2int& b)
 	{
 		return Vector2f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y));
 	}
 
-	Vector3f Math::CenterPoint(Vector3f a, Vector3f b)
+	Vector3f Math::CenterPoint(const Vector3f& a, const Vector3f& b)
 	{
 		return Vector3f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y), CenterPoint(a.z, b.z));
 	}
 
-	Vector3f Math::CenterPoint(Vector3int a, Vector3int b)
+	Vector3f Math::CenterPoint(const Vector3int& a, const Vector3int& b)
 	{
 		return Vector3f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y), CenterPoint(a.z, b.z));
 	}
 
-	Vector2int Math::FindClosestPoint(Vector2int point, Vector2int points[], int pointCount)
+	Vector2int Math::FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount)
 	{
 		Vector2int currentClosestPoint = points[0];
 		float currentClosestDistance = VectorDistance(point, points[0]);
@@ -120,7 +128,7 @@ namespace Birb
 		return currentClosestPoint;
 	}
 
-	Vector2int Math::FindClosestPoint(Vector2int point, std::vector<Vector2int> points)
+	Vector2int Math::FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points)
 	{
 		Vector2int currentClosestPoint = points[0];
 		float currentClosestDistance = VectorDistance(point, points[0]);
@@ -140,7 +148,7 @@ namespace Birb
 		return currentClosestPoint;
 	}
 
-	Vector2int Math::FindClosestPoint(Vector2int point, std::vector<Vector2int> points, std::vector<Vector2int> ignoredPoints)
+	Vector2int Math::FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints)
 	{
 		Vector2int currentClosestPoint = points[0];
 		float currentClosestDistance = VectorDistance(point, points[0]);
@@ -171,7 +179,7 @@ namespace Birb
 		return currentClosestPoint;
 	}
 
-	double Math::Round(double value, int decimal_points)
+	double Math::Round(const double& value, const int& decimal_points)
 	{
 		/* How this thing works: 
 		 * 1. Multiply the value with 10 ^ decimal points. This will leave the needed values before the decimal point

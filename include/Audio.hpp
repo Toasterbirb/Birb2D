@@ -14,13 +14,19 @@ namespace Birb
 		class SoundFile
 		{
 		public:
-			SoundFile(std::string p_filePath);
+			SoundFile(const std::string& p_filePath);
 			void play();
 			void free()
 			{
 				Mix_FreeChunk(sound);
 			}
 			bool isPlaying();
+
+			~SoundFile()
+			{
+				/* Free the soundfile when its destroyed */
+				free();
+			}
 		private:
 			Mix_Chunk* sound;
 			std::string filePath;
@@ -30,7 +36,7 @@ namespace Birb
 		class MusicFile
 		{
 		public:
-			MusicFile(std::string p_filePath);
+			MusicFile(const std::string& p_filePath);
 			void play();
 			void play(bool loop);
 			void free()
@@ -38,6 +44,12 @@ namespace Birb
 				Mix_FreeMusic(music);
 			}
 			bool isPlaying();
+
+			~MusicFile()
+			{
+				/* Free the musicfile when its destroyed */
+				free();
+			}
 		private:
 			Mix_Music* music;
 			std::string filePath;

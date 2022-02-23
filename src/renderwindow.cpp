@@ -4,7 +4,7 @@
 
 namespace Birb
 {
-	Window::Window(std::string p_title, Vector2int p_window_dimensions, int p_refresh_rate, bool resizable)
+	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
 	:win_title(p_title), refresh_rate(p_refresh_rate), window_dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
 		/* Create a new window and initialize stuff for it */
@@ -114,7 +114,7 @@ namespace Birb
 		return pos;
 	}
 
-	bool Window::CursorInRect(Rect rect)
+	bool Window::CursorInRect(const Rect& rect)
 	{
 		Vector2int cursorPos = CursorPosition();
 
@@ -125,7 +125,7 @@ namespace Birb
 		return false;
 	}
 
-	void Window::SetWindowSize(Vector2int dimensions)
+	void Window::SetWindowSize(const Vector2int& dimensions)
 	{
 		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
 		window_dimensions = dimensions;
@@ -133,7 +133,7 @@ namespace Birb
 		window_dimensions_multiplier.y = (float)window_dimensions.y / (float)original_window_dimensions.y;
 	}
 
-	void Window::EventTick(SDL_Event event, bool* GameRunning)
+	void Window::EventTick(const SDL_Event& event, bool* GameRunning)
 	{
 		switch (event.type)
 		{
@@ -158,7 +158,7 @@ namespace Birb
 		return (SDL_PollEvent(&event) != 0);
 	}
 
-	SDL_Texture* Resources::LoadTexture(std::string p_filePath)
+	SDL_Texture* Resources::LoadTexture(const std::string& p_filePath)
 	{
 		SDL_Texture* texture = NULL;
 		texture = IMG_LoadTexture(Global::RenderVars::Renderer, p_filePath.c_str());
@@ -169,7 +169,7 @@ namespace Birb
 		return texture;
 	}
 
-	TTF_Font* Resources::LoadFont(std::string p_filePath, int p_fontSize)
+	TTF_Font* Resources::LoadFont(const std::string& p_filePath, const int& p_fontSize)
 	{
 		TTF_Font* font;
 		font = TTF_OpenFont(p_filePath.c_str(), p_fontSize);
@@ -229,7 +229,7 @@ namespace Birb
 	}
 
 
-	SDL_Texture* Resources::TextSprite(std::string text, TTF_Font* font, SDL_Color& color)
+	SDL_Texture* Resources::TextSprite(const std::string& text, TTF_Font* font, const SDL_Color& color)
 	{
 		/* Check if the arguments are valid */
 		if (font == nullptr)
@@ -251,7 +251,7 @@ namespace Birb
 		return texture;
 	}
 
-	SDL_Texture* Resources::TextSprite(std::string text, TTF_Font* font, SDL_Color& color, SDL_Color& bgColor)
+	SDL_Texture* Resources::TextSprite(const std::string& text, TTF_Font* font, const SDL_Color& color, const SDL_Color& bgColor)
 	{
 		/* Check if the arguments are valid */
 		if (font == nullptr)
@@ -378,7 +378,7 @@ namespace Birb
 		SDL_SetRenderDrawColor(Global::RenderVars::Renderer, 0, 0, 0, 255);
 	}
 
-	void Render::DrawRect(SDL_Color color, Rect dimensions)
+	void Render::DrawRect(const SDL_Color& color, const Rect& dimensions)
 	{
 		SetRenderDrawColor(color);
 		SDL_Rect rectangle = dimensions.getSDLRect();
@@ -386,7 +386,7 @@ namespace Birb
 		ResetDrawColor();
 	}
 
-	void Render::DrawRect(SDL_Color color, Rect dimensions, int width)
+	void Render::DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width)
 	{
 		DrawRect(color, Rect(dimensions.x, dimensions.y, dimensions.w, width)); /* Top */
 		DrawRect(color, Rect(dimensions.x, dimensions.y + dimensions.h - width, dimensions.w, width)); /* Bottom */
@@ -394,21 +394,21 @@ namespace Birb
 		DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
 	}
 
-	void Render::DrawLine(SDL_Color color, Vector2int pointA, Vector2int pointB)
+	void Render::DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB)
 	{
 		SetRenderDrawColor(color);
 		SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
 		ResetDrawColor();
 	}
 
-	void Render::DrawCircle(SDL_Color color, Vector2int pos, int radius)
+	void Render::DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius)
 	{
 		Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 		filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor);
 		ResetDrawColor();
 	}
 
-	void Render::SetRenderDrawColor(SDL_Color color)
+	void Render::SetRenderDrawColor(const SDL_Color& color)
 	{
 		SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 	}

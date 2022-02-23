@@ -12,7 +12,7 @@ namespace Birb
 		:x(0.0f), y(0.0f)
 		{}
 
-		Vector2f(float p_x, float p_y)
+		Vector2f(const float& p_x, const float& p_y)
 		:x(p_x), y(p_y)
 		{}
 
@@ -62,11 +62,11 @@ namespace Birb
 		:x(0), y(0)
 		{}
 
-		Vector2int(int p_x, int p_y)
+		Vector2int(const int& p_x, const int& p_y)
 		:x(p_x), y(p_y)
 		{}
 
-		Vector2int(float p_x, float p_y)
+		Vector2int(const float& p_x, const float& p_y)
 		{
 			x = std::round(p_x);
 			y = std::round(p_y);
@@ -123,7 +123,7 @@ namespace Birb
 		:x(0.0f), y(0.0f), z(0.0f)
 		{}
 
-		Vector3f(float p_x, float p_y, float p_z)
+		Vector3f(const float& p_x, const float& p_y, const float& p_z)
 		:x(p_x), y(p_y), z(p_z)
 		{}
 
@@ -178,11 +178,11 @@ namespace Birb
 		:x(0), y(0), z(0)
 		{}
 
-		Vector3int(int p_x, int p_y, int p_z)
+		Vector3int(const int& p_x, const int& p_y, const int& p_z)
 		:x(p_x), y(p_y), z(p_z)
 		{}
 
-		Vector3int(float p_x, float p_y, float p_z)
+		Vector3int(const float& p_x, const float& p_y, const float& p_z)
 		{
 			x = std::round(p_x);
 			y = std::round(p_y);
@@ -236,31 +236,32 @@ namespace Birb
 	/// Misc math functions
 	struct Math
 	{
-		static float VectorDistance(Vector2f a, Vector2f b); ///< Calculate the distance between two 2D floating point vectors
-		static float VectorDistance(Vector2int a, Vector2int b); ///< Calculate the distance between two 2D integer vectors
-		static float VectorDistance(Vector3f a, Vector3f b); ///< Calculate the distance between two 3D floating point vectors
-		static float VectorDistance(Vector3int a, Vector3int b); ///< Calculate the distance between two 3D integer vectors
+		static float VectorDistance(const Vector2f& a, const Vector2f& b); ///< Calculate the distance between two 2D floating point vectors
+		static float VectorDistance(const Vector2int& a, const Vector2int& b); ///< Calculate the distance between two 2D integer vectors
+		static float VectorDistance(const Vector3f& a, const Vector3f& b); ///< Calculate the distance between two 3D floating point vectors
+		static float VectorDistance(const Vector3int& a, const Vector3int& b); ///< Calculate the distance between two 3D integer vectors
 
-		static float 		Clamp(float value, float min, float max); ///< Clamp a float between the given values
-		static int 			Clamp(int value, int min, int max); ///< Clamp an integer between the given values
+		static float 		Clamp(const float& value, const float& min, const float& max); ///< Clamp a float between the given values
+		static double 		Clamp(const double& value, const double& min, const double& max); ///< Clamp a double between the given values
+		static int 			Clamp(const int& value, const int& min, const int& max); ///< Clamp an integer between the given values
 
-		static int 			Lerp(int a, int b, float t); ///< Interpolate a value between two values given time t
-		static float 		Lerp(float a, float b, float t); ///< Interpolate a value between two values given time t
-		static Vector2f 	Lerp(Vector2f a, Vector2f b, float t); ///< Interpolate a point between two 2D floating point vectors given time t
-		static Vector2int 	Lerp(Vector2int a, Vector2int b, float t); ///< Interpolate a point between two 2D integer vectors given time t
-		static Vector3f 	Lerp(Vector3f a, Vector3f b, float t); ///< Interpolate a point between two 3D floating point vectors given time t
-		static Vector3int 	Lerp(Vector3int a, Vector3int b, float t); ///< Interpolate a point between two 3D integer vectors given time t
+		static int 			Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
+		static float 		Lerp(const float& a, const float& b, const float& t); ///< Interpolate a value between two values given time t
+		static Vector2f 	Lerp(const Vector2f& a, const Vector2f& b, const float& t); ///< Interpolate a point between two 2D floating point vectors given time t
+		static Vector2int 	Lerp(const Vector2int& a, const Vector2int& b, const float& t); ///< Interpolate a point between two 2D integer vectors given time t
+		static Vector3f 	Lerp(const Vector3f& a, const Vector3f& b, const float& t); ///< Interpolate a point between two 3D floating point vectors given time t
+		static Vector3int 	Lerp(const Vector3int& a, const Vector3int& b, const float& t); ///< Interpolate a point between two 3D integer vectors given time t
 
-		static float 	CenterPoint(float a, float b); ///< Calculate the "center" value between two 1D floats
-		static Vector2f CenterPoint(Vector2f a, Vector2f b); ///< Calculate the center point between two 2D floating point vectors
-		static Vector2f CenterPoint(Vector2int a, Vector2int b); ///< Calculate the center point between two 2D integer vectors
-		static Vector3f CenterPoint(Vector3f a, Vector3f b); ///< Calculate the center point between two 3D floating point vectors
-		static Vector3f CenterPoint(Vector3int a, Vector3int b); ///< Calculate the center point between two 3D integer vectors
+		static float 	CenterPoint(const float& a, const float& b); ///< Calculate the "center" value between two 1D floats
+		static Vector2f CenterPoint(const Vector2f& a, const Vector2f& b); ///< Calculate the center point between two 2D floating point vectors
+		static Vector2f CenterPoint(const Vector2int& a, const Vector2int& b); ///< Calculate the center point between two 2D integer vectors
+		static Vector3f CenterPoint(const Vector3f& a, const Vector3f& b); ///< Calculate the center point between two 3D floating point vectors
+		static Vector3f CenterPoint(const Vector3int& a, const Vector3int& b); ///< Calculate the center point between two 3D integer vectors
 
-		static Vector2int FindClosestPoint(Vector2int point, Vector2int points[], int pointCount);
-		static Vector2int FindClosestPoint(Vector2int point, std::vector<Vector2int> points);
-		static Vector2int FindClosestPoint(Vector2int point, std::vector<Vector2int> points, std::vector<Vector2int> ignoredPoints);
+		static Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount);
+		static Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points);
+		static Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints);
 
-		static double 	Round(double value, int decimal_points); ///< Rounds the given floating point value with specified accuracy
+		static double 	Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
 	};
 }

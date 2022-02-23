@@ -18,12 +18,12 @@ namespace Birb
 		double ElapsedMinutes();
 		double ElapsedHours();
 
-		double CalcSeconds(double mills); 	///< Converts milliseconds into seconds
-		double CalcMinutes(double mills); 	///< Converts milliseconds into minutes
-		double CalcHours(double mills); 	///< Converts milliseconds into hours
+		static double CalcSeconds(const double& mills); 	///< Converts milliseconds into seconds
+		static double CalcMinutes(const double& mills); 	///< Converts milliseconds into minutes
+		static double CalcHours(const double& mills); 	///< Converts milliseconds into hours
 		
 		std::string DigitalFormat(); 		///< Prints the current elapsed time in digital format (00:00:00:000)
-		std::string SplitDigitalFormat(double previousmills /**< [in] elapsed milliseconds of the previous split */); ///< Used for calculating digital time for a split during timing
+		std::string SplitDigitalFormat(const double& previousmills /**< [in] elapsed milliseconds of the previous split */); ///< Used for calculating digital time for a split during timing
 		bool running = false;
 
 	private:

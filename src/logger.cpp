@@ -7,7 +7,7 @@ namespace Birb
 {
 	namespace Debug
 	{
-		void Log(std::string text, Type type)
+		void Log(const std::string& text, Type type)
 		{
 			std::time_t t = std::time(0);
 			std::tm* now = std::localtime(&t);

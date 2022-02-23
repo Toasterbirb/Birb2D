@@ -6,7 +6,7 @@ namespace Birb
 	:x(0.0f), y(0.0f), w(0.0f), h(0.0f)
 	{}
 
-	Rect::Rect(float p_x, float p_y, float p_w, float p_h)
+	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h)
 	:x(p_x), y(p_y), w(p_w), h(p_h)
 	{}
 
@@ -21,7 +21,7 @@ namespace Birb
 		return roundedRect;
 	}
 
-	SDL_Rect Rect::getSDLRect()
+	SDL_Rect Rect::getSDLRect() const
 	{
 		SDL_Rect sdlrect;
 		sdlrect.h = h;
@@ -33,7 +33,7 @@ namespace Birb
 
 	namespace utils
 	{
-		std::vector<Vector2int> SortPath(Vector2int startPoint, std::vector<Vector2int> points)
+		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points)
 		{
 			std::vector<Vector2int> result;
 			Vector2int closestPoint;

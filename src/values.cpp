@@ -6,7 +6,7 @@ namespace Birb
 	/* Dims or lightens color */
 	namespace Colors
 	{
-		SDL_Color ChangeColorIntensity(SDL_Color color, int delta)
+		SDL_Color ChangeColorIntensity(const SDL_Color& color, const int& delta)
 		{
 			SDL_Color newColor = color;
 

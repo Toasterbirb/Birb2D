@@ -34,7 +34,7 @@ namespace Birb
 	}
 
 	//** Loads up a music file from given path. Shouldn't be used for short sound effects
-	Audio::MusicFile::MusicFile(std::string p_filePath)
+	Audio::MusicFile::MusicFile(const std::string& p_filePath)
 	:filePath(p_filePath)
 	{
 		music = Mix_LoadMUS(p_filePath.c_str());
@@ -46,7 +46,7 @@ namespace Birb
 	}
 
 	//** Loads up a sound file from given path. Used for shorter sound effects and not music
-	Audio::SoundFile::SoundFile(std::string p_filePath)
+	Audio::SoundFile::SoundFile(const std::string& p_filePath)
 	:filePath(p_filePath)
 	{
 		sound = Mix_LoadWAV(p_filePath.c_str());

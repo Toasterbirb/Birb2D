@@ -9,18 +9,18 @@ namespace Birb
 	{
 		namespace Directory
 		{
-			void Create(std::string dpath)
+			void Create(const std::string& dpath)
 			{
 				std::filesystem::create_directories(dpath);
 			}
 
-			void Remove(std::string dpath)
+			void Remove(const std::string& dpath)
 			{
 				if (std::filesystem::is_directory(dpath))
 					std::filesystem::remove(dpath);
 			}
 
-			bool Exists(std::string dpath)
+			bool Exists(const std::string& dpath)
 			{
 				return (std::filesystem::exists(dpath) && std::filesystem::is_directory(dpath));
 			}
@@ -28,7 +28,7 @@ namespace Birb
 
 		namespace File
 		{
-			void CreateEmpty(std::string fpath)
+			void CreateEmpty(const std::string& fpath)
 			{
 				if (!std::filesystem::exists(fpath))
 					std::ofstream output(fpath);
@@ -36,7 +36,7 @@ namespace Birb
 					Debug::Log("File '" + fpath + "' exists already. Not overwriting it...", Debug::Type::warning);
 			}
 
-			void Remove(std::string fpath)
+			void Remove(const std::string& fpath)
 			{
 				if (Exists(fpath))
 					std::filesystem::remove(fpath);
@@ -44,12 +44,12 @@ namespace Birb
 					Debug::Log("Tried to remove file '" + fpath + "' even though it doesn't even exist", Debug::Type::warning);
 			}
 
-			bool Exists(std::string fpath)
+			bool Exists(const std::string& fpath)
 			{
 				return (std::filesystem::exists(fpath) && std::filesystem::is_regular_file(fpath));
 			}
 
-			std::string Read(std::string fpath)
+			std::string Read(const std::string& fpath)
 			{
 				/* Make sure the file exists */
 				if (!Exists(fpath))
@@ -68,7 +68,7 @@ namespace Birb
 				return fileContents;
 			}
 
-			bool Write(std::string fpath, std::string content, bool overwrite)
+			bool Write(const std::string& fpath, const std::string& content, const bool& overwrite)
 			{
 				/* Check if a file exists if overwrite protection is enabled */
 				if (!overwrite && Exists(fpath))

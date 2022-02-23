@@ -15,7 +15,7 @@ namespace Birb
 	struct Rect
 	{
 		Rect();
-		Rect(float p_x, float p_y, float p_w, float p_h);
+		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h);
 
 		void print()
 		{
@@ -28,8 +28,7 @@ namespace Birb
 		}
 
 		Rect getInt();
-
-		SDL_Rect getSDLRect();
+		SDL_Rect getSDLRect() const;
 
 		float x, y, w, h;
 	};
@@ -51,7 +50,7 @@ namespace Birb
 			RandomGenInitialized = true;
 		}
 
-		inline int randomInt(int min, int max)
+		inline int randomInt(const int& min, const int& max)
 		{
 			if (!RandomGenInitialized)
 				InitRandomGen();
@@ -65,7 +64,7 @@ namespace Birb
 			//return distribution(generator);
 		}
 
-		inline float randomFloat(float min, float max)
+		inline float randomFloat(const float& min, const float& max)
 		{
 			if (!RandomGenInitialized)
 				InitRandomGen();
@@ -80,7 +79,7 @@ namespace Birb
 			SDL_QueryTexture(texture, NULL, NULL, &x, &y);
 		}
 
-		static SDL_Color TexturePixelToColor(Uint8* pixels, Vector2int pixelPosition, int textureWidth)
+		static SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2int& pixelPosition, const int& textureWidth)
 		{
 			// Some weird BGRA format
 			Uint8 b = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 0]; // Blue
@@ -93,7 +92,7 @@ namespace Birb
 			return color;
 		}
 
-		std::vector<Vector2int> SortPath(Vector2int startPoint, std::vector<Vector2int> points);
+		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points);
 	}
 }
 

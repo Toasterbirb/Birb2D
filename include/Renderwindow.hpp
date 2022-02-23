@@ -12,7 +12,7 @@ namespace Birb
 	struct Window
 	{
 		Window();
-		Window(std::string p_title, Vector2int p_window_dimensions, int p_refresh_rate, bool resizable);
+		Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable);
 
 		/* -- Init stuff functions -- */
 		static void InitSDL();
@@ -28,12 +28,12 @@ namespace Birb
 
 		/* -- Cursor functions -- */
 		Vector2int CursorPosition();
-		bool CursorInRect(Rect rect);
+		bool CursorInRect(const Rect& rect);
 		/* ---------------------- */
 
 		/* -- Basic window events -- */
-		void SetWindowSize(Vector2int dimensions);
-		void EventTick(SDL_Event event, bool* GameRunning);
+		void SetWindowSize(const Vector2int& dimensions);
+		void EventTick(const SDL_Event& event, bool* GameRunning);
 		bool PollEvents(); ///< Runs SDL_PollEvent and saves the result to the *event* variable
 		SDL_Event event;
 		/* ------------------------- */
@@ -52,10 +52,10 @@ namespace Birb
 	/// Methods for loading different resources like fonts and textures
 	struct Resources
 	{
-		static SDL_Texture* LoadTexture(std::string p_filePath);
-		static SDL_Texture* TextSprite(std::string text, TTF_Font* font, SDL_Color& color);
-		static SDL_Texture* TextSprite(std::string text, TTF_Font* font, SDL_Color& color, SDL_Color& bgColor);
-		static TTF_Font* 	LoadFont(std::string p_filePath, int p_fontSize);
+		static SDL_Texture* LoadTexture(const std::string& p_filePath);
+		static SDL_Texture* TextSprite(const std::string& text, TTF_Font* font, const SDL_Color& color);
+		static SDL_Texture* TextSprite(const std::string& text, TTF_Font* font, const SDL_Color& color, const SDL_Color& bgColor);
+		static TTF_Font* 	LoadFont(const std::string& p_filePath, const int& p_fontSize);
 		static Uint8* 		CopyTexturePixels(SDL_Surface* surface, int* width, int* height, int* pitch);
 	};
 
@@ -64,10 +64,10 @@ namespace Birb
 	{
 		static bool DrawEntity(Entity& entity);
 		static void ResetDrawColor();
-		static void DrawRect(SDL_Color color, Rect dimensions); 			///< Draw filled rect
-		static void DrawRect(SDL_Color color, Rect dimensions, int width); 	///< Draw hollow rect
-		static void DrawLine(SDL_Color color, Vector2int pointA, Vector2int pointB);
-		static void DrawCircle(SDL_Color color, Vector2int pos, int radius);
-		static void SetRenderDrawColor(SDL_Color color);
+		static void DrawRect(const SDL_Color& color, const Rect& dimensions); ///< Draw filled rect
+		static void DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
+		static void DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB);
+		static void DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius);
+		static void SetRenderDrawColor(const SDL_Color& color);
 	};
 }

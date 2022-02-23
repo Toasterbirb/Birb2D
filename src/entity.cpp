@@ -14,13 +14,13 @@ namespace Birb
 			bgColor = NULL;
 		}
 
-		TextComponent::TextComponent(std::string p_text, TTF_Font* p_font, SDL_Color* p_color)
+		TextComponent::TextComponent(const std::string& p_text, TTF_Font* p_font, SDL_Color* p_color)
 		:text(p_text), font(p_font), color(p_color)
 		{
 			bgColor = NULL;
 		}
 
-		TextComponent::TextComponent(std::string p_text, TTF_Font* p_font, SDL_Color* p_color, SDL_Color* p_bgColor)
+		TextComponent::TextComponent(const std::string& p_text, TTF_Font* p_font, SDL_Color* p_color, SDL_Color* p_bgColor)
 		:text(p_text), font(p_font), color(p_color), bgColor(p_bgColor)
 		{}
 
@@ -51,7 +51,7 @@ namespace Birb
 			animationQueued = false;
 		}
 
-		AnimationComponent::AnimationComponent(Vector2int p_spriteSize, int p_frameCount, int p_fps)
+		AnimationComponent::AnimationComponent(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps)
 		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), lastFrame(p_frameCount - 1)
 		{
 			frameIndex 		= 0;
@@ -59,7 +59,7 @@ namespace Birb
 			animationQueued = false;
 		}
 
-		AnimationComponent::AnimationComponent(Vector2int p_spriteSize, int p_frameCount, int p_fps, bool p_loop)
+		AnimationComponent::AnimationComponent(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop)
 		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), loop(p_loop), lastFrame(p_frameCount - 1)
 		{
 			frameIndex 		= 0;
@@ -79,14 +79,14 @@ namespace Birb
 			animationQueued = true;
 		}
 
-		void AnimationComponent::StartAnimation(int p_startFrame)
+		void AnimationComponent::StartAnimation(const int& p_startFrame)
 		{
 			frameIndex = p_startFrame;
 			lastFrame = frameCount - 1;
 			animationQueued = true;
 		}
 
-		void AnimationComponent::StartAnimation(int p_startFrame, int p_lastFrame)
+		void AnimationComponent::StartAnimation(const int& p_startFrame, const int& p_lastFrame)
 		{
 			frameIndex = p_startFrame;
 			lastFrame = p_lastFrame;
@@ -94,7 +94,7 @@ namespace Birb
 		}
 	}
 
-	Vector2int Entity::getAtlasPosition(int frame)
+	Vector2int Entity::getAtlasPosition(const int& frame)
 	{
 		Vector2int pos;
 		int index = frame;
@@ -113,7 +113,7 @@ namespace Birb
 		return pos;
 	}
 
-	void Entity::SetText(std::string newText)
+	void Entity::SetText(const std::string& newText)
 	{
 		/* Don't do anything if the text hasn't changed at all */
 		if (textComponent.text == newText)
@@ -152,19 +152,19 @@ namespace Birb
 		active = true;
 	}
 
-	Entity::Entity(std::string p_name)
+	Entity::Entity(const std::string& p_name)
 	:name(p_name)
 	{
 		SetBaseEntityValues();
 	}
 
-	Entity::Entity(std::string p_name, Rect p_rect, SDL_Texture* p_texture)
+	Entity::Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture)
 	:name(p_name), sprite(p_texture), rect(p_rect)
 	{
 		SetBaseEntityValues();
 	}
 
-	Entity::Entity(std::string p_name, Vector2int pos, EntityComponent::TextComponent p_textComponent)
+	Entity::Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::TextComponent& p_textComponent)
 	:name(p_name)
 	{
 		/* Load the text sprite */
@@ -177,7 +177,7 @@ namespace Birb
 
 	}
 
-	Entity::Entity(std::string p_name, Vector2int pos, SDL_Texture* p_texture)
+	Entity::Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture)
 	:name(p_name), sprite(p_texture)
 	{
 		SetBaseEntityValues();

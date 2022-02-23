@@ -79,11 +79,52 @@ TEST_CASE("window and rendering functions")
 	CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
 	CHECK(Birb::Render::DrawEntity(textEntity));
 	CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
+
+	CHECK_NOTHROW(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
+	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
+	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
+
 	CHECK_NOTHROW(window.Display());
 	sleep(1);
+
+	/* Try changing text */
+	textEntity.SetText("Changed text :D");
+	CHECK_NOTHROW(window.Clear());
+
+	CHECK(Birb::Render::DrawEntity(testEntity));
+	CHECK(Birb::Render::DrawEntity(secondEntityWithSameTexture));
+	CHECK(Birb::Render::DrawEntity(rotatedEntity));
+	CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
+	CHECK(Birb::Render::DrawEntity(textEntity));
+	CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
+
+	CHECK_NOTHROW(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
+	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
+	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
+
+	CHECK_NOTHROW(window.Display());
+	sleep(1);
+
 	CHECK_NOTHROW(window.Cleanup());
 
 	SDL_Quit();
+}
+
+TEST_CASE("Audio tests")
+{
+	Birb::Audio::Init(0);
+	Birb::Audio::SoundFile sound("./res/audio/game_over.wav");
+	Birb::Audio::MusicFile music("./res/audio/score.wav");
+
+	Birb::Debug::Log("A sound should play now");
+	sound.play();
+	CHECK(sound.isPlaying());
+	sleep(1);
+
+	Birb::Debug::Log("Another sound should play now");
+	music.play();
+	CHECK(music.isPlaying());
+	sleep(1);
 }
 
 // ### Math stuff and other utilities ###
@@ -175,6 +216,28 @@ TEST_CASE("Distance calculation with 3D vectors")
 
 	CHECK(std::roundf(Birb::Math::VectorDistance(pointAf, pointBf)) == std::roundf(7.3484792283495));
 	CHECK(std::roundf(Birb::Math::VectorDistance(pointAint, pointBint)) == std::roundf(7.3484692283495));
+}
+
+TEST_CASE("Clamping")
+{
+	int intvalue = 10;
+	float floatvalue = 15;
+	double doublevalue = 20;
+
+	CHECK(Birb::Math::Clamp(intvalue, 0, 5) == 5);
+	CHECK(Birb::Math::Clamp(intvalue, 0, 20) == 10);
+	CHECK(Birb::Math::Clamp(intvalue, 20, 40) == 20);
+	CHECK(Birb::Math::Clamp(intvalue, 40, 5) == 40);
+
+	CHECK(Birb::Math::Clamp(floatvalue, 0.0f, 5.0f) == 5.0f);
+	CHECK(Birb::Math::Clamp(floatvalue, 0.0f, 20.0f) == 15.0f);
+	CHECK(Birb::Math::Clamp(floatvalue, 20.0f, 40.0f) == 20.0f);
+	CHECK(Birb::Math::Clamp(floatvalue, 40.0f, 5.0f) == 40.0f);
+
+	CHECK(Birb::Math::Clamp(doublevalue, 0.0, 5.0) == 5.0);
+	CHECK(Birb::Math::Clamp(doublevalue, 0.0, 25.0) == 20.0);
+	CHECK(Birb::Math::Clamp(doublevalue, 25.0, 40.0) == 25.0);
+	CHECK(Birb::Math::Clamp(doublevalue, 40.0, 5.0) == 40);
 }
 
 TEST_CASE("Lerping / interpolation with integers")
@@ -283,6 +346,28 @@ TEST_CASE("Calculate the centerpoint between two 3D vectors")
 	CHECK(resultint == expectedResult);
 }
 
+TEST_CASE("Find closest point to given point in a list of points")
+{
+	Birb::Vector2int points[5] = {
+		Birb::Vector2int(0, 0),
+		Birb::Vector2int(3, 3),
+		Birb::Vector2int(1, 1),
+		Birb::Vector2int(8, 9),
+		Birb::Vector2int(-5, 10),
+	};
+
+	std::vector<Birb::Vector2int> pointList;
+
+	std::vector<Birb::Vector2int> ignoreList;
+	ignoreList.push_back(Birb::Vector2int(1, 1));
+
+	pointList.insert(pointList.end(), points, points + 5);
+
+	CHECK(Birb::Math::FindClosestPoint(points[0], points, 5) == Birb::Vector2int(1, 1));
+	CHECK(Birb::Math::FindClosestPoint(pointList[0], pointList) == Birb::Vector2int(1, 1));
+	CHECK(Birb::Math::FindClosestPoint(pointList[0], pointList, ignoreList) == Birb::Vector2int(3, 3));
+}
+
 TEST_CASE("Rounding with specified accuracy")
 {
 	double value1 = 0.013333333;
@@ -378,14 +463,15 @@ TEST_CASE("Timer stop test")
 	Birb::Debug::Log("Running timer tests, this might take a moment...");
 	Birb::Timer timer;
 	timer.Start();
-	SDL_Delay(1000);
+	SDL_Delay(1200);
 	timer.Stop();
 
-	CHECK(timer.ElapsedSeconds() == 1.00);
+	CHECK(timer.ElapsedSeconds() == 1.20);
+	CHECK(timer.DigitalFormat() == "00:00:01:200"); /* Test digital format since we have already spent time on timing */
 
 	/* Make sure the timer actually stops after stopping it */
 	SDL_Delay(500);
-	CHECK(timer.ElapsedSeconds() == 1.00);
+	CHECK(timer.ElapsedSeconds() == 1.20);
 }
 
 TEST_CASE("Timer accuracy test")
@@ -396,6 +482,15 @@ TEST_CASE("Timer accuracy test")
 	timer.Stop();
 
 	CHECK(timer.ElapsedMilliseconds() == 123);
+}
+
+TEST_CASE("Timer format conversions")
+{
+	int milliseconds = 3600000;
+
+	CHECK(Birb::Timer::CalcSeconds(milliseconds) == 3600);
+	CHECK(Birb::Timer::CalcMinutes(milliseconds) == 60);
+	CHECK(Birb::Timer::CalcHours(milliseconds) == 1);
 }
 
 TEST_CASE("Filesystem directories")

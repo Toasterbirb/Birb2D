@@ -16,8 +16,8 @@ namespace Birb
 		struct TextComponent
 		{
 			TextComponent();
-			TextComponent(std::string p_text, TTF_Font* font, SDL_Color* p_color);
-			TextComponent(std::string p_text, TTF_Font* font, SDL_Color* p_color, SDL_Color* p_bgColor);
+			TextComponent(const std::string& p_text, TTF_Font* font, SDL_Color* p_color);
+			TextComponent(const std::string& p_text, TTF_Font* font, SDL_Color* p_color, SDL_Color* p_bgColor);
 			std::string text;
 			TTF_Font* font;
 			SDL_Color* color; 	///< Surface color of the text
@@ -37,8 +37,8 @@ namespace Birb
 		struct AnimationComponent
 		{
 			AnimationComponent();
-			AnimationComponent(Vector2int p_spriteSize, int p_frameCount, int p_fps);
-			AnimationComponent(Vector2int p_spriteSize, int p_frameCount, int p_fps, bool p_loop);
+			AnimationComponent(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps);
+			AnimationComponent(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop);
 
 			int fps;
 			bool loop; ///< Start the animation over when it ends
@@ -52,8 +52,8 @@ namespace Birb
 
 
 			void StartAnimation(); ///< Start playing the animation from the first frame
-			void StartAnimation(int startFrame); ///< Start playing the animation from selected frame
-			void StartAnimation(int startFrame, int endFrame); ///< Start playing the animation with custom start and end frame
+			void StartAnimation(const int& startFrame); ///< Start playing the animation from selected frame
+			void StartAnimation(const int& startFrame, const int& endFrame); ///< Start playing the animation with custom start and end frame
 			void ResetAnimationAtlas(); ///< Reset current frame to 0 and reset the lastFrame to frameCount - 1
 		};
 	}
@@ -63,13 +63,13 @@ namespace Birb
 	/// Entities can be anything really. For example, it could be text or a picture. This could be extended to animations in the future
 	struct Entity
 	{
-		Entity(std::string p_name); ///< Creates empty Entity object
-		Entity(std::string p_name, Rect p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
-		Entity(std::string p_name, Vector2int pos, EntityComponent::TextComponent p_textComponent); 	///< Creates a Text Entity using a TextComponent
-		Entity(std::string p_name, Vector2int pos, SDL_Texture* p_texture); 		///< Creates an Entity with a SDL_Texture to render without specifying a scale
+		Entity(const std::string& p_name); ///< Creates empty Entity object
+		Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
+		Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::TextComponent& p_textComponent); 	///< Creates a Text Entity using a TextComponent
+		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture); 		///< Creates an Entity with a SDL_Texture to render without specifying a scale
 
 		/* Make it possible to update the TextComponent */
-		void SetText(std::string newText); 	///< Change the text in TextComponent and reload the sprite
+		void SetText(const std::string& newText); 	///< Change the text in TextComponent and reload the sprite
 		void SetFont(TTF_Font* font); 		///< Change the font in TextComponent and reload the sprite
 		void SetColor(SDL_Color* color); 	///< Change the color in TextComponent and reload the sprite
 
@@ -92,7 +92,7 @@ namespace Birb
 
 		/* Informational functions */
 		bool isHovering(); ///< Check if the cursor is hovering over this entity
-		Vector2int getAtlasPosition(int frame); ///< Get position in a texture atlas given the sprite index
+		Vector2int getAtlasPosition(const int& frame); ///< Get position in a texture atlas given the sprite index
 	};
 
 }
