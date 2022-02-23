@@ -35,7 +35,7 @@ namespace Birb
 			onClick = PlaceHolderClickEvent;
 		}
 
-		ClickComponent::ClickComponent(std::function<void()> p_onClick)
+		ClickComponent::ClickComponent(const std::function<void()>& p_onClick)
 		:onClick(p_onClick)
 		{
 			active = true;
@@ -162,6 +162,19 @@ namespace Birb
 	:name(p_name), sprite(p_texture), rect(p_rect)
 	{
 		SetBaseEntityValues();
+	}
+
+	Entity::Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::AnimationComponent& p_animationComponent)
+	:name(p_name), sprite(p_texture)
+	{
+		/* Load the text sprite */
+		SetBaseEntityValues();
+		animationComponent = p_animationComponent;
+
+		rect.x = pos.x;
+		rect.y = pos.y;
+		rect.w = p_animationComponent.spriteSize.x;
+		rect.h = p_animationComponent.spriteSize.y;
 	}
 
 	Entity::Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::TextComponent& p_textComponent)

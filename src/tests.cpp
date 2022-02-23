@@ -89,6 +89,9 @@ TEST_CASE("window and rendering functions")
 
 	/* Try changing text */
 	textEntity.SetText("Changed text :D");
+	textEntity.SetColor(&Birb::Colors::Green);
+	CHECK(textEntity.textComponent.text == "Changed text :D");
+	CHECK(textEntity.textComponent.color == &Birb::Colors::Green);
 	CHECK_NOTHROW(window.Clear());
 
 	CHECK(Birb::Render::DrawEntity(testEntity));
@@ -104,6 +107,33 @@ TEST_CASE("window and rendering functions")
 
 	CHECK_NOTHROW(window.Display());
 	sleep(1);
+
+	SDL_Texture* animationSprite = Birb::Resources::LoadTexture("./res/textures/birb_animation.png");
+	Birb::Entity animationBirb(
+			"Animated birb",
+			Birb::Vector2int(100, 100),
+			animationSprite,
+			Birb::EntityComponent::AnimationComponent(
+				Birb::Vector2int(64, 64),
+				16,
+				8,
+				true));
+	animationBirb.localScale = Birb::Vector2f(3, 3);
+	animationBirb.animationComponent.StartAnimation();
+
+	/* Keep rendering for about 2 seoncds with a timer */
+	Birb::Timer timer;
+	timer.Start();
+	
+	bool animationSuccessful;
+	while (timer.ElapsedSeconds() < 2)
+	{
+		window.Clear();
+		animationSuccessful = Birb::Render::DrawEntity(animationBirb);
+		window.Display();
+		SDL_Delay(16); /* Cap to around 60 fps, lets not waste CPU cycles... */
+	}
+	CHECK(animationSuccessful == true);
 
 	CHECK_NOTHROW(window.Cleanup());
 
@@ -218,21 +248,29 @@ TEST_CASE("Distance calculation with 3D vectors")
 	CHECK(std::roundf(Birb::Math::VectorDistance(pointAint, pointBint)) == std::roundf(7.3484692283495));
 }
 
-TEST_CASE("Clamping")
+TEST_CASE("integer clamping")
 {
 	int intvalue = 10;
-	float floatvalue = 15;
-	double doublevalue = 20;
 
 	CHECK(Birb::Math::Clamp(intvalue, 0, 5) == 5);
 	CHECK(Birb::Math::Clamp(intvalue, 0, 20) == 10);
 	CHECK(Birb::Math::Clamp(intvalue, 20, 40) == 20);
 	CHECK(Birb::Math::Clamp(intvalue, 40, 5) == 40);
+}
+
+TEST_CASE("float clamping")
+{
+	float floatvalue = 15;
 
 	CHECK(Birb::Math::Clamp(floatvalue, 0.0f, 5.0f) == 5.0f);
 	CHECK(Birb::Math::Clamp(floatvalue, 0.0f, 20.0f) == 15.0f);
 	CHECK(Birb::Math::Clamp(floatvalue, 20.0f, 40.0f) == 20.0f);
 	CHECK(Birb::Math::Clamp(floatvalue, 40.0f, 5.0f) == 40.0f);
+}
+
+TEST_CASE("double clamping")
+{
+	double doublevalue = 20;
 
 	CHECK(Birb::Math::Clamp(doublevalue, 0.0, 5.0) == 5.0);
 	CHECK(Birb::Math::Clamp(doublevalue, 0.0, 25.0) == 20.0);
