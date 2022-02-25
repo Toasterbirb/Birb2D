@@ -41,6 +41,10 @@ namespace Birb
 
 			for (int i = 0; i < (int)points.size(); i++)
 			{
+				/* Skip the point if its the start point */
+				if (startPoint == points[i])
+					continue;
+
 				closestPoint = Birb::Math::FindClosestPoint(result[result.size() - 1], points, result);
 				result.push_back(closestPoint);
 			}

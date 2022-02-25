@@ -2,11 +2,18 @@
 #include <ctime>
 #include <fstream>
 #include <SDL2/SDL.h>
+#include <filesystem>
 
 namespace Birb
 {
 	namespace Debug
 	{
+		void Reset()
+		{
+			if (std::filesystem::exists("./log.txt") && std::filesystem::is_regular_file("./log.txt"))
+				std::filesystem::remove("./log.txt");
+		}
+
 		void Log(const std::string& text, Type type)
 		{
 			std::time_t t = std::time(0);

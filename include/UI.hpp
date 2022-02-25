@@ -10,7 +10,7 @@ namespace Birb
 	public:
 		UI();
 		std::vector<Entity> Buttons;
-		void AddButton(Entity buttonEntity);
-		void PollButtons(Window window);
+		void AddButton(Entity buttonEntity); ///< Addin't an entity to this list makes it interactable as a button
+		void PollButtons(Window window); ///< Check if the user is clicking on any buttons etc.
 	};
 }

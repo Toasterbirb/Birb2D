@@ -14,6 +14,7 @@ docs:
 
 test: audio.o filesystem.o entity.o logger.o math.o renderwindow.o timer.o timestep.o utils.o values.o tests.o
 	mkdir -p build
+	cp -r ./res $(outputDir)/
 	$(CC) $^ $(CFLAGS) $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/test
 
 run_tests: test

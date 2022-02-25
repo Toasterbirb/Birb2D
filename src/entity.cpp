@@ -6,7 +6,7 @@ namespace Birb
 {
 	namespace EntityComponent
 	{
-		TextComponent::TextComponent()
+		Text::Text()
 		{
 			text 	= "";
 			font 	= NULL;
@@ -14,13 +14,13 @@ namespace Birb
 			bgColor = NULL;
 		}
 
-		TextComponent::TextComponent(const std::string& p_text, TTF_Font* p_font, SDL_Color* p_color)
+		Text::Text(const std::string& p_text, TTF_Font* p_font, SDL_Color* p_color)
 		:text(p_text), font(p_font), color(p_color)
 		{
 			bgColor = NULL;
 		}
 
-		TextComponent::TextComponent(const std::string& p_text, TTF_Font* p_font, SDL_Color* p_color, SDL_Color* p_bgColor)
+		Text::Text(const std::string& p_text, TTF_Font* p_font, SDL_Color* p_color, SDL_Color* p_bgColor)
 		:text(p_text), font(p_font), color(p_color), bgColor(p_bgColor)
 		{}
 
@@ -29,19 +29,19 @@ namespace Birb
 			Debug::Log("This button is working");
 		}
 
-		ClickComponent::ClickComponent()
+		Click::Click()
 		{
 			active = true;
 			onClick = PlaceHolderClickEvent;
 		}
 
-		ClickComponent::ClickComponent(const std::function<void()>& p_onClick)
+		Click::Click(const std::function<void()>& p_onClick)
 		:onClick(p_onClick)
 		{
 			active = true;
 		}
 
-		AnimationComponent::AnimationComponent()
+		Animation::Animation()
 		{
 			fps 			= 24;
 			loop 			= false;
@@ -51,7 +51,7 @@ namespace Birb
 			animationQueued = false;
 		}
 
-		AnimationComponent::AnimationComponent(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps)
+		Animation::Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps)
 		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), lastFrame(p_frameCount - 1)
 		{
 			frameIndex 		= 0;
@@ -59,7 +59,7 @@ namespace Birb
 			animationQueued = false;
 		}
 
-		AnimationComponent::AnimationComponent(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop)
+		Animation::Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop)
 		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), loop(p_loop), lastFrame(p_frameCount - 1)
 		{
 			frameIndex 		= 0;
@@ -67,26 +67,26 @@ namespace Birb
 		}
 
 
-		void AnimationComponent::ResetAnimationAtlas()
+		void Animation::ResetAnimationAtlas()
 		{
 			frameIndex = 0;
 			lastFrame = frameCount - 1;
 		}
 
-		void AnimationComponent::StartAnimation()
+		void Animation::StartAnimation()
 		{
 			ResetAnimationAtlas();
 			animationQueued = true;
 		}
 
-		void AnimationComponent::StartAnimation(const int& p_startFrame)
+		void Animation::StartAnimation(const int& p_startFrame)
 		{
 			frameIndex = p_startFrame;
 			lastFrame = frameCount - 1;
 			animationQueued = true;
 		}
 
-		void AnimationComponent::StartAnimation(const int& p_startFrame, const int& p_lastFrame)
+		void Animation::StartAnimation(const int& p_startFrame, const int& p_lastFrame)
 		{
 			frameIndex = p_startFrame;
 			lastFrame = p_lastFrame;
@@ -164,7 +164,7 @@ namespace Birb
 		SetBaseEntityValues();
 	}
 
-	Entity::Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::AnimationComponent& p_animationComponent)
+	Entity::Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent)
 	:name(p_name), sprite(p_texture)
 	{
 		/* Load the text sprite */
@@ -177,7 +177,7 @@ namespace Birb
 		rect.h = p_animationComponent.spriteSize.y;
 	}
 
-	Entity::Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::TextComponent& p_textComponent)
+	Entity::Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent)
 	:name(p_name)
 	{
 		/* Load the text sprite */

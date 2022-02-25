@@ -41,10 +41,14 @@ TEST_CASE("Random int")
 
 TEST_CASE("logging")
 {
+	std::cout << "There should be 4 different log messages showing up shortly..." << std::endl;
 	CHECK_NOTHROW(Birb::Debug::Log("Log (this is only a test)"));
 	CHECK_NOTHROW(Birb::Debug::Log("Log (this is only a test)", Birb::Debug::log));
 	CHECK_NOTHROW(Birb::Debug::Log("Warning (this is only a test)", Birb::Debug::warning));
 	CHECK_NOTHROW(Birb::Debug::Log("Error (this is only a test)", Birb::Debug::error));
+	Birb::Debug::Reset();
+	CHECK_FALSE(Birb::Filesystem::File::Exists("./log.txt"));
+	std::cout << "Log file reset. The logging messages above this line shouldn't be in the log.txt file" << std::endl;
 }
 
 TEST_CASE("window and rendering functions")
@@ -60,8 +64,8 @@ TEST_CASE("window and rendering functions")
 	Birb::Entity entityWithNegativeSize("Entity with negative size", Birb::Rect(300, 100, -128, 72), texture);
 
 
-	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::TextComponent("Hello World", font, &Birb::Colors::Red));
-	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::TextComponent("Hello World", font, &Birb::Colors::Red, &Birb::Colors::White));
+	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red));
+	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red, &Birb::Colors::White));
 
 	CHECK(window.win_title == "Title");
 	CHECK(window.window_dimensions.x == 1280);
@@ -113,7 +117,7 @@ TEST_CASE("window and rendering functions")
 			"Animated birb",
 			Birb::Vector2int(100, 100),
 			animationSprite,
-			Birb::EntityComponent::AnimationComponent(
+			Birb::EntityComponent::Animation(
 				Birb::Vector2int(64, 64),
 				16,
 				8,
@@ -396,14 +400,49 @@ TEST_CASE("Find closest point to given point in a list of points")
 
 	std::vector<Birb::Vector2int> pointList;
 
-	std::vector<Birb::Vector2int> ignoreList;
-	ignoreList.push_back(Birb::Vector2int(1, 1));
+	std::vector<Birb::Vector2int> ignoreList =
+	{
+		Birb::Vector2int(1, 1),
+		Birb::Vector2int(3, 3)
+	};
 
 	pointList.insert(pointList.end(), points, points + 5);
 
 	CHECK(Birb::Math::FindClosestPoint(points[0], points, 5) == Birb::Vector2int(1, 1));
 	CHECK(Birb::Math::FindClosestPoint(pointList[0], pointList) == Birb::Vector2int(1, 1));
-	CHECK(Birb::Math::FindClosestPoint(pointList[0], pointList, ignoreList) == Birb::Vector2int(3, 3));
+	CHECK(Birb::Math::FindClosestPoint(pointList[0], pointList, ignoreList) == Birb::Vector2int(-5, 10));
+}
+
+TEST_CASE("Sort path with a startpoint")
+{
+	std::vector<Birb::Vector2int> points = {
+		Birb::Vector2int(0, 0),
+		Birb::Vector2int(3, 3),
+		Birb::Vector2int(1, 1),
+		Birb::Vector2int(8, 9),
+		Birb::Vector2int(6, 6),
+	};
+
+	Birb::Debug::Log("Sorting a path...");
+	for (int i = 0; i < (int)points.size(); i++)
+	{
+		Birb::Debug::Log(points[i].print());
+	}
+
+	points = Birb::utils::SortPath(points[0], points);
+	Birb::Debug::Log("----->");
+
+	for (int i = 0; i < (int)points.size(); i++)
+	{
+		Birb::Debug::Log(points[i].print());
+	}
+
+	CHECK(points.size() == 5);
+	CHECK(points[0] == Birb::Vector2int(0, 0));
+	CHECK(points[1] == Birb::Vector2int(1, 1));
+	CHECK(points[2] == Birb::Vector2int(3, 3));
+	CHECK(points[3] == Birb::Vector2int(6, 6));
+	CHECK(points[4] == Birb::Vector2int(8, 9));
 }
 
 TEST_CASE("Rounding with specified accuracy")
@@ -501,6 +540,7 @@ TEST_CASE("Timer stop test")
 	Birb::Debug::Log("Running timer tests, this might take a moment...");
 	Birb::Timer timer;
 	timer.Start();
+	CHECK(timer.running);
 	SDL_Delay(1200);
 	timer.Stop();
 

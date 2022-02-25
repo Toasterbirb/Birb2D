@@ -12,33 +12,33 @@ namespace Birb
 {
 	namespace EntityComponent
 	{
-		/// TextComponent contains details needed to generate a sprite for the Entity in case the Entity is used to display text.
-		struct TextComponent
+		/// Text contains details needed to generate a sprite for the Entity in case the Entity is used to display text.
+		struct Text
 		{
-			TextComponent();
-			TextComponent(const std::string& p_text, TTF_Font* font, SDL_Color* p_color);
-			TextComponent(const std::string& p_text, TTF_Font* font, SDL_Color* p_color, SDL_Color* p_bgColor);
+			Text();
+			Text(const std::string& p_text, TTF_Font* font, SDL_Color* p_color);
+			Text(const std::string& p_text, TTF_Font* font, SDL_Color* p_color, SDL_Color* p_bgColor);
 			std::string text;
 			TTF_Font* font;
 			SDL_Color* color; 	///< Surface color of the text
 			SDL_Color* bgColor; ///< Background color for the text component
 		};
 
-		/// ClickComponent adds button functionality to the Entity
-		struct ClickComponent
+		/// Click adds button functionality to the Entity
+		struct Click
 		{
-			ClickComponent();
-			ClickComponent(const std::function<void()>& p_onClick);
+			Click();
+			Click(const std::function<void()>& p_onClick);
 			bool active;
 			std::function<void()> onClick;
 		};
 
-		/// AnimationComponent allows for texture atlas based sprite animations
-		struct AnimationComponent
+		/// Animation allows for texture atlas based sprite animations
+		struct Animation
 		{
-			AnimationComponent();
-			AnimationComponent(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps);
-			AnimationComponent(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop);
+			Animation();
+			Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps);
+			Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop);
 
 			int fps;
 			bool loop; ///< Start the animation over when it ends
@@ -56,6 +56,12 @@ namespace Birb
 			void StartAnimation(const int& startFrame, const int& endFrame); ///< Start playing the animation with custom start and end frame
 			void ResetAnimationAtlas(); ///< Reset current frame to 0 and reset the lastFrame to frameCount - 1
 		};
+
+		/// ProgressbarComponent is used to create... well... progress bars
+		struct Progressbar
+		{
+
+		};
 	}
 
 	/// Entities are objects that contain all of the information required to render stuff
@@ -65,14 +71,14 @@ namespace Birb
 	{
 		Entity(const std::string& p_name); ///< Creates empty Entity object
 		Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
-		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::AnimationComponent& p_animationComponent); 	///< Creates a Animation Entity using a AnimationComponent
-		Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::TextComponent& p_textComponent); 	///< Creates a Text Entity using a TextComponent
+		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent); 	///< Creates a Animation Entity using a Animation
+		Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
 		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture); 		///< Creates an Entity with a SDL_Texture to render without specifying a scale
 
-		/* Make it possible to update the TextComponent */
-		void SetText(const std::string& newText); 	///< Change the text in TextComponent and reload the sprite
-		void SetFont(TTF_Font* font); 		///< Change the font in TextComponent and reload the sprite
-		void SetColor(SDL_Color* color); 	///< Change the color in TextComponent and reload the sprite
+		/* Make it possible to update the Text */
+		void SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
+		void SetFont(TTF_Font* font); 		///< Change the font in Text and reload the sprite
+		void SetColor(SDL_Color* color); 	///< Change the color in Text and reload the sprite
 
 		std::string name; 		///< Name of the entity. Used for debugging
 
@@ -84,9 +90,9 @@ namespace Birb
 		Rect rect; 				///< Sets the position and the dimensions of the entity
 		Vector2f localScale; 	///< Scale modifier for the Entity rendering
 
-		EntityComponent::TextComponent textComponent; 			///< Enables the rendering of Text
-		EntityComponent::ClickComponent clickComponent; 		///< Enables button-like functionality
-		EntityComponent::AnimationComponent animationComponent; ///< Enables animations for sprite rendering
+		EntityComponent::Text textComponent; 			///< Enables the rendering of Text
+		EntityComponent::Click clickComponent; 			///< Enables button-like functionality
+		EntityComponent::Animation animationComponent; 	///< Enables animations for sprite rendering
 		void LoadSprite(); 				///< Create a sprite for the Entity using details found in the textComponent variable
 		void ReloadSprite(); 			///< Destroy the old sprite and create a new one. Useful for refreshing text after editing the textComponent variable
 		void SetBaseEntityValues(); 	///< Used to set some default value when they aren't provided during Entity initialization

@@ -150,7 +150,28 @@ namespace Birb
 
 	Vector2int Math::FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints)
 	{
-		Vector2int currentClosestPoint = points[0];
+		/* Find the first non-ignored point */
+		Vector2int firstNotIgnored;
+		for (int i = 0; i < (int)points.size(); i++)
+		{
+			bool ignored = false;
+			for (int j = 0; j < (int)ignoredPoints.size(); j++)
+			{
+				if (points[i] == ignoredPoints[j])
+				{
+					ignored = true;
+					break;
+				}
+			}
+
+			if (!ignored)
+			{
+				firstNotIgnored = points[i];
+				break;
+			}
+		}
+
+		Vector2int currentClosestPoint = firstNotIgnored;
 		float currentClosestDistance = VectorDistance(point, points[0]);
 
 		bool ignore;
@@ -161,7 +182,10 @@ namespace Birb
 			/* Check if the point is in the ignore list */
 			for (int j = 0; j < (int)ignoredPoints.size(); j++)
 				if (points[i] == ignoredPoints[j])
+				{
 					ignore = true;
+					break;
+				}
 
 			if (!ignore)
 			{
