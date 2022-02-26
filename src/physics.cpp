@@ -13,7 +13,7 @@ namespace Birb
 			return SDL_HasIntersection(&A, &B);
 		}
 
-		TEST_CASE("RectCollision")
+		TEST_CASE("Rect collision")
 		{
 			Birb::Rect rectA(0, 0, 4, 2);
 			Birb::Rect rectB(2, 1, 3, 2);
@@ -21,6 +21,60 @@ namespace Birb
 
 			CHECK(Birb::Physics::RectCollision(rectA, rectB));
 			CHECK_FALSE(Birb::Physics::RectCollision(rectA, rectC));
+		}
+
+		bool RectCollision(const Birb::Rect rects[], const int& size)
+		{
+			for (int i = 0; i < size; i++)
+				for (int j = 0; j < size; j++)
+					if (i != j && RectCollision(rects[i], rects[j]))
+						return true;
+			return false;
+		}
+
+		TEST_CASE("Rect collision with multiple rects at once in an array")
+		{
+			Birb::Rect rectsA[3] = {
+				Birb::Rect(0, 0, 4, 2),
+				Birb::Rect(2, 1, 3, 2),
+				Birb::Rect(5, 1, 3, 2),
+			};
+
+			Birb::Rect rectsB[3] = {
+				Birb::Rect(0, 0, 4, 2),
+				Birb::Rect(200, 1, 3, 2),
+				Birb::Rect(5, 100, 3, 2),
+			};
+
+			CHECK(RectCollision(rectsA, 3));
+			CHECK_FALSE(RectCollision(rectsB, 3));
+		}
+
+		bool RectCollision(const std::vector<Birb::Rect>& rects)
+		{
+			for (int i = 0; i < (int)rects.size(); i++)
+				for (int j = 0; j < (int)rects.size(); j++)
+					if (i != j && RectCollision(rects[i], rects[j]))
+						return true;
+			return false;
+		}
+
+		TEST_CASE("Rect collision with multiple rects at once in a list")
+		{
+			std::vector<Birb::Rect> rectsA = {
+				Birb::Rect(0, 0, 4, 2),
+				Birb::Rect(2, 1, 3, 2),
+				Birb::Rect(5, 1, 3, 2),
+			};
+
+			std::vector<Birb::Rect> rectsB = {
+				Birb::Rect(0, 0, 4, 2),
+				Birb::Rect(200, 1, 3, 2),
+				Birb::Rect(5, 100, 3, 2),
+			};
+
+			CHECK(RectCollision(rectsA));
+			CHECK_FALSE(RectCollision(rectsB));
 		}
 
 		bool EntityCollision(const Entity& entityA, const Entity& entityB)
@@ -37,7 +91,7 @@ namespace Birb
 			return SDL_HasIntersection(&A, &B);
 		}
 
-		TEST_CASE("EntityCollision")
+		TEST_CASE("Entity collision")
 		{
 			Birb::Entity entityA("Entity A");
 			Birb::Entity entityB("Entity B");
@@ -56,7 +110,7 @@ namespace Birb
 			CHECK_FALSE(Birb::Physics::EntityCollision(entityA, entityC));
 		}
 
-		TEST_CASE("EntityCollision with localScale")
+		TEST_CASE("Entity collision with localScale")
 		{
 			Birb::Entity entityA("Entity A");
 			Birb::Entity entityB("Entity B");

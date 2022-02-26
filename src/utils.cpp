@@ -97,19 +97,7 @@ namespace Birb
 				Birb::Vector2int(6, 6),
 			};
 
-			Birb::Debug::Log("Sorting a path...");
-			for (int i = 0; i < (int)points.size(); i++)
-			{
-				Birb::Debug::Log(points[i].print());
-			}
-
 			points = Birb::utils::SortPath(points[0], points);
-			Birb::Debug::Log("----->");
-
-			for (int i = 0; i < (int)points.size(); i++)
-			{
-				Birb::Debug::Log(points[i].print());
-			}
 
 			CHECK(points.size() == 5);
 			CHECK(points[0] == Birb::Vector2int(0, 0));
