@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Audio.hpp"
 #include "Logger.hpp"
+#include "doctest.h"
 
 namespace Birb
 {
@@ -102,4 +103,21 @@ namespace Birb
 		else
 			return false;
 	}
+}
+
+TEST_CASE("Audio tests")
+{
+	Birb::Audio::Init(0);
+	Birb::Audio::SoundFile sound("./res/audio/game_over.wav");
+	Birb::Audio::MusicFile music("./res/audio/score.wav");
+
+	Birb::Debug::Log("A sound should play now");
+	sound.play();
+	CHECK(sound.isPlaying());
+	SDL_Delay(1000);
+
+	Birb::Debug::Log("Another sound should play now");
+	music.play();
+	CHECK(music.isPlaying());
+	SDL_Delay(1000);
 }
