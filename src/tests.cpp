@@ -125,19 +125,29 @@ TEST_CASE("window and rendering functions")
 	animationBirb.localScale = Birb::Vector2f(3, 3);
 	animationBirb.animationComponent.StartAnimation();
 
+	/* Progres bar */
+	Birb::Entity progressBarEntity("Progress bar");
+	progressBarEntity.rect = Birb::Rect(100, 300, 200, 25);
+	progressBarEntity.progressBarComponent = Birb::EntityComponent::ProgressBar(2, &Birb::Colors::White, &Birb::Colors::DarkGray, &Birb::Colors::Green);
+
 	/* Keep rendering for about 2 seoncds with a timer */
 	Birb::Timer timer;
 	timer.Start();
 	
 	bool animationSuccessful;
+	bool progressBarSuccessful;
 	while (timer.ElapsedSeconds() < 2)
 	{
 		window.Clear();
-		animationSuccessful = Birb::Render::DrawEntity(animationBirb);
+		animationSuccessful 	= Birb::Render::DrawEntity(animationBirb);
+		
+		progressBarEntity.progressBarComponent.value = timer.ElapsedSeconds() / 2.0;
+		progressBarSuccessful 	= Birb::Render::DrawEntity(progressBarEntity);
 		window.Display();
 		SDL_Delay(16); /* Cap to around 60 fps, lets not waste CPU cycles... */
 	}
-	CHECK(animationSuccessful == true);
+	CHECK(animationSuccessful 	== true);
+	CHECK(progressBarSuccessful == true);
 
 	CHECK_NOTHROW(window.Cleanup());
 

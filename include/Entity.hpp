@@ -18,6 +18,7 @@ namespace Birb
 			Text();
 			Text(const std::string& p_text, TTF_Font* font, SDL_Color* p_color);
 			Text(const std::string& p_text, TTF_Font* font, SDL_Color* p_color, SDL_Color* p_bgColor);
+
 			std::string text;
 			TTF_Font* font;
 			SDL_Color* color; 	///< Surface color of the text
@@ -57,10 +58,23 @@ namespace Birb
 			void ResetAnimationAtlas(); ///< Reset current frame to 0 and reset the lastFrame to frameCount - 1
 		};
 
-		/// ProgressbarComponent is used to create... well... progress bars
-		struct Progressbar
+		/// ProgressBar is used to create... well... progress bars
+		/// If the entity has a sprite on it. That will be used instead of the fill color
+		struct ProgressBar
 		{
+			ProgressBar();
+			ProgressBar(const int& p_borderWidth, SDL_Color* p_borderColor, SDL_Color* p_backgroundColor, SDL_Color* p_fillColor);
+			ProgressBar(const int& p_borderWidth, SDL_Color* p_borderColor, SDL_Color* p_backgroundColor, SDL_Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value);
+			bool active; ///< Setting this value active toggles on the progress bar component
 
+			int borderWidth; ///< Sets the thickness of the borders around the progress bar
+			SDL_Color* borderColor; ///< Border color around the fill area
+			SDL_Color* backgroundColor; ///< Background color that is below the filled area
+			SDL_Color* fillColor; ///< Color that hides the background color
+
+			float minValue; ///< Value where the progress bar should be empty
+			float maxValue; ///< Value where the progress bar should be full
+			float value; ///< Current progress value
 		};
 	}
 
@@ -90,9 +104,10 @@ namespace Birb
 		Rect rect; 				///< Sets the position and the dimensions of the entity
 		Vector2f localScale; 	///< Scale modifier for the Entity rendering
 
-		EntityComponent::Text textComponent; 			///< Enables the rendering of Text
-		EntityComponent::Click clickComponent; 			///< Enables button-like functionality
-		EntityComponent::Animation animationComponent; 	///< Enables animations for sprite rendering
+		EntityComponent::Text textComponent; 				///< Enables the rendering of Text
+		EntityComponent::Click clickComponent; 				///< Enables button-like functionality
+		EntityComponent::Animation animationComponent; 		///< Enables animations for sprite rendering
+		EntityComponent::ProgressBar progressBarComponent; 	///< Turns the entity into a progress bar
 		void LoadSprite(); 				///< Create a sprite for the Entity using details found in the textComponent variable
 		void ReloadSprite(); 			///< Destroy the old sprite and create a new one. Useful for refreshing text after editing the textComponent variable
 		void SetBaseEntityValues(); 	///< Used to set some default value when they aren't provided during Entity initialization

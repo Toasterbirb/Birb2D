@@ -272,16 +272,74 @@ namespace Birb
 		return texture;
 	}
 
+	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
+	{
+		Vector2int atlasPos = entity->getAtlasPosition(entity->animationComponent.frameIndex);
+		src->x = atlasPos.x;
+		src->y = atlasPos.y;
+		src->w = entity->animationComponent.spriteSize.x;
+		src->h = entity->animationComponent.spriteSize.y;
+
+		dst->x = entity->rect.x;
+		dst->y = entity->rect.y;
+		dst->w = src->w * entity->localScale.x;
+		dst->h = src->h * entity->localScale.y;
+
+
+
+		/* Set the current atlas position to the next frame */
+		if (entity->animationComponent.animationQueued || entity->animationComponent.loop)
+		{
+			if (entity->animationComponent.frameTimer.running && entity->animationComponent.frameTimer.ElapsedSeconds() >= (1.0 / entity->animationComponent.fps))
+			{
+				if (entity->animationComponent.frameIndex < entity->animationComponent.lastFrame)
+				{
+					entity->animationComponent.frameIndex++;
+					entity->animationComponent.frameTimer.Start();
+				}
+			}
+			else if (!entity->animationComponent.frameTimer.running)
+			{
+				/* Start the frame timer */
+				entity->animationComponent.frameTimer.Start();
+			}
+
+			if (entity->animationComponent.loop && entity->animationComponent.frameIndex >= entity->animationComponent.lastFrame)
+			{
+				entity->animationComponent.frameIndex = 0;
+			}
+			else if (entity->animationComponent.animationQueued && entity->animationComponent.frameIndex >= entity->animationComponent.lastFrame)
+			{
+				entity->animationComponent.frameIndex = entity->animationComponent.lastFrame;
+				entity->animationComponent.animationQueued = false;
+			}
+		}
+	}
+
+	void DrawProgressBar(const Entity& entity)
+	{
+		/* Draw progress bar background unless the bar is full */
+		if (entity.progressBarComponent.value < entity.progressBarComponent.maxValue)
+			Render::DrawRect(*entity.progressBarComponent.backgroundColor, entity.rect);
+
+		/* Draw the progress bar filler box */
+		Birb::Rect fillRect(entity.rect.x, entity.rect.y, (entity.progressBarComponent.value / entity.progressBarComponent.maxValue) * entity.rect.w, entity.rect.h);
+		Render::DrawRect(*entity.progressBarComponent.fillColor, fillRect);
+		
+		/* Draw the progress bar outer box */
+		Render::DrawRect(*entity.progressBarComponent.borderColor, entity.rect, entity.progressBarComponent.borderWidth);
+	}
+
 	bool Render::DrawEntity(Entity& entity)
 	{
 		if (!entity.active)
 			return true;
 
-		if (entity.sprite == nullptr)
-		{
-			Debug::Log("Entity '" + entity.name + "' has no sprite to render", Debug::error);
-			return false;
-		}
+		//if (entity.sprite == nullptr)
+		//{
+		//	Debug::Log("Entity '" + entity.name + "' has no sprite to render", Debug::error);
+		//	return false;
+		//}
 
 		/* Check if the sprite would be even visible */
 		if (entity.rect.w <= 0 || entity.rect.h <= 0)
@@ -305,7 +363,7 @@ namespace Birb
 			return false;
 		}
 
-		if (entity.animationComponent.frameCount == 0)
+		if (entity.animationComponent.frameCount <= 0) /* Check if the entity has animations */
 		{
 			src.x = 0;
 			src.y = 0;
@@ -320,57 +378,35 @@ namespace Birb
 		else
 		{
 			/* Entity probably has an animation component */
-			Vector2int atlasPos = entity.getAtlasPosition(entity.animationComponent.frameIndex);
-			src.x = atlasPos.x;
-			src.y = atlasPos.y;
-			src.w = entity.animationComponent.spriteSize.x;
-			src.h = entity.animationComponent.spriteSize.y;
+			HandleAnimations(&entity, &src, &dst);
+		}
 
-			dst.x = entity.rect.x;
-			dst.y = entity.rect.y;
-			dst.w = src.w * entity.localScale.x;
-			dst.h = src.h * entity.localScale.y;
-
-
-
-			/* Set the current atlas position to the next frame */
-			if (entity.animationComponent.animationQueued || entity.animationComponent.loop)
+		/* Check if the entity has an active progress bar component */
+		if (entity.progressBarComponent.active)
+		{
+			/* Crop the sprite if the value of a the progress bar component is less than its max value */
+			if (entity.progressBarComponent.value < entity.progressBarComponent.maxValue)
 			{
-				if (entity.animationComponent.frameTimer.running && entity.animationComponent.frameTimer.ElapsedSeconds() >= (1.0 / entity.animationComponent.fps))
-				{
-					if (entity.animationComponent.frameIndex < entity.animationComponent.lastFrame)
-					{
-						entity.animationComponent.frameIndex++;
-						entity.animationComponent.frameTimer.Start();
-					}
-				}
-				else if (!entity.animationComponent.frameTimer.running)
-				{
-					/* Start the frame timer */
-					entity.animationComponent.frameTimer.Start();
-				}
-
-				if (entity.animationComponent.loop && entity.animationComponent.frameIndex >= entity.animationComponent.lastFrame)
-				{
-					entity.animationComponent.frameIndex = 0;
-				}
-				else if (entity.animationComponent.animationQueued && entity.animationComponent.frameIndex >= entity.animationComponent.lastFrame)
-				{
-					entity.animationComponent.frameIndex = entity.animationComponent.lastFrame;
-					entity.animationComponent.animationQueued = false;
-				}
+				dst.x = dst.x + entity.progressBarComponent.borderWidth;
+				src.w = (entity.progressBarComponent.value / entity.progressBarComponent.maxValue) * texWidth - (entity.progressBarComponent.borderWidth * 2);
 			}
+
+			DrawProgressBar(entity);
 		}
 
 		centerPoint = Vector2int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
 		SDL_Point center = { centerPoint.x, centerPoint.y };
 
-		if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite, &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
-			Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
-		else
-			return true;
+		/* Skip rendering the texture if one doesn't exist on the entity */
+		if (entity.sprite != nullptr)
+		{
+			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite, &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
+				Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
+			else
+				return true;
+		}
 
-		return false;
+		return true;
 	}
 
 	void Render::ResetDrawColor()

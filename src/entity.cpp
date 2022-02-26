@@ -1,6 +1,7 @@
 #include "Logger.hpp"
 #include "Entity.hpp"
 #include "Renderwindow.hpp"
+#include "Values.hpp"
 
 namespace Birb
 {
@@ -92,6 +93,36 @@ namespace Birb
 			lastFrame = p_lastFrame;
 			animationQueued = true;
 		}
+
+		ProgressBar::ProgressBar()
+		{
+			borderWidth 	= 1;
+			borderColor 	= &Birb::Colors::White;
+			backgroundColor = &Birb::Colors::Black;
+			fillColor 		= &Birb::Colors::White;
+
+			minValue = 0;
+			maxValue = 1;
+			value = 0;
+
+			active = false;
+		}
+
+		ProgressBar::ProgressBar(const int& p_borderWidth, SDL_Color* p_borderColor, SDL_Color* p_backgroundColor, SDL_Color* p_fillColor)
+		:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor)
+		{
+			minValue = 0;
+			maxValue = 1;
+			value = 0.25f;
+
+			active = true;
+		}
+
+		ProgressBar::ProgressBar(const int& p_borderWidth, SDL_Color* p_borderColor, SDL_Color* p_backgroundColor, SDL_Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value)
+		:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor), minValue(p_minValue), maxValue(p_maxValue), value(p_value)
+		{
+			active = true;
+		}
 	}
 
 	Vector2int Entity::getAtlasPosition(const int& frame)
@@ -156,6 +187,7 @@ namespace Birb
 	:name(p_name)
 	{
 		SetBaseEntityValues();
+		sprite = nullptr;
 	}
 
 	Entity::Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture)
@@ -183,6 +215,7 @@ namespace Birb
 		/* Load the text sprite */
 		SetBaseEntityValues();
 		textComponent = p_textComponent;
+		sprite = nullptr;
 		LoadSprite();
 
 		rect.x = pos.x;
