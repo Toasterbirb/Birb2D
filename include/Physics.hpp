@@ -7,7 +7,7 @@ namespace Birb
 {
 	namespace Physics
 	{
-		bool RectCollision(Rect rectA, Rect rectB);
+		bool RectCollision(const Rect& rectA, const Rect& rectB);
 		bool EntityCollision(const Entity& entityA, const Entity& entityB);
 	}
 }

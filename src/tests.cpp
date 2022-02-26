@@ -10,6 +10,7 @@
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Renderwindow.hpp"
+#include "Physics.hpp"
 #include "Filesystem.hpp"
 
 
@@ -544,6 +545,52 @@ TEST_CASE("Rect with rounded values (integer)")
     CHECK(roundedRect.w == 30);
     CHECK(roundedRect.h == 41);
 }
+
+/* Physics things, some collision stuff */
+TEST_CASE("RectCollision")
+{
+	Birb::Rect rectA(0, 0, 4, 2);
+	Birb::Rect rectB(2, 1, 3, 2);
+	Birb::Rect rectC(5, 1, 3, 2);
+
+	CHECK(Birb::Physics::RectCollision(rectA, rectB));
+	CHECK_FALSE(Birb::Physics::RectCollision(rectA, rectC));
+}
+
+TEST_CASE("EntityCollision")
+{
+	Birb::Entity entityA("Entity A");
+	Birb::Entity entityB("Entity B");
+	Birb::Entity entityC("Entity C");
+
+	Birb::Rect rectA(0, 0, 4, 2);
+	entityA.rect = rectA;
+
+	Birb::Rect rectB(2, 1, 3, 2);
+	entityB.rect = rectB;
+
+	Birb::Rect rectC(5, 1, 3, 2);
+	entityC.rect = rectC;
+
+	CHECK(Birb::Physics::EntityCollision(entityA, entityB));
+	CHECK_FALSE(Birb::Physics::EntityCollision(entityA, entityC));
+}
+
+TEST_CASE("EntityCollision with localScale")
+{
+	Birb::Entity entityA("Entity A");
+	Birb::Entity entityB("Entity B");
+
+	Birb::Rect rectA(0, 0, 4, 2);
+	entityA.rect = rectA;
+	entityA.localScale = Birb::Vector2f(2, 1);
+
+	Birb::Rect rectB(5, 1, 3, 2);
+	entityB.rect = rectB;
+
+	CHECK(Birb::Physics::EntityCollision(entityA, entityB));
+}
+/* ------------------------------------ */
 
 TEST_CASE("Timer stop test")
 {
