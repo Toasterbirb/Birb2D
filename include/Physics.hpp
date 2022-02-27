@@ -1,5 +1,4 @@
 #pragma once
-#include "doctest.h"
 #include <SDL2/SDL.h>
 #include "Utils.hpp"
 #include "Entity.hpp"

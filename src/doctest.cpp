@@ -1,5 +1,12 @@
 #ifndef DOCTEST_CONFIG_DISABLE
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 
+#else
+#include <stdio.h>
+int main(int argc, char** argv)
+{
+	printf("No tests have been built\n");
+	return 0;
+}
 #endif
 
 #include "doctest.h"
@@ -47,7 +54,7 @@ TEST_CASE("Window and rendering functions")
 	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
 
 	CHECK_NOTHROW(window.Display());
-	sleep(1);
+	SDL_Delay(1000);
 
 	/* Try changing text */
 	textEntity.SetText("Changed text :D");
@@ -68,7 +75,7 @@ TEST_CASE("Window and rendering functions")
 	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
 
 	CHECK_NOTHROW(window.Display());
-	sleep(1);
+	SDL_Delay(1000);
 
 	SDL_Texture* animationSprite = Birb::Resources::LoadTexture("./res/textures/birb_animation.png");
 	Birb::Entity animationBirb(

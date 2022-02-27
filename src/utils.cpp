@@ -1,5 +1,4 @@
 #include "Utils.hpp"
-#include "doctest.h"
 #include "Logger.hpp"
 
 namespace Birb
@@ -11,6 +10,14 @@ namespace Birb
 	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h)
 	:x(p_x), y(p_y), w(p_w), h(p_h)
 	{}
+
+	std::string Rect::toString()
+	{
+		return utils::CleanDecimals(x) + ", " +
+			utils::CleanDecimals(y) + ", " +
+			utils::CleanDecimals(w) + ", " +
+			utils::CleanDecimals(h);
+	}
 
 	Rect Rect::getInt()
 	{
@@ -33,41 +40,53 @@ namespace Birb
 		return sdlrect;
 	}
 
-	/* Rect tests */
-	TEST_CASE("Default Rect")
-	{
-		Birb::Rect defaultRect;
-		CHECK(defaultRect.x == 0);
-		CHECK(defaultRect.y == 0);
-		CHECK(defaultRect.w == 0);
-		CHECK(defaultRect.h == 0);
-
-	}
-
-	TEST_CASE("Rect with arguments")
-	{
-		Birb::Rect customRect(10.54, 20, 30.234, 40.6668);
-		CHECK(customRect.x == 10.54f);
-		CHECK(customRect.y == 20);
-		CHECK(customRect.w == 30.234f);
-		CHECK(customRect.h == 40.6668f);
-	}
-
-	TEST_CASE("Rect with rounded values (integer)")
-	{
-		Birb::Rect customRect(10.54, 20, 30.234, 40.6668);
-		Birb::Rect roundedRect = customRect.getInt();
-
-		CHECK(roundedRect.x == 11);
-		CHECK(roundedRect.y == 20);
-		CHECK(roundedRect.w == 30);
-		CHECK(roundedRect.h == 41);
-	}
-	/* End of tests */
-
 
 	namespace utils
 	{
+		static bool RandomGenInitialized = false;
+		void InitRandomGen()
+		{
+			srand(time(0));
+			RandomGenInitialized = true;
+		}
+
+		int randomInt(const int& min, const int& max)
+		{
+			if (!RandomGenInitialized)
+				InitRandomGen();
+
+			float value = rand() % (max + 1 - min) + min;
+			return value;
+		}
+
+		float randomFloat(const float& min, const float& max)
+		{
+			if (!RandomGenInitialized)
+				InitRandomGen();
+
+			float random = ((float) rand()) / (float) RAND_MAX;
+			float range = max - min;
+			return (random * range) + min;
+		}
+
+		void GetTextureDimensions(SDL_Texture* texture, int& x, int& y)
+		{
+			SDL_QueryTexture(texture, NULL, NULL, &x, &y);
+		}
+
+		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2int& pixelPosition, const int& textureWidth)
+		{
+			// Some weird BGRA format
+			Uint8 b = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 0]; // Blue
+			Uint8 g = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 1]; // Green
+			Uint8 r = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 2]; // Red
+			Uint8 a = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 3]; // Alpha
+			
+			SDL_Color color = { r, g, b, a };
+			
+			return color;
+		}
+
 		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points)
 		{
 			std::vector<Vector2int> result;
@@ -87,50 +106,25 @@ namespace Birb
 			return result;
 		}
 
-		TEST_CASE("Sort path with a startpoint")
+		std::string CleanDecimals(const double& value)
 		{
-			std::vector<Birb::Vector2int> points = {
-				Birb::Vector2int(0, 0),
-				Birb::Vector2int(3, 3),
-				Birb::Vector2int(1, 1),
-				Birb::Vector2int(8, 9),
-				Birb::Vector2int(6, 6),
-			};
+			if (Math::IsDigit(value))
+			{
+				return std::to_string((int)value);
+			}
+			else
+			{
+				std::string result = std::to_string(value);
+				for (int i = result.size() - 1; i > 0; i--)
+				{
+					if (result[i] == '0')
+						result.erase(i, 1);
+					else
+						break;
+				}
 
-			points = Birb::utils::SortPath(points[0], points);
-
-			CHECK(points.size() == 5);
-			CHECK(points[0] == Birb::Vector2int(0, 0));
-			CHECK(points[1] == Birb::Vector2int(1, 1));
-			CHECK(points[2] == Birb::Vector2int(3, 3));
-			CHECK(points[3] == Birb::Vector2int(6, 6));
-			CHECK(points[4] == Birb::Vector2int(8, 9));
+				return result;
+			}
 		}
 	}
-}
-
-TEST_CASE("Random int")
-{
-	/* Make sure that the functions return a different value every time */
-	Birb::utils::InitRandomGen();
-
-	int valueCount = 50;
-	int values[50];
-	for (int i = 0; i < valueCount; i++)
-		values[i] = Birb::utils::randomInt(0, 10);
-
-	/* Check if all of the values were the same */
-	int firstValue = values[0];
-	bool differentValueFound = false;
-	for (int i = 1; i < valueCount; i++)
-	{
-		//std::cout << "[" << i << "] Randon value: " << values[i] << std::endl;
-		if (values[i] != firstValue)
-		{
-			differentValueFound = true;
-			//break;
-		}
-	}
-
-	CHECK(differentValueFound);
 }

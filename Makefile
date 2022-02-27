@@ -1,5 +1,6 @@
 CC=g++
 SRCDIR=./src
+TEST_SRCDIR=./src/tests
 outputDir=./build
 CFLAGS=-fPIC -O3 -g -std=c++17
 WarningFlags=-Wpedantic -pedantic -Wall -Wextra
@@ -12,7 +13,7 @@ all: test docs engine_lib run_tests
 docs:
 	doxygen ./doxygen_config
 
-test: audio.o filesystem.o entity.o logger.o math.o physics.o renderwindow.o timer.o timestep.o utils.o values.o tests.o
+test: audio.o filesystem.o entity.o logger.o math.o physics.o renderwindow.o timer.o timestep.o utils.o values.o doctest.o audio_test.o entity_test.o filesystem_test.o logger_test.o math_test.o physics_test.o renderwindow_test.o timer_test.o utils_test.o
 	mkdir -p build
 	cp -r ./res $(outputDir)/
 	$(CC) $^ $(CFLAGS) $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/test
@@ -25,7 +26,7 @@ run_quick_tests: test
 
 engine_lib: filesystem.o audio.o entity.o logger.o math.o renderwindow.o physics.o timer.o timestep.o ui.o utils.o values.o
 	mkdir -p build
-	g++ -shared -g $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
+	g++ -shared -g $(CFLAGS) $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
 
 static_engine_lib: filesystem.o audio.o entity.o logger.o math.o renderwindow.o physics.o timer.o timestep.o ui.o utils.o values.o
 	mkdir -p build
@@ -42,44 +43,13 @@ uninstall:
 	rm -rf /usr/local/include/birb2d
 	ldconfig
 
-audio.o: $(SRCDIR)/audio.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $^ -o audio.o
+# Engine code
+%.o: $(SRCDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $(INCLUDES) $^
 
-filesystem.o: $(SRCDIR)/filesystem.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $^ -o filesystem.o
-
-entity.o: $(SRCDIR)/entity.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $^ -o entity.o
-
-logger.o: $(SRCDIR)/logger.cpp
-	$(CC) -c $(CFLAGS) $^ -o logger.o
-
-tests.o: $(SRCDIR)/tests.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(SDL_FLAGS) $(WarningFlags) $^ -o tests.o
-
-math.o: $(SRCDIR)/math.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(SDL_FLAGS) $(WarningFlags) $^ -o math.o
-
-renderwindow.o: $(SRCDIR)/renderwindow.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o renderwindow.o
-
-physics.o: $(SRCDIR)/physics.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o physics.o
-
-timer.o: $(SRCDIR)/timer.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o timer.o
-
-timestep.o: $(SRCDIR)/timestep.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o timestep.o
-
-ui.o: $(SRCDIR)/ui.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o ui.o
-
-utils.o: $(SRCDIR)/utils.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o utils.o
-
-values.o: $(SRCDIR)/values.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $(WarningFlags) $^ -o values.o
+# Test code
+%.o: $(TEST_SRCDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $(INCLUDES) $^
 
 
 

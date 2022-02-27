@@ -1,5 +1,4 @@
 #pragma once
-#include "doctest.h"
 #include <iostream>
 #include <math.h>
 #include <vector>
@@ -263,6 +262,9 @@ namespace Birb
 		static Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points);
 		static Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints);
 
-		static double 	Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
+		static double 		Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
+
+		static bool IsDigit(const float& value); 	///< Check if the float has any decimal points
+		static bool IsDigit(const double& value); 	///< Check if the double has any decimal points
 	};
 }
