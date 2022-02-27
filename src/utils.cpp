@@ -115,12 +115,14 @@ namespace Birb
 			else
 			{
 				std::string result = std::to_string(value);
-				for (int i = result.size() - 1; i > 0; i--)
+				int size = (int)result.size();
+				for (int i = size - 1; i > 0; i--)
 				{
-					if (result[i] == '0')
-						result.erase(i, 1);
-					else
+					if (result[i] != '0' && i < size - 1)
+					{
+						result.erase(i + 1, size);
 						break;
+					}
 				}
 
 				return result;

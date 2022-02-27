@@ -114,16 +114,24 @@ namespace Birb
 		CHECK(points[4] == Vector2int(8, 9));
 	}
 
-	TEST_CASE("Create a string out of double/float without trailing zeroes in decimals")
+	TEST_CASE("Create a string out of floating point number without trailing zeroes in decimals")
 	{
-		float valueA = 1.987200;
-		float valueB = 2.0000;
-		double valueC = 4.3429000;
-		double valueD = 4.00;
+		double values[7] = {
+			1.987200,
+			2.0000,
+			4.3429000,
+			4.00,
+			5.020,
+			1.0001,
+			1.555
+		};
 
-		CHECK(utils::CleanDecimals(valueA) == "1.9872");
-		CHECK(utils::CleanDecimals(valueB) == "2");
-		CHECK(utils::CleanDecimals(valueC) == "4.3429");
-		CHECK(utils::CleanDecimals(valueD) == "4");
+		CHECK(utils::CleanDecimals(values[0]) == "1.9872");
+		CHECK(utils::CleanDecimals(values[1]) == "2");
+		CHECK(utils::CleanDecimals(values[2]) == "4.3429");
+		CHECK(utils::CleanDecimals(values[3]) == "4");
+		CHECK(utils::CleanDecimals(values[4]) == "5.02");
+		CHECK(utils::CleanDecimals(values[5]) == "1.0001");
+		CHECK(utils::CleanDecimals(values[6]) == "1.555");
 	}
 }
