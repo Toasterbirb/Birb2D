@@ -64,7 +64,7 @@ jobs:
 
     - run: |
        sudo apt-get install libsdl2-dev libsdl2-gfx-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
-       make -j4 test
+       make -j4 engine_lib
     #   make release
 
     - name: Perform CodeQL Analysis
