@@ -123,7 +123,7 @@ namespace Birb
 			4.00,
 			5.020,
 			1.0001,
-			//1.555
+			1.555
 		};
 
 		CHECK(utils::CleanDecimals(values[0]) == "1.9872");
