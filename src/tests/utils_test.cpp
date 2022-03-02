@@ -122,8 +122,8 @@ namespace Birb
 			4.3429000,
 			4.00,
 			5.020,
-			1.0001,
-			1.555
+			-1.0001,
+			-1.555
 		};
 
 		CHECK(utils::CleanDecimals(values[0]) == "1.9872");
@@ -131,7 +131,116 @@ namespace Birb
 		CHECK(utils::CleanDecimals(values[2]) == "4.3429");
 		CHECK(utils::CleanDecimals(values[3]) == "4");
 		CHECK(utils::CleanDecimals(values[4]) == "5.02");
-		CHECK(utils::CleanDecimals(values[5]) == "1.0001");
-		CHECK(utils::CleanDecimals(values[6]) == "1.555");
+		CHECK(utils::CleanDecimals(values[5]) == "-1.0001");
+		CHECK(utils::CleanDecimals(values[6]) == "-1.555");
+	}
+
+	TEST_CASE("Shuffle an integer array")
+	{
+		int values[5] = {
+			0,
+			1,
+			2,
+			3,
+			4
+		};
+
+		utils::ShuffleArray(values, 5);
+		bool shuffleResult = values[0] != 0 || values[1] != 1 || values[2] != 2 || values[3] != 3 || values[4] != 4;
+		CHECK(shuffleResult);
+
+		/* Confirm that all of the values are still there */
+		int sum = 0;
+		for (int i = 0; i < 5; i++)
+			sum += values[i];
+
+		CHECK(sum == 10);
+	}
+
+	TEST_CASE("Shuffle a float array")
+	{
+		float values[5] = {
+			0.5f,
+			1.1f,
+			2.6f,
+			3,
+			4.2f
+		};
+
+		utils::ShuffleArray(values, 5);
+		bool shuffleResult = values[0] != 0.5f || values[1] != 1.1f || values[2] != 2.6f || values[3] != 3 || values[4] != 4.2f;
+		CHECK(shuffleResult);
+
+		/* Confirm that all of the values are still there */
+		float sum = 0;
+		for (int i = 0; i < 5; i++)
+			sum += values[i];
+
+		CHECK(Math::Round(sum, 1) == 11.4);
+	}
+
+	TEST_CASE("Shuffle a double array")
+	{
+		double values[5] = {
+			0.5,
+			1.1,
+			2.6,
+			3,
+			4.2
+		};
+
+		utils::ShuffleArray(values, 5);
+		bool shuffleResult = values[0] != 0.5 || values[1] != 1.1 || values[2] != 2.6 || values[3] != 3 || values[4] != 4.2;
+		CHECK(shuffleResult);
+
+		/* Confirm that all of the values are still there */
+		double sum = 0;
+		for (int i = 0; i < 5; i++)
+			sum += values[i];
+
+		CHECK(Math::Round(sum, 1) == 11.4);
+	}
+	
+	TEST_CASE("Shuffle a string array")
+	{
+		std::string originalValues[5] = {
+			"One",
+			"Two",
+			"Three",
+			"Four",
+			"Five"
+		};
+
+		std::string values[5] = {
+			"One",
+			"Two",
+			"Three",
+			"Four",
+			"Five"
+		};
+
+		utils::ShuffleArray(values, 5);
+		bool shuffleResult = values[0] != "One" || values[1] != "Two" || values[2] != "Three" || values[3] != "Four" || values[4] != "Five";
+		CHECK(shuffleResult);
+
+		/* Confirm that all of the values are still there */
+		bool valueFound[5];
+
+		for (int i = 0; i < 5; i++)
+			for (int j = 0; j < 5; j++)
+				if (i == j)
+					valueFound[i] = true;
+		
+		/* Check the results */
+		bool result = true;
+
+		for (int i = 0; i < 5; i++)
+			if (valueFound[i] == false)
+			{
+				result = false;
+				break;
+			}
+
+		CHECK(result);
 	}
 }

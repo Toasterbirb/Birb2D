@@ -42,18 +42,10 @@ namespace Birb
 		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2int& pixelPosition, const int& textureWidth);
 		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points);
 		std::string CleanDecimals(const double& value); ///< Returns a string with without trailing zeroes in decimals
+
+		void ShuffleArray(int* values, const int& size); ///< Shuffles an array of integers
+		void ShuffleArray(float* values, const int& size); ///< Shuffles an array of floats
+		void ShuffleArray(double* values, const int& size); ///< Shuffles an array of doubles
+		void ShuffleArray(std::string* values, const int& size); ///< Shuffles an array of strings
 	}
 }
-
-//namespace Birb2D
-//{
-//	/// Deprecated way of handling textures. Kept for now, but please don't use this
-//	struct Texture
-//	{
-//		Texture();
-//		Texture(SDL_Texture* p_sdlTexture, Vector2int p_dimensions);
-//		SDL_Texture* sdlTexture;
-//		Vector2int dimensions;
-//	};
-//
-//}
