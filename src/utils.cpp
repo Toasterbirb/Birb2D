@@ -136,9 +136,12 @@ namespace Birb
 			for (int i = 0; i < size; i++)
 			{
 				newIndex = randomInt(0, size - 1);
-				placeHolder = values[i];
-				values[i] = values[newIndex];
-				values[newIndex] = placeHolder;
+				if (newIndex != i)
+				{
+					placeHolder = values[i];
+					values[i] = values[newIndex];
+					values[newIndex] = placeHolder;
+				}
 			}
 		}
 
@@ -149,9 +152,12 @@ namespace Birb
 			for (int i = 0; i < size; i++)
 			{
 				newIndex = randomInt(0, size - 1);
-				placeHolder = values[i];
-				values[i] = values[newIndex];
-				values[newIndex] = placeHolder;
+				if (newIndex != i)
+				{
+					placeHolder = values[i];
+					values[i] = values[newIndex];
+					values[newIndex] = placeHolder;
+				}
 			}
 		}
 
@@ -162,9 +168,12 @@ namespace Birb
 			for (int i = 0; i < size; i++)
 			{
 				newIndex = randomInt(0, size - 1);
-				placeHolder = values[i];
-				values[i] = values[newIndex];
-				values[newIndex] = placeHolder;
+				if (newIndex != i)
+				{
+					placeHolder = values[i];
+					values[i] = values[newIndex];
+					values[newIndex] = placeHolder;
+				}
 			}
 		}
 
@@ -175,9 +184,12 @@ namespace Birb
 			for (int i = 0; i < size; i++)
 			{
 				newIndex = randomInt(0, size - 1);
-				placeHolder = values[i];
-				values[i] = values[newIndex];
-				values[newIndex] = placeHolder;
+				if (newIndex != i)
+				{
+					placeHolder = values[i];
+					values[i] = values[newIndex];
+					values[newIndex] = placeHolder;
+				}
 			}
 		}
 	}
