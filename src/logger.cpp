@@ -10,8 +10,8 @@ namespace Birb
 	{
 		void Reset()
 		{
-			if (std::filesystem::exists("./log.txt") && std::filesystem::is_regular_file("./log.txt"))
-				std::filesystem::remove("./log.txt");
+			if (std::filesystem::exists(logfile) && std::filesystem::is_regular_file(logfile))
+				std::filesystem::remove(logfile);
 		}
 
 		void Log(const std::string& text, Type type)
@@ -100,7 +100,7 @@ namespace Birb
 
 			// Append the line to a logfile
 			std::ofstream outfile;
-			outfile.open("log.txt", std::ios_base::app);
+			outfile.open(logfile, std::ios_base::app);
 			outfile << line;
 		}
 	}
