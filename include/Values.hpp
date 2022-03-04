@@ -2,9 +2,20 @@
 #pragma GCC diagnostic ignored "-Wunused-variable"
 
 #include <SDL2/SDL.h>
+#include <string>
 
 namespace Birb
 {
+	struct ApplicationInfo
+	{
+		ApplicationInfo();
+		ApplicationInfo(const std::string& ApplicationName);
+
+		std::string AppName;
+		std::string ResLocation;
+		void LocateResources();
+	};
+
 	namespace Global
 	{
 		namespace IsInit

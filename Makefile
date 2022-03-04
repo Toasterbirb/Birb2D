@@ -13,7 +13,7 @@ all: test docs engine_lib run_tests
 docs:
 	doxygen ./doxygen_config
 
-test: audio.o filesystem.o entity.o logger.o math.o physics.o renderwindow.o timer.o timestep.o utils.o values.o doctest.o audio_test.o entity_test.o filesystem_test.o logger_test.o math_test.o physics_test.o renderwindow_test.o timer_test.o utils_test.o
+test: audio.o filesystem.o entity.o logger.o math.o physics.o renderwindow.o timer.o timestep.o utils.o values.o doctest.o audio_test.o entity_test.o filesystem_test.o logger_test.o math_test.o physics_test.o renderwindow_test.o timer_test.o utils_test.o values_test.o
 	mkdir -p build
 	cp -r ./res $(outputDir)/
 	$(CC) $^ $(CFLAGS) $(SDL_FLAGS) $(WarningFlags) -o $(outputDir)/test

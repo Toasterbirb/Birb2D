@@ -1,8 +1,48 @@
 #include <math.h>
 #include "Values.hpp"
+#include "Filesystem.hpp"
 
 namespace Birb
 {
+	ApplicationInfo::ApplicationInfo()
+	{
+		AppName 	= "_null_";
+		ResLocation = "./res";
+	}
+
+	ApplicationInfo::ApplicationInfo(const std::string& ApplicationName)
+		:AppName(ApplicationName)
+	{
+		LocateResources();
+	}
+
+	void ApplicationInfo::LocateResources()
+	{
+		/* Check if the application name hasn't been set yet */
+		if (AppName == "_null_")
+		{
+			ResLocation = "./res";
+			return;
+		}
+
+		/* Resource path priority
+		 * 1: ./res
+		 * 2: ~/.local/share/<ApplicationName>/res
+		 * 3: /usr/local/share/<ApplicationName>/res
+		 * 4: /usr/share/<ApplicationName>/res */
+		
+		if (Birb::Filesystem::Directory::Exists("./res"))
+			ResLocation = "./res";
+		else if (Birb::Filesystem::Directory::Exists((std::string)getenv("HOME") + "/.local/share/" + AppName + "/res"))
+			ResLocation = (std::string)getenv("HOME") + "/.local/share/" + AppName + "/res";
+		else if (Birb::Filesystem::Directory::Exists("/usr/local/share/" + AppName + "/res"))
+			ResLocation = "/usr/local/share/" + AppName + "/res";
+		else if (Birb::Filesystem::Directory::Exists("/usr/share/" + AppName + "/res"))
+			ResLocation = "/usr/share/" + AppName + "/res";
+		else
+			ResLocation = "";
+	}
+
 	/* Dims or lightens color */
 	namespace Colors
 	{
