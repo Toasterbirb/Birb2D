@@ -46,4 +46,4 @@ log.txt
 
 # AppImage
 *.AppDir
-*.[Aa]pp[Ii]mage
+*.AppImage

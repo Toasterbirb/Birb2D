@@ -58,3 +58,5 @@ clean:
 	rm -f *.o log.txt
 	rm -rf $(outputDir)
 	rm -rf docs
+	rm -rf *.AppDir
+	rm -f *.AppImage
