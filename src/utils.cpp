@@ -151,13 +151,14 @@ namespace Birb
 			float placeHolder;
 			for (int i = 0; i < size; i++)
 			{
-				newIndex = randomInt(0, size - 1);
-				if (newIndex != i)
+				do
 				{
-					placeHolder = values[i];
-					values[i] = values[newIndex];
-					values[newIndex] = placeHolder;
-				}
+					newIndex = randomInt(0, size - 1);
+				} while (newIndex == i);
+
+				placeHolder = values[i];
+				values[i] = values[newIndex];
+				values[newIndex] = placeHolder;
 			}
 		}
 
@@ -167,13 +168,14 @@ namespace Birb
 			double placeHolder;
 			for (int i = 0; i < size; i++)
 			{
-				newIndex = randomInt(0, size - 1);
-				if (newIndex != i)
+				do
 				{
-					placeHolder = values[i];
-					values[i] = values[newIndex];
-					values[newIndex] = placeHolder;
-				}
+					newIndex = randomInt(0, size - 1);
+				} while (newIndex == i);
+
+				placeHolder = values[i];
+				values[i] = values[newIndex];
+				values[newIndex] = placeHolder;
 			}
 		}
 
@@ -183,13 +185,14 @@ namespace Birb
 			std::string placeHolder;
 			for (int i = 0; i < size; i++)
 			{
-				newIndex = randomInt(0, size - 1);
-				if (newIndex != i)
+				do
 				{
-					placeHolder = values[i];
-					values[i] = values[newIndex];
-					values[newIndex] = placeHolder;
-				}
+					newIndex = randomInt(0, size - 1);
+				} while (newIndex == i);
+
+				placeHolder = values[i];
+				values[i] = values[newIndex];
+				values[newIndex] = placeHolder;
 			}
 		}
 	}
