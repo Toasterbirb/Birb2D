@@ -43,3 +43,7 @@ log.txt
 
 # Vim stuff
 .undodir
+
+# AppImage
+*.AppDir
+*.[Aa]pp[Ii]mage
