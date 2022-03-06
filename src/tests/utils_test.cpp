@@ -146,8 +146,6 @@ namespace Birb
 		};
 
 		utils::ShuffleArray(values, 5);
-		bool shuffleResult = values[0] != 0 || values[1] != 1 || values[2] != 2 || values[3] != 3 || values[4] != 4;
-		CHECK(shuffleResult);
 
 		/* Confirm that all of the values are still there */
 		int sum = 0;
@@ -168,8 +166,6 @@ namespace Birb
 		};
 
 		utils::ShuffleArray(values, 5);
-		bool shuffleResult = values[0] != 0.5f || values[1] != 1.1f || values[2] != 2.6f || values[3] != 3 || values[4] != 4.2f;
-		CHECK(shuffleResult);
 
 		/* Confirm that all of the values are still there */
 		float sum = 0;
@@ -190,8 +186,6 @@ namespace Birb
 		};
 
 		utils::ShuffleArray(values, 5);
-		bool shuffleResult = values[0] != 0.5 || values[1] != 1.1 || values[2] != 2.6 || values[3] != 3 || values[4] != 4.2;
-		CHECK(shuffleResult);
 
 		/* Confirm that all of the values are still there */
 		double sum = 0;
@@ -220,8 +214,6 @@ namespace Birb
 		};
 
 		utils::ShuffleArray(values, 5);
-		bool shuffleResult = values[0] != "One" || values[1] != "Two" || values[2] != "Three" || values[3] != "Four" || values[4] != "Five";
-		CHECK(shuffleResult);
 
 		/* Confirm that all of the values are still there */
 		bool valueFound[5];
