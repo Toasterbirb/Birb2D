@@ -234,37 +234,57 @@ namespace Birb
 	};
 
 	/// Misc math functions
-	struct Math
+	namespace Math
 	{
-		static float VectorDistance(const Vector2f& a, const Vector2f& b); ///< Calculate the distance between two 2D floating point vectors
-		static float VectorDistance(const Vector2int& a, const Vector2int& b); ///< Calculate the distance between two 2D integer vectors
-		static float VectorDistance(const Vector3f& a, const Vector3f& b); ///< Calculate the distance between two 3D floating point vectors
-		static float VectorDistance(const Vector3int& a, const Vector3int& b); ///< Calculate the distance between two 3D integer vectors
+		float VectorDistance(const Vector2f& a, const Vector2f& b); ///< Calculate the distance between two 2D floating point vectors
+		float VectorDistance(const Vector2int& a, const Vector2int& b); ///< Calculate the distance between two 2D integer vectors
+		float VectorDistance(const Vector3f& a, const Vector3f& b); ///< Calculate the distance between two 3D floating point vectors
+		float VectorDistance(const Vector3int& a, const Vector3int& b); ///< Calculate the distance between two 3D integer vectors
 
-		static float 		Clamp(const float& value, const float& min, const float& max); ///< Clamp a float between the given values
-		static double 		Clamp(const double& value, const double& min, const double& max); ///< Clamp a double between the given values
-		static int 			Clamp(const int& value, const int& min, const int& max); ///< Clamp an integer between the given values
+		float 		Clamp(const float& value, const float& min, const float& max); ///< Clamp a float between the given values
+		double 		Clamp(const double& value, const double& min, const double& max); ///< Clamp a double between the given values
+		int 			Clamp(const int& value, const int& min, const int& max); ///< Clamp an integer between the given values
 
-		static int 			Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
-		static float 		Lerp(const float& a, const float& b, const float& t); ///< Interpolate a value between two values given time t
-		static Vector2f 	Lerp(const Vector2f& a, const Vector2f& b, const float& t); ///< Interpolate a point between two 2D floating point vectors given time t
-		static Vector2int 	Lerp(const Vector2int& a, const Vector2int& b, const float& t); ///< Interpolate a point between two 2D integer vectors given time t
-		static Vector3f 	Lerp(const Vector3f& a, const Vector3f& b, const float& t); ///< Interpolate a point between two 3D floating point vectors given time t
-		static Vector3int 	Lerp(const Vector3int& a, const Vector3int& b, const float& t); ///< Interpolate a point between two 3D integer vectors given time t
+		int 			Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
+		float 		Lerp(const float& a, const float& b, const float& t); ///< Interpolate a value between two values given time t
+		Vector2f 	Lerp(const Vector2f& a, const Vector2f& b, const float& t); ///< Interpolate a point between two 2D floating point vectors given time t
+		Vector2int 	Lerp(const Vector2int& a, const Vector2int& b, const float& t); ///< Interpolate a point between two 2D integer vectors given time t
+		Vector3f 	Lerp(const Vector3f& a, const Vector3f& b, const float& t); ///< Interpolate a point between two 3D floating point vectors given time t
+		Vector3int 	Lerp(const Vector3int& a, const Vector3int& b, const float& t); ///< Interpolate a point between two 3D integer vectors given time t
 
-		static float 	CenterPoint(const float& a, const float& b); ///< Calculate the "center" value between two 1D floats
-		static Vector2f CenterPoint(const Vector2f& a, const Vector2f& b); ///< Calculate the center point between two 2D floating point vectors
-		static Vector2f CenterPoint(const Vector2int& a, const Vector2int& b); ///< Calculate the center point between two 2D integer vectors
-		static Vector3f CenterPoint(const Vector3f& a, const Vector3f& b); ///< Calculate the center point between two 3D floating point vectors
-		static Vector3f CenterPoint(const Vector3int& a, const Vector3int& b); ///< Calculate the center point between two 3D integer vectors
+		float 	CenterPoint(const float& a, const float& b); ///< Calculate the "center" value between two 1D floats
+		Vector2f CenterPoint(const Vector2f& a, const Vector2f& b); ///< Calculate the center point between two 2D floating point vectors
+		Vector2f CenterPoint(const Vector2int& a, const Vector2int& b); ///< Calculate the center point between two 2D integer vectors
+		Vector3f CenterPoint(const Vector3f& a, const Vector3f& b); ///< Calculate the center point between two 3D floating point vectors
+		Vector3f CenterPoint(const Vector3int& a, const Vector3int& b); ///< Calculate the center point between two 3D integer vectors
 
-		static Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount);
-		static Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points);
-		static Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints);
+		Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount);
+		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points);
+		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints);
 
-		static double 		Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
+		double 		Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
 
-		static bool IsDigit(const float& value); 	///< Check if the float has any decimal points
-		static bool IsDigit(const double& value); 	///< Check if the double has any decimal points
+		bool IsDigit(const float& value); 	///< Check if the float has any decimal points
+		bool IsDigit(const double& value); 	///< Check if the double has any decimal points
+
+		double 	FindHighestValue(double* values, const int& valueCount);
+		double 	FindHighestValue(const std::vector<double>& values);
+		float 	FindHighestValue(float* values, const int& valueCount);
+		float 	FindHighestValue(const std::vector<float>& values);
+		int 	FindHighestValue(int* values, const int& valueCount);
+		int 	FindHighestValue(const std::vector<int>& values);
+
+		double 	FindLowestValue(double* values, const int& valueCount);
+		double 	FindLowestValue(const std::vector<double>& values);
+		float 	FindLowestValue(float* values, const int& valueCount);
+		float 	FindLowestValue(const std::vector<float>& values);
+		int 	FindLowestValue(int* values, const int& valueCount);
+		int 	FindLowestValue(const std::vector<int>& values);
+
+		double 	Average(double* values, const int& valueCount);
+		float 	Average(float* values, const int& valueCount);
+		double 	Average(int* values, const int& valueCount);
+
+		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum);
 	};
 }

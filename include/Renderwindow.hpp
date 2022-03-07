@@ -60,14 +60,15 @@ namespace Birb
 	};
 
 	/// Methods for rendering things
-	struct Render
+	namespace Render
 	{
-		static bool DrawEntity(Entity& entity);
-		static void ResetDrawColor();
-		static void DrawRect(const SDL_Color& color, const Rect& dimensions); ///< Draw filled rect
-		static void DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
-		static void DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB);
-		static void DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius);
-		static void SetRenderDrawColor(const SDL_Color& color);
+		bool DrawEntity(Entity& entity);
+		void ResetDrawColor();
+		void DrawRect(const SDL_Color& color, const Rect& dimensions); ///< Draw filled rect
+		void DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
+		void DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB);
+		void DrawLines(const SDL_Color& color, Vector2int* points, const int& pointCount);
+		void DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius);
+		void SetRenderDrawColor(const SDL_Color& color);
 	};
 }

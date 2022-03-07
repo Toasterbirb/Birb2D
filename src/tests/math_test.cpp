@@ -351,4 +351,108 @@ namespace Birb
 		CHECK(vecA * vecB == Vector3int(8, 18, 10));
 		CHECK(vecA / vecB == Vector3int(2, 2, 3));
 	}
+
+	TEST_CASE("Find highest and lowest double value")
+	{
+		double values[5] = 
+		{
+			4, 5, 1.6, 16.5, 3.6
+		};
+
+		std::vector<double> valuesVector = 
+		{
+			4, 5, 1.6, 16.5, 3.6
+		};
+
+		CHECK(Math::FindHighestValue(values, 5) == 16.5);
+		CHECK(Math::FindLowestValue(values, 5) == 1.6);
+
+		CHECK(Math::FindHighestValue(valuesVector) == 16.5);
+		CHECK(Math::FindLowestValue(valuesVector) == 1.6);
+	}
+
+	TEST_CASE("Find highest and lowest float value")
+	{
+		float values[5] = 
+		{
+			4, 5, 1.6f, 16.5f, 3.6f
+		};
+
+		std::vector<float> valuesVector = 
+		{
+			4, 5, 1.6f, 16.5f, 3.6f
+		};
+
+		CHECK(Math::FindHighestValue(values, 5) == 16.5f);
+		CHECK(Math::FindLowestValue(values, 5) == 1.6f);
+
+		CHECK(Math::FindHighestValue(valuesVector) == 16.5f);
+		CHECK(Math::FindLowestValue(valuesVector) == 1.6f);
+	}
+
+	TEST_CASE("Find highest and lowest int value")
+	{
+		int values[5] = 
+		{
+			4, 5, 1, 16, 7
+		};
+
+		std::vector<int> valuesVector = 
+		{
+			4, 5, 1, 16, 7
+		};
+
+		CHECK(Math::FindHighestValue(values, 5) == 16);
+		CHECK(Math::FindLowestValue(values, 5) == 1);
+
+		CHECK(Math::FindHighestValue(valuesVector) == 16);
+		CHECK(Math::FindLowestValue(valuesVector) == 1);
+	}
+
+	TEST_CASE("Calculate average from double array")
+	{
+		double values[5] = 
+		{
+			4, 5, 1.6, 16.5, 3.6
+		};
+
+		CHECK(Math::Round(Math::Average(values, 5), 2) == 6.14);
+	}
+
+	TEST_CASE("Calculate average from float array")
+	{
+		float values[5] = 
+		{
+			4, 5, 1.6f, 16.5f, 3.6f
+		};
+
+		CHECK(Math::Round(Math::Average(values, 5), 2) == 6.14);
+	}
+
+	TEST_CASE("Calculate average from int array")
+	{
+		int values[5] = 
+		{
+			4, 5, 1, 16, 3
+		};
+
+		CHECK(Math::Round(Math::Average(values, 5), 2) == 5.8);
+	}
+
+	TEST_CASE("Normalize a value to set range")
+	{
+		double values[13] = {
+			12, 19, 21, 23, 25, 35, 47, 48, 59, 65, 66, 67, 68
+		};
+
+		double lowestValue 	= Math::FindLowestValue(values, 13);
+		double highestValue = Math::FindHighestValue(values, 13);
+		double normalized_maximum = 100;
+
+		CHECK(Math::Normalize(values[0], lowestValue, highestValue, normalized_maximum) == 0);
+		CHECK(Math::Normalize(values[1], lowestValue, highestValue, normalized_maximum) == 12.5);
+		CHECK(Math::Round(Math::Normalize(values[2], lowestValue, highestValue,normalized_maximum), 2) == 16.07);
+		CHECK(Math::Round(Math::Normalize(values[11], lowestValue, highestValue, normalized_maximum), 2) == 98.21);
+		CHECK(Math::Normalize(values[12], lowestValue, highestValue, normalized_maximum) == 100);
+	}
 }

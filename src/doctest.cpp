@@ -11,9 +11,11 @@ int main(int argc, char** argv)
 
 #include "doctest.h"
 #include "Entity.hpp"
+#include "Graphs.hpp"
 #include "Math.hpp"
 #include "Values.hpp"
 #include "Logger.hpp"
+#include "Utils.hpp"
 #include "Renderwindow.hpp"
 
 TEST_CASE("Window and rendering functions")
@@ -29,6 +31,21 @@ TEST_CASE("Window and rendering functions")
 	rotatedEntity.angle = 45;
 	rotatedEntity.localScale = Birb::Vector2f(3.5, 2);
 	Birb::Entity entityWithNegativeSize("Entity with negative size", Birb::Rect(300, 100, -128, 72), texture);
+
+	/* Graph */
+	std::vector<double> values = {
+		1.5, 12, 5.6, 2.7, 7, 6, 15
+	};
+
+	Birb::Widgets::Graph lineGraph(Birb::Widgets::GraphType::Line,
+			values,
+			Birb::Rect(800, 50, 260, 180));
+	lineGraph.graphColor = Birb::Colors::Green;
+
+	Birb::Widgets::Graph blockGraph(Birb::Widgets::GraphType::Block,
+			values,
+			Birb::Rect(800, 250, 260, 180));
+	blockGraph.graphColor = Birb::Colors::Red;
 
 
 	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red));
@@ -55,6 +72,10 @@ TEST_CASE("Window and rendering functions")
 	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
 	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
 
+	/* Draw the graphs */
+	lineGraph.Render();
+	blockGraph.Render();
+
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);
 
@@ -75,6 +96,10 @@ TEST_CASE("Window and rendering functions")
 	CHECK_NOTHROW(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
 	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
 	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
+
+	/* Draw the graph */
+	lineGraph.Render();
+	blockGraph.Render();
 
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);
@@ -97,21 +122,31 @@ TEST_CASE("Window and rendering functions")
 	progressBarEntity.rect = Birb::Rect(100, 300, 200, 25);
 	progressBarEntity.progressBarComponent = Birb::EntityComponent::ProgressBar(2, &Birb::Colors::White, &Birb::Colors::DarkGray, &Birb::Colors::Green);
 
+	/* Frametime graph */
+	std::vector<double> frameTimes;
+	Birb::Widgets::Graph frameTimeGraph(Birb::Widgets::GraphType::Line, frameTimes, Birb::Rect(100, 400, 500, 150));
+
 	/* Keep rendering for about 2 seoncds with a timer */
 	Birb::Timer timer;
 	timer.Start();
 	
 	bool animationSuccessful;
 	bool progressBarSuccessful;
+	double currentTime = Birb::utils::hireTimeInSeconds();
 	while (timer.ElapsedSeconds() < 2)
 	{
+		SDL_Delay(16); /* Cap to around 60 fps, lets not waste CPU cycles... */
 		window.Clear();
 		animationSuccessful 	= Birb::Render::DrawEntity(animationBirb);
 		
 		progressBarEntity.progressBarComponent.value = timer.ElapsedSeconds() / 2.0;
 		progressBarSuccessful 	= Birb::Render::DrawEntity(progressBarEntity);
+
+		double newTime = Birb::utils::hireTimeInSeconds();
+		frameTimeGraph.values.push_back(newTime - currentTime);
+		currentTime = newTime;
+		frameTimeGraph.Render();
 		window.Display();
-		SDL_Delay(16); /* Cap to around 60 fps, lets not waste CPU cycles... */
 	}
 	CHECK(animationSuccessful 	== true);
 	CHECK(progressBarSuccessful == true);

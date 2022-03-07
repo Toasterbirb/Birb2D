@@ -409,43 +409,59 @@ namespace Birb
 		return true;
 	}
 
-	void Render::ResetDrawColor()
+	namespace Render
 	{
-		SDL_SetRenderDrawColor(Global::RenderVars::Renderer, 0, 0, 0, 255);
-	}
+		void ResetDrawColor()
+		{
+			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, 0, 0, 0, 255);
+		}
 
-	void Render::DrawRect(const SDL_Color& color, const Rect& dimensions)
-	{
-		SetRenderDrawColor(color);
-		SDL_Rect rectangle = dimensions.getSDLRect();
-		SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
-		ResetDrawColor();
-	}
+		void DrawRect(const SDL_Color& color, const Rect& dimensions)
+		{
+			SetRenderDrawColor(color);
+			SDL_Rect rectangle = dimensions.getSDLRect();
+			SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
+			ResetDrawColor();
+		}
 
-	void Render::DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width)
-	{
-		DrawRect(color, Rect(dimensions.x, dimensions.y, dimensions.w, width)); /* Top */
-		DrawRect(color, Rect(dimensions.x, dimensions.y + dimensions.h - width, dimensions.w, width)); /* Bottom */
-		DrawRect(color, Rect(dimensions.x, dimensions.y, width, dimensions.h)); /* Left */
-		DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
-	}
+		void DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width)
+		{
+			DrawRect(color, Rect(dimensions.x, dimensions.y, dimensions.w, width)); /* Top */
+			DrawRect(color, Rect(dimensions.x, dimensions.y + dimensions.h - width, dimensions.w, width)); /* Bottom */
+			DrawRect(color, Rect(dimensions.x, dimensions.y, width, dimensions.h)); /* Left */
+			DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
+		}
 
-	void Render::DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB)
-	{
-		SetRenderDrawColor(color);
-		SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
-		ResetDrawColor();
-	}
+		void DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB)
+		{
+			SetRenderDrawColor(color);
+			SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
+			ResetDrawColor();
+		}
 
-	void Render::DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius)
-	{
-		Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
-		filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor);
-		ResetDrawColor();
-	}
+		void DrawLines(const SDL_Color& color, Vector2int* points, const int& pointCount)
+		{
+			SDL_Point sdlPoints[pointCount];
+			for (int i = 0; i < pointCount; i++)
+			{
+				sdlPoints[i] = { points[i].x, points[i].y };
+			}
 
-	void Render::SetRenderDrawColor(const SDL_Color& color)
-	{
-		SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
+			SetRenderDrawColor(color);
+			SDL_RenderDrawLines(Global::RenderVars::Renderer, sdlPoints, pointCount);
+			ResetDrawColor();
+		}
+
+		void DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius)
+		{
+			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
+			filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor);
+			ResetDrawColor();
+		}
+
+		void SetRenderDrawColor(const SDL_Color& color)
+		{
+			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
+		}
 	}
 }

@@ -1,6 +1,5 @@
 #include <SDL2/SDL.h>
 #include "Timestep.hpp"
-//#include "Utils.hpp"
 #include "Values.hpp"
 
 namespace Birb
@@ -13,9 +12,6 @@ namespace Birb
 
 	void TimeStep::Start()
 	{
-		/* Start deltaTime timer */
-		//deltaTimer.Start();
-
 		startTick = SDL_GetTicks();
 
 		double newTime = utils::hireTimeInSeconds();
@@ -46,9 +42,4 @@ namespace Birb
 		if (frameTicks < 1000 / mainWindow->refresh_rate)
 			SDL_Delay(1000 / mainWindow->refresh_rate - frameTicks);
 	}
-
-	//float TimeStep::deltaTime()
-	//{
-	//	return (accumulator / timeStep);
-	//}
 }
