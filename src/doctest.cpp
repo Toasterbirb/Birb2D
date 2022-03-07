@@ -70,9 +70,19 @@ TEST_CASE("Window and rendering functions")
 	CHECK(Birb::Render::DrawEntity(textEntity));
 	CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
 
-	CHECK_NOTHROW(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
+	CHECK_NOTHROW(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2int(400, 400), 50));
 	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
 	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
+
+	/* Draw a polygon */
+	Birb::Vector2int polyPoints[5] = {
+		Birb::Vector2int(100, 59),
+		Birb::Vector2int(150, 34),
+		Birb::Vector2int(170, 99),
+		Birb::Vector2int(87, 24),
+		Birb::Vector2int(53, 10),
+	};
+	CHECK_NOTHROW(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints, 5));
 
 	/* Draw the graphs */
 	lineGraph.Render();
@@ -87,6 +97,16 @@ TEST_CASE("Window and rendering functions")
 	CHECK(textEntity.textComponent.text == "Changed text :D");
 	CHECK(textEntity.textComponent.color == &Birb::Colors::Green);
 	CHECK_NOTHROW(window.Clear());
+
+	/* Draw a polygon */
+	std::vector<Birb::Vector2int> polyPoints2 = {
+		Birb::Vector2int(10, 5),
+		Birb::Vector2int(150, 34),
+		Birb::Vector2int(170, 99),
+		Birb::Vector2int(87, 24),
+		Birb::Vector2int(53, 10),
+	};
+	CHECK_NOTHROW(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints2));
 
 	CHECK(Birb::Render::DrawEntity(testEntity));
 	CHECK(Birb::Render::DrawEntity(secondEntityWithSameTexture));

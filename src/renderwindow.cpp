@@ -476,7 +476,38 @@ namespace Birb
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 			filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor);
-			ResetDrawColor();
+		}
+
+		void DrawPolygon(const SDL_Color& color, Vector2int* points, const int& pointCount)
+		{
+			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
+
+			/* Convert Vector2int points into Sint16 vectors */
+			Sint16 vx[pointCount];
+			Sint16 vy[pointCount];
+			for (int i = 0; i < pointCount; i++)
+			{
+				vx[i] = points[i].x;
+				vy[i] = points[i].y;
+			}
+
+			filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor);
+		}
+
+		void DrawPolygon(const SDL_Color& color, const std::vector<Vector2int>& points)
+		{
+			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
+
+			/* Convert Vector2int points into Sint16 vectors */
+			Sint16 vx[points.size()];
+			Sint16 vy[points.size()];
+			for (int i = 0; i < points.size(); i++)
+			{
+				vx[i] = points[i].x;
+				vy[i] = points[i].y;
+			}
+
+			filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor);
 		}
 
 		void SetRenderDrawColor(const SDL_Color& color)
