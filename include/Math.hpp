@@ -238,10 +238,11 @@ namespace Birb
 
 		float 		Clamp(const float& value, const float& min, const float& max); ///< Clamp a float between the given values
 		double 		Clamp(const double& value, const double& min, const double& max); ///< Clamp a double between the given values
-		int 			Clamp(const int& value, const int& min, const int& max); ///< Clamp an integer between the given values
+		int 		Clamp(const int& value, const int& min, const int& max); ///< Clamp an integer between the given values
 
-		int 			Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
+		int 		Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
 		float 		Lerp(const float& a, const float& b, const float& t); ///< Interpolate a value between two values given time t
+		double 		Lerp(const double& a, const double& b, const float& t); ///< Interpolate a value between two values given time t
 		Vector2f 	Lerp(const Vector2f& a, const Vector2f& b, const float& t); ///< Interpolate a point between two 2D floating point vectors given time t
 		Vector2int 	Lerp(const Vector2int& a, const Vector2int& b, const float& t); ///< Interpolate a point between two 2D integer vectors given time t
 		Vector3f 	Lerp(const Vector3f& a, const Vector3f& b, const float& t); ///< Interpolate a point between two 3D floating point vectors given time t

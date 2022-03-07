@@ -92,6 +92,17 @@ namespace Birb
 		CHECK(Math::Lerp(a, b, 1) == 3);
 	}
 
+	TEST_CASE("Lerping / interpolation with doubles")
+	{
+		double a = 1;
+		double b = 3;
+
+		CHECK(Math::Lerp(a, b, 0) == 1);
+		CHECK(Math::Lerp(a, b, 0.25) == 1.5f);
+		CHECK(Math::Lerp(a, b, 0.5) == 2);
+		CHECK(Math::Lerp(a, b, 1) == 3);
+	}
+
 	TEST_CASE("Lerping / interpolation with 2D float vectors")
 	{
 		Vector2f vecAf = { 1.0f, 1.0f };

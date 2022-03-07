@@ -86,6 +86,11 @@ namespace Birb
 			return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
 		}
 
+		double Lerp(const double& a, const double& b, const float& t)
+		{
+			return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
+		}
+
 		Vector2f Lerp(const Vector2f& a, const Vector2f& b, const float& t)
 		{
 			return Vector2f(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
