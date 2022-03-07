@@ -16,10 +16,7 @@ namespace Birb
 		:x(p_x), y(p_y)
 		{}
 
-		std::string toString()
-		{
-			return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
-		}
+		std::string toString();
 
 		/* Operator overloads */
 		Vector2f operator+(const Vector2f& other) const
@@ -67,10 +64,7 @@ namespace Birb
 			y = std::round(p_y);
 		}
 
-		std::string toString()
-		{
-			return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
-		}
+		std::string toString();
 
 		/* Operator overloads */
 		Vector2int operator+(const Vector2int& other) const
@@ -117,10 +111,7 @@ namespace Birb
 		:x(p_x), y(p_y), z(p_z)
 		{}
 
-		std::string toString()
-		{
-			return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
-		}
+		std::string toString();
 
 		/* Operator overloads */
 		Vector3f operator+(const Vector3f& other) const
@@ -174,10 +165,7 @@ namespace Birb
 			z = std::round(p_z);
 		}
 
-		std::string toString()
-		{
-			return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
-		}
+		std::string toString();
 
 		/* Operator overloads */
 		Vector3int operator+(const Vector3int& other) const

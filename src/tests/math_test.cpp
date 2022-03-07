@@ -3,6 +3,19 @@
 
 namespace Birb
 {
+	TEST_CASE("Vector to string")
+	{
+		Vector2f point2f(1.10f, 1.10f);
+		Vector2int point2int(1, 1);
+		Vector3f point3f(1.10f, 1.10f, 2.10f);
+		Vector3int point3int(1, 1, 2);
+
+		CHECK(point2f.toString() == "(1.1, 1.1)");
+		CHECK(point2int.toString() == "(1, 1)");
+		CHECK(point3f.toString() == "(1.1, 1.1, 2.1)");
+		CHECK(point3int.toString() == "(1, 1, 2)");
+	}
+
 	TEST_CASE("Distance calculation with 2D vectors")
 	{
 		Vector2f pointAf(1.0f, 1.0f);
