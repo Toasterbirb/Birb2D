@@ -472,13 +472,19 @@ namespace Birb
 			ResetDrawColor();
 		}
 
-		void DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius)
+		bool DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
-			filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor);
+			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
+				return true;
+			else
+			{
+				Debug::Log("Error when drawing a circle", Debug::error);
+				return false;
+			}
 		}
 
-		void DrawPolygon(const SDL_Color& color, Vector2int* points, const int& pointCount)
+		bool DrawPolygon(const SDL_Color& color, Vector2int* points, const int& pointCount)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
@@ -491,10 +497,16 @@ namespace Birb
 				vy[i] = points[i].y;
 			}
 
-			filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor);
+			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
+				return true;
+			else
+			{
+				Debug::Log("Error when drawing a polygon!", Debug::error);
+				return false;
+			}
 		}
 
-		void DrawPolygon(const SDL_Color& color, const std::vector<Vector2int>& points)
+		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2int>& points)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
@@ -507,7 +519,13 @@ namespace Birb
 				vy[i] = points[i].y;
 			}
 
-			filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor);
+			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
+				return true;
+			else
+			{
+				Debug::Log("Error when drawing a polygon!", Debug::error);
+				return false;
+			}
 		}
 
 		void SetRenderDrawColor(const SDL_Color& color)

@@ -70,7 +70,7 @@ TEST_CASE("Window and rendering functions")
 	CHECK(Birb::Render::DrawEntity(textEntity));
 	CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
 
-	CHECK_NOTHROW(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2int(400, 400), 50));
+	CHECK(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2int(400, 400), 50));
 	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
 	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
 
@@ -82,7 +82,7 @@ TEST_CASE("Window and rendering functions")
 		Birb::Vector2int(87, 24),
 		Birb::Vector2int(53, 10),
 	};
-	CHECK_NOTHROW(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints, 5));
+	CHECK(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints, 5));
 
 	/* Draw the graphs */
 	lineGraph.Render();
@@ -106,7 +106,7 @@ TEST_CASE("Window and rendering functions")
 		Birb::Vector2int(87, 24),
 		Birb::Vector2int(53, 10),
 	};
-	CHECK_NOTHROW(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints2));
+	CHECK(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints2));
 
 	CHECK(Birb::Render::DrawEntity(testEntity));
 	CHECK(Birb::Render::DrawEntity(secondEntityWithSameTexture));
@@ -115,7 +115,7 @@ TEST_CASE("Window and rendering functions")
 	CHECK(Birb::Render::DrawEntity(textEntity));
 	CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
 
-	CHECK_NOTHROW(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
+	CHECK(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
 	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
 	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
 
