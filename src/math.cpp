@@ -24,6 +24,16 @@ namespace Birb
 		return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 	}
 
+	Line::Line()
+	{
+		pointA = Vector2f(0, 0);
+		pointB = Vector2f(0, 0);
+	}
+	
+	Line::Line(const Vector2f& pointA, const Vector2f& pointB)
+	:pointA(pointA), pointB(pointB)
+	{}
+
 	namespace Math
 	{
 		float VectorDistance(const Vector2f& a, const Vector2f& b)

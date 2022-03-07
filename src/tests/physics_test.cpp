@@ -85,5 +85,65 @@ namespace Birb
 
 			CHECK(EntityCollision(entityA, entityB));
 		}
+
+		TEST_CASE("Point in polygon")
+		{
+			const int pointCount = 6;
+			Vector2f points[pointCount] = {
+				Vector2f(0, 0),
+				Vector2f(2, 0),
+				Vector2f(3, 2),
+				Vector2f(4, 0),
+				Vector2f(4, 3),
+				Vector2f(0, 3)
+			};
+
+			Vector2f testPointA(3, 1); /* Shouldn't be in the polygon */
+			Vector2f testPointB(2, 1); /* Should be in the polygon */
+			Vector2f testPointC(1, 2); /* Should be in the polygon */
+			Vector2f testPointD(3, 4); /* Shouldn't be in the polygon */
+			Vector2f testPointE(3.5, 0); /* Shouldn't be in the polygon */
+			Vector2f testPointF(-1, 1.5); /* Shouldn't be in the polygon */
+			Vector2f testPointG(0, 0); /* Should be in the polygon */
+
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointA));
+			CHECK(PointInPolygon(points, pointCount, testPointB));
+			CHECK(PointInPolygon(points, pointCount, testPointC));
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointD));
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointE));
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointF));
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointG));
+		}
+
+		TEST_CASE("Line intersection")
+		{
+			Line lineA(Vector2f(1, 1), Vector2f(5, 3));
+			Line lineB(Vector2f(4.5f, 1.5f), Vector2f(6, 4));
+			Line lineC(Vector2f(3, 1), Vector2f(2, 3));
+			Line lineD(Vector2f(0,0), Vector2f(7, 5));
+			Line lineE(Vector2f(0, 5), Vector2f(7, 0));
+
+			Line lineF(Vector2f(7, 1), Vector2f(7, 3)); /* This should only collide with its overlapping line */
+			//Line lineG(Vector2f(7, 2), Vector2f(7, 3)); /* This line overlaps with lineF and should collide with it */
+
+			CHECK_FALSE(LineIntersection(lineA, lineB));
+			CHECK(LineIntersection(lineA, lineC));
+			CHECK(LineIntersection(lineA, lineD));
+			CHECK(LineIntersection(lineC, lineD));
+			CHECK_FALSE(LineIntersection(lineB, lineD));
+			CHECK(LineIntersection(lineA, lineE));
+			CHECK(LineIntersection(lineD, lineE));
+			CHECK(LineIntersection(lineB, lineE));
+			CHECK_FALSE(LineIntersection(lineC, lineE));
+
+			CHECK_FALSE(LineIntersection(lineA, lineF));
+			CHECK_FALSE(LineIntersection(lineB, lineF));
+			CHECK_FALSE(LineIntersection(lineC, lineF));
+			CHECK_FALSE(LineIntersection(lineD, lineF));
+			CHECK_FALSE(LineIntersection(lineE, lineF));
+
+			CHECK(LineIntersection(lineF, lineF)); /* Line should collide with itself */
+			//CHECK(LineIntersection(lineF, lineG)); /* Not implemented yet */
+		}
 	}
 }
