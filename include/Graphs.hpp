@@ -27,6 +27,8 @@ namespace Birb
 			SDL_Color graphColor;
 
 			std::vector<double> values;
+			double zeroValue = 0;
+			bool normalizedZeroValue = false; ///< Set to true for normalized min value
 			int borderSize;
 			double wallOffset = 5.0;
 		};

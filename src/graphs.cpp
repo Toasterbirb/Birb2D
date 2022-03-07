@@ -55,7 +55,11 @@ namespace Birb
 			
 			/* Calculate points */
 			double highestValue = Math::FindHighestValue(values);
-			double lowestValue 	= Math::FindLowestValue(values);
+			double lowestValue;
+			if (normalizedZeroValue)
+				lowestValue = Math::FindLowestValue(values);
+			else
+				lowestValue = zeroValue;
 
 			for (int i = 0; i < (int)values.size(); i++)
 			{

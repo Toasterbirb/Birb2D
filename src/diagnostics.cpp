@@ -13,6 +13,7 @@ namespace Birb
 			graph.backgroundColor 	= Colors::Black;
 			graph.graphColor 		= Colors::White;
 			graph.borderColor 		= Colors::White;
+			graph.normalizedZeroValue = true;
 		}
 
 		void FrametimeGraph::Render()
