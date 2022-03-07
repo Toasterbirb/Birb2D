@@ -51,7 +51,7 @@ namespace Birb
 			}
 
 			double width = rect.w - (wallOffset * 2);
-			Vector2int points[values.size()];
+			Vector2f points[values.size()];
 			
 			/* Calculate points */
 			double highestValue = Math::FindHighestValue(values);
