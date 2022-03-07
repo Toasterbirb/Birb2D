@@ -31,6 +31,7 @@ namespace Birb
 			bool normalizedZeroValue = false; ///< Set to true for normalized min value
 			int borderSize;
 			double wallOffset = 5.0;
+			double blockSpacing = 10;
 		};
 	}
 }
