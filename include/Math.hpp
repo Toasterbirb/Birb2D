@@ -263,7 +263,7 @@ namespace Birb
 		bool IsDigit(const float& value); 	///< Check if the float has any decimal points
 		bool IsDigit(const double& value); 	///< Check if the double has any decimal points
 
-
+		/// Find the highest value in an array
 		template<typename T>
 		T FindHighestValue(T* values, const int& valueCount)
 		{
@@ -275,7 +275,8 @@ namespace Birb
 			}
 			return result;
 		}
-
+		
+		/// Find the highest value in a vector
 		template<typename T>
 		T FindHighestValue(const std::vector<T>& values)
 		{
@@ -287,7 +288,8 @@ namespace Birb
 			}
 			return result;
 		}
-
+		
+		/// Find the lowest value in an array
 		template<typename T>
 		T FindLowestValue(T* values, const int& valueCount)
 		{
@@ -300,6 +302,7 @@ namespace Birb
 			return result;
 		}
 
+		/// Find the lowest value in a list
 		template<typename T>
 		T FindLowestValue(const std::vector<T>& values)
 		{

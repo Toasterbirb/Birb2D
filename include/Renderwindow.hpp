@@ -11,24 +11,24 @@ namespace Birb
 {
 	struct Window
 	{
-		Window();
-		Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable);
+		Window(); ///< Initializes a window without any parameters. Shouldn't be used
+		Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable); ///< Creates a window and initializes SDL2 stuff and a renderer
 
 		/* -- Init stuff functions -- */
-		static void InitSDL();
-		static void InitSDL_ttf();
-		static void InitSDL_image();
+		static void InitSDL(); ///< Initializes SDL2 (if its not already initialized)
+		static void InitSDL_ttf(); ///< Initializes SDL2_ttf (if its not already initialized)
+		static void InitSDL_image(); ///< Initializes SDL2_image (if its not already initialized)
 		/* -------------------------- */
 
 		/* -- Rendering and cleanup functions -- */
-		void Clear();
-		void Display();
-		void Cleanup();
+		void Clear(); ///< Clear the renderer so new stuff can be rendered to it without old stuff staying
+		void Display(); ///< Displays the renderer. Should be run after everything has been drawn to the renderer
+		void Cleanup(); ///< Frees resources allocated for the window and deinitializes SDL2 things
 		/* ------------------------------------- */
 
 		/* -- Cursor functions -- */
-		Vector2int CursorPosition();
-		bool CursorInRect(const Rect& rect);
+		Vector2int CursorPosition(); ///< Returns the current cursor position relative to the window
+		bool CursorInRect(const Rect& rect); ///< Checks if the cursor is inside of the given rect dimensions
 		/* ---------------------- */
 
 		/* -- Basic window events -- */
@@ -62,17 +62,17 @@ namespace Birb
 	/// Methods for rendering things
 	namespace Render
 	{
-		bool DrawEntity(Entity& entity);
-		void ResetDrawColor();
+		bool DrawEntity(Entity& entity); ///< Renders an entity
+		void ResetDrawColor(); ///< Resets the drawing color back to black, so that the window background color stays the same
 		void DrawRect(const SDL_Color& color, const Rect& dimensions); ///< Draw filled rect
 		void DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
-		void DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB);
-		void DrawLine(const SDL_Color& color, const Vector2f& pointA, const Vector2f& pointB);
-		void DrawLines(const SDL_Color& color, Vector2int* points, const int& pointCount);
-		void DrawLines(const SDL_Color& color, Vector2f* points, const int& pointCount);
-		bool DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius);
-		bool DrawPolygon(const SDL_Color& color, Vector2int* points, const int& pointCount);
-		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2int>& points);
-		void SetRenderDrawColor(const SDL_Color& color);
+		void DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB); ///< Draw a line between points A and B
+		void DrawLine(const SDL_Color& color, const Vector2f& pointA, const Vector2f& pointB); ///< Draw a line between points A and B
+		void DrawLines(const SDL_Color& color, Vector2int* points, const int& pointCount); ///< Draw lines between multiple points at once
+		void DrawLines(const SDL_Color& color, Vector2f* points, const int& pointCount); ///< Draw lines between multiple points at once
+		bool DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius); ///< Draw a circle around a point
+		bool DrawPolygon(const SDL_Color& color, Vector2int* points, const int& pointCount); ///< Draw a polygon from multiple points
+		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2int>& points); ///< Draw a polygon from multiple points
+		void SetRenderDrawColor(const SDL_Color& color); ///< Sets the drawing color for base SDL2 drawing functions
 	};
 }
