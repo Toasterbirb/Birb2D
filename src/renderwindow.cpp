@@ -439,6 +439,13 @@ namespace Birb
 			ResetDrawColor();
 		}
 
+		void DrawLine(const SDL_Color& color, const Vector2f& pointA, const Vector2f& pointB)
+		{
+			SetRenderDrawColor(color);
+			SDL_RenderDrawLineF(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
+			ResetDrawColor();
+		}
+
 		void DrawLines(const SDL_Color& color, Vector2int* points, const int& pointCount)
 		{
 			SDL_Point sdlPoints[pointCount];
@@ -449,6 +456,19 @@ namespace Birb
 
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLines(Global::RenderVars::Renderer, sdlPoints, pointCount);
+			ResetDrawColor();
+		}
+
+		void DrawLines(const SDL_Color& color, Vector2f* points, const int& pointCount)
+		{
+			SDL_FPoint sdlPoints[pointCount];
+			for (int i = 0; i < pointCount; i++)
+			{
+				sdlPoints[i] = { points[i].x, points[i].y };
+			}
+
+			SetRenderDrawColor(color);
+			SDL_RenderDrawLinesF(Global::RenderVars::Renderer, sdlPoints, pointCount);
 			ResetDrawColor();
 		}
 
