@@ -16,12 +16,7 @@ namespace Birb
 		:x(p_x), y(p_y)
 		{}
 
-		Vector2f getValue()
-		{
-			return Vector2f(x, y);
-		}
-
-		std::string print()
+		std::string toString()
 		{
 			return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 		}
@@ -72,12 +67,7 @@ namespace Birb
 			y = std::round(p_y);
 		}
 
-		Vector2int getValue()
-		{
-			return Vector2int(x, y);
-		}
-
-		std::string print()
+		std::string toString()
 		{
 			return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 		}
@@ -127,12 +117,7 @@ namespace Birb
 		:x(p_x), y(p_y), z(p_z)
 		{}
 
-		Vector3f getValue()
-		{
-			return Vector3f(x, y, z);
-		}
-
-		std::string print()
+		std::string toString()
 		{
 			return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 		}
@@ -189,12 +174,7 @@ namespace Birb
 			z = std::round(p_z);
 		}
 
-		Vector3int getValue()
-		{
-			return Vector3int(x, y, z);
-		}
-
-		std::string print()
+		std::string toString()
 		{
 			return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 		}
@@ -233,6 +213,33 @@ namespace Birb
 		int x, y, z;
 	};
 
+	/* ostream overloads for Vectors */
+	inline std::ostream& operator<<(std::ostream& stream, const Vector2int& other)
+	{
+		stream << other.x << ", " << other.y;
+		return stream;
+	}
+
+	inline std::ostream& operator<<(std::ostream& stream, const Vector3int& other)
+	{
+		stream << other.x << ", " << other.y << ", " << other.z;
+		return stream;
+	}
+
+	inline std::ostream& operator<<(std::ostream& stream, const Vector2f& other)
+	{
+		stream << other.x << ", " << other.y;
+		return stream;
+	}
+
+	inline std::ostream& operator<<(std::ostream& stream, const Vector3f& other)
+	{
+		stream << other.x << ", " << other.y << ", " << other.z;
+		return stream;
+	}
+	/* end of ostream overloads */
+
+
 	/// Misc math functions
 	namespace Math
 	{
@@ -267,23 +274,64 @@ namespace Birb
 		bool IsDigit(const float& value); 	///< Check if the float has any decimal points
 		bool IsDigit(const double& value); 	///< Check if the double has any decimal points
 
-		double 	FindHighestValue(double* values, const int& valueCount);
-		double 	FindHighestValue(const std::vector<double>& values);
-		float 	FindHighestValue(float* values, const int& valueCount);
-		float 	FindHighestValue(const std::vector<float>& values);
-		int 	FindHighestValue(int* values, const int& valueCount);
-		int 	FindHighestValue(const std::vector<int>& values);
 
-		double 	FindLowestValue(double* values, const int& valueCount);
-		double 	FindLowestValue(const std::vector<double>& values);
-		float 	FindLowestValue(float* values, const int& valueCount);
-		float 	FindLowestValue(const std::vector<float>& values);
-		int 	FindLowestValue(int* values, const int& valueCount);
-		int 	FindLowestValue(const std::vector<int>& values);
+		template<typename T>
+		T FindHighestValue(T* values, const int& valueCount)
+		{
+			T result = values[0];
+			for (int i = 1; i < valueCount; i++)
+			{
+				if (values[i] > result)
+					result = values[i];
+			}
+			return result;
+		}
 
-		double 	Average(double* values, const int& valueCount);
-		float 	Average(float* values, const int& valueCount);
-		double 	Average(int* values, const int& valueCount);
+		template<typename T>
+		T FindHighestValue(const std::vector<T>& values)
+		{
+			T result = values[0];
+			for (int i = 1; i < (int)values.size(); i++)
+			{
+				if (values[i] > result)
+					result = values[i];
+			}
+			return result;
+		}
+
+		template<typename T>
+		T FindLowestValue(T* values, const int& valueCount)
+		{
+			T result = values[0];
+			for (int i = 1; i < valueCount; i++)
+			{
+				if (values[i] < result)
+					result = values[i];
+			}
+			return result;
+		}
+
+		template<typename T>
+		T FindLowestValue(const std::vector<T>& values)
+		{
+			T result = values[0];
+			for (int i = 1; i < (int)values.size(); i++)
+			{
+				if (values[i] < result)
+					result = values[i];
+			}
+			return result;
+		}
+
+
+		template<typename T>
+		double Average(T* values, const int& valueCount)
+		{
+			double total = 0;
+			for (int i = 0; i < valueCount; i++)
+				total += values[i];
+			return total / valueCount;
+		}
 
 		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum);
 	};

@@ -40,12 +40,14 @@ TEST_CASE("Window and rendering functions")
 	Birb::Widgets::Graph lineGraph(Birb::Widgets::GraphType::Line,
 			values,
 			Birb::Rect(800, 50, 260, 180));
-	lineGraph.graphColor = Birb::Colors::Green;
+	lineGraph.graphColor 		= Birb::Colors::Green;
+	lineGraph.backgroundColor 	= Birb::Colors::Black;
 
 	Birb::Widgets::Graph blockGraph(Birb::Widgets::GraphType::Block,
 			values,
 			Birb::Rect(800, 250, 260, 180));
-	blockGraph.graphColor = Birb::Colors::Red;
+	blockGraph.graphColor 		= Birb::Colors::Red;
+	blockGraph.backgroundColor 	= Birb::Colors::Black;
 
 
 	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red));

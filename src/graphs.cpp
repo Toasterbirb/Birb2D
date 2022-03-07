@@ -79,7 +79,7 @@ namespace Birb
 
 				case (GraphType::Block):
 					for (int i = 0; i < (int)values.size(); i++)
-						Render::DrawRect(graphColor, Rect(points[i].x, points[i].y, 10, Math::Normalize(values[i], lowestValue, highestValue, rect.h)));
+						Render::DrawRect(graphColor, Rect(points[i].x - (((width / (int)values.size()) - 2) / 2), points[i].y, (width / values.size()) - 2, Math::Normalize(values[i], lowestValue, highestValue, rect.h)));
 					break;
 			}
 
