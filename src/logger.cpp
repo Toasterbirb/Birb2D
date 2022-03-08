@@ -47,18 +47,18 @@ namespace Birb
 			switch (type)
 			{
 				case (Type::log):
-					printline = line + "\033[32m[Log] " + text + "\033[0m";
-					line = line + "[Log] " + text + "\n";
+					printline = line + "\033[32m[" + LogLabel + "] " + text + "\033[0m";
+					line = line + "[" + LogLabel + "] " + text + "\n";
 					break;
 
 				case (Type::warning):
-					printline = line + "\033[33m[Warning] " + text + "\033[0m";
-					line = line + "[Warning] " + text + "\n";
+					printline = line + "\033[33m[" + WarningLabel +"] " + text + "\033[0m";
+					line = line + "[" + WarningLabel + "] " + text + "\n";
 					break;
 
 				case (Type::error):
-					printline = line + "\033[31m[ERROR] " + text + "\033[0m";
-					line = line + "[ERROR] " + text + "\n";
+					printline = line + "\033[31m[" + ErrorLabel + "] " + text + "\033[0m";
+					line = line + "[" + ErrorLabel + "] " + text + "\n";
 					break;
 
 				default:
