@@ -49,6 +49,12 @@ TEST_CASE("Window and rendering functions")
 	blockGraph.graphColor 		= Birb::Colors::Red;
 	blockGraph.backgroundColor 	= Birb::Colors::Black;
 
+	Birb::Widgets::Graph areaGraph(Birb::Widgets::GraphType::Area,
+			values,
+			Birb::Rect(800, 450, 260, 180));
+	areaGraph.graphColor 		= Birb::Colors::Blue;
+	areaGraph.backgroundColor 	= Birb::Colors::Black;
+
 
 	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red));
 	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red, &Birb::Colors::White));
@@ -72,7 +78,7 @@ TEST_CASE("Window and rendering functions")
 
 	CHECK(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2int(400, 400), 50));
 	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
-	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
+	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 200, 20)));
 
 	/* Draw a polygon */
 	Birb::Vector2int polyPoints[5] = {
@@ -87,6 +93,7 @@ TEST_CASE("Window and rendering functions")
 	/* Draw the graphs */
 	lineGraph.Render();
 	blockGraph.Render();
+	areaGraph.Render();
 
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);
@@ -117,11 +124,12 @@ TEST_CASE("Window and rendering functions")
 
 	CHECK(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
 	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
-	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 500, 20)));
+	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 200, 20)));
 
 	/* Draw the graph */
 	lineGraph.Render();
 	blockGraph.Render();
+	areaGraph.Render();
 
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);

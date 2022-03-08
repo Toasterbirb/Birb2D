@@ -528,6 +528,30 @@ namespace Birb
 			}
 		}
 
+		/* filledPolygonColor works only with integers, so this will just 
+		 * round the floating point vlues into integers */
+		bool DrawPolygon(const SDL_Color& color, Vector2f* points, const int& pointCount)
+		{
+			Vector2int intPoints[pointCount];
+			for (int i = 0; i < pointCount; i++)
+			{
+				intPoints[i].x = std::round(points[i].x);
+				intPoints[i].y = std::round(points[i].y);
+			}
+			return DrawPolygon(color, intPoints, pointCount);
+		}
+
+		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2f>& points)
+		{
+			Vector2int intPoints[points.size()];
+			for (int i = 0; i < points.size(); i++)
+			{
+				intPoints[i].x = std::round(points[i].x);
+				intPoints[i].y = std::round(points[i].y);
+			}
+			return DrawPolygon(color, intPoints, points.size());
+		}
+
 		void SetRenderDrawColor(const SDL_Color& color)
 		{
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);

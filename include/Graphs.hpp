@@ -8,7 +8,7 @@ namespace Birb
 	{
 		enum GraphType
 		{
-			Block, Line
+			Block, Line, Area
 		};
 
 		struct Graph

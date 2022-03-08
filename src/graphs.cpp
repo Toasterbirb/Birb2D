@@ -9,7 +9,7 @@ namespace Birb
 		Graph::Graph()
 		{
 			borderColor 	= Colors::White;
-			backgroundColor = Colors::White;
+			backgroundColor = Colors::Black;
 			graphColor 		= Colors::White;
 
 			borderSize = 3;
@@ -51,7 +51,7 @@ namespace Birb
 			}
 
 			double width = rect.w - (wallOffset * 2);
-			Vector2f points[values.size()];
+			std::vector<Vector2f> points(values.size());
 			
 			/* Calculate points */
 			double highestValue = Math::FindHighestValue(values);
@@ -78,12 +78,27 @@ namespace Birb
 			switch (type)
 			{
 				case (GraphType::Line):
-					Render::DrawLines(graphColor, points, values.size());
+					Render::DrawLines(graphColor, &points[0], values.size());
 					break;
 
 				case (GraphType::Block):
 					for (int i = 0; i < (int)values.size(); i++)
 						Render::DrawRect(graphColor, Rect(points[i].x - (((width / (int)values.size()) - blockSpacing) / 2), points[i].y, (width / values.size()) - blockSpacing, Math::Normalize(values[i], lowestValue, highestValue, rect.h)));
+					break;
+
+				case(GraphType::Area):
+					/* Works pretty much the same way as the line rendering, but
+					 * creates a polygon to fill in the area between the line and 
+					 * the bottom of the graph */
+					
+					Vector2f endBottomPoint(points[points.size() - 1].x, rect.y + rect.h);
+					Vector2f startBottomPoint(points[0].x, rect.y + rect.h);
+
+					/* End first, because we are working clockwise */
+					points.push_back(endBottomPoint);
+					points.push_back(startBottomPoint);
+
+					Render::DrawPolygon(graphColor, points);
 					break;
 			}
 

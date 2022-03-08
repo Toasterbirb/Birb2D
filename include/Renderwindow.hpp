@@ -73,6 +73,8 @@ namespace Birb
 		bool DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius); ///< Draw a circle around a point
 		bool DrawPolygon(const SDL_Color& color, Vector2int* points, const int& pointCount); ///< Draw a polygon from multiple points
 		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2int>& points); ///< Draw a polygon from multiple points
+		bool DrawPolygon(const SDL_Color& color, Vector2f* points, const int& pointCount); ///< Draw a polygon from multiple points
+		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2f>& points); ///< Draw a polygon from multiple points
 		void SetRenderDrawColor(const SDL_Color& color); ///< Sets the drawing color for base SDL2 drawing functions
 	};
 }
