@@ -17,6 +17,7 @@ namespace Birb
 		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h);
 
 		std::string toString();
+		Vector2f* toPolygon();
 		Rect getInt();
 		SDL_Rect getSDLRect() const;
 

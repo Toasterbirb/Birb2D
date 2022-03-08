@@ -19,6 +19,18 @@ namespace Birb
 			utils::CleanDecimals(h);
 	}
 
+	Vector2f* Rect::toPolygon()
+	{
+		Vector2f* points = new Vector2f[4] {
+			Vector2f(x, y),
+			Vector2f(x + w, y),
+			Vector2f(x + w, y + h),
+			Vector2f(x, y + h)
+		};
+
+		return points;
+	}
+
 	Rect Rect::getInt()
 	{
 		Rect roundedRect;
