@@ -9,15 +9,16 @@ namespace Birb
 	{
 		int milliseconds = 3600000;
 
-		CHECK(Birb::Timer::CalcSeconds(milliseconds) == 3600);
-		CHECK(Birb::Timer::CalcMinutes(milliseconds) == 60);
-		CHECK(Birb::Timer::CalcHours(milliseconds) == 1);
+		CHECK(Timer::CalcSeconds(milliseconds) == 3600);
+		CHECK(Timer::CalcMinutes(milliseconds) == 60);
+		CHECK(Timer::CalcHours(milliseconds) == 1);
 	}
 
 	TEST_CASE("Timer stop test")
 	{
-		Birb::Debug::Log("Running timer tests, this might take a moment...");
-		Birb::Timer timer;
+		Debug::Log("Running timer tests, this might take a moment...");
+		Timer timer;
+		Debug::Log("Delay test for 1200 milliseconds");
 		timer.Start();
 		CHECK(timer.running);
 		SDL_Delay(1200);
@@ -27,6 +28,7 @@ namespace Birb
 		CHECK(timer.DigitalFormat() == "00:00:01:200"); /* Test digital format since we have already spent time on timing */
 
 		/* Make sure the timer actually stops after stopping it */
+		Debug::Log("Delaying for 500 milliseconds to see if the timer stopped");
 		SDL_Delay(500);
 		CHECK(timer.ElapsedSeconds() == 1.20);
 	}
@@ -34,6 +36,7 @@ namespace Birb
 	TEST_CASE("Timer accuracy test")
 	{
 		Birb::Timer timer;
+		Debug::Log("Delay test for 123 milliseconds");
 		timer.Start();
 		SDL_Delay(123);
 		timer.Stop();
