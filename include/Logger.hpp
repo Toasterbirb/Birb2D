@@ -17,8 +17,8 @@ namespace Birb
 		static std::string logfile = (std::string)getenv("HOME") + "/.cache/birb2d_log.txt";
 
 		/* Labels that show in between [ ] characters after the timestamp */
-		static const std::string LogLabel 	= "L";
-		static const std::string WarningLabel = "W";
+		static const std::string LogLabel 		= "L";
+		static const std::string WarningLabel 	= "W";
 		static const std::string ErrorLabel 	= "E";
 	}
 }
