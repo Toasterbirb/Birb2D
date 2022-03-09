@@ -1,7 +1,6 @@
 #include "../include/Logger.hpp"
 #include <ctime>
 #include <fstream>
-#include <SDL2/SDL.h>
 #include <filesystem>
 
 namespace Birb
