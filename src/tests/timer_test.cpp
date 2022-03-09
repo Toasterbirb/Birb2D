@@ -1,5 +1,5 @@
+#include <thread>
 #include "doctest.h"
-#include <SDL2/SDL.h>
 #include "Logger.hpp"
 #include "Timer.hpp"
 
@@ -16,12 +16,14 @@ namespace Birb
 
 	TEST_CASE("Timer stop test")
 	{
+		using namespace std::chrono_literals;
+
 		Debug::Log("Running timer tests, this might take a moment...");
 		Timer timer;
 		Debug::Log("Delay test for 1200 milliseconds");
 		timer.Start();
 		CHECK(timer.running);
-		SDL_Delay(1200);
+		std::this_thread::sleep_for(1200ms);
 		timer.Stop();
 
 		CHECK(timer.ElapsedSeconds() == 1.20);
@@ -29,16 +31,18 @@ namespace Birb
 
 		/* Make sure the timer actually stops after stopping it */
 		Debug::Log("Delaying for 500 milliseconds to see if the timer stopped");
-		SDL_Delay(500);
+		std::this_thread::sleep_for(1200ms);
 		CHECK(timer.ElapsedSeconds() == 1.20);
 	}
 
 	TEST_CASE("Timer accuracy test")
 	{
+		using namespace std::chrono_literals;
+
 		Birb::Timer timer;
 		Debug::Log("Delay test for 123 milliseconds");
 		timer.Start();
-		SDL_Delay(123);
+		std::this_thread::sleep_for(123ms);
 		timer.Stop();
 
 		CHECK(timer.ElapsedMilliseconds() == 123);
