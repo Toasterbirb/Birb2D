@@ -6,10 +6,19 @@ namespace Birb
 	{
 		bool RectCollision(const Rect& rectA, const Rect& rectB)
 		{
-			SDL_Rect A = rectA.getSDLRect();
-			SDL_Rect B = rectB.getSDLRect();
+			/* Check the X-axis */
+			if (rectA.x + rectA.w < rectB.x)
+				return false;
+			else if (rectA.x > rectB.x + rectB.w)
+				return false;
 
-			return SDL_HasIntersection(&A, &B);
+			/* Check the Y-axis */
+			if (rectA.y + rectA.h < rectB.y)
+				return false;
+			else if (rectA.y > rectB.y + rectB.h)
+				return false;
+
+			return true;
 		}
 
 		bool RectCollision(const Birb::Rect rects[], const int& size)

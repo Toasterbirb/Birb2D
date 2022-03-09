@@ -13,7 +13,24 @@ namespace Birb
 			Rect rectC(5, 1, 3, 2);
 
 			CHECK(RectCollision(rectA, rectB));
+			CHECK(RectCollision(rectB, rectA));
 			CHECK_FALSE(RectCollision(rectA, rectC));
+			CHECK_FALSE(RectCollision(rectC, rectA));
+			
+
+			Rect rectD(0, 0, 10, 10);
+			Rect rectE(0, 20, 10, 10);
+			Rect rectF(30, 0, 10, 10);
+			Rect rectG(10, 0, 10, 10);
+
+			CHECK(RectCollision(rectG, rectD));
+			CHECK(RectCollision(rectD, rectG));
+			CHECK_FALSE(RectCollision(rectD, rectE));
+			CHECK_FALSE(RectCollision(rectE, rectD));
+			CHECK_FALSE(RectCollision(rectE, rectF));
+			CHECK_FALSE(RectCollision(rectF, rectE));
+			CHECK_FALSE(RectCollision(rectD, rectF));
+			CHECK_FALSE(RectCollision(rectF, rectD));
 		}
 
 		TEST_CASE("Rect collision with multiple rects at once in an array")
