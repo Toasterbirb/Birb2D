@@ -44,22 +44,3 @@ to uninstall, run the following
 ```sh
 make uninstall
 ```
-
-## Roadmap
-- [x] Sprite rendering
-- [x] Timestep
-- [x] Basic input handling (currently at cave man stage)
-- [x] Entity system (Partially functional currently)
-- [ ] Basic UI functionality
-	- [x] Buttons
-	- [x] Text
-	- [ ] Dropdown menu
-	- [ ] Slider
-	- [ ] Input box
-	- [x] Resizable UI
-		- [ ] Resolution independent UI scaling
-		- [ ] Anchors
-- [x] Sound
-- [x] Animation (sprite based animations supported)
-- [ ] Physics
-- [ ] To be continued...
