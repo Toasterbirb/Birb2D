@@ -254,4 +254,28 @@ namespace Birb
 
 		CHECK(result);
 	}
+
+	TEST_CASE("Polygon to lines")
+	{
+		const int polygonSize = 4;
+		Vector2f polygon[polygonSize] = {
+			Vector2f(7, -1),
+			Vector2f(9, -1),
+			Vector2f(11, 0),
+			Vector2f(9, 0),
+		};
+
+		Line expectedLines[polygonSize] = {
+			Line(Vector2f(7, -1), Vector2f(9, -1)),
+			Line(Vector2f(9, -1), Vector2f(11, 0)),
+			Line(Vector2f(11, 0), Vector2f(9, 0)),
+			Line(Vector2f(9, 0), Vector2f(7, -1)),
+		};
+
+		Line* lines = utils::PolygonToLines(polygon, polygonSize);
+		CHECK(lines[0] == expectedLines[0]);
+		CHECK(lines[1] == expectedLines[1]);
+		CHECK(lines[2] == expectedLines[2]);
+		CHECK(lines[3] == expectedLines[3]);
+	}
 }

@@ -48,5 +48,7 @@ namespace Birb
 		void ShuffleArray(float* values, const int& size); ///< Shuffles an array of floats
 		void ShuffleArray(double* values, const int& size); ///< Shuffles an array of doubles
 		void ShuffleArray(std::string* values, const int& size); ///< Shuffles an array of strings
+
+		Line* PolygonToLines(const Vector2f polygon[], const int& polygonSize);
 	}
 }

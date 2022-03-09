@@ -129,8 +129,12 @@ namespace Birb
 	{
 		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
 		window_dimensions = dimensions;
-		window_dimensions_multiplier.x = (float)window_dimensions.x / (float)original_window_dimensions.x;
-		window_dimensions_multiplier.y = (float)window_dimensions.y / (float)original_window_dimensions.y;
+	}
+
+	Vector2f Window::window_dimensions_multiplier()
+	{
+		return Vector2f((float)window_dimensions.x / (float)original_window_dimensions.x,
+						(float)window_dimensions.y / (float)original_window_dimensions.y);
 	}
 
 	void Window::EventTick(const SDL_Event& event, bool* GameRunning)

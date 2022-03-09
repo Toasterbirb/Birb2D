@@ -207,5 +207,20 @@ namespace Birb
 				values[newIndex] = placeHolder;
 			}
 		}
+
+		Line* PolygonToLines(const Vector2f polygon[], const int& polygonSize)
+		{
+			Line* lines = new Line[polygonSize];
+			
+			for (int i = 0; i < polygonSize - 1; i++)
+			{
+				lines[i] = Line(polygon[i], polygon[i + 1]);
+			}
+
+			/* The last line connects the last point and the first point */
+			lines[polygonSize - 1] = Line(polygon[polygonSize - 1], polygon[0]);
+
+			return lines;
+		}
 	}
 }

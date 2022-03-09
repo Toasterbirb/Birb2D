@@ -44,35 +44,12 @@ namespace Birb
 			return SDL_HasIntersection(&A, &B);
 		}
 
-		/* Inspired/yoinked from https://alienryderflex.com/polygon */
-		bool PointInPolygon(Vector2f* points, const int& pointCount, const Vector2f& point)
-		{
-			int j = pointCount - 1;
-			bool oddNodes = false; /* If the node count is odd, the point is in the polygon */
-			
-			for (int i = 0; i < pointCount; i++)
-			{
-				if (points[i].y < point.y && points[j].y >= point.y
-						|| points[j].y < point.y && points[i].y >= point.y)
-				{
-					if (points[i].x + (point.y - points[i].y) / (points[j].y - points[i].y) * (points[j].x - points[i].x) < point.x)
-					{
-						oddNodes = !oddNodes;
-					}
-				}
-
-				j = i;
-			}
-
-			return oddNodes;
-		}
-
 		/* Inspired/yoinked from
 		 * https://stackoverflow/questions/563198/how-do-you-detect-where-two-line-segments-intersect
 		 *
 		 * Doesn't handle cases where the lines overlap eachother and have the exact same X/Y values
 		 * for example A(7,1) B(7,3) and A(7,2) B(7,3) should technically collide, but this algorithm 
-		 * doesn't handle it for some reason. pls fix */
+		 * doesn't handle it for some reason. pls fix*/
 		bool LineIntersection(const Line& lineA, const Line& lineB)
 		{
 			/* If the two lines are the exact same, they should collide */
@@ -97,6 +74,59 @@ namespace Birb
 			{
 				/* Intersection found */
 				return true;
+			}
+
+			return false;
+		}
+
+		/* Inspired/yoinked from https://alienryderflex.com/polygon */
+		bool PointInPolygon(Vector2f points[], const int& pointCount, const Vector2f& point)
+		{
+			int j = pointCount - 1;
+			bool oddNodes = false; /* If the node count is odd, the point is in the polygon */
+			
+			for (int i = 0; i < pointCount; i++)
+			{
+				if (points[i].y < point.y && points[j].y >= point.y
+						|| points[j].y < point.y && points[i].y >= point.y)
+				{
+					if (points[i].x + (point.y - points[i].y) / (points[j].y - points[i].y) * (points[j].x - points[i].x) < point.x)
+					{
+						oddNodes = !oddNodes;
+					}
+				}
+
+				j = i;
+			}
+
+			return oddNodes;
+		}
+
+		bool PolygonCollision(Vector2f polygonA[], const int& polygonAsize, Vector2f polygonB[], const int& polygonBsize)
+		{
+			/* First test if any of the points of either polygon is inside of the other one
+			 * start with polygon A and then repeat the process the other way around */
+			for (int i = 0; i < polygonAsize; i++)
+				if (PointInPolygon(polygonB, polygonBsize, polygonA[i]))
+					return true;
+
+			for (int i = 0; i < polygonBsize; i++)
+				if (PointInPolygon(polygonA, polygonAsize, polygonB[i]))
+					return true;
+
+			/* Next check for line intersections. The other polygon might not have points inside of the other polygon
+			 * so we need to check if the sides intersect. First convert the polygons into lines */
+			Line* polygonAlines = utils::PolygonToLines(polygonA, polygonAsize);
+			Line* polygonBlines = utils::PolygonToLines(polygonB, polygonBsize);
+
+			/* Check if any of the lines intersect */
+			for (int i = 0; i < polygonAsize; i++)
+			{
+				for (int j = 0; j < polygonBsize; j++)
+				{
+					if (LineIntersection(polygonAlines[i], polygonBlines[j]))
+						return true;
+				}
 			}
 
 			return false;

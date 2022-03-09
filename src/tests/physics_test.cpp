@@ -86,35 +86,6 @@ namespace Birb
 			CHECK(EntityCollision(entityA, entityB));
 		}
 
-		TEST_CASE("Point in polygon")
-		{
-			const int pointCount = 6;
-			Vector2f points[pointCount] = {
-				Vector2f(0, 0),
-				Vector2f(2, 0),
-				Vector2f(3, 2),
-				Vector2f(4, 0),
-				Vector2f(4, 3),
-				Vector2f(0, 3)
-			};
-
-			Vector2f testPointA(3, 1); /* Shouldn't be in the polygon */
-			Vector2f testPointB(2, 1); /* Should be in the polygon */
-			Vector2f testPointC(1, 2); /* Should be in the polygon */
-			Vector2f testPointD(3, 4); /* Shouldn't be in the polygon */
-			Vector2f testPointE(3.5, 0); /* Shouldn't be in the polygon */
-			Vector2f testPointF(-1, 1.5); /* Shouldn't be in the polygon */
-			Vector2f testPointG(0, 0); /* Should be in the polygon */
-
-			CHECK_FALSE(PointInPolygon(points, pointCount, testPointA));
-			CHECK(PointInPolygon(points, pointCount, testPointB));
-			CHECK(PointInPolygon(points, pointCount, testPointC));
-			CHECK_FALSE(PointInPolygon(points, pointCount, testPointD));
-			CHECK_FALSE(PointInPolygon(points, pointCount, testPointE));
-			CHECK_FALSE(PointInPolygon(points, pointCount, testPointF));
-			CHECK_FALSE(PointInPolygon(points, pointCount, testPointG));
-		}
-
 		TEST_CASE("Line intersection")
 		{
 			Line lineA(Vector2f(1, 1), Vector2f(5, 3));
@@ -144,6 +115,79 @@ namespace Birb
 
 			CHECK(LineIntersection(lineF, lineF)); /* Line should collide with itself */
 			//CHECK(LineIntersection(lineF, lineG)); /* Not implemented yet */
+		}
+
+		TEST_CASE("Point in polygon")
+		{
+			const int pointCount = 6;
+			Vector2f points[pointCount] = {
+				Vector2f(0, 0),
+				Vector2f(2, 0),
+				Vector2f(3, 2),
+				Vector2f(4, 0),
+				Vector2f(4, 3),
+				Vector2f(0, 3)
+			};
+
+			Vector2f testPointA(3, 1); /* Shouldn't be in the polygon */
+			Vector2f testPointB(2, 1); /* Should be in the polygon */
+			Vector2f testPointC(1, 2); /* Should be in the polygon */
+			Vector2f testPointD(3, 4); /* Shouldn't be in the polygon */
+			Vector2f testPointE(3.5, 0); /* Shouldn't be in the polygon */
+			Vector2f testPointF(-1, 1.5); /* Shouldn't be in the polygon */
+			Vector2f testPointG(0, 0); /* Should be in the polygon */
+
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointA));
+			CHECK(PointInPolygon(points, pointCount, testPointB));
+			CHECK(PointInPolygon(points, pointCount, testPointC));
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointD));
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointE));
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointF));
+			CHECK_FALSE(PointInPolygon(points, pointCount, testPointG));
+		}
+
+		TEST_CASE("Polygon collisiosn")
+		{
+			const int polygonAsize = 7;
+			Vector2f polygonA[polygonAsize] = {
+				Vector2f(2, 1),
+				Vector2f(4, -1),
+				Vector2f(9, 1),
+				Vector2f(7, 3),
+				Vector2f(10, 4),
+				Vector2f(5, 5),
+				Vector2f(1, 4)
+			};
+
+			/* Triangle inside of the polygon A */
+			const int polygonBsize = 3;
+			Vector2f polygonB[polygonBsize] = {
+				Vector2f(3, 1),
+				Vector2f(4, 3),
+				Vector2f(3, 3)
+			};
+
+			/* 4 sided polygon with no points inside of polygon A, but the sides should collide */
+			const int polygonCsize = 4;
+			Vector2f polygonC[polygonCsize] = {
+				Vector2f(8, 3),
+				Vector2f(9, 3),
+				Vector2f(9, 6),
+				Vector2f(7, 6)
+			};
+
+			/* 4 sided polygon completely outside of polygon A, shouldn't collide with it */
+			const int polygonDsize = 4;
+			Vector2f polygonD[polygonDsize] = {
+				Vector2f(7, -1),
+				Vector2f(9, -1),
+				Vector2f(11, 0),
+				Vector2f(9, 0)
+			};
+
+			CHECK(PolygonCollision(polygonA, polygonAsize, polygonB, polygonBsize));
+			CHECK(PolygonCollision(polygonA, polygonAsize, polygonC, polygonCsize));
+			CHECK_FALSE(PolygonCollision(polygonA, polygonAsize, polygonD, polygonDsize));
 		}
 	}
 }
