@@ -45,7 +45,7 @@ namespace Birb
 		SDL_Renderer* renderer = NULL;
 		Vector2int window_dimensions; ///< Current window dimensions
 		Vector2int original_window_dimensions; ///< Window dimensions on application startup before its modified by the user
-		Vector2f window_dimensions_multiplier; ///< Contains the difference between the current and old window dimensions. DO NOT MODIFY!
+		Vector2f window_dimensions_multiplier(); ///< Returns the difference between the current and original window dimensions.
 		/* ---------------------- */
 	};
 
