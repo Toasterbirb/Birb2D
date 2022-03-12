@@ -12,4 +12,5 @@ function full()
 case $1 in
 	quick) quick ;;
 	full) full ;;
+	*) echo "Run this script with either argument 'quick' or 'full'" ;;
 esac
