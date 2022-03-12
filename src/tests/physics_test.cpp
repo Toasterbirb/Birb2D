@@ -203,8 +203,13 @@ namespace Birb
 			};
 
 			CHECK(PolygonCollision(polygonA, polygonAsize, polygonB, polygonBsize));
+			CHECK(PolygonCollision(polygonB, polygonBsize, polygonA, polygonAsize));
+
 			CHECK(PolygonCollision(polygonA, polygonAsize, polygonC, polygonCsize));
+			CHECK(PolygonCollision(polygonC, polygonCsize, polygonA, polygonAsize));
+
 			CHECK_FALSE(PolygonCollision(polygonA, polygonAsize, polygonD, polygonDsize));
+			CHECK_FALSE(PolygonCollision(polygonD, polygonDsize, polygonA, polygonAsize));
 		}
 	}
 }

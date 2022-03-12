@@ -55,32 +55,6 @@ namespace Birb
 
 	namespace utils
 	{
-		static bool RandomGenInitialized = false;
-		void InitRandomGen()
-		{
-			srand(time(0));
-			RandomGenInitialized = true;
-		}
-
-		int randomInt(const int& min, const int& max)
-		{
-			if (!RandomGenInitialized)
-				InitRandomGen();
-
-			float value = rand() % (max + 1 - min) + min;
-			return value;
-		}
-
-		float randomFloat(const float& min, const float& max)
-		{
-			if (!RandomGenInitialized)
-				InitRandomGen();
-
-			float random = ((float) rand()) / (float) RAND_MAX;
-			float range = max - min;
-			return (random * range) + min;
-		}
-
 		void GetTextureDimensions(SDL_Texture* texture, int& x, int& y)
 		{
 			SDL_QueryTexture(texture, NULL, NULL, &x, &y);
@@ -138,73 +112,6 @@ namespace Birb
 				}
 
 				return result;
-			}
-		}
-
-		void ShuffleArray(int* values, const int& size)
-		{
-			int newIndex;
-			int placeHolder;
-			for (int i = 0; i < size; i++)
-			{
-				newIndex = randomInt(0, size - 1);
-				if (newIndex != i)
-				{
-					placeHolder = values[i];
-					values[i] = values[newIndex];
-					values[newIndex] = placeHolder;
-				}
-			}
-		}
-
-		void ShuffleArray(float* values, const int& size)
-		{
-			int newIndex;
-			float placeHolder;
-			for (int i = 0; i < size; i++)
-			{
-				do
-				{
-					newIndex = randomInt(0, size - 1);
-				} while (newIndex == i);
-
-				placeHolder = values[i];
-				values[i] = values[newIndex];
-				values[newIndex] = placeHolder;
-			}
-		}
-
-		void ShuffleArray(double* values, const int& size)
-		{
-			int newIndex;
-			double placeHolder;
-			for (int i = 0; i < size; i++)
-			{
-				do
-				{
-					newIndex = randomInt(0, size - 1);
-				} while (newIndex == i);
-
-				placeHolder = values[i];
-				values[i] = values[newIndex];
-				values[newIndex] = placeHolder;
-			}
-		}
-
-		void ShuffleArray(std::string* values, const int& size)
-		{
-			int newIndex;
-			std::string placeHolder;
-			for (int i = 0; i < size; i++)
-			{
-				do
-				{
-					newIndex = randomInt(0, size - 1);
-				} while (newIndex == i);
-
-				placeHolder = values[i];
-				values[i] = values[newIndex];
-				values[newIndex] = placeHolder;
 			}
 		}
 
