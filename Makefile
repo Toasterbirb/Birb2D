@@ -2,7 +2,7 @@ CC=g++
 SRCDIR=./src
 TEST_SRCDIR=./src/tests
 outputDir=./build
-CFLAGS=-fPIC -O3 -g -std=c++17
+CFLAGS=-fPIC -g -std=c++17
 WarningFlags=-Wpedantic -pedantic -Wall -Wextra
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
@@ -31,11 +31,11 @@ run_quick_tests: test
 
 engine_lib: ${LIB_OBJ}
 	mkdir -p build
-	g++ -shared -g $(CFLAGS) $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
+	$(CC) -shared $(CFLAGS) $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
 
 static_engine_lib: ${LIB_OBJ}
 	mkdir -p build
-	g++ -static -g $(CFLAGS) $(SDL2_STUFF) -o $(outputDir)/$(LIBFILE) $^
+	g++ -static $(CFLAGS) $(SDL2_STUFF) -o $(outputDir)/$(LIBFILE) $^
 	#ar -crs $(outputDir)/libbirb2d.a $^
 
 install: engine_lib

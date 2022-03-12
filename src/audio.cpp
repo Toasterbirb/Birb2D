@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Audio.hpp"
 #include "Logger.hpp"
 

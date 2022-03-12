@@ -2,10 +2,10 @@
 #pragma GCC diagnostic ignored "-Wunused-function"
 
 #include <SDL2/SDL.h>
-
-#include "Math.hpp"
 #include <cstdlib>
 #include <math.h>
+
+#include "Math.hpp"
 
 
 namespace Birb
