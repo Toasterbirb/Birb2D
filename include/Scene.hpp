@@ -22,6 +22,8 @@ namespace Birb
 		void Deactivate();
 		void Toggle();
 
+		void Render() const; ///< Render all objects in the scene if the scene is active
+
 	private:
 		void SetObjectState(bool state);
 

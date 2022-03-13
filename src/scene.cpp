@@ -1,4 +1,5 @@
 #include "Scene.hpp"
+#include "Renderwindow.hpp"
 
 namespace Birb
 {
@@ -75,5 +76,20 @@ namespace Birb
 	{
 		active = !active;
 		SetObjectState(active);
+	}
+
+	void Scene::Render() const
+	{
+		/* Skip rendering if the scene isn't active */
+		if (!active)
+			return;
+
+		/* Draw entities */
+		for (int i = 0; i < (int)entities.size(); i++)
+			Render::DrawEntity(*entities[i]);
+
+		/* Draw graphs */
+		for (int i = 0; i < (int)graphs.size(); i++)
+			graphs[i]->Render();
 	}
 }
