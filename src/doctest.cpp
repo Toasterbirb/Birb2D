@@ -16,6 +16,7 @@ int main(int argc, char** argv)
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Utils.hpp"
+#include "Scene.hpp"
 #include "Renderwindow.hpp"
 
 TEST_CASE("Window and rendering functions")
@@ -25,12 +26,20 @@ TEST_CASE("Window and rendering functions")
 	Birb::Window window("Title", Birb::Vector2int(1280, 720), 60, false);
 	SDL_Texture* texture 	= Birb::Resources::LoadTexture(appInfo.ResLocation + "/textures/birb.png");
 	TTF_Font* font 			= Birb::Resources::LoadFont(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
+	
+	Birb::Scene testScene;
+
 	Birb::Entity testEntity("Test entity", Birb::Vector2int(10, 10), texture);
 	Birb::Entity secondEntityWithSameTexture("Second entity with the same texture", Birb::Rect(200, 400, 128 * 2, 72 * 2), texture);
 	Birb::Entity rotatedEntity("Rotated entity with custom localscale", Birb::Rect(300, 100, 128, 72), texture);
 	rotatedEntity.angle = 45;
 	rotatedEntity.localScale = Birb::Vector2f(3.5, 2);
 	Birb::Entity entityWithNegativeSize("Entity with negative size", Birb::Rect(300, 100, -128, 72), texture);
+
+	/* Add entities to the scene */
+	testScene.AddObject(&testEntity);
+	testScene.AddObject(&secondEntityWithSameTexture);
+	testScene.AddObject(&rotatedEntity);
 
 	/* Graph */
 	std::vector<double> values = {
@@ -69,67 +78,70 @@ TEST_CASE("Window and rendering functions")
 	CHECK(font 		!= nullptr);
 
 	CHECK_NOTHROW(window.Clear());
-	CHECK(Birb::Render::DrawEntity(testEntity));
-	CHECK(Birb::Render::DrawEntity(secondEntityWithSameTexture));
-	CHECK(Birb::Render::DrawEntity(rotatedEntity));
-	CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
-	CHECK(Birb::Render::DrawEntity(textEntity));
-	CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
+	{
+		CHECK_NOTHROW(testScene.Render());
+		CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
+		CHECK(Birb::Render::DrawEntity(textEntity));
+		CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
 
-	CHECK(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2int(400, 400), 50));
-	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
-	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 200, 20)));
+		CHECK(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2int(400, 400), 50));
+		CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
+		CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 200, 20)));
 
-	/* Draw a polygon */
-	Birb::Vector2int polyPoints[5] = {
-		Birb::Vector2int(100, 59),
-		Birb::Vector2int(150, 34),
-		Birb::Vector2int(170, 99),
-		Birb::Vector2int(87, 24),
-		Birb::Vector2int(53, 10),
-	};
-	CHECK(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints, 5));
+		/* Draw a polygon */
+		Birb::Vector2int polyPoints[5] = {
+			Birb::Vector2int(100, 59),
+			Birb::Vector2int(150, 34),
+			Birb::Vector2int(170, 99),
+			Birb::Vector2int(87, 24),
+			Birb::Vector2int(53, 10),
+		};
+		CHECK(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints, 5));
 
-	/* Draw the graphs */
-	lineGraph.Render();
-	blockGraph.Render();
-	areaGraph.Render();
+		/* Draw the graphs */
+		lineGraph.Render();
+		blockGraph.Render();
+		areaGraph.Render();
 
+	}
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);
 
 	/* Try changing text */
-	textEntity.SetText("Changed text :D");
+	textEntity.SetText("The birbs disappeared");
 	textEntity.SetColor(&Birb::Colors::Green);
-	CHECK(textEntity.textComponent.text == "Changed text :D");
+	CHECK(textEntity.textComponent.text == "The birbs disappeared");
 	CHECK(textEntity.textComponent.color == &Birb::Colors::Green);
+
+	/* Toggle the test scene */
+	testScene.Toggle();
+
 	CHECK_NOTHROW(window.Clear());
+	{
+		/* Draw a polygon */
+		std::vector<Birb::Vector2int> polyPoints2 = {
+			Birb::Vector2int(10, 5),
+			Birb::Vector2int(150, 34),
+			Birb::Vector2int(170, 99),
+			Birb::Vector2int(87, 24),
+			Birb::Vector2int(53, 10),
+		};
+		CHECK(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints2));
 
-	/* Draw a polygon */
-	std::vector<Birb::Vector2int> polyPoints2 = {
-		Birb::Vector2int(10, 5),
-		Birb::Vector2int(150, 34),
-		Birb::Vector2int(170, 99),
-		Birb::Vector2int(87, 24),
-		Birb::Vector2int(53, 10),
-	};
-	CHECK(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints2));
+		testScene.Render();
+		CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
+		CHECK(Birb::Render::DrawEntity(textEntity));
+		CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
 
-	CHECK(Birb::Render::DrawEntity(testEntity));
-	CHECK(Birb::Render::DrawEntity(secondEntityWithSameTexture));
-	CHECK(Birb::Render::DrawEntity(rotatedEntity));
-	CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
-	CHECK(Birb::Render::DrawEntity(textEntity));
-	CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
+		CHECK(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
+		CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
+		CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 200, 20)));
 
-	CHECK(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
-	CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
-	CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 200, 20)));
-
-	/* Draw the graph */
-	lineGraph.Render();
-	blockGraph.Render();
-	areaGraph.Render();
+		/* Draw the graph */
+		lineGraph.Render();
+		blockGraph.Render();
+		areaGraph.Render();
+	}
 
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);
