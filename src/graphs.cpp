@@ -43,6 +43,10 @@ namespace Birb
 
 		void Graph::Render()
 		{
+			/* Skip rendering the graph if its not active */
+			if (!active)
+				return;
+
 			/* Only draw the border if there are <=1 points */
 			if (values.size() <= 1)
 			{

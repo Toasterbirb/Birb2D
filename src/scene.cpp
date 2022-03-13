@@ -2,6 +2,11 @@
 
 namespace Birb
 {
+	Scene::Scene()
+	{
+		active = true;
+	}
+
 	void Scene::AddObject(Entity* entity)
 	{
 		entities.push_back(entity);
@@ -37,5 +42,38 @@ namespace Birb
 	int Scene::ObjectCount()
 	{
 		return entities.size() + graphs.size();
+	}
+
+	void Scene::SetObjectState(bool state)
+	{
+		/* Set state for entitites */
+		for (int i = 0; i < (int)entities.size(); i++)
+		{
+			entities[i]->active = state;
+		}
+		
+		/* Set state for graphs */
+		for (int i = 0; i < (int)graphs.size(); i++)
+		{
+			graphs[i]->active = state;
+		}
+	}
+
+	void Scene::Activate()
+	{
+		active = true;
+		SetObjectState(true);
+	}
+
+	void Scene::Deactivate()
+	{
+		active = false;
+		SetObjectState(false);
+	}
+
+	void Scene::Toggle()
+	{
+		active = !active;
+		SetObjectState(active);
 	}
 }

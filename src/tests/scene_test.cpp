@@ -23,5 +23,26 @@ namespace Birb
 		CHECK(scene.ObjectCount() == 4);
 		CHECK(scene.HasObject(entityA));
 		CHECK(scene.HasObject(graphs[0]));
+
+		SUBCASE("Scene state changing")
+		{
+			scene.Deactivate();
+			CHECK_FALSE(entityA.active);
+			CHECK_FALSE(entityB.active);
+			CHECK_FALSE(graphs[0].active);
+			CHECK_FALSE(graphs[1].active);
+
+			scene.Activate();
+			CHECK(entityA.active);
+			CHECK(entityB.active);
+			CHECK(graphs[0].active);
+			CHECK(graphs[1].active);
+
+			scene.Toggle();
+			CHECK_FALSE(entityA.active);
+			CHECK_FALSE(entityB.active);
+			CHECK_FALSE(graphs[0].active);
+			CHECK_FALSE(graphs[1].active);
+		}
 	}
 }
