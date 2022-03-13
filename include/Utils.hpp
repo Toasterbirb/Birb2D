@@ -21,6 +21,14 @@ namespace Birb
 		SDL_Rect getSDLRect() const;
 
 		float x, y, w, h;
+
+		bool operator==(const Rect& other) const
+		{
+			return 	(x == other.x
+					&& y == other.y
+					&& w == other.w
+					&& h == other.h);
+		}
 	};
 
 	namespace utils

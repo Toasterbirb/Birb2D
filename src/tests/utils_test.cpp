@@ -50,6 +50,15 @@ namespace Birb
 		CHECK(polygonB[3] == Vector2f(0, -10));
 	}
 
+	TEST_CASE("Rect comparison")
+	{
+		Rect rectA(10, 10, 10, 10);
+		Rect rectB(20, 10, 30, 30);
+
+		CHECK(rectA == rectA);
+		CHECK_FALSE(rectA == rectB);
+	}
+
 	TEST_CASE("Get rounded values from Rect")
 	{
 		Rect rectWithFloats(0.5f, 7.4f, 100.8f, 99.4);
