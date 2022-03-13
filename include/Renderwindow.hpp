@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 
+#include "Color.hpp"
 #include "Utils.hpp"
 #include "Entity.hpp"
 
@@ -54,8 +55,8 @@ namespace Birb
 	struct Resources
 	{
 		static SDL_Texture* LoadTexture(const std::string& p_filePath);
-		static SDL_Texture* TextSprite(const std::string& text, TTF_Font* font, const SDL_Color& color);
-		static SDL_Texture* TextSprite(const std::string& text, TTF_Font* font, const SDL_Color& color, const SDL_Color& bgColor);
+		static SDL_Texture* TextSprite(const std::string& text, TTF_Font* font, const Color& color);
+		static SDL_Texture* TextSprite(const std::string& text, TTF_Font* font, const Color& color, const Color& bgColor);
 		static TTF_Font* 	LoadFont(const std::string& p_filePath, const int& p_fontSize);
 		static Uint8* 		CopyTexturePixels(SDL_Surface* surface, int* width, int* height, int* pitch);
 	};
@@ -65,17 +66,17 @@ namespace Birb
 	{
 		bool DrawEntity(Entity& entity); ///< Renders an entity
 		void ResetDrawColor(); ///< Resets the drawing color back to black, so that the window background color stays the same
-		void DrawRect(const SDL_Color& color, const Rect& dimensions); ///< Draw filled rect
-		void DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
-		void DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB); ///< Draw a line between points A and B
-		void DrawLine(const SDL_Color& color, const Vector2f& pointA, const Vector2f& pointB); ///< Draw a line between points A and B
-		void DrawLines(const SDL_Color& color, Vector2int* points, const int& pointCount); ///< Draw lines between multiple points at once
-		void DrawLines(const SDL_Color& color, Vector2f* points, const int& pointCount); ///< Draw lines between multiple points at once
-		bool DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius); ///< Draw a circle around a point
-		bool DrawPolygon(const SDL_Color& color, Vector2int* points, const int& pointCount); ///< Draw a polygon from multiple points
-		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2int>& points); ///< Draw a polygon from multiple points
-		bool DrawPolygon(const SDL_Color& color, Vector2f* points, const int& pointCount); ///< Draw a polygon from multiple points
-		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2f>& points); ///< Draw a polygon from multiple points
-		void SetRenderDrawColor(const SDL_Color& color); ///< Sets the drawing color for base SDL2 drawing functions
+		void DrawRect(const Color& color, const Rect& dimensions); ///< Draw filled rect
+		void DrawRect(const Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
+		void DrawLine(const Color& color, const Vector2int& pointA, const Vector2int& pointB); ///< Draw a line between points A and B
+		void DrawLine(const Color& color, const Vector2f& pointA, const Vector2f& pointB); ///< Draw a line between points A and B
+		void DrawLines(const Color& color, Vector2int* points, const int& pointCount); ///< Draw lines between multiple points at once
+		void DrawLines(const Color& color, Vector2f* points, const int& pointCount); ///< Draw lines between multiple points at once
+		bool DrawCircle(const Color& color, const Vector2int& pos, const int& radius); ///< Draw a circle around a point
+		bool DrawPolygon(const Color& color, Vector2int* points, const int& pointCount); ///< Draw a polygon from multiple points
+		bool DrawPolygon(const Color& color, const std::vector<Vector2int>& points); ///< Draw a polygon from multiple points
+		bool DrawPolygon(const Color& color, Vector2f* points, const int& pointCount); ///< Draw a polygon from multiple points
+		bool DrawPolygon(const Color& color, const std::vector<Vector2f>& points); ///< Draw a polygon from multiple points
+		void SetRenderDrawColor(const Color& color); ///< Sets the drawing color for base SDL2 drawing functions
 	};
 }

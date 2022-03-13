@@ -15,13 +15,13 @@ namespace Birb
 			bgColor = NULL;
 		}
 
-		Text::Text(const std::string& p_text, TTF_Font* p_font, SDL_Color* p_color)
+		Text::Text(const std::string& p_text, TTF_Font* p_font, Color* p_color)
 		:text(p_text), font(p_font), color(p_color)
 		{
 			bgColor = NULL;
 		}
 
-		Text::Text(const std::string& p_text, TTF_Font* p_font, SDL_Color* p_color, SDL_Color* p_bgColor)
+		Text::Text(const std::string& p_text, TTF_Font* p_font, Color* p_color, Color* p_bgColor)
 		:text(p_text), font(p_font), color(p_color), bgColor(p_bgColor)
 		{}
 
@@ -108,7 +108,7 @@ namespace Birb
 			active = false;
 		}
 
-		ProgressBar::ProgressBar(const int& p_borderWidth, SDL_Color* p_borderColor, SDL_Color* p_backgroundColor, SDL_Color* p_fillColor)
+		ProgressBar::ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor)
 		:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor)
 		{
 			minValue = 0;
@@ -118,7 +118,7 @@ namespace Birb
 			active = true;
 		}
 
-		ProgressBar::ProgressBar(const int& p_borderWidth, SDL_Color* p_borderColor, SDL_Color* p_backgroundColor, SDL_Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value)
+		ProgressBar::ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value)
 		:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor), minValue(p_minValue), maxValue(p_maxValue), value(p_value)
 		{
 			active = true;
@@ -164,7 +164,7 @@ namespace Birb
 		ReloadSprite();
 	}
 
-	void Entity::SetColor(SDL_Color* color)
+	void Entity::SetColor(Color* color)
 	{
 		/* Don't do anything if the color hasn't changed at all */
 		if (color->a == textComponent.color->a

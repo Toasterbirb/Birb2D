@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Color.hpp"
 #include "Utils.hpp"
 
 namespace Birb
@@ -23,9 +24,9 @@ namespace Birb
 			Rect rect; ///< Dimensions of the graph
 
 			/* Colors */
-			SDL_Color borderColor; ///< Color for the border around the graph
-			SDL_Color backgroundColor; ///< Color of the background behind the blocks/line/border
-			SDL_Color graphColor; ///< Color for the graph blocks/line
+			Color borderColor; ///< Color for the border around the graph
+			Color backgroundColor; ///< Color of the background behind the blocks/line/border
+			Color graphColor; ///< Color for the graph blocks/line
 
 			std::vector<double> values; ///< List of values for the graph y-axis
 			double zeroValue = 0; ///< Sets the lowest value in the graph
@@ -33,6 +34,20 @@ namespace Birb
 			int borderSize; ///< Graph border thickness
 			double wallOffset = 5.0; ///< How much empty space there should be between the graph borders and the line/blocks
 			double blockSpacing = 10; ///< Sets the amount of padding between blocks in the graph (doesn't work with lines)
+
+			bool operator==(const Graph& other) const
+			{
+				return 	(type 					== other.type
+						&& rect 				== other.rect
+						&& borderColor 			== other.borderColor
+						&& backgroundColor 		== other.backgroundColor
+						&& graphColor 			== other.graphColor
+						&& zeroValue 			== other.zeroValue
+						&& normalizedZeroValue 	== other.normalizedZeroValue
+						&& borderSize 			== other.borderSize
+						&& wallOffset 			== other.wallOffset
+						&& blockSpacing 		== other.blockSpacing);
+			}
 		};
 	}
 }

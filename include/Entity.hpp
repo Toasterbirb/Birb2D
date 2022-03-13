@@ -7,6 +7,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "Utils.hpp"
 #include "Timer.hpp"
+#include "Color.hpp"
 
 namespace Birb
 {
@@ -16,13 +17,13 @@ namespace Birb
 		struct Text
 		{
 			Text();
-			Text(const std::string& p_text, TTF_Font* font, SDL_Color* p_color);
-			Text(const std::string& p_text, TTF_Font* font, SDL_Color* p_color, SDL_Color* p_bgColor);
+			Text(const std::string& p_text, TTF_Font* font, Color* p_color);
+			Text(const std::string& p_text, TTF_Font* font, Color* p_color, Color* p_bgColor);
 
 			std::string text;
 			TTF_Font* font;
-			SDL_Color* color; 	///< Surface color of the text
-			SDL_Color* bgColor; ///< Background color for the text component
+			Color* color; 	///< Surface color of the text
+			Color* bgColor; ///< Background color for the text component
 
 			bool operator==(const Text& other) const
 			{
@@ -80,14 +81,14 @@ namespace Birb
 		struct ProgressBar
 		{
 			ProgressBar();
-			ProgressBar(const int& p_borderWidth, SDL_Color* p_borderColor, SDL_Color* p_backgroundColor, SDL_Color* p_fillColor);
-			ProgressBar(const int& p_borderWidth, SDL_Color* p_borderColor, SDL_Color* p_backgroundColor, SDL_Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value);
+			ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor);
+			ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value);
 			bool active; ///< Setting this value active toggles on the progress bar component
 
 			int borderWidth; ///< Sets the thickness of the borders around the progress bar
-			SDL_Color* borderColor; ///< Border color around the fill area
-			SDL_Color* backgroundColor; ///< Background color that is below the filled area
-			SDL_Color* fillColor; ///< Color that hides the background color
+			Color* borderColor; ///< Border color around the fill area
+			Color* backgroundColor; ///< Background color that is below the filled area
+			Color* fillColor; ///< Color that hides the background color
 
 			float minValue; ///< Value where the progress bar should be empty
 			float maxValue; ///< Value where the progress bar should be full
@@ -119,7 +120,7 @@ namespace Birb
 		/* Make it possible to update the Text */
 		void SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
 		void SetFont(TTF_Font* font); 		///< Change the font in Text and reload the sprite
-		void SetColor(SDL_Color* color); 	///< Change the color in Text and reload the sprite
+		void SetColor(Color* color); 	///< Change the color in Text and reload the sprite
 
 		std::string name; 		///< Name of the entity. Used for debugging
 

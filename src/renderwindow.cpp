@@ -233,7 +233,7 @@ namespace Birb
 	}
 
 
-	SDL_Texture* Resources::TextSprite(const std::string& text, TTF_Font* font, const SDL_Color& color)
+	SDL_Texture* Resources::TextSprite(const std::string& text, TTF_Font* font, const Color& color)
 	{
 		/* Check if the arguments are valid */
 		if (font == nullptr)
@@ -243,7 +243,7 @@ namespace Birb
 		}
 
 		//SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
-		SDL_Surface* surface = TTF_RenderText_Blended(font, text.c_str(), color);
+		SDL_Surface* surface = TTF_RenderText_Blended(font, text.c_str(), color.sdl());
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 
@@ -255,7 +255,7 @@ namespace Birb
 		return texture;
 	}
 
-	SDL_Texture* Resources::TextSprite(const std::string& text, TTF_Font* font, const SDL_Color& color, const SDL_Color& bgColor)
+	SDL_Texture* Resources::TextSprite(const std::string& text, TTF_Font* font, const Color& color, const Color& bgColor)
 	{
 		/* Check if the arguments are valid */
 		if (font == nullptr)
@@ -264,7 +264,7 @@ namespace Birb
 			return NULL;
 		}
 
-		SDL_Surface* surface = TTF_RenderText_Shaded(font, text.c_str(), color, bgColor);
+		SDL_Surface* surface = TTF_RenderText_Shaded(font, text.c_str(), color.sdl(), bgColor.sdl());
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 
@@ -420,7 +420,7 @@ namespace Birb
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, 0, 0, 0, 255);
 		}
 
-		void DrawRect(const SDL_Color& color, const Rect& dimensions)
+		void DrawRect(const Color& color, const Rect& dimensions)
 		{
 			SetRenderDrawColor(color);
 			SDL_Rect rectangle = dimensions.getSDLRect();
@@ -428,7 +428,7 @@ namespace Birb
 			ResetDrawColor();
 		}
 
-		void DrawRect(const SDL_Color& color, const Rect& dimensions, const int& width)
+		void DrawRect(const Color& color, const Rect& dimensions, const int& width)
 		{
 			DrawRect(color, Rect(dimensions.x, dimensions.y, dimensions.w, width)); /* Top */
 			DrawRect(color, Rect(dimensions.x, dimensions.y + dimensions.h - width, dimensions.w, width)); /* Bottom */
@@ -436,21 +436,21 @@ namespace Birb
 			DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
 		}
 
-		void DrawLine(const SDL_Color& color, const Vector2int& pointA, const Vector2int& pointB)
+		void DrawLine(const Color& color, const Vector2int& pointA, const Vector2int& pointB)
 		{
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
 			ResetDrawColor();
 		}
 
-		void DrawLine(const SDL_Color& color, const Vector2f& pointA, const Vector2f& pointB)
+		void DrawLine(const Color& color, const Vector2f& pointA, const Vector2f& pointB)
 		{
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLineF(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
 			ResetDrawColor();
 		}
 
-		void DrawLines(const SDL_Color& color, Vector2int* points, const int& pointCount)
+		void DrawLines(const Color& color, Vector2int* points, const int& pointCount)
 		{
 			SDL_Point sdlPoints[pointCount];
 			for (int i = 0; i < pointCount; i++)
@@ -463,7 +463,7 @@ namespace Birb
 			ResetDrawColor();
 		}
 
-		void DrawLines(const SDL_Color& color, Vector2f* points, const int& pointCount)
+		void DrawLines(const Color& color, Vector2f* points, const int& pointCount)
 		{
 			SDL_FPoint sdlPoints[pointCount];
 			for (int i = 0; i < pointCount; i++)
@@ -476,7 +476,7 @@ namespace Birb
 			ResetDrawColor();
 		}
 
-		bool DrawCircle(const SDL_Color& color, const Vector2int& pos, const int& radius)
+		bool DrawCircle(const Color& color, const Vector2int& pos, const int& radius)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
@@ -488,7 +488,7 @@ namespace Birb
 			}
 		}
 
-		bool DrawPolygon(const SDL_Color& color, Vector2int* points, const int& pointCount)
+		bool DrawPolygon(const Color& color, Vector2int* points, const int& pointCount)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
@@ -510,7 +510,7 @@ namespace Birb
 			}
 		}
 
-		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2int>& points)
+		bool DrawPolygon(const Color& color, const std::vector<Vector2int>& points)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
@@ -534,7 +534,7 @@ namespace Birb
 
 		/* filledPolygonColor works only with integers, so this will just 
 		 * round the floating point vlues into integers */
-		bool DrawPolygon(const SDL_Color& color, Vector2f* points, const int& pointCount)
+		bool DrawPolygon(const Color& color, Vector2f* points, const int& pointCount)
 		{
 			Vector2int intPoints[pointCount];
 			for (int i = 0; i < pointCount; i++)
@@ -545,7 +545,7 @@ namespace Birb
 			return DrawPolygon(color, intPoints, pointCount);
 		}
 
-		bool DrawPolygon(const SDL_Color& color, const std::vector<Vector2f>& points)
+		bool DrawPolygon(const Color& color, const std::vector<Vector2f>& points)
 		{
 			Vector2int intPoints[points.size()];
 			for (int i = 0; i < points.size(); i++)
@@ -556,7 +556,7 @@ namespace Birb
 			return DrawPolygon(color, intPoints, points.size());
 		}
 
-		void SetRenderDrawColor(const SDL_Color& color)
+		void SetRenderDrawColor(const Color& color)
 		{
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 		}
