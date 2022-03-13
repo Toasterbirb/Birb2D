@@ -23,6 +23,14 @@ namespace Birb
 			TTF_Font* font;
 			SDL_Color* color; 	///< Surface color of the text
 			SDL_Color* bgColor; ///< Background color for the text component
+
+			bool operator==(const Text& other) const
+			{
+				return 	(text 		== other.text
+						&& font 	== other.font
+						&& color 	== other.color
+						&& bgColor 	== other.bgColor);
+			}
 		};
 
 		/// Click adds button functionality to the Entity
@@ -56,6 +64,15 @@ namespace Birb
 			void StartAnimation(const int& startFrame); ///< Start playing the animation from selected frame
 			void StartAnimation(const int& startFrame, const int& endFrame); ///< Start playing the animation with custom start and end frame
 			void ResetAnimationAtlas(); ///< Reset current frame to 0 and reset the lastFrame to frameCount - 1
+
+			bool operator==(const Animation& other) const
+			{
+				return 	(fps 			== other.fps
+						&& loop 		== other.loop
+						&& frameCount 	== other.frameCount
+						&& spriteSize 	== other.spriteSize
+						&& lastFrame 	== other.lastFrame);
+			}
 		};
 
 		/// ProgressBar is used to create... well... progress bars
@@ -75,6 +92,16 @@ namespace Birb
 			float minValue; ///< Value where the progress bar should be empty
 			float maxValue; ///< Value where the progress bar should be full
 			float value; ///< Current progress value
+
+			bool operator==(const ProgressBar& other) const
+			{
+				return 	(borderWidth 		== other.borderWidth
+						&& borderColor 		== other.borderColor
+						&& backgroundColor 	== other.backgroundColor
+						&& fillColor 		== other.fillColor
+						&& minValue 		== other.minValue
+						&& maxValue 		== other.maxValue);
+			}
 		};
 	}
 
@@ -115,6 +142,16 @@ namespace Birb
 		/* Informational functions */
 		bool isHovering(); ///< Check if the cursor is hovering over this entity
 		Vector2int getAtlasPosition(const int& frame); ///< Get position in a texture atlas given the sprite index
+
+		bool operator==(const Entity& other) const
+		{
+			return 	(&sprite 				== &other.sprite
+					&& localScale 			== other.localScale
+					&& textComponent 		== other.textComponent
+					&& &clickComponent 		== &other.clickComponent
+					&& animationComponent 	== other.animationComponent
+					&& progressBarComponent == other.progressBarComponent);
+		}
 	};
 
 }
