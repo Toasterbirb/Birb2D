@@ -6,6 +6,7 @@
 #include <math.h>
 
 #include "Math.hpp"
+#include "Line.hpp"
 
 
 namespace Birb

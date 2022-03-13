@@ -3,6 +3,7 @@
 #include <vector>
 #include "Entity.hpp"
 #include "Graphs.hpp"
+#include "Line.hpp"
 
 namespace Birb
 {
@@ -10,25 +11,21 @@ namespace Birb
 	{
 	public:
 		Scene();
-		void AddObject(Entity* entity);
-		void AddObject(Widgets::Graph* graph);
+		void AddObject(SceneObject* obj);
 		
-		bool HasObject(const Entity& entity) const;
-		bool HasObject(const Widgets::Graph& graph) const;
-
 		int ObjectCount();
 
 		void Activate();
 		void Deactivate();
 		void Toggle();
+		bool isActive() const;
 
 		void Render() const; ///< Render all objects in the scene if the scene is active
 
 	private:
 		void SetObjectState(bool state);
 
-		std::vector<Entity*> entities;
-		std::vector<Widgets::Graph*> graphs;
+		std::vector<SceneObject*> objects;
 		bool active;
 	};
 }

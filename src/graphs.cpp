@@ -110,5 +110,10 @@ namespace Birb
 			/* Draw the graph border */
 			Render::DrawRect(borderColor, rect, 3);
 		}
+
+		void Graph::RenderFunc()
+		{
+			this->Render();
+		}
 	}
 }

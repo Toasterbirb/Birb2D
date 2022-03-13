@@ -70,6 +70,7 @@ namespace Birb
 		void DrawRect(const Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
 		void DrawLine(const Color& color, const Vector2int& pointA, const Vector2int& pointB); ///< Draw a line between points A and B
 		void DrawLine(const Color& color, const Vector2f& pointA, const Vector2f& pointB); ///< Draw a line between points A and B
+		void DrawLine(const Line& line); ///< Draw a line between points A and B
 		void DrawLines(const Color& color, Vector2int* points, const int& pointCount); ///< Draw lines between multiple points at once
 		void DrawLines(const Color& color, Vector2f* points, const int& pointCount); ///< Draw lines between multiple points at once
 		bool DrawCircle(const Color& color, const Vector2int& pos, const int& radius); ///< Draw a circle around a point

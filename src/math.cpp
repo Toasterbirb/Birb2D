@@ -1,19 +1,8 @@
 #include "Math.hpp"
 #include "Logger.hpp"
-//#include "Utils.hpp"
 
 namespace Birb
 {
-	Line::Line()
-	{
-		pointA = Vector2f(0, 0);
-		pointB = Vector2f(0, 0);
-	}
-	
-	Line::Line(const Vector2f& pointA, const Vector2f& pointB)
-	:pointA(pointA), pointB(pointB)
-	{}
-
 	namespace Math
 	{
 		float VectorDistance(const Vector2f& a, const Vector2f& b)

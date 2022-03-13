@@ -36,7 +36,10 @@ TEST_CASE("Window and rendering functions")
 	rotatedEntity.localScale = Birb::Vector2f(3.5, 2);
 	Birb::Entity entityWithNegativeSize("Entity with negative size", Birb::Rect(300, 100, -128, 72), texture);
 
+	Birb::Line line(Birb::Vector2f(0, 0), Birb::Vector2f(1280, 720));
+
 	/* Add entities to the scene */
+	testScene.AddObject(&line);
 	testScene.AddObject(&testEntity);
 	testScene.AddObject(&secondEntityWithSameTexture);
 	testScene.AddObject(&rotatedEntity);
@@ -63,6 +66,7 @@ TEST_CASE("Window and rendering functions")
 			Birb::Rect(800, 450, 260, 180));
 	areaGraph.graphColor 		= Birb::Colors::Blue;
 	areaGraph.backgroundColor 	= Birb::Colors::Black;
+	testScene.AddObject(&areaGraph);
 
 
 	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red));
@@ -101,7 +105,6 @@ TEST_CASE("Window and rendering functions")
 		/* Draw the graphs */
 		lineGraph.Render();
 		blockGraph.Render();
-		areaGraph.Render();
 
 	}
 	CHECK_NOTHROW(window.Display());
@@ -140,7 +143,6 @@ TEST_CASE("Window and rendering functions")
 		/* Draw the graph */
 		lineGraph.Render();
 		blockGraph.Render();
-		areaGraph.Render();
 	}
 
 	CHECK_NOTHROW(window.Display());

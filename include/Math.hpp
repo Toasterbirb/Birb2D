@@ -4,28 +4,10 @@
 #include <math.h>
 #include <vector>
 #include "Vector.hpp"
+#include "Color.hpp"
 
 namespace Birb
 {
-	/* 2 Dimensions lines with point A and B */
-	struct Line
-	{
-		Line();
-		Line(const Vector2f& pointA, const Vector2f& pointB);
-
-		Vector2f pointA;
-		Vector2f pointB;
-
-		bool operator==(const Line& other) const
-		{
-			return (pointA == other.pointA && pointB == other.pointB);
-		}
-
-		bool operator!=(const Line& other) const
-		{
-			return (pointA == other.pointA && pointB == other.pointB);
-		}
-	};
 
 
 	/// Misc math functions

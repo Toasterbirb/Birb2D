@@ -268,4 +268,9 @@ namespace Birb
 		/* Create new text sprite */
 		LoadSprite();
 	}
+
+	void Entity::RenderFunc()
+	{
+		Render::DrawEntity(*this);
+	}
 }

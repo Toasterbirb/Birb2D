@@ -3,6 +3,7 @@
 #include <vector>
 #include "Color.hpp"
 #include "Utils.hpp"
+#include "SceneObject.hpp"
 
 namespace Birb
 {
@@ -13,8 +14,9 @@ namespace Birb
 			Block, Line, Area
 		};
 
-		struct Graph
+		class Graph : public SceneObject
 		{
+		public:
 			Graph(); ///< Empty constructor
 			Graph(const GraphType& graphType, const Rect& rect); ///< Define a graph with no values. Values can be added later
 			Graph(const GraphType& graphType, const std::vector<double>& values, const Rect& rect); ///< Define a graph with predefined values
@@ -49,6 +51,9 @@ namespace Birb
 						&& wallOffset 			== other.wallOffset
 						&& blockSpacing 		== other.blockSpacing);
 			}
+
+		private:
+			void RenderFunc() override;
 		};
 	}
 }

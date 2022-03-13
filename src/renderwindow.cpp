@@ -450,6 +450,13 @@ namespace Birb
 			ResetDrawColor();
 		}
 
+		void DrawLine(const Line& line)
+		{
+			SetRenderDrawColor(line.color);
+			SDL_RenderDrawLineF(Global::RenderVars::Renderer, line.pointA.x, line.pointA.y, line.pointB.x, line.pointB.y);
+			ResetDrawColor();
+		}
+
 		void DrawLines(const Color& color, Vector2int* points, const int& pointCount)
 		{
 			SDL_Point sdlPoints[pointCount];

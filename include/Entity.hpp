@@ -8,6 +8,7 @@
 #include "Utils.hpp"
 #include "Timer.hpp"
 #include "Color.hpp"
+#include "SceneObject.hpp"
 
 namespace Birb
 {
@@ -109,8 +110,9 @@ namespace Birb
 	/// Entities are objects that contain all of the information required to render stuff
 	
 	/// Entities can be anything really. For example, it could be text or a picture. This could be extended to animations in the future
-	struct Entity
+	class Entity : public SceneObject
 	{
+	public:
 		Entity(const std::string& p_name); ///< Creates empty Entity object
 		Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
 		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent); 	///< Creates a Animation Entity using a Animation
@@ -153,6 +155,9 @@ namespace Birb
 					&& animationComponent 	== other.animationComponent
 					&& progressBarComponent == other.progressBarComponent);
 		}
+
+	private:
+		void RenderFunc() override;
 	};
 
 }
