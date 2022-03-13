@@ -20,6 +20,14 @@ namespace Birb
 	:r(r), g(g), b(b), a(a)
 	{}
 
+	Color::Color(const int& hex)
+	{
+		r = (hex & 0xff0000) >> 16;
+		g = (hex & 0xff00) >> 8;
+		b = (hex & 0xff) >> 0;
+		a = 255;
+	}
+
 	SDL_Color Color::sdl() const
 	{
 		SDL_Color color = { r, g, b, a };
