@@ -8,6 +8,7 @@
 #include "Utils.hpp"
 #include "Timer.hpp"
 #include "Color.hpp"
+#include "Rect.hpp"
 #include "SceneObject.hpp"
 
 namespace Birb

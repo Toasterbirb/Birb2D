@@ -3,6 +3,7 @@
 #include <vector>
 #include "Color.hpp"
 #include "Utils.hpp"
+#include "Rect.hpp"
 #include "SceneObject.hpp"
 
 namespace Birb
