@@ -55,10 +55,9 @@ namespace Birb
 			objects[i]->RenderFunc();
 	}
 
+	/// FIXME: Switch bubble sort to some other more performant algorithm
 	void Scene::SortObjects()
 	{
-		/* Uses bubblesort for now. Could probably be optimized at some point by changing
-		 * to some more performant algorithm */
 		SceneObject* tmpObject;
 		bool ready;
 		do
