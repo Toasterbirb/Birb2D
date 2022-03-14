@@ -37,12 +37,13 @@ TEST_CASE("Window and rendering functions")
 	Birb::Entity entityWithNegativeSize("Entity with negative size", Birb::Rect(300, 100, -128, 72), texture);
 
 	Birb::Line line(Birb::Vector2f(0, 0), Birb::Vector2f(1280, 720));
+	line.renderingPriority = -1;
 
 	/* Add entities to the scene */
-	testScene.AddObject(&line);
 	testScene.AddObject(&testEntity);
 	testScene.AddObject(&secondEntityWithSameTexture);
 	testScene.AddObject(&rotatedEntity);
+	testScene.AddObject(&line);
 
 	/* Graph */
 	std::vector<double> values = {

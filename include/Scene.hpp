@@ -12,6 +12,7 @@ namespace Birb
 	public:
 		Scene();
 		void AddObject(SceneObject* obj);
+		std::vector<SceneObject*> GetObjects() const;
 		
 		int ObjectCount();
 
@@ -23,7 +24,7 @@ namespace Birb
 		void Render() const; ///< Render all objects in the scene if the scene is active
 
 	private:
-		void SetObjectState(bool state);
+		void SortObjects(); ///< Sort objects according to their priority
 
 		std::vector<SceneObject*> objects;
 		bool active;

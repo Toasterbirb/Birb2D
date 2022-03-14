@@ -11,6 +11,12 @@ namespace Birb
 	void Scene::AddObject(SceneObject* obj)
 	{
 		objects.push_back(obj);
+		SortObjects();
+	}
+
+	std::vector<SceneObject*> Scene::GetObjects() const
+	{
+		return objects;
 	}
 
 	int Scene::ObjectCount()
@@ -47,5 +53,27 @@ namespace Birb
 		/* Draw objects */
 		for (int i = 0; i < (int)objects.size(); i++)
 			objects[i]->RenderFunc();
+	}
+
+	void Scene::SortObjects()
+	{
+		/* Uses bubblesort for now. Could probably be optimized at some point by changing
+		 * to some more performant algorithm */
+		SceneObject* tmpObject;
+		bool ready;
+		do
+		{
+			ready = true;
+			for (int i = 0; i < (int)objects.size() - 1; i++)
+			{
+				if (objects[i]->renderingPriority > objects[i + 1]->renderingPriority)
+				{
+					tmpObject = objects[i];
+					objects[i] = objects[i + 1];
+					objects[i + 1] = tmpObject;
+					ready = false;
+				}
+			}
+		} while (!ready);
 	}
 }
