@@ -563,6 +563,11 @@ namespace Birb
 			return DrawPolygon(color, intPoints, points.size());
 		}
 
+		bool DrawPolygon(const Polygon& polygon)
+		{
+			return DrawPolygon(polygon.color, polygon.points);
+		}
+
 		void SetRenderDrawColor(const Color& color)
 		{
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);

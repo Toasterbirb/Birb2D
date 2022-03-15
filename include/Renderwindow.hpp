@@ -8,6 +8,7 @@
 #include "Color.hpp"
 #include "Utils.hpp"
 #include "Entity.hpp"
+#include "Polygon.hpp"
 
 namespace Birb
 {
@@ -78,6 +79,7 @@ namespace Birb
 		bool DrawPolygon(const Color& color, const std::vector<Vector2int>& points); ///< Draw a polygon from multiple points
 		bool DrawPolygon(const Color& color, Vector2f* points, const int& pointCount); ///< Draw a polygon from multiple points
 		bool DrawPolygon(const Color& color, const std::vector<Vector2f>& points); ///< Draw a polygon from multiple points
+		bool DrawPolygon(const Polygon& polygon); ///< Draw a polygon
 		void SetRenderDrawColor(const Color& color); ///< Sets the drawing color for base SDL2 drawing functions
 	};
 }
