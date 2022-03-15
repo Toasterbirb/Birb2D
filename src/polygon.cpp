@@ -12,12 +12,12 @@ namespace Birb
 	:color(color)
 	{}
 
-	Polygon::Polygon(const Vector2f (&points)[], const int& pointCount)
+	Polygon::Polygon(const Vector2f points[], const int& pointCount)
 	{
 		this->points = std::vector<Vector2f>(points, points + pointCount);
 	}
 
-	Polygon::Polygon(const Vector2f (&points)[], const int& pointCount, const Color& color)
+	Polygon::Polygon(const Vector2f points[], const int& pointCount, const Color& color)
 	:color(color)
 	{
 		this->points = std::vector<Vector2f>(points, points + pointCount);
@@ -34,7 +34,7 @@ namespace Birb
 		this->points = points;
 	}
 
-	void Polygon::AddPoints(const Vector2f (&points)[], const int& pointCount)
+	void Polygon::AddPoints(const Vector2f points[], const int& pointCount)
 	{
 		this->points.insert(std::end(this->points), points, points + pointCount);
 	}

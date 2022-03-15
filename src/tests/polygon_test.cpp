@@ -20,7 +20,6 @@ namespace Birb
 			Vector2f(3, 5)
 		};
 
-		/* clang gives error with this line, but it compiles completely fine with gcc */
 		Polygon polygon(points, POINT_COUNT, 0xAAAAAA);
 		CHECK(polygon.size() == POINT_COUNT);
 		CHECK(polygon.color == 0xAAAAAA);
