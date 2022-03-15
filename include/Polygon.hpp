@@ -7,7 +7,7 @@
 
 namespace Birb
 {
-	class Polygon : SceneObject
+	class Polygon : public SceneObject
 	{
 	public:
 		Polygon();

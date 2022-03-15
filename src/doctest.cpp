@@ -17,6 +17,7 @@ int main(int argc, char** argv)
 #include "Logger.hpp"
 #include "Utils.hpp"
 #include "Scene.hpp"
+#include "Polygon.hpp"
 #include "Renderwindow.hpp"
 
 TEST_CASE("Window and rendering functions")
@@ -42,12 +43,21 @@ TEST_CASE("Window and rendering functions")
 	Birb::Rect renderedRect(0, 0, 100, 100);
 	renderedRect.renderingPriority = -5;
 
+	Birb::Polygon polygon(
+	{
+		Birb::Vector2f(0, 200),
+		Birb::Vector2f(200, 184),
+		Birb::Vector2f(230, 110),
+		Birb::Vector2f(0, 180)
+	}, 0x81E176);
+
 	/* Add entities etc. to the scene */
 	testScene.AddObject(&testEntity);
 	testScene.AddObject(&secondEntityWithSameTexture);
 	testScene.AddObject(&rotatedEntity);
 	testScene.AddObject(&line);
 	testScene.AddObject(&renderedRect);
+	testScene.AddObject(&polygon);
 
 	/* Graph */
 	std::vector<double> values = {
