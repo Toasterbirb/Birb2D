@@ -1,14 +1,23 @@
 #include "Rect.hpp"
+#include "Renderwindow.hpp"
 #include "Utils.hpp"
 
 namespace Birb
 {
 	Rect::Rect()
 	:x(0.0f), y(0.0f), w(0.0f), h(0.0f)
-	{}
+	{
+		color = Color(0xFFFFFF);
+	}
 
 	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h)
 	:x(p_x), y(p_y), w(p_w), h(p_h)
+	{
+		color = Color(0xFFFFFF);
+	}
+
+	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color)
+	:x(p_x), y(p_y), w(p_w), h(p_h), color(color)
 	{}
 
 	std::string Rect::toString()
@@ -50,5 +59,10 @@ namespace Birb
 		sdlrect.x = x;
 		sdlrect.y = y;
 		return sdlrect;
+	}
+
+	void Rect::RenderFunc()
+	{
+		Render::DrawRect(color, *this);
 	}
 }

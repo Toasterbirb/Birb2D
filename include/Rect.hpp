@@ -1,14 +1,18 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include "Color.hpp"
+#include "SceneObject.hpp"
 #include "Vector.hpp"
 
 namespace Birb
 {
-	struct Rect
+	class Rect : public SceneObject
 	{
+	public:
 		Rect();
 		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h);
+		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color);
 
 		std::string toString();
 		Vector2f* toPolygon();
@@ -16,6 +20,7 @@ namespace Birb
 		SDL_Rect getSDLRect() const;
 
 		float x, y, w, h;
+		Color color;
 
 		bool operator==(const Rect& other) const
 		{
@@ -24,5 +29,8 @@ namespace Birb
 					&& w == other.w
 					&& h == other.h);
 		}
+
+	private:
+		void RenderFunc() override;
 	};
 }

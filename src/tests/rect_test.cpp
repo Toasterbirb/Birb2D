@@ -5,6 +5,7 @@ namespace Birb
 {
 	TEST_CASE("Default Rect")
 	{
+		std::cout << "Size: " << sizeof(Rect) << std::endl;
 		Rect defaultRect;
 		CHECK(defaultRect.x == 0);
 		CHECK(defaultRect.y == 0);

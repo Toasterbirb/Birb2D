@@ -39,11 +39,15 @@ TEST_CASE("Window and rendering functions")
 	Birb::Line line(Birb::Vector2f(0, 0), Birb::Vector2f(1280, 720));
 	line.renderingPriority = -1;
 
-	/* Add entities to the scene */
+	Birb::Rect renderedRect(0, 0, 100, 100);
+	renderedRect.renderingPriority = -5;
+
+	/* Add entities etc. to the scene */
 	testScene.AddObject(&testEntity);
 	testScene.AddObject(&secondEntityWithSameTexture);
 	testScene.AddObject(&rotatedEntity);
 	testScene.AddObject(&line);
+	testScene.AddObject(&renderedRect);
 
 	/* Graph */
 	std::vector<double> values = {
