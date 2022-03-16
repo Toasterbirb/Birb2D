@@ -509,7 +509,10 @@ namespace Birb
 			}
 
 			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
+			{
+				Render::ResetDrawColor();
 				return true;
+			}
 			else
 			{
 				Debug::Log("Error when drawing a polygon!", Debug::error);
@@ -531,7 +534,10 @@ namespace Birb
 			}
 
 			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
+			{
+				Render::ResetDrawColor();
 				return true;
+			}
 			else
 			{
 				Debug::Log("Error when drawing a polygon!", Debug::error);
