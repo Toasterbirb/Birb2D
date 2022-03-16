@@ -12,6 +12,7 @@ namespace Birb
 	public:
 		Scene();
 		void AddObject(SceneObject* obj);
+		void AddObject(SceneObject* obj[], int objCount);
 		std::vector<SceneObject*> GetObjects() const;
 		
 		int ObjectCount();

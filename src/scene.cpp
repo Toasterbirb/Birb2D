@@ -14,6 +14,11 @@ namespace Birb
 		SortObjects();
 	}
 
+	void Scene::AddObject(SceneObject* obj[], int objCount)
+	{
+		this->objects.insert(std::end(this->objects), obj, obj + objCount);
+	}
+
 	std::vector<SceneObject*> Scene::GetObjects() const
 	{
 		return objects;

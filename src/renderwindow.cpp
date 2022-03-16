@@ -457,6 +457,20 @@ namespace Birb
 			ResetDrawColor();
 		}
 
+		void DrawLine(const Line& line, const int& thickness)
+		{
+			/* Use a polygon to draw a thicker line */
+			const int POINT_COUNT = 4;
+			double pointOffset = thickness / 2.0;
+			Vector2f points[POINT_COUNT] = {
+				{ line.pointA.x - pointOffset, line.pointA.y - pointOffset },
+				{ line.pointA.x + pointOffset, line.pointA.y + pointOffset },
+				{ line.pointB.x + pointOffset, line.pointB.y + pointOffset },
+				{ line.pointB.x - pointOffset, line.pointB.y - pointOffset },
+			};
+			DrawPolygon(line.color, points, POINT_COUNT);
+		}
+
 		void DrawLines(const Color& color, Vector2int* points, const int& pointCount)
 		{
 			SDL_Point sdlPoints[pointCount];

@@ -40,6 +40,8 @@ TEST_CASE("Window and rendering functions")
 	Birb::Line line(Birb::Vector2f(0, 0), Birb::Vector2f(1280, 720));
 	line.renderingPriority = -1;
 
+	Birb::Line lineB({0, 720}, {1280, 0});
+
 	Birb::Rect renderedRect(0, 0, 100, 100);
 	renderedRect.renderingPriority = -5;
 
@@ -121,6 +123,9 @@ TEST_CASE("Window and rendering functions")
 		lineGraph.Render();
 		blockGraph.Render();
 
+		/* Draw a thick line over everything */
+		Birb::Render::DrawLine(lineB, 2);
+
 	}
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);
@@ -158,6 +163,9 @@ TEST_CASE("Window and rendering functions")
 		/* Draw the graph */
 		lineGraph.Render();
 		blockGraph.Render();
+
+		/* Draw a thick line over everything */
+		Birb::Render::DrawLine(lineB, 4);
 	}
 
 	CHECK_NOTHROW(window.Display());
