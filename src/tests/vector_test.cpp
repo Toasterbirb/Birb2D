@@ -25,10 +25,17 @@ namespace Birb
 
 	TEST_CASE("Vector2f with arguments")
 	{
-		CHECK(Vector2f(1, 4).x == 1);
-		CHECK(Vector2f(1, 4).y == 4);
-		CHECK(Vector2f(1.53f, 5.21f).x == 1.53f);
-		CHECK(Vector2f(1.53f, 5.21f).y == 5.21f);
+		Vector2f vecA(1, 4);
+		CHECK(vecA.x == 1);
+		CHECK(vecA.y == 4);
+
+		Vector2f vecB(1.53f, 5.21f);
+		CHECK(vecB.x == 1.53f);
+		CHECK(vecB.y == 5.21f);
+
+		Vector2f vecC({2.2f, 5.1f});
+		CHECK(vecC.x == 2.2f);
+		CHECK(vecC.y == 5.1f);
 	}
 
 	TEST_CASE("Vector2f operator overloads")
@@ -52,10 +59,17 @@ namespace Birb
 
 	TEST_CASE("Vector2int with arguments")
 	{
-		CHECK(Vector2int(1, 4).x == 1);
-		CHECK(Vector2int(1, 4).y == 4);
-		CHECK(Vector2int(1.53f, 5.21f).x == 2);
-		CHECK(Vector2int(1.53f, 5.21f).y == 5);
+		Vector2int vecA(1, 4);
+		CHECK(vecA.x == 1);
+		CHECK(vecA.y == 4);
+
+		Vector2int vecB(1.53f, 5.21f);
+		CHECK(vecB.x == 2);
+		CHECK(vecB.y == 5);
+
+		Vector2int vecC({2.2f, 5.1f});
+		CHECK(vecC.x == 2);
+		CHECK(vecC.y == 5);
 	}
 
 	TEST_CASE("Vector2int operator overloads")
@@ -80,12 +94,20 @@ namespace Birb
 
 	TEST_CASE("Vector3f with arguments")
 	{
-		CHECK(Vector3f(1, 4, 2).x == 1);
-		CHECK(Vector3f(1, 4, 2).y == 4);
-		CHECK(Vector3f(1, 4, 2).z == 2);
-		CHECK(Vector3f(1.53f, 5.21f, 2.45f).x == 1.53f);
-		CHECK(Vector3f(1.53f, 5.21f, 2.45f).y == 5.21f);
-		CHECK(Vector3f(1.53f, 5.21f, 2.45f).z == 2.45f);
+		Vector3f vecA(1, 4, 3);
+		CHECK(vecA.x == 1);
+		CHECK(vecA.y == 4);
+		CHECK(vecA.z == 3);
+
+		Vector3f vecB(1.53f, 5.21f, 3.5f);
+		CHECK(vecB.x == 1.53f);
+		CHECK(vecB.y == 5.21f);
+		CHECK(vecB.z == 3.5f);
+
+		Vector3f vecC({2.2f, 5.1f, 8.08f});
+		CHECK(vecC.x == 2.2f);
+		CHECK(vecC.y == 5.1f);
+		CHECK(vecC.z == 8.08f);
 	}
 
 	TEST_CASE("Vector3f operator overloads")
@@ -110,12 +132,20 @@ namespace Birb
 
 	TEST_CASE("Vector3int with arguments")
 	{
-		CHECK(Vector3int(1, 4, 2).x == 1);
-		CHECK(Vector3int(1, 4, 2).y == 4);
-		CHECK(Vector3int(1, 4, 2).z == 2);
-		CHECK(Vector3int(1.53f, 5.21f, 2.45f).x == 2);
-		CHECK(Vector3int(1.53f, 5.21f, 2.45f).y == 5);
-		CHECK(Vector3int(1.53f, 5.21f, 2.45f).z == 2);
+		Vector3int vecA(1, 4, 3);
+		CHECK(vecA.x == 1);
+		CHECK(vecA.y == 4);
+		CHECK(vecA.z == 3);
+
+		Vector3int vecB(1.53f, 5.21f, 3.5f);
+		CHECK(vecB.x == 2);
+		CHECK(vecB.y == 5);
+		CHECK(vecB.z == 4);
+
+		Vector3int vecC({2.2f, 5.1f, 8.08f});
+		CHECK(vecC.x == 2);
+		CHECK(vecC.y == 5);
+		CHECK(vecC.z == 8);
 	}
 
 	TEST_CASE("Vector3int operator overloads")

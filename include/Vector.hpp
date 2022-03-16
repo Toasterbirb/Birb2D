@@ -17,6 +17,10 @@ namespace Birb
 		:x(p_x), y(p_y)
 		{}
 
+		Vector2f(const float values[2])
+		:x(values[0]), y(values[1])
+		{}
+
 		std::string toString();
 
 		/* Operator overloads */
@@ -57,6 +61,10 @@ namespace Birb
 
 		Vector2int(const int& p_x, const int& p_y)
 		:x(p_x), y(p_y)
+		{}
+
+		Vector2int(const int values[2])
+		:x(values[0]), y(values[1])
 		{}
 
 		Vector2int(const float& p_x, const float& p_y)
@@ -112,6 +120,10 @@ namespace Birb
 		:x(p_x), y(p_y), z(p_z)
 		{}
 
+		Vector3f(const float values[3])
+		:x(values[0]), y(values[1]), z(values[2])
+		{}
+
 		std::string toString();
 
 		/* Operator overloads */
@@ -157,6 +169,10 @@ namespace Birb
 
 		Vector3int(const int& p_x, const int& p_y, const int& p_z)
 		:x(p_x), y(p_y), z(p_z)
+		{}
+
+		Vector3int(const int values[3])
+		:x(values[0]), y(values[1]), z(values[2])
 		{}
 
 		Vector3int(const float& p_x, const float& p_y, const float& p_z)
