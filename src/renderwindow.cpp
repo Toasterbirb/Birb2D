@@ -461,7 +461,7 @@ namespace Birb
 		{
 			/* Use a polygon to draw a thicker line */
 			const int POINT_COUNT = 4;
-			double pointOffset = thickness / 2.0;
+			float pointOffset = thickness / 2.0;
 			Vector2f points[POINT_COUNT] = {
 				{ line.pointA.x - pointOffset, line.pointA.y - pointOffset },
 				{ line.pointA.x + pointOffset, line.pointA.y + pointOffset },
