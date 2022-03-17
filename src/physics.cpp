@@ -41,8 +41,8 @@ namespace Birb
 
 		bool EntityCollision(const Entity& entityA, const Entity& entityB)
 		{
-			SDL_Rect A = entityA.rect.getSDLRect();
-			SDL_Rect B = entityB.rect.getSDLRect();
+			Rect A = entityA.rect;
+			Rect B = entityB.rect;
 
 			/* Take localscale into account */
 			A.w *= entityA.localScale.x;
@@ -50,7 +50,7 @@ namespace Birb
 			B.w *= entityB.localScale.x;
 			B.h *= entityB.localScale.y;
 
-			return SDL_HasIntersection(&A, &B);
+			return RectCollision(A, B);
 		}
 
 		/* Inspired/yoinked from
