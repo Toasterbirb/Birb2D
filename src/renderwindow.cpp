@@ -501,7 +501,10 @@ namespace Birb
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
+			{
+				Render::ResetDrawColor();
 				return true;
+			}
 			else
 			{
 				Debug::Log("Error when drawing a circle", Debug::error);
