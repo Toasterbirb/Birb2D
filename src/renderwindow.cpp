@@ -417,7 +417,7 @@ namespace Birb
 	{
 		void ResetDrawColor()
 		{
-			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, 0, 0, 0, 255);
+			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, Global::RenderVars::BackgroundColor.r, Global::RenderVars::BackgroundColor.g, Global::RenderVars::BackgroundColor.b, 255);
 		}
 
 		void DrawRect(const Color& color, const Rect& dimensions)

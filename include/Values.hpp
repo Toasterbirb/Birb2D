@@ -31,6 +31,7 @@ namespace Birb
 			static int RefreshRate = 240;
 			static SDL_Window* MainWindow;
 			static SDL_Renderer* Renderer;
+			static Color BackgroundColor = 0x000000;
 		}
 	}
 
