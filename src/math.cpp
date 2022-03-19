@@ -25,35 +25,6 @@ namespace Birb
 			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2) + std::pow(b.z - a.z, 2));
 		}
 
-		float Clamp(const float& value, const float& min, const float& max)
-		{
-			if (value < min)
-				return min;
-			else if (value > max)
-				return max;
-
-			return value;
-		}
-
-		double Clamp(const double& value, const double& min, const double& max)
-		{
-			if (value < min)
-				return min;
-			else if (value > max)
-				return max;
-
-			return value;
-		}
-
-		int Clamp(const int& value, const int& min, const int& max)
-		{
-			if (value < min)
-				return min;
-			else if (value > max)
-				return max;
-
-			return value;
-		}
 
 		int Lerp(const int& a, const int& b, const float& t)
 		{
