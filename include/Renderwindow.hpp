@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 
+#include "Circle.hpp"
 #include "Color.hpp"
 #include "Utils.hpp"
 #include "Entity.hpp"
@@ -79,6 +80,7 @@ namespace Birb
 		void DrawLines(const Color& color, Vector2int* points, const int& pointCount); ///< Draw lines between multiple points at once
 		void DrawLines(const Color& color, Vector2f* points, const int& pointCount); ///< Draw lines between multiple points at once
 
+		bool DrawCircle(const Circle& circle); ///< Draw a circle around a point
 		bool DrawCircle(const Color& color, const Vector2int& pos, const int& radius); ///< Draw a circle around a point
 
 		bool DrawPolygon(const Color& color, Vector2int* points, const int& pointCount); ///< Draw a polygon from multiple points

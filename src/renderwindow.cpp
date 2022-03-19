@@ -497,6 +497,11 @@ namespace Birb
 			ResetDrawColor();
 		}
 
+		bool DrawCircle(const Circle& circle)
+		{
+			return DrawCircle(circle.color, circle.pos, circle.radius);
+		}
+
 		bool DrawCircle(const Color& color, const Vector2int& pos, const int& radius)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;

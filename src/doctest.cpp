@@ -10,6 +10,7 @@ int main(int argc, char** argv)
 #endif
 
 #include "doctest.h"
+#include "Circle.hpp"
 #include "Entity.hpp"
 #include "Graphs.hpp"
 #include "Math.hpp"
@@ -53,6 +54,8 @@ TEST_CASE("Window and rendering functions")
 		Birb::Vector2f(0, 180)
 	}, 0x81E176);
 
+	Birb::Circle circle(32, {500, 650}, 0x32DDAA);
+
 	/* Add entities etc. to the scene */
 	testScene.AddObject(&testEntity);
 	testScene.AddObject(&secondEntityWithSameTexture);
@@ -60,6 +63,7 @@ TEST_CASE("Window and rendering functions")
 	testScene.AddObject(&line);
 	testScene.AddObject(&renderedRect);
 	testScene.AddObject(&polygon);
+	testScene.AddObject(&circle);
 
 	/* Graph */
 	std::vector<double> values = {
@@ -85,6 +89,7 @@ TEST_CASE("Window and rendering functions")
 	areaGraph.backgroundColor 	= Birb::Colors::Black;
 	testScene.AddObject(&areaGraph);
 
+	
 
 	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red));
 	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red, &Birb::Colors::White));
