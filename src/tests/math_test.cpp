@@ -187,7 +187,7 @@ namespace Birb
 		CHECK(resultint == expectedResult);
 	}
 
-	TEST_CASE("Check if a point is on a line between two points")
+	TEST_CASE("Check if a point is on a line")
 	{
 		Line line;
 		Vector2f pointA(5, 3);
@@ -215,7 +215,7 @@ namespace Birb
 		CHECK(Math::PointOnLine(line, pointF));
 	}
 
-	TEST_CASE("Check if a point is on a line between two points with negative values")
+	TEST_CASE("Check if a point is on a line with negative values")
 	{
 		Line line({4, -3}, {6, -1});
 		Vector2f pointA(5, -2);
@@ -225,6 +225,16 @@ namespace Birb
 		CHECK(Math::PointOnLine(line, pointA));
 		CHECK_FALSE(Math::PointOnLine(line, pointB));
 		CHECK_FALSE(Math::PointOnLine(line, pointC));
+	}
+
+	TEST_CASE("Check if a point is on a line that is going down")
+	{
+		Line line({0, 2}, {2, 0});
+		Vector2f pointA(1, 1);
+		Vector2f pointB(4, -2);
+
+		CHECK(Math::PointOnLine(line, pointA));
+		CHECK_FALSE(Math::PointOnLine(line, pointB));
 	}
 
 	TEST_CASE("Find closest point to given point in a list of points")

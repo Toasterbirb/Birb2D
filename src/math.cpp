@@ -101,7 +101,7 @@ namespace Birb
 				return false;
 			}
 
-			float slope = std::abs(line.pointB.y - line.pointA.y) / std::abs(line.pointB.x - line.pointA.x);
+			float slope = (line.pointB.y - line.pointA.y) / (line.pointB.x - line.pointA.x);
 			float y_intersection = line.pointA.y - (line.pointA.x * slope);
 
 			return (point.y == (slope * point.x + y_intersection));

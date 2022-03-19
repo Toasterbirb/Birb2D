@@ -49,7 +49,15 @@ namespace Birb
 		bool x = (point.x == sidePointA.x && point.x == sidePointB.x);
 		bool y = (point.y == sidePointA.y && point.y == sidePointB.y);
 
-		return (x || y);
+		if (x || y)
+		{
+			/* The points are on the same x or y -axis */
+			return true;
+		}
+
+		/* Do some more math to check if the point is on the same *diagonal* line */
+		Line line(sidePointA, sidePointB);
+		return Math::PointOnLine(line, point);
 	}
 
 	/* TODO: Also detect diagonal lines. Currently only supports detecting
