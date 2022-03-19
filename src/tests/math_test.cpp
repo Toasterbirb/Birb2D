@@ -187,6 +187,46 @@ namespace Birb
 		CHECK(resultint == expectedResult);
 	}
 
+	TEST_CASE("Check if a point is on a line between two points")
+	{
+		Line line;
+		Vector2f pointA(5, 3);
+		Vector2f pointB(6, 5);
+		Vector2f pointC(7, 5); /* Point not on the line */
+		Vector2f pointD(8, 9); /* Point on the line, but not between the given limits */
+		Vector2f pointE(3, -1); /* Point on the line, but not between the given limits */
+		Vector2f pointF(4, 1); /* Point at the beginning of the line, but still on the line */
+
+		SUBCASE("Line PointA before PointB")
+		{
+			line = Line({4, 1}, {7, 7});
+		}
+
+		SUBCASE("Line PointB before PointA")
+		{
+			line = Line({7, 7}, {4, 1});
+		}
+
+		CHECK(Math::PointOnLine(line, pointA));
+		CHECK(Math::PointOnLine(line, pointB));
+		CHECK_FALSE(Math::PointOnLine(line, pointC));
+		CHECK_FALSE(Math::PointOnLine(line, pointD));
+		CHECK_FALSE(Math::PointOnLine(line, pointE));
+		CHECK(Math::PointOnLine(line, pointF));
+	}
+
+	TEST_CASE("Check if a point is on a line between two points with negative values")
+	{
+		Line line({4, -3}, {6, -1});
+		Vector2f pointA(5, -2);
+		Vector2f pointB(2, -5);
+		Vector2f pointC(2, -3);
+
+		CHECK(Math::PointOnLine(line, pointA));
+		CHECK_FALSE(Math::PointOnLine(line, pointB));
+		CHECK_FALSE(Math::PointOnLine(line, pointC));
+	}
+
 	TEST_CASE("Find closest point to given point in a list of points")
 	{
 		Vector2int points[5] = {

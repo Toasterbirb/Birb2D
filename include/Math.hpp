@@ -5,6 +5,7 @@
 #include <vector>
 #include "Vector.hpp"
 #include "Color.hpp"
+#include "Line.hpp"
 
 namespace Birb
 {
@@ -43,9 +44,12 @@ namespace Birb
 		Vector3f CenterPoint(const Vector3f& a, const Vector3f& b); ///< Calculate the center point between two 3D floating point vectors
 		Vector3f CenterPoint(const Vector3int& a, const Vector3int& b); ///< Calculate the center point between two 3D integer vectors
 
+		bool PointOnLine(const Line& line, const Vector2f& point); ///< Check if the give point is on the line
+
 		Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount);
 		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points);
 		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints);
+
 
 		double 		Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
 

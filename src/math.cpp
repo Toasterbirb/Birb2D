@@ -87,6 +87,26 @@ namespace Birb
 			return Vector3f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y), CenterPoint(a.z, b.z));
 		}
 
+		bool PointOnLine(const Line& line, const Vector2f& point)
+		{
+			/* Check if the point is in the area of the line
+			 *
+			 * A point could be "on the line", but it might be outside of the line limited 
+			 * by pointA and pointB */
+			if (std::min(line.pointA.x, line.pointB.x) > point.x
+				|| std::max(line.pointA.x, line.pointB.x) < point.x
+				|| std::min(line.pointA.y, line.pointB.y) > point.y
+				|| std::max(line.pointA.y, line.pointB.y) < point.y)
+			{
+				return false;
+			}
+
+			float slope = std::abs(line.pointB.y - line.pointA.y) / std::abs(line.pointB.x - line.pointA.x);
+			float y_intersection = line.pointA.y - (line.pointA.x * slope);
+
+			return (point.y == (slope * point.x + y_intersection));
+		}
+
 		Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount)
 		{
 			Vector2int currentClosestPoint = points[0];
