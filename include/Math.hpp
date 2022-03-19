@@ -18,9 +18,6 @@ namespace Birb
 		float VectorDistance(const Vector3f& a, const Vector3f& b); ///< Calculate the distance between two 3D floating point vectors
 		float VectorDistance(const Vector3int& a, const Vector3int& b); ///< Calculate the distance between two 3D integer vectors
 
-		//float 		Clamp(const float& value, const float& min, const float& max); ///< Clamp a float between the given values
-		//double 		Clamp(const double& value, const double& min, const double& max); ///< Clamp a double between the given values
-		//int 		Clamp(const int& value, const int& min, const int& max); ///< Clamp an integer between the given values
 		template<typename T>
 		T Clamp(const T& value, const T& min, const T& max)
 		{
