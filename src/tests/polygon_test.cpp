@@ -68,4 +68,144 @@ namespace Birb
 			CHECK(polygon.points[POINT_COUNT * 3 - 1] == Vector2f(4, 5));
 		}
 	}
+
+	TEST_CASE("Polygon optimization with a lot of points to optimize")
+	{
+		std::vector<Vector2f> points;
+		std::vector<Vector2f> expectedPoints;
+
+		SUBCASE("Case A")
+		{
+			points = {
+				{2, 0}, /* X */
+				{4, 0},
+				{5, 1}, /* X? */
+				{7, 3},
+				{5, 3}, /* X */
+				{3, 3}, /* X */
+				{1, 3}, /* X */
+				{0, 3},
+				{0, 2}, /* X */
+				{0, 1}, /* X */
+				{0, 0}
+			};
+
+			expectedPoints = {
+				{4, 0},
+				{5, 1},
+				{7, 3},
+				{0, 3},
+				{0, 0}
+			};
+		}
+
+		SUBCASE("Case B")
+		{
+			points = {
+				{0, 1},
+				{0, 0},
+				{2, 0},
+				{4, 0},
+				{4, 2},
+				{0, 2}
+			};
+
+			expectedPoints = {
+				{0, 0},
+				{4, 0},
+				{4, 2},
+				{0, 2}
+			};
+		}
+
+		Polygon polygon(points);
+		polygon.Optimize();
+
+		CHECK(polygon.points.size() == expectedPoints.size());
+		for (int i = 0; i < expectedPoints.size(); i++)
+			CHECK(polygon.points[i] == expectedPoints[i]);
+	}
+
+	TEST_CASE("Polygon optimization when there are no points to optimize")
+	{
+		std::vector<Vector2f> points;
+
+		SUBCASE("Case A")
+		{
+			points = {
+				{2, 2},
+				{4, 1},
+				{6, 2},
+				{6, 3},
+				{-2, 3}
+			};
+		}
+
+		SUBCASE("Case B")
+		{
+			points = {
+				{-1, -1},
+				{ 1, -1},
+				{ 1,  1},
+				{-1,  1}
+			};
+		}
+
+		SUBCASE("Case C")
+		{
+			points = {
+				{0, 0},
+				{1, 1},
+				{2, 0},
+				{2, -0.5},
+				{4, 0},
+				{4, -1},
+				{6, 0},
+				{5, 0.5},
+				{3, 2},
+				{1, 3}
+			};
+		}
+
+		SUBCASE("Case D")
+		{
+			points = {
+				{1, 0},
+				{2, 1},
+				{0, 1}
+			};
+		}
+
+		SUBCASE("Polygon where everything would be optimized normally")
+		{
+			points = {
+				{0, 0},
+				{1, 0},
+				{2, 0},
+				{4, 0}
+			};
+		}
+
+		SUBCASE("Invalid polygon A")
+		{
+			points = {
+				{0, 1},
+				{0, 2}
+			};
+		}
+
+		SUBCASE("Invalid polygon B")
+		{
+			points = {
+				{0, 0}
+			};
+		}
+
+		Polygon polygon(points);
+		polygon.Optimize();
+
+		CHECK(polygon.size() == points.size());
+		for (int i = 0; i < points.size(); i++)
+			CHECK(polygon.points[i] == points[i]);
+	}
 }

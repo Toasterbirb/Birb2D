@@ -44,6 +44,72 @@ namespace Birb
 		this->points.insert(std::end(this->points), std::begin(points), std::end(points));
 	}
 
+	bool PointsHaveSameAxis(Vector2f point, Vector2f sidePointA, Vector2f sidePointB)
+	{
+		bool x = (point.x == sidePointA.x && point.x == sidePointB.x);
+		bool y = (point.y == sidePointA.y && point.y == sidePointB.y);
+
+		return (x || y);
+	}
+
+	/* TODO: Also detect diagonal lines. Currently only supports detecting
+	 * unnecessary points along X and Y -axis */
+	void Polygon::Optimize()
+	{
+		/* Don't do anything if the polygon has less than 3 points
+		 * since there would be nothing to optimize anyway
+		 *
+		 * Also in this case the polygon would be invalid to begin with */
+		if (points.size() < 3)
+			return;
+
+		std::vector<Vector2f> newPoints;
+
+		/* Find the first valid point */
+		int startPoint;
+
+		/* Check the first point before the loop because it has to be compared
+		 * to the last object */
+		if (!PointsHaveSameAxis(points[0], points[points.size() - 1], points[1]))
+		{
+			startPoint = 0;
+		}
+		else
+		{
+			/* Loop trough rest of the points to find the first valid point */
+			for (int i = 1; i < points.size() - 1; i++)
+			{
+				if (!PointsHaveSameAxis(points[i], points[i - 1], points[i + 1]))
+				{
+					startPoint = i;
+					break;
+				}
+			}
+		}
+
+		/* Push back the first point, since its valid */
+		newPoints.push_back(points[startPoint]);
+
+		/* Go trough the polygon points and only keep those points that have
+		 * points with all different axis next to them. Don't check the first one
+		 * thought, because that has already been checked */
+		for (int i = startPoint + 1; i < points.size() - 1; i++)
+		{
+			if (!PointsHaveSameAxis(points[i], points[i - 1], points[i + 1]))
+				newPoints.push_back(points[i]);
+		}
+
+		/* Check the last point in the array */
+		if (!PointsHaveSameAxis(points[points.size() - 1], points[points.size() - 2], points[0]))
+			newPoints.push_back(points[points.size() - 1]);
+
+
+		/* The minimum size of a polygon is 3 points, so we need to prevent
+		 * cases where the entire polygon would be optimized away */
+		if (newPoints.size() > 2)
+			points = newPoints;
+	}
+
 	int Polygon::size() const
 	{
 		return points.size();
