@@ -3,17 +3,32 @@
 
 namespace Birb
 {
-	TEST_CASE("Vector to string")
+	TEST_CASE("Vector conversions")
 	{
 		Vector2f point2f(1.10f, 1.10f);
 		Vector2int point2int(1, 1);
 		Vector3f point3f(1.10f, 1.10f, 2.10f);
 		Vector3int point3int(1, 1, 2);
 
-		CHECK(point2f.toString() == "(1.1, 1.1)");
-		CHECK(point2int.toString() == "(1, 1)");
-		CHECK(point3f.toString() == "(1.1, 1.1, 2.1)");
-		CHECK(point3int.toString() == "(1, 1, 2)");
+		SUBCASE("To string")
+		{
+			CHECK(point2f.toString() == "(1.1, 1.1)");
+			CHECK(point2int.toString() == "(1, 1)");
+			CHECK(point3f.toString() == "(1.1, 1.1, 2.1)");
+			CHECK(point3int.toString() == "(1, 1, 2)");
+		}
+
+		SUBCASE("To int vector")
+		{
+			CHECK(point2f.toInt() == Vector2int(1, 1));
+			CHECK(point3f.toInt() == Vector3int(1, 1, 2));
+		}
+
+		SUBCASE("To float vector")
+		{
+			CHECK(point2int.toFloat() == Vector2f(1.0f, 1.0f));
+			CHECK(point3int.toFloat() == Vector3f(1.0f, 1.0f, 2.0f));
+		}
 	}
 
 	TEST_CASE("Default Vector2f")

@@ -3,23 +3,43 @@
 
 namespace Birb
 {
-	std::string Vector2f::toString()
+	std::string Vector2f::toString() const
 	{
 		return "(" + utils::CleanDecimals(x) + ", " + utils::CleanDecimals(y) + ")";
 	}
 
-	std::string Vector2int::toString()
+	Vector2int Vector2f::toInt() const
+	{
+		return Vector2int(std::round(x), std::round(y));
+	}
+
+	std::string Vector2int::toString() const
 	{
 		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 	}
 
-	std::string Vector3f::toString()
+	Vector2f Vector2int::toFloat() const
+	{
+		return Vector2f(x, y);
+	}
+
+	std::string Vector3f::toString() const
 	{
 		return "(" + utils::CleanDecimals(x) + ", " + utils::CleanDecimals(y) + ", " + utils::CleanDecimals(z) + ")";
 	}
 
-	std::string Vector3int::toString()
+	Vector3int Vector3f::toInt() const
+	{
+		return Vector3int(std::round(x), std::round(y), std::round(z));
+	}
+
+	std::string Vector3int::toString() const
 	{
 		return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
+	}
+
+	Vector3f Vector3int::toFloat() const
+	{
+		return Vector3f(x, y, z);
 	}
 }

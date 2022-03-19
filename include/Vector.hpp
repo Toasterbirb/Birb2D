@@ -6,6 +6,9 @@
 
 namespace Birb
 {
+	struct Vector2int;
+	struct Vector3int;
+
 	/// Point in 2D space with floating point accuracy
 	struct Vector2f
 	{
@@ -21,7 +24,8 @@ namespace Birb
 		:x(values[0]), y(values[1])
 		{}
 
-		std::string toString();
+		std::string toString() const;
+		Vector2int toInt() const;
 
 		/* Operator overloads */
 		Vector2f operator+(const Vector2f& other) const
@@ -73,7 +77,8 @@ namespace Birb
 			y = std::round(p_y);
 		}
 
-		std::string toString();
+		std::string toString() const;
+		Vector2f toFloat() const;
 
 		/* Operator overloads */
 		Vector2int operator+(const Vector2int& other) const
@@ -124,7 +129,8 @@ namespace Birb
 		:x(values[0]), y(values[1]), z(values[2])
 		{}
 
-		std::string toString();
+		std::string toString() const;
+		Vector3int toInt() const;
 
 		/* Operator overloads */
 		Vector3f operator+(const Vector3f& other) const
@@ -182,7 +188,8 @@ namespace Birb
 			z = std::round(p_z);
 		}
 
-		std::string toString();
+		std::string toString() const;
+		Vector3f toFloat() const;
 
 		/* Operator overloads */
 		Vector3int operator+(const Vector3int& other) const
