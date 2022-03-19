@@ -211,5 +211,18 @@ namespace Birb
 			CHECK_FALSE(PolygonCollision(polygonA, polygonAsize, polygonD, polygonDsize));
 			CHECK_FALSE(PolygonCollision(polygonD, polygonDsize, polygonA, polygonAsize));
 		}
+
+		TEST_CASE("Point in circle")
+		{
+			Circle circle(2, {2, 2});
+
+			CHECK(PointInCircle(Vector2int(3, 2), circle));
+			CHECK_FALSE(PointInCircle(Vector2int(-1, 2), circle));
+			CHECK_FALSE(PointInCircle(Vector2int(4, 4), circle));
+
+			CHECK(PointInCircle(Vector2f(3.5f, 2), circle));
+			CHECK(PointInCircle(Vector2f(3.303f, 0.7386), circle));
+			CHECK_FALSE(PointInCircle(Vector2f(0.0f, 0.0f), circle));
+		}
 	}
 }

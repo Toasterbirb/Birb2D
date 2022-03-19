@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Utils.hpp"
+#include "Circle.hpp"
 #include "Entity.hpp"
+#include "Utils.hpp"
 
 namespace Birb
 {
@@ -14,5 +15,7 @@ namespace Birb
 		bool LineIntersection(const Line& lineA, const Line& lineB);
 		bool PointInPolygon(Vector2f points[], const int& pointCount, const Vector2f& point); ///< Test if a given point is inside of the polygon created by a point array
 		bool PolygonCollision(Vector2f polygonA[], const int& polygonAsize, Vector2f polygonB[], const int& polygonBsize);
+		bool PointInCircle(const Vector2int& point, const Circle& circle);
+		bool PointInCircle(const Vector2f& point, const Circle& circle);
 	}
 }

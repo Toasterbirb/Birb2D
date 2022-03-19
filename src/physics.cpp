@@ -140,5 +140,15 @@ namespace Birb
 
 			return false;
 		}
+
+		bool PointInCircle(const Vector2int& point, const Circle& circle)
+		{
+			return (Math::VectorDistance(point, circle.pos) <= circle.radius);
+		}
+
+		bool PointInCircle(const Vector2f& point, const Circle& circle)
+		{
+			return (Math::VectorDistance(point, circle.pos.toFloat()) <= circle.radius);
+		}
 	}
 }
