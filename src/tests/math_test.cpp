@@ -245,6 +245,13 @@ namespace Birb
 		CHECK(Math::FindPointOnCircle(circle, 180).toInt() 	== Vector2int(1, 2));
 		CHECK(Math::FindPointOnCircle(circle, 270).toInt() 	== Vector2int(2, 1));
 		CHECK(Math::FindPointOnCircle(circle, 360).toInt() 	== Vector2int(3, 2));
+
+		Circle circleB(4, {0, 0});
+		CHECK(Math::FindPointOnCircle(circleB, 0).toInt() 		== Vector2int(4, 0));
+		CHECK(Math::FindPointOnCircle(circleB, 90).toInt() 		== Vector2int(0, 4));
+		CHECK(Math::FindPointOnCircle(circleB, 180).toInt() 	== Vector2int(-4, 0));
+		CHECK(Math::FindPointOnCircle(circleB, 270).toInt() 	== Vector2int(0, -4));
+		CHECK(Math::FindPointOnCircle(circleB, 360).toInt() 	== Vector2int(4, 0));
 	}
 
 	TEST_CASE("Find closest point to given point in a list of points")
