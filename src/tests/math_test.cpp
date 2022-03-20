@@ -240,11 +240,11 @@ namespace Birb
 	TEST_CASE("Find a point on a circle given the angle")
 	{
 		Circle circle(1, {2, 2});
-		CHECK(Math::FindPointOnCircle(circle, 0).toInt() 	== Vector2f(3, 2).toInt());
-		CHECK(Math::FindPointOnCircle(circle, 90).toInt() 	== Vector2f(2, 3).toInt());
-		CHECK(Math::FindPointOnCircle(circle, 180).toInt() 	== Vector2f(1, 2).toInt());
-		CHECK(Math::FindPointOnCircle(circle, 270).toInt() 	== Vector2f(2, 1).toInt());
-		CHECK(Math::FindPointOnCircle(circle, 360).toInt() 	== Vector2f(3, 2).toInt());
+		CHECK(Math::FindPointOnCircle(circle, 0).toInt() 	== Vector2int(3, 2));
+		CHECK(Math::FindPointOnCircle(circle, 90).toInt() 	== Vector2int(2, 3));
+		CHECK(Math::FindPointOnCircle(circle, 180).toInt() 	== Vector2int(1, 2));
+		CHECK(Math::FindPointOnCircle(circle, 270).toInt() 	== Vector2int(2, 1));
+		CHECK(Math::FindPointOnCircle(circle, 360).toInt() 	== Vector2int(3, 2));
 	}
 
 	TEST_CASE("Find closest point to given point in a list of points")
