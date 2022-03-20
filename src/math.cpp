@@ -1,6 +1,8 @@
 #include "Math.hpp"
 #include "Logger.hpp"
 
+#define PI 3.141592654
+
 namespace Birb
 {
 	namespace Math
@@ -105,6 +107,17 @@ namespace Birb
 			float y_intersection = line.pointA.y - (line.pointA.x * slope);
 
 			return (point.y == (slope * point.x + y_intersection));
+		}
+
+		Vector2f FindPointOnCircle(const Circle& circle, const float& angle)
+		{
+			/* Convert the angle into radians */
+			float radians = (PI / 180) * angle;
+
+			float x = circle.pos.x + circle.radius * cos(radians);
+			float y = circle.pos.y + circle.radius * sin(radians);
+
+			return Vector2f(x, y);
 		}
 
 		Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount)

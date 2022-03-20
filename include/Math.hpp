@@ -5,6 +5,7 @@
 #include <vector>
 #include "Vector.hpp"
 #include "Color.hpp"
+#include "Circle.hpp"
 #include "Line.hpp"
 
 namespace Birb
@@ -46,12 +47,14 @@ namespace Birb
 
 		bool PointOnLine(const Line& line, const Vector2f& point); ///< Check if the give point is on the line
 
+		Vector2f FindPointOnCircle(const Circle& circle, const float& angle); ///< Returns a point on the circle at the given angle
+
 		Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount);
 		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points);
 		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints);
 
 
-		double 		Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
+		double Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
 
 		bool IsDigit(const float& value); 	///< Check if the float has any decimal points
 		bool IsDigit(const double& value); 	///< Check if the double has any decimal points
