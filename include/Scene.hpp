@@ -1,9 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Entity.hpp"
-#include "Graphs.hpp"
-#include "Line.hpp"
+#include "SceneObject.hpp"
 
 namespace Birb
 {

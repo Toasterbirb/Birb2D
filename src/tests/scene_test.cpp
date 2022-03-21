@@ -1,4 +1,6 @@
 #include "doctest.h"
+#include "Entity.hpp"
+#include "Graphs.hpp"
 #include "Scene.hpp"
 
 namespace Birb
