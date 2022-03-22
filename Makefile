@@ -3,7 +3,7 @@ SRCDIR=./src
 TEST_SRCDIR=./src/tests
 outputDir=./build
 CFLAGS=-fPIC -g -std=c++17
-WarningFlags=-Wpedantic -pedantic -Wall -Wextra
+WarningFlags=-Wpedantic -Wall -Wextra -Wfloat-equal
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
 LIBFILE=libbirb2d.so
