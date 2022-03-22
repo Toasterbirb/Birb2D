@@ -46,9 +46,17 @@ namespace Birb
 		Vector3f CenterPoint(const Vector3int& a, const Vector3int& b); ///< Calculate the center point between two 3D integer vectors
 
 		bool PointOnLine(const Line& line, const Vector2f& point); ///< Check if the give point is on the line
+		
+		/// @param circle 	Circle object
+		/// @param angle 	Angle in degrees
+		/// @return 		A point on the circle rotated by the angle.
+		Vector2f FindPointOnCircle(const Circle& circle, const float& angle);
 
-		Vector2f FindPointOnCircle(const Circle& circle, const float& angle); ///< Returns a point on the circle at the given angle
-
+		/// Find the closest point in an array to the given Vector2int point
+		/// @param point 		The current point
+		/// @param points 		List of points that we are comparing point to
+		/// @param pointCount 	Size of the points array
+		/// @return 			Closest point in the array
 		Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount);
 		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points);
 		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints);
