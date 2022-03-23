@@ -44,6 +44,3 @@ to uninstall, run the following
 ```sh
 make uninstall
 ```
-
-## Licensing
-To keep things simple, the license of this repository only applies to the game engine code. The games you make with it are 100% yours and do not have to fall under this same license. You are free to license the games/software/other stuff you make with Birb2D however you want. If you modify the engine and publicly distribute that "fork", it is expected that those changes are made public as per GPLv3.
