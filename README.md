@@ -20,27 +20,4 @@ Birb2D is not meant to be *production* quality, but there's a chance it can be u
 - [doctest](https://github.com/doctest/doctest) (included as a headerfile)
 
 ## Building
-### Generate documentation
-```sh
-doxygen doxygen_config
-```
-
-### Shared library
-```sh
-make -j$(nproc) engine_lib
-```
-
-### Run tests
-```sh
-make -j$(nproc) run_tests
-```
-
-### Installation
-Simply compile the shared library and copy the headerfiles with
-```sh
-make -j$(nproc) install
-```
-to uninstall, run the following
-```sh
-make uninstall
-```
+Refer to [this](https://github.com/Toasterbirb/Birb2D/wiki/Setup) wiki page
