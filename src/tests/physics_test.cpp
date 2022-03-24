@@ -243,5 +243,28 @@ namespace Birb
 			CHECK(PointInCircle(Vector2f(3.303f, 0.7386), circle));
 			CHECK_FALSE(PointInCircle(Vector2f(0.0f, 0.0f), circle));
 		}
+
+		TEST_CASE("Circle collision")
+		{
+			Circle circleA(2, {2, 2});
+			Circle circleB(2, {5, 4});
+			Circle circleC(3, {10, 4});
+			Circle circleD(1, {6, 9});
+
+			CHECK(CircleCollision(circleA, circleB));
+			CHECK(CircleCollision(circleB, circleA));
+
+			CHECK(CircleCollision(circleB, circleC));
+			CHECK(CircleCollision(circleC, circleB));
+
+			CHECK_FALSE(CircleCollision(circleA, circleC));
+			CHECK_FALSE(CircleCollision(circleC, circleA));
+
+			CHECK_FALSE(CircleCollision(circleC, circleD));
+			CHECK_FALSE(CircleCollision(circleD, circleC));
+
+			CHECK_FALSE(CircleCollision(circleB, circleD));
+			CHECK_FALSE(CircleCollision(circleD, circleB));
+		}
 	}
 }

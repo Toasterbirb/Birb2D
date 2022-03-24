@@ -175,5 +175,10 @@ namespace Birb
 		{
 			return (Math::VectorDistance(point, circle.pos.toFloat()) <= circle.radius);
 		}
+
+		bool CircleCollision(const Circle& circleA, const Circle& circleB)
+		{
+			return (Math::VectorDistance(circleA.pos, circleB.pos) <= circleA.radius + circleB.radius);
+		}
 	}
 }
