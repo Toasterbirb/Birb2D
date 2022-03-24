@@ -33,20 +33,20 @@ namespace Birb
 	TEST_CASE("Rect to polygon")
 	{
 		Rect rectA(0, 0, 10, 10);
-		Vector2f* polygonA = rectA.toPolygon();
+		Polygon polygonA = rectA.toPolygon();
 
-		CHECK(polygonA[0] == Vector2f(0, 0));
-		CHECK(polygonA[1] == Vector2f(10, 0));
-		CHECK(polygonA[2] == Vector2f(10, 10));
-		CHECK(polygonA[3] == Vector2f(0, 10));
+		CHECK(polygonA.points[0] == Vector2f(0, 0));
+		CHECK(polygonA.points[1] == Vector2f(10, 0));
+		CHECK(polygonA.points[2] == Vector2f(10, 10));
+		CHECK(polygonA.points[3] == Vector2f(0, 10));
 
 		Rect rectB(0, 0, -10, -10);
-		Vector2f* polygonB = rectB.toPolygon();
+		Polygon polygonB = rectB.toPolygon();
 
-		CHECK(polygonB[0] == Vector2f(0, 0));
-		CHECK(polygonB[1] == Vector2f(-10, 0));
-		CHECK(polygonB[2] == Vector2f(-10, -10));
-		CHECK(polygonB[3] == Vector2f(0, -10));
+		CHECK(polygonB.points[0] == Vector2f(0, 0));
+		CHECK(polygonB.points[1] == Vector2f(-10, 0));
+		CHECK(polygonB.points[2] == Vector2f(-10, -10));
+		CHECK(polygonB.points[3] == Vector2f(0, -10));
 	}
 
 	TEST_CASE("Rect comparison")
