@@ -180,5 +180,37 @@ namespace Birb
 		{
 			return (Math::VectorDistance(circleA.pos, circleB.pos) <= circleA.radius + circleB.radius);
 		}
+
+		bool CircleRectCollision(const Circle& circle, const Rect& rect)
+		{
+			/* Convert the rect into a polygon because it makes life a bit easier */
+			Polygon polygon = rect.toPolygon();
+
+			/* Check if there are any points inside of the circle */
+			for (int i = 0; i < 4; i++)
+				if (PointInCircle(polygon.points[i], circle))
+					return true;
+
+			/* Create rect around the circle and do AABB check */
+			Rect circleRect(circle.pos.x - circle.radius, circle.pos.y - circle.radius, circle.radius * 2, circle.radius * 2);
+
+			/* AABB collision will be true if the rect is on the same axis with
+			 * one of the circleRect sides, so we have to also check for that.
+			 * Rect collisions happen when the rect is really big and the circle is 
+			 * inside of the rect or if the rects side touches the circle.
+			 *
+			 * This way we should be able to rule out false positives by seeing if the rect
+			 * points on both sides of the circle's center point */
+			if (RectCollision(circleRect, rect))
+			{
+				if ((rect.x < circle.pos.x && rect.x + rect.w > circle.pos.x)
+					|| (rect.y < circle.pos.y && rect.y + rect.h > circle.pos.y))
+					return true;
+				else
+					return false;
+			}
+			
+			return false;
+		}
 	}
 }

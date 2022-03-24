@@ -28,5 +28,6 @@ namespace Birb
 		bool PointInCircle(const Vector2f& point, const Circle& circle);
 
 		bool CircleCollision(const Circle& circleA, const Circle& circleB);
+		bool CircleRectCollision(const Circle& circle, const Rect& rect);
 	}
 }

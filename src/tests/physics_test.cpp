@@ -266,5 +266,28 @@ namespace Birb
 			CHECK_FALSE(CircleCollision(circleB, circleD));
 			CHECK_FALSE(CircleCollision(circleD, circleB));
 		}
+
+		TEST_CASE("Circle collisions with rects")
+		{
+			Circle circle(1, {4, 5});
+
+			Rect rectA(1, 1, 3, 4);
+			Rect rectB(4, 0, 10, 11);
+			Rect rectC(5, 4, 1, 2);
+			Rect rectD(3, 7, 3, 1);
+			Rect rectE(2, 5.8, 1, 1.2);
+			Rect rectF(4.5, 1, 2.5, 3);
+			Rect rectG(2, 3, 1.2, 1.2);
+			Rect rectH(3.8, 6, 0.4, 0.2);
+
+			CHECK(CircleRectCollision(circle, rectA));
+			CHECK(CircleRectCollision(circle, rectB));
+			CHECK(CircleRectCollision(circle, rectC));
+			CHECK_FALSE(CircleRectCollision(circle, rectD));
+			CHECK_FALSE(CircleRectCollision(circle, rectE));
+			CHECK_FALSE(CircleRectCollision(circle, rectF));
+			CHECK_FALSE(CircleRectCollision(circle, rectG));
+			CHECK(CircleRectCollision(circle, rectH));
+		}
 	}
 }
