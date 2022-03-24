@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include "Color.hpp"
+#include "Polygon.hpp"
 #include "SceneObject.hpp"
 #include "Vector.hpp"
 
@@ -15,7 +16,7 @@ namespace Birb
 		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color);
 
 		std::string toString() const;
-		Vector2f* toPolygon() const;
+		Polygon toPolygon() const;
 		Rect getInt() const;
 		SDL_Rect getSDLRect() const;
 

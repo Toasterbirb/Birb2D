@@ -28,7 +28,7 @@ namespace Birb
 			utils::CleanDecimals(h);
 	}
 
-	Vector2f* Rect::toPolygon() const
+	Polygon Rect::toPolygon() const
 	{
 		Vector2f* points = new Vector2f[4] {
 			Vector2f(x, y),
@@ -37,7 +37,7 @@ namespace Birb
 			Vector2f(x, y + h)
 		};
 
-		return points;
+		return Polygon(points, 4);
 	}
 
 	Rect Rect::getInt() const
