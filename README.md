@@ -21,3 +21,6 @@ Birb2D is not meant to be *production* quality, but there's a chance it can be u
 
 ## Building
 Refer to [this](https://github.com/Toasterbirb/Birb2D/wiki/Setup) wiki page
+
+## What works so far
+Birb2D can already do something. You can draw pictures, polygons and other shapes and check for collisions etc. Also sound, buttons, a basic scene system and some basic math stuff is there. Physics engine is still completely missing. Also the documentation is quite lacking
