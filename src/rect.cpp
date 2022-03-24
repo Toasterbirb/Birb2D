@@ -20,7 +20,7 @@ namespace Birb
 	:x(p_x), y(p_y), w(p_w), h(p_h), color(color)
 	{}
 
-	std::string Rect::toString()
+	std::string Rect::toString() const
 	{
 		return utils::CleanDecimals(x) + ", " +
 			utils::CleanDecimals(y) + ", " +
@@ -28,7 +28,7 @@ namespace Birb
 			utils::CleanDecimals(h);
 	}
 
-	Vector2f* Rect::toPolygon()
+	Vector2f* Rect::toPolygon() const
 	{
 		Vector2f* points = new Vector2f[4] {
 			Vector2f(x, y),
@@ -40,7 +40,7 @@ namespace Birb
 		return points;
 	}
 
-	Rect Rect::getInt()
+	Rect Rect::getInt() const
 	{
 		Rect roundedRect;
 		roundedRect.x = round(x);
