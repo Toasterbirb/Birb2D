@@ -203,11 +203,8 @@ namespace Birb
 			 * points on both sides of the circle's center point */
 			if (RectCollision(circleRect, rect))
 			{
-				if ((rect.x < circle.pos.x && rect.x + rect.w > circle.pos.x)
-					|| (rect.y < circle.pos.y && rect.y + rect.h > circle.pos.y))
-					return true;
-				else
-					return false;
+				return ((rect.x < circle.pos.x && rect.x + rect.w > circle.pos.x)
+						|| (rect.y < circle.pos.y && rect.y + rect.h > circle.pos.y));
 			}
 			
 			return false;
