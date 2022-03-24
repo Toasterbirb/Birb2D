@@ -175,6 +175,7 @@ namespace Birb
 				Vector2f(5, 5),
 				Vector2f(1, 4)
 			};
+			Polygon polyA(polygonA, polygonAsize);
 
 			/* Triangle inside of the polygon A */
 			const int polygonBsize = 3;
@@ -183,6 +184,7 @@ namespace Birb
 				Vector2f(4, 3),
 				Vector2f(3, 3)
 			};
+			Polygon polyB(polygonB, polygonBsize);
 
 			/* 4 sided polygon with no points inside of polygon A, but the sides should collide */
 			const int polygonCsize = 4;
@@ -192,6 +194,7 @@ namespace Birb
 				Vector2f(9, 6),
 				Vector2f(7, 6)
 			};
+			Polygon polyC(polygonC, polygonCsize);
 
 			/* 4 sided polygon completely outside of polygon A, shouldn't collide with it */
 			const int polygonDsize = 4;
@@ -201,7 +204,9 @@ namespace Birb
 				Vector2f(11, 0),
 				Vector2f(9, 0)
 			};
+			Polygon polyD(polygonD, polygonDsize);
 
+			/* Test with normal point arrays */
 			CHECK(PolygonCollision(polygonA, polygonAsize, polygonB, polygonBsize));
 			CHECK(PolygonCollision(polygonB, polygonBsize, polygonA, polygonAsize));
 
@@ -210,6 +215,20 @@ namespace Birb
 
 			CHECK_FALSE(PolygonCollision(polygonA, polygonAsize, polygonD, polygonDsize));
 			CHECK_FALSE(PolygonCollision(polygonD, polygonDsize, polygonA, polygonAsize));
+
+			/* Test with polygon datatype */
+			CHECK(PolygonCollision(polyA, polyB));
+			CHECK(PolygonCollision(polyB, polyA));
+
+			CHECK(PolygonCollision(polyA, polyC));
+			CHECK(PolygonCollision(polyC, polyA));
+
+			CHECK_FALSE(PolygonCollision(polyA, polyD));
+			CHECK_FALSE(PolygonCollision(polyD, polyA));
+
+			/* Check multiple polygon collisions at once */
+			CHECK(PolygonCollision({polyA, polyB, polyC}));
+			CHECK_FALSE(PolygonCollision({polyA, polyD}));
 		}
 
 		TEST_CASE("Point in circle")

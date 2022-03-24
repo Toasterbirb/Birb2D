@@ -141,6 +141,31 @@ namespace Birb
 			return false;
 		}
 
+		bool PolygonCollision(std::vector<Vector2f> polygonA, std::vector<Vector2f> polygonB)
+		{
+			return PolygonCollision(&polygonA[0], polygonA.size(), &polygonB[0], polygonB.size());
+		}
+
+		bool PolygonCollision(const Polygon& polygonA, const Polygon& polygonB)
+		{
+			return PolygonCollision(polygonA.points, polygonB.points);
+		}
+
+		bool PolygonCollision(std::vector<Polygon> polygons)
+		{
+			bool collision = false;
+			for (int i = 0; i < polygons.size() && !collision; i++)
+			{
+				for (int j = 0; j < polygons.size() && !collision; j++)
+				{
+					if (i != j)
+						collision = PolygonCollision(polygons[i], polygons[j]);
+				}
+			}
+					
+			return collision;
+		}
+
 		bool PointInCircle(const Vector2int& point, const Circle& circle)
 		{
 			return (Math::VectorDistance(point, circle.pos) <= circle.radius);
