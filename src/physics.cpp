@@ -39,6 +39,11 @@ namespace Birb
 			return false;
 		}
 
+		bool RectCollision(const Rect& rect, const Circle& circle)
+		{
+			return CircleCollision(circle, rect);
+		}
+
 		bool EntityCollision(const Entity& entityA, const Entity& entityB)
 		{
 			Rect A = entityA.rect;
@@ -181,7 +186,7 @@ namespace Birb
 			return (Math::VectorDistance(circleA.pos, circleB.pos) <= circleA.radius + circleB.radius);
 		}
 
-		bool CircleRectCollision(const Circle& circle, const Rect& rect)
+		bool CircleCollision(const Circle& circle, const Rect& rect)
 		{
 			/* Convert the rect into a polygon because it makes life a bit easier */
 			Polygon polygon = rect.toPolygon();

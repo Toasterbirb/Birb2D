@@ -280,14 +280,15 @@ namespace Birb
 			Rect rectG(2, 3, 1.2, 1.2);
 			Rect rectH(3.8, 6, 0.4, 0.2);
 
-			CHECK(CircleRectCollision(circle, rectA));
-			CHECK(CircleRectCollision(circle, rectB));
-			CHECK(CircleRectCollision(circle, rectC));
-			CHECK_FALSE(CircleRectCollision(circle, rectD));
-			CHECK_FALSE(CircleRectCollision(circle, rectE));
-			CHECK_FALSE(CircleRectCollision(circle, rectF));
-			CHECK_FALSE(CircleRectCollision(circle, rectG));
-			CHECK(CircleRectCollision(circle, rectH));
+			CHECK(CircleCollision(circle, rectA));
+			CHECK(CircleCollision(circle, rectB));
+			CHECK(CircleCollision(circle, rectC));
+			CHECK_FALSE(CircleCollision(circle, rectD));
+
+			CHECK_FALSE(RectCollision(rectE, circle));
+			CHECK_FALSE(RectCollision(rectF, circle));
+			CHECK_FALSE(RectCollision(rectG, circle));
+			CHECK(RectCollision(rectH, circle));
 		}
 	}
 }
