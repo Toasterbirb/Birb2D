@@ -68,13 +68,13 @@ namespace Birb
 		 * since there would be nothing to optimize anyway
 		 *
 		 * Also in this case the polygon would be invalid to begin with */
-		if (points.size() < 3)
+		if (points.size() < 4)
 			return;
 
 		std::vector<Vector2f> newPoints;
 
 		/* Find the first valid point */
-		int startPoint;
+		int startPoint = -1;
 
 		/* Check the first point before the loop because it has to be compared
 		 * to the last object */
@@ -94,6 +94,10 @@ namespace Birb
 				}
 			}
 		}
+
+		/* We didn't find any valid starting points */
+		if (startPoint == -1)
+			return;
 
 		/* Push back the first point, since its valid */
 		newPoints.push_back(points[startPoint]);
