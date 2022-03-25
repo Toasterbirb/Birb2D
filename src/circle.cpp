@@ -23,14 +23,19 @@ namespace Birb
 	:radius(radius), pos(pos), color(color)
 	{}
 
-	float Circle::Circumference()
+	float Circle::Circumference() const
 	{
 		return (radius * 2 * PI);
 	}
 
-	float Circle::Diameter()
+	float Circle::Diameter() const
 	{
 		return (radius * 2);
+	}
+
+	Rect Circle::toRect() const
+	{
+		return Rect(pos.x - radius, pos.y - radius, Diameter(), Diameter());
 	}
 
 	void Circle::RenderFunc()
