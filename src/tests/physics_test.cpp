@@ -323,5 +323,24 @@ namespace Birb
 			CHECK_FALSE(CircleCollision(circle, lineQ));
 			CHECK_FALSE(CircleCollision(circle, lineR));
 		}
+
+		TEST_CASE("Circle collision with polygons")
+		{
+			Circle circle(3, {4, 3});
+
+			Polygon polygonA({{1, 6}, {5, 5}, {8, 6}, {5, 7}}, 4);
+			Polygon polygonB({{1, 1}, {10, 7}, {10, 8}}, 3);
+			Polygon polygonC({{6, 0}, {9, 0}, {9, 5}, {7, 5}, {8, 3}, {7, 1}}, 6);
+			Polygon polygonD({{3, 8}, {8, 8}, {8, 10}, {2, 10}}, 4);
+			Polygon polygonE({{2, 2}, {3, 2}, {3, 3}, {4, 4}, {2, 4}}, 5);
+			Polygon polygonF({{10, 3}, {10, 6}, {2, 7}}, 3);
+
+			CHECK(CircleCollision(circle, polygonA));
+			CHECK(CircleCollision(circle, polygonB));
+			CHECK_FALSE(CircleCollision(circle, polygonC));
+			CHECK_FALSE(CircleCollision(circle, polygonD));
+			CHECK(CircleCollision(circle, polygonE));
+			CHECK(CircleCollision(circle, polygonF));
+		}
 	}
 }

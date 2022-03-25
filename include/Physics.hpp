@@ -52,5 +52,8 @@ namespace Birb
 
 		/// Check for collision between a circle and a line
 		bool CircleCollision(const Circle& circle, const Line& line);
+
+		/// Check for collision between a circle and a polygon
+		bool CircleCollision(const Circle& circle, const Polygon& polygon);
 	}
 }

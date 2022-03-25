@@ -253,5 +253,28 @@ namespace Birb
 
 			return false;
 		}
+
+		bool CircleCollision(const Circle& circle, const Polygon& polygon)
+		{
+			/* Check if any of the polygon points are inside of the circle */
+			for (int i = 0; i < polygon.size(); i++)
+			{
+				if (PointInCircle(polygon.points[i], circle))
+				{
+					std::cout << "Colliding point: " << polygon.points[i] << std::endl;
+					return true;
+				}
+			}
+
+			/* Check if the lines connecting polygon points intersect the circle */
+			for (int i = 0; i < polygon.size() - 1; i++)
+			{
+				if (CircleCollision(circle, Line(polygon.points[i], polygon.points[i + 1])))
+					return true;
+			}
+
+			/* Also check the connection between the last and first point of the polygon */
+			return CircleCollision(circle, Line(polygon.points[polygon.size() - 1], polygon.points[0]));
+		}
 	}
 }
