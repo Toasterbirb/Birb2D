@@ -101,21 +101,22 @@ namespace Birb
 		/* Go trough the polygon points and only keep those points that have
 		 * points with all different axis next to them. Don't check the first one
 		 * thought, because that has already been checked */
-		for (int i = startPoint + 1; i < points.size() - 1; i++)
+		for (int i = startPoint + 1; i < points.size() - 1 && points.size() > 2; i++)
 		{
 			if (!PointsHaveSameAxis(points[i], points[i - 1], points[i + 1]))
 				newPoints.push_back(points[i]);
 		}
 
+		/* The minimum size of a polygon is 3 points, so we need to prevent
+		 * cases where the entire polygon would be optimized away */
+		if (newPoints.size() < 3)
+			return;
+
 		/* Check the last point in the array */
 		if (!PointsHaveSameAxis(points[points.size() - 1], points[points.size() - 2], points[0]))
 			newPoints.push_back(points[points.size() - 1]);
 
-
-		/* The minimum size of a polygon is 3 points, so we need to prevent
-		 * cases where the entire polygon would be optimized away */
-		if (newPoints.size() > 2)
-			points = newPoints;
+		points = newPoints;
 	}
 
 	int Polygon::size() const
