@@ -290,5 +290,38 @@ namespace Birb
 			CHECK_FALSE(RectCollision(rectG, circle));
 			CHECK(RectCollision(rectH, circle));
 		}
+
+		TEST_CASE("Circle collision with lines")
+		{
+			Circle circle(2, {3, 2});
+			
+			Line lineF({1, 3}, {6, 4});
+			Line lineG({1, 4}, {4, 4});
+			Line lineH({5, 1}, {5, 2});
+			Line lineI({3, 1}, {8, 2});
+			Line lineJ({2, 2}, {3, 3});
+			Line lineK({3, 5}, {6, 2});
+			Line lineL({0, 0}, {5, 10});
+			Line lineM({0, 3}, {2, 7});
+			Line lineN({8, 3}, {15, 1});
+			Line lineO({12, 5}, {12, 10});
+			Line lineP({3, 7}, {2, 11});
+			Line lineQ({6, 3}, {4, 7});
+			Line lineR({1.5, 3.5}, {0, 5});
+
+			CHECK(CircleCollision(circle, lineF));
+			CHECK(CircleCollision(circle, lineG));
+			CHECK(CircleCollision(circle, lineH));
+			CHECK(CircleCollision(circle, lineI));
+			CHECK(CircleCollision(circle, lineJ));
+			CHECK_FALSE(CircleCollision(circle, lineK));
+			CHECK(CircleCollision(circle, lineL));
+			CHECK_FALSE(CircleCollision(circle, lineM));
+			CHECK_FALSE(CircleCollision(circle, lineN));
+			CHECK_FALSE(CircleCollision(circle, lineO));
+			CHECK_FALSE(CircleCollision(circle, lineP));
+			CHECK_FALSE(CircleCollision(circle, lineQ));
+			CHECK_FALSE(CircleCollision(circle, lineR));
+		}
 	}
 }

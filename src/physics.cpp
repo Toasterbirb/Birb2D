@@ -197,7 +197,7 @@ namespace Birb
 					return true;
 
 			/* Create rect around the circle and do AABB check */
-			Rect circleRect(circle.pos.x - circle.radius, circle.pos.y - circle.radius, circle.radius * 2, circle.radius * 2);
+			Rect circleRect = circle.toRect();
 
 			/* AABB collision will be true if the rect is on the same axis with
 			 * one of the circleRect sides, so we have to also check for that.
@@ -212,6 +212,45 @@ namespace Birb
 						|| (rect.y < circle.pos.y && rect.y + rect.h > circle.pos.y));
 			}
 			
+			return false;
+		}
+
+		bool CircleCollision(const Circle& circle, const Line& line)
+		{
+			/* Check if either of the line points are inside of the circle */
+			if (PointInCircle(line.pointA, circle) || PointInCircle(line.pointB, circle))
+				return true;
+
+			/* If the previous method doesn't work, we need to do some more maths. First we 
+			 * need to make sure though that the line can even intersect the circle,
+			 * since the next formula assumes the lines are infinite. We are dealing with
+			 * lines between two points. This can be done with a simple AABB check */
+
+			/* First create a rect out of the line */
+			Rect lineRect(line.pointA.x, line.pointA.y, line.pointB.x - line.pointA.x, line.pointB.y - line.pointA.y);
+
+			if (!RectCollision(lineRect, circle))
+				return false;
+
+			/* Lets first calculate the formula for the line */
+			float slope = (line.pointB.y - line.pointA.y) / (line.pointB.x - line.pointA.x);
+			float y_intersection = line.pointA.y - (line.pointA.x * slope);
+
+			/* Line: y = slope * x + y_intersection
+			 * Circle: (x - circle.x)^2 + (y + circle.y)^2 = circle.radius^2 */
+
+
+			float a = std::pow(slope, 2) + 1;
+			float b = ((circle.pos.x * -1) * 2) + (2 * slope * (y_intersection - circle.pos.y));
+			float c = (std::pow(circle.pos.x, 2) + std::pow(y_intersection - circle.pos.y, 2)) - std::pow(circle.radius, 2);
+
+
+			float discriminant = std::pow(b, 2) - (4 * a * c);
+
+			if (discriminant >= 0)
+				return true;
+
+
 			return false;
 		}
 	}

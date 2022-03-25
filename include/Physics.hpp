@@ -49,5 +49,8 @@ namespace Birb
 
 		/// Check for collision between a circle and a rect
 		bool CircleCollision(const Circle& circle, const Rect& rect);
+
+		/// Check for collision between a circle and a line
+		bool CircleCollision(const Circle& circle, const Line& line);
 	}
 }
