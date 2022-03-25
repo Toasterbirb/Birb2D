@@ -357,14 +357,19 @@ namespace Birb
 		Vector2int centerPoint;
 
 		/* Get texture data */
-		int texWidth;
-		int texHeight;
-		SDL_QueryTexture(entity.sprite, NULL, NULL, &texWidth, &texHeight);
+		int texWidth 	= 0;
+		int texHeight 	= 0;
 
-		if (texWidth <= 0 || texHeight <= 0)
+		/* Skip the texture width tests if the entity doesn't have a texture on it */
+		if (entity.sprite != nullptr)
 		{
-			Birb::Debug::Log("Tried to render an entity with a texture with size of <= 0", Debug::Type::warning);
-			return false;
+			SDL_QueryTexture(entity.sprite, NULL, NULL, &texWidth, &texHeight);
+
+			if (texWidth <= 0 || texHeight <= 0)
+			{
+				Birb::Debug::Log("Tried to render an entity with a texture with size of <= 0", Debug::Type::warning);
+				return false;
+			}
 		}
 
 		if (entity.animationComponent.frameCount <= 0) /* Check if the entity has animations */
