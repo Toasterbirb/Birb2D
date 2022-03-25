@@ -149,12 +149,12 @@ namespace Birb
 
 		bool operator==(const Entity& other) const
 		{
-			return 	(&sprite 				== &other.sprite
-					&& localScale 			== other.localScale
-					&& textComponent 		== other.textComponent
-					&& &clickComponent 		== &other.clickComponent
-					&& animationComponent 	== other.animationComponent
-					&& progressBarComponent == other.progressBarComponent);
+			return 	(&sprite 					== &other.sprite
+					&& localScale 				== other.localScale
+					&& textComponent 			== other.textComponent
+					&& &clickComponent 			== &other.clickComponent
+					&& &animationComponent 		== &other.animationComponent
+					&& &progressBarComponent 	== &other.progressBarComponent);
 		}
 
 	private:
