@@ -239,6 +239,14 @@ namespace Birb
 			/* Line: y = slope * x + y_intersection
 			 * Circle: (x - circle.x)^2 + (y + circle.y)^2 = circle.radius^2 */
 
+			/* Here we are basically combining the circle formula with
+			 * the line formula. Then calculate the binomial square for
+			 * x and y coordinates and combine them together into 3 variables.
+			 * Those three variables are a, b and c respectively. We need those
+			 * to calculate the discriminant in the second degree equation
+			 * that we need to solve. We don't have to solve it entirely,
+			 * because we don't care about the locations of the points. We only need to
+			 * find out if there was an intersection. */
 
 			float a = std::pow(slope, 2) + 1;
 			float b = ((circle.pos.x * -1) * 2) + (2 * slope * (y_intersection - circle.pos.y));
@@ -260,10 +268,7 @@ namespace Birb
 			for (int i = 0; i < polygon.size(); i++)
 			{
 				if (PointInCircle(polygon.points[i], circle))
-				{
-					std::cout << "Colliding point: " << polygon.points[i] << std::endl;
 					return true;
-				}
 			}
 
 			/* Check if the lines connecting polygon points intersect the circle */
