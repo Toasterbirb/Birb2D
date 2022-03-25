@@ -29,6 +29,12 @@ run_tests: test
 run_quick_tests: test
 	./build/test -tce="*rendering*,*audio*,*timer*"
 
+run_tests_valgrind: test
+	valgrind --leak-check=summary --show-leak-kinds=all ./build/test -tce="*timer*"
+
+run_quick_tests_valgrind: test
+	valgrind --leak-check=summary --show-leak-kinds=all ./build/test -tce="*rendering*,*audio*,*timer*"
+
 engine_lib: ${LIB_OBJ}
 	mkdir -p build
 	$(CC) -shared $(CFLAGS) $(SDL_FLAGS) -o $(outputDir)/$(LIBFILE) $^
