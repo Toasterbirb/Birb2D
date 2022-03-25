@@ -65,13 +65,13 @@ namespace Birb
 			}
 		}
 
-		Line* PolygonToLines(const Vector2f polygon[], const int& polygonSize)
+		std::vector<Line> PolygonToLines(const Vector2f polygon[], const int& polygonSize)
 		{
-			Line* lines = new Line[polygonSize];
+			std::vector<Line> lines;
 			
 			for (int i = 0; i < polygonSize - 1; i++)
 			{
-				lines[i] = Line(polygon[i], polygon[i + 1]);
+				lines.push_back(Line(polygon[i], polygon[i + 1]));
 			}
 
 			/* The last line connects the last point and the first point */

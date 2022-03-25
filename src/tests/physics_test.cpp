@@ -163,7 +163,7 @@ namespace Birb
 			CHECK_FALSE(PointInPolygon(points, pointCount, testPointG));
 		}
 
-		TEST_CASE("Polygon collisiosn")
+		TEST_CASE("Polygon collision")
 		{
 			const int polygonAsize = 7;
 			Vector2f polygonA[polygonAsize] = {

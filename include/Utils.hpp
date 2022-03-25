@@ -26,6 +26,6 @@ namespace Birb
 		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points);
 		std::string CleanDecimals(const double& value); ///< Returns a string with without trailing zeroes in decimals
 
-		Line* PolygonToLines(const Vector2f polygon[], const int& polygonSize);
+		std::vector<Line> PolygonToLines(const Vector2f polygon[], const int& polygonSize);
 	}
 }

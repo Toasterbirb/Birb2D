@@ -30,7 +30,7 @@ namespace Birb
 
 	Polygon Rect::toPolygon() const
 	{
-		Vector2f* points = new Vector2f[4] {
+		Vector2f points[4] = {
 			Vector2f(x, y),
 			Vector2f(x + w, y),
 			Vector2f(x + w, y + h),

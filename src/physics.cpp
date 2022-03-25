@@ -130,8 +130,8 @@ namespace Birb
 
 			/* Next check for line intersections. The other polygon might not have points inside of the other polygon
 			 * so we need to check if the sides intersect. First convert the polygons into lines */
-			Line* polygonAlines = utils::PolygonToLines(polygonA, polygonAsize);
-			Line* polygonBlines = utils::PolygonToLines(polygonB, polygonBsize);
+			std::vector<Line> polygonAlines = utils::PolygonToLines(polygonA, polygonAsize);
+			std::vector<Line> polygonBlines = utils::PolygonToLines(polygonB, polygonBsize);
 
 			/* Check if any of the lines intersect */
 			for (int i = 0; i < polygonAsize; i++)
