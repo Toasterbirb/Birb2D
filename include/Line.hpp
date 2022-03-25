@@ -32,4 +32,10 @@ namespace Birb
 	private:
 		void RenderFunc() override;
 	};
+
+	inline std::ostream& operator<<(std::ostream& stream, const Line& other)
+	{
+		stream << "[(" << other.pointA.x << ", " << other.pointA.y << "), (" << other.pointB.x << ", " << other.pointB.y << ")]";
+		return stream;
+	}
 }
