@@ -41,18 +41,31 @@ engine_lib: ${LIB_OBJ}
 
 static_engine_lib: ${LIB_OBJ}
 	mkdir -p build
-	g++ -static $(CFLAGS) $(SDL2_STUFF) -o $(outputDir)/$(LIBFILE) $^
-	#ar -crs $(outputDir)/libbirb2d.a $^
+	ar -crs $(outputDir)/libbirb2d.a $^
 
 install: engine_lib
+	rm -f /usr/lib/libbirb2d.a
 	cp $(outputDir)/$(LIBFILE) /usr/lib/
+	mkdir -p /usr/local/include/birb2d
+	cp ./include/* /usr/local/include/birb2d/
+	ldconfig
+
+install_static: static_engine_lib
+	rm -f /usr/lib/$(LIBFILE)
+	cp $(outputDir)/libbirb2d.a /usr/lib/
 	mkdir -p /usr/local/include/birb2d
 	cp ./include/* /usr/local/include/birb2d/
 	ldconfig
 
 uninstall:
 	rm -f /usr/lib/$(LIBFILE)
+	rm -rf /usr/local/lib64/birb2d_static
 	rm -rf /usr/local/include/birb2d
+	ldconfig
+
+uninstall_lib:
+	rm -f /usr/lib/$(LIBFILE)
+	rm -f /usr/lib/libbirb2d.a
 	ldconfig
 
 # Engine code
@@ -64,6 +77,8 @@ uninstall:
 	$(CC) -c $(CFLAGS) $(INCLUDES) $^
 
 
+docker_build:
+	podman build -f ./dockerfiles/fedora-headless.Dockerfile ./ -t birb2d:fedora-headless
 
 .PHONY: clean
 clean:
