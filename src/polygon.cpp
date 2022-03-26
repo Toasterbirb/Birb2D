@@ -74,7 +74,7 @@ namespace Birb
 		std::vector<Vector2f> newPoints;
 
 		/* Find the first valid point */
-		int startPoint = -1;
+		int startPoint;
 
 		/* Check the first point before the loop because it has to be compared
 		 * to the last object */
