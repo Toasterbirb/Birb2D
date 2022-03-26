@@ -13,7 +13,7 @@ RUN dnf -y update &&       \
     SDL2_gfx-devel
 
 # Setup rootless env
-ARG USER=jsantos
+ARG USER=birb
 
 RUN useradd -m ${USER} && \
     chown -R ${USER}:${USER} /home/${USER}
