@@ -42,4 +42,10 @@ namespace Birb
 	{
 		Render::DrawCircle(color, pos, radius);
 	}
+
+	void Circle::SetPos(const Vector2f& delta)
+	{
+		pos.x += delta.x;
+		pos.y += delta.y;
+	}
 }

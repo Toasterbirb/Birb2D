@@ -115,5 +115,11 @@ namespace Birb
 		{
 			this->Render();
 		}
+
+		void Graph::SetPos(const Vector2f& delta)
+		{
+			rect.x += delta.x;
+			rect.y += delta.y;
+		}
 	}
 }

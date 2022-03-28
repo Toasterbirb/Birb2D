@@ -65,4 +65,10 @@ namespace Birb
 	{
 		Render::DrawRect(color, *this);
 	}
+
+	void Rect::SetPos(const Vector2f& delta)
+	{
+		x += delta.x;
+		y += delta.y;
+	}
 }

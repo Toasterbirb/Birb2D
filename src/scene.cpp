@@ -6,6 +6,7 @@ namespace Birb
 	Scene::Scene()
 	{
 		active = true;
+		positionOffset = {0, 0};
 	}
 
 	void Scene::AddObject(SceneObject* obj)
@@ -47,6 +48,27 @@ namespace Birb
 	bool Scene::isActive() const
 	{
 		return active;
+	}
+
+	void Scene::SetPosition(const Vector2f& newPosition)
+	{
+		/* Calculate the delta between the current and new position */
+		Vector2f delta = newPosition - positionOffset;
+
+		/* Set new positions for all of the scene objects */
+		for (int i = 0; i < (int)objects.size(); i++)
+		{
+			objects[i]->SetPos(delta);
+		}
+	}
+
+	void Scene::Translate(const Vector2f& delta)
+	{
+		/* Set new positions for all of the scene objects */
+		for (int i = 0; i < (int)objects.size(); i++)
+		{
+			objects[i]->SetPos(delta);
+		}
 	}
 
 	void Scene::Render() const

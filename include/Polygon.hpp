@@ -31,5 +31,6 @@ namespace Birb
 
 	private:
 		void RenderFunc() override;
+		void SetPos(const Vector2f& delta) override;
 	};
 }

@@ -132,4 +132,13 @@ namespace Birb
 	{
 		Render::DrawPolygon(color, points);
 	}
+
+	void Polygon::SetPos(const Vector2f& delta)
+	{
+		for (int i = 0; i < (int)points.size(); i++)
+		{
+			points[i].x += delta.x;
+			points[i].y += delta.y;
+		}
+	}
 }

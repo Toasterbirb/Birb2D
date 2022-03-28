@@ -31,6 +31,7 @@ namespace Birb
 
 	private:
 		void RenderFunc() override;
+		void SetPos(const Vector2f& delta) override;
 	};
 
 	inline std::ostream& operator<<(std::ostream& stream, const Line& other)

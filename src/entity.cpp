@@ -273,4 +273,10 @@ namespace Birb
 	{
 		Render::DrawEntity(*this);
 	}
+
+	void Entity::SetPos(const Vector2f& delta)
+	{
+		rect.x += delta.x;
+		rect.y += delta.y;
+	}
 }

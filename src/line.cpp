@@ -30,4 +30,10 @@ namespace Birb
 	{
 		Render::DrawLine(*this);
 	}
+
+	void Line::SetPos(const Vector2f& delta)
+	{
+		pointA = pointA + delta;
+		pointB = pointB + delta;
+	}
 }
