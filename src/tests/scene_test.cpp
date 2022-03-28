@@ -94,6 +94,23 @@ namespace Birb
 			
 			CHECK(rect == Rect(-10, -10, 10, 10));
 			CHECK(circle.pos == Vector2int(-10, -10));
+
+			/* Reset scene position back to the original position */
+			scene.SetPosition(Vector2f(0, 0));
+			CHECK(entityA.rect == Rect(0, 150, 128, 72));
+			CHECK(entityB.rect == Rect(50, 100, 128, 72));
+			CHECK(graphs[0].rect == Rect(50, 100, 128, 72));
+			CHECK(graphs[1].rect == Rect(50, 100, 128, 72));
+			
+			CHECK(polygon.points[0] == Vector2f(0, 0));
+			CHECK(polygon.points[1] == Vector2f(2, 0));
+			CHECK(polygon.points[2] == Vector2f(1, 1));
+
+			CHECK(line.pointA == Vector2f(0, 0));
+			CHECK(line.pointB == Vector2f(3, 3));
+			
+			CHECK(rect == Rect(0, 0, 10, 10));
+			CHECK(circle.pos == Vector2int(0, 0));
 		}
 	}
 }

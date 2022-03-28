@@ -54,6 +54,7 @@ namespace Birb
 	{
 		/* Calculate the delta between the current and new position */
 		Vector2f delta = newPosition - positionOffset;
+		positionOffset = positionOffset + delta;
 
 		/* Set new positions for all of the scene objects */
 		for (int i = 0; i < (int)objects.size(); i++)
@@ -64,6 +65,8 @@ namespace Birb
 
 	void Scene::Translate(const Vector2f& delta)
 	{
+		positionOffset = positionOffset + delta;
+
 		/* Set new positions for all of the scene objects */
 		for (int i = 0; i < (int)objects.size(); i++)
 		{
