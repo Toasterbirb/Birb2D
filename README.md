@@ -33,7 +33,7 @@ I have **tried** to get this thing running under windows, but it hasn't gone as 
 - **Visual Studio**. Opened it, closed it. Didn't know how to use that monster
 - **MinGW**
 	- **On windows**: Gave up, CMD sucks and should be illegal to ship with an operating system
-	- **On GNU/Linux**: Ehh... g++.exe run fine under wine, but there were a ton of incompatibilities between GNU/Linux and Windows libraries making it not compile. Mostly filesystem and timer specific issues. There were probably a bit more issues as well, but I couldn't really spot them when there was about 10 wine fixmes for each g++ error.
+	- **On GNU/Linux**: Ehh... g++.exe ran fine under wine, but there were a ton of incompatibilities between GNU/Linux and Windows libraries making it not compile. Mostly filesystem and timer specific issues. There were probably a bit more issues as well, but I couldn't really spot them when there was about 10 wine fixmes for each g++ error.
 
 ## What does this mean?
 No Windows support. Here's an alternative operating system for you: https://archlinux.org/download/
