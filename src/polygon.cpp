@@ -44,6 +44,22 @@ namespace Birb
 		this->points.insert(std::end(this->points), std::begin(points), std::end(points));
 	}
 
+	Vector2f Polygon::CenterPoint() const
+	{
+		Vector2f result;
+
+		/* Calculate the average of all points */
+		for (int i = 0; i < (int)points.size(); i++)
+		{
+			result.x += points[i].x;
+			result.y += points[i].y;
+		}
+		result.x /= points.size();
+		result.y /= points.size();
+
+		return result;
+	}
+
 	bool PointsHaveSameAxis(Vector2f point, Vector2f sidePointA, Vector2f sidePointB)
 	{
 		bool x = (point.x == sidePointA.x && point.x == sidePointB.x);

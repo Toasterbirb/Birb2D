@@ -1,4 +1,5 @@
 #include "doctest.h"
+#include "Math.hpp"
 #include "Polygon.hpp"
 
 namespace Birb
@@ -145,6 +146,19 @@ namespace Birb
 		CHECK(polygon.points.size() == expectedPoints.size());
 		for (int i = 0; i < expectedPoints.size(); i++)
 			CHECK(polygon.points[i] == expectedPoints[i]);
+	}
+
+	TEST_CASE("Find Polygon center point")
+	{
+		Polygon polygonA({{2, 2}, {8, 3}, {2, 4}});
+		CHECK(polygonA.CenterPoint() == Vector2f(4, 3));
+
+		Polygon polygonB({
+				{1, 2}, {2, 5},
+				{4, 3}, {7, 3},
+				{5, 1}, {1, 1}});
+		CHECK(Birb::Math::Round(polygonB.CenterPoint().x, 2) == 3.33);
+		CHECK(polygonB.CenterPoint().y == 2.5f);
 	}
 
 	TEST_CASE("Polygon optimization when there are no points to optimize")

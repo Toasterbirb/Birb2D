@@ -20,6 +20,10 @@ namespace Birb
 		void AddPoints(const Vector2f points[], const int& pointCount);
 		void AddPoints(const std::vector<Vector2f>& points);
 
+		/// Gets the "center point" of the polygon by taking the average
+		/// of all points
+		Vector2f CenterPoint() const;
+
 		/// Removes points that don't change the visual appearance of the polygon
 		// Shouldn't be called if the point locations are going to be modified since
 		// there is going to be detail lost
