@@ -10,3 +10,12 @@ TEST_CASE("Locate resources")
 	CHECK(appInfo.AppName 		== ApplicationName);
 	CHECK(appInfo.ResLocation 	== "./res");
 }
+
+TEST_CASE("Locate resources when AppName is not set")
+{
+	Birb::ApplicationInfo appInfo;
+	appInfo.LocateResources();
+
+	CHECK(appInfo.AppName 		== "_null_");
+	CHECK(appInfo.ResLocation 	== "./res");
+}

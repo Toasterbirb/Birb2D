@@ -1,13 +1,14 @@
 #include <math.h>
 #include "Values.hpp"
 #include "Filesystem.hpp"
+#include "Logger.hpp"
 
 namespace Birb
 {
 	ApplicationInfo::ApplicationInfo()
 	{
 		AppName 	= "_null_";
-		ResLocation = "./res";
+		LocateResources();
 	}
 
 	ApplicationInfo::ApplicationInfo(const std::string& ApplicationName)
@@ -18,6 +19,27 @@ namespace Birb
 
 	void ApplicationInfo::LocateResources()
 	{
+		/* Check if the application is in an AppImage */
+		char* AppPath = getenv("APPDIR");
+		if (AppPath != nullptr)
+		{
+			/* Application is in an AppImage */
+			if (AppName == "_null_")
+			{
+				/* Application is in an AppImage, but doesn't have AppName set */
+				Debug::Log("AppName not set. Resource path defaulted to /usr/share/birb2d/res", Debug::warning);
+				ResLocation = (std::string)AppPath + "usr/share/birb2d/res";
+			}
+			else
+			{
+				/* Application is in an AppImage and has a AppName set */
+				ResLocation = (std::string)AppPath + "usr/share/" + AppName + "/res";
+			}
+
+			return;
+		}
+		
+
 		/* Check if the application name hasn't been set yet */
 		if (AppName == "_null_")
 		{
