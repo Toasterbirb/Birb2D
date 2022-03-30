@@ -7,6 +7,7 @@ WarningFlags=-Wpedantic -Wall -Wextra -Wfloat-equal
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
 LIBFILE=libbirb2d.so
+DESTDIR=/usr
 
 LIB_OBJ=circle.o color.o diagnostics.o filesystem.o graphs.o audio.o entity.o line.o logger.o math.o rect.o renderwindow.o physics.o polygon.o random.o scene.o sceneobject.o timer.o timestep.o ui.o utils.o values.o vector.o
 TEST_OBJ=doctest.o audio_test.o circle_test.o color_test.o entity_test.o filesystem_test.o graph_test.o line_test.o logger_test.o math_test.o physics_test.o polygon_test.o random_test.o rect_test.o renderwindow_test.o scene_test.o timer_test.o utils_test.o values_test.o vector_test.o
@@ -42,28 +43,30 @@ static_engine_lib: ${LIB_OBJ}
 	ar -crs $(outputDir)/libbirb2d.a $^
 
 install: engine_lib
-	rm -f /usr/lib/libbirb2d.a
-	cp $(outputDir)/$(LIBFILE) /usr/lib/
-	mkdir -p /usr/local/include/birb2d
-	cp ./include/* /usr/local/include/birb2d/
+	mkdir -p $(DESTDIR)/lib
+	mkdir -p $(DESTDIR)/include/birb2d
+	rm -f $(DESTDIR)/lib/libbirb2d.a
+	cp $(outputDir)/$(LIBFILE) $(DESTDIR)/lib/
+	cp ./include/*.hpp $(DESTDIR)/include/birb2d/
 	ldconfig
 
 install_static: static_engine_lib
-	rm -f /usr/lib/$(LIBFILE)
-	cp $(outputDir)/libbirb2d.a /usr/lib/
-	mkdir -p /usr/local/include/birb2d
-	cp ./include/* /usr/local/include/birb2d/
+	mkdir -p $(DESTDIR)/lib
+	mkdir -p $(DESTDIR)/include/birb2d
+	rm -f $(DESTDIR)/lib/$(LIBFILE)
+	cp $(outputDir)/libbirb2d.a $(DESTDIR)/lib/
+	cp ./include/*.hpp $(DESTDIR)/include/birb2d/
 	ldconfig
 
 uninstall:
-	rm -f /usr/lib/$(LIBFILE)
-	rm -rf /usr/local/lib64/birb2d_static
-	rm -rf /usr/local/include/birb2d
+	rm -f $(DESTDIR)/lib/$(LIBFILE)
+	rm -f $(DESTDIR)/lib/libbirb2d.a
+	rm -rf $(DESTDIR)/include/birb2d
 	ldconfig
 
 uninstall_lib:
-	rm -f /usr/lib/$(LIBFILE)
-	rm -f /usr/lib/libbirb2d.a
+	rm -f $(DESTDIR)/lib/$(LIBFILE)
+	rm -f $(DESTDIR)/lib/libbirb2d.a
 	ldconfig
 
 # Engine code
