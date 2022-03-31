@@ -33,6 +33,5 @@ int main(int argc, char** argv)
 		timeStep.End();
 	}
 
-	window.Cleanup();
 	return 0;
 }
