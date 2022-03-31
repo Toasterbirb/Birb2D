@@ -28,12 +28,12 @@ namespace Birb
 			{
 				/* Application is in an AppImage, but doesn't have AppName set */
 				Debug::Log("AppName not set. Resource path defaulted to /usr/share/birb2d/res", Debug::warning);
-				ResLocation = (std::string)AppPath + "usr/share/birb2d/res";
+				ResLocation = (std::string)AppPath + "/usr/share/birb2d/res";
 			}
 			else
 			{
 				/* Application is in an AppImage and has a AppName set */
-				ResLocation = (std::string)AppPath + "usr/share/" + AppName + "/res";
+				ResLocation = (std::string)AppPath + "/usr/share/" + AppName + "/res";
 			}
 
 			return;
