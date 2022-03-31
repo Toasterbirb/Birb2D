@@ -74,6 +74,12 @@ namespace Birb
 		}
 	}
 
+	void Scene::Clear()
+	{
+		objects.clear();
+		positionOffset = {0, 0};
+	}
+
 	void Scene::Render() const
 	{
 		/* Skip rendering if the scene isn't active */

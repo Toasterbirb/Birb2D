@@ -112,5 +112,11 @@ namespace Birb
 			CHECK(rect == Rect(0, 0, 10, 10));
 			CHECK(circle.pos == Vector2int(0, 0));
 		}
+
+		SUBCASE("Reset the scene")
+		{
+			scene.Clear();
+			CHECK(scene.ObjectCount() == 0);
+		}
 	}
 }
