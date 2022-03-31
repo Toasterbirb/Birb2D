@@ -173,19 +173,6 @@ namespace Birb
 		return texture;
 	}
 
-	TTF_Font* Resources::LoadFont(const std::string& p_filePath, const int& p_fontSize)
-	{
-		TTF_Font* font;
-		font = TTF_OpenFont(p_filePath.c_str(), p_fontSize);
-
-		if (!font)
-		{
-			Debug::Log("Error while loading font [" + p_filePath + "] TTF_Error: " + (std::string)TTF_GetError(), Debug::error);
-		}
-
-		return font;
-	}
-
 	Uint8* Resources::CopyTexturePixels(
         SDL_Surface* surface, // surface to take pixels from
         int* width,
