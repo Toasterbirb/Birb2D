@@ -5,7 +5,7 @@
 namespace Birb
 {
 	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
-	:win_title(p_title), refresh_rate(p_refresh_rate), window_dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
+	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
@@ -26,6 +26,11 @@ namespace Birb
 		Global::RenderVars::RefreshRate = refresh_rate;
 		Global::RenderVars::MainWindow 	= win;
 		Global::RenderVars::Renderer 	= renderer;
+	}
+
+	Window::~Window()
+	{
+		Cleanup();
 	}
 
 	void Window::InitSDL()
@@ -107,14 +112,14 @@ namespace Birb
 		SDL_RenderPresent(Global::RenderVars::Renderer);
 	}
 
-	Vector2int Window::CursorPosition()
+	Vector2int Window::CursorPosition() const
 	{
 		Vector2int pos;
 		SDL_GetMouseState(&pos.x, &pos.y);
 		return pos;
 	}
 
-	bool Window::CursorInRect(const Rect& rect)
+	bool Window::CursorInRect(const Rect& rect) const
 	{
 		Vector2int cursorPos = CursorPosition();
 
@@ -128,13 +133,13 @@ namespace Birb
 	void Window::SetWindowSize(const Vector2int& dimensions)
 	{
 		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
-		window_dimensions = dimensions;
+		this->dimensions = dimensions;
 	}
 
 	Vector2f Window::window_dimensions_multiplier()
 	{
-		return Vector2f((float)window_dimensions.x / (float)original_window_dimensions.x,
-						(float)window_dimensions.y / (float)original_window_dimensions.y);
+		return Vector2f((float)dimensions.x / (float)original_window_dimensions.x,
+						(float)dimensions.y / (float)original_window_dimensions.y);
 	}
 
 	void Window::EventTick(const SDL_Event& event, bool* GameRunning)

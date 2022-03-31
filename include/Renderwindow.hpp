@@ -13,9 +13,11 @@
 
 namespace Birb
 {
-	struct Window
+	class Window
 	{
+	public:
 		Window(); ///< Initializes a window without any parameters. Shouldn't be used
+		~Window();
 		Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable); ///< Creates a window and initializes SDL2 stuff and a renderer
 
 		/* -- Init stuff functions -- */
@@ -27,12 +29,11 @@ namespace Birb
 		/* -- Rendering and cleanup functions -- */
 		void Clear(); ///< Clear the renderer so new stuff can be rendered to it without old stuff staying
 		void Display(); ///< Displays the renderer. Should be run after everything has been drawn to the renderer
-		void Cleanup(); ///< Frees resources allocated for the window and deinitializes SDL2 things
 		/* ------------------------------------- */
 
 		/* -- Cursor functions -- */
-		Vector2int CursorPosition(); ///< Returns the current cursor position relative to the window
-		bool CursorInRect(const Rect& rect); ///< Checks if the cursor is inside of the given rect dimensions
+		Vector2int CursorPosition() const; ///< Returns the current cursor position relative to the window
+		bool CursorInRect(const Rect& rect) const; ///< Checks if the cursor is inside of the given rect dimensions
 		/* ---------------------- */
 
 		/* -- Basic window events -- */
@@ -46,11 +47,14 @@ namespace Birb
 		std::string win_title; ///< Window title text
 		int refresh_rate; ///< Window refreshrate. Can be changed during runtime if needed for some reason
 		SDL_Window* win;
-		SDL_Renderer* renderer = NULL;
-		Vector2int window_dimensions; ///< Current window dimensions
+		SDL_Renderer* renderer;
+		Vector2int dimensions; ///< Current window dimensions
 		Vector2int original_window_dimensions; ///< Window dimensions on application startup before its modified by the user
 		Vector2f window_dimensions_multiplier(); ///< Returns the difference between the current and original window dimensions.
 		/* ---------------------- */
+
+	private:
+		void Cleanup(); ///< Frees resources allocated for the window and deinitializes SDL2 things
 	};
 
 	/// Methods for loading different resources like fonts and textures
