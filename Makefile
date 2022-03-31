@@ -9,8 +9,8 @@ INCLUDES=-I./include
 LIBFILE=libbirb2d.so
 DESTDIR=/usr
 
-LIB_OBJ=circle.o color.o diagnostics.o filesystem.o graphs.o audio.o entity.o line.o logger.o math.o rect.o renderwindow.o physics.o polygon.o random.o scene.o sceneobject.o timer.o timestep.o ui.o utils.o values.o vector.o
-TEST_OBJ=doctest.o audio_test.o circle_test.o color_test.o entity_test.o filesystem_test.o graph_test.o line_test.o logger_test.o math_test.o physics_test.o polygon_test.o random_test.o rect_test.o renderwindow_test.o scene_test.o timer_test.o utils_test.o values_test.o vector_test.o
+LIB_OBJ=circle.o color.o diagnostics.o filesystem.o font.o graphs.o audio.o entity.o line.o logger.o math.o rect.o renderwindow.o physics.o polygon.o random.o scene.o sceneobject.o timer.o timestep.o ui.o utils.o values.o vector.o
+TEST_OBJ=doctest.o audio_test.o circle_test.o color_test.o entity_test.o filesystem_test.o font_test.o graph_test.o line_test.o logger_test.o math_test.o physics_test.o polygon_test.o random_test.o rect_test.o renderwindow_test.o scene_test.o timer_test.o utils_test.o values_test.o vector_test.o
 
 all: test docs engine_lib run_tests
 

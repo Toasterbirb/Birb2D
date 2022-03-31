@@ -12,6 +12,7 @@ int main(int argc, char** argv)
 #include "doctest.h"
 #include "Circle.hpp"
 #include "Entity.hpp"
+#include "Font.hpp"
 #include "Graphs.hpp"
 #include "Math.hpp"
 #include "Values.hpp"
@@ -27,7 +28,7 @@ TEST_CASE("Window and rendering functions")
 
 	Birb::Window window("Title", Birb::Vector2int(1280, 720), 60, false);
 	SDL_Texture* texture 	= Birb::Resources::LoadTexture(appInfo.ResLocation + "/textures/birb.png");
-	TTF_Font* font 			= Birb::Resources::LoadFont(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
+	Birb::Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
 	
 	Birb::Scene testScene;
 
@@ -91,8 +92,8 @@ TEST_CASE("Window and rendering functions")
 
 	
 
-	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red));
-	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", font, &Birb::Colors::Red, &Birb::Colors::White));
+	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font.ttf(), &Birb::Colors::Red));
+	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", font.ttf(), &Birb::Colors::Red, &Birb::Colors::White));
 
 	CHECK(window.win_title == "Title");
 	CHECK(window.window_dimensions.x == 1280);
@@ -101,7 +102,7 @@ TEST_CASE("Window and rendering functions")
 	CHECK(window.win 		!= NULL);
 	CHECK(window.renderer 	!= NULL);
 	CHECK(texture 	!= nullptr);
-	CHECK(font 		!= nullptr);
+	CHECK(font.ttf() 		!= nullptr);
 
 	CHECK_NOTHROW(window.Clear());
 	{
