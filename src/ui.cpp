@@ -4,12 +4,12 @@ namespace Birb
 {
 	UI::UI() {}
 
-	void UI::AddButton(Entity buttonEntity)
+	void UI::AddButton(const Entity& buttonEntity)
 	{
 		Buttons.push_back(buttonEntity);
 	}
 
-	void UI::PollButtons(Window window)
+	void UI::PollButtons(const Window& window)
 	{
 		for (int i = 0; i < (int)Buttons.size(); i++)
 		{
