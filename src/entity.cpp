@@ -15,14 +15,14 @@ namespace Birb
 			bgColor = NULL;
 		}
 
-		Text::Text(const std::string& p_text, TTF_Font* p_font, Color* p_color)
-		:text(p_text), font(p_font), color(p_color)
+		Text::Text(const std::string& text, Font* font, Color* color)
+		:text(text), font(font), color(color)
 		{
 			bgColor = NULL;
 		}
 
-		Text::Text(const std::string& p_text, TTF_Font* p_font, Color* p_color, Color* p_bgColor)
-		:text(p_text), font(p_font), color(p_color), bgColor(p_bgColor)
+		Text::Text(const std::string& text, Font* font, Color* color, Color* bgColor)
+		:text(text), font(font), color(color), bgColor(bgColor)
 		{}
 
 		void PlaceHolderClickEvent()
@@ -154,13 +154,13 @@ namespace Birb
 		ReloadSprite();
 	}
 
-	void Entity::SetFont(TTF_Font* font)
+	void Entity::SetFont(const Font& font)
 	{
 		/* Don't do anything if the font hasn't changed at all */
-		if (textComponent.font == font)
+		if (textComponent.font == &font)
 			return;
 
-		textComponent.font = font;
+		*textComponent.font = font;
 		ReloadSprite();
 	}
 
@@ -243,9 +243,9 @@ namespace Birb
 		if (textComponent.text != "")
 		{
 			if (textComponent.bgColor == NULL)
-				sprite = Resources::TextSprite(textComponent.text, textComponent.font, *textComponent.color);
+				sprite = Resources::TextSprite(textComponent.text, *textComponent.font, *textComponent.color);
 			else
-				sprite = Resources::TextSprite(textComponent.text, textComponent.font, *textComponent.color, *textComponent.bgColor);
+				sprite = Resources::TextSprite(textComponent.text, *textComponent.font, *textComponent.color, *textComponent.bgColor);
 
 			if (sprite == nullptr)
 				Debug::Log("Something went wrong while creating the text sprite for '" + name + "'", Debug::error);

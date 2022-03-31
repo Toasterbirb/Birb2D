@@ -5,6 +5,7 @@
 #include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "Font.hpp"
 #include "Utils.hpp"
 #include "Timer.hpp"
 #include "Color.hpp"
@@ -19,18 +20,18 @@ namespace Birb
 		struct Text
 		{
 			Text();
-			Text(const std::string& p_text, TTF_Font* font, Color* p_color);
-			Text(const std::string& p_text, TTF_Font* font, Color* p_color, Color* p_bgColor);
+			Text(const std::string& text, Font* font, Color* color);
+			Text(const std::string& text, Font* font, Color* color, Color* bgColor);
 
 			std::string text;
-			TTF_Font* font;
+			Font* font;
 			Color* color; 	///< Surface color of the text
 			Color* bgColor; ///< Background color for the text component
 
 			bool operator==(const Text& other) const
 			{
 				return 	(text 		== other.text
-						&& font 	== other.font
+						&& &font 	== &other.font
 						&& color 	== other.color
 						&& bgColor 	== other.bgColor);
 			}
@@ -122,7 +123,7 @@ namespace Birb
 
 		/* Make it possible to update the Text */
 		void SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
-		void SetFont(TTF_Font* font); 		///< Change the font in Text and reload the sprite
+		void SetFont(const Font& font); 		///< Change the font in Text and reload the sprite
 		void SetColor(Color* color); 	///< Change the color in Text and reload the sprite
 
 		std::string name; 		///< Name of the entity. Used for debugging

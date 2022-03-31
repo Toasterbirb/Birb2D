@@ -92,8 +92,8 @@ TEST_CASE("Window and rendering functions")
 
 	
 
-	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", font.ttf(), &Birb::Colors::Red));
-	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", font.ttf(), &Birb::Colors::Red, &Birb::Colors::White));
+	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", &font, &Birb::Colors::Red));
+	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", &font, &Birb::Colors::Red, &Birb::Colors::White));
 
 	CHECK(window.win_title == "Title");
 	CHECK(window.window_dimensions.x == 1280);

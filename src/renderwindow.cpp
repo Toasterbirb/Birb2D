@@ -233,17 +233,17 @@ namespace Birb
 	}
 
 
-	SDL_Texture* Resources::TextSprite(const std::string& text, TTF_Font* font, const Color& color)
+	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color)
 	{
 		/* Check if the arguments are valid */
-		if (font == nullptr)
+		if (!font.isLoaded())
 		{
 			Debug::Log("Tried to render text with invalid font!");
 			return NULL;
 		}
 
 		//SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
-		SDL_Surface* surface = TTF_RenderText_Blended(font, text.c_str(), color.sdl());
+		SDL_Surface* surface = TTF_RenderText_Blended(font.ttf(), text.c_str(), color.sdl());
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 
@@ -255,16 +255,16 @@ namespace Birb
 		return texture;
 	}
 
-	SDL_Texture* Resources::TextSprite(const std::string& text, TTF_Font* font, const Color& color, const Color& bgColor)
+	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color, const Color& bgColor)
 	{
 		/* Check if the arguments are valid */
-		if (font == nullptr)
+		if (!font.isLoaded())
 		{
 			Debug::Log("Tried to render text with invalid font!");
 			return NULL;
 		}
 
-		SDL_Surface* surface = TTF_RenderText_Shaded(font, text.c_str(), color.sdl(), bgColor.sdl());
+		SDL_Surface* surface = TTF_RenderText_Shaded(font.ttf(), text.c_str(), color.sdl(), bgColor.sdl());
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 
