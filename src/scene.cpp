@@ -33,16 +33,28 @@ namespace Birb
 	void Scene::Activate()
 	{
 		active = true;
+
+		/* Mark the scene as active in scene objects */
+		for (int i = 0; i < objects.size(); i++)
+			objects[i]->sceneActive = true;
 	}
 
 	void Scene::Deactivate()
 	{
 		active = false;
+
+		/* Mark the scene as inactive in scene objects */
+		for (int i = 0; i < objects.size(); i++)
+			objects[i]->sceneActive = false;
 	}
 
 	void Scene::Toggle()
 	{
 		active = !active;
+
+		/* Toggle the scene statuc in scene objects */
+		for (int i = 0; i < objects.size(); i++)
+			objects[i]->sceneActive = active;
 	}
 
 	bool Scene::isActive() const

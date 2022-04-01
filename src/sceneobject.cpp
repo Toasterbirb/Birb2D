@@ -5,6 +5,7 @@ namespace Birb
 	SceneObject::SceneObject()
 	{
 		renderingPriority = 0;
+		sceneActive = true;
 	}
 
 	SceneObject::SceneObject(const int& priority)
