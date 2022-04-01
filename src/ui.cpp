@@ -21,8 +21,9 @@ namespace Birb
 			if (!window.CursorInRect(Buttons[i].rect))
 				continue;
 
-			/* Run the button click event */
-			Buttons[i].clickComponent.onClick();
+			/* Run the button click event if there was a mouseclick */
+			if (window.event.type == SDL_MOUSEBUTTONDOWN)
+				Buttons[i].clickComponent.onClick();
 
 			/* You can really only click one button at once, so lets stop if we got this far */
 			break;
