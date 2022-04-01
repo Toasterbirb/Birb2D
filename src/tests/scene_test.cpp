@@ -44,16 +44,22 @@ namespace Birb
 			scene.Deactivate();
 			CHECK_FALSE(scene.isActive());
 			CHECK_FALSE(entityA.sceneActive);
+			CHECK_FALSE(entityB.sceneActive);
+			CHECK_FALSE(polygon.sceneActive);
 			CHECK_FALSE(line.sceneActive);
 
 			scene.Activate();
 			CHECK(scene.isActive());
 			CHECK(entityA.sceneActive);
+			CHECK(entityB.sceneActive);
+			CHECK(polygon.sceneActive);
 			CHECK(line.sceneActive);
 
 			scene.Toggle();
 			CHECK_FALSE(scene.isActive());
 			CHECK_FALSE(entityA.sceneActive);
+			CHECK_FALSE(entityB.sceneActive);
+			CHECK_FALSE(polygon.sceneActive);
 			CHECK_FALSE(line.sceneActive);
 		}
 
