@@ -1,11 +1,15 @@
 #include "Audio.hpp"
 #include "Logger.hpp"
+#include "Values.hpp"
 
 namespace Birb
 {
 	//** Initializes the SDL_mixer library. Needs to be called before any other audio features are used
 	bool Audio::Init(int flags)
 	{
+		if (Global::IsInit::SDL_mixer)
+			return true;
+
 		Debug::Log("Initializing audio...");
 		int initted = Mix_Init(flags);
 		if ((initted&flags) != flags)
@@ -29,6 +33,7 @@ namespace Birb
 
 		// Audio initialization was successful
 		Debug::Log("Audio initialized successfully!");
+		Global::IsInit::SDL_mixer = true;
 		return true;
 	}
 
@@ -36,6 +41,7 @@ namespace Birb
 	Audio::MusicFile::MusicFile(const std::string& p_filePath)
 	:filePath(p_filePath)
 	{
+		Audio::Init(0);
 		music = Mix_LoadMUS(p_filePath.c_str());
 		if (!music)
 		{
@@ -48,6 +54,7 @@ namespace Birb
 	Audio::SoundFile::SoundFile(const std::string& p_filePath)
 	:filePath(p_filePath)
 	{
+		Audio::Init(0);
 		sound = Mix_LoadWAV(p_filePath.c_str());
 		if (!sound)
 		{
