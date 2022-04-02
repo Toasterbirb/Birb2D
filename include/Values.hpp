@@ -29,6 +29,7 @@ namespace Birb
 			static bool SDL 		= false;
 			static bool SDL_ttf 	= false;
 			static bool SDL_image 	= false;
+			static bool SDL_mixer   = false;
 		}
 
 		namespace RenderVars
