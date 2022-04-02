@@ -14,7 +14,7 @@ namespace Birb
 			CHECK(font.isLoaded() == false);
 			font.LoadFont(fontPath, 13);
 
-			CHECK(font.size == 13);
+			CHECK(font.GetSize() == 13);
 			CHECK(font.filePath == fontPath);
 			CHECK(font.isLoaded());
 		}
@@ -22,8 +22,20 @@ namespace Birb
 		SUBCASE("With constructor parameters")
 		{
 			Font font(fontPath, 14);
-			CHECK(font.size == 14);
+			CHECK(font.GetSize() == 14);
 			CHECK(font.filePath == fontPath);
+			CHECK(font.isLoaded());
+		}
+
+		SUBCASE("Change the font size")
+		{
+			Font font(fontPath, 14);
+			CHECK(font.GetSize() == 14);
+			CHECK(font.filePath == fontPath);
+			CHECK(font.isLoaded());
+
+			font.SetSize(15);
+			CHECK(font.GetSize() == 15);
 			CHECK(font.isLoaded());
 		}
 

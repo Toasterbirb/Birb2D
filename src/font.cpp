@@ -28,9 +28,14 @@ namespace Birb
 		/* Attempt to load the font */
 		ttfFont = TTF_OpenFont(filePath.c_str(), fontSize);
 		if (ttfFont != nullptr)
+		{
 			fontLoaded = true;
+		}
 		else
+		{
 			Debug::Log("Something went wrong when loading font '" + filePath + "' TTF_Error: " + (std::string)TTF_GetError(), Debug::error);
+			fontLoaded = false;
+		}
 	}
 
 	bool Font::isLoaded() const
@@ -41,5 +46,19 @@ namespace Birb
 	TTF_Font* Font::ttf() const
 	{
 		return ttfFont;
+	}
+
+	int Font::GetSize() const
+	{
+		return size;
+	}
+
+	void Font::SetSize(const int& size)
+	{
+		this->size = size;
+
+		/* Reload the font with a different size */
+		free(ttfFont);
+		LoadFont(this->filePath, size);
 	}
 }
