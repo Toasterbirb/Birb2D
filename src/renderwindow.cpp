@@ -7,7 +7,6 @@ namespace Birb
 	Window::Window()
 	{
 		InitSDL();
-		InitSDL_ttf();
 		InitSDL_image();
 	}
 
@@ -16,7 +15,6 @@ namespace Birb
 	{
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
-		InitSDL_ttf();
 		InitSDL_image();
 
 		if (resizable)
@@ -55,24 +53,6 @@ namespace Birb
 		else
 		{
 			Global::IsInit::SDL = true;
-		}
-	}
-
-	void Window::InitSDL_ttf()
-	{
-		/* Check if SDL_ttf has already been initialized */
-		if (Global::IsInit::SDL_ttf)
-			return;
-
-		Debug::Log("Initializing SDL_ttf...");
-		if (TTF_Init() == -1)
-		{
-			Debug::Log("TTF_Init has failed: " + (std::string)TTF_GetError(), Debug::error);
-			exit(2);
-		}
-		else
-		{
-			Global::IsInit::SDL_ttf = true;
 		}
 	}
 

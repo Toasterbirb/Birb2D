@@ -22,7 +22,6 @@ namespace Birb
 
 		/* -- Init stuff functions -- */
 		static void InitSDL(); ///< Initializes SDL2 (if its not already initialized)
-		static void InitSDL_ttf(); ///< Initializes SDL2_ttf (if its not already initialized)
 		static void InitSDL_image(); ///< Initializes SDL2_image (if its not already initialized)
 		/* -------------------------- */
 

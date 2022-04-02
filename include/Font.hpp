@@ -24,5 +24,6 @@ namespace Birb
 		int size;
 		bool fontLoaded;
 		TTF_Font* ttfFont;
+		void InitSDL_ttf(); ///< Initializes SDL2_ttf (if its not already initialized)
 	};
 }

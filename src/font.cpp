@@ -1,5 +1,6 @@
 #include "Font.hpp"
 #include "Logger.hpp"
+#include "Values.hpp"
 
 namespace Birb
 {
@@ -22,6 +23,7 @@ namespace Birb
 
 	void Font::LoadFont(const std::string& filePath, const int& fontSize)
 	{
+		InitSDL_ttf();
 		this->filePath 	= filePath;
 		this->size 		= fontSize;
 		
@@ -60,5 +62,23 @@ namespace Birb
 		/* Reload the font with a different size */
 		free(ttfFont);
 		LoadFont(this->filePath, size);
+	}
+
+	void Font::InitSDL_ttf()
+	{
+		/* Check if SDL_ttf has already been initialized */
+		if (Global::IsInit::SDL_ttf)
+			return;
+
+		Debug::Log("Initializing SDL_ttf...");
+		if (TTF_Init() == -1)
+		{
+			Debug::Log("TTF_Init has failed: " + (std::string)TTF_GetError(), Debug::error);
+			exit(2);
+		}
+		else
+		{
+			Global::IsInit::SDL_ttf = true;
+		}
 	}
 }
