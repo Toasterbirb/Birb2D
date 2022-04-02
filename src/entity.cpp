@@ -186,8 +186,8 @@ namespace Birb
 	void Entity::CenterRelativeTo(const Rect& rect)
 	{
 		Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
-		this->rect.x = (rect.w / 2) - (textureDimensions.x / 2.0);
-		this->rect.y = (rect.h / 2) - (textureDimensions.y / 2.0);
+		this->rect.x = ((rect.w / 2) - (textureDimensions.x / 2.0)) + rect.x;
+		this->rect.y = ((rect.h / 2) - (textureDimensions.y / 2.0)) + rect.y;
 	}
 
 	Entity::Entity()

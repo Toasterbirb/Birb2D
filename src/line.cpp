@@ -1,19 +1,26 @@
 #include "Line.hpp"
 #include "Renderwindow.hpp"
+#include "Logger.hpp"
 
 namespace Birb
 {
+	void Line::DefaultLineValues()
+	{
+		color = Color(0xFFFFFF);
+		thickness = 1;
+	}
+
 	Line::Line()
 	{
 		pointA = Vector2f(0, 0);
 		pointB = Vector2f(0, 0);
-		color = Color(0xFFFFFF);
+		DefaultLineValues();
 	}
 	
 	Line::Line(const Vector2f& pointA, const Vector2f& pointB)
 	:pointA(pointA), pointB(pointB)
 	{
-		color = Color(0xFFFFFF);
+		DefaultLineValues();
 	}
 
 	Line::Line(const Vector2f& pointA, const Vector2f& pointB, const Color& color)
@@ -28,7 +35,12 @@ namespace Birb
 
 	void Line::RenderFunc()
 	{
-		Render::DrawLine(*this);
+		if (thickness == 1)
+			Render::DrawLine(*this);
+		else if (thickness > 1)
+			Render::DrawLine(*this, thickness);
+		else
+			Debug::Log("Tried to render a line with thickness <=0", Debug::error);
 	}
 
 	void Line::SetPos(const Vector2f& delta)

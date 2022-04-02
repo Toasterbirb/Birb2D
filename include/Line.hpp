@@ -18,6 +18,7 @@ namespace Birb
 		Vector2f pointA;
 		Vector2f pointB;
 		Color color; ///< In case the line will be rendered
+		int thickness;
 
 		bool operator==(const Line& other) const
 		{
@@ -32,6 +33,7 @@ namespace Birb
 	private:
 		void RenderFunc() override;
 		void SetPos(const Vector2f& delta) override;
+		void DefaultLineValues();
 	};
 
 	inline std::ostream& operator<<(std::ostream& stream, const Line& other)
