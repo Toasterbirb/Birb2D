@@ -8,7 +8,7 @@ namespace Birb
 	bool Audio::Init(int flags)
 	{
 		if (Global::IsInit::SDL_mixer)
-			return false;
+			return true;
 
 		Debug::Log("Initializing audio...");
 		int initted = Mix_Init(flags);
