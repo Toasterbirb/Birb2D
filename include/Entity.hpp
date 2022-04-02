@@ -131,7 +131,6 @@ namespace Birb
 		/* Sprite handlings */
 		SDL_Texture* sprite; 	///< Sprite to be rendered
 
-		bool active; 			///< Inactive entities will be skipped during rendering
 		float angle; 			///< Sets the rotation of the entity when rendering it
 		Rect rect; 				///< Sets the position and the dimensions of the entity
 		Vector2f localScale; 	///< Scale modifier for the Entity rendering

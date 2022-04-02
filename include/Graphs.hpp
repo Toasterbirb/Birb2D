@@ -37,7 +37,6 @@ namespace Birb
 			int borderSize; ///< Graph border thickness
 			double wallOffset = 5.0; ///< How much empty space there should be between the graph borders and the line/blocks
 			double blockSpacing = 10; ///< Sets the amount of padding between blocks in the graph (doesn't work with lines)
-			bool active = true;
 
 			bool operator==(const Graph& other) const
 			{
