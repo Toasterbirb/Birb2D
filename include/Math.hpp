@@ -21,15 +21,15 @@ namespace Birb
 		float VectorDistance(const Vector3int& a, const Vector3int& b); ///< Calculate the distance between two 3D integer vectors
 
 		template<typename T>
-		T Clamp(const T& value, const T& min, const T& max)
-		{
-			if (value < min)
-				return min;
-			else if (value > max)
-				return max;
+			T Clamp(const T& value, const T& min, const T& max)
+			{
+				if (value < min)
+					return min;
+				else if (value > max)
+					return max;
 
-			return value;
-		}
+				return value;
+			}
 
 		int 		Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
 		float 		Lerp(const float& a, const float& b, const float& t); ///< Interpolate a value between two values given time t
@@ -46,7 +46,7 @@ namespace Birb
 		Vector3f CenterPoint(const Vector3int& a, const Vector3int& b); ///< Calculate the center point between two 3D integer vectors
 
 		bool PointOnLine(const Line& line, const Vector2f& point); ///< Check if the give point is on the line
-		
+
 		/// @param circle 	Circle object
 		/// @param angle 	Angle in degrees
 		/// @return 		A point on the circle rotated by the angle.
@@ -69,65 +69,65 @@ namespace Birb
 
 		/// Find the highest value in an array
 		template<typename T>
-		T FindHighestValue(T* values, const int& valueCount)
-		{
-			T result = values[0];
-			for (int i = 1; i < valueCount; i++)
+			T FindHighestValue(T* values, const int& valueCount)
 			{
-				if (values[i] > result)
-					result = values[i];
+				T result = values[0];
+				for (int i = 1; i < valueCount; i++)
+				{
+					if (values[i] > result)
+						result = values[i];
+				}
+				return result;
 			}
-			return result;
-		}
-		
+
 		/// Find the highest value in a vector
 		template<typename T>
-		T FindHighestValue(const std::vector<T>& values)
-		{
-			T result = values[0];
-			for (int i = 1; i < (int)values.size(); i++)
+			T FindHighestValue(const std::vector<T>& values)
 			{
-				if (values[i] > result)
-					result = values[i];
+				T result = values[0];
+				for (int i = 1; i < (int)values.size(); i++)
+				{
+					if (values[i] > result)
+						result = values[i];
+				}
+				return result;
 			}
-			return result;
-		}
-		
+
 		/// Find the lowest value in an array
 		template<typename T>
-		T FindLowestValue(T* values, const int& valueCount)
-		{
-			T result = values[0];
-			for (int i = 1; i < valueCount; i++)
+			T FindLowestValue(T* values, const int& valueCount)
 			{
-				if (values[i] < result)
-					result = values[i];
+				T result = values[0];
+				for (int i = 1; i < valueCount; i++)
+				{
+					if (values[i] < result)
+						result = values[i];
+				}
+				return result;
 			}
-			return result;
-		}
 
 		/// Find the lowest value in a list
 		template<typename T>
-		T FindLowestValue(const std::vector<T>& values)
-		{
-			T result = values[0];
-			for (int i = 1; i < (int)values.size(); i++)
+			T FindLowestValue(const std::vector<T>& values)
 			{
-				if (values[i] < result)
-					result = values[i];
+				T result = values[0];
+				for (int i = 1; i < (int)values.size(); i++)
+				{
+					if (values[i] < result)
+						result = values[i];
+				}
+				return result;
 			}
-			return result;
-		}
 
 
 		template<typename T>
-		double Average(T* values, const int& valueCount)
-		{
-			double total = 0;
-			for (int i = 0; i < valueCount; i++)
-				total += values[i];
-			return total / valueCount;
-		}
+			double Average(T* values, const int& valueCount)
+			{
+				double total = 0;
+				for (int i = 0; i < valueCount; i++)
+					total += values[i];
+				return total / valueCount;
+			}
 
 		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum);
 	};

@@ -16,46 +16,46 @@ namespace Birb
 		}
 
 		Text::Text(const std::string& text, Font* font, Color* color)
-		:text(text), font(font), color(color)
+			:text(text), font(font), color(color)
 		{
 			bgColor = NULL;
 		}
 
 		Text::Text(const std::string& text, Font* font, Color* color, Color* bgColor)
-		:text(text), font(font), color(color), bgColor(bgColor)
+			:text(text), font(font), color(color), bgColor(bgColor)
 		{}
 
 		void PlaceHolderClickEvent()
 		{
-            if (Global::Debugging::Buttons)
-                Debug::Log("Placeholder onClick event");
+			if (Global::Debugging::Buttons)
+				Debug::Log("Placeholder onClick event");
 		}
 
-        void PlaceHolderHoverEvent()
-        {
-            if (Global::Debugging::Buttons)
-                Debug::Log("Placeholder onHover event");
-        }
+		void PlaceHolderHoverEvent()
+		{
+			if (Global::Debugging::Buttons)
+				Debug::Log("Placeholder onHover event");
+		}
 
-        void PlaceHolderDragEvent()
-        {
-            if (Global::Debugging::Buttons)
-                Debug::Log("Placeholder onDrag event");
-        }
+		void PlaceHolderDragEvent()
+		{
+			if (Global::Debugging::Buttons)
+				Debug::Log("Placeholder onDrag event");
+		}
 
 		Click::Click()
 		{
 			onClick = PlaceHolderClickEvent;
-            onHover = PlaceHolderHoverEvent;
-            onDrag  = PlaceHolderDragEvent;
+			onHover = PlaceHolderHoverEvent;
+			onDrag  = PlaceHolderDragEvent;
 			active = true;
 		}
 
 		Click::Click(const std::function<void()>& p_onClick)
-		:onClick(p_onClick)
+			:onClick(p_onClick)
 		{
-            onHover = PlaceHolderHoverEvent;
-            onDrag  = PlaceHolderDragEvent;
+			onHover = PlaceHolderHoverEvent;
+			onDrag  = PlaceHolderDragEvent;
 			active = true;
 		}
 
@@ -70,7 +70,7 @@ namespace Birb
 		}
 
 		Animation::Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps)
-		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), lastFrame(p_frameCount - 1)
+			:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), lastFrame(p_frameCount - 1)
 		{
 			frameIndex 		= 0;
 			loop 			= false;
@@ -78,7 +78,7 @@ namespace Birb
 		}
 
 		Animation::Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop)
-		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), loop(p_loop), lastFrame(p_frameCount - 1)
+			:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), loop(p_loop), lastFrame(p_frameCount - 1)
 		{
 			frameIndex 		= 0;
 			animationQueued = false;
@@ -126,7 +126,7 @@ namespace Birb
 		}
 
 		ProgressBar::ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor)
-		:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor)
+			:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor)
 		{
 			minValue = 0;
 			maxValue = 1;
@@ -136,7 +136,7 @@ namespace Birb
 		}
 
 		ProgressBar::ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value)
-		:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor), minValue(p_minValue), maxValue(p_maxValue), value(p_value)
+			:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor), minValue(p_minValue), maxValue(p_maxValue), value(p_value)
 		{
 			active = true;
 		}
@@ -185,9 +185,9 @@ namespace Birb
 	{
 		/* Don't do anything if the color hasn't changed at all */
 		if (color->a == textComponent.color->a
-			&& color->r == textComponent.color->r
-			&& color->g == textComponent.color->g
-			&& color->b == textComponent.color->b) return;
+				&& color->r == textComponent.color->r
+				&& color->g == textComponent.color->g
+				&& color->b == textComponent.color->b) return;
 
 		textComponent.color = color;
 		ReloadSprite();
@@ -215,20 +215,20 @@ namespace Birb
 	}
 
 	Entity::Entity(const std::string& p_name)
-	:name(p_name)
+		:name(p_name)
 	{
 		SetBaseEntityValues();
 		sprite = nullptr;
 	}
 
 	Entity::Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture)
-	:name(p_name), sprite(p_texture), rect(p_rect)
+		:name(p_name), sprite(p_texture), rect(p_rect)
 	{
 		SetBaseEntityValues();
 	}
 
 	Entity::Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent)
-	:name(p_name), sprite(p_texture)
+		:name(p_name), sprite(p_texture)
 	{
 		/* Load the text sprite */
 		SetBaseEntityValues();
@@ -241,7 +241,7 @@ namespace Birb
 	}
 
 	Entity::Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent)
-	:name(p_name)
+		:name(p_name)
 	{
 		/* Load the text sprite */
 		SetBaseEntityValues();
@@ -255,7 +255,7 @@ namespace Birb
 	}
 
 	Entity::Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture)
-	:name(p_name), sprite(p_texture)
+		:name(p_name), sprite(p_texture)
 	{
 		SetBaseEntityValues();
 		rect.x = pos.x;

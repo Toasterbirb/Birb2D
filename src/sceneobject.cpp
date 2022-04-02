@@ -10,12 +10,12 @@ namespace Birb
 	}
 
 	SceneObject::SceneObject(const int& priority)
-	:renderingPriority(priority)
+		:renderingPriority(priority)
 	{
 		active = true;
 	}
 
 	SceneObject::SceneObject(const int& priority, const bool& active)
-	:renderingPriority(priority), active(active)
+		:renderingPriority(priority), active(active)
 	{}
 }

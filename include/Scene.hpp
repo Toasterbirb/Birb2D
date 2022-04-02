@@ -8,31 +8,31 @@ namespace Birb
 {
 	class Scene
 	{
-	public:
-		Scene();
-		void AddObject(SceneObject* obj);
-		void AddObject(SceneObject* obj[], int objCount);
-		std::vector<SceneObject*> GetObjects() const;
-		
-		int ObjectCount();
+		public:
+			Scene();
+			void AddObject(SceneObject* obj);
+			void AddObject(SceneObject* obj[], int objCount);
+			std::vector<SceneObject*> GetObjects() const;
 
-		void Activate();
-		void Deactivate();
-		void Toggle();
-		bool isActive() const;
+			int ObjectCount();
 
-		void SetPosition(const Vector2f& newPosition);
-		void Translate(const Vector2f& delta);
+			void Activate();
+			void Deactivate();
+			void Toggle();
+			bool isActive() const;
 
-		void Clear(); ///< Empty the scene
-		void Render() const; ///< Render all objects in the scene if the scene is active
+			void SetPosition(const Vector2f& newPosition);
+			void Translate(const Vector2f& delta);
 
-	private:
-		void SortObjects(); ///< Sort objects according to their priority
+			void Clear(); ///< Empty the scene
+			void Render() const; ///< Render all objects in the scene if the scene is active
 
-		std::vector<SceneObject*> objects;
-		bool active;
+		private:
+			void SortObjects(); ///< Sort objects according to their priority
 
-		Vector2f positionOffset;
+			std::vector<SceneObject*> objects;
+			bool active;
+
+			Vector2f positionOffset;
 	};
 }

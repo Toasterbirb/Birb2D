@@ -16,19 +16,19 @@ namespace Birb
 		pointB = Vector2f(0, 0);
 		DefaultLineValues();
 	}
-	
+
 	Line::Line(const Vector2f& pointA, const Vector2f& pointB)
-	:pointA(pointA), pointB(pointB)
+		:pointA(pointA), pointB(pointB)
 	{
 		DefaultLineValues();
 	}
 
 	Line::Line(const Vector2f& pointA, const Vector2f& pointB, const Color& color)
-	:pointA(pointA), pointB(pointB), color(color)
+		:pointA(pointA), pointB(pointB), color(color)
 	{}
 
 	Line::Line(const Vector2f& pointA, const Vector2f& pointB, const Color& color, const int& renderingPriority)
-	:pointA(pointA), pointB(pointB), color(color)
+		:pointA(pointA), pointB(pointB), color(color)
 	{
 		this->renderingPriority = renderingPriority;
 	}

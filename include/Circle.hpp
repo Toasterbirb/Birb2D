@@ -9,21 +9,21 @@ namespace Birb
 {
 	class Circle : public SceneObject
 	{
-	public:
-		Circle();
-		Circle(const float& radius);
-		Circle(const float& radius, const Vector2int& pos, Color color = 0xFFFFFF);
+		public:
+			Circle();
+			Circle(const float& radius);
+			Circle(const float& radius, const Vector2int& pos, Color color = 0xFFFFFF);
 
-		float Circumference() const;
-		float Diameter() const;
-		Rect toRect() const; ///< Returns a rect around the circle
+			float Circumference() const;
+			float Diameter() const;
+			Rect toRect() const; ///< Returns a rect around the circle
 
-		float radius;
-		Vector2int pos;
-		Color color;
+			float radius;
+			Vector2int pos;
+			Color color;
 
-	private:
-		void RenderFunc() override;
-		void SetPos(const Vector2f& delta) override;
+		private:
+			void RenderFunc() override;
+			void SetPos(const Vector2f& delta) override;
 	};
 }

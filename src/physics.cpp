@@ -62,7 +62,7 @@ namespace Birb
 		 * https://stackoverflow/questions/563198/how-do-you-detect-where-two-line-segments-intersect
 		 *
 		 * Doesn't handle cases where the lines overlap eachother and have the exact same X/Y values
-		 * for example A(7,1) B(7,3) and A(7,2) B(7,3) should technically collide, but this algorithm 
+		 * for example A(7,1) B(7,3) and A(7,2) B(7,3) should technically collide, but this algorithm
 		 * doesn't handle it for some reason. pls fix*/
 		bool LineIntersection(const Line& lineA, const Line& lineB)
 		{
@@ -98,7 +98,7 @@ namespace Birb
 		{
 			int j = pointCount - 1;
 			bool oddNodes = false; /* If the node count is odd, the point is in the polygon */
-			
+
 			for (int i = 0; i < pointCount; i++)
 			{
 				if (points[i].y < point.y && points[j].y >= point.y
@@ -167,7 +167,7 @@ namespace Birb
 						collision = PolygonCollision(polygons[i], polygons[j]);
 				}
 			}
-					
+
 			return collision;
 		}
 
@@ -201,7 +201,7 @@ namespace Birb
 
 			/* AABB collision will be true if the rect is on the same axis with
 			 * one of the circleRect sides, so we have to also check for that.
-			 * Rect collisions happen when the rect is really big and the circle is 
+			 * Rect collisions happen when the rect is really big and the circle is
 			 * inside of the rect or if the rects side touches the circle.
 			 *
 			 * This way we should be able to rule out false positives by seeing if the rect
@@ -211,7 +211,7 @@ namespace Birb
 				return ((rect.x < circle.pos.x && rect.x + rect.w > circle.pos.x)
 						|| (rect.y < circle.pos.y && rect.y + rect.h > circle.pos.y));
 			}
-			
+
 			return false;
 		}
 
@@ -221,7 +221,7 @@ namespace Birb
 			if (PointInCircle(line.pointA, circle) || PointInCircle(line.pointB, circle))
 				return true;
 
-			/* If the previous method doesn't work, we need to do some more maths. First we 
+			/* If the previous method doesn't work, we need to do some more maths. First we
 			 * need to make sure though that the line can even intersect the circle,
 			 * since the next formula assumes the lines are infinite. We are dealing with
 			 * lines between two points. This can be done with a simple AABB check */

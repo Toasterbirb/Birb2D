@@ -32,7 +32,7 @@ namespace Birb
 		{
 			return std::round(a + (b - a) * Clamp(t, 0.0f, 1.0f));
 		}
-		
+
 		float Lerp(const float& a, const float& b, const float& t)
 		{
 			return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
@@ -93,12 +93,12 @@ namespace Birb
 		{
 			/* Check if the point is in the area of the line
 			 *
-			 * A point could be "on the line", but it might be outside of the line limited 
+			 * A point could be "on the line", but it might be outside of the line limited
 			 * by pointA and pointB */
 			if (std::min(line.pointA.x, line.pointB.x) > point.x
-				|| std::max(line.pointA.x, line.pointB.x) < point.x
-				|| std::min(line.pointA.y, line.pointB.y) > point.y
-				|| std::max(line.pointA.y, line.pointB.y) < point.y)
+					|| std::max(line.pointA.x, line.pointB.x) < point.x
+					|| std::min(line.pointA.y, line.pointB.y) > point.y
+					|| std::max(line.pointA.y, line.pointB.y) < point.y)
 			{
 				return false;
 			}
@@ -129,7 +129,7 @@ namespace Birb
 			{
 				float distance = VectorDistance(point, points[i]);
 
-				/* Compare the distance to the current shortest one. Also set a new closest point if the previous one 
+				/* Compare the distance to the current shortest one. Also set a new closest point if the previous one
 				 * was in the exact same position */
 				if (distance <= currentClosestDistance || currentClosestDistance == 0.0f)
 				{
@@ -149,7 +149,7 @@ namespace Birb
 			{
 				float distance = VectorDistance(point, points[i]);
 
-				/* Compare the distance to the current shortest one. Also set a new closest point if the previous one 
+				/* Compare the distance to the current shortest one. Also set a new closest point if the previous one
 				 * was in the exact same position */
 				if (distance <= currentClosestDistance || currentClosestDistance == 0.0f)
 				{
@@ -204,7 +204,7 @@ namespace Birb
 				{
 					float distance = VectorDistance(point, points[i]);
 
-					/* Compare the distance to the current shortest one. Also set a new closest point if the previous one 
+					/* Compare the distance to the current shortest one. Also set a new closest point if the previous one
 					 * was in the exact same position */
 					if (distance <= currentClosestDistance || currentClosestDistance == 0.0f)
 					{
@@ -218,7 +218,7 @@ namespace Birb
 
 		double Round(const double& value, const int& decimal_points)
 		{
-			/* How this thing works: 
+			/* How this thing works:
 			 * 1. Multiply the value with 10 ^ decimal points. This will leave the needed values before the decimal point
 			 * 2. Round to integer
 			 * 3. Divide the value with 10 ^ decimal points to get the desired rounded decimal value

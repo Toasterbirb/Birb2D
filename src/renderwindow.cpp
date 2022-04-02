@@ -11,7 +11,7 @@ namespace Birb
 	}
 
 	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
-	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
+		:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
@@ -126,7 +126,7 @@ namespace Birb
 	Vector2f Window::window_dimensions_multiplier()
 	{
 		return Vector2f((float)dimensions.x / (float)original_window_dimensions.x,
-						(float)dimensions.y / (float)original_window_dimensions.y);
+				(float)dimensions.y / (float)original_window_dimensions.y);
 	}
 
 	void Window::EventTick(const SDL_Event& event, bool* GameRunning)
@@ -138,12 +138,12 @@ namespace Birb
 				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 					SetWindowSize(Vector2int(event.window.data1, event.window.data2));
 				break;
-			
+
 			case (SDL_QUIT):
 				Debug::Log("Quitting...");
 				*GameRunning = false;
 				break;
-			
+
 			default:
 				break;
 		}
@@ -158,7 +158,7 @@ namespace Birb
 	{
 		SDL_Texture* texture = NULL;
 		texture = IMG_LoadTexture(Global::RenderVars::Renderer, p_filePath.c_str());
-		
+
 		if (texture == NULL)
 			Debug::Log("Failed to load texture [" + p_filePath + "]: " + (std::string)SDL_GetError(), Debug::error);
 
@@ -166,10 +166,10 @@ namespace Birb
 	}
 
 	Uint8* Resources::CopyTexturePixels(
-        SDL_Surface* surface, // surface to take pixels from
-        int* width,
-        int* height,
-        int* pitch)
+			SDL_Surface* surface, // surface to take pixels from
+			int* width,
+			int* height,
+			int* pitch)
 	{
 		Uint8* pixels = 0;
 		SDL_Surface* tmpSurface = 0;
@@ -308,7 +308,7 @@ namespace Birb
 		/* Draw the progress bar filler box */
 		Birb::Rect fillRect(entity.rect.x, entity.rect.y, (entity.progressBarComponent.value / entity.progressBarComponent.maxValue) * entity.rect.w, entity.rect.h);
 		Render::DrawRect(*entity.progressBarComponent.fillColor, fillRect);
-		
+
 		/* Draw the progress bar outer box */
 		Render::DrawRect(*entity.progressBarComponent.borderColor, entity.rect, entity.progressBarComponent.borderWidth);
 	}
@@ -551,7 +551,7 @@ namespace Birb
 			}
 		}
 
-		/* filledPolygonColor works only with integers, so this will just 
+		/* filledPolygonColor works only with integers, so this will just
 		 * round the floating point vlues into integers */
 		bool DrawPolygon(const Color& color, Vector2f* points, const int& pointCount)
 		{

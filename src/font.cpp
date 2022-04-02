@@ -26,7 +26,7 @@ namespace Birb
 		InitSDL_ttf();
 		this->filePath 	= filePath;
 		this->size 		= fontSize;
-		
+
 		/* Attempt to load the font */
 		ttfFont = TTF_OpenFont(filePath.c_str(), fontSize);
 		if (ttfFont != nullptr)

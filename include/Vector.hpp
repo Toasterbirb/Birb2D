@@ -13,15 +13,15 @@ namespace Birb
 	struct Vector2f
 	{
 		Vector2f()
-		:x(0.0f), y(0.0f)
+			:x(0.0f), y(0.0f)
 		{}
 
 		Vector2f(const float& p_x, const float& p_y)
-		:x(p_x), y(p_y)
+			:x(p_x), y(p_y)
 		{}
 
 		Vector2f(const float values[2])
-		:x(values[0]), y(values[1])
+			:x(values[0]), y(values[1])
 		{}
 
 		std::string toString() const;
@@ -60,15 +60,15 @@ namespace Birb
 	struct Vector2int
 	{
 		Vector2int()
-		:x(0), y(0)
+			:x(0), y(0)
 		{}
 
 		Vector2int(const int& p_x, const int& p_y)
-		:x(p_x), y(p_y)
+			:x(p_x), y(p_y)
 		{}
 
 		Vector2int(const int values[2])
-		:x(values[0]), y(values[1])
+			:x(values[0]), y(values[1])
 		{}
 
 		Vector2int(const float& p_x, const float& p_y)
@@ -118,15 +118,15 @@ namespace Birb
 	struct Vector3f
 	{
 		Vector3f()
-		:x(0.0f), y(0.0f), z(0.0f)
+			:x(0.0f), y(0.0f), z(0.0f)
 		{}
 
 		Vector3f(const float& p_x, const float& p_y, const float& p_z)
-		:x(p_x), y(p_y), z(p_z)
+			:x(p_x), y(p_y), z(p_z)
 		{}
 
 		Vector3f(const float values[3])
-		:x(values[0]), y(values[1]), z(values[2])
+			:x(values[0]), y(values[1]), z(values[2])
 		{}
 
 		std::string toString() const;
@@ -170,15 +170,15 @@ namespace Birb
 	struct Vector3int
 	{
 		Vector3int()
-		:x(0), y(0), z(0)
+			:x(0), y(0), z(0)
 		{}
 
 		Vector3int(const int& p_x, const int& p_y, const int& p_z)
-		:x(p_x), y(p_y), z(p_z)
+			:x(p_x), y(p_y), z(p_z)
 		{}
 
 		Vector3int(const int values[3])
-		:x(values[0]), y(values[1]), z(values[2])
+			:x(values[0]), y(values[1]), z(values[2])
 		{}
 
 		Vector3int(const float& p_x, const float& p_y, const float& p_z)

@@ -8,7 +8,7 @@ namespace Birb
 	{
 		SDL_Texture* texture = NULL;
 		texture = IMG_LoadTexture(Global::RenderVars::Renderer, p_filePath.c_str());
-		
+
 		if (texture == NULL)
 			Debug::Log("Failed to load texture [" + p_filePath + "]: " + (std::string)SDL_GetError(), Debug::error);
 
@@ -29,10 +29,10 @@ namespace Birb
 	}
 
 	Uint8* Resources::CopyTexturePixels(
-        SDL_Surface* surface, // surface to take pixels from
-        int* width,
-        int* height,
-        int* pitch)
+			SDL_Surface* surface, // surface to take pixels from
+			int* width,
+			int* height,
+			int* pitch)
 	{
 		Uint8* pixels = 0;
 		SDL_Surface* tmpSurface = 0;

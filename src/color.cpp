@@ -11,13 +11,13 @@ namespace Birb
 	}
 
 	Color::Color(const int& r, const int& g, const int& b)
-	:r(r), g(g), b(b)
+		:r(r), g(g), b(b)
 	{
 		a = 255;
 	}
 
 	Color::Color(const int& r, const int& g, const int& b, const int& a)
-	:r(r), g(g), b(b), a(a)
+		:r(r), g(g), b(b), a(a)
 	{}
 
 	Color::Color(const int& hex)

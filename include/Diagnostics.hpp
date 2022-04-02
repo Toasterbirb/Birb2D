@@ -9,16 +9,16 @@ namespace Birb
 	{
 		class FrametimeGraph
 		{
-		public:
-			FrametimeGraph(const Rect& rect, const int& pointCount, TimeStep& timeStep);
-			void Render();
-			bool enabled;
-			int pointCount;
-			Rect rect;
+			public:
+				FrametimeGraph(const Rect& rect, const int& pointCount, TimeStep& timeStep);
+				void Render();
+				bool enabled;
+				int pointCount;
+				Rect rect;
 
-		private:
-			TimeStep& timeStep;
-			Widgets::Graph graph;
+			private:
+				TimeStep& timeStep;
+				Widgets::Graph graph;
 		};
 	}
 }

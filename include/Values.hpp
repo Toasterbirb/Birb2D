@@ -19,10 +19,10 @@ namespace Birb
 
 	namespace Global
 	{
-        namespace Debugging
-        {
-            static bool Buttons     = false;
-        }
+		namespace Debugging
+		{
+			static bool Buttons     = false;
+		}
 
 		namespace IsInit
 		{

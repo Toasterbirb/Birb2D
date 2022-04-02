@@ -1,5 +1,5 @@
 #ifndef DOCTEST_CONFIG_DISABLE
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #else
 #include <stdio.h>
 int main(int argc, char** argv)
@@ -29,7 +29,7 @@ TEST_CASE("Window and rendering functions")
 	Birb::Window window("Title", Birb::Vector2int(1280, 720), 60, false);
 	SDL_Texture* texture 	= Birb::Resources::LoadTexture(appInfo.ResLocation + "/textures/birb.png");
 	Birb::Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
-	
+
 	Birb::Scene testScene;
 	testScene.Activate();
 
@@ -50,12 +50,12 @@ TEST_CASE("Window and rendering functions")
 	renderedRect.renderingPriority = -5;
 
 	Birb::Polygon polygon(
-	{
-		Birb::Vector2f(0, 200),
-		Birb::Vector2f(200, 184),
-		Birb::Vector2f(230, 110),
-		Birb::Vector2f(0, 180)
-	}, 0x81E176);
+			{
+			Birb::Vector2f(0, 200),
+			Birb::Vector2f(200, 184),
+			Birb::Vector2f(230, 110),
+			Birb::Vector2f(0, 180)
+			}, 0x81E176);
 
 	Birb::Circle circle(32, {500, 650}, 0x32DDAA);
 
@@ -93,7 +93,7 @@ TEST_CASE("Window and rendering functions")
 	areaGraph.backgroundColor 	= Birb::Colors::Black;
 	testScene.AddObject(&areaGraph);
 
-	
+
 
 	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", &font, &Birb::Colors::Red));
 	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", &font, &Birb::Colors::Red, &Birb::Colors::White));
@@ -202,7 +202,7 @@ TEST_CASE("Window and rendering functions")
 	/* Keep rendering for about 2 seoncds with a timer */
 	Birb::Timer timer;
 	timer.Start();
-	
+
 	bool animationSuccessful;
 	bool progressBarSuccessful;
 	double currentTime = Birb::utils::hireTimeInSeconds();
@@ -211,7 +211,7 @@ TEST_CASE("Window and rendering functions")
 		SDL_Delay(16); /* Cap to around 60 fps, lets not waste CPU cycles... */
 		window.Clear();
 		animationSuccessful 	= Birb::Render::DrawEntity(animationBirb);
-		
+
 		progressBarEntity.progressBarComponent.value = timer.ElapsedSeconds() / 2.0;
 		progressBarSuccessful 	= Birb::Render::DrawEntity(progressBarEntity);
 

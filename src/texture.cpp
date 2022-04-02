@@ -23,7 +23,7 @@ namespace Birb
 	bool Texture::LoadTexture(const std::string& filePath)
 	{
 		this->sdlTex = NULL;
-		
+
 		SDL_Surface* surface = IMG_Load(filePath.c_str());
 		if (surface == NULL)
 		{

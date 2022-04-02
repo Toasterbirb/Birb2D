@@ -9,7 +9,7 @@ namespace Birb
 	}
 
 	Polygon::Polygon(const Color& color)
-	:color(color)
+		:color(color)
 	{}
 
 	Polygon::Polygon(const Vector2f points[], const int& pointCount)
@@ -18,7 +18,7 @@ namespace Birb
 	}
 
 	Polygon::Polygon(const Vector2f points[], const int& pointCount, const Color& color)
-	:color(color)
+		:color(color)
 	{
 		this->points = std::vector<Vector2f>(points, points + pointCount);
 	}
@@ -29,7 +29,7 @@ namespace Birb
 	}
 
 	Polygon::Polygon(const std::vector<Vector2f>& points, const Color& color)
-	:color(color)
+		:color(color)
 	{
 		this->points = points;
 	}

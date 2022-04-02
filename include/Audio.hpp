@@ -13,46 +13,46 @@ namespace Birb
 		/// Used for short sound effects
 		class SoundFile
 		{
-		public:
-			SoundFile(const std::string& p_filePath);
-			void play();
-			void free()
-			{
-				Mix_FreeChunk(sound);
-			}
-			bool isPlaying();
+			public:
+				SoundFile(const std::string& p_filePath);
+				void play();
+				void free()
+				{
+					Mix_FreeChunk(sound);
+				}
+				bool isPlaying();
 
-			~SoundFile()
-			{
-				/* Free the soundfile when its destroyed */
-				free();
-			}
-		private:
-			Mix_Chunk* sound;
-			std::string filePath;
+				~SoundFile()
+				{
+					/* Free the soundfile when its destroyed */
+					free();
+				}
+			private:
+				Mix_Chunk* sound;
+				std::string filePath;
 		};
 
 		/// Used for longer audio pieces like music. Shouldn't be used for sound effects
 		class MusicFile
 		{
-		public:
-			MusicFile(const std::string& p_filePath);
-			void play();
-			void play(bool loop);
-			void free()
-			{
-				Mix_FreeMusic(music);
-			}
-			bool isPlaying();
+			public:
+				MusicFile(const std::string& p_filePath);
+				void play();
+				void play(bool loop);
+				void free()
+				{
+					Mix_FreeMusic(music);
+				}
+				bool isPlaying();
 
-			~MusicFile()
-			{
-				/* Free the musicfile when its destroyed */
-				free();
-			}
-		private:
-			Mix_Music* music;
-			std::string filePath;
+				~MusicFile()
+				{
+					/* Free the musicfile when its destroyed */
+					free();
+				}
+			private:
+				Mix_Music* music;
+				std::string filePath;
 		};
 	};
 

@@ -44,8 +44,8 @@ namespace Birb
 			Click(const std::function<void()>& p_onClick);
 			bool active;
 			std::function<void()> onClick;
-            std::function<void()> onHover;
-            std::function<void()> onDrag;
+			std::function<void()> onHover;
+			std::function<void()> onDrag;
 		};
 
 		/// Animation allows for texture atlas based sprite animations
@@ -112,58 +112,58 @@ namespace Birb
 	}
 
 	/// Entities are objects that contain all of the information required to render stuff
-	
+
 	/// Entities can be anything really. For example, it could be text or a picture. This could be extended to animations in the future
 	class Entity : public SceneObject
 	{
-	public:
-		Entity();
-		Entity(const std::string& p_name); ///< Creates empty Entity object
-		Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
-		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent); 	///< Creates a Animation Entity using a Animation
-		Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
-		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture); 		///< Creates an Entity with a SDL_Texture to render without specifying a scale
+		public:
+			Entity();
+			Entity(const std::string& p_name); ///< Creates empty Entity object
+			Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
+			Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent); 	///< Creates a Animation Entity using a Animation
+			Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
+			Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture); 		///< Creates an Entity with a SDL_Texture to render without specifying a scale
 
-		/* Make it possible to update the Text */
-		void SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
-		void SetFont(const Font& font); 		///< Change the font in Text and reload the sprite
-		void SetColor(Color* color); 	///< Change the color in Text and reload the sprite
+			/* Make it possible to update the Text */
+			void SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
+			void SetFont(const Font& font); 		///< Change the font in Text and reload the sprite
+			void SetColor(Color* color); 	///< Change the color in Text and reload the sprite
 
-		std::string name; 		///< Name of the entity. Used for debugging
+			std::string name; 		///< Name of the entity. Used for debugging
 
-		/* Sprite handlings */
-		SDL_Texture* sprite; 	///< Sprite to be rendered
+			/* Sprite handlings */
+			SDL_Texture* sprite; 	///< Sprite to be rendered
 
-		float angle; 			///< Sets the rotation of the entity when rendering it
-		Rect rect; 				///< Sets the position and the dimensions of the entity
-		Vector2f localScale; 	///< Scale modifier for the Entity rendering
+			float angle; 			///< Sets the rotation of the entity when rendering it
+			Rect rect; 				///< Sets the position and the dimensions of the entity
+			Vector2f localScale; 	///< Scale modifier for the Entity rendering
 
-		EntityComponent::Text textComponent; 				///< Enables the rendering of Text
-		EntityComponent::Click clickComponent; 				///< Enables button-like functionality
-		EntityComponent::Animation animationComponent; 		///< Enables animations for sprite rendering
-		EntityComponent::ProgressBar progressBarComponent; 	///< Turns the entity into a progress bar
-		void LoadSprite(); 				///< Create a sprite for the Entity using details found in the textComponent variable
-		void ReloadSprite(); 			///< Destroy the old sprite and create a new one. Useful for refreshing text after editing the textComponent variable
-		void SetBaseEntityValues(); 	///< Used to set some default value when they aren't provided during Entity initialization
-		void CenterRelativeTo(const Rect& rect);
+			EntityComponent::Text textComponent; 				///< Enables the rendering of Text
+			EntityComponent::Click clickComponent; 				///< Enables button-like functionality
+			EntityComponent::Animation animationComponent; 		///< Enables animations for sprite rendering
+			EntityComponent::ProgressBar progressBarComponent; 	///< Turns the entity into a progress bar
+			void LoadSprite(); 				///< Create a sprite for the Entity using details found in the textComponent variable
+			void ReloadSprite(); 			///< Destroy the old sprite and create a new one. Useful for refreshing text after editing the textComponent variable
+			void SetBaseEntityValues(); 	///< Used to set some default value when they aren't provided during Entity initialization
+			void CenterRelativeTo(const Rect& rect);
 
-		/* Informational functions */
-		bool isHovering(); ///< Check if the cursor is hovering over this entity
-		Vector2int getAtlasPosition(const int& frame); ///< Get position in a texture atlas given the sprite index
+			/* Informational functions */
+			bool isHovering(); ///< Check if the cursor is hovering over this entity
+			Vector2int getAtlasPosition(const int& frame); ///< Get position in a texture atlas given the sprite index
 
-		bool operator==(const Entity& other) const
-		{
-			return 	(&sprite 					== &other.sprite
-					&& localScale 				== other.localScale
-					&& textComponent 			== other.textComponent
-					&& &clickComponent 			== &other.clickComponent
-					&& &animationComponent 		== &other.animationComponent
-					&& &progressBarComponent 	== &other.progressBarComponent);
-		}
+			bool operator==(const Entity& other) const
+			{
+				return 	(&sprite 					== &other.sprite
+						&& localScale 				== other.localScale
+						&& textComponent 			== other.textComponent
+						&& &clickComponent 			== &other.clickComponent
+						&& &animationComponent 		== &other.animationComponent
+						&& &progressBarComponent 	== &other.progressBarComponent);
+			}
 
-	private:
-		void RenderFunc() override;
-		void SetPos(const Vector2f& delta) override;
+		private:
+			void RenderFunc() override;
+			void SetPos(const Vector2f& delta) override;
 	};
 
 }

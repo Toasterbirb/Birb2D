@@ -60,7 +60,7 @@ namespace Birb
 
 				std::ifstream file;
 				file.open(fpath, std::ios::in);
-				
+
 				std::string fileContents;
 				file >> fileContents;
 
@@ -73,7 +73,7 @@ namespace Birb
 				/* Check if a file exists if overwrite protection is enabled */
 				if (!overwrite && Exists(fpath))
 				{
-					Debug::Log("File '" + fpath + "' exists already. Not going to overwrite it...", Debug::Type::warning); 
+					Debug::Log("File '" + fpath + "' exists already. Not going to overwrite it...", Debug::Type::warning);
 					return false;
 				}
 				else if (std::filesystem::is_directory(fpath))
