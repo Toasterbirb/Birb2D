@@ -100,7 +100,8 @@ namespace Birb
 
 		/* Draw objects */
 		for (int i = 0; i < (int)objects.size(); i++)
-			objects[i]->RenderFunc();
+			if (objects[i]->active)
+				objects[i]->RenderFunc();
 	}
 
 	/// FIXME: Switch bubble sort to some other more performant algorithm
