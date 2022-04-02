@@ -11,3 +11,9 @@ TEST_CASE("Entity comparison")
 	entityB.name = "First entity";
 	CHECK_FALSE(entityA == entityB);
 }
+
+TEST_CASE("Empty entity")
+{
+	Birb::Entity entity;
+	CHECK(entity.name == "Default Entity");
+}

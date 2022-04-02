@@ -183,6 +183,13 @@ namespace Birb
 		active = true;
 	}
 
+	Entity::Entity()
+	{
+		name = "Default Entity";
+		SetBaseEntityValues();
+		sprite = nullptr;
+	}
+
 	Entity::Entity(const std::string& p_name)
 	:name(p_name)
 	{

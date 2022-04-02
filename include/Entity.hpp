@@ -115,6 +115,7 @@ namespace Birb
 	class Entity : public SceneObject
 	{
 	public:
+		Entity();
 		Entity(const std::string& p_name); ///< Creates empty Entity object
 		Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
 		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent); 	///< Creates a Animation Entity using a Animation
