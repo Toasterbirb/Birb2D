@@ -31,6 +31,7 @@ TEST_CASE("Window and rendering functions")
 	Birb::Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
 	
 	Birb::Scene testScene;
+	testScene.Activate();
 
 	Birb::Entity testEntity("Test entity", Birb::Vector2int(10, 10), texture);
 	Birb::Entity secondEntityWithSameTexture("Second entity with the same texture", Birb::Rect(200, 400, 128 * 2, 72 * 2), texture);

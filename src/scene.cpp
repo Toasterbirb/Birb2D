@@ -5,7 +5,7 @@ namespace Birb
 {
 	Scene::Scene()
 	{
-		active = true;
+		active = false;
 		positionOffset = {0, 0};
 	}
 
