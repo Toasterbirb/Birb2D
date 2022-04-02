@@ -27,18 +27,35 @@ namespace Birb
 
 		void PlaceHolderClickEvent()
 		{
-			Debug::Log("This button is working");
+            if (Global::Debugging::Buttons)
+                Debug::Log("Placeholder onClick event");
 		}
+
+        void PlaceHolderHoverEvent()
+        {
+            if (Global::Debugging::Buttons)
+                Debug::Log("Placeholder onHover event");
+        }
+
+        void PlaceHolderDragEvent()
+        {
+            if (Global::Debugging::Buttons)
+                Debug::Log("Placeholder onDrag event");
+        }
 
 		Click::Click()
 		{
-			active = true;
 			onClick = PlaceHolderClickEvent;
+            onHover = PlaceHolderHoverEvent;
+            onDrag  = PlaceHolderDragEvent;
+			active = true;
 		}
 
 		Click::Click(const std::function<void()>& p_onClick)
 		:onClick(p_onClick)
 		{
+            onHover = PlaceHolderHoverEvent;
+            onDrag  = PlaceHolderDragEvent;
 			active = true;
 		}
 

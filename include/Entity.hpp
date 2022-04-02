@@ -44,6 +44,8 @@ namespace Birb
 			Click(const std::function<void()>& p_onClick);
 			bool active;
 			std::function<void()> onClick;
+            std::function<void()> onHover;
+            std::function<void()> onDrag;
 		};
 
 		/// Animation allows for texture atlas based sprite animations

@@ -2,15 +2,30 @@
 
 namespace Birb
 {
-	UI::UI() {}
+	UI::UI()
+    {
+        mouseHeldDown = false;
+    }
 
 	void UI::AddButton(Entity* buttonEntity)
 	{
 		Buttons.push_back(buttonEntity);
 	}
 
-	void UI::PollButtons(const Window& window) const
+	void UI::PollButtons(const Window& window)
 	{
+        /* Set the mouse down state */
+        switch (window.event.type)
+        {
+            case (SDL_MOUSEBUTTONDOWN):
+                mouseHeldDown = true;
+                break;
+
+            case (SDL_MOUSEBUTTONUP):
+                mouseHeldDown = false;
+                break;
+        }
+
 		for (int i = 0; i < (int)Buttons.size(); i++)
 		{
 			/* Skip inactive buttons */
@@ -22,12 +37,21 @@ namespace Birb
 				continue;
 
 			/* Check if the cursor is on top of the button */
-			if (!window.CursorInRect(Buttons[i]->rect))
-				continue;
+            if (window.CursorInRect(Buttons[i]->rect))
+                Buttons[i]->clickComponent.onHover();
+            else
+                continue;
 
-			/* Run the button click event if there was a mouseclick */
-			if (window.event.type == SDL_MOUSEBUTTONDOWN)
-				Buttons[i]->clickComponent.onClick();
+            /* Check if we are dragging */
+            if (window.event.type != SDL_MOUSEBUTTONDOWN && window.event.type != SDL_MOUSEBUTTONUP && mouseHeldDown) 
+            {
+                Buttons[i]->clickComponent.onDrag();
+                continue; /* It is impossible to click and drag at the same time */
+            }
+
+            /* Check if the mousebutton is released */
+            if (window.event.type == SDL_MOUSEBUTTONUP)
+                Buttons[i]->clickComponent.onClick();
 
 			/* You can really only click one button at once, so lets stop if we got this far */
 			break;
