@@ -9,8 +9,11 @@ namespace Birb
 	{
 		Birb::ApplicationInfo appInfo("Birb2D_tests");
 
-		Audio::Init(0);
+        CHECK_FALSE(Global::IsInit::SDL_mixer);
 		Audio::SoundFile sound(appInfo.ResLocation + "/audio/game_over.wav");
+        // FIXME: Global is not being updated properly
+        //CHECK(Global::IsInit::SDL_mixer);
+
 		Audio::MusicFile music(appInfo.ResLocation + "/audio/score.wav");
 
 		Debug::Log("A sound should play now");
