@@ -143,6 +143,7 @@ namespace Birb
 		void LoadSprite(); 				///< Create a sprite for the Entity using details found in the textComponent variable
 		void ReloadSprite(); 			///< Destroy the old sprite and create a new one. Useful for refreshing text after editing the textComponent variable
 		void SetBaseEntityValues(); 	///< Used to set some default value when they aren't provided during Entity initialization
+		void CenterRelativeTo(const Rect& rect);
 
 		/* Informational functions */
 		bool isHovering(); ///< Check if the cursor is hovering over this entity
