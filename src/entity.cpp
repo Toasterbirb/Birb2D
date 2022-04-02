@@ -238,10 +238,9 @@ namespace Birb
 		rect.y = pos.y;
 
 		/* Get texture scale automatically */
-		int w, h;
-		utils::GetTextureDimensions(p_texture, w, h);
-		rect.w = w;
-		rect.h = h;
+		Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
+		rect.w = textureDimensions.x;
+		rect.h = textureDimensions.y;
 	}
 
 	void Entity::LoadSprite()
@@ -259,10 +258,9 @@ namespace Birb
 			else
 			{
 				/* Get texture scale automatically */
-				int w, h;
-				utils::GetTextureDimensions(sprite, w, h);
-				rect.w = w;
-				rect.h = h;
+				Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
+				rect.w = textureDimensions.x;
+				rect.h = textureDimensions.y;
 			}
 		}
 	}

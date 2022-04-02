@@ -21,7 +21,7 @@ namespace Birb
 			return t;
 		}
 
-		void GetTextureDimensions(SDL_Texture* texture, int& x, int& y);
+		Vector2int GetTextureDimensions(SDL_Texture* texture);
 		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2int& pixelPosition, const int& textureWidth);
 		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points);
 		std::string CleanDecimals(const double& value); ///< Returns a string with without trailing zeroes in decimals

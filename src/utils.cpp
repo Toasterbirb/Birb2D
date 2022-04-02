@@ -5,9 +5,11 @@ namespace Birb
 {
 	namespace utils
 	{
-		void GetTextureDimensions(SDL_Texture* texture, int& x, int& y)
+		Vector2int GetTextureDimensions(SDL_Texture* texture)
 		{
-			SDL_QueryTexture(texture, NULL, NULL, &x, &y);
+			Vector2int result;
+			SDL_QueryTexture(texture, NULL, NULL, &result.x, &result.y);
+			return result;
 		}
 
 		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2int& pixelPosition, const int& textureWidth)
