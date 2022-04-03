@@ -19,11 +19,6 @@ namespace Birb
 
 	namespace Global
 	{
-        struct Debugging
-        {
-            static inline bool Buttons = false;
-        };
-
 		struct IsInit
 		{
 			static inline bool SDL = false;

@@ -2,6 +2,7 @@
 #include "Entity.hpp"
 #include "Renderwindow.hpp"
 #include "Values.hpp"
+#include "Diagnostics.hpp"
 
 namespace Birb
 {
@@ -27,25 +28,25 @@ namespace Birb
 
 		void PlaceHolderMouseDownEvent()
 		{
-			if (Global::Debugging::Buttons)
+			if (Diagnostics::Debugging::Buttons)
 				Debug::Log("Placeholder onMouseDown event");
 		}
 
 		void PlaceHolderClickEvent()
 		{
-            if (Global::Debugging::Buttons)
+            if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onClick event");
 		}
 
         void PlaceHolderHoverEvent()
         {
-            if (Global::Debugging::Buttons)
+            if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onHover event");
         }
 
         void PlaceHolderDragEvent()
         {
-            if (Global::Debugging::Buttons)
+            if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onDrag event");
         }
 

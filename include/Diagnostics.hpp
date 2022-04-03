@@ -20,5 +20,13 @@ namespace Birb
 			TimeStep& timeStep;
 			Widgets::Graph graph;
 		};
+
+		/// Boolean toggles for debugging features. Some can clutter the console output
+		/// quite a bit, so be careful
+        struct Debugging
+        {
+            static inline bool Buttons = false;
+        };
+
 	}
 }
