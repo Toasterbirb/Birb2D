@@ -39,14 +39,18 @@ namespace Birb
 		};
 
 		/// Click adds button functionality to the Entity
-		struct Click
+		class Click
 		{
+		public:
 			Click();
 			Click(const std::function<void()>& p_onClick);
 			bool active;
+			std::function<void()> onMouseDown;
 			std::function<void()> onClick;
             std::function<void()> onHover;
             std::function<void()> onDrag;
+		private:
+			void AssignPlaceholderEvents();
 		};
 
 		/// Animation allows for texture atlas based sprite animations

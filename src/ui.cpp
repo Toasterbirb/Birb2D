@@ -43,11 +43,16 @@ namespace Birb
                 continue;
 
             /* Check if we are dragging */
-            if (window.event.type != SDL_MOUSEBUTTONDOWN && window.event.type != SDL_MOUSEBUTTONUP && mouseHeldDown) 
+			if (window.event.type != SDL_MOUSEBUTTONDOWN && window.event.type != SDL_MOUSEBUTTONUP && mouseHeldDown) 
             {
                 Buttons[i]->clickComponent.onDrag();
                 continue; /* It is impossible to click and drag at the same time */
             }
+			else if (window.event.type == SDL_MOUSEBUTTONDOWN)
+			{
+				Buttons[i]->clickComponent.onMouseDown();
+				continue;
+			}
 
             /* Check if the mousebutton is released */
             if (window.event.type == SDL_MOUSEBUTTONUP)

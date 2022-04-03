@@ -25,6 +25,12 @@ namespace Birb
 		:text(text), font(font), color(color), bgColor(bgColor)
 		{}
 
+		void PlaceHolderMouseDownEvent()
+		{
+			if (Global::Debugging::Buttons)
+				Debug::Log("Placeholder onMouseDown event");
+		}
+
 		void PlaceHolderClickEvent()
 		{
             if (Global::Debugging::Buttons)
@@ -43,19 +49,24 @@ namespace Birb
                 Debug::Log("Placeholder onDrag event");
         }
 
-		Click::Click()
+		void Click::AssignPlaceholderEvents()
 		{
-			onClick = PlaceHolderClickEvent;
+			onMouseDown = PlaceHolderMouseDownEvent;
             onHover = PlaceHolderHoverEvent;
             onDrag  = PlaceHolderDragEvent;
+		}
+
+		Click::Click()
+		{
+			AssignPlaceholderEvents();
+			onClick = PlaceHolderClickEvent;
 			active = true;
 		}
 
 		Click::Click(const std::function<void()>& p_onClick)
 		:onClick(p_onClick)
 		{
-            onHover = PlaceHolderHoverEvent;
-            onDrag  = PlaceHolderDragEvent;
+			AssignPlaceholderEvents();
 			active = true;
 		}
 
