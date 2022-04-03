@@ -55,7 +55,7 @@ namespace Birb
 
 		bool operator!=(const Vector2f& other) const
 		{
-			return (x != other.x && y != other.y);
+			return (x != other.x || y != other.y);
 		}
 
 		float x, y;
@@ -113,7 +113,7 @@ namespace Birb
 
 		bool operator!=(const Vector2int& other) const
 		{
-			return (x != other.x && y != other.y);
+			return (x != other.x || y != other.y);
 		}
 
 		int x, y;
@@ -165,7 +165,7 @@ namespace Birb
 
 		bool operator!=(const Vector3f& other) const
 		{
-			return (x != other.x && y != other.y && z != other.z);
+			return (x != other.x || y != other.y || z != other.z);
 		}
 
 		float x, y, z;
@@ -224,7 +224,7 @@ namespace Birb
 
 		bool operator!=(const Vector3int& other) const
 		{
-			return (x != other.x && y != other.y && z != other.z);
+			return (x != other.x || y != other.y || z != other.z);
 		}
 
 		int x, y, z;

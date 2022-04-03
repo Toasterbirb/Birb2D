@@ -22,6 +22,9 @@ namespace Birb
 
 	void Scene::AddObject(SceneObject* obj[], int objCount)
 	{
+		for (int i = 0; i < objCount; i++)
+			obj[i]->SetPos(positionOffset);
+
 		this->objects.insert(std::end(this->objects), obj, obj + objCount);
 	}
 

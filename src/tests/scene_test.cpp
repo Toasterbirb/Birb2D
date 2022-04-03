@@ -144,6 +144,7 @@ namespace Birb
 			scene.AddObject(&newRectB);
 			CHECK(newRect == Rect(30, 30, 20, 20));
 			CHECK(newRectB == Rect(30, 30, 30, 30));
+			CHECK(entityA.rect == Rect(30, 30, 20, 20));
 		}
 
 		SUBCASE("Reset the scene")
