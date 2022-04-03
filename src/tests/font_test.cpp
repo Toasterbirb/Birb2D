@@ -5,7 +5,6 @@ namespace Birb
 {
 	TEST_CASE("Font loading")
 	{
-		TTF_Init();
 		std::string fontPath = "./res/fonts/freefont/FreeMonoBold.ttf";
 
 		SUBCASE("With not parameters given to constructor")
@@ -38,8 +37,5 @@ namespace Birb
 			CHECK(font.GetSize() == 15);
 			CHECK(font.isLoaded());
 		}
-
-
-		TTF_Quit();
 	}
 }

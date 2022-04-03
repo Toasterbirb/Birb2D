@@ -19,26 +19,26 @@ namespace Birb
 
 	namespace Global
 	{
-        namespace Debugging
+        struct Debugging
         {
-            static bool Buttons     = false;
-        }
+            static inline bool Buttons = false;
+        };
 
-		namespace IsInit
+		struct IsInit
 		{
-			static bool SDL 		= false;
-			static bool SDL_ttf 	= false;
-			static bool SDL_image 	= false;
-			static bool SDL_mixer   = false;
-		}
+			static inline bool SDL = false;
+			static inline bool SDL_ttf = false;
+			static inline bool SDL_image = false;
+			static inline bool SDL_mixer = false;
+		};
 
-		namespace RenderVars
+		struct RenderVars
 		{
-			static int RefreshRate = 240;
-			static SDL_Window* MainWindow;
-			static SDL_Renderer* Renderer;
-			static Color BackgroundColor = 0x000000;
-		}
+			static inline int RefreshRate = 240;
+			static inline SDL_Window* MainWindow = NULL;
+			static inline SDL_Renderer* Renderer = NULL;
+			static inline Color BackgroundColor = Color(0, 0, 0);
+		};
 	}
 
 	namespace Colors

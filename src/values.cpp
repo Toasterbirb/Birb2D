@@ -65,9 +65,9 @@ namespace Birb
 			ResLocation = "";
 	}
 
-	/* Dims or lightens color */
 	namespace Colors
 	{
+		/* Dims or lightens color */
 		SDL_Color ChangeColorIntensity(const SDL_Color& color, const int& delta)
 		{
 			SDL_Color newColor = color;

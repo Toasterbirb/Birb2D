@@ -12,7 +12,7 @@ namespace Birb
         CHECK_FALSE(Global::IsInit::SDL_mixer);
 		Audio::SoundFile sound(appInfo.ResLocation + "/audio/game_over.wav");
         // FIXME: Global is not being updated properly
-        //CHECK(Global::IsInit::SDL_mixer);
+        CHECK(Global::IsInit::SDL_mixer);
 
 		Audio::MusicFile music(appInfo.ResLocation + "/audio/score.wav");
 
