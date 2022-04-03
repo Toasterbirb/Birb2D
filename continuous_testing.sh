@@ -22,6 +22,7 @@ function full_valgrind()
 case $1 in
 	quick) quick ;;
 	quick_valgrind) quick_valgrind ;;
+	full) full ;;
 	full_valgrind) full_valgrind ;;
 	*) echo "Run this script with either argument 'quick' or 'full'" ;;
 esac
