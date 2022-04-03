@@ -28,26 +28,34 @@ namespace Birb
 
 		void PlaceHolderMouseDownEvent()
 		{
+#ifdef DEBUG
 			if (Diagnostics::Debugging::Buttons)
 				Debug::Log("Placeholder onMouseDown event");
+#endif
 		}
 
 		void PlaceHolderClickEvent()
 		{
+#ifdef DEBUG
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onClick event");
+#endif
 		}
 
         void PlaceHolderHoverEvent()
         {
+#ifdef DEBUG
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onHover event");
+#endif
         }
 
         void PlaceHolderDragEvent()
         {
+#ifdef DEBUG
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onDrag event");
+#endif
         }
 
 		void Click::AssignPlaceholderEvents()
