@@ -6,10 +6,11 @@ namespace Birb
 {
 	TEST_CASE("Random int")
 	{
+		Random rand;
 		int valueCount = 50;
 		int values[50];
 		for (int i = 0; i < valueCount; i++)
-			values[i] = Random::RandomInt(0, 10);
+			values[i] = rand.RandomInt(0, 10);
 
 		/* Check if all of the values were the same */
 		int firstValue = values[0];
@@ -29,10 +30,11 @@ namespace Birb
 
 	TEST_CASE("Random float")
 	{
+		Random rand;
 		int valueCount = 50;
 		int values[50];
 		for (int i = 0; i < valueCount; i++)
-			values[i] = Random::RandomFloat(0.0f, 10.0f);
+			values[i] = rand.RandomFloat(0.0f, 10.0f);
 
 		/* Check if all of the values were the same */
 		float firstValue = values[0];
@@ -52,6 +54,7 @@ namespace Birb
 
 	TEST_CASE("Shuffle an integer array")
 	{
+		Random rand;
 		int values[5] = {
 			0,
 			1,
@@ -60,7 +63,7 @@ namespace Birb
 			4
 		};
 
-		Random::ShuffleArray(values, 5);
+		rand.ShuffleArray(values, 5);
 
 		/* Confirm that all of the values are still there */
 		int sum = 0;

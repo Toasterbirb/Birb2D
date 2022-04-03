@@ -22,11 +22,12 @@ namespace Birb
 
 	void Random::ShuffleArray(int* values, const int& size)
 	{
+		Random rand;
 		int newIndex;
 		int placeHolder;
 		for (int i = 0; i < size; i++)
 		{
-			newIndex = RandomInt(0, size - 1);
+			newIndex = rand.RandomInt(0, size - 1);
 			if (newIndex != i)
 			{
 				placeHolder = values[i];
@@ -38,13 +39,14 @@ namespace Birb
 
 	void Random::ShuffleArray(float* values, const int& size)
 	{
+		Random rand;
 		int newIndex;
 		float placeHolder;
 		for (int i = 0; i < size; i++)
 		{
 			do
 			{
-				newIndex = RandomInt(0, size - 1);
+				newIndex = rand.RandomInt(0, size - 1);
 			} while (newIndex == i);
 
 			placeHolder = values[i];
@@ -55,13 +57,14 @@ namespace Birb
 
 	void Random::ShuffleArray(double* values, const int& size)
 	{
+		Random rand;
 		int newIndex;
 		double placeHolder;
 		for (int i = 0; i < size; i++)
 		{
 			do
 			{
-				newIndex = RandomInt(0, size - 1);
+				newIndex = rand.RandomInt(0, size - 1);
 			} while (newIndex == i);
 
 			placeHolder = values[i];
@@ -72,13 +75,14 @@ namespace Birb
 
 	void Random::ShuffleArray(std::string* values, const int& size)
 	{
+		Random rand;
 		int newIndex;
 		std::string placeHolder;
 		for (int i = 0; i < size; i++)
 		{
 			do
 			{
-				newIndex = RandomInt(0, size - 1);
+				newIndex = rand.RandomInt(0, size - 1);
 			} while (newIndex == i);
 
 			placeHolder = values[i];
