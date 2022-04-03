@@ -23,6 +23,7 @@ namespace Birb
 			Text(const std::string& text, Font* font, Color* color);
 			Text(const std::string& text, Font* font, Color* color, Color* bgColor);
 
+			/* FIXME: figure out how to make these variables private */
 			std::string text;
 			Font* font;
 			Color* color; 	///< Surface color of the text
