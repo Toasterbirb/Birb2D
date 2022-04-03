@@ -62,6 +62,8 @@ namespace Birb
 		CHECK(vecA - vecB == Vector2f(-1.0f, -1.7f));
 		CHECK(vecA * vecB == Vector2f(2.0f, 4.8f));
 		CHECK(vecA / vecB == Vector2f(0.5f, 0.46875f));
+		CHECK(vecA == vecA);
+		CHECK(vecA != vecB);
 	}
 
 	/* Vector2int */
@@ -96,6 +98,8 @@ namespace Birb
 		CHECK(vecA - vecB == Vector2int(2, -1));
 		CHECK(vecA * vecB == Vector2int(8, 6));
 		CHECK(vecA / vecB == Vector2int(2, 1));
+		CHECK(vecA == vecA);
+		CHECK(vecA != vecB);
 	}
 
 	/* Vector3f */
@@ -134,6 +138,8 @@ namespace Birb
 		CHECK(vecA - vecB == Vector3f(-1.0f, -1.7f, -1.8f));
 		CHECK(vecA * vecB == Vector3f(2.0f, 4.8f, 0.4f));
 		CHECK(vecA / vecB == Vector3f(0.5f, 0.468750f, 0.1f));
+		CHECK(vecA == vecA);
+		CHECK(vecA != vecB);
 	}
 
 	/* Vector3int */
@@ -172,5 +178,7 @@ namespace Birb
 		CHECK(vecA - vecB == Vector3int(2, 3, 3));
 		CHECK(vecA * vecB == Vector3int(8, 18, 10));
 		CHECK(vecA / vecB == Vector3int(2, 2, 3));
+		CHECK(vecA == vecA);
+		CHECK(vecA != vecB);
 	}
 }
