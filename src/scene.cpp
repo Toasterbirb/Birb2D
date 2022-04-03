@@ -12,6 +12,11 @@ namespace Birb
 	void Scene::AddObject(SceneObject* obj)
 	{
 		objects.push_back(obj);
+
+		/* If the positionOffset has changed, apply that to new objects */
+		if (positionOffset != Vector2f(0, 0))
+			obj->SetPos(positionOffset);
+
 		SortObjects();
 	}
 
@@ -84,6 +89,11 @@ namespace Birb
 		{
 			objects[i]->SetPos(delta);
 		}
+	}
+
+	Vector2f Scene::Position() const
+	{
+		return positionOffset;
 	}
 
 	void Scene::Clear()

@@ -73,6 +73,7 @@ namespace Birb
 
 			/* Set a specific position */
 			scene.SetPosition(Vector2f(10, 10));
+			CHECK(scene.Position() == Vector2f(10, 10));
 
 			CHECK(entityA.rect == Rect(10, 160, 128, 72));
 			CHECK(entityB.rect == Rect(60, 110, 128, 72));
@@ -91,6 +92,7 @@ namespace Birb
 
 			/* Move the scene to the other direction with a delta amount */
 			scene.Translate(Vector2f(-20, -20));
+			CHECK(scene.Position() == Vector2f(-10, -10));
 
 			CHECK(entityA.rect == Rect(-10, 140, 128, 72));
 			CHECK(entityB.rect == Rect(40, 90, 128, 72));
@@ -109,6 +111,7 @@ namespace Birb
 
 			/* Reset scene position back to the original position */
 			scene.SetPosition(Vector2f(0, 0));
+			CHECK(scene.Position() == Vector2f(0, 0));
 			CHECK(entityA.rect == Rect(0, 150, 128, 72));
 			CHECK(entityB.rect == Rect(50, 100, 128, 72));
 			CHECK(graphs[0].rect == Rect(50, 100, 128, 72));
@@ -123,6 +126,24 @@ namespace Birb
 			
 			CHECK(rect == Rect(0, 0, 10, 10));
 			CHECK(circle.pos == Vector2int(0, 0));
+		}
+
+		SUBCASE("Update the changed scene position for new objects")
+		{
+			entityA.rect = Rect(10, 10, 20, 20);
+			scene.SetPosition(Vector2f(10, 10));
+			CHECK(entityA.rect == Rect(20, 20, 20, 20));
+
+			/* Add a new objects after setting the position */
+			Rect newRect(10, 10, 20, 20);
+			scene.AddObject(&newRect);
+			CHECK(newRect == Rect(20, 20, 20, 20));
+
+			scene.Translate(Vector2f(10, 10));
+			Rect newRectB(10, 10, 30, 30);
+			scene.AddObject(&newRectB);
+			CHECK(newRect == Rect(30, 30, 20, 20));
+			CHECK(newRectB == Rect(30, 30, 30, 30));
 		}
 
 		SUBCASE("Reset the scene")

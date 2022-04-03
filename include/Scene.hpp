@@ -23,6 +23,7 @@ namespace Birb
 
 		void SetPosition(const Vector2f& newPosition);
 		void Translate(const Vector2f& delta);
+		Vector2f Position() const;
 
 		void Clear(); ///< Empty the scene
 		void Render() const; ///< Render all objects in the scene if the scene is active
