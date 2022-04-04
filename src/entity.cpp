@@ -245,6 +245,14 @@ namespace Birb
 		sprite = nullptr;
 	}
 
+	/* FIXME: Write tests for this constructor */
+	Entity::Entity(const std::string& p_name, const Rect& rect)
+	:name(p_name), rect(rect)
+	{
+		SetBaseEntityValues();
+		sprite = nullptr;
+	}
+
 	Entity::Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture)
 	:name(p_name), sprite(p_texture), rect(p_rect)
 	{

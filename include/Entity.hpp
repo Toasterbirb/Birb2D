@@ -126,7 +126,8 @@ namespace Birb
 	{
 	public:
 		Entity();
-		Entity(const std::string& p_name); ///< Creates empty Entity object
+		Entity(const std::string& p_name); ///< Creates an empty Entity object
+		Entity(const std::string& p_name, const Rect& rect); ///< Creates an empty Entity object with size and position
 		Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
 		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent); 	///< Creates a Animation Entity using a Animation
 		Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
