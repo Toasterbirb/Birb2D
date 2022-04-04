@@ -29,6 +29,9 @@ namespace Birb
 			Color* color; 	///< Surface color of the text
 			Color* bgColor; ///< Background color for the text component
 
+			/* FIXME: Create a constructor for this variable */
+			int wrapLength;
+
 			bool operator==(const Text& other) const
 			{
 				return 	(text 		== other.text

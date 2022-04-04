@@ -225,7 +225,7 @@ namespace Birb
 	}
 
 
-	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color)
+	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color, int wrapLength)
 	{
 		/* Check if the arguments are valid */
 		if (!font.isLoaded())
@@ -235,7 +235,11 @@ namespace Birb
 		}
 
 		//SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
-		SDL_Surface* surface = TTF_RenderText_Blended(font.ttf(), text.c_str(), color.sdl());
+		SDL_Surface* surface;
+
+		surface = TTF_RenderText_Blended_Wrapped(font.ttf(), text.c_str(), color.sdl(), wrapLength);
+
+
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 
@@ -260,6 +264,7 @@ namespace Birb
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 
+		/* FIXME: Implement wrapping for this function too */
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
 		if (texture == nullptr)
 			Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError(), Debug::error);

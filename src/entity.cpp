@@ -14,17 +14,21 @@ namespace Birb
 			font 	= NULL;
 			color 	= NULL;
 			bgColor = NULL;
+			wrapLength = 0;
 		}
 
 		Text::Text(const std::string& text, Font* font, Color* color)
 		:text(text), font(font), color(color)
 		{
 			bgColor = NULL;
+			wrapLength = 0;
 		}
 
 		Text::Text(const std::string& text, Font* font, Color* color, Color* bgColor)
 		:text(text), font(font), color(color), bgColor(bgColor)
-		{}
+		{
+			wrapLength = 0;
+		}
 
 		void PlaceHolderMouseDownEvent()
 		{
@@ -293,7 +297,7 @@ namespace Birb
 		if (textComponent.text != "")
 		{
 			if (textComponent.bgColor == NULL)
-				sprite = Resources::TextSprite(textComponent.text, *textComponent.font, *textComponent.color);
+				sprite = Resources::TextSprite(textComponent.text, *textComponent.font, *textComponent.color, textComponent.wrapLength);
 			else
 				sprite = Resources::TextSprite(textComponent.text, *textComponent.font, *textComponent.color, *textComponent.bgColor);
 
