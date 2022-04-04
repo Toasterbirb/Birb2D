@@ -1,6 +1,7 @@
 #include "Font.hpp"
 #include "Logger.hpp"
 #include "Values.hpp"
+#include "Diagnostics.hpp"
 
 namespace Birb
 {
@@ -70,7 +71,11 @@ namespace Birb
 		if (Global::IsInit::SDL_ttf)
 			return;
 
-		Debug::Log("Initializing SDL_ttf...");
+#ifdef DEBUG
+		if (Diagnostics::Debugging::InitMessages)
+			Debug::Log("Initializing SDL_ttf...");
+#endif
+
 		if (TTF_Init() == -1)
 		{
 			Debug::Log("TTF_Init has failed: " + (std::string)TTF_GetError(), Debug::error);

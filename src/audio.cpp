@@ -1,6 +1,7 @@
 #include "Audio.hpp"
 #include "Logger.hpp"
 #include "Values.hpp"
+#include "Diagnostics.hpp"
 
 namespace Birb
 {
@@ -10,7 +11,11 @@ namespace Birb
 		if (Global::IsInit::SDL_mixer)
 			return true;
 
-		Debug::Log("Initializing audio...");
+#ifdef DEBUG
+		if (Diagnostics::Debugging::InitMessages)
+			Debug::Log("Initializing audio...");
+#endif
+
 		int initted = Mix_Init(flags);
 		if ((initted&flags) != flags)
 		{
@@ -32,7 +37,11 @@ namespace Birb
 		}
 
 		// Audio initialization was successful
-		Debug::Log("Audio initialized successfully!");
+#ifdef DEBUG
+		if (Diagnostics::Debugging::InitMessages)
+			Debug::Log("Audio initialized successfully!");
+#endif
+
 		Global::IsInit::SDL_mixer = true;
 		return true;
 	}

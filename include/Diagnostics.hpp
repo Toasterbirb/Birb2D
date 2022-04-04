@@ -26,6 +26,7 @@ namespace Birb
         struct Debugging
         {
             static inline bool Buttons = false;
+			static inline bool InitMessages = false;
         };
 
 	}

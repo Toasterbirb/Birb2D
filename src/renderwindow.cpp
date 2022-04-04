@@ -1,6 +1,7 @@
 #include "Renderwindow.hpp"
 #include "Values.hpp"
 #include "Logger.hpp"
+#include "Diagnostics.hpp"
 
 namespace Birb
 {
@@ -44,7 +45,11 @@ namespace Birb
 		if (Global::IsInit::SDL)
 			return;
 
-		Debug::Log("Initializing SDL...");
+#ifdef DEBUG
+		if (Birb::Diagnostics::Debugging::InitMessages)
+			Debug::Log("Initializing SDL...");
+#endif
+
 		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) > 0)
 		{
 			Debug::Log("SDL Init failed: " + (std::string)SDL_GetError(), Debug::error);
@@ -62,7 +67,11 @@ namespace Birb
 		if (Global::IsInit::SDL_image)
 			return;
 
-		Debug::Log("Initializing SDL_image...");
+#ifdef DEBUG
+		if (Birb::Diagnostics::Debugging::InitMessages)
+			Debug::Log("Initializing SDL_image...");
+#endif
+
 		if (!(IMG_Init(IMG_INIT_PNG)))
 		{
 			Debug::Log("IMG_Init has failed" + (std::string)SDL_GetError(), Debug::error);
@@ -84,7 +93,11 @@ namespace Birb
 		Global::IsInit::SDL_image = false;
 		Global::IsInit::SDL_ttf = false;
 
-		Debug::Log("Destroying the window");
+#ifdef DEBUG
+		if (Diagnostics::Debugging::InitMessages)
+			Debug::Log("Destroying the window");
+#endif
+
 		SDL_DestroyWindow(win);
 	}
 
