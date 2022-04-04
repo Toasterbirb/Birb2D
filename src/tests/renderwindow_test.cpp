@@ -22,61 +22,8 @@ namespace Birb
 		CHECK(Global::RenderVars::BackgroundColor == Colors::Black);
 	}
 
-	TEST_CASE("Rendering: General")
+	void RenderLoop(const Scene& scene, Window window)
 	{
-		Window window("Birb2D tests", Vector2int(1280, 720), 75, false);
-		ApplicationInfo appInfo("Birb2D_tests");
-		Scene scene;
-		scene.Activate();
-
-		/* Place to store stuff in subcases */
-		std::vector<Entity> entities;
-		std::vector<Circle> circles;
-
-		SUBCASE("Sprites / Textures in a scene")
-		{
-			const int ENTITY_COUNT = 5;
-			SDL_Texture* birbSprite = Resources::LoadTexture(appInfo.ResLocation + "/textures/birb.png");
-
-			/* Create the entities */
-			for (int i = 0; i < ENTITY_COUNT; i++)
-			{
-				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite);
-				entities.push_back(testEntity);
-			}
-
-			/* Add the entities to the scene */
-			for (int i = 0; i < entities.size(); i++)
-				scene.AddObject(&entities[i]);
-
-			CHECK(scene.ObjectCount() == ENTITY_COUNT);
-		}
-
-		SUBCASE("Scenes inside of other scenes")
-		{
-			/* Create a child scene */
-			Scene* childScene = new Scene();
-
-			/* Create two rects for the background */
-			Rect* rectA = new Rect(Rect(0, 0, 640, 720, Colors::LightGray));
-			Rect* rectB = new Rect(Rect(640, 0, 640, 720, Colors::DarkGray));
-			Rect* rectC = new Rect(Rect(320, 180, 640, 360, Colors::Red));
-
-			scene.AddObject(rectA);
-			scene.AddObject(rectB);
-
-			/* Create a rect to put into the child scene */
-			rectC->renderingPriority = 1;
-			childScene->AddObject(rectC);
-
-			/* Add the childscene as a SceneObject into the main scene */
-			childScene->renderingPriority = 1;
-			scene.AddObject(childScene);
-
-			CHECK(scene.ObjectCount() == 3);
-			CHECK(childScene->ObjectCount() == 1);
-		}
-
 		TimeStep timeStep;
 		timeStep.Init(&window);
 		Timer testTimer;
@@ -110,5 +57,69 @@ namespace Birb
 			window.Display();
 			timeStep.End();
 		}
+	}
+
+	TEST_CASE("Rendering: General")
+	{
+		Window window("Birb2D tests", Vector2int(1280, 720), 75, false);
+		ApplicationInfo appInfo("Birb2D_tests");
+		Scene scene;
+		scene.Activate();
+
+		/* Place to store stuff in subcases */
+		std::vector<Entity> entities;
+		std::vector<Circle> circles;
+
+		SUBCASE("Sprites / Textures in a scene")
+		{
+			const int ENTITY_COUNT = 5;
+			SDL_Texture* birbSprite = Resources::LoadTexture(appInfo.ResLocation + "/textures/birb.png");
+
+			/* Create the entities */
+			for (int i = 0; i < ENTITY_COUNT; i++)
+			{
+				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite);
+				entities.push_back(testEntity);
+			}
+
+			/* Add the entities to the scene */
+			for (int i = 0; i < entities.size(); i++)
+				scene.AddObject(&entities[i]);
+
+			CHECK(scene.ObjectCount() == ENTITY_COUNT);
+
+			RenderLoop(scene, window);
+
+			/* Free stuff */
+			SDL_DestroyTexture(birbSprite);
+		}
+
+		SUBCASE("Scenes inside of other scenes")
+		{
+			/* Create a child scene */
+			Scene childScene;
+
+			/* Create two rects for the background */
+			Rect rectA(Rect(0, 0, 640, 720, Colors::LightGray));
+			Rect rectB(Rect(640, 0, 640, 720, Colors::DarkGray));
+			Rect rectC(Rect(320, 180, 640, 360, Colors::Red));
+
+			scene.AddObject(&rectA);
+			scene.AddObject(&rectB);
+
+			/* Create a rect to put into the child scene */
+			rectC.renderingPriority = 1;
+			childScene.AddObject(&rectC);
+
+			/* Add the childscene as a SceneObject into the main scene */
+			childScene.renderingPriority = 1;
+			scene.AddObject(&childScene);
+
+			CHECK(scene.ObjectCount() == 3);
+			CHECK(childScene.ObjectCount() == 1);
+
+			RenderLoop(scene, window);
+		}
+
 	}
 }
