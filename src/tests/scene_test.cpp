@@ -153,4 +153,10 @@ namespace Birb
 			CHECK(scene.ObjectCount() == 0);
 		}
 	}
+
+	TEST_CASE("Scene that is inactive by default")
+	{
+		Scene sceneThatIsDisabled(false);
+		CHECK(sceneThatIsDisabled.isActive() == false);
+	}
 }

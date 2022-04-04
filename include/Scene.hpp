@@ -6,12 +6,13 @@
 
 namespace Birb
 {
-	class Scene
+	class Scene : public SceneObject
 	{
 	public:
 		Scene();
+		Scene(const bool& isActive);
 		void AddObject(SceneObject* obj);
-		void AddObject(SceneObject* obj[], int objCount);
+		void AddObject(SceneObject** obj, int objCount);
 		std::vector<SceneObject*> GetObjects() const;
 		
 		int ObjectCount();
@@ -35,5 +36,9 @@ namespace Birb
 		bool active;
 
 		Vector2f positionOffset;
+
+		/* Variables for a scene that is a child of another scene */
+		void RenderFunc() override; ///< Gets called when the scene is a child of another scene
+		void SetPos(const Vector2f& delta) override; ///< The same as Translate, used when the scene is a SceneObject
 	};
 }

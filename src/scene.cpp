@@ -5,7 +5,13 @@ namespace Birb
 {
 	Scene::Scene()
 	{
-		active = false;
+		active = true;
+		positionOffset = {0, 0};
+	}
+
+	Scene::Scene(const bool& isActive)
+	:active(isActive)
+	{
 		positionOffset = {0, 0};
 	}
 
@@ -136,5 +142,15 @@ namespace Birb
 				}
 			}
 		} while (!ready);
+	}
+
+	void Scene::RenderFunc()
+	{
+		this->Render();
+	}
+
+	void Scene::SetPos(const Vector2f& delta)
+	{
+		this->Translate(delta);
 	}
 }
