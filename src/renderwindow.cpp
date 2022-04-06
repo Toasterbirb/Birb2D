@@ -245,7 +245,6 @@ namespace Birb
 			surface = TTF_RenderText_Solid(font.ttf(), text.c_str(), color.sdl());
 		}
 
-
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
 
