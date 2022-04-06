@@ -151,12 +151,12 @@ namespace Birb
 				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 					SetWindowSize(Vector2int(event.window.data1, event.window.data2));
 				break;
-			
+
 			case (SDL_QUIT):
 				Debug::Log("Quitting...");
 				*GameRunning = false;
 				break;
-			
+
 			default:
 				break;
 		}
@@ -171,7 +171,7 @@ namespace Birb
 	{
 		SDL_Texture* texture = NULL;
 		texture = IMG_LoadTexture(Global::RenderVars::Renderer, p_filePath.c_str());
-		
+
 		if (texture == NULL)
 			Debug::Log("Failed to load texture [" + p_filePath + "]: " + (std::string)SDL_GetError(), Debug::error);
 
@@ -234,15 +234,16 @@ namespace Birb
 			return NULL;
 		}
 
-		//SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
 		SDL_Surface* surface;
 
-#ifdef TEXT_WRAP_ENABLED
-		surface = TTF_RenderText_Blended_Wrapped(font.ttf(), text.c_str(), color.sdl(), wrapLength);
-#else
-		surface = TTF_RenderText_Solid(font.ttf(), text.c_str(), color.sdl());
-#endif
-
+		// wrapLength of 0 is meant to only wrap with '\n', but seems to not work on some systems
+		// Disabling for now, as this breaks text rendering.
+		// FIXME: Enable when this feature is supported
+		if (wrapLength != 0) {
+			surface = TTF_RenderText_Blended_Wrapped(font.ttf(), text.c_str(), color.sdl(), wrapLength);
+		} else {
+			surface = TTF_RenderText_Solid(font.ttf(), text.c_str(), color.sdl());
+		}
 
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
@@ -330,7 +331,7 @@ namespace Birb
 		/* Draw the progress bar filler box */
 		Birb::Rect fillRect(entity.rect.x, entity.rect.y, (entity.progressBarComponent.value / entity.progressBarComponent.maxValue) * entity.rect.w, entity.rect.h);
 		Render::DrawRect(*entity.progressBarComponent.fillColor, fillRect);
-		
+
 		/* Draw the progress bar outer box */
 		Render::DrawRect(*entity.progressBarComponent.borderColor, entity.rect, entity.progressBarComponent.borderWidth);
 	}
@@ -573,7 +574,7 @@ namespace Birb
 			}
 		}
 
-		/* filledPolygonColor works only with integers, so this will just 
+		/* filledPolygonColor works only with integers, so this will just
 		 * round the floating point vlues into integers */
 		bool DrawPolygon(const Color& color, Vector2f* points, const int& pointCount)
 		{
