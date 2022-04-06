@@ -242,7 +242,7 @@ namespace Birb
 		if (wrapLength != 0) {
 			surface = TTF_RenderText_Blended_Wrapped(font.ttf(), text.c_str(), color.sdl(), wrapLength);
 		} else {
-			surface = TTF_RenderText_Solid(font.ttf(), text.c_str(), color.sdl());
+			surface = TTF_RenderText_Blended(font.ttf(), text.c_str(), color.sdl());
 		}
 
 		if (surface == nullptr)
