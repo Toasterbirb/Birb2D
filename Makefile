@@ -1,8 +1,8 @@
-CC=g++
+CC=em++
 SRCDIR=./src
 TEST_SRCDIR=./src/tests
 outputDir=./build
-CFLAGS=-fPIC -g -std=c++17
+CFLAGS=-fPIC -g -std=c++17 -sUSE_SDL=2 -sUSE_SDL_IMAGE=2 -sUSE_SDL_TTF=2 -sUSE_SDL_MIXER=2 -sUSE_SDL_GFX=2
 WarningFlags=-Wpedantic -Wall -Wextra -Wfloat-equal
 SDL_FLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
 INCLUDES=-I./include
