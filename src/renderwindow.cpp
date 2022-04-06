@@ -237,7 +237,11 @@ namespace Birb
 		//SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
 		SDL_Surface* surface;
 
+#ifdef TEXT_WRAP_ENABLED
 		surface = TTF_RenderText_Blended_Wrapped(font.ttf(), text.c_str(), color.sdl(), wrapLength);
+#else
+		surface = TTF_RenderText_Solid(font.ttf(), text.c_str(), color.sdl());
+#endif
 
 
 		if (surface == nullptr)
