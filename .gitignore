@@ -48,3 +48,6 @@ log.txt
 # AppImage
 *.AppDir
 *.AppImage
+
+# Dist files
+*.tar.gz
