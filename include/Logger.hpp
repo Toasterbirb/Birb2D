@@ -10,7 +10,7 @@ namespace Birb
 	{
 		enum Type
 		{
-			log, warning, error
+			log, warning, error, fixme
 		};
 		void Reset(); ///< Delete the logfile if one exists already. Good to run on application startup
 		void Log(const std::string& text, Type type = Type::log); ///< Log to the console and also write to a logfile
@@ -21,5 +21,6 @@ namespace Birb
 		static const std::string LogLabel 		= "L";
 		static const std::string WarningLabel 	= "W";
 		static const std::string ErrorLabel 	= "E";
+		static const std::string FixmeLabel 	= "F";
 	}
 }
