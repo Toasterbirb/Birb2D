@@ -76,7 +76,7 @@ uninstall_lib:
 
 # Engine code
 %.o: $(SRCDIR)/%.cpp
-	$(CC) -c $(CFLAGS) -DDEBUG -DTEXT_WRAP_ENABLED $(INCLUDES) $^
+	$(CC) -c $(CFLAGS) -DDEBUG $(INCLUDES) $^
 
 # Test code
 %.o: $(TEST_SRCDIR)/%.cpp
