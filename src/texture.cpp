@@ -32,7 +32,7 @@ namespace Birb
 		}
 
 		/* Create a texture from the surface pixels */
-		this->sdlTex = SDL_CreateTextureFromSurface(Birb::Window::renderer, surface);
+		this->sdlTex = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
 
 		SDL_FreeSurface(surface);
 		return true;
@@ -66,5 +66,10 @@ namespace Birb
 	void Texture::Destroy()
 	{
 		SDL_DestroyTexture(sdlTex);
+	}
+
+	Vector2int Texture::dimensions() const
+	{
+		return texture_dimensions;
 	}
 }

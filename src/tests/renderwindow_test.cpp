@@ -4,6 +4,7 @@
 #include "Values.hpp"
 #include "Scene.hpp"
 #include "Timestep.hpp"
+#include "Texture.hpp"
 
 namespace Birb
 {
@@ -73,12 +74,12 @@ namespace Birb
 		SUBCASE("Sprites / Textures in a scene")
 		{
 			const int ENTITY_COUNT = 5;
-			SDL_Texture* birbSprite = Resources::LoadTexture(appInfo.ResLocation + "/textures/birb.png");
+			Texture birbSprite(appInfo.ResLocation + "/textures/birb.png");
 
 			/* Create the entities */
 			for (int i = 0; i < ENTITY_COUNT; i++)
 			{
-				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite);
+				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite.sdlTexture());
 				entities.push_back(testEntity);
 			}
 
@@ -91,7 +92,7 @@ namespace Birb
 			RenderLoop(scene, window);
 
 			/* Free stuff */
-			SDL_DestroyTexture(birbSprite);
+			birbSprite.Destroy();
 		}
 
 		SUBCASE("Scenes inside of other scenes")
