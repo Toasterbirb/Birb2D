@@ -227,5 +227,5 @@ TEST_CASE("Window and rendering functions")
 
 	//CHECK_NOTHROW(window.Cleanup());
 
-	SDL_Quit();
+	//SDL_Quit();
 }

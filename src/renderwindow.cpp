@@ -14,6 +14,10 @@ namespace Birb
 	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
 	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
+#ifdef DEBUG
+		Debug::Log("Creating window '" + win_title + "'...");
+#endif
+
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
 		InitSDL_image();
@@ -24,14 +28,26 @@ namespace Birb
 			win = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_window_dimensions.x, p_window_dimensions.y, SDL_WINDOW_SHOWN);
 
 		if (win == NULL)
+		{
 			Debug::Log("Window failed to init: " + (std::string)SDL_GetError(), Debug::error);
+			exit(1);
+		}
 
 		renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+		if (renderer == NULL)
+		{
+			Debug::Log("Renderer failed to init: " + (std::string)SDL_GetError(), Debug::error);
+			exit(1);
+		}
 
 		/* Set some global rendering variables */
 		Global::RenderVars::RefreshRate = refresh_rate;
 		Global::RenderVars::MainWindow 	= win;
 		Global::RenderVars::Renderer 	= renderer;
+
+#ifdef DEBUG
+		Debug::Log("Window '" + win_title + "' created successfully!");
+#endif
 	}
 
 	Window::~Window()
@@ -85,6 +101,18 @@ namespace Birb
 
 	void Window::Cleanup()
 	{
+#ifdef DEBUG
+		Debug::Log("Starting window cleanup for '" + win_title + "'...");
+#endif
+		SDL_DestroyWindow(win);
+
+		/* FIXME: There's some sort of memory leak with SDL_Renderer. Destroying the renderer
+		 * causes heck of a lot of valgrind errors
+		 * Ref: https://stackoverflow.com/questions/20823886/sdl2-memory-leaks-on-sdl-destroyrenderer
+		 *
+		 * Also, this deconstructor is getting called twice in some cases for some weird reason */
+		//SDL_DestroyRenderer(renderer);
+
 		IMG_Quit();
 		TTF_Quit();
 		SDL_Quit();
@@ -93,12 +121,12 @@ namespace Birb
 		Global::IsInit::SDL_image = false;
 		Global::IsInit::SDL_ttf = false;
 
-#ifdef DEBUG
-		if (Diagnostics::Debugging::InitMessages)
-			Debug::Log("Destroying the window");
-#endif
+		Global::RenderVars::MainWindow = NULL;
+		Global::RenderVars::Renderer = NULL;
 
-		SDL_DestroyWindow(win);
+#ifdef DEBUG
+		Debug::Log("Window '" + win_title + "' destroyed!");
+#endif
 	}
 
 	void Window::Clear()
