@@ -8,17 +8,19 @@ namespace Birb
 	Texture::Texture()
 	{
 		textureLoaded = false;
+		texture_dimensions = Vector2int(0, 0);
 	}
 
 	Texture::Texture(const std::string& filePath)
 	{
-		LoadTexture(filePath);
+		textureLoaded = LoadTexture(filePath);
+		
+		/* If the texture was loaded successfully, get its dimensions */
+		if (textureLoaded)
+			texture_dimensions = utils::GetTextureDimensions(sdlTex);
+		else
+			texture_dimensions = Vector2int(0, 0);
 	}
-
-	//Texture::~Texture()
-	//{
-	//	SDL_DestroyTexture(sdlTex);
-	//}
 
 	bool Texture::LoadTexture(const std::string& filePath)
 	{

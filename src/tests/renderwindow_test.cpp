@@ -73,8 +73,15 @@ namespace Birb
 
 		SUBCASE("Sprites / Textures in a scene")
 		{
+			Texture emptyTexture;		
+			CHECK(emptyTexture.isLoaded() == false);
+			CHECK(emptyTexture.dimensions() == Vector2int(0, 0));
+
 			const int ENTITY_COUNT = 5;
 			Texture birbSprite(appInfo.ResLocation + "/textures/birb.png");
+
+			CHECK(birbSprite.isLoaded() == true);
+			CHECK(birbSprite.dimensions() == Vector2int(64, 64));
 
 			/* Create the entities */
 			for (int i = 0; i < ENTITY_COUNT; i++)
