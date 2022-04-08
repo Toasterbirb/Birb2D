@@ -12,6 +12,7 @@ namespace Birb
 		Color(const int& hex);
 
 		SDL_Color sdl() const; ///< Convert Color to SDL_Color
+		void ChangeIntensity(const int& delta);
 
 		Uint8 r, g, b, a;
 
@@ -22,5 +23,18 @@ namespace Birb
 					&& b == other.b
 					&& a == other.a);
 		}
+
 	};
+
+	namespace Colors
+	{
+		static Color White =        { 255, 	255, 	255, 	255 };
+		static Color Black =        { 0, 	0, 		0, 		255 };
+		static Color Red =          { 255, 	0, 		0, 		255 };
+		static Color Green =        { 0, 	255, 	0, 		255 };
+		static Color Blue =         { 0, 	0, 		255, 	255 };
+		static Color Yellow =       { 255, 	255, 	0, 		255 };
+		static Color DarkGray =     { 60, 	60, 	60, 	255 };
+		static Color LightGray =    { 180, 	180, 	180, 	255 };
+	}
 }

@@ -41,6 +41,18 @@ namespace Birb
 		CHECK(colorB.g == 78);
 		CHECK(colorB.b == 7);
 		CHECK(colorB.a == 255);
+
+		Color colorC(0x000000);
+		CHECK(colorC.r == 0);
+		CHECK(colorC.g == 0);
+		CHECK(colorC.b == 0);
+		CHECK(colorC.a == 255);
+
+		Color colorD(0x00000000);
+		CHECK(colorC.r == 0);
+		CHECK(colorC.g == 0);
+		CHECK(colorC.b == 0);
+		CHECK(colorC.a == 255);
 	}
 
 	TEST_CASE("Color to SDL_Color")
@@ -69,5 +81,32 @@ namespace Birb
 			colorA = colorB;
 			CHECK(colorA == colorB);
 		}
+	}
+
+	TEST_CASE("Color intensity modification (lighten/darken)")
+	{
+		Color colorA(0xFFFFFF);
+		CHECK(colorA.r == 255);
+		CHECK(colorA.g == 255);
+		CHECK(colorA.b == 255);
+		CHECK(colorA.a == 255);
+
+		colorA.ChangeIntensity(10);
+		CHECK(colorA.r == 255);
+		CHECK(colorA.g == 255);
+		CHECK(colorA.b == 255);
+		CHECK(colorA.a == 255);
+
+		colorA.ChangeIntensity(-10);
+		CHECK(colorA.r == 245);
+		CHECK(colorA.g == 245);
+		CHECK(colorA.b == 245);
+		CHECK(colorA.a == 255);
+
+		colorA.ChangeIntensity(-255);
+		CHECK(colorA.r == 0);
+		CHECK(colorA.g == 0);
+		CHECK(colorA.b == 0);
+		CHECK(colorA.a == 255);
 	}
 }

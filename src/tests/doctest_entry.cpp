@@ -15,6 +15,7 @@ int main(int argc, char** argv)
 #include "Font.hpp"
 #include "Graphs.hpp"
 #include "Math.hpp"
+#include "Color.hpp"
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Utils.hpp"

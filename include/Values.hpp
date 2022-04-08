@@ -35,18 +35,4 @@ namespace Birb
 			static inline Color BackgroundColor = Color(0, 0, 0);
 		};
 	}
-
-	namespace Colors
-	{
-		static Color White =        { 255, 	255, 	255, 	255 };
-		static Color Black =        { 0, 	0, 		0, 		255 };
-		static Color Red =          { 255, 	0, 		0, 		255 };
-		static Color Green =        { 0, 	255, 	0, 		255 };
-		static Color Blue =         { 0, 	0, 		255, 	255 };
-		static Color Yellow =       { 255, 	255, 	0, 		255 };
-		static Color DarkGray =     { 60, 	60, 	60, 	255 };
-		static Color LightGray =    { 180, 	180, 	180, 	255 };
-
-		SDL_Color ChangeColorIntensity(const SDL_Color& color, const int& delta);
-	}
 }
