@@ -89,6 +89,10 @@ uninstall_lib:
 # Test code
 %.o: $(TEST_SRCDIR)/%.cpp
 	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $(INCLUDES) $^
+	
+# Memleak test code
+%.o: ./src/mem_tests/%.cpp
+	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $(INCLUDES) $^
 
 
 docker_build:
