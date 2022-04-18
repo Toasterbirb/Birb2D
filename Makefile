@@ -30,6 +30,11 @@ test: ${LIB_OBJ} ${TEST_OBJ}
 	cp -r ./res $(outputDir)/
 	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) $(WarningFlags) -o $(outputDir)/test
 
+entity_memleak: ${LIB_OBJ} entity_memleak.o
+	mkdir -p build
+	cp -r ./res $(outputDir)/
+	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) $(WarningFlags) -o $(outputDir)/entity_memleak_test
+
 run_tests: test
 	./build/test
 
@@ -83,7 +88,7 @@ uninstall_lib:
 
 # Test code
 %.o: $(TEST_SRCDIR)/%.cpp
-	$(CXX) -c $(CXXFLAGS) $(INCLUDES) $^
+	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $(INCLUDES) $^
 
 
 docker_build:
