@@ -25,5 +25,8 @@ namespace Birb
 		music.play();
 		CHECK(music.isPlaying());
 		SDL_Delay(1000);
+
+		/* De-initialize SDL_mixer */
+		Mix_Quit();
 	}
 }

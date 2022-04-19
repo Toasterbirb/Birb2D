@@ -2,6 +2,7 @@
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
+#include <SDL2/SDL_mixer.h>
 
 namespace Birb
 {
@@ -111,11 +112,18 @@ namespace Birb
 		 * Ref: https://stackoverflow.com/questions/20823886/sdl2-memory-leaks-on-sdl-destroyrenderer
 		 *
 		 * Also, this deconstructor is getting called twice in some cases for some weird reason */
-		//SDL_DestroyRenderer(renderer);
 
 		IMG_Quit();
 		TTF_Quit();
 		SDL_Quit();
+		SDL_DestroyRenderer(renderer);
+
+		/* Also de-initialize SDL_Mixer if audio has been used */
+		if (Global::IsInit::SDL_mixer)
+		{
+			Mix_Quit();
+			Global::IsInit::SDL_mixer = false;
+		}
 
 		Global::IsInit::SDL = false;
 		Global::IsInit::SDL_image = false;

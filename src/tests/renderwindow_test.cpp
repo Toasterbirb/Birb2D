@@ -23,7 +23,7 @@ namespace Birb
 		CHECK(Global::RenderVars::BackgroundColor == Colors::Black);
 	}
 
-	void RenderLoop(const Scene& scene, Window window)
+	void RenderLoop(const Scene& scene, Window& window)
 	{
 		TimeStep timeStep;
 		timeStep.Init(&window);
