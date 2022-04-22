@@ -61,7 +61,7 @@ namespace Birb
 		this->size = size;
 
 		/* Reload the font with a different size */
-		free(ttfFont);
+		TTF_CloseFont(ttfFont);
 		LoadFont(this->filePath, size);
 	}
 
