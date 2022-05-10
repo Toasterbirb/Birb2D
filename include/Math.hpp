@@ -38,6 +38,7 @@ namespace Birb
 		Vector2int 	Lerp(const Vector2int& a, const Vector2int& b, const float& t); ///< Interpolate a point between two 2D integer vectors given time t
 		Vector3f 	Lerp(const Vector3f& a, const Vector3f& b, const float& t); ///< Interpolate a point between two 3D floating point vectors given time t
 		Vector3int 	Lerp(const Vector3int& a, const Vector3int& b, const float& t); ///< Interpolate a point between two 3D integer vectors given time t
+		Color 		Lerp(const Color& a, const Color& b, const float& t); ///< Interpolate between two colors given time t
 
 		float 	CenterPoint(const float& a, const float& b); ///< Calculate the "center" value between two 1D floats
 		Vector2f CenterPoint(const Vector2f& a, const Vector2f& b); ///< Calculate the center point between two 2D floating point vectors

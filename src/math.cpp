@@ -63,6 +63,11 @@ namespace Birb
 			return Vector3int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 		}
 
+		Color Lerp(const Color& a, const Color& b, const float& t)
+		{
+			return Color(Lerp(a.r, b.r, t), Lerp(a.g, b.g, t), Lerp(a.b, b.b, t));
+		}
+
 
 		float CenterPoint(const float& a, const float& b)
 		{

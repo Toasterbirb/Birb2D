@@ -135,6 +135,20 @@ namespace Birb
 		CHECK(Math::Lerp(vecAint, vecBint, 1) == Birb::Vector3int(40, 20, 30));
 	}
 
+	TEST_CASE("Lerping / interpolation with colors")
+	{
+		Color black(0, 0, 0);
+		Color white(255, 255, 255);
+		CHECK(Math::Lerp(black, white, 0.0f) == black);
+		CHECK(Math::Lerp(black, white, 0.4f) == Color(102, 102, 102));
+		CHECK(Math::Lerp(black, white, 0.6f) == Color(153, 153, 153));
+		CHECK(Math::Lerp(black, white, 1.0f) == white);
+
+		Color colorA(10, 10, 10);
+		Color colorB(20, 20, 20);
+		CHECK(Math::Lerp(colorA, colorB, 0.5f) == Color(15, 15, 15));
+	}
+
 	TEST_CASE("Calculate the centerpoint between two 1D floats")
 	{
 		float a = 0;
