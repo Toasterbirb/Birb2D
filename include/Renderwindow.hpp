@@ -1,9 +1,11 @@
 #pragma once
 
+#ifdef LIB_SDL
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
+#endif /* LIB_SDL */
 
 #include "Circle.hpp"
 #include "Color.hpp"
@@ -59,19 +61,25 @@ namespace Birb
 	/// Methods for loading different resources like fonts and textures
 	struct Resources
 	{
+#ifdef LIB_SDL
 		static SDL_Texture* LoadTexture(const std::string& p_filePath);
 
 		/* FIXME: Move all of this to resources.cpp and add constructors for wrapped boolean */
 		static SDL_Texture* TextSprite(const std::string& text, const Font& font, const Color& color, int wrapLength = 0);
 		static SDL_Texture* TextSprite(const std::string& text, const Font& font, const Color& color, const Color& bgColor);
 		static Uint8* 		CopyTexturePixels(SDL_Surface* surface, int* width, int* height, int* pitch);
+#endif /* LIB_SDL */
 	};
 
 	/// Methods for rendering things
 	namespace Render
 	{
 		bool DrawEntity(Entity& entity); ///< Renders an entity
+
+#ifdef LIB_SDL
 		void ResetDrawColor(); ///< Resets the drawing color back to black, so that the window background color stays the same
+		void SetRenderDrawColor(const Color& color); ///< Sets the drawing color for base SDL2 drawing functions
+#endif
 
 		void DrawRect(const Color& color, const Rect& dimensions); ///< Draw filled rect
 		void DrawRect(const Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
@@ -93,6 +101,5 @@ namespace Birb
 		bool DrawPolygon(const Color& color, const std::vector<Vector2f>& points); ///< Draw a polygon from multiple points
 		bool DrawPolygon(const Polygon& polygon); ///< Draw a polygon
 
-		void SetRenderDrawColor(const Color& color); ///< Sets the drawing color for base SDL2 drawing functions
 	};
 }

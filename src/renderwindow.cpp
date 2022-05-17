@@ -19,6 +19,7 @@ namespace Birb
 		Debug::Log("Creating window '" + win_title + "'...");
 #endif
 
+#ifdef LIB_SDL
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
 		InitSDL_image();
@@ -42,9 +43,11 @@ namespace Birb
 		}
 
 		/* Set some global rendering variables */
-		Global::RenderVars::RefreshRate = refresh_rate;
 		Global::RenderVars::MainWindow 	= win;
 		Global::RenderVars::Renderer 	= renderer;
+#endif /* LIB_SDL */
+
+		Global::RenderVars::RefreshRate = refresh_rate;
 
 #ifdef DEBUG
 		Debug::Log("Window '" + win_title + "' created successfully!");
@@ -102,6 +105,7 @@ namespace Birb
 
 	void Window::Cleanup()
 	{
+#ifdef LIB_SDL
 #ifdef DEBUG
 		Debug::Log("Starting window cleanup for '" + win_title + "'...");
 #endif
@@ -131,6 +135,7 @@ namespace Birb
 
 		Global::RenderVars::MainWindow = NULL;
 		Global::RenderVars::Renderer = NULL;
+#endif
 
 #ifdef DEBUG
 		Debug::Log("Window '" + win_title + "' destroyed!");
@@ -140,12 +145,16 @@ namespace Birb
 	void Window::Clear()
 	{
 		/* Clear the window renderer. Call before rendering stuff */
+#ifdef LIB_SDL
 		SDL_RenderClear(Global::RenderVars::Renderer);
+#endif
 	}
 
 	void Window::Display()
 	{
+#ifdef LIB_SDL
 		SDL_RenderPresent(Global::RenderVars::Renderer);
+#endif
 	}
 
 	Vector2int Window::CursorPosition() const
@@ -200,9 +209,16 @@ namespace Birb
 
 	bool Window::PollEvents()
 	{
+#ifdef LIB_SDL
 		return (SDL_PollEvent(&event) != 0);
+#else
+		// TODO: Implement event polling without SDL
+		Debug::Log("Event polling not implemented", Debug::fixme);
+		return false;
+#endif /* LIB_SDL */
 	}
 
+#ifdef LIB_SDL
 	SDL_Texture* Resources::LoadTexture(const std::string& p_filePath)
 	{
 		SDL_Texture* texture = NULL;
@@ -313,6 +329,7 @@ namespace Birb
 		SDL_FreeSurface(surface);
 		return texture;
 	}
+#endif /* LIB_SDL */
 
 	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
 	{
@@ -390,8 +407,13 @@ namespace Birb
 			return false;
 		}
 
+#ifdef LIB_SDL
 		SDL_Rect src;
 		SDL_Rect dst;
+#else
+		Rect src;
+		Rect dst;
+#endif
 		Vector2int centerPoint;
 
 		/* Get texture data */
@@ -399,6 +421,7 @@ namespace Birb
 		int texHeight 	= 0;
 
 		/* Skip the texture width tests if the entity doesn't have a texture on it */
+#ifdef LIB_SDL
 		if (entity.sprite != nullptr)
 		{
 			SDL_QueryTexture(entity.sprite, NULL, NULL, &texWidth, &texHeight);
@@ -409,6 +432,19 @@ namespace Birb
 				return false;
 			}
 		}
+#else
+		if (entity.sprite.isLoaded())
+		{
+			texWidth 	= entity.sprite.dimensions().x;
+			texHeight 	= entity.sprite.dimensions().y;
+
+			if (texWidth <= 0 || texHeight <= 0)
+			{
+				Birb::Debug::Log("Tried to render an entity with a texture with size of <= 0", Debug::Type::warning);
+				return false;
+			}
+		}
+#endif
 
 		if (entity.animationComponent.frameCount <= 0) /* Check if the entity has animations */
 		{
@@ -425,7 +461,11 @@ namespace Birb
 		else
 		{
 			/* Entity probably has an animation component */
+#ifdef LIB_SDL
 			HandleAnimations(&entity, &src, &dst);
+#else
+			// TODO: Figure out how to do animations without SDL
+#endif
 		}
 
 		/* Check if the entity has an active progress bar component */
@@ -442,6 +482,9 @@ namespace Birb
 		}
 
 		centerPoint = Vector2int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
+
+		// TODO: Figure out rendering without SDL
+#ifdef LIB_SDL
 		SDL_Point center = { centerPoint.x, centerPoint.y };
 
 		/* Skip rendering the texture if one doesn't exist on the entity */
@@ -452,23 +495,35 @@ namespace Birb
 			else
 				return true;
 		}
+#endif /* LIB_SDL */
 
 		return true;
 	}
 
 	namespace Render
 	{
+#ifdef LIB_SDL
 		void ResetDrawColor()
 		{
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, Global::RenderVars::BackgroundColor.r, Global::RenderVars::BackgroundColor.g, Global::RenderVars::BackgroundColor.b, 255);
 		}
 
+		void SetRenderDrawColor(const Color& color)
+		{
+			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
+		}
+#endif
+
 		void DrawRect(const Color& color, const Rect& dimensions)
 		{
+#ifdef LIB_SDL
 			SetRenderDrawColor(color);
 			SDL_Rect rectangle = dimensions.getSDLRect();
 			SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
 			ResetDrawColor();
+#else
+			Debug::Log("DrawRect()", Debug::fixme);
+#endif
 		}
 
 		void DrawRect(const Color& color, const Rect& dimensions, const int& width)
@@ -481,23 +536,35 @@ namespace Birb
 
 		void DrawLine(const Color& color, const Vector2int& pointA, const Vector2int& pointB)
 		{
+#ifdef LIB_SDL
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
 			ResetDrawColor();
+#else
+			Debug::Log("DrawLine()", Debug::fixme);
+#endif /* LIB_SDL */
 		}
 
 		void DrawLine(const Color& color, const Vector2f& pointA, const Vector2f& pointB)
 		{
+#ifdef LIB_SDL
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLineF(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
 			ResetDrawColor();
+#else
+			Debug::Log("DrawLine()", Debug::fixme);
+#endif /* LIB_SDL */
 		}
 
 		void DrawLine(const Line& line)
 		{
+#ifdef LIB_SDL
 			SetRenderDrawColor(line.color);
 			SDL_RenderDrawLineF(Global::RenderVars::Renderer, line.pointA.x, line.pointA.y, line.pointB.x, line.pointB.y);
 			ResetDrawColor();
+#else
+			Debug::Log("DrawLine()", Debug::fixme);
+#endif /* LIB_SDL */
 		}
 
 		void DrawLine(const Line& line, const int& thickness)
@@ -516,6 +583,7 @@ namespace Birb
 
 		void DrawLines(const Color& color, Vector2int* points, const int& pointCount)
 		{
+#ifdef LIB_SDL
 			SDL_Point sdlPoints[pointCount];
 			for (int i = 0; i < pointCount; i++)
 			{
@@ -525,10 +593,14 @@ namespace Birb
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLines(Global::RenderVars::Renderer, sdlPoints, pointCount);
 			ResetDrawColor();
+#else
+			Debug::Log("DrawLines()", Debug::fixme);
+#endif /* LIB_SDL */
 		}
 
 		void DrawLines(const Color& color, Vector2f* points, const int& pointCount)
 		{
+#ifdef LIB_SDL
 			SDL_FPoint sdlPoints[pointCount];
 			for (int i = 0; i < pointCount; i++)
 			{
@@ -538,6 +610,9 @@ namespace Birb
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLinesF(Global::RenderVars::Renderer, sdlPoints, pointCount);
 			ResetDrawColor();
+#else
+			Debug::Log("DrawLines()", Debug::fixme);
+#endif
 		}
 
 		bool DrawCircle(const Circle& circle)
@@ -547,6 +622,7 @@ namespace Birb
 
 		bool DrawCircle(const Color& color, const Vector2int& pos, const int& radius)
 		{
+#ifdef LIB_SDL
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
 			{
@@ -558,10 +634,15 @@ namespace Birb
 				Debug::Log("Error when drawing a circle", Debug::error);
 				return false;
 			}
+#else
+			Debug::Log("DrawCircle()", Debug::fixme);
+			return false;
+#endif /* LIB_SDL */
 		}
 
 		bool DrawPolygon(const Color& color, Vector2int* points, const int& pointCount)
 		{
+#ifdef LIB_SDL
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
 			/* Convert Vector2int points into Sint16 vectors */
@@ -583,10 +664,15 @@ namespace Birb
 				Debug::Log("Error when drawing a polygon!", Debug::error);
 				return false;
 			}
+#else
+			Debug::Log("DrawPolygon()", Debug::fixme);
+			return false;
+#endif /* LIB_SDL */
 		}
 
 		bool DrawPolygon(const Color& color, const std::vector<Vector2int>& points)
 		{
+#ifdef LIB_SDL
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
 			/* Convert Vector2int points into Sint16 vectors */
@@ -608,6 +694,10 @@ namespace Birb
 				Debug::Log("Error when drawing a polygon!", Debug::error);
 				return false;
 			}
+#else
+			Debug::Log("DrawPolygon()", Debug::fixme);
+			return false;
+#endif
 		}
 
 		/* filledPolygonColor works only with integers, so this will just
@@ -637,11 +727,6 @@ namespace Birb
 		bool DrawPolygon(const Polygon& polygon)
 		{
 			return DrawPolygon(polygon.color, polygon.points);
-		}
-
-		void SetRenderDrawColor(const Color& color)
-		{
-			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 		}
 	}
 }
