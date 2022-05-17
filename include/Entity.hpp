@@ -3,8 +3,6 @@
 #include <functional>
 #include <string>
 #include <vector>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include "Font.hpp"
 #include "Utils.hpp"
 #include "Timer.hpp"
