@@ -1,6 +1,8 @@
 #pragma once
 
+#ifdef LIB_SDL
 #include <SDL2/SDL.h>
+#endif
 
 namespace Birb
 {
@@ -11,10 +13,15 @@ namespace Birb
 		Color(const int& r, const int& g, const int& b, const int& a);
 		Color(const int& hex);
 
+#ifdef LIB_SDL
 		SDL_Color sdl() const; ///< Convert Color to SDL_Color
+		Uint8 r, g, b, a;
+#else
+		int r, g, b, a;
+#endif /* LIB_SDL */
+
 		void ChangeIntensity(const int& delta);
 
-		Uint8 r, g, b, a;
 
 		bool operator==(const Color& other) const
 		{

@@ -7,7 +7,7 @@ outputDir=./build
 CXXFLAGS=-fPIC -g -std=c++17
 WarningFlags=-Wpedantic -Wall -Wextra -Wfloat-equal
 LDFLAGS=-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_gfx
-CPPFLAGS=-DDEBUG
+CPPFLAGS=-DDEBUG -DLIB_SDL
 INCLUDES=-I./include
 LIBFILE=libbirb2d.so
 DESTDIR=/usr

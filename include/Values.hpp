@@ -1,7 +1,10 @@
 #pragma once
 #pragma GCC diagnostic ignored "-Wunused-variable"
 
+#ifdef LIB_SDL
 #include <SDL2/SDL.h>
+#endif
+
 #include <string>
 #include "Color.hpp"
 
@@ -30,8 +33,12 @@ namespace Birb
 		struct RenderVars
 		{
 			static inline int RefreshRate = 240;
+
+#ifdef LIB_SDL
 			static inline SDL_Window* MainWindow = NULL;
 			static inline SDL_Renderer* Renderer = NULL;
+#endif
+
 			static inline Color BackgroundColor = Color(0, 0, 0);
 		};
 	}
