@@ -1,7 +1,7 @@
 VERSION=0.2.1
 
 CXX=g++
-SRCDIR=./src
+SRCDIR=./src/core
 TEST_SRCDIR=./src/tests
 outputDir=./build
 CXXFLAGS=-fPIC -g -std=c++17
@@ -14,7 +14,7 @@ DESTDIR=/usr
 
 LIB_SRC:=$(wildcard $(SRCDIR)/*.cpp)
 LIB_OBJ_SRC:=$(LIB_SRC:.cpp=.o)
-LIB_OBJ=$(subst src/,,$(LIB_OBJ_SRC))
+LIB_OBJ=$(subst src/core,,$(LIB_OBJ_SRC))
 
 TEST_SRC:=$(wildcard $(TEST_SRCDIR)/*.cpp)
 TEST_OBJ_SRC:=$(TEST_SRC:.cpp=.o)
