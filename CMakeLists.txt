@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.12)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 
 project(Birb2D)
 
 option(BIRB_GLFW "Enable GLFW backend (experimental)" OFF)
 
 if (BIRB_GLFW)
-	message("TODO: Add GLFW support")
+	set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+	set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 else()
+	list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 	find_package(SDL2 REQUIRED)
 	find_package(SDL2_image REQUIRED)
 	find_package(SDL2_gfx REQUIRED)
