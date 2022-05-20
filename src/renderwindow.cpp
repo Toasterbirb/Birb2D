@@ -50,6 +50,8 @@ namespace Birb
 		/* Set some global rendering variables */
 		Global::RenderVars::MainWindow 	= win;
 		Global::RenderVars::Renderer 	= renderer;
+#else /* LIB_SDL */
+		Debug::Log("Most parts of the window system aren't implemented without SDL", Debug::fixme);
 #endif /* LIB_SDL */
 
 		Global::RenderVars::RefreshRate = refresh_rate;
@@ -115,7 +117,7 @@ namespace Birb
 #ifdef LIB_SDL
 #ifdef DEBUG
 		Debug::Log("Starting window cleanup for '" + win_title + "'...");
-#endif
+#endif /* DEBUG */
 		SDL_DestroyWindow(win);
 
 		/* FIXME: There's some sort of memory leak with SDL_Renderer. Destroying the renderer
@@ -146,7 +148,7 @@ namespace Birb
 
 #ifdef DEBUG
 		Debug::Log("Window '" + win_title + "' destroyed!");
-#endif
+#endif /* DEBUG */
 	}
 
 	void Window::Clear()
@@ -154,14 +156,14 @@ namespace Birb
 		/* Clear the window renderer. Call before rendering stuff */
 #ifdef LIB_SDL
 		SDL_RenderClear(Global::RenderVars::Renderer);
-#endif
+#endif /* LIB_SDL */
 	}
 
 	void Window::Display()
 	{
 #ifdef LIB_SDL
 		SDL_RenderPresent(Global::RenderVars::Renderer);
-#endif
+#endif /* LIB_SDL */
 	}
 
 	Vector2int Window::CursorPosition() const
@@ -169,9 +171,9 @@ namespace Birb
 		Vector2int pos;
 #ifdef LIB_SDL
 		SDL_GetMouseState(&pos.x, &pos.y);
-#else
+#else /* LIB_SDL */
 		Debug::Log("CursorPosition() not implemented", Debug::fixme);
-#endif
+#endif /* LIB_SDL */
 		return pos;
 	}
 
@@ -190,7 +192,7 @@ namespace Birb
 	{
 #ifdef LIB_SDL
 		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
-#endif
+#endif /* LIB_SDL */
 		this->dimensions = dimensions;
 	}
 
@@ -226,13 +228,14 @@ namespace Birb
 	{
 #ifdef LIB_SDL
 		return (SDL_PollEvent(&event) != 0);
-#else
+#else /* LIB_SDL */
 		// TODO: Implement event polling without SDL
 		Debug::Log("Event polling not implemented", Debug::fixme);
 		return false;
 #endif /* LIB_SDL */
 	}
 
+// TODO: Move all of this code to a separate calls
 #ifdef LIB_SDL
 	SDL_Texture* Resources::LoadTexture(const std::string& p_filePath)
 	{
@@ -430,7 +433,7 @@ namespace Birb
 #else
 		Rect src;
 		Rect dst;
-#endif
+#endif /* LIB_SDL */
 		Vector2int centerPoint;
 
 		/* Get texture data */
@@ -449,7 +452,7 @@ namespace Birb
 				return false;
 			}
 		}
-#else
+#else /* LIB_SDL */
 		if (entity.sprite.isLoaded())
 		{
 			texWidth 	= entity.sprite.dimensions().x;
@@ -461,7 +464,7 @@ namespace Birb
 				return false;
 			}
 		}
-#endif
+#endif /* LIB_SDL */
 
 		if (entity.animationComponent.frameCount <= 0) /* Check if the entity has animations */
 		{
@@ -482,7 +485,7 @@ namespace Birb
 			HandleAnimations(&entity, &src, &dst);
 #else
 			// TODO: Figure out how to do animations without SDL
-#endif
+#endif /* LIB_SDL */
 		}
 
 		/* Check if the entity has an active progress bar component */
@@ -529,7 +532,7 @@ namespace Birb
 		{
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 		}
-#endif
+#endif /* LIB_SDL */
 
 		void DrawRect(const Color& color, const Rect& dimensions)
 		{
@@ -538,9 +541,9 @@ namespace Birb
 			SDL_Rect rectangle = dimensions.getSDLRect();
 			SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
 			ResetDrawColor();
-#else
+#else /* LIB_SDL */
 			Debug::Log("DrawRect()", Debug::fixme);
-#endif
+#endif /* LIB_SDL */
 		}
 
 		void DrawRect(const Color& color, const Rect& dimensions, const int& width)
@@ -629,7 +632,7 @@ namespace Birb
 			ResetDrawColor();
 #else
 			Debug::Log("DrawLines()", Debug::fixme);
-#endif
+#endif /* LIB_SDL */
 		}
 
 		bool DrawCircle(const Circle& circle)
@@ -714,7 +717,7 @@ namespace Birb
 #else
 			Debug::Log("DrawPolygon()", Debug::fixme);
 			return false;
-#endif
+#endif /* LIB_SDL */
 		}
 
 		/* filledPolygonColor works only with integers, so this will just

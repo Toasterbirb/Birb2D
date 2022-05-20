@@ -45,6 +45,8 @@ namespace Birb
 			Debug::Log("Something went wrong when loading font '" + filePath + "' TTF_Error: " + (std::string)TTF_GetError(), Debug::error);
 			fontLoaded = false;
 		}
+#else
+		Debug::Log("Font loading not implemented without SDL_ttf", Debug::fixme);
 #endif /* LIB_SDL */
 	}
 
