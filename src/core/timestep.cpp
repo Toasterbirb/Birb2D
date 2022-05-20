@@ -5,11 +5,12 @@
 #endif /* LIB_SDL */
 
 #include "Timestep.hpp"
+#include "Utils.hpp"
 #include "Values.hpp"
 
 namespace Birb
 {
-	void TimeStep::Init()
+	TimeStep::TimeStep()
 	{
 		currentTime = Utils::hireTimeInSeconds();
 	}

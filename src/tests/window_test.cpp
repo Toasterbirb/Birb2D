@@ -29,7 +29,6 @@ namespace Birb
 	void RenderLoop(const Scene& scene, Window& window)
 	{
 		TimeStep timeStep;
-		timeStep.Init();
 		Timer testTimer;
 		testTimer.Start();
 
