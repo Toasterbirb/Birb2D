@@ -5,10 +5,14 @@ project(Birb2D)
 option(BIRB_GLFW "Enable GLFW backend (experimental)" OFF)
 
 if (BIRB_GLFW)
+	# GLFW
+	find_package(OpenGL REQUIRED)
 	set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 	set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw)
 else()
+	# SDL2
 	list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 	find_package(SDL2 REQUIRED)
 	find_package(SDL2_image REQUIRED)
@@ -21,7 +25,7 @@ endif()
 
 include_directories(include/)
 
-add_executable(test
+set(TEST_SRC
 	src/tests/audio_test.cpp
 	src/tests/circle_test.cpp
 	src/tests/color_test.cpp
@@ -43,6 +47,10 @@ add_executable(test
 	src/tests/utils_test.cpp
 	src/tests/values_test.cpp
 	src/tests/vector_test.cpp
+)
+
+add_executable(test
+	${TEST_SRC}
 	src/audio.cpp
 	src/circle.cpp
 	src/color.cpp
@@ -69,8 +77,10 @@ add_executable(test
 )
 
 if (BIRB_GLFW)
-	message("TODO: Add GLFW support")
+	# GLFW
+	target_link_libraries(test glfw OpenGL::GL)
 else()
+	# SDL2
 	target_link_libraries(test
 		SDL2::Main
 		SDL2::Image
