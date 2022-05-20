@@ -1,7 +1,7 @@
-#include <thread>
 #include "doctest.h"
 #include "Logger.hpp"
 #include "Timer.hpp"
+#include "Utils.hpp"
 
 namespace Birb
 {
@@ -23,7 +23,7 @@ namespace Birb
 		Debug::Log("Delay test for 1200 milliseconds");
 		timer.Start();
 		CHECK(timer.running);
-		std::this_thread::sleep_for(1200ms);
+		Utils::Sleep(1200);
 		timer.Stop();
 
 		CHECK(timer.ElapsedSeconds() == 1.20);
@@ -31,7 +31,7 @@ namespace Birb
 
 		/* Make sure the timer actually stops after stopping it */
 		Debug::Log("Delaying for 500 milliseconds to see if the timer stopped");
-		std::this_thread::sleep_for(1200ms);
+		Utils::Sleep(1200);
 		CHECK(timer.ElapsedSeconds() == 1.20);
 	}
 
@@ -42,7 +42,7 @@ namespace Birb
 		Birb::Timer timer;
 		Debug::Log("Delay test for 123 milliseconds");
 		timer.Start();
-		std::this_thread::sleep_for(123ms);
+		Utils::Sleep(123);
 		timer.Stop();
 
 		CHECK(timer.ElapsedMilliseconds() == 123);

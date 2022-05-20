@@ -1,3 +1,4 @@
+#include <thread>
 #include "Utils.hpp"
 #include "Logger.hpp"
 
@@ -27,25 +28,6 @@ namespace Birb
 		}
 #endif /* LIB_SDL */
 
-		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points)
-		{
-			std::vector<Vector2int> result;
-			Vector2int closestPoint;
-			result.push_back(startPoint);
-
-			for (int i = 0; i < (int)points.size(); i++)
-			{
-				/* Skip the point if its the start point */
-				if (startPoint == points[i])
-					continue;
-
-				closestPoint = Birb::Math::FindClosestPoint(result[result.size() - 1], points, result);
-				result.push_back(closestPoint);
-			}
-
-			return result;
-		}
-
 		std::string CleanDecimals(const double& value)
 		{
 			if (Math::IsDigit(value))
@@ -69,6 +51,26 @@ namespace Birb
 			}
 		}
 
+		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points)
+		{
+			std::vector<Vector2int> result;
+			Vector2int closestPoint;
+			result.push_back(startPoint);
+
+			for (int i = 0; i < (int)points.size(); i++)
+			{
+				/* Skip the point if its the start point */
+				if (startPoint == points[i])
+					continue;
+
+				closestPoint = Birb::Math::FindClosestPoint(result[result.size() - 1], points, result);
+				result.push_back(closestPoint);
+			}
+
+			return result;
+		}
+
+
 		std::vector<Line> PolygonToLines(const Vector2f polygon[], const int& polygonSize)
 		{
 			std::vector<Line> lines;
@@ -82,6 +84,11 @@ namespace Birb
 			lines[polygonSize - 1] = Line(polygon[polygonSize - 1], polygon[0]);
 
 			return lines;
+		}
+
+		void Sleep(const int& ms)
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 		}
 	}
 }

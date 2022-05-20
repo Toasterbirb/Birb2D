@@ -50,9 +50,9 @@ namespace Birb
 		int frameTicks = SDL_GetTicks() - startTick;
 
 		if (frameTicks < 1000 / mainWindow->refresh_rate)
-			SDL_Delay(1000 / mainWindow->refresh_rate - frameTicks);
+			Utils::Sleep(1000 / mainWindow->refresh_rate - frameTicks);
 #else
-		Debug::Log("Figure out an alternative for SDL_GetTicks() and SDL_Delay()", Debug::fixme);
+		Debug::Log("Figure out an alternative for SDL_GetTicks()", Debug::fixme);
 #endif /* LIB_SDL */
 	}
 }
