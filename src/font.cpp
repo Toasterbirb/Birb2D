@@ -46,6 +46,7 @@ namespace Birb
 			fontLoaded = false;
 		}
 #else
+		fontLoaded = false;
 		Debug::Log("Font loading not implemented without SDL_ttf", Debug::fixme);
 #endif /* LIB_SDL */
 	}
