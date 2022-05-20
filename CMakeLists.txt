@@ -1,16 +1,24 @@
 cmake_minimum_required(VERSION 3.12)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 
-project(test)
+project(Birb2D)
 
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_gfx REQUIRED)
-find_package(SDL2_ttf REQUIRED)
-find_package(SDL2_mixer REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS} include/)
+option(BIRB_GLFW "Enable GLFW backend (experimental)" OFF)
 
-add_definitions(-DDEBUG -DLIB_SDL)
+if (BIRB_GLFW)
+	message("TODO: Add GLFW support")
+else()
+	find_package(SDL2 REQUIRED)
+	find_package(SDL2_image REQUIRED)
+	find_package(SDL2_gfx REQUIRED)
+	find_package(SDL2_ttf REQUIRED)
+	find_package(SDL2_mixer REQUIRED)
+	include_directories(${SDL2_INCLUDE_DIRS})
+	add_definitions(-DLIB_SDL)
+endif()
+
+include_directories(include/)
+
 add_executable(test
 	src/tests/audio_test.cpp
 	src/tests/circle_test.cpp
@@ -58,10 +66,14 @@ add_executable(test
 	src/vector.cpp
 )
 
-target_link_libraries(test
-	SDL2::Main
-	SDL2::Image
-	SDL2::GFX
-	SDL2::TTF
-	SDL2::Mixer
-)
+if (BIRB_GLFW)
+	message("TODO: Add GLFW support")
+else()
+	target_link_libraries(test
+		SDL2::Main
+		SDL2::Image
+		SDL2::GFX
+		SDL2::TTF
+		SDL2::Mixer
+	)
+endif()
