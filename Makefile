@@ -20,12 +20,12 @@ TEST_SRC:=$(wildcard $(TEST_SRCDIR)/*.cpp)
 TEST_OBJ_SRC:=$(TEST_SRC:.cpp=.o)
 TEST_OBJ=$(subst src/tests,,$(TEST_OBJ_SRC))
 
-all: test docs engine_lib run_tests
+all: test docs engine_lib run_tests config_tool
 
 docs:
 	doxygen ./doxygen_config
 
-test: ${LIB_OBJ} ${TEST_OBJ}
+test: ${LIB_OBJ} ${TEST_OBJ} config_tool
 	mkdir -p build
 	cp -r ./res $(outputDir)/
 	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) $(WarningFlags) -o $(outputDir)/test
@@ -55,26 +55,33 @@ static_engine_lib: ${LIB_OBJ}
 	mkdir -p build
 	ar -crs $(outputDir)/libbirb2d.a $^
 
-install: engine_lib
+config_tool:
+	mkdir -p build
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) ./src/config_tool/birbconfig.cpp -o $(outputDir)/birb-config
+
+install: engine_lib config_tool
 	mkdir -p $(DESTDIR)/lib
 	mkdir -p $(DESTDIR)/include/birb2d
 	rm -f $(DESTDIR)/lib/libbirb2d.a
 	cp $(outputDir)/$(LIBFILE) $(DESTDIR)/lib/
 	cp ./include/*.hpp $(DESTDIR)/include/birb2d/
+	cp $(outputDir)/birb-config $(DESTDIR)/bin/
 	ldconfig
 
-install_static: static_engine_lib
+install_static: static_engine_lib config_tool
 	mkdir -p $(DESTDIR)/lib
 	mkdir -p $(DESTDIR)/include/birb2d
 	rm -f $(DESTDIR)/lib/$(LIBFILE)
 	cp $(outputDir)/libbirb2d.a $(DESTDIR)/lib/
 	cp ./include/*.hpp $(DESTDIR)/include/birb2d/
+	cp $(outputDir)/birb-config $(DESTDIR)/bin/
 	ldconfig
 
 uninstall:
 	rm -f $(DESTDIR)/lib/$(LIBFILE)
 	rm -f $(DESTDIR)/lib/libbirb2d.a
 	rm -rf $(DESTDIR)/include/birb2d
+	rm -f $(DESTDIR)/bin/birb-config
 	ldconfig
 
 uninstall_lib:
