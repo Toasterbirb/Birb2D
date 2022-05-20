@@ -25,7 +25,7 @@ all: test docs engine_lib run_tests config_tool
 docs:
 	doxygen ./doxygen_config
 
-test: ${LIB_OBJ} ${TEST_OBJ} config_tool
+test: ${LIB_OBJ} ${TEST_OBJ}
 	mkdir -p build
 	cp -r ./res $(outputDir)/
 	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) $(WarningFlags) -o $(outputDir)/test
