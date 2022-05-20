@@ -232,7 +232,7 @@ namespace Birb
 	void Entity::CenterRelativeTo(const Rect& rect)
 	{
 #ifdef LIB_SDL
-		Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
+		Vector2int textureDimensions = Utils::GetTextureDimensions(sprite);
 #else
 		Vector2int textureDimensions = sprite.dimensions();
 #endif
@@ -283,7 +283,7 @@ namespace Birb
 		rect.y = pos.y;
 
 		/* Get texture scale automatically */
-		Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
+		Vector2int textureDimensions = Utils::GetTextureDimensions(sprite);
 		rect.w = textureDimensions.x;
 		rect.h = textureDimensions.y;
 	}
@@ -353,7 +353,7 @@ namespace Birb
 			else
 			{
 				/* Get texture scale automatically */
-				Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
+				Vector2int textureDimensions = Utils::GetTextureDimensions(sprite);
 				rect.w = textureDimensions.x;
 				rect.h = textureDimensions.y;
 			}

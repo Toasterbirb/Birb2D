@@ -22,10 +22,10 @@ namespace Birb
 
 	std::string Rect::toString() const
 	{
-		return utils::CleanDecimals(x) + ", " +
-			utils::CleanDecimals(y) + ", " +
-			utils::CleanDecimals(w) + ", " +
-			utils::CleanDecimals(h);
+		return Utils::CleanDecimals(x) + ", " +
+			Utils::CleanDecimals(y) + ", " +
+			Utils::CleanDecimals(w) + ", " +
+			Utils::CleanDecimals(h);
 	}
 
 	Polygon Rect::toPolygon() const

@@ -209,7 +209,7 @@ TEST_CASE("Window and rendering functions")
 	
 	bool animationSuccessful;
 	bool progressBarSuccessful;
-	double currentTime = Birb::utils::hireTimeInSeconds();
+	double currentTime = Birb::Utils::hireTimeInSeconds();
 	while (timer.ElapsedSeconds() < 2)
 	{
 		SDL_Delay(16); /* Cap to around 60 fps, lets not waste CPU cycles... */
@@ -219,7 +219,7 @@ TEST_CASE("Window and rendering functions")
 		progressBarEntity.progressBarComponent.value = timer.ElapsedSeconds() / 2.0;
 		progressBarSuccessful 	= Birb::Render::DrawEntity(progressBarEntity);
 
-		double newTime = Birb::utils::hireTimeInSeconds();
+		double newTime = Birb::Utils::hireTimeInSeconds();
 		frameTimeGraph.values.push_back(newTime - currentTime);
 		currentTime = newTime;
 		frameTimeGraph.Render();

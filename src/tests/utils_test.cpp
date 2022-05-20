@@ -14,7 +14,7 @@ namespace Birb
 			Vector2int(6, 6),
 		};
 
-		points = utils::SortPath(points[0], points);
+		points = Utils::SortPath(points[0], points);
 
 		CHECK(points.size() == 5);
 		CHECK(points[0] == Vector2int(0, 0));
@@ -36,13 +36,13 @@ namespace Birb
 			-1.555
 		};
 
-		CHECK(utils::CleanDecimals(values[0]) == "1.9872");
-		CHECK(utils::CleanDecimals(values[1]) == "2");
-		CHECK(utils::CleanDecimals(values[2]) == "4.3429");
-		CHECK(utils::CleanDecimals(values[3]) == "4");
-		CHECK(utils::CleanDecimals(values[4]) == "5.02");
-		CHECK(utils::CleanDecimals(values[5]) == "-1.0001");
-		CHECK(utils::CleanDecimals(values[6]) == "-1.555");
+		CHECK(Utils::CleanDecimals(values[0]) == "1.9872");
+		CHECK(Utils::CleanDecimals(values[1]) == "2");
+		CHECK(Utils::CleanDecimals(values[2]) == "4.3429");
+		CHECK(Utils::CleanDecimals(values[3]) == "4");
+		CHECK(Utils::CleanDecimals(values[4]) == "5.02");
+		CHECK(Utils::CleanDecimals(values[5]) == "-1.0001");
+		CHECK(Utils::CleanDecimals(values[6]) == "-1.555");
 	}
 
 	TEST_CASE("Polygon to lines")
@@ -62,7 +62,7 @@ namespace Birb
 			Line(Vector2f(9, 0), Vector2f(7, -1)),
 		};
 
-		std::vector<Line> lines = utils::PolygonToLines(polygon, polygonSize);
+		std::vector<Line> lines = Utils::PolygonToLines(polygon, polygonSize);
 		CHECK(lines[0] == expectedLines[0]);
 		CHECK(lines[1] == expectedLines[1]);
 		CHECK(lines[2] == expectedLines[2]);

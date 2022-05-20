@@ -16,7 +16,7 @@
 
 namespace Birb
 {
-	namespace utils
+	namespace Utils
 	{
 #ifdef LIB_SDL
 		inline float hireTimeInSeconds()

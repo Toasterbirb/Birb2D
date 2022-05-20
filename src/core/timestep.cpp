@@ -11,7 +11,7 @@ namespace Birb
 {
 	void TimeStep::Init(Window* p_mainWindow)
 	{
-		currentTime = utils::hireTimeInSeconds();
+		currentTime = Utils::hireTimeInSeconds();
 		mainWindow = p_mainWindow;
 	}
 
@@ -23,7 +23,7 @@ namespace Birb
 		Debug::Log("Figure out an alternative for SDL_GetTicks()", Debug::fixme);
 #endif /* LIB_SDL */
 
-		double newTime = utils::hireTimeInSeconds();
+		double newTime = Utils::hireTimeInSeconds();
 		double frameTime = newTime - currentTime;
 		deltaTime = frameTime;
 

@@ -18,7 +18,7 @@ namespace Birb
 		/* If the texture was loaded successfully, get its dimensions */
 #ifdef LIB_SDL
 		if (textureLoaded)
-			texture_dimensions = utils::GetTextureDimensions(sdlTex);
+			texture_dimensions = Utils::GetTextureDimensions(sdlTex);
 		else
 			texture_dimensions = Vector2int(0, 0);
 #else

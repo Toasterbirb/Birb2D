@@ -3,7 +3,7 @@
 
 namespace Birb
 {
-	namespace utils
+	namespace Utils
 	{
 #ifdef LIB_SDL
 		Vector2int GetTextureDimensions(SDL_Texture* texture)

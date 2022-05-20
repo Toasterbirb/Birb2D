@@ -5,7 +5,7 @@ namespace Birb
 {
 	std::string Vector2f::toString() const
 	{
-		return "(" + utils::CleanDecimals(x) + ", " + utils::CleanDecimals(y) + ")";
+		return "(" + Utils::CleanDecimals(x) + ", " + Utils::CleanDecimals(y) + ")";
 	}
 
 	Vector2int Vector2f::toInt() const
@@ -25,7 +25,7 @@ namespace Birb
 
 	std::string Vector3f::toString() const
 	{
-		return "(" + utils::CleanDecimals(x) + ", " + utils::CleanDecimals(y) + ", " + utils::CleanDecimals(z) + ")";
+		return "(" + Utils::CleanDecimals(x) + ", " + Utils::CleanDecimals(y) + ", " + Utils::CleanDecimals(z) + ")";
 	}
 
 	Vector3int Vector3f::toInt() const
