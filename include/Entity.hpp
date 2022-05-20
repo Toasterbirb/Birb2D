@@ -12,7 +12,7 @@
 #include "SceneObject.hpp"
 
 #ifndef LIB_SDL
-#include <Texture.hpp>
+#include "Texture.hpp"
 #endif
 
 namespace Birb

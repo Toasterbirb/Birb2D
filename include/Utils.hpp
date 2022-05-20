@@ -4,7 +4,7 @@
 #ifdef LIB_SDL
 #include <SDL2/SDL.h>
 #else
-#include <Logger.hpp>
+#include "Logger.hpp"
 #endif
 
 #include <chrono>
