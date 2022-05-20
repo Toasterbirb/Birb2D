@@ -9,10 +9,10 @@
 
 namespace Birb
 {
-	void TimeStep::Init(Window* p_mainWindow)
+	void TimeStep::Init(Window* mainWindow)
 	{
 		currentTime = Utils::hireTimeInSeconds();
-		mainWindow = p_mainWindow;
+		mainWindow = mainWindow;
 	}
 
 	void TimeStep::Start()
