@@ -9,10 +9,9 @@
 
 namespace Birb
 {
-	void TimeStep::Init(Window* mainWindow)
+	void TimeStep::Init()
 	{
 		currentTime = Utils::hireTimeInSeconds();
-		mainWindow = mainWindow;
 	}
 
 	void TimeStep::Start()
@@ -49,8 +48,8 @@ namespace Birb
 #ifdef LIB_SDL
 		int frameTicks = SDL_GetTicks() - startTick;
 
-		if (frameTicks < 1000 / mainWindow->refresh_rate)
-			Utils::Sleep(1000 / mainWindow->refresh_rate - frameTicks);
+		if (frameTicks < 1000 / Global::RenderVars::RefreshRate)
+			Utils::Sleep(1000 / Global::RenderVars::RefreshRate - frameTicks);
 #else
 		Debug::Log("Figure out an alternative for SDL_GetTicks()", Debug::fixme);
 #endif /* LIB_SDL */
