@@ -1,3 +1,6 @@
 [submodule "doxygen-awesome-css"]
 	path = doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
+[submodule "cmake/sdl2"]
+	path = cmake/sdl2
+	url = https://gitlab.com/aminosbh/sdl2-cmake-modules.git
