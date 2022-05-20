@@ -18,6 +18,7 @@ Birb2D is not meant to be *production* quality, but there's a chance it can be u
 - SDL2_ttf
 - SDL2_mixer
 - SDL2_gfx
+- GLFW
 - [doctest](https://github.com/doctest/doctest) (included as a headerfile)
 
 ## Building
