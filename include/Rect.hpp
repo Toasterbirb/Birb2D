@@ -1,6 +1,9 @@
 #pragma once
 
+#ifdef LIB_SDL
 #include <SDL2/SDL.h>
+#endif
+
 #include "Color.hpp"
 #include "Polygon.hpp"
 #include "SceneObject.hpp"
@@ -18,7 +21,10 @@ namespace Birb
 		std::string toString() const;
 		Polygon toPolygon() const;
 		Rect getInt() const;
+
+#ifdef LIB_SDL
 		SDL_Rect getSDLRect() const;
+#endif
 
 		float x, y, w, h;
 		Color color;

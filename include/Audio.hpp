@@ -1,8 +1,12 @@
 #pragma once
 
+#ifndef NO_SOUND
 #include <iostream>
+
+#ifdef LIB_SDL
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
+#endif /* LIB_SDL */
 
 namespace Birb
 {
@@ -18,7 +22,9 @@ namespace Birb
 			void play();
 			void free()
 			{
+#ifdef LIB_SDL
 				Mix_FreeChunk(sound);
+#endif /* LIB_SDL */
 			}
 			bool isPlaying();
 
@@ -28,7 +34,9 @@ namespace Birb
 				free();
 			}
 		private:
+#ifdef LIB_SDL
 			Mix_Chunk* sound;
+#endif /* LIB_SDL */
 			std::string filePath;
 		};
 
@@ -41,7 +49,9 @@ namespace Birb
 			void play(bool loop);
 			void free()
 			{
+#ifdef LIB_SDL
 				Mix_FreeMusic(music);
+#endif /* LIB_SDL */
 			}
 			bool isPlaying();
 
@@ -51,9 +61,11 @@ namespace Birb
 				free();
 			}
 		private:
+#ifdef LIB_SDL
 			Mix_Music* music;
+#endif /* LIB_SDL */
 			std::string filePath;
 		};
 	};
-
 }
+#endif /* NO_SOUND */

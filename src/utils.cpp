@@ -5,6 +5,7 @@ namespace Birb
 {
 	namespace utils
 	{
+#ifdef LIB_SDL
 		Vector2int GetTextureDimensions(SDL_Texture* texture)
 		{
 			Vector2int result;
@@ -24,6 +25,7 @@ namespace Birb
 			
 			return color;
 		}
+#endif /* LIB_SDL */
 
 		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points)
 		{

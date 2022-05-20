@@ -55,6 +55,7 @@ namespace Birb
 		CHECK(colorC.a == 255);
 	}
 
+#ifdef LIB_SDL
 	TEST_CASE("Color to SDL_Color")
 	{
 		Color color(20, 45, 52, 10);
@@ -65,6 +66,7 @@ namespace Birb
 		CHECK(sdlcolor.b == 52);
 		CHECK(sdlcolor.a == 10);
 	}
+#endif /* LIB_SDL */
 
 	TEST_CASE("Color operator overloads")
 	{

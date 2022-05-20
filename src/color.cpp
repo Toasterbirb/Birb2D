@@ -28,11 +28,13 @@ namespace Birb
 		a = 255;
 	}
 
+#ifdef LIB_SDL
 	SDL_Color Color::sdl() const
 	{
 		SDL_Color color = { r, g, b, a };
 		return color;
 	}
+#endif /* LIB_SDL */
 
 	void Color::ChangeIntensity(const int& delta)
 	{
