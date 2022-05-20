@@ -8,6 +8,7 @@
 #include "Timer.hpp"
 #include "Color.hpp"
 #include "Rect.hpp"
+#include "Resources.hpp"
 #include "SceneObject.hpp"
 
 #ifndef LIB_SDL
