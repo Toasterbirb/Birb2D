@@ -14,6 +14,7 @@ namespace Birb
 
 	void UI::PollButtons(const Window& window)
 	{
+#ifdef LIB_SDL
         /* Set the mouse down state */
         switch (window.event.type)
         {
@@ -61,5 +62,8 @@ namespace Birb
 			/* You can really only click one button at once, so lets stop if we got this far */
 			break;
 		}
+#else
+		Debug::Log("PollButtons() not fully implemented, because SDL_Event doesn't have non-SDL alternatives", Debug::fixme);
+#endif /* LIB_SDL */
 	}
 }

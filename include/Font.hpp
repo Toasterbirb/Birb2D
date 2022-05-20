@@ -1,6 +1,9 @@
 #pragma once
 
+#ifdef LIB_SDL
 #include <SDL2/SDL_ttf.h>
+#endif
+
 #include <string>
 
 namespace Birb
@@ -15,7 +18,10 @@ namespace Birb
 
 		void LoadFont(const std::string& filePath, const int& fontSize = 12);
 		bool isLoaded() const;
+
+#ifdef LIB_SDL
 		TTF_Font* ttf() const;
+#endif
 
 		int GetSize() const;
 		void SetSize(const int& size);
@@ -23,7 +29,10 @@ namespace Birb
 	private:
 		int size;
 		bool fontLoaded;
+
+#ifdef LIB_SDL
 		TTF_Font* ttfFont;
 		void InitSDL_ttf(); ///< Initializes SDL2_ttf (if its not already initialized)
+#endif /* LIB_SDL */
 	};
 }

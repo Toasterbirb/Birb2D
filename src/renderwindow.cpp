@@ -2,14 +2,19 @@
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
+
+#ifdef LIB_SDL
 #include <SDL2/SDL_mixer.h>
+#endif
 
 namespace Birb
 {
 	Window::Window()
 	{
+#ifdef LIB_SDL
 		InitSDL();
 		InitSDL_image();
+#endif /* LIB_SDL */
 	}
 
 	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
@@ -59,6 +64,7 @@ namespace Birb
 		Cleanup();
 	}
 
+#ifdef LIB_SDL
 	void Window::InitSDL()
 	{
 		/* Check if SDL has already been initialized */
@@ -102,6 +108,7 @@ namespace Birb
 			Global::IsInit::SDL_image = true;
 		}
 	}
+#endif /* LIB_SDL */
 
 	void Window::Cleanup()
 	{
@@ -160,7 +167,11 @@ namespace Birb
 	Vector2int Window::CursorPosition() const
 	{
 		Vector2int pos;
+#ifdef LIB_SDL
 		SDL_GetMouseState(&pos.x, &pos.y);
+#else
+		Debug::Log("CursorPosition() not implemented", Debug::fixme);
+#endif
 		return pos;
 	}
 
@@ -177,7 +188,9 @@ namespace Birb
 
 	void Window::SetWindowSize(const Vector2int& dimensions)
 	{
+#ifdef LIB_SDL
 		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
+#endif
 		this->dimensions = dimensions;
 	}
 
@@ -187,6 +200,7 @@ namespace Birb
 						(float)dimensions.y / (float)original_window_dimensions.y);
 	}
 
+#ifdef LIB_SDL
 	void Window::EventTick(const SDL_Event& event, bool* GameRunning)
 	{
 		switch (event.type)
@@ -206,6 +220,7 @@ namespace Birb
 				break;
 		}
 	}
+#endif /* LIB_SDL */
 
 	bool Window::PollEvents()
 	{
@@ -331,6 +346,7 @@ namespace Birb
 	}
 #endif /* LIB_SDL */
 
+#ifdef LIB_SDL
 	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
 	{
 		Vector2int atlasPos = entity->getAtlasPosition(entity->animationComponent.frameIndex);
@@ -374,6 +390,7 @@ namespace Birb
 			}
 		}
 	}
+#endif /* LIB_SDL */
 
 	void DrawProgressBar(const Entity& entity)
 	{

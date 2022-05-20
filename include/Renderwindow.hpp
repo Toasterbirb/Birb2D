@@ -23,8 +23,10 @@ namespace Birb
 		Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable); ///< Creates a window and initializes SDL2 stuff and a renderer
 
 		/* -- Init stuff functions -- */
+#ifdef LIB_SDL
 		static void InitSDL(); ///< Initializes SDL2 (if its not already initialized)
 		static void InitSDL_image(); ///< Initializes SDL2_image (if its not already initialized)
+#endif /* LIB_SDL */
 		/* -------------------------- */
 
 		/* -- Rendering and cleanup functions -- */
@@ -39,16 +41,20 @@ namespace Birb
 
 		/* -- Basic window events -- */
 		void SetWindowSize(const Vector2int& dimensions);
-		void EventTick(const SDL_Event& event, bool* GameRunning);
 		bool PollEvents(); ///< Runs SDL_PollEvent and saves the result to the *event* variable
+#ifdef LIB_SDL
+		void EventTick(const SDL_Event& event, bool* GameRunning);
 		SDL_Event event;
+#endif /* LIB_SDL */
 		/* ------------------------- */
 
 		/* -- Window variables -- */
 		std::string win_title; ///< Window title text
 		int refresh_rate; ///< Window refreshrate. Can be changed during runtime if needed for some reason
+#ifdef LIB_SDL
 		SDL_Window* win;
 		SDL_Renderer* renderer;
+#endif /* LIB_SDL */
 		Vector2int dimensions; ///< Current window dimensions
 		Vector2int original_window_dimensions; ///< Window dimensions on application startup before its modified by the user
 		Vector2f window_dimensions_multiplier(); ///< Returns the difference between the current and original window dimensions.

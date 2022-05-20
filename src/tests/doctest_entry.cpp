@@ -23,6 +23,8 @@ int main(int argc, char** argv)
 #include "Polygon.hpp"
 #include "Renderwindow.hpp"
 
+// This test is full of SDL stuff
+#ifdef LIB_SDL
 TEST_CASE("Window and rendering functions")
 {
 	Birb::ApplicationInfo appInfo("Birb2D_tests");
@@ -229,3 +231,4 @@ TEST_CASE("Window and rendering functions")
 
 	//SDL_Quit();
 }
+#endif /* LIB_SDL */

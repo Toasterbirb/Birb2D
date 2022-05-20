@@ -61,7 +61,7 @@ namespace Birb
 		sdlrect.y = y;
 		return sdlrect;
 	}
-#endif /* LIB_SDL  */
+#endif /* LIB_SDL */
 
 	void Rect::RenderFunc()
 	{

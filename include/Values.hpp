@@ -24,10 +24,12 @@ namespace Birb
 	{
 		struct IsInit
 		{
+#ifdef LIB_SDL
 			static inline bool SDL = false;
 			static inline bool SDL_ttf = false;
 			static inline bool SDL_image = false;
 			static inline bool SDL_mixer = false;
+#endif /* LIB_SDL */
 		};
 
 		struct RenderVars
@@ -37,7 +39,7 @@ namespace Birb
 #ifdef LIB_SDL
 			static inline SDL_Window* MainWindow = NULL;
 			static inline SDL_Renderer* Renderer = NULL;
-#endif
+#endif /* LIB_SDL */
 
 			static inline Color BackgroundColor = Color(0, 0, 0);
 		};

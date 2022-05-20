@@ -1,4 +1,9 @@
+#ifdef LIB_SDL
 #include <SDL2/SDL.h>
+#else
+#include <Logger.hpp>
+#endif /* LIB_SDL */
+
 #include "Timestep.hpp"
 #include "Values.hpp"
 
@@ -12,7 +17,11 @@ namespace Birb
 
 	void TimeStep::Start()
 	{
+#ifdef LIB_SDL
 		startTick = SDL_GetTicks();
+#else
+		Debug::Log("Figure out an alternative for SDL_GetTicks()", Debug::fixme);
+#endif /* LIB_SDL */
 
 		double newTime = utils::hireTimeInSeconds();
 		double frameTime = newTime - currentTime;
@@ -37,9 +46,13 @@ namespace Birb
 
 	void TimeStep::End()
 	{
+#ifdef LIB_SDL
 		int frameTicks = SDL_GetTicks() - startTick;
 
 		if (frameTicks < 1000 / mainWindow->refresh_rate)
 			SDL_Delay(1000 / mainWindow->refresh_rate - frameTicks);
+#else
+		Debug::Log("Figure out an alternative for SDL_GetTicks() and SDL_Delay()", Debug::fixme);
+#endif /* LIB_SDL */
 	}
 }
