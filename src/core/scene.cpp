@@ -1,5 +1,4 @@
 #include "Scene.hpp"
-#include "Renderwindow.hpp"
 
 namespace Birb
 {

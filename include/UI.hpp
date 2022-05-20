@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "Entity.hpp"
-#include "Renderwindow.hpp"
+#include "Window.hpp"
 
 namespace Birb
 {

@@ -1,8 +1,8 @@
-#include "Logger.hpp"
-#include "Entity.hpp"
-#include "Renderwindow.hpp"
-#include "Values.hpp"
 #include "Diagnostics.hpp"
+#include "Entity.hpp"
+#include "Logger.hpp"
+#include "Render.hpp"
+#include "Values.hpp"
 
 namespace Birb
 {

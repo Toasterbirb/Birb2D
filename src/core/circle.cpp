@@ -1,5 +1,5 @@
 #include "Circle.hpp"
-#include "Renderwindow.hpp"
+#include "Render.hpp"
 
 #define PI 3.141592654
 

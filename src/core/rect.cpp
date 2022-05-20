@@ -1,5 +1,5 @@
 #include "Rect.hpp"
-#include "Renderwindow.hpp"
+#include "Render.hpp"
 #include "Utils.hpp"
 
 namespace Birb

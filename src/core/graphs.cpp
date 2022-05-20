@@ -1,5 +1,5 @@
 #include "Graphs.hpp"
-#include "Renderwindow.hpp"
+#include "Render.hpp"
 #include "Values.hpp"
 
 namespace Birb

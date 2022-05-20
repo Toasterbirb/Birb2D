@@ -1,5 +1,5 @@
 #include "Line.hpp"
-#include "Renderwindow.hpp"
+#include "Render.hpp"
 #include "Logger.hpp"
 
 namespace Birb

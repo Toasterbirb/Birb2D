@@ -1,6 +1,6 @@
 #include <memory>
 #include "doctest.h"
-#include "Renderwindow.hpp"
+#include "Window.hpp"
 #include "Values.hpp"
 #include "Scene.hpp"
 #include "Timestep.hpp"

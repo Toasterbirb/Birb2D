@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderwindow.hpp"
+#include "Window.hpp"
 
 namespace Birb
 {

@@ -1,5 +1,5 @@
 #include "Polygon.hpp"
-#include "Renderwindow.hpp"
+#include "Render.hpp"
 
 namespace Birb
 {

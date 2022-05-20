@@ -21,7 +21,8 @@ int main(int argc, char** argv)
 #include "Utils.hpp"
 #include "Scene.hpp"
 #include "Polygon.hpp"
-#include "Renderwindow.hpp"
+#include "Render.hpp"
+#include "Window.hpp"
 
 // This test is full of SDL stuff
 #ifdef LIB_SDL
