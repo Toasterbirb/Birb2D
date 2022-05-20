@@ -21,22 +21,8 @@ namespace Birb
 	{
 
 #ifdef LIB_SDL
-		inline float hireTimeInSeconds()
-		{
-			float t = SDL_GetTicks();
-			t *= 0.001f;
-
-			return t;
-		}
-
 		Vector2int GetTextureDimensions(SDL_Texture* texture);
 		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2int& pixelPosition, const int& textureWidth);
-#else
-		inline float hireTimeInSeconds()
-		{
-			Debug::Log("Implement hireTimeInSeconds()", Debug::fixme);
-			return 0;
-		}
 #endif /* LIB_SDL */
 
 		std::string CleanDecimals(const double& value); ///< Returns a string with without trailing zeroes in decimals

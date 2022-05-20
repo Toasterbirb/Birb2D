@@ -138,7 +138,7 @@ TEST_CASE("Window and rendering functions")
 
 	}
 	CHECK_NOTHROW(window.Display());
-	SDL_Delay(1000);
+	Birb::Utils::Sleep(1000);
 
 	/* Try changing text */
 	textEntity.SetText("The birbs disappeared");
@@ -179,7 +179,7 @@ TEST_CASE("Window and rendering functions")
 	}
 
 	CHECK_NOTHROW(window.Display());
-	SDL_Delay(1000);
+	Birb::Utils::Sleep(1000);
 
 	SDL_Texture* animationSprite = Birb::Resources::LoadTexture(appInfo.ResLocation + "/textures/birb_animation.png");
 	Birb::Entity animationBirb(
@@ -209,17 +209,17 @@ TEST_CASE("Window and rendering functions")
 	
 	bool animationSuccessful;
 	bool progressBarSuccessful;
-	double currentTime = Birb::Utils::hireTimeInSeconds();
+	double currentTime = timer.ElapsedSeconds();
 	while (timer.ElapsedSeconds() < 2)
 	{
-		SDL_Delay(16); /* Cap to around 60 fps, lets not waste CPU cycles... */
+		Birb::Utils::Sleep(16); /* Cap to around 60 fps, lets not waste CPU cycles... */
 		window.Clear();
 		animationSuccessful 	= Birb::Render::DrawEntity(animationBirb);
 		
 		progressBarEntity.progressBarComponent.value = timer.ElapsedSeconds() / 2.0;
 		progressBarSuccessful 	= Birb::Render::DrawEntity(progressBarEntity);
 
-		double newTime = Birb::Utils::hireTimeInSeconds();
+		double newTime = timer.ElapsedSeconds();
 		frameTimeGraph.values.push_back(newTime - currentTime);
 		currentTime = newTime;
 		frameTimeGraph.Render();

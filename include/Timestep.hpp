@@ -17,7 +17,7 @@ namespace Birb
 		//float deltaTime(); ///< Method to get deltatime
 
 		/* Variables */
-		Timer tickTimer;
+		Timer tickTimer; /// Time passed from the creation of this TimeStep object
 
 		const double timeStep = 0.01;
 		double accumulator = 0.00;
