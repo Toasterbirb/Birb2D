@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.12)
 project(Birb2D)
 
 option(BIRB_GLFW "Enable GLFW backend (experimental)" OFF)
+option(BIRB_DEBUG "Enable more verbose output and persistent logs" ON)
 
 if (BIRB_GLFW)
 	# GLFW
@@ -21,6 +22,10 @@ else()
 	find_package(SDL2_mixer REQUIRED)
 	include_directories(${SDL2_INCLUDE_DIRS})
 	add_definitions(-DLIB_SDL)
+endif()
+
+if (BIRB_DEBUG)
+	add_definitions(-DDEBUG)
 endif()
 
 include_directories(include/)
@@ -49,8 +54,7 @@ set(TEST_SRC
 	src/tests/vector_test.cpp
 )
 
-add_executable(test
-	${TEST_SRC}
+set(ENGINE_CORE_SRC
 	src/core/audio.cpp
 	src/core/circle.cpp
 	src/core/color.cpp
@@ -76,6 +80,11 @@ add_executable(test
 	src/core/utils.cpp
 	src/core/values.cpp
 	src/core/vector.cpp
+)
+
+add_executable(test
+	${TEST_SRC}
+	${ENGINE_CORE_SRC}
 )
 
 if (BIRB_GLFW)

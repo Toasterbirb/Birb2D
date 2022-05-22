@@ -16,10 +16,10 @@ namespace Birb
 		void Log(const std::string& text, Type type)
 		{
 #ifndef DEBUG
-			/* Skip fixme log lines if engine debugging isn't enabled */
-			if (type == Debug::fixme)
+			/* Suppress everything but errors if debugging isn't enabled */
+			if (type == Debug::fixme || type == Debug::log || type == Debug::warning)
 				return;
-#endif
+#endif /* DEBUG */
 
 			std::time_t t = std::time(0);
 			std::tm* now = std::localtime(&t);
