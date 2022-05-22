@@ -22,5 +22,9 @@ namespace Birb
 		static const std::string WarningLabel 	= "W";
 		static const std::string ErrorLabel 	= "E";
 		static const std::string FixmeLabel 	= "F";
+
+#ifdef LIB_GLFW
+		void error_callback(int error, const char* description);
+#endif
 	}
 }

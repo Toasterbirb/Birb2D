@@ -5,7 +5,11 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
-#endif /* LIB_SDL */
+#elif LIB_GLFW
+#include "glad/gl.h"
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#endif
 
 #include "Circle.hpp"
 #include "Color.hpp"
@@ -45,16 +49,23 @@ namespace Birb
 #ifdef LIB_SDL
 		void EventTick(const SDL_Event& event, bool* GameRunning);
 		SDL_Event event;
-#endif /* LIB_SDL */
+#elif LIB_GLFW
+		void EventTick(bool* GameRunning);
+#endif
 		/* ------------------------- */
 
 		/* -- Window variables -- */
 		std::string win_title; ///< Window title text
 		int refresh_rate; ///< Window refreshrate. Can be changed during runtime if needed for some reason
 #ifdef LIB_SDL
-		SDL_Window* win;
-		SDL_Renderer* renderer;
-#endif /* LIB_SDL */
+		SDL_Window* 	win;
+		SDL_Renderer* 	renderer;
+#elif LIB_GLFW
+		GLFWwindow* 	glWindow;
+		int 			frameBufferWidth;
+		int 			frameBufferHeight;
+#endif
+
 		Vector2int dimensions; ///< Current window dimensions
 		Vector2int original_window_dimensions; ///< Window dimensions on application startup before its modified by the user
 		Vector2f window_dimensions_multiplier(); ///< Returns the difference between the current and original window dimensions.

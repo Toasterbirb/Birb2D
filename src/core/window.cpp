@@ -26,6 +26,10 @@ namespace Birb
 #endif
 
 #ifdef LIB_SDL
+		/* ------------------------- */
+		/* SDL Window implementation */
+		/* ------------------------- */
+
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
 		InitSDL_image();
@@ -51,9 +55,55 @@ namespace Birb
 		/* Set some global rendering variables */
 		Global::RenderVars::MainWindow 	= win;
 		Global::RenderVars::Renderer 	= renderer;
-#else /* LIB_SDL */
-		Debug::Log("Most parts of the window system aren't implemented without SDL", Debug::fixme);
-#endif /* LIB_SDL */
+#elif LIB_GLFW
+		/* ------------------------- */
+		/* GLFW Window implementation */
+		/* ------------------------- */
+
+		/* Initialize GLFW stuff */
+		glfwSetErrorCallback(Debug::error_callback);
+
+		if (!glfwInit())
+		{
+			Debug::Log("Failed to initialize GLFW", Debug::error);
+			exit(1);
+		}
+
+		/* Create the window */
+		if (resizable)
+			glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+		else
+			glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+		glWindow = glfwCreateWindow(dimensions.x, dimensions.y, win_title.c_str(), NULL, NULL);
+		if (!glWindow)
+		{
+			Debug::Log("Something went wrong when creating GLFW window", Debug::error);
+			glfwTerminate();
+			exit(1);
+		}
+
+
+		/* Make the window current context */
+		glfwMakeContextCurrent(glWindow);
+
+		/* Load up glad */
+		gladLoadGL(glfwGetProcAddress);
+
+		/* Set buffer swapping interval to 1 */
+		glfwSwapInterval(1);
+
+		/* Get the framebuffer size and set it to the viewport */
+		glfwGetFramebufferSize(glWindow, &frameBufferWidth, &frameBufferHeight);
+		glViewport(0, 0, frameBufferWidth, frameBufferHeight);
+
+		/* Clear the window so that it isn't near invisible */
+		glClear(GL_COLOR_BUFFER_BIT);
+		glfwSwapBuffers(glWindow);
+
+
+
+#endif /* LIB_SDL + LIB_GLFW */
 
 		Global::RenderVars::RefreshRate = refresh_rate;
 
@@ -145,6 +195,9 @@ namespace Birb
 
 		Global::RenderVars::MainWindow = NULL;
 		Global::RenderVars::Renderer = NULL;
+#elif LIB_GLFW
+		glfwDestroyWindow(glWindow);
+		glfwTerminate();
 #endif
 
 #ifdef DEBUG
@@ -223,17 +276,25 @@ namespace Birb
 				break;
 		}
 	}
-#endif /* LIB_SDL */
+#elif LIB_GLFW
+	void Window::EventTick(bool* GameRunning)
+	{
+		/* Check if the window should close */
+		if (*glfwWindowShouldClose)
+			*GameRunning = false;
+	}
+#endif
 
 	bool Window::PollEvents()
 	{
 #ifdef LIB_SDL
 		return (SDL_PollEvent(&event) != 0);
-#else /* LIB_SDL */
-		// TODO: Implement event polling without SDL
-		Debug::Log("Event polling not implemented", Debug::fixme);
+#elif LIB_GLFW
+		glfwPollEvents();
 		return false;
 #endif /* LIB_SDL */
+
+		return false;
 	}
 
 

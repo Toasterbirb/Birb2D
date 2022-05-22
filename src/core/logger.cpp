@@ -107,7 +107,7 @@ namespace Birb
 				std::cout << printline << " (" << Debug::lines.size() << "x)" << "\t\r" << std::flush;
 			}
 
-#ifdef DEBUG
+#if defined(DEBUG) && defined(LOGFILE)
 			// Append the line to a logfile
 			std::ofstream outfile;
 			outfile.open(logfile, std::ios_base::app);
@@ -115,5 +115,12 @@ namespace Birb
 			outfile.close();
 #endif /* DEBUG */
 		}
+
+#ifdef LIB_GLFW
+		void error_callback(int error, const char* description)
+		{
+			fprintf(stderr, "GLFW Error: %s\n", description);
+		}
+#endif
 	}
 }

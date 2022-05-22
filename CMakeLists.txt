@@ -2,8 +2,12 @@ cmake_minimum_required(VERSION 3.12)
 
 project(Birb2D)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 option(BIRB_GLFW "Enable GLFW backend (experimental)" OFF)
-option(BIRB_DEBUG "Enable more verbose output and persistent logs" ON)
+option(BIRB_DEBUG "Enable more verbose output" ON)
+option(BIRB_LOGFILE "Write logs to a file" OFF)
+option(BIRB_NO_SOUND "Disable SDL_Mixer and audio tests" OFF)
 
 if (BIRB_GLFW)
 	# GLFW
@@ -12,6 +16,7 @@ if (BIRB_GLFW)
 	set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw)
+	add_definitions(-DLIB_GLFW)
 else()
 	# SDL2
 	list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
@@ -26,6 +31,14 @@ endif()
 
 if (BIRB_DEBUG)
 	add_definitions(-DDEBUG)
+endif()
+
+if (BIRB_LOGFILE)
+	add_definitions(-DLOGFILE)
+endif()
+
+if (BIRB_NOSOUND)
+	add_definitions(-DNO_SOUND)
 endif()
 
 include_directories(include/)
@@ -82,14 +95,23 @@ set(ENGINE_CORE_SRC
 	src/core/vector.cpp
 )
 
-add_executable(test
-	${TEST_SRC}
-	${ENGINE_CORE_SRC}
-)
+if (BIRB_GLFW)
+	add_executable(test
+		${TEST_SRC}
+		${ENGINE_CORE_SRC}
+		src/gl.c
+		src/tests/opengl_test.cpp
+	)
+else()
+	add_executable(test
+		${TEST_SRC}
+		${ENGINE_CORE_SRC}
+	)
+endif()
 
 if (BIRB_GLFW)
 	# GLFW
-	target_link_libraries(test glfw OpenGL::GL)
+	target_link_libraries(test glfw OpenGL::GL OpenGL::GLU)
 else()
 	# SDL2
 	target_link_libraries(test
