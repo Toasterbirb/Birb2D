@@ -41,7 +41,7 @@ set(TEST_SRC
 	src/tests/polygon_test.cpp
 	src/tests/random_test.cpp
 	src/tests/rect_test.cpp
-	src/tests/renderwindow_test.cpp
+	src/tests/window_test.cpp
 	src/tests/scene_test.cpp
 	src/tests/timer_test.cpp
 	src/tests/utils_test.cpp
@@ -51,29 +51,31 @@ set(TEST_SRC
 
 add_executable(test
 	${TEST_SRC}
-	src/audio.cpp
-	src/circle.cpp
-	src/color.cpp
-	src/entity.cpp
-	src/filesystem.cpp
-	src/font.cpp
-	src/graphs.cpp
-	src/line.cpp
-	src/logger.cpp
-	src/math.cpp
-	src/physics.cpp
-	src/polygon.cpp
-	src/random.cpp
-	src/rect.cpp
-	src/renderwindow.cpp
-	src/scene.cpp
-	src/sceneobject.cpp
-	src/texture.cpp
-	src/timer.cpp
-	src/timestep.cpp
-	src/utils.cpp
-	src/values.cpp
-	src/vector.cpp
+	src/core/audio.cpp
+	src/core/circle.cpp
+	src/core/color.cpp
+	src/core/entity.cpp
+	src/core/filesystem.cpp
+	src/core/font.cpp
+	src/core/graphs.cpp
+	src/core/line.cpp
+	src/core/logger.cpp
+	src/core/math.cpp
+	src/core/physics.cpp
+	src/core/polygon.cpp
+	src/core/random.cpp
+	src/core/rect.cpp
+	src/core/window.cpp
+	src/core/render.cpp
+	src/core/resources.cpp
+	src/core/scene.cpp
+	src/core/sceneobject.cpp
+	src/core/texture.cpp
+	src/core/timer.cpp
+	src/core/timestep.cpp
+	src/core/utils.cpp
+	src/core/values.cpp
+	src/core/vector.cpp
 )
 
 if (BIRB_GLFW)
@@ -89,3 +91,5 @@ else()
 		SDL2::Mixer
 	)
 endif()
+
+file(COPY ${CMAKE_SOURCE_DIR}/res DESTINATION ./)
