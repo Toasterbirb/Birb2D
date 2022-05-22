@@ -24,7 +24,21 @@ namespace Birb
 #ifdef LIB_SDL
 		SDL_Texture* sdlTexture() const;
 		bool CreateFromSurface(SDL_Renderer* renderer, SDL_Surface* surface);
-#endif
+
+		bool operator==(const Texture& other) const
+		{
+			return (texture_dimensions == other.texture_dimensions
+					&& textureLoaded == other.textureLoaded
+					&& sdlTex == other.sdlTex);
+		}
+#else
+
+		bool operator==(const Texture& other) const
+		{
+			return (texture_dimensions == other.texture_dimensions
+					&& textureLoaded == other.textureLoaded);
+		}
+#endif /* LIB_SDL */
 
 	private:
 		Vector2int texture_dimensions;
