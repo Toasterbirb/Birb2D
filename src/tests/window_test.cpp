@@ -78,7 +78,7 @@ namespace Birb
 
 		SUBCASE("Sprites / Textures in a scene")
 		{
-			Texture emptyTexture;		
+			Texture emptyTexture;
 			CHECK(emptyTexture.isLoaded() == false);
 			CHECK(emptyTexture.dimensions() == Vector2int(0, 0));
 
@@ -91,11 +91,7 @@ namespace Birb
 			/* Create the entities */
 			for (int i = 0; i < ENTITY_COUNT; i++)
 			{
-#ifdef LIB_SDL
-				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite.sdlTexture());
-#else
 				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite);
-#endif /* LIB_SDL */
 				entities.push_back(testEntity);
 			}
 

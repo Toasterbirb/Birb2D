@@ -14,6 +14,9 @@ namespace Birb
 	public:
 		Texture();
 		Texture(const std::string& filePath);
+#ifdef LIB_SDL
+		Texture(SDL_Texture* sdlTexture); ///< Initialize with a SDL_Texture
+#endif /* LIB_SDL */
 		//~Texture();
 
 		bool LoadTexture(const std::string& filePath);
@@ -21,6 +24,7 @@ namespace Birb
 		void Destroy();
 
 		Vector2int dimensions() const;
+
 #ifdef LIB_SDL
 		SDL_Texture* sdlTexture() const;
 		bool CreateFromSurface(SDL_Renderer* renderer, SDL_Surface* surface);

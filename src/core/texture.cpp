@@ -14,7 +14,7 @@ namespace Birb
 	Texture::Texture(const std::string& filePath)
 	{
 		textureLoaded = LoadTexture(filePath);
-		
+
 		/* If the texture was loaded successfully, get its dimensions */
 #ifdef LIB_SDL
 		if (textureLoaded)
@@ -27,11 +27,20 @@ namespace Birb
 #endif /* LIB_SDL */
 	}
 
+#ifdef LIB_SDL
+	Texture::Texture(SDL_Texture* sdlTexture)
+	:sdlTex(sdlTexture)
+	{
+		texture_dimensions = Utils::GetTextureDimensions(sdlTexture);
+		textureLoaded = true; /* Assuming the sdlTexture is valid */
+	}
+#endif /* LIB_SDL */
+
 	bool Texture::LoadTexture(const std::string& filePath)
 	{
 #ifdef LIB_SDL
 		this->sdlTex = NULL;
-		
+
 		SDL_Surface* surface = IMG_Load(filePath.c_str());
 		if (surface == NULL)
 		{

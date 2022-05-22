@@ -329,18 +329,6 @@ namespace Birb
 		int texHeight 	= 0;
 
 		/* Skip the texture width tests if the entity doesn't have a texture on it */
-#ifdef LIB_SDL
-		if (entity.sprite != nullptr)
-		{
-			SDL_QueryTexture(entity.sprite, NULL, NULL, &texWidth, &texHeight);
-
-			if (texWidth <= 0 || texHeight <= 0)
-			{
-				Birb::Debug::Log("Tried to render an entity with a texture with size of <= 0", Debug::Type::warning);
-				return false;
-			}
-		}
-#else /* LIB_SDL */
 		if (entity.sprite.isLoaded())
 		{
 			texWidth 	= entity.sprite.dimensions().x;
@@ -352,7 +340,6 @@ namespace Birb
 				return false;
 			}
 		}
-#endif /* LIB_SDL */
 
 		if (entity.animationComponent.frameCount <= 0) /* Check if the entity has animations */
 		{
@@ -396,9 +383,9 @@ namespace Birb
 		SDL_Point center = { centerPoint.x, centerPoint.y };
 
 		/* Skip rendering the texture if one doesn't exist on the entity */
-		if (entity.sprite != nullptr)
+		if (entity.sprite.isLoaded() == true)
 		{
-			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite, &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
+			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite.sdlTexture(), &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
 				Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
 			else
 				return true;
