@@ -96,11 +96,11 @@ set(ENGINE_CORE_SRC
 )
 
 set(SDL_SPECIFIC_SRC
-	src/sdl/sdl_window.cpp
+	src/core/sdl/sdl_window.cpp
 )
 
 set(GLFW_SPECIFIC_SRC
-	src/glfw/glfw_window.cpp
+	src/core/glfw/glfw_window.cpp
 )
 
 if (BIRB_GLFW)

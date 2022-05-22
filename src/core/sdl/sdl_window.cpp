@@ -4,11 +4,14 @@
 
 namespace Birb
 {
-	void Window::bSDL_InitWindow(const bool& resizable)
+	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
+	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
 		/* ------------------------- */
 		/* SDL Window implementation */
 		/* ------------------------- */
+
+		Debug::Log("Creating window '" + win_title + "'...");
 
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
@@ -35,6 +38,9 @@ namespace Birb
 		/* Set some global rendering variables */
 		Global::RenderVars::MainWindow 	= win;
 		Global::RenderVars::Renderer 	= renderer;
+		Global::RenderVars::RefreshRate = refresh_rate;
+
+		Debug::Log("Window '" + win_title + "' created successfully!");
 	}
 }
 #endif

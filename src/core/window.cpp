@@ -18,26 +18,6 @@ namespace Birb
 #endif /* LIB_SDL */
 	}
 
-	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
-	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
-	{
-#ifdef DEBUG
-		Debug::Log("Creating window '" + win_title + "'...");
-#endif
-
-#ifdef LIB_SDL
-		bSDL_InitWindow(resizable);
-#elif LIB_GLFW
-		bGLFW_InitWindow(resizable);
-#endif
-
-		Global::RenderVars::RefreshRate = refresh_rate;
-
-#ifdef DEBUG
-		Debug::Log("Window '" + win_title + "' created successfully!");
-#endif
-	}
-
 	Window::~Window()
 	{
 		Cleanup();

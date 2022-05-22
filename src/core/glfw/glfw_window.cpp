@@ -4,11 +4,14 @@
 
 namespace Birb
 {
-	void Window::bGLFW_InitWindow(const bool& resizable)
+	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
+	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
 		/* ------------------------- */
 		/* GLFW Window implementation */
 		/* ------------------------- */
+
+		Debug::Log("Creating window '" + win_title + "'...");
 
 		/* Initialize GLFW stuff */
 		glfwSetErrorCallback(Debug::error_callback);
@@ -50,6 +53,10 @@ namespace Birb
 		/* Clear the window so that it isn't near invisible */
 		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(glWindow);
+
+		Global::RenderVars::RefreshRate = refresh_rate;
+
+		Debug::Log("Window '" + win_title + "' created successfully!");
 	}
 }
 #endif

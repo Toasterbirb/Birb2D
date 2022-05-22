@@ -73,14 +73,5 @@ namespace Birb
 
 	private:
 		void Cleanup(); ///< Frees resources allocated for the window and deinitializes SDL2 things
-
-#ifdef LIB_SDL
-		/* SDL Functions */
-		void bSDL_InitWindow(const bool& resizable);
-#elif LIB_GLFW
-		/* GLFW Functions */
-		void bGLFW_InitWindow(const bool& resizable);
-#endif
-
 	};
 }
