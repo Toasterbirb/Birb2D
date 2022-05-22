@@ -95,10 +95,19 @@ set(ENGINE_CORE_SRC
 	src/core/vector.cpp
 )
 
+set(SDL_SPECIFIC_SRC
+	src/sdl/sdl_window.cpp
+)
+
+set(GLFW_SPECIFIC_SRC
+	src/glfw/glfw_window.cpp
+)
+
 if (BIRB_GLFW)
 	add_executable(test
 		${TEST_SRC}
 		${ENGINE_CORE_SRC}
+		${GLFW_SPECIFIC_SRC}
 		src/gl.c
 		src/tests/opengl_test.cpp
 	)
@@ -106,6 +115,7 @@ else()
 	add_executable(test
 		${TEST_SRC}
 		${ENGINE_CORE_SRC}
+		${SDL_SPECIFIC_SRC}
 	)
 endif()
 

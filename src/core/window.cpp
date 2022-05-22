@@ -26,84 +26,10 @@ namespace Birb
 #endif
 
 #ifdef LIB_SDL
-		/* ------------------------- */
-		/* SDL Window implementation */
-		/* ------------------------- */
-
-		/* Create a new window and initialize stuff for it */
-		InitSDL();
-		InitSDL_image();
-
-		if (resizable)
-			win = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_window_dimensions.x, p_window_dimensions.y, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-		else
-			win = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_window_dimensions.x, p_window_dimensions.y, SDL_WINDOW_SHOWN);
-
-		if (win == NULL)
-		{
-			Debug::Log("Window failed to init: " + (std::string)SDL_GetError(), Debug::error);
-			exit(1);
-		}
-
-		renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
-		if (renderer == NULL)
-		{
-			Debug::Log("Renderer failed to init: " + (std::string)SDL_GetError(), Debug::error);
-			exit(1);
-		}
-
-		/* Set some global rendering variables */
-		Global::RenderVars::MainWindow 	= win;
-		Global::RenderVars::Renderer 	= renderer;
+		bSDL_InitWindow(resizable);
 #elif LIB_GLFW
-		/* ------------------------- */
-		/* GLFW Window implementation */
-		/* ------------------------- */
-
-		/* Initialize GLFW stuff */
-		glfwSetErrorCallback(Debug::error_callback);
-
-		if (!glfwInit())
-		{
-			Debug::Log("Failed to initialize GLFW", Debug::error);
-			exit(1);
-		}
-
-		/* Create the window */
-		if (resizable)
-			glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-		else
-			glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-
-		glWindow = glfwCreateWindow(dimensions.x, dimensions.y, win_title.c_str(), NULL, NULL);
-		if (!glWindow)
-		{
-			Debug::Log("Something went wrong when creating GLFW window", Debug::error);
-			glfwTerminate();
-			exit(1);
-		}
-
-
-		/* Make the window current context */
-		glfwMakeContextCurrent(glWindow);
-
-		/* Load up glad */
-		gladLoadGL(glfwGetProcAddress);
-
-		/* Set buffer swapping interval to 1 */
-		glfwSwapInterval(1);
-
-		/* Get the framebuffer size and set it to the viewport */
-		glfwGetFramebufferSize(glWindow, &frameBufferWidth, &frameBufferHeight);
-		glViewport(0, 0, frameBufferWidth, frameBufferHeight);
-
-		/* Clear the window so that it isn't near invisible */
-		glClear(GL_COLOR_BUFFER_BIT);
-		glfwSwapBuffers(glWindow);
-
-
-
-#endif /* LIB_SDL + LIB_GLFW */
+		bGLFW_InitWindow(resizable);
+#endif
 
 		Global::RenderVars::RefreshRate = refresh_rate;
 
