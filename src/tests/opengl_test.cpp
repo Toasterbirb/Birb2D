@@ -57,7 +57,7 @@ namespace Birb
 
 	TEST_CASE("Rendering: OpenGL triangle")
 	{
-		Window window("OpenGL triangle", Vector2int(640, 480), 60, false);
+		Window window("OpenGL triangle", Vector2int(1280, 720), 60, false);
 
 		GLuint vertex_buffer, vertex_shader, fragment_shader, program;
 		GLint mvp_location, vpos_location, vcol_location;
@@ -90,6 +90,14 @@ namespace Birb
 		glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
 							  sizeof(vertices[0]), (void*) (sizeof(float) * 2));
 
+		int width, height;
+		float ratio;
+
+		glfwGetFramebufferSize(window.glWindow, &width, &height);
+		ratio = width / (float) height;
+
+		glViewport(0, 0, width, height);
+
 		/* Spin the triangle for 2 seconds or until the user closes the window */
 		Timer timer;
 		timer.Start();
@@ -99,14 +107,8 @@ namespace Birb
 			if (timer.ElapsedSeconds() > 2)
 				glfwSetWindowShouldClose(window.glWindow, 1);
 
-			float ratio;
-			int width, height;
 			mat4x4 m, p, mvp;
 
-			glfwGetFramebufferSize(window.glWindow, &width, &height);
-			ratio = width / (float) height;
-
-			glViewport(0, 0, width, height);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			mat4x4_identity(m);
