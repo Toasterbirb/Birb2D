@@ -50,8 +50,9 @@ namespace Birb
 		glfwSwapInterval(1);
 
 		/* Get the framebuffer size and set it to the viewport */
-		glfwGetFramebufferSize(glWindow, &frameBufferWidth, &frameBufferHeight);
-		glViewport(0, 0, frameBufferWidth, frameBufferHeight);
+		int width, height;
+		glfwGetFramebufferSize(glWindow, &width, &height);
+		glViewport(0, 0, width, height);
 
 		/* Clear the window so that it isn't near invisible */
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -96,6 +97,20 @@ namespace Birb
 		this->dimensions = dimensions;
 	}
 
+	void Window::EventTick(bool* GameRunning)
+	{
+		/* Check if the window should close */
+		if (*glfwWindowShouldClose)
+			*GameRunning = false;
+	}
+
+	bool Window::PollEvents()
+	{
+		glfwPollEvents();
+		return false;
+	}
+
+	/* GLFW Specific functions */
 	void Window::window_size_callback(GLFWwindow* window, int width, int height)
 	{
 		/* Update the viewport size if the window has been resized */
@@ -104,12 +119,12 @@ namespace Birb
 		glViewport(0, 0, frameBufferWidth, frameBufferHeight);
 	}
 
-
-	void Window::EventTick(bool* GameRunning)
+	Vector2int Window::FrameBufferDimensions()
 	{
-		/* Check if the window should close */
-		if (*glfwWindowShouldClose)
-			*GameRunning = false;
+		Vector2int frameBufferDimensions;
+		glfwGetFramebufferSize(glWindow, &frameBufferDimensions.x, &frameBufferDimensions.y);
+		return frameBufferDimensions;
 	}
+
 }
 #endif

@@ -56,7 +56,7 @@ namespace Birb
 
 			double width = rect.w - (wallOffset * 2);
 			std::vector<Vector2f> points(values.size());
-			
+
 			/* Calculate points */
 			double highestValue = Math::FindHighestValue(values);
 			double lowestValue;

@@ -90,11 +90,8 @@ namespace Birb
 		glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
 							  sizeof(vertices[0]), (void*) (sizeof(float) * 2));
 
-		int width, height;
-		float ratio;
-
-		glfwGetFramebufferSize(window.glWindow, &width, &height);
-		ratio = width / (float) height;
+		Vector2int frameBufferDimensions = window.FrameBufferDimensions();
+		float ratio = frameBufferDimensions.x / (float)frameBufferDimensions.y;
 
 		/* Spin the triangle for 2 seconds or until the user closes the window */
 		bool windowResized = false;

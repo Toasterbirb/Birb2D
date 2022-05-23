@@ -64,8 +64,8 @@ namespace Birb
 		SDL_Renderer* 	renderer;
 #elif LIB_GLFW
 		GLFWwindow* 	glWindow;
-		int 			frameBufferWidth;
-		int 			frameBufferHeight;
+
+		Vector2int FrameBufferDimensions();
 #endif
 
 		Vector2int dimensions; ///< Current window dimensions

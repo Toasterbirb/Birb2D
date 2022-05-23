@@ -1,6 +1,9 @@
 #ifdef LIB_SDL
 #include "Window.hpp"
 #include "Logger.hpp"
+#include "Diagnostics.hpp"
+
+#include <SDL2/SDL_mixer.h>
 
 namespace Birb
 {
@@ -159,6 +162,11 @@ namespace Birb
 			default:
 				break;
 		}
+	}
+
+	bool Window::PollEvents()
+	{
+		return (SDL_PollEvent(&event) != 0);
 	}
 }
 #endif
