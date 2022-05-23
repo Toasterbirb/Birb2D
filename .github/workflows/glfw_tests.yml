@@ -16,6 +16,6 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install libglfw3-dev valgrind
     - name: Compile
-      run: mkdir build ; cd build ; cmake .. -DBIRB_GLFW=ON -DBIRB_NO_SOUND=ON ; make -j4
+      run: mkdir build ; cd build ; cmake .. -DGLFW=ON -DNO_SOUND=ON ; make -j4
     - name: Run quick tests
       run: ./test -tce="*rendering*,*audio*,*timer*"

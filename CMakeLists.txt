@@ -4,12 +4,12 @@ project(Birb2D)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-option(BIRB_GLFW "Enable GLFW backend (experimental)" OFF)
-option(BIRB_DEBUG "Enable more verbose output" ON)
-option(BIRB_LOGFILE "Write logs to a file" OFF)
-option(BIRB_NO_SOUND "Disable SDL_Mixer and audio tests" OFF)
+option(GLFW "Enable GLFW backend (experimental)" OFF)
+option(DEBUG "Enable more verbose output" ON)
+option(LOGFILE "Write logs to a file" OFF)
+option(NO_SOUND "Disable SDL_Mixer and audio tests" OFF)
 
-if (BIRB_GLFW)
+if (GLFW)
 	# GLFW
 	find_package(OpenGL REQUIRED)
 	set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
@@ -29,15 +29,15 @@ else()
 	add_definitions(-DLIB_SDL)
 endif()
 
-if (BIRB_DEBUG)
+if (DEBUG)
 	add_definitions(-DDEBUG)
 endif()
 
-if (BIRB_LOGFILE)
+if (LOGFILE)
 	add_definitions(-DLOGFILE)
 endif()
 
-if (BIRB_NOSOUND)
+if (NOSOUND)
 	add_definitions(-DNO_SOUND)
 endif()
 
@@ -103,7 +103,7 @@ set(GLFW_SPECIFIC_SRC
 	src/core/glfw/glfw_window.cpp
 )
 
-if (BIRB_GLFW)
+if (GLFW)
 	add_executable(test
 		${TEST_SRC}
 		${ENGINE_CORE_SRC}
@@ -119,7 +119,7 @@ else()
 	)
 endif()
 
-if (BIRB_GLFW)
+if (GLFW)
 	# GLFW
 	target_link_libraries(test glfw OpenGL::GL OpenGL::GLU)
 else()
