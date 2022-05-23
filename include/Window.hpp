@@ -57,6 +57,8 @@ namespace Birb
 		/* -- Window variables -- */
 		std::string win_title; ///< Window title text
 		int refresh_rate; ///< Window refreshrate. Can be changed during runtime if needed for some reason
+		bool resizable;
+
 #ifdef LIB_SDL
 		SDL_Window* 	win;
 		SDL_Renderer* 	renderer;
@@ -73,5 +75,11 @@ namespace Birb
 
 	private:
 		void Cleanup(); ///< Frees resources allocated for the window and deinitializes SDL2 things
+
+#ifdef LIB_GLFW
+		/* GLFW specific functions */
+		static void window_size_callback(GLFWwindow* window, int width, int height);
+#endif
+
 	};
 }

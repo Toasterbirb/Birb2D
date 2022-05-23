@@ -10,131 +10,9 @@
 
 namespace Birb
 {
-	Window::Window()
-	{
-#ifdef LIB_SDL
-		InitSDL();
-		InitSDL_image();
-#endif /* LIB_SDL */
-	}
-
 	Window::~Window()
 	{
 		Cleanup();
-	}
-
-#ifdef LIB_SDL
-	void Window::InitSDL()
-	{
-		/* Check if SDL has already been initialized */
-		if (Global::IsInit::SDL)
-			return;
-
-#ifdef DEBUG
-		if (Birb::Diagnostics::Debugging::InitMessages)
-			Debug::Log("Initializing SDL...");
-#endif
-
-		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) > 0)
-		{
-			Debug::Log("SDL Init failed: " + (std::string)SDL_GetError(), Debug::error);
-			exit(2);
-		}
-		else
-		{
-			Global::IsInit::SDL = true;
-		}
-	}
-
-	void Window::InitSDL_image()
-	{
-		/* Check if SDL_image has already been initialized */
-		if (Global::IsInit::SDL_image)
-			return;
-
-#ifdef DEBUG
-		if (Birb::Diagnostics::Debugging::InitMessages)
-			Debug::Log("Initializing SDL_image...");
-#endif
-
-		if (!(IMG_Init(IMG_INIT_PNG)))
-		{
-			Debug::Log("IMG_Init has failed" + (std::string)SDL_GetError(), Debug::error);
-			exit(2);
-		}
-		else
-		{
-			Global::IsInit::SDL_image = true;
-		}
-	}
-#endif /* LIB_SDL */
-
-	void Window::Cleanup()
-	{
-#ifdef LIB_SDL
-#ifdef DEBUG
-		Debug::Log("Starting window cleanup for '" + win_title + "'...");
-#endif /* DEBUG */
-		SDL_DestroyWindow(win);
-
-		/* FIXME: There's some sort of memory leak with SDL_Renderer. Destroying the renderer
-		 * causes heck of a lot of valgrind errors
-		 * Ref: https://stackoverflow.com/questions/20823886/sdl2-memory-leaks-on-sdl-destroyrenderer
-		 *
-		 * Also, this deconstructor is getting called twice in some cases for some weird reason */
-
-		IMG_Quit();
-		TTF_Quit();
-		SDL_Quit();
-		SDL_DestroyRenderer(renderer);
-
-		/* Also de-initialize SDL_Mixer if audio has been used */
-		if (Global::IsInit::SDL_mixer)
-		{
-			Mix_Quit();
-			Global::IsInit::SDL_mixer = false;
-		}
-
-		Global::IsInit::SDL = false;
-		Global::IsInit::SDL_image = false;
-		Global::IsInit::SDL_ttf = false;
-
-		Global::RenderVars::MainWindow = NULL;
-		Global::RenderVars::Renderer = NULL;
-#elif LIB_GLFW
-		glfwDestroyWindow(glWindow);
-		glfwTerminate();
-#endif
-
-#ifdef DEBUG
-		Debug::Log("Window '" + win_title + "' destroyed!");
-#endif /* DEBUG */
-	}
-
-	void Window::Clear()
-	{
-		/* Clear the window renderer. Call before rendering stuff */
-#ifdef LIB_SDL
-		SDL_RenderClear(Global::RenderVars::Renderer);
-#endif /* LIB_SDL */
-	}
-
-	void Window::Display()
-	{
-#ifdef LIB_SDL
-		SDL_RenderPresent(Global::RenderVars::Renderer);
-#endif /* LIB_SDL */
-	}
-
-	Vector2int Window::CursorPosition() const
-	{
-		Vector2int pos;
-#ifdef LIB_SDL
-		SDL_GetMouseState(&pos.x, &pos.y);
-#else /* LIB_SDL */
-		Debug::Log("CursorPosition() not implemented", Debug::fixme);
-#endif /* LIB_SDL */
-		return pos;
 	}
 
 	bool Window::CursorInRect(const Rect& rect) const
@@ -148,13 +26,6 @@ namespace Birb
 		return false;
 	}
 
-	void Window::SetWindowSize(const Vector2int& dimensions)
-	{
-#ifdef LIB_SDL
-		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
-#endif /* LIB_SDL */
-		this->dimensions = dimensions;
-	}
 
 	Vector2f Window::window_dimensions_multiplier()
 	{
@@ -162,34 +33,6 @@ namespace Birb
 						(float)dimensions.y / (float)original_window_dimensions.y);
 	}
 
-#ifdef LIB_SDL
-	void Window::EventTick(const SDL_Event& event, bool* GameRunning)
-	{
-		switch (event.type)
-		{
-			/* Handle window resizing */
-			case (SDL_WINDOWEVENT):
-				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
-					SetWindowSize(Vector2int(event.window.data1, event.window.data2));
-				break;
-
-			case (SDL_QUIT):
-				Debug::Log("Quitting...");
-				*GameRunning = false;
-				break;
-
-			default:
-				break;
-		}
-	}
-#elif LIB_GLFW
-	void Window::EventTick(bool* GameRunning)
-	{
-		/* Check if the window should close */
-		if (*glfwWindowShouldClose)
-			*GameRunning = false;
-	}
-#endif
 
 	bool Window::PollEvents()
 	{

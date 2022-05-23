@@ -96,9 +96,8 @@ namespace Birb
 		glfwGetFramebufferSize(window.glWindow, &width, &height);
 		ratio = width / (float) height;
 
-		glViewport(0, 0, width, height);
-
 		/* Spin the triangle for 2 seconds or until the user closes the window */
+		bool windowResized = false;
 		Timer timer;
 		timer.Start();
 
@@ -106,10 +105,12 @@ namespace Birb
 		{
 			if (timer.ElapsedSeconds() > 2)
 				glfwSetWindowShouldClose(window.glWindow, 1);
+			else if (!windowResized && timer.ElapsedSeconds() > 1)
+				window.SetWindowSize({960, 540});
 
 			mat4x4 m, p, mvp;
 
-			glClear(GL_COLOR_BUFFER_BIT);
+			window.Clear();
 
 			mat4x4_identity(m);
 			mat4x4_rotate_Z(m, m, (float) glfwGetTime());
@@ -120,8 +121,8 @@ namespace Birb
 			glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 
-			glfwSwapBuffers(window.glWindow);
-			glfwPollEvents();
+			window.Display();
+			window.PollEvents();
 		}
 	}
 }
