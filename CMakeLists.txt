@@ -113,17 +113,27 @@ if (GLFW)
 		src/gl.c
 		src/tests/opengl_test.cpp
 	)
+
+	add_library(birb2d
+		${ENGINE_CORE_SRC}
+		${GLFW_SPECIFIC_SRC}
+		src/gl.c)
 else()
 	add_executable(test
 		${TEST_SRC}
 		${ENGINE_CORE_SRC}
 		${SDL_SPECIFIC_SRC}
 	)
+
+	add_library(birb2d
+		${ENGINE_CORE_SRC}
+		${SDL_SPECIFIC_SRC})
 endif()
 
 if (GLFW)
 	# GLFW
 	target_link_libraries(test glfw OpenGL::GL OpenGL::GLU)
+	target_link_libraries(birb2d glfw OpenGL::GL OpenGL::GLU)
 else()
 	# SDL2
 	target_link_libraries(test
@@ -133,6 +143,15 @@ else()
 		SDL2::TTF
 		SDL2::Mixer
 	)
+
+	target_link_libraries(birb2d
+		SDL2::Main
+		SDL2::Image
+		SDL2::GFX
+		SDL2::TTF
+		SDL2::Mixer
+	)
+
 endif()
 
 file(COPY ${CMAKE_SOURCE_DIR}/res DESTINATION ./)
