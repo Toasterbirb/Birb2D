@@ -10,9 +10,7 @@
 #include "Rect.hpp"
 #include "SceneObject.hpp"
 
-#ifndef LIB_SDL
-#include <Texture.hpp>
-#endif
+#include "SDL.hpp"
 
 namespace Birb
 {

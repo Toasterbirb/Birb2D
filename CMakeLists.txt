@@ -1,15 +1,20 @@
 cmake_minimum_required(VERSION 3.12)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 
 project(Birb2D)
 
 
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_gfx REQUIRED)
-find_package(SDL2_ttf REQUIRED)
-find_package(SDL2_mixer REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+add_subdirectory(vendor/SDL)
+include_directories(vendor/SDL/include)
+
+add_subdirectory(vendor/SDL_image)
+include_directories(vendor/SDL_image)
+
+add_subdirectory(vendor/SDL_mixer)
+include_directories(vendor/SDL_mixer/include)
+
+add_subdirectory(vendor/SDL_ttf)
+include_directories(vendor/SDL_ttf)
+
 add_definitions(-DLIB_SDL)
 
 include_directories(include/)
@@ -39,6 +44,13 @@ set(CORE_SRC
 	src/values.cpp
 	src/vector.cpp)
 
+set(SDL_gfx_src
+	vendor/SDL_gfx-2.0.26/SDL_framerate.c
+	#vendor/SDL_gfx-2.0.26/SDL_gfxBlitFunc.c
+	vendor/SDL_gfx-2.0.26/SDL_gfxPrimitives.c
+	vendor/SDL_gfx-2.0.26/SDL_imageFilter.c
+	vendor/SDL_gfx-2.0.26/SDL_rotozoom.c)
+
 
 add_executable(test
 	src/tests/audio_test.cpp
@@ -65,23 +77,26 @@ add_executable(test
 	${CORE_SRC}
 )
 
+target_precompile_headers(test PRIVATE include/SDL.hpp)
+
+
+add_library(birb2d STATIC ${CORE_SRC})
+target_precompile_headers(birb2d PRIVATE include/SDL.hpp)
+
 target_link_libraries(test
-	SDL2::Main
-	SDL2::Image
-	SDL2::GFX
-	SDL2::TTF
-	SDL2::Mixer
+	SDL2
+	SDL2main
+	SDL2_image
+	SDL2_ttf
+	SDL2_mixer
 )
 
-add_library(birb2d
-	${CORE_SRC})
-
 target_link_libraries(birb2d
-	SDL2::Main
-	SDL2::Image
-	SDL2::GFX
-	SDL2::TTF
-	SDL2::Mixer
+	SDL2
+	SDL2main
+	SDL2_image
+	SDL2_ttf
+	SDL2_mixer
 )
 
 file(COPY ${CMAKE_SOURCE_DIR}/res DESTINATION ./)

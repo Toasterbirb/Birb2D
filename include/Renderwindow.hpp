@@ -1,11 +1,6 @@
 #pragma once
 
-#ifdef LIB_SDL
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL2_gfxPrimitives.h>
-#endif /* LIB_SDL */
+#include "SDL.hpp"
 
 #include "Circle.hpp"
 #include "Color.hpp"

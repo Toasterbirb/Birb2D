@@ -1,8 +1,6 @@
 #pragma once
 
-#ifdef LIB_SDL
-#include <SDL2/SDL.h>
-#endif
+#include "SDL.hpp"
 
 namespace Birb
 {

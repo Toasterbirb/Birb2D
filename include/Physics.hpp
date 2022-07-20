@@ -28,10 +28,10 @@ namespace Birb
 
 		/// Check if two polygons collide with each other
 		bool PolygonCollision(Vector2f polygonA[], const int& polygonAsize, Vector2f polygonB[], const int& polygonBsize);
-		
+
 		/// Check if two polygons collide with each other
 		bool PolygonCollision(std::vector<Vector2f> polygonA, std::vector<Vector2f> polygonB);
-		
+
 		/// Check if two polygons collide with each other
 		bool PolygonCollision(const Polygon& polygonA, const Polygon& polygonB);
 
@@ -40,7 +40,7 @@ namespace Birb
 
 		/// Check if a point is inside of a circle
 		bool PointInCircle(const Vector2int& point, const Circle& circle);
-		
+
 		/// Check if a point is inside of a circle
 		bool PointInCircle(const Vector2f& point, const Circle& circle);
 

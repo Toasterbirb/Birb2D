@@ -1,10 +1,7 @@
 #pragma once
 
 #include <string>
-//#include <SDL2/SDL.h>
-#ifdef LIB_SDL
-#include <SDL2/SDL_ttf.h>
-#endif
+#include "SDL.hpp"
 
 #include "Values.hpp"
 

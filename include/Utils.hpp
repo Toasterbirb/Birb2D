@@ -1,11 +1,8 @@
 #pragma once
 #pragma GCC diagnostic ignored "-Wunused-function"
 
-#ifdef LIB_SDL
-#include <SDL2/SDL.h>
-#else
+#include "SDL.hpp"
 #include <Logger.hpp>
-#endif
 
 #include <cstdlib>
 #include <math.h>

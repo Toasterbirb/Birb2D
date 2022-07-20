@@ -2,9 +2,10 @@
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
+#include <cstring>
 
 #ifdef LIB_SDL
-#include <SDL2/SDL_mixer.h>
+//#include <SDL_mixer.h>
 #endif
 
 namespace Birb
@@ -644,16 +645,18 @@ namespace Birb
 		{
 #ifdef LIB_SDL
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
-			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
-			{
-				Render::ResetDrawColor();
-				return true;
-			}
-			else
-			{
-				Debug::Log("Error when drawing a circle", Debug::error);
-				return false;
-			}
+			Debug::Log("DrawCircle() commented out", Debug::fixme);
+			return false;
+			//if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
+			//{
+			//	Render::ResetDrawColor();
+			//	return true;
+			//}
+			//else
+			//{
+			//	Debug::Log("Error when drawing a circle", Debug::error);
+			//	return false;
+			//}
 #else
 			Debug::Log("DrawCircle()", Debug::fixme);
 			return false;
@@ -674,16 +677,18 @@ namespace Birb
 				vy[i] = points[i].y;
 			}
 
-			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
-			{
-				Render::ResetDrawColor();
-				return true;
-			}
-			else
-			{
-				Debug::Log("Error when drawing a polygon!", Debug::error);
-				return false;
-			}
+			Debug::Log("DrawPolygon() commented out", Debug::fixme);
+			return false;
+			//if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
+			//{
+			//	Render::ResetDrawColor();
+			//	return true;
+			//}
+			//else
+			//{
+			//	Debug::Log("Error when drawing a polygon!", Debug::error);
+			//	return false;
+			//}
 #else
 			Debug::Log("DrawPolygon()", Debug::fixme);
 			return false;
@@ -704,16 +709,18 @@ namespace Birb
 				vy[i] = points[i].y;
 			}
 
-			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
-			{
-				Render::ResetDrawColor();
-				return true;
-			}
-			else
-			{
-				Debug::Log("Error when drawing a polygon!", Debug::error);
-				return false;
-			}
+			Debug::Log("DrawPolygon() commented out", Debug::fixme);
+			return false;
+			//if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
+			//{
+			//	Render::ResetDrawColor();
+			//	return true;
+			//}
+			//else
+			//{
+			//	Debug::Log("Error when drawing a polygon!", Debug::error);
+			//	return false;
+			//}
 #else
 			Debug::Log("DrawPolygon()", Debug::fixme);
 			return false;

@@ -1,8 +1,6 @@
 #pragma once
 
-#ifdef LIB_SDL
-#include <SDL2/SDL_ttf.h>
-#endif
+#include "SDL.hpp"
 
 #include <string>
 
@@ -25,7 +23,7 @@ namespace Birb
 
 		int GetSize() const;
 		void SetSize(const int& size);
-	
+
 	private:
 		int size;
 		bool fontLoaded;

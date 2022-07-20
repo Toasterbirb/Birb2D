@@ -1,8 +1,6 @@
 #pragma once
 
-#ifdef LIB_SDL
-#include <SDL2/SDL_image.h>
-#endif
+#include "SDL.hpp"
 
 #include <string>
 #include "Vector.hpp"

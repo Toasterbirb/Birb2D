@@ -1,9 +1,7 @@
 #pragma once
 #pragma GCC diagnostic ignored "-Wunused-variable"
 
-#ifdef LIB_SDL
-#include <SDL2/SDL.h>
-#endif
+#include "SDL.hpp"
 
 #include <string>
 #include "Color.hpp"

@@ -3,10 +3,7 @@
 #ifndef NO_SOUND
 #include <iostream>
 
-#ifdef LIB_SDL
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
-#endif /* LIB_SDL */
+#include "SDL.hpp"
 
 namespace Birb
 {

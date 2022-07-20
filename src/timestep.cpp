@@ -1,5 +1,5 @@
 #ifdef LIB_SDL
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #else
 #include <Logger.hpp>
 #endif /* LIB_SDL */
