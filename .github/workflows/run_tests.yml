@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Pull submodules
+      run: git submodule update --init --recursive
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install valgrind libfluidsynth-dev libxmp-dev libflac-dev libopusfile-dev
     - name: Compile
