@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install libsdl2-dev libsdl2-gfx-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev valgrind
+      run: sudo apt-get update && sudo apt-get install valgrind libfluidsynth-dev libxmp-dev libflac-dev libopusfile-dev
     - name: Compile
-      run: make -j4 test
+      run: mkdir build ; cd build ; cmake .. ; make -j4
     - name: Run tests
-      run: make run_quick_tests
+      run: ./test -tce="*rendering*,*audio*,*timer*"
     - name: Valgrind memcheck
       run: chmod +x ${GITHUB_WORKSPACE}/.github/workflows/valgrind_test.sh ; ${GITHUB_WORKSPACE}/.github/workflows/valgrind_test.sh
