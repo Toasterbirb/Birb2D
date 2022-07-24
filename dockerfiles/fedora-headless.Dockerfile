@@ -26,3 +26,6 @@ USER ${USER}
 
 # Remove any build files
 RUN rm -rf workspace/build
+
+# Compile the libraries and run tests
+RUN mkdir workspace/build && cd workspace/build && cmake .. && make -j$(nproc) && ./test -tce="*rendering*,*audio*,*timer*"
