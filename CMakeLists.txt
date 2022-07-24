@@ -11,6 +11,8 @@ option(SYSTEM_SDL "Link Birb2D dynamically against system SDL libraries instead 
 compiling them from source" OFF)
 option(STATIC_SDL "Use static linking for SDL (might not work on all
 systems)" OFF)
+option(TESTS "Compile tests" ON)
+option(EXAMPLES "Compile examples" OFF)
 
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
@@ -73,35 +75,12 @@ target_link_libraries(birb2d
 )
 target_precompile_headers(birb2d PRIVATE include/SDL.hpp)
 
+# Compile tests if enabled
+if (TESTS)
+	add_subdirectory(tests)
+endif()
 
-add_executable(test
-	src/tests/audio_test.cpp
-	src/tests/circle_test.cpp
-	src/tests/color_test.cpp
-	src/tests/doctest_entry.cpp
-	src/tests/entity_test.cpp
-	src/tests/filesystem_test.cpp
-	src/tests/font_test.cpp
-	src/tests/graph_test.cpp
-	src/tests/line_test.cpp
-	src/tests/logger_test.cpp
-	src/tests/math_test.cpp
-	src/tests/physics_test.cpp
-	src/tests/polygon_test.cpp
-	src/tests/random_test.cpp
-	src/tests/rect_test.cpp
-	src/tests/renderwindow_test.cpp
-	src/tests/scene_test.cpp
-	src/tests/timer_test.cpp
-	src/tests/utils_test.cpp
-	src/tests/values_test.cpp
-	src/tests/vector_test.cpp
-	#${CORE_SRC}
-)
-
-
-target_link_libraries(test
-	birb2d
-)
-
-file(COPY ${CMAKE_SOURCE_DIR}/res DESTINATION ./)
+# Compile examples if enabled
+if (EXAMPLES)
+	add_subdirectory(examples)
+endif()
