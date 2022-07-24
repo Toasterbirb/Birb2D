@@ -34,7 +34,7 @@ namespace Birb
 		scene.AddObject(&circle);
 
 		CHECK(scene.ObjectCount() == 8);
-		
+
 		std::vector<SceneObject*> objPointers = scene.GetObjects();
 		CHECK(objPointers[objPointers.size() - 1] == &entityB);
 		CHECK(objPointers[objPointers.size() - 2] == &graphs[1]);
@@ -79,14 +79,14 @@ namespace Birb
 			CHECK(entityB.rect == Rect(60, 110, 128, 72));
 			CHECK(graphs[0].rect == Rect(60, 110, 128, 72));
 			CHECK(graphs[1].rect == Rect(60, 110, 128, 72));
-			
+
 			CHECK(polygon.points[0] == Vector2f(10, 10));
 			CHECK(polygon.points[1] == Vector2f(12, 10));
 			CHECK(polygon.points[2] == Vector2f(11, 11));
 
 			CHECK(line.pointA == Vector2f(10, 10));
 			CHECK(line.pointB == Vector2f(13, 13));
-			
+
 			CHECK(rect == Rect(10, 10, 10, 10));
 			CHECK(circle.pos == Vector2int(10, 10));
 
@@ -98,14 +98,14 @@ namespace Birb
 			CHECK(entityB.rect == Rect(40, 90, 128, 72));
 			CHECK(graphs[0].rect == Rect(40, 90, 128, 72));
 			CHECK(graphs[1].rect == Rect(40, 90, 128, 72));
-			
+
 			CHECK(polygon.points[0] == Vector2f(-10, -10));
 			CHECK(polygon.points[1] == Vector2f(-8, -10));
 			CHECK(polygon.points[2] == Vector2f(-9, -9));
 
 			CHECK(line.pointA == Vector2f(-10, -10));
 			CHECK(line.pointB == Vector2f(-7, -7));
-			
+
 			CHECK(rect == Rect(-10, -10, 10, 10));
 			CHECK(circle.pos == Vector2int(-10, -10));
 
@@ -116,14 +116,14 @@ namespace Birb
 			CHECK(entityB.rect == Rect(50, 100, 128, 72));
 			CHECK(graphs[0].rect == Rect(50, 100, 128, 72));
 			CHECK(graphs[1].rect == Rect(50, 100, 128, 72));
-			
+
 			CHECK(polygon.points[0] == Vector2f(0, 0));
 			CHECK(polygon.points[1] == Vector2f(2, 0));
 			CHECK(polygon.points[2] == Vector2f(1, 1));
 
 			CHECK(line.pointA == Vector2f(0, 0));
 			CHECK(line.pointB == Vector2f(3, 3));
-			
+
 			CHECK(rect == Rect(0, 0, 10, 10));
 			CHECK(circle.pos == Vector2int(0, 0));
 		}

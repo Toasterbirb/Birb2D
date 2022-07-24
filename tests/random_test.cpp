@@ -112,7 +112,7 @@ namespace Birb
 
 		CHECK(Math::Round(sum, 1) == 11.4);
 	}
-	
+
 	TEST_CASE("Shuffle a string array")
 	{
 		std::string originalValues[5] = {
@@ -140,7 +140,7 @@ namespace Birb
 			for (int j = 0; j < 5; j++)
 				if (i == j)
 					valueFound[i] = true;
-		
+
 		/* Check the results */
 		bool result = true;
 

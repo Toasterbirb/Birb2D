@@ -1,8 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <iostream>
-#include <string>
+#include "STD.hpp"
 
 namespace Birb
 {

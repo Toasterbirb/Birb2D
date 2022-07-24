@@ -1,8 +1,8 @@
-#include "Logger.hpp"
+#include "Diagnostics.hpp"
 #include "Entity.hpp"
+#include "Logger.hpp"
 #include "Renderwindow.hpp"
 #include "Values.hpp"
-#include "Diagnostics.hpp"
 
 namespace Birb
 {
@@ -173,12 +173,8 @@ namespace Birb
 
 		int texWidth;
 		int texHeight;
-#ifdef LIB_SDL
-		SDL_QueryTexture(sprite, NULL, NULL, &texWidth, &texHeight);
-#else
 		texWidth = sprite.dimensions().x;
 		texHeight = sprite.dimensions().y;
-#endif
 
 		int spritesPerRow = texWidth / animationComponent.spriteSize.x;
 		float fullRowCount = std::floor(index / spritesPerRow);
@@ -231,11 +227,7 @@ namespace Birb
 
 	void Entity::CenterRelativeTo(const Rect& rect)
 	{
-#ifdef LIB_SDL
-		Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
-#else
 		Vector2int textureDimensions = sprite.dimensions();
-#endif
 		this->rect.x = ((rect.w / 2) - (textureDimensions.x / 2.0)) + rect.x;
 		this->rect.y = ((rect.h / 2) - (textureDimensions.y / 2.0)) + rect.y;
 	}
@@ -244,18 +236,12 @@ namespace Birb
 	{
 		name = "Default Entity";
 		SetBaseEntityValues();
-#ifdef LIB_SDL
-		sprite = nullptr;
-#endif
 	}
 
 	Entity::Entity(const std::string& p_name)
 	:name(p_name)
 	{
 		SetBaseEntityValues();
-#ifdef LIB_SDL
-		sprite = nullptr;
-#endif
 	}
 
 	/* FIXME: Write tests for this constructor */
@@ -263,62 +249,38 @@ namespace Birb
 	:name(p_name), rect(rect)
 	{
 		SetBaseEntityValues();
-#ifdef LIB_SDL
-		sprite = nullptr;
-#endif
 	}
 
-#ifdef LIB_SDL
-	Entity::Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture)
-	:name(p_name), sprite(p_texture), rect(p_rect)
+	Entity::Entity(const std::string& name, const Rect& rect, Texture texture)
+	:name(name), rect(rect), sprite(texture)
 	{
 		SetBaseEntityValues();
 	}
 
-	Entity::Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture)
-	:name(p_name), sprite(p_texture)
+	Entity::Entity(const std::string& name, const Vector2int& pos, Texture texture)
+	:name(name), sprite(texture)
 	{
 		SetBaseEntityValues();
 		rect.x = pos.x;
 		rect.y = pos.y;
 
 		/* Get texture scale automatically */
-		Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
-		rect.w = textureDimensions.x;
-		rect.h = textureDimensions.y;
+		rect.w = texture.dimensions().x;
+		rect.h = texture.dimensions().y;
 	}
 
-	Entity::Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent)
-	:name(p_name), sprite(p_texture)
+	Entity::Entity(const std::string& name, const Vector2int& pos, Texture texture, const EntityComponent::Animation& animationComponent)
+	:name(name), sprite(texture), animationComponent(animationComponent)
 	{
 		/* Load the text sprite */
 		SetBaseEntityValues();
-		animationComponent = p_animationComponent;
+		//this->animationComponent = animationComponent;
 
 		rect.x = pos.x;
 		rect.y = pos.y;
-		rect.w = p_animationComponent.spriteSize.x;
-		rect.h = p_animationComponent.spriteSize.y;
+		rect.w = animationComponent.spriteSize.x;
+		rect.h = animationComponent.spriteSize.y;
 	}
-#else
-	Entity::Entity(const std::string& p_name, const Rect& p_rect, Texture texture)
-	{
-		// TODO: Implement this function
-		Debug::Log("Implement Entity::Entity(const std::string& p_name, const Rect& p_rect, Texture texture)", Debug::fixme);
-	}
-
-	Entity::Entity(const std::string& p_name, const Vector2int& pos, Texture p_texture)
-	{
-		// TODO: Implement this function
-		Debug::Log("Implement Entity::Entity(const std::string& p_name, const Vector2int& pos, Texture p_texture)", Debug::fixme);
-	}
-
-	Entity::Entity(const std::string& p_name, const Vector2int& pos, Texture p_texture, const EntityComponent::Animation& p_animationComponent)
-	{
-		// TODO: Implement this function
-		Debug::Log("Implement Entity::Entity(const std::string& p_name, const Vector2int& pos, Texture p_texture, const EntityComponent::Animation& p_animationComponent)", Debug::fixme);
-	}
-#endif /* LIB_SDL */
 
 	Entity::Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent)
 	:name(p_name)
@@ -326,9 +288,6 @@ namespace Birb
 		/* Load the text sprite */
 		SetBaseEntityValues();
 		textComponent = p_textComponent;
-#ifdef LIB_SDL
-		sprite = nullptr;
-#endif
 		LoadSprite();
 
 		rect.x = pos.x;
@@ -339,7 +298,6 @@ namespace Birb
 
 	void Entity::LoadSprite()
 	{
-#ifdef LIB_SDL
 		/* There's a text component. Let's generate a text sprite for it */
 		if (textComponent.text != "")
 		{
@@ -348,29 +306,21 @@ namespace Birb
 			else
 				sprite = Resources::TextSprite(textComponent.text, *textComponent.font, *textComponent.color, *textComponent.bgColor);
 
-			if (sprite == nullptr)
+			if (sprite.isLoaded() == false)
 				Debug::Log("Something went wrong while creating the text sprite for '" + name + "'", Debug::error);
 			else
 			{
 				/* Get texture scale automatically */
-				Vector2int textureDimensions = utils::GetTextureDimensions(sprite);
-				rect.w = textureDimensions.x;
-				rect.h = textureDimensions.y;
+				rect.w = sprite.dimensions().x;
+				rect.h = sprite.dimensions().y;
 			}
 		}
-#else
-		// TODO: Implement text component stuff without SDL
-#endif
 	}
 
 	void Entity::ReloadSprite()
 	{
 		/* Destroy the old sprite */
-#ifdef LIB_SDL
-		SDL_DestroyTexture(sprite);
-#else
 		sprite.Destroy();
-#endif
 
 		/* Create new text sprite */
 		LoadSprite();

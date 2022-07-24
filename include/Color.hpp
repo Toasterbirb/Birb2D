@@ -11,12 +11,8 @@ namespace Birb
 		Color(const int& r, const int& g, const int& b, const int& a);
 		Color(const int& hex);
 
-#ifdef LIB_SDL
 		SDL_Color sdl() const; ///< Convert Color to SDL_Color
 		Uint8 r, g, b, a;
-#else
-		int r, g, b, a;
-#endif /* LIB_SDL */
 
 		void ChangeIntensity(const int& delta);
 

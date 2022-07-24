@@ -1,5 +1,4 @@
 #pragma once
-#ifdef LIB_SDL
 
 #ifdef SYSTEM_SDL
 #include <SDL2/SDL.h>
@@ -12,5 +11,3 @@
 #include <SDL_mixer.h>
 #include <SDL_image.h>
 #endif /* SYSTEM_SDL */
-
-#endif /* LIB_SDL */

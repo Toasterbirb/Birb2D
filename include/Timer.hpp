@@ -1,9 +1,6 @@
 #pragma once
 
-#include <chrono>
-#include <ctime>
-#include <cmath>
-#include <string>
+#include "STD.hpp"
 
 namespace Birb
 {

@@ -56,7 +56,7 @@ namespace Birb
 
 			double width = rect.w - (wallOffset * 2);
 			std::vector<Vector2f> points(values.size());
-			
+
 			/* Calculate points */
 			double highestValue = Math::FindHighestValue(values);
 			double lowestValue;
@@ -92,9 +92,9 @@ namespace Birb
 
 				case(GraphType::Area):
 					/* Works pretty much the same way as the line rendering, but
-					 * creates a polygon to fill in the area between the line and 
+					 * creates a polygon to fill in the area between the line and
 					 * the bottom of the graph */
-					
+
 					Vector2f endBottomPoint(points[points.size() - 1].x, rect.y + rect.h);
 					Vector2f startBottomPoint(points[0].x, rect.y + rect.h);
 

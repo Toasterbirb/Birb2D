@@ -1,0 +1,14 @@
+#pragma once
+#include <cmath>
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <cstdlib>
+#include <stdlib.h>
+#include <stdio.h>
+#include <filesystem>
+#include <fstream>
+#include <vector>
+#include <math.h>
+#include <chrono>
+#include <functional>

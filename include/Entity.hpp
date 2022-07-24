@@ -1,16 +1,14 @@
 #pragma once
 
-#include <functional>
-#include <string>
-#include <vector>
+#include "STD.hpp"
 #include "Font.hpp"
 #include "Utils.hpp"
 #include "Timer.hpp"
 #include "Color.hpp"
 #include "Rect.hpp"
+#include "Resources.hpp"
 #include "SceneObject.hpp"
-
-#include "SDL.hpp"
+#include "Texture.hpp"
 
 namespace Birb
 {
@@ -120,7 +118,7 @@ namespace Birb
 	}
 
 	/// Entities are objects that contain all of the information required to render stuff
-	
+
 	/// Entities can be anything really. For example, it could be text or a picture. This could be extended to animations in the future
 	class Entity : public SceneObject
 	{
@@ -129,15 +127,9 @@ namespace Birb
 		Entity(const std::string& p_name); ///< Creates an empty Entity object
 		Entity(const std::string& p_name, const Rect& rect); ///< Creates an empty Entity object with size and position
 
-#ifdef LIB_SDL
-		Entity(const std::string& p_name, const Rect& p_rect, SDL_Texture* p_texture); 			///< Creates an Entity with a SDL_Texture to render with custom scale
-		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture); 		///< Creates an Entity with a SDL_Texture to render without specifying a scale
-		Entity(const std::string& p_name, const Vector2int& pos, SDL_Texture* p_texture, const EntityComponent::Animation& p_animationComponent); 	///< Creates a Animation Entity using a Animation
-#else
-		Entity(const std::string& p_name, const Rect& p_rect, Texture texture);
-		Entity(const std::string& p_name, const Vector2int& pos, Texture p_texture);
-		Entity(const std::string& p_name, const Vector2int& pos, Texture p_texture, const EntityComponent::Animation& p_animationComponent);
-#endif /* LIB_SDL */
+		Entity(const std::string& name, const Rect& rect, Texture texture);
+		Entity(const std::string& name, const Vector2int& pos, Texture texture);
+		Entity(const std::string& name, const Vector2int& pos, Texture texture, const EntityComponent::Animation& animationComponent);
 
 		Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
 
@@ -149,12 +141,7 @@ namespace Birb
 		std::string name; 		///< Name of the entity. Used for debugging
 
 		/* Sprite handlings */
-		// TODO: Switch to the Texture class to avoid hardcoding SDL
-#ifdef LIB_SDL
-		SDL_Texture* sprite; 	///< Sprite to be rendered
-#else
 		Texture sprite; 		///< Sprite to be rendered
-#endif /* LIB_SDL */
 
 		float angle; 			///< Sets the rotation of the entity when rendering it
 		Rect rect; 				///< Sets the position and the dimensions of the entity

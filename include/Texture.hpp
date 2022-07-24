@@ -1,8 +1,8 @@
 #pragma once
 
-#include "SDL.hpp"
+#include <SDL_image.h>
 
-#include <string>
+#include "STD.hpp"
 #include "Vector.hpp"
 
 namespace Birb
@@ -12,6 +12,7 @@ namespace Birb
 	public:
 		Texture();
 		Texture(const std::string& filePath);
+		Texture(SDL_Texture* sdlTexture); ///< Initialize with a SDL_Texture
 		//~Texture();
 
 		bool LoadTexture(const std::string& filePath);
@@ -19,16 +20,21 @@ namespace Birb
 		void Destroy();
 
 		Vector2int dimensions() const;
-#ifdef LIB_SDL
+
 		SDL_Texture* sdlTexture() const;
 		bool CreateFromSurface(SDL_Renderer* renderer, SDL_Surface* surface);
-#endif
+
+		bool operator==(const Texture& other) const
+		{
+			return (texture_dimensions == other.texture_dimensions
+					&& textureLoaded == other.textureLoaded
+					&& sdlTex == other.sdlTex);
+		}
+
 
 	private:
 		Vector2int texture_dimensions;
-#ifdef LIB_SDL
 		SDL_Texture* sdlTex;
-#endif
 		bool textureLoaded;
 	};
 }

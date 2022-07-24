@@ -14,7 +14,6 @@ namespace Birb
 
 	void UI::PollButtons(const Window& window)
 	{
-#ifdef LIB_SDL
         /* Set the mouse down state */
         switch (window.event.type)
         {
@@ -44,7 +43,7 @@ namespace Birb
                 continue;
 
             /* Check if we are dragging */
-			if (window.event.type != SDL_MOUSEBUTTONDOWN && window.event.type != SDL_MOUSEBUTTONUP && mouseHeldDown) 
+			if (window.event.type != SDL_MOUSEBUTTONDOWN && window.event.type != SDL_MOUSEBUTTONUP && mouseHeldDown)
             {
                 Buttons[i]->clickComponent.onDrag();
                 continue; /* It is impossible to click and drag at the same time */
@@ -62,8 +61,5 @@ namespace Birb
 			/* You can really only click one button at once, so lets stop if we got this far */
 			break;
 		}
-#else
-		Debug::Log("PollButtons() not fully implemented, because SDL_Event doesn't have non-SDL alternatives", Debug::fixme);
-#endif /* LIB_SDL */
 	}
 }

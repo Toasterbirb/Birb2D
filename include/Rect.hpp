@@ -20,9 +20,7 @@ namespace Birb
 		Polygon toPolygon() const;
 		Rect getInt() const;
 
-#ifdef LIB_SDL
 		SDL_Rect getSDLRect() const;
-#endif
 
 		float x, y, w, h;
 		Color color;

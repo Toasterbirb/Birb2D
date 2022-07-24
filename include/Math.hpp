@@ -1,8 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <math.h>
-#include <vector>
+#include "STD.hpp"
 #include "Vector.hpp"
 #include "Color.hpp"
 #include "Circle.hpp"
@@ -47,7 +45,7 @@ namespace Birb
 		Vector3f CenterPoint(const Vector3int& a, const Vector3int& b); ///< Calculate the center point between two 3D integer vectors
 
 		bool PointOnLine(const Line& line, const Vector2f& point); ///< Check if the give point is on the line
-		
+
 		/// @param circle 	Circle object
 		/// @param angle 	Angle in degrees
 		/// @return 		A point on the circle rotated by the angle.
@@ -80,7 +78,7 @@ namespace Birb
 			}
 			return result;
 		}
-		
+
 		/// Find the highest value in a vector
 		template<typename T>
 		T FindHighestValue(const std::vector<T>& values)
@@ -93,7 +91,7 @@ namespace Birb
 			}
 			return result;
 		}
-		
+
 		/// Find the lowest value in an array
 		template<typename T>
 		T FindLowestValue(T* values, const int& valueCount)

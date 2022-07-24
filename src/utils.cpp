@@ -5,7 +5,6 @@ namespace Birb
 {
 	namespace utils
 	{
-#ifdef LIB_SDL
 		Vector2int GetTextureDimensions(SDL_Texture* texture)
 		{
 			Vector2int result;
@@ -20,12 +19,11 @@ namespace Birb
 			Uint8 g = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 1]; // Green
 			Uint8 r = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 2]; // Red
 			Uint8 a = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 3]; // Alpha
-			
+
 			SDL_Color color = { r, g, b, a };
-			
+
 			return color;
 		}
-#endif /* LIB_SDL */
 
 		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points)
 		{
@@ -72,7 +70,7 @@ namespace Birb
 		std::vector<Line> PolygonToLines(const Vector2f polygon[], const int& polygonSize)
 		{
 			std::vector<Line> lines;
-			
+
 			for (int i = 0; i < polygonSize - 1; i++)
 			{
 				lines.push_back(Line(polygon[i], polygon[i + 1]));

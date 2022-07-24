@@ -13,12 +13,14 @@ option(STATIC_SDL "Use static linking for SDL (might not work on all
 systems)" OFF)
 option(TESTS "Compile tests" ON)
 option(EXAMPLES "Compile examples" OFF)
+option(DEBUG "Enable some extra debug output" OFF)
 
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
 else()
 	if (STATIC_SDL)
 		set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
+		add_definitions(-DSTATIC_SDL)
 	else()
 		set(BUILD_SHARED_LIBS ON CACHE BOOL "Build the library as a shared library")
 	endif()
@@ -36,7 +38,6 @@ else()
 	include_directories(vendor/SDL_ttf)
 endif()
 
-add_definitions(-DLIB_SDL)
 
 include_directories(include/)
 
@@ -56,6 +57,7 @@ set(CORE_SRC
 	src/random.cpp
 	src/rect.cpp
 	src/renderwindow.cpp
+	src/resources.cpp
 	src/scene.cpp
 	src/sceneobject.cpp
 	src/texture.cpp
@@ -73,7 +75,7 @@ target_link_libraries(birb2d
 	SDL2_ttf
 	SDL2_mixer
 )
-target_precompile_headers(birb2d PRIVATE include/SDL.hpp)
+target_precompile_headers(birb2d PRIVATE include/SDL.hpp include/STD.hpp)
 
 # Compile tests if enabled
 if (TESTS)
@@ -84,3 +86,6 @@ endif()
 if (EXAMPLES)
 	add_subdirectory(examples)
 endif()
+
+# Config tool to help with finding out what the engine was compiled with
+add_subdirectory(config_tool)

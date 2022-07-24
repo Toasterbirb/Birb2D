@@ -18,10 +18,8 @@ namespace Birb
 		Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable); ///< Creates a window and initializes SDL2 stuff and a renderer
 
 		/* -- Init stuff functions -- */
-#ifdef LIB_SDL
 		static void InitSDL(); ///< Initializes SDL2 (if its not already initialized)
 		static void InitSDL_image(); ///< Initializes SDL2_image (if its not already initialized)
-#endif /* LIB_SDL */
 		/* -------------------------- */
 
 		/* -- Rendering and cleanup functions -- */
@@ -37,19 +35,15 @@ namespace Birb
 		/* -- Basic window events -- */
 		void SetWindowSize(const Vector2int& dimensions);
 		bool PollEvents(); ///< Runs SDL_PollEvent and saves the result to the *event* variable
-#ifdef LIB_SDL
 		void EventTick(const SDL_Event& event, bool* GameRunning);
 		SDL_Event event;
-#endif /* LIB_SDL */
 		/* ------------------------- */
 
 		/* -- Window variables -- */
 		std::string win_title; ///< Window title text
 		int refresh_rate; ///< Window refreshrate. Can be changed during runtime if needed for some reason
-#ifdef LIB_SDL
 		SDL_Window* win;
 		SDL_Renderer* renderer;
-#endif /* LIB_SDL */
 		Vector2int dimensions; ///< Current window dimensions
 		Vector2int original_window_dimensions; ///< Window dimensions on application startup before its modified by the user
 		Vector2f window_dimensions_multiplier(); ///< Returns the difference between the current and original window dimensions.
@@ -59,28 +53,13 @@ namespace Birb
 		void Cleanup(); ///< Frees resources allocated for the window and deinitializes SDL2 things
 	};
 
-	/// Methods for loading different resources like fonts and textures
-	struct Resources
-	{
-#ifdef LIB_SDL
-		static SDL_Texture* LoadTexture(const std::string& p_filePath);
-
-		/* FIXME: Move all of this to resources.cpp and add constructors for wrapped boolean */
-		static SDL_Texture* TextSprite(const std::string& text, const Font& font, const Color& color, int wrapLength = 0);
-		static SDL_Texture* TextSprite(const std::string& text, const Font& font, const Color& color, const Color& bgColor);
-		static Uint8* 		CopyTexturePixels(SDL_Surface* surface, int* width, int* height, int* pitch);
-#endif /* LIB_SDL */
-	};
-
 	/// Methods for rendering things
 	namespace Render
 	{
 		bool DrawEntity(Entity& entity); ///< Renders an entity
 
-#ifdef LIB_SDL
 		void ResetDrawColor(); ///< Resets the drawing color back to black, so that the window background color stays the same
 		void SetRenderDrawColor(const Color& color); ///< Sets the drawing color for base SDL2 drawing functions
-#endif
 
 		void DrawRect(const Color& color, const Rect& dimensions); ///< Draw filled rect
 		void DrawRect(const Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect

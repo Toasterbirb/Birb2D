@@ -16,7 +16,7 @@ namespace Birb
 		pointB = Vector2f(0, 0);
 		DefaultLineValues();
 	}
-	
+
 	Line::Line(const Vector2f& pointA, const Vector2f& pointB)
 	:pointA(pointA), pointB(pointB)
 	{

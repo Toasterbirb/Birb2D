@@ -331,12 +331,12 @@ namespace Birb
 
 	TEST_CASE("Find highest and lowest double value")
 	{
-		double values[5] = 
+		double values[5] =
 		{
 			4, 5, 1.6, 16.5, 3.6
 		};
 
-		std::vector<double> valuesVector = 
+		std::vector<double> valuesVector =
 		{
 			4, 5, 1.6, 16.5, 3.6
 		};
@@ -350,12 +350,12 @@ namespace Birb
 
 	TEST_CASE("Find highest and lowest float value")
 	{
-		float values[5] = 
+		float values[5] =
 		{
 			4, 5, 1.6f, 16.5f, 3.6f
 		};
 
-		std::vector<float> valuesVector = 
+		std::vector<float> valuesVector =
 		{
 			4, 5, 1.6f, 16.5f, 3.6f
 		};
@@ -369,12 +369,12 @@ namespace Birb
 
 	TEST_CASE("Find highest and lowest int value")
 	{
-		int values[5] = 
+		int values[5] =
 		{
 			4, 5, 1, 16, 7
 		};
 
-		std::vector<int> valuesVector = 
+		std::vector<int> valuesVector =
 		{
 			4, 5, 1, 16, 7
 		};
@@ -388,7 +388,7 @@ namespace Birb
 
 	TEST_CASE("Calculate average from double array")
 	{
-		double values[5] = 
+		double values[5] =
 		{
 			4, 5, 1.6, 16.5, 3.6
 		};
@@ -398,7 +398,7 @@ namespace Birb
 
 	TEST_CASE("Calculate average from float array")
 	{
-		float values[5] = 
+		float values[5] =
 		{
 			4, 5, 1.6f, 16.5f, 3.6f
 		};
@@ -408,7 +408,7 @@ namespace Birb
 
 	TEST_CASE("Calculate average from int array")
 	{
-		int values[5] = 
+		int values[5] =
 		{
 			4, 5, 1, 16, 3
 		};

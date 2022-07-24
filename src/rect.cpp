@@ -51,7 +51,6 @@ namespace Birb
 		return roundedRect;
 	}
 
-#ifdef LIB_SDL
 	SDL_Rect Rect::getSDLRect() const
 	{
 		SDL_Rect sdlrect;
@@ -61,7 +60,6 @@ namespace Birb
 		sdlrect.y = y;
 		return sdlrect;
 	}
-#endif /* LIB_SDL */
 
 	void Rect::RenderFunc()
 	{

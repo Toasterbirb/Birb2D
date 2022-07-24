@@ -33,13 +33,13 @@ namespace Birb
 				hours = "0" + std::to_string(now->tm_hour);
 			else
 				hours = std::to_string(now->tm_hour);
-			
+
 			// Minutes
 			if (now->tm_min < 10)
 				minutes = "0" + std::to_string(now->tm_min);
 			else
 				minutes = std::to_string(now->tm_min);
-			
+
 			// Seconds
 			if (now->tm_sec < 10)
 				seconds = "0" + std::to_string(now->tm_sec);

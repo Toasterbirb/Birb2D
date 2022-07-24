@@ -1,4 +1,4 @@
-#include <math.h>
+#include "STD.hpp"
 #include "Values.hpp"
 #include "Filesystem.hpp"
 #include "Logger.hpp"
@@ -38,7 +38,7 @@ namespace Birb
 
 			return;
 		}
-		
+
 
 		/* Check if the application name hasn't been set yet */
 		if (AppName == "_null_")
@@ -52,7 +52,7 @@ namespace Birb
 		 * 2: ~/.local/share/<ApplicationName>/res
 		 * 3: /usr/local/share/<ApplicationName>/res
 		 * 4: /usr/share/<ApplicationName>/res */
-		
+
 		if (Birb::Filesystem::Directory::Exists("./res"))
 			ResLocation = "./res";
 		else if (Birb::Filesystem::Directory::Exists((std::string)getenv("HOME") + "/.local/share/" + AppName + "/res"))

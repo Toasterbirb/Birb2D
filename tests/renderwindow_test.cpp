@@ -17,10 +17,8 @@ namespace Birb
 		CHECK(window.win_title == "Birb2D tests");
 		CHECK(window.original_window_dimensions == Vector2int(1280, 720));
 
-#ifdef LIB_SDL
 		CHECK(Global::RenderVars::Renderer == window.renderer);
 		CHECK(window.win == Global::RenderVars::MainWindow);
-#endif /* LIB_SDL */
 
 		CHECK(Global::RenderVars::RefreshRate == 75);
 		CHECK(Global::RenderVars::BackgroundColor == Colors::Black);
@@ -46,10 +44,7 @@ namespace Birb
 			{
 				while (window.PollEvents())
 				{
-					// SDL event polling, needs to be changed slightly to support GLFW
-#ifdef LIB_SDL
 					window.EventTick(window.event, &ApplicationRunning);
-#endif /* LIB_SDL */
 				}
 
 				timeStep.Step();
@@ -79,7 +74,7 @@ namespace Birb
 
 		SUBCASE("Sprites / Textures in a scene")
 		{
-			Texture emptyTexture;		
+			Texture emptyTexture;
 			CHECK(emptyTexture.isLoaded() == false);
 			CHECK(emptyTexture.dimensions() == Vector2int(0, 0));
 
@@ -92,11 +87,7 @@ namespace Birb
 			/* Create the entities */
 			for (int i = 0; i < ENTITY_COUNT; i++)
 			{
-#ifdef LIB_SDL
-				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite.sdlTexture());
-#else
 				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite);
-#endif /* LIB_SDL */
 				entities.push_back(testEntity);
 			}
 

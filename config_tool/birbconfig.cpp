@@ -13,9 +13,17 @@ int main(void)
 	std::cout << "- DEBUG\t\tMore verbosity" << std::endl;
 #endif
 
-#ifdef LIB_SDL
-	std::cout << "- LIB_SDL\tUse SDL2 as the graphics + sound library" << std::endl;
-#endif
+#ifdef SYSTEM_SDL
+	std::cout << "- SYSTEM_SDL\tCompiled with pre-compiled system SDL-libs" << std::endl;
+#else
+
+#ifdef STATIC_SDL
+	std::cout << "- STATIC_SDL\tSDL was compiled with static libraries" << std::endl;
+#else
+	std::cout << "- SHARED_SDL\tSDL was compiled with shared libraries" << std::endl;
+#endif /* STATIC_SDL */
+
+#endif /* SYSTEM_SDL */
 
 #ifdef NO_SOUND
 	std::cout << "- NO_SOUND\tDisables sound completely (gets rid of SDL2_mixer dependency)" << std::endl;

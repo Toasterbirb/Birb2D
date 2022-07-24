@@ -16,7 +16,7 @@ namespace Birb
 			CHECK(RectCollision(rectB, rectA));
 			CHECK_FALSE(RectCollision(rectA, rectC));
 			CHECK_FALSE(RectCollision(rectC, rectA));
-			
+
 
 			Rect rectD(0, 0, 10, 10);
 			Rect rectE(0, 20, 10, 10);
@@ -294,7 +294,7 @@ namespace Birb
 		TEST_CASE("Circle collision with lines")
 		{
 			Circle circle(2, {3, 2});
-			
+
 			Line lineF({1, 3}, {6, 4});
 			Line lineG({1, 4}, {4, 4});
 			Line lineH({5, 1}, {5, 2});
