@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
+
 add_subdirectory(vendor/SDL)
 include_directories(vendor/SDL/include)
 
