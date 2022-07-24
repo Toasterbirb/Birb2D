@@ -7,19 +7,26 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
+option(SYSTEM_SDL "Link Birb2D dynamically against system SDL libraries instead of
+compiling them from source" OFF)
 
-add_subdirectory(vendor/SDL)
-include_directories(vendor/SDL/include)
+if (SYSTEM_SDL)
+	add_definitions(-DSYSTEM_SDL)
+else()
+	set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
 
-add_subdirectory(vendor/SDL_image)
-include_directories(vendor/SDL_image)
+	add_subdirectory(vendor/SDL)
+	include_directories(vendor/SDL/include)
 
-add_subdirectory(vendor/SDL_mixer)
-include_directories(vendor/SDL_mixer/include)
+	add_subdirectory(vendor/SDL_image)
+	include_directories(vendor/SDL_image)
 
-add_subdirectory(vendor/SDL_ttf)
-include_directories(vendor/SDL_ttf)
+	add_subdirectory(vendor/SDL_mixer)
+	include_directories(vendor/SDL_mixer/include)
+
+	add_subdirectory(vendor/SDL_ttf)
+	include_directories(vendor/SDL_ttf)
+endif()
 
 add_definitions(-DLIB_SDL)
 
@@ -49,13 +56,6 @@ set(CORE_SRC
 	src/utils.cpp
 	src/values.cpp
 	src/vector.cpp)
-
-set(SDL_gfx_src
-	vendor/SDL_gfx-2.0.26/SDL_framerate.c
-	#vendor/SDL_gfx-2.0.26/SDL_gfxBlitFunc.c
-	vendor/SDL_gfx-2.0.26/SDL_gfxPrimitives.c
-	vendor/SDL_gfx-2.0.26/SDL_imageFilter.c
-	vendor/SDL_gfx-2.0.26/SDL_rotozoom.c)
 
 
 add_executable(test
