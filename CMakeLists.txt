@@ -80,7 +80,7 @@ add_executable(test
 	src/tests/utils_test.cpp
 	src/tests/values_test.cpp
 	src/tests/vector_test.cpp
-	${CORE_SRC}
+	#${CORE_SRC}
 )
 
 target_precompile_headers(test PRIVATE include/SDL.hpp)
@@ -89,7 +89,8 @@ target_precompile_headers(test PRIVATE include/SDL.hpp)
 add_library(birb2d STATIC ${CORE_SRC})
 target_precompile_headers(birb2d PRIVATE include/SDL.hpp)
 
-target_link_libraries(test
+
+target_link_libraries(birb2d
 	SDL2
 	SDL2main
 	SDL2_image
@@ -97,7 +98,8 @@ target_link_libraries(test
 	SDL2_mixer
 )
 
-target_link_libraries(birb2d
+target_link_libraries(test
+	birb2d
 	SDL2
 	SDL2main
 	SDL2_image
