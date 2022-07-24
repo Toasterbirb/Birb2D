@@ -9,11 +9,17 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(SYSTEM_SDL "Link Birb2D dynamically against system SDL libraries instead of
 compiling them from source" OFF)
+option(STATIC_SDL "Use static linking for SDL (might not work on all
+systems)" OFF)
 
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
 else()
-	set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
+	if (STATIC_SDL)
+		set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
+	else()
+		set(BUILD_SHARED_LIBS ON CACHE BOOL "Build the library as a shared library")
+	endif()
 
 	add_subdirectory(vendor/SDL)
 	include_directories(vendor/SDL/include)
@@ -57,6 +63,16 @@ set(CORE_SRC
 	src/values.cpp
 	src/vector.cpp)
 
+add_library(birb2d STATIC ${CORE_SRC})
+target_link_libraries(birb2d
+	SDL2
+	SDL2main
+	SDL2_image
+	SDL2_ttf
+	SDL2_mixer
+)
+target_precompile_headers(birb2d PRIVATE include/SDL.hpp)
+
 
 add_executable(test
 	src/tests/audio_test.cpp
@@ -83,20 +99,6 @@ add_executable(test
 	#${CORE_SRC}
 )
 
-target_precompile_headers(test PRIVATE include/SDL.hpp)
-
-
-add_library(birb2d STATIC ${CORE_SRC})
-target_precompile_headers(birb2d PRIVATE include/SDL.hpp)
-
-
-target_link_libraries(birb2d
-	SDL2
-	SDL2main
-	SDL2_image
-	SDL2_ttf
-	SDL2_mixer
-)
 
 target_link_libraries(test
 	birb2d

@@ -4,13 +4,15 @@ RUN dnf -y update &&       \
     dnf -y install gcc     \
     gcc-c++                \
     git                    \
-    make                   \
+    cmake                  \
+	valgrind               \
     vim                    \
-    SDL2-devel             \
-    SDL2_image-devel       \
-    SDL2_ttf-devel         \
-    SDL2_mixer-devel       \
-    SDL2_gfx-devel
+	fluidsynth-devel       \
+	libxmp-devel           \
+	flac-devel             \
+	freetype-devel         \
+	opusfile-devel
+
 
 # Setup rootless env
 ARG USER=birb
@@ -21,3 +23,6 @@ RUN useradd -m ${USER} && \
 WORKDIR /home/${USER}
 COPY --chown=${USER} . workspace
 USER ${USER}
+
+# Remove any build files
+RUN rm -rf workspace/build
