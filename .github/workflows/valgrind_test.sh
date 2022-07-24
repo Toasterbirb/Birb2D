@@ -1,5 +1,5 @@
 #!/bin/bash
-cd build
+cd build/tests
 RESULT=$(valgrind --leak-check=summary --show-leak-kinds=all ./test -tce="*rendering*,*audio*,*timer*" &>/dev/stdout | awk '/ERROR SUMMARY/ { print $4 }')
 
 function _success()

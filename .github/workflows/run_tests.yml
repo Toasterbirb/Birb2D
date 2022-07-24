@@ -20,6 +20,6 @@ jobs:
     - name: Compile
       run: mkdir build ; cd build ; cmake .. ; make -j4
     - name: Run tests
-      run: cd build ; ./test -tce="*rendering*,*audio*,*timer*"
+      run: cd build/tests ; ./test -tce="*rendering*,*audio*,*timer*"
     - name: Valgrind memcheck
       run: chmod +x ${GITHUB_WORKSPACE}/.github/workflows/valgrind_test.sh ; ${GITHUB_WORKSPACE}/.github/workflows/valgrind_test.sh
