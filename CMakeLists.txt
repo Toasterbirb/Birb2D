@@ -100,11 +100,6 @@ target_link_libraries(birb2d
 
 target_link_libraries(test
 	birb2d
-	SDL2
-	SDL2main
-	SDL2_image
-	SDL2_ttf
-	SDL2_mixer
 )
 
 file(COPY ${CMAKE_SOURCE_DIR}/res DESTINATION ./)
