@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL_image.h>
+#include "SDL.hpp"
 
 #include "STD.hpp"
 #include "Vector.hpp"

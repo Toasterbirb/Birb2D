@@ -2,8 +2,7 @@
 
 #include "STD.hpp"
 
-#include <SDL_ttf.h>
-#include <SDL_image.h>
+#include "SDL.hpp"
 
 #include "Font.hpp"
 #include "Values.hpp"
