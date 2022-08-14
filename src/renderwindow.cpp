@@ -447,18 +447,16 @@ namespace Birb
 		bool DrawCircle(const Color& color, const Vector2int& pos, const int& radius)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
-			Debug::Log("DrawCircle() commented out", Debug::fixme);
-			return false;
-			//if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
-			//{
-			//	Render::ResetDrawColor();
-			//	return true;
-			//}
-			//else
-			//{
-			//	Debug::Log("Error when drawing a circle", Debug::error);
-			//	return false;
-			//}
+			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
+			{
+				Render::ResetDrawColor();
+				return true;
+			}
+			else
+			{
+				Debug::Log("Error when drawing a circle", Debug::error);
+				return false;
+			}
 		}
 
 		bool DrawPolygon(const Color& color, Vector2int* points, const int& pointCount)
@@ -474,18 +472,16 @@ namespace Birb
 				vy[i] = points[i].y;
 			}
 
-			Debug::Log("DrawPolygon() commented out", Debug::fixme);
-			return false;
-			//if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
-			//{
-			//	Render::ResetDrawColor();
-			//	return true;
-			//}
-			//else
-			//{
-			//	Debug::Log("Error when drawing a polygon!", Debug::error);
-			//	return false;
-			//}
+			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
+			{
+				Render::ResetDrawColor();
+				return true;
+			}
+			else
+			{
+				Debug::Log("Error when drawing a polygon!", Debug::error);
+				return false;
+			}
 		}
 
 		bool DrawPolygon(const Color& color, const std::vector<Vector2int>& points)
@@ -501,18 +497,16 @@ namespace Birb
 				vy[i] = points[i].y;
 			}
 
-			Debug::Log("DrawPolygon() commented out", Debug::fixme);
-			return false;
-			//if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
-			//{
-			//	Render::ResetDrawColor();
-			//	return true;
-			//}
-			//else
-			//{
-			//	Debug::Log("Error when drawing a polygon!", Debug::error);
-			//	return false;
-			//}
+			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
+			{
+				Render::ResetDrawColor();
+				return true;
+			}
+			else
+			{
+				Debug::Log("Error when drawing a polygon!", Debug::error);
+				return false;
+			}
 		}
 
 		/* filledPolygonColor works only with integers, so this will just

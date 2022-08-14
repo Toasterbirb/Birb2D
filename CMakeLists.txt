@@ -36,6 +36,14 @@ else()
 
 	add_subdirectory(vendor/SDL_ttf)
 	include_directories(vendor/SDL_ttf)
+
+	include(ExternalProject)
+	ExternalProject_Add(SDL_gfx
+		SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx
+		CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx/configure --prefix=<INSTALL_DIR>
+		BUILD_COMMAND ${MAKE})
+
+	include_directories(vendor/SDL2_gfx)
 endif()
 
 
@@ -74,6 +82,7 @@ target_link_libraries(birb2d
 	SDL2_image
 	SDL2_ttf
 	SDL2_mixer
+	SDL2_gfx
 )
 target_precompile_headers(birb2d PRIVATE include/SDL.hpp include/STD.hpp)
 

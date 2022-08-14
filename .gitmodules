@@ -13,3 +13,6 @@
 [submodule "vendor/SDL"]
 	path = vendor/SDL
 	url = https://github.com/libsdl-org/SDL
+[submodule "vendor/SDL2_gfx"]
+	path = vendor/SDL2_gfx
+	url = https://github.com/Toasterbirb/SDL2_gfx
