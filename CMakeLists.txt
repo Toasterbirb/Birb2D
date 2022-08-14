@@ -57,6 +57,7 @@ set(CORE_SRC
 	src/audio.cpp
 	src/circle.cpp
 	src/color.cpp
+	src/diagnostics.cpp
 	src/entity.cpp
 	src/filesystem.cpp
 	src/font.cpp
