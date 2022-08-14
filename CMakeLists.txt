@@ -13,7 +13,11 @@ option(STATIC_SDL "Use static linking for SDL (might not work on all
 systems)" OFF)
 option(TESTS "Compile tests" ON)
 option(EXAMPLES "Compile examples" OFF)
-option(DEBUG "Enable some extra debug output" OFF)
+option(DEBUG "Enable some extra debug output" ON)
+
+if (DEBUG)
+	add_definitions(-DDEBUG)
+endif()
 
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
