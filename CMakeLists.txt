@@ -44,7 +44,8 @@ else()
 	include(ExternalProject)
 	ExternalProject_Add(SDL_gfx
 		SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx
-		CONFIGURE_COMMAND ${CMAKE_COMMAND} -E env SDL_LIBS=<INSTALL_DIR> ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx/configure --prefix=<INSTALL_DIR> --disable-sdltest
+		CONFIGURE_COMMAND ${CMAKE_COMMAND} -E env
+		SDL_CONFIG=${CMAKE_CURRENT_BINARY_DIR}/vendor/SDL/sdl2-config ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx/configure --prefix=<INSTALL_DIR> --disable-sdltest
 		BUILD_COMMAND ${MAKE})
 
 	include_directories(vendor/SDL2_gfx)
