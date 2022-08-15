@@ -16,7 +16,7 @@ jobs:
     - name: Pull submodules
       run: git submodule update --init --recursive
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install valgrind libfluidsynth-dev libxmp-dev libflac-dev libopusfile-dev
+      run: sudo apt-get update && sudo apt-get install valgrind libfluidsynth-dev libxmp-dev libflac-dev libopusfile-dev libsdl2-dev
     - name: Compile
       run: mkdir build ; cd build ; cmake .. ; make -j4
     - name: Run tests
