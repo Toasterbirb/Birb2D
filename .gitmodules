@@ -18,4 +18,4 @@
 	url = https://github.com/Toasterbirb/SDL2_gfx
 [submodule "vendor/seed"]
 	path = vendor/seed
-	url = https://github.com/Toasterbirb/seed
+	url = git@github.com:toasterbirb/seed.git
