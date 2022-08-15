@@ -50,7 +50,6 @@ else()
 	include_directories(vendor/SDL2_gfx)
 endif()
 
-
 include_directories(include/)
 
 set(CORE_SRC
@@ -101,5 +100,5 @@ if (EXAMPLES)
 	add_subdirectory(examples)
 endif()
 
-# Config tool to help with finding out what the engine was compiled with
-add_subdirectory(config_tool)
+# Add utilities
+add_subdirectory(utils)
