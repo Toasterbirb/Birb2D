@@ -1,65 +1,66 @@
 #include "STD.hpp"
 #include "Filesystem.hpp"
 
-#define CMAKE_TEMPLATE "\
-cmake_minimum_required(VERSION 3.12)\n\
-project(template_project\n\
-VERSION 1.0\n\
-LANGUAGES CXX)\n\
-\n\
-# Headers \n\
-include_directories(birb2d/include/) \n\
-include_directories(birb2d/vendor/SDL2_gfx/)\n\
-\n\
-add_subdirectory(birb2d)\n\
-\n\
-add_executable(birb_project src/main.cpp)\n\
-target_link_libraries(birb_project birb2d)\n\
-\n\
-# Copy the resources into the build directory\n\
-file(COPY ./res DESTINATION ./)\n"
+const std::string CMAKE_TEMPLATE = R"~~(
+cmake_minimum_required(VERSION 3.12)
+project(template_project
+VERSION 1.0
+LANGUAGES CXX)
 
-#define MAIN_TEMPLATE "\
-#include \"Renderwindow.hpp\"\n\
-#include \"Timestep.hpp\"\n\
-\n\
-int main(int argc, char** argv)\n\
-{\n\
-	Birb::Debug::Log(\"Creating the window\");\n\
-	Birb::Window window(\"Birb2D project template\", Birb::Vector2int(1280, 720), 75, false);\n\
-	Birb::TimeStep timeStep;\n\
-	timeStep.Init(&window);\n\
-\n\
-	Birb::Debug::Log(\"Starting the game loop\");\n\
-	bool ApplicationRunning = true;\n\
-	while (ApplicationRunning)\n\
-	{\n\
-		timeStep.Start();\n\
-		while (timeStep.Running())\n\
-		{\n\
-			/* Handle input stuff */\n\
-			while (window.PollEvents())\n\
-			{\n\
-				window.EventTick(window.event, &ApplicationRunning);\n\
-			}\n\
-\n\
-			timeStep.Step();\n\
-		}\n\
-\n\
-		window.Clear();\n\
-		/* Handle rendering */\n\
-\n\
-\n\
-\n\
-		/* End of rendering */\n\
-		window.Display();\n\
-\n\
-		timeStep.End();\n\
-	}\n\
-\n\
-	return 0;\n\
-}\n\
-"
+# Headers
+include_directories(birb2d/include/)
+include_directories(birb2d/vendor/SDL2_gfx/)
+
+add_subdirectory(birb2d)
+
+add_executable(birb_project src/main.cpp)
+target_link_libraries(birb_project birb2d)
+
+# Copy the resources into the build directory
+file(COPY ./res DESTINATION ./)
+)~~";
+
+const std::string MAIN_TEMPLATE = R"~~(
+#include "Renderwindow.hpp"
+#include "Timestep.hpp"
+
+int main(int argc, char** argv)
+{
+	Birb::Debug::Log("Creating the window");
+	Birb::Window window("Birb2D project template", Birb::Vector2int(1280, 720), 75, false);
+	Birb::TimeStep timeStep;
+	timeStep.Init(&window);
+
+	Birb::Debug::Log("Starting the game loop");
+	bool ApplicationRunning = true;
+	while (ApplicationRunning)
+	{
+		timeStep.Start();
+		while (timeStep.Running())
+		{
+			/* Handle input stuff */
+			while (window.PollEvents())
+			{
+				window.EventTick(window.event, &ApplicationRunning);
+			}
+
+			timeStep.Step();
+		}
+
+		window.Clear();
+		/* Handle rendering */
+
+
+
+		/* End of rendering */
+		window.Display();
+
+		timeStep.End();
+	}
+
+	return 0;
+}
+)~~";
 
 struct Project
 {
