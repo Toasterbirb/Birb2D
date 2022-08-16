@@ -75,6 +75,7 @@ set(CORE_SRC
 	src/timer.cpp
 	src/timestep.cpp
 	src/utils.cpp
+	src/ui.cpp
 	src/values.cpp
 	src/vector.cpp)
 
