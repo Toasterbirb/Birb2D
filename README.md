@@ -26,12 +26,8 @@ Refer to [this](https://github.com/Toasterbirb/Birb2D/wiki/Setup) wiki page
 ## What works so far
 Birb2D can already do something. You can draw pictures, polygons and other shapes and check for collisions etc. Also sound, buttons, a basic scene system and some basic math stuff is there. Physics engine is still completely missing. Also the documentation is quite lacking
 
----
-
 ## Note to Windows users
 Could work, **not supported**. You might want to edit the enviromental variable usage and filepaths to fit Windows, but no guarantees are given.
-
----
 
 ## Credits
 Some notable people who have donated code to Birb2D or helped with ideas/issues. If you think you should be included here, shoot me a message ʕ •ᴥ•ʔ
