@@ -8,7 +8,7 @@ void GenerateGridLines(const float& scale, const Birb::Vector2int& dimensions, s
 
 	/* Horizontal lines */
 	float temp_pos = 0;
-	for (int i = 0; i < dimensions.x + 1; i++)
+	for (int i = 0; i < dimensions.y + 1; i++)
 	{
 		Birb::Vector2f pointA = { 0, temp_pos };
 		Birb::Vector2f pointB = { dimensions.x * scale, temp_pos };
@@ -19,7 +19,7 @@ void GenerateGridLines(const float& scale, const Birb::Vector2int& dimensions, s
 
 	/* Vertical lines */
 	temp_pos = 0;
-	for (int i = 0; i < dimensions.y + 1; i++)
+	for (int i = 0; i < dimensions.x + 1; i++)
 	{
 		Birb::Vector2f pointA = { temp_pos, 0 };
 		Birb::Vector2f pointB = { temp_pos, dimensions.y * scale };
