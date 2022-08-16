@@ -30,3 +30,10 @@ Birb2D can already do something. You can draw pictures, polygons and other shape
 
 ## Note to Windows users
 Could work, **not supported**. You might want to edit the enviromental variable usage and filepaths to fit Windows, but no guarantees are given.
+
+---
+
+## Credits
+Some notable people who have donated code to Birb2D or helped with ideas/issues. If you think you should be included here, shoot me a message ʕ •ᴥ•ʔ
+- [Josh Santos](https://github.com/thatnerdjosh)
+- [Quartzi](https://github.com/realQuartzi)
