@@ -1,5 +1,4 @@
-#include "Renderwindow.hpp"
-#include "Timestep.hpp"
+#include "Birb2D.hpp"
 
 int main(int argc, char** argv)
 {
