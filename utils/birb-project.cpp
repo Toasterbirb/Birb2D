@@ -9,20 +9,19 @@ LANGUAGES CXX)
 
 # Headers
 include_directories(birb2d/include/)
-include_directories(birb2d/vendor/SDL2_gfx/)
 
 add_subdirectory(birb2d)
 
 add_executable(birb_project src/main.cpp)
 target_link_libraries(birb_project birb2d)
+target_precompile_headers(birb_project PRIVATE birb2d/include/Birb2D.hpp)
 
 # Copy the resources into the build directory
 file(COPY ./res DESTINATION ./)
 )~~";
 
 const std::string MAIN_TEMPLATE = R"~~(
-#include "Renderwindow.hpp"
-#include "Timestep.hpp"
+#include "Birb2D.hpp"
 
 int main(int argc, char** argv)
 {
