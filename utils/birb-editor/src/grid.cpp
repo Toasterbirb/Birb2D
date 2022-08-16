@@ -54,12 +54,16 @@ Birb::Vector2int ClickToIndex(const Birb::Scene& grid_scene, const Birb::Vector2
 		return { -1, -1 };
 
 	result = grid_scene.Position().toInt() - cursor_pos;
-	result.x /= std::round(scale);
-	result.y /= std::round(scale);
+	result.x /= scale;
+	result.y /= scale;
 
 	/* Fix the negative values */
 	result.x = std::abs(result.x);
 	result.y = std::abs(result.y);
+
+	/* Check if the result is out of bounds */
+	if (result.x > dimensions.x - 1 || result.y > dimensions.y - 1)
+		return { -1, -1 };
 
 	return result;
 }

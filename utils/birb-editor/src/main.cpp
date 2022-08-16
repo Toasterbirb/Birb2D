@@ -8,6 +8,7 @@ const static Birb::Vector2int DEFAULT_LEVEL_SIZE = { 32, 32 };
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
 const static float SCALE_TICK = 0.5f;
 
+
 int main(int argc, char** argv)
 {
 	Birb::Debug::Log("Creating the window");
@@ -36,10 +37,15 @@ int main(int argc, char** argv)
 	Birb::Scene level_view;
 	level_view.SetPosition({ side_panel_width, top_bar_height });
 	Birb::Rect level_view_background(0, 0, window.dimensions.x - side_panel_width, window.dimensions.y - top_bar_height);
+	level_view_background.renderingPriority = -10;
 	level_view_background.color = 0x565566;
 	level_view.AddObject(&level_view_background);
 
 	Birb::Scene level_grid;
+	level_grid.renderingPriority = 5;
+
+	Birb::Scene level_scene;
+	level_scene.renderingPriority = 1;
 
 	Birb::Vector2int grid_position_offset;
 	bool mwheel_dragging = false;
@@ -47,8 +53,10 @@ int main(int argc, char** argv)
 
 	float current_scale = DEFAULT_LEVEL_SCALE;
 	level_view.AddObject(&level_grid);
+	level_view.AddObject(&level_scene);
 
 	Birb::Level level(DEFAULT_LEVEL_SIZE);
+	level.SetScale(DEFAULT_LEVEL_SCALE);
 
 	/** Create the grid lines **/
 	std::vector<Birb::Line> horizontal_lines;
@@ -89,6 +97,11 @@ int main(int argc, char** argv)
 
 					/* Add the lines to the scene */
 					AddLinesToGrid(&level_grid, level_view, grid_position_offset, horizontal_lines, vertical_lines);
+
+					/* Update the level scene scale */
+					level.SetScale(current_scale);
+					level_scene = level.ToScene();
+					level_scene.SetPosition(level_grid.Position());
 				}
 
 				/* Mouse button events */
@@ -104,8 +117,25 @@ int main(int argc, char** argv)
 
 						/* Mouse click */
 						case (SDL_BUTTON_LEFT):
-							std::cout << ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale) << std::endl;
+						{
+							Birb::Vector2int tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
+							std::cout << "Tile pos: " << tile_pos << std::endl;
+
+							/* Set the tile */
+							if (tile_pos.x != -1 && tile_pos.y != -1)
+							{
+								Birb::Level::Tile new_tile;
+								new_tile.rect.color = 0x009000;
+
+								level.SetTile(tile_pos, new_tile);
+
+								/* Update the level view */
+								level_scene = level.ToScene();
+								level_scene.SetPosition(level_grid.Position());
+							}
+
 							break;
+						}
 
 						default:
 							break;
@@ -114,7 +144,7 @@ int main(int argc, char** argv)
 
 				if (window.event.type == SDL_MOUSEBUTTONUP)
 					if (window.event.button.button == SDL_BUTTON_MIDDLE)
-						mwheel_dragging = false;
+						mwheel_dragging = false; /* Stop dragging */
 
 				/* Update the offset if dragging */
 				if (mwheel_dragging)
@@ -125,6 +155,9 @@ int main(int argc, char** argv)
 					/* Update the grid */
 					GenerateGridLines(current_scale, DEFAULT_LEVEL_SIZE, &horizontal_lines, &vertical_lines);
 					AddLinesToGrid(&level_grid, level_view, grid_position_offset, horizontal_lines, vertical_lines);
+
+					/* Update the level view */
+					level_scene.SetPosition(level_grid.Position());
 				}
 
 				/* Keyboard events */
