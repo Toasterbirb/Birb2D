@@ -29,14 +29,4 @@ Birb2D can already do something. You can draw pictures, polygons and other shape
 ---
 
 ## Note to Windows users
-I have **tried** to get this thing running under windows, but it hasn't gone as planned. I haven't used Windows for a few years as my desktop OS, so I have no clue how to make stuff compatible between GNU/Linux and Windows.
-
-### What have I *tried* so far
-- **Cygwin** in a vm (it was borked in wine). It was slow af and SDL libraries failed to compile in it for some reason. The binaries provided by Cygwin were too old and didn't work for this project
-- **Visual Studio**. Opened it, closed it. Didn't know how to use that monster
-- **MinGW**
-	- **On windows**: Gave up, CMD sucks and should be illegal to ship with an operating system
-	- **On GNU/Linux**: Ehh... g++.exe ran fine under wine, but there were a ton of incompatibilities between GNU/Linux and Windows libraries making it not compile. Mostly filesystem and timer specific issues. There were probably a bit more issues as well, but I couldn't really spot them when there was about 10 wine fixmes for each g++ error.
-
-### What does this mean?
-No Windows support. Here's an alternative operating system for you: https://archlinux.org/download/
+Could work, **not supported**. You might want to edit the enviromental variable usage and filepaths to fit Windows, but no guarantees are given.
