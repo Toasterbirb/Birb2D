@@ -60,6 +60,7 @@ set(CORE_SRC
 	src/filesystem.cpp
 	src/font.cpp
 	src/graphs.cpp
+	src/level.cpp
 	src/line.cpp
 	src/logger.cpp
 	src/math.cpp

@@ -9,3 +9,6 @@ add_executable(birb-config birb-config.cpp)
 # Tool to help with creating new projects
 add_executable(birb-project birb-project.cpp)
 target_link_libraries(birb-project birb2d)
+
+# Simple level editor for creating 2D maps
+add_subdirectory(birb-editor)
