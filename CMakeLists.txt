@@ -47,7 +47,6 @@ else()
 		CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx/configure --prefix=<INSTALL_DIR>
 		BUILD_COMMAND ${MAKE})
 
-	include_directories(vendor/SDL2_gfx)
 endif()
 
 include_directories(include/)
@@ -80,6 +79,7 @@ set(CORE_SRC
 	src/vector.cpp)
 
 add_library(birb2d STATIC ${CORE_SRC})
+target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
 target_link_libraries(birb2d
 	SDL2
 	SDL2main
