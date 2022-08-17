@@ -45,8 +45,8 @@ namespace Birb
 					/* Calculate the rect size + position */
 					tiles[i][j].rect.x = i * scale;
 					tiles[i][j].rect.y = j * scale;
-					tiles[i][j].rect.w = scale;
-					tiles[i][j].rect.h = scale;
+					tiles[i][j].rect.w = scale + 1;
+					tiles[i][j].rect.h = scale + 1;
 
 					scene.AddObject(&tiles[i][j].rect);
 				}
