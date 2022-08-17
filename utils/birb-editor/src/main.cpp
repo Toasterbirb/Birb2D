@@ -4,7 +4,7 @@
 const static int top_bar_height = 20;
 const static int side_panel_width = 200;
 
-const static Birb::Vector2int DEFAULT_LEVEL_SIZE = { 2048, 2048 };
+const static Birb::Vector2int DEFAULT_LEVEL_SIZE = { 256, 256 };
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
 const static float SCALE_TICK = 1;
 
@@ -73,6 +73,7 @@ int main(int argc, char** argv)
 	level_scene.renderingPriority = 1;
 
 	bool pending_level_scene_update = false;
+	bool pending_level_scene_position_update = false;
 	bool pending_level_grid_update = false;
 
 	Birb::Vector2int grid_position_offset;
@@ -192,7 +193,8 @@ int main(int argc, char** argv)
 					pending_level_grid_update = true;
 
 					/* Update the level view */
-					level_scene.SetPosition(level_grid.Position());
+					pending_level_scene_position_update = true;
+					//level_scene.SetPosition(level_grid.Position());
 				}
 
 				/* Keyboard events */
@@ -204,6 +206,7 @@ int main(int argc, char** argv)
 							/* Reset the offset */
 							grid_position_offset = {0, 0};
 							pending_level_grid_update = true;
+							pending_level_scene_position_update = true;
 							break;
 
 						default:
@@ -225,6 +228,12 @@ int main(int argc, char** argv)
 			timeStep.Step();
 		}
 
+		if (pending_level_grid_update)
+		{
+			GenerateGridLines(window, &level_grid, level_view, grid_position_offset, current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
+			pending_level_grid_update = false;
+		}
+
 		if (pending_level_scene_update)
 		{
 			level_scene = level.ToScene();
@@ -232,10 +241,10 @@ int main(int argc, char** argv)
 			pending_level_scene_update = false;
 		}
 
-		if (pending_level_grid_update)
+		if (pending_level_scene_position_update)
 		{
-			GenerateGridLines(window, &level_grid, level_view, grid_position_offset, current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
-			pending_level_grid_update = false;
+			level_scene.SetPosition(level_grid.Position());
+			pending_level_scene_position_update = false;
 		}
 
 		window.Clear();
