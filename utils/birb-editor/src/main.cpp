@@ -71,6 +71,7 @@ int main(int argc, char** argv)
 
 	Birb::Scene level_scene;
 	level_scene.renderingPriority = 1;
+	bool pending_level_scene_update = false;
 
 	Birb::Vector2int grid_position_offset;
 	bool mwheel_dragging = false;
@@ -126,8 +127,7 @@ int main(int argc, char** argv)
 
 					/* Update the level scene scale */
 					level.SetScale(current_scale);
-					level_scene = level.ToScene();
-					level_scene.SetPosition(level_grid.Position());
+					pending_level_scene_update = true;
 				}
 
 				/* Mouse button events */
@@ -165,8 +165,7 @@ int main(int argc, char** argv)
 								}
 
 								/* Update the level view */
-								level_scene = level.ToScene();
-								level_scene.SetPosition(level_grid.Position());
+								pending_level_scene_update = true;
 							}
 
 							break;
@@ -222,6 +221,13 @@ int main(int argc, char** argv)
 			}
 
 			timeStep.Step();
+		}
+
+		if (pending_level_scene_update)
+		{
+			level_scene = level.ToScene();
+			level_scene.SetPosition(level_grid.Position());
+			pending_level_scene_update = false;
 		}
 
 		window.Clear();
