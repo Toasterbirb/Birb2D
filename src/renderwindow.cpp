@@ -321,7 +321,6 @@ namespace Birb
 			}
 		}
 
-
 		/* Check if the entity has an active progress bar component */
 		if (entity.progressBarComponent.active)
 		{
@@ -335,13 +334,12 @@ namespace Birb
 			DrawProgressBar(entity);
 		}
 
-		centerPoint = Vector2int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
-
-		SDL_Point center = { centerPoint.x, centerPoint.y };
-
 		/* Skip rendering the texture if one doesn't exist on the entity */
 		if (entity.sprite.isLoaded())
 		{
+			centerPoint = Vector2int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
+			SDL_Point center = { centerPoint.x, centerPoint.y };
+
 			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite.sdlTexture(), &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
 				Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
 			else
