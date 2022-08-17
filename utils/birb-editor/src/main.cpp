@@ -137,10 +137,19 @@ int main(int argc, char** argv)
 							/* Set the tile */
 							if (tile_pos.x != -1 && tile_pos.y != -1)
 							{
-								Birb::Level::Tile new_tile;
-								new_tile.rect.color = 0x009000;
+								if (level.GetTile(tile_pos).is_empty)
+								{
+									Birb::Level::Tile new_tile;
+									new_tile.rect.color = 0xffffff;
 
-								level.SetTile(tile_pos, new_tile);
+									level.SetTile(tile_pos, new_tile);
+								}
+								else
+								{
+									Birb::Level::Tile tile = level.GetTile(tile_pos);
+									tile.rect.color.ChangeIntensity(-10);
+									level.SetTile(tile_pos, tile);
+								}
 
 								/* Update the level view */
 								level_scene = level.ToScene();
@@ -183,6 +192,16 @@ int main(int argc, char** argv)
 							grid_position_offset = {0, 0};
 							GenerateGridLines(current_scale, DEFAULT_LEVEL_SIZE, &horizontal_lines, &vertical_lines);
 							AddLinesToGrid(&level_grid, level_view, grid_position_offset, horizontal_lines, vertical_lines);
+							break;
+
+						default:
+							break;
+					}
+					switch (window.event.key.keysym.scancode)
+					{
+						case (SDL_SCANCODE_H):
+							/* Toggle the grid */
+							level_grid.Toggle();
 							break;
 
 						default:
