@@ -8,8 +8,15 @@ const static Birb::Vector2int DEFAULT_LEVEL_SIZE = { 64, 32 };
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
 const static float SCALE_TICK = 0.5f;
 
+static bool ApplicationRunning = true;
+
 static Birb::ApplicationInfo appInfo("birb-editor");
 
+void Quit()
+{
+	Birb::Debug::Log("Quitting...");
+	ApplicationRunning = false;
+}
 
 int main(int argc, char** argv)
 {
@@ -37,6 +44,11 @@ int main(int argc, char** argv)
 	Birb::Entity titleText("Title text", Birb::Vector2int(4, 4), Birb::EntityComponent::Text("Birb Editor", &titleFont, &Birb::Colors::White));
 	titleText.renderingPriority = 1;
 	top_bar.AddObject(&titleText);
+
+	Birb::Entity exitButton("Exit button", Birb::Rect(window.dimensions.x - 18, 2, 16, 16));
+	exitButton.rect.color = Birb::Colors::Red;
+	exitButton.renderingPriority = 20;
+	top_bar.AddObject(&exitButton);
 
 
 	/* Side panel */
@@ -80,7 +92,12 @@ int main(int argc, char** argv)
 
 
 	Birb::Debug::Log("Starting the game loop");
-	bool ApplicationRunning = true;
+
+	Birb::UI ui;
+
+	exitButton.clickComponent = Birb::EntityComponent::Click(Quit);
+	ui.AddButton(&exitButton);
+
 	while (ApplicationRunning)
 	{
 		timeStep.Start();
@@ -90,6 +107,7 @@ int main(int argc, char** argv)
 			while (window.PollEvents())
 			{
 				window.EventTick(window.event, &ApplicationRunning);
+				ui.PollButtons(window);
 
 				/* Scroll event */
 				if (window.event.type == SDL_MOUSEWHEEL)
