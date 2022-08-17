@@ -98,13 +98,12 @@ namespace Birb
 
 	void Level::PreallocateTiles(const Vector2int& dimensions)
 	{
+		tiles.reserve(dimensions.x);
 		for (int i = 0; i < grid_size.x; i++)
 		{
 			std::vector<Tile> line;
-			for (int j = 0; j < grid_size.y; j++)
-			{
-				line.push_back(Tile());
-			}
+			line.reserve(dimensions.y);
+			line.resize(dimensions.y);
 			tiles.push_back(line);
 		}
 
