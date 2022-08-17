@@ -71,7 +71,9 @@ int main(int argc, char** argv)
 
 	Birb::Scene level_scene;
 	level_scene.renderingPriority = 1;
+
 	bool pending_level_scene_update = false;
+	bool pending_level_grid_update = false;
 
 	Birb::Vector2int grid_position_offset;
 	bool mwheel_dragging = false;
@@ -123,7 +125,7 @@ int main(int argc, char** argv)
 
 
 					/* Re-generate the grid lines */
-					GenerateGridLines(window, &level_grid, level_view, grid_position_offset,current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
+					pending_level_grid_update = true;
 
 					/* Update the level scene scale */
 					level.SetScale(current_scale);
@@ -187,7 +189,7 @@ int main(int argc, char** argv)
 					drag_start_pos = window.CursorPosition();
 
 					/* Update the grid */
-					GenerateGridLines(window, &level_grid, level_view, grid_position_offset,current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
+					pending_level_grid_update = true;
 
 					/* Update the level view */
 					level_scene.SetPosition(level_grid.Position());
@@ -201,7 +203,7 @@ int main(int argc, char** argv)
 						case (SDLK_HOME):
 							/* Reset the offset */
 							grid_position_offset = {0, 0};
-							GenerateGridLines(window, &level_grid, level_view, grid_position_offset, current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
+							pending_level_grid_update = true;
 							break;
 
 						default:
@@ -228,6 +230,12 @@ int main(int argc, char** argv)
 			level_scene = level.ToScene();
 			level_scene.SetPosition(level_grid.Position());
 			pending_level_scene_update = false;
+		}
+
+		if (pending_level_grid_update)
+		{
+			GenerateGridLines(window, &level_grid, level_view, grid_position_offset, current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
+			pending_level_grid_update = false;
 		}
 
 		window.Clear();
