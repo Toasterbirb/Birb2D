@@ -8,6 +8,8 @@ const static Birb::Vector2int DEFAULT_LEVEL_SIZE = { 64, 32 };
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
 const static float SCALE_TICK = 0.5f;
 
+static Birb::ApplicationInfo appInfo("birb-editor");
+
 
 int main(int argc, char** argv)
 {
@@ -20,11 +22,22 @@ int main(int argc, char** argv)
 	 * Variables *
 	 * --------- */
 
+	/* Locate resources */
+	appInfo.LocateResources();
+
+	/* Fonts */
+	Birb::Font titleFont(appInfo.ResLocation + "/fonts/FreeSansBold.ttf");
+
 	/* Top bar */
 	Birb::Scene top_bar;
 	Birb::Rect top_bar_background(0, 0, window.dimensions.x, top_bar_height);
 	top_bar_background.color = 0x2a2738;
 	top_bar.AddObject(&top_bar_background);
+
+	Birb::Entity titleText("Title text", Birb::Vector2int(4, 4), Birb::EntityComponent::Text("Birb Editor", &titleFont, &Birb::Colors::White));
+	titleText.renderingPriority = 1;
+	top_bar.AddObject(&titleText);
+
 
 	/* Side panel */
 	Birb::Scene side_panel;
