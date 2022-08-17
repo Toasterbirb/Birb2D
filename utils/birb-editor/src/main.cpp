@@ -4,9 +4,9 @@
 const static int top_bar_height = 20;
 const static int side_panel_width = 200;
 
-const static Birb::Vector2int DEFAULT_LEVEL_SIZE = { 64, 32 };
+const static Birb::Vector2int DEFAULT_LEVEL_SIZE = { 2048, 2048 };
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
-const static float SCALE_TICK = 0.5f;
+const static float SCALE_TICK = 1;
 
 static bool ApplicationRunning = true;
 
@@ -87,9 +87,7 @@ int main(int argc, char** argv)
 	std::vector<Birb::Line> horizontal_lines;
 	std::vector<Birb::Line> vertical_lines;
 
-	GenerateGridLines(DEFAULT_LEVEL_SCALE, DEFAULT_LEVEL_SIZE, &horizontal_lines, &vertical_lines);
-	AddLinesToGrid(&level_grid, level_view, grid_position_offset, horizontal_lines, vertical_lines);
-
+	GenerateGridLines(window, &level_grid, level_view, grid_position_offset, DEFAULT_LEVEL_SCALE, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
 
 	Birb::Debug::Log("Starting the game loop");
 
@@ -124,10 +122,7 @@ int main(int argc, char** argv)
 
 
 					/* Re-generate the grid lines */
-					GenerateGridLines(current_scale, DEFAULT_LEVEL_SIZE, &horizontal_lines, &vertical_lines);
-
-					/* Add the lines to the scene */
-					AddLinesToGrid(&level_grid, level_view, grid_position_offset, horizontal_lines, vertical_lines);
+					GenerateGridLines(window, &level_grid, level_view, grid_position_offset,current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
 
 					/* Update the level scene scale */
 					level.SetScale(current_scale);
@@ -193,8 +188,7 @@ int main(int argc, char** argv)
 					drag_start_pos = window.CursorPosition();
 
 					/* Update the grid */
-					GenerateGridLines(current_scale, DEFAULT_LEVEL_SIZE, &horizontal_lines, &vertical_lines);
-					AddLinesToGrid(&level_grid, level_view, grid_position_offset, horizontal_lines, vertical_lines);
+					GenerateGridLines(window, &level_grid, level_view, grid_position_offset,current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
 
 					/* Update the level view */
 					level_scene.SetPosition(level_grid.Position());
@@ -208,8 +202,7 @@ int main(int argc, char** argv)
 						case (SDLK_HOME):
 							/* Reset the offset */
 							grid_position_offset = {0, 0};
-							GenerateGridLines(current_scale, DEFAULT_LEVEL_SIZE, &horizontal_lines, &vertical_lines);
-							AddLinesToGrid(&level_grid, level_view, grid_position_offset, horizontal_lines, vertical_lines);
+							GenerateGridLines(window, &level_grid, level_view, grid_position_offset, current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
 							break;
 
 						default:
