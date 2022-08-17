@@ -332,6 +332,10 @@ namespace Birb
 			}
 
 			DrawProgressBar(entity);
+
+			/* We are done if there isn't going to be a sprite to render */
+			if (!entity.sprite.isLoaded())
+				return true;
 		}
 
 		/* Skip rendering the texture if one doesn't exist on the entity */
@@ -345,6 +349,9 @@ namespace Birb
 			else
 				return true;
 		}
+
+		/* If nothing was rendered so far, simply render the rect */
+		DrawRect(entity.rect.color, entity.rect);
 
 		return true;
 	}
