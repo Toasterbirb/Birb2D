@@ -301,25 +301,26 @@ namespace Birb
 				Birb::Debug::Log("Tried to render an entity with a texture with size of <= 0", Debug::Type::warning);
 				return false;
 			}
+
+			if (entity.animationComponent.frameCount <= 0) /* Check if the entity has animations */
+			{
+				src.x = 0;
+				src.y = 0;
+				src.w = texWidth;
+				src.h = texHeight;
+
+				dst.x = entity.rect.x;
+				dst.y = entity.rect.y;
+				dst.w = entity.rect.w * entity.localScale.x;
+				dst.h = entity.rect.h * entity.localScale.y;
+			}
+			else
+			{
+				/* Entity probably has an animation component */
+				HandleAnimations(&entity, &src, &dst);
+			}
 		}
 
-		if (entity.animationComponent.frameCount <= 0) /* Check if the entity has animations */
-		{
-			src.x = 0;
-			src.y = 0;
-			src.w = texWidth;
-			src.h = texHeight;
-
-			dst.x = entity.rect.x;
-			dst.y = entity.rect.y;
-			dst.w = entity.rect.w * entity.localScale.x;
-			dst.h = entity.rect.h * entity.localScale.y;
-		}
-		else
-		{
-			/* Entity probably has an animation component */
-			HandleAnimations(&entity, &src, &dst);
-		}
 
 		/* Check if the entity has an active progress bar component */
 		if (entity.progressBarComponent.active)
