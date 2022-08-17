@@ -20,6 +20,7 @@ add_executable(test
 	filesystem_test.cpp
 	font_test.cpp
 	graph_test.cpp
+	level_test.cpp
 	line_test.cpp
 	logger_test.cpp
 	math_test.cpp
