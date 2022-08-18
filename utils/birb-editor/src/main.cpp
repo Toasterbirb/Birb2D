@@ -12,6 +12,7 @@ static bool ApplicationRunning = true;
 
 static Birb::ApplicationInfo appInfo("birb-editor");
 
+
 void Quit()
 {
 	Birb::Debug::Log("Quitting...");
@@ -80,6 +81,11 @@ int main(int argc, char** argv)
 	bool mwheel_dragging = false;
 	Birb::Vector2int drag_start_pos;
 
+	Birb::Entity coordinate_text("Mouse coordinate text", Birb::Vector2int(5, 5), Birb::EntityComponent::Text("", &titleFont, &Birb::Colors::White));
+	coordinate_text.textComponent.bgColor = &Birb::Colors::DarkGray;
+	coordinate_text.renderingPriority = 11;
+	level_view.AddObject(&coordinate_text);
+
 	float current_scale = DEFAULT_LEVEL_SCALE;
 	level_view.AddObject(&level_grid);
 	level_view.AddObject(&level_scene);
@@ -99,6 +105,8 @@ int main(int argc, char** argv)
 
 	exitButton.clickComponent = Birb::EntityComponent::Click(Quit);
 	ui.AddButton(&exitButton);
+
+	Birb::Vector2int last_cursor_pos;
 
 	while (ApplicationRunning)
 	{
@@ -245,6 +253,13 @@ int main(int argc, char** argv)
 		{
 			level_scene.SetPosition(level_grid.Position());
 			pending_level_scene_position_update = false;
+		}
+
+		if (window.CursorPosition() != last_cursor_pos)
+		{
+			Birb::Vector2int current_tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
+			coordinate_text.SetText(current_tile_pos.toString());
+			last_cursor_pos = window.CursorPosition();
 		}
 
 		window.Clear();
