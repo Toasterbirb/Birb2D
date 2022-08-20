@@ -217,7 +217,7 @@ int main(int argc, char** argv)
 							pending_level_scene_position_update = true;
 							break;
 
-							case (Birb::Input::H):
+						case (Birb::Input::H):
 							/* Toggle the grid */
 							level_grid.Toggle();
 							break;
