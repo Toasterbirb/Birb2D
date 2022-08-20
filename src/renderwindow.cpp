@@ -180,6 +180,11 @@ namespace Birb
 						(float)dimensions.y / (float)original_window_dimensions.y);
 	}
 
+	bool Window::PollEvents()
+	{
+		return (SDL_PollEvent(&event) != 0);
+	}
+
 	void Window::EventTick(const SDL_Event& event, bool* GameRunning)
 	{
 		switch (event.type)
@@ -205,11 +210,25 @@ namespace Birb
 		return Input::EventToKeycode(this->event);
 	}
 
-	bool Window::PollEvents()
+	bool Window::isKeyDown() const
 	{
-		return (SDL_PollEvent(&event) != 0);
+		return (this->event.type == SDL_KEYDOWN);
 	}
 
+	bool Window::isKeyUp() const
+	{
+		return (this->event.type == SDL_KEYUP);
+	}
+
+	bool Window::isMouseDown() const
+	{
+		return (this->event.type == SDL_MOUSEBUTTONDOWN);
+	}
+
+	bool Window::isMouseUp() const
+	{
+		return (this->event.type == SDL_MOUSEBUTTONUP);
+	}
 
 	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
 	{

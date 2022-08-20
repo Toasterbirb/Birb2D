@@ -142,7 +142,7 @@ int main(int argc, char** argv)
 				}
 
 				/* Mouse button events */
-				if (window.event.type == SDL_MOUSEBUTTONDOWN)
+				if (window.isMouseDown())
 				{
 					switch (window.event.button.button)
 					{
@@ -187,7 +187,7 @@ int main(int argc, char** argv)
 					}
 				}
 
-				if (window.event.type == SDL_MOUSEBUTTONUP)
+				if (window.isMouseUp())
 					if (window.event.button.button == SDL_BUTTON_MIDDLE)
 						mwheel_dragging = false; /* Stop dragging */
 
@@ -206,7 +206,7 @@ int main(int argc, char** argv)
 				}
 
 				/* Keyboard events */
-				if (window.event.type == SDL_KEYDOWN)
+				if (window.isKeyDown())
 				{
 					switch (window.key_event())
 					{

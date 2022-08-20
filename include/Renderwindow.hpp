@@ -39,6 +39,10 @@ namespace Birb
 		void EventTick(const SDL_Event& event, bool* GameRunning);
 		SDL_Event event;
 		Input::KeyCode key_event() const;
+		bool isKeyDown() const;
+		bool isKeyUp() const;
+		bool isMouseDown() const;
+		bool isMouseUp() const;
 		/* ------------------------- */
 
 		/* -- Window variables -- */
