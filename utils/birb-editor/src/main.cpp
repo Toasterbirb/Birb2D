@@ -208,21 +208,16 @@ int main(int argc, char** argv)
 				/* Keyboard events */
 				if (window.event.type == SDL_KEYDOWN)
 				{
-					switch (window.event.key.keysym.sym)
+					switch (window.key_event())
 					{
-						case (SDLK_HOME):
+						case (Birb::Input::HOME):
 							/* Reset the offset */
 							grid_position_offset = {0, 0};
 							pending_level_grid_update = true;
 							pending_level_scene_position_update = true;
 							break;
 
-						default:
-							break;
-					}
-					switch (window.event.key.keysym.scancode)
-					{
-						case (SDL_SCANCODE_H):
+							case (Birb::Input::H):
 							/* Toggle the grid */
 							level_grid.Toggle();
 							break;

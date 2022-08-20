@@ -7,6 +7,7 @@
 #include "Filesystem.hpp"
 #include "Font.hpp"
 #include "Graphs.hpp"
+#include "Input.hpp"
 #include "Level.hpp"
 #include "Line.hpp"
 #include "Logger.hpp"

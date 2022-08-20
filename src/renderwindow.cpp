@@ -200,6 +200,11 @@ namespace Birb
 		}
 	}
 
+	Input::KeyCode Window::key_event() const
+	{
+		return Input::EventToKeycode(this->event);
+	}
+
 	bool Window::PollEvents()
 	{
 		return (SDL_PollEvent(&event) != 0);

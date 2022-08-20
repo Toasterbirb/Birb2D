@@ -4,6 +4,7 @@
 
 #include "Circle.hpp"
 #include "Color.hpp"
+#include "Input.hpp"
 #include "Utils.hpp"
 #include "Entity.hpp"
 #include "Polygon.hpp"
@@ -37,6 +38,7 @@ namespace Birb
 		bool PollEvents(); ///< Runs SDL_PollEvent and saves the result to the *event* variable
 		void EventTick(const SDL_Event& event, bool* GameRunning);
 		SDL_Event event;
+		Input::KeyCode key_event() const;
 		/* ------------------------- */
 
 		/* -- Window variables -- */
