@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 	appInfo.LocateResources();
 
 	/* Fonts */
-	Birb::Font titleFont(appInfo.ResLocation + "/fonts/FreeSansBold.ttf");
+	Birb::Font titleFont(appInfo.ResLocation + "/fonts/freefont/FreeSansBold.ttf");
 
 	/* Top bar */
 	Birb::Scene top_bar;
