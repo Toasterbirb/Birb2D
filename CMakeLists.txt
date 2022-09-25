@@ -14,6 +14,7 @@ systems)" OFF)
 option(TESTS "Compile tests" ON)
 option(EXAMPLES "Compile examples" OFF)
 option(DEBUG "Enable some extra debug output" ON)
+option(WERR "Treat warnings as errors" OFF)
 
 if (DEBUG)
 	add_definitions(-DDEBUG)
@@ -84,6 +85,9 @@ set(CORE_SRC
 add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
 target_compile_options(birb2d PRIVATE -Wall -Wextra -Wpedantic)
+if (WERR)
+	target_compile_options(birb2d PRIVATE -Werror)
+endif()
 target_link_libraries(birb2d
 	SDL2
 	SDL2main
