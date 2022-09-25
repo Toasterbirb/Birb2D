@@ -83,6 +83,7 @@ set(CORE_SRC
 
 add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
+target_compile_options(birb2d PRIVATE -Wall -Wextra -Wpedantic)
 target_link_libraries(birb2d
 	SDL2
 	SDL2main
