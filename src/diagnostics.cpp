@@ -6,7 +6,7 @@ namespace Birb
 	namespace Diagnostics
 	{
 		FrametimeGraph::FrametimeGraph(const Rect& rect, const int& pointCount, TimeStep& timeStep)
-		:timeStep(timeStep), pointCount(pointCount), rect(rect)
+		:pointCount(pointCount), rect(rect), timeStep(timeStep)
 		{
 			enabled = true;
 			graph = Widgets::Graph(Widgets::GraphType::Line, rect);
@@ -23,7 +23,7 @@ namespace Birb
 				return;
 
 			/* Update values */
-			if (graph.values.size() < pointCount)
+			if ((int)graph.values.size() < pointCount)
 			{
 				graph.values.push_back(timeStep.deltaTime * 1000);
 			}

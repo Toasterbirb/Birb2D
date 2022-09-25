@@ -92,11 +92,11 @@ std::string ExpandHomePath(const std::string& filepath)
 }
 
 
-int main(int argc, char** argv)
+int main(void)
 {
 	Project project;
 
-	std::cout << "\e[32mWelcome to the Birb2D project wizard!\e[0m\n";
+	std::cout << "\003[32mWelcome to the Birb2D project wizard!\003[0m\n";
 
 	std::cout << "Project path: ";
 	std::cin >> project.project_path;
@@ -141,14 +141,14 @@ int main(int argc, char** argv)
 		}
 		else
 		{
-			std::cout << "\e[31mBirb2D source wasn't provided. You need to clone it manually!\e[0m\n";
+			std::cout << "\003[31mBirb2D source wasn't provided. You need to clone it manually!\003[0m\n";
 		}
 
 		std::cout << "Creating some project files...\n";
 		Birb::Filesystem::File::Write(project.project_path + "/CMakeLists.txt", CMAKE_TEMPLATE);
 		Birb::Filesystem::File::Write(project.project_path + "/src/main.cpp", MAIN_TEMPLATE);
 
-		std::cout << "\e[32mProject created!\e[0m\n";
+		std::cout << "\003[32mProject created!\003[0m\n";
 	}
 
 	return 0;

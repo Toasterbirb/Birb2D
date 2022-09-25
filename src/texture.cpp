@@ -54,7 +54,7 @@ namespace Birb
 
 	bool Texture::CreateFromSurface(SDL_Renderer* renderer, SDL_Surface* surface)
 	{
-		this->sdlTex = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
+		this->sdlTex = SDL_CreateTextureFromSurface(renderer, surface);
 
 		if (sdlTex == nullptr)
 		{

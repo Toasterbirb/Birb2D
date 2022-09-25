@@ -19,7 +19,7 @@ void Quit()
 	ApplicationRunning = false;
 }
 
-int main(int argc, char** argv)
+int main(void)
 {
 	Birb::Debug::Log("Creating the window");
 	Birb::Window window("Birb Editor", Birb::Vector2int(1280, 720), 75, false);

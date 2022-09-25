@@ -172,9 +172,9 @@ namespace Birb
 		int index = frame;
 
 		int texWidth;
-		int texHeight;
+		//int texHeight;
 		texWidth = sprite.dimensions().x;
-		texHeight = sprite.dimensions().y;
+		//texHeight = sprite.dimensions().y;
 
 		int spritesPerRow = texWidth / animationComponent.spriteSize.x;
 		float fullRowCount = std::floor(index / spritesPerRow);

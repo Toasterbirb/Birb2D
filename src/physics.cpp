@@ -101,8 +101,8 @@ namespace Birb
 
 			for (int i = 0; i < pointCount; i++)
 			{
-				if (points[i].y < point.y && points[j].y >= point.y
-						|| points[j].y < point.y && points[i].y >= point.y)
+				if ((points[i].y < point.y && points[j].y >= point.y)
+						|| (points[j].y < point.y && points[i].y >= point.y))
 				{
 					if (points[i].x + (point.y - points[i].y) / (points[j].y - points[i].y) * (points[j].x - points[i].x) < point.x)
 					{
@@ -159,9 +159,9 @@ namespace Birb
 		bool PolygonCollision(std::vector<Polygon> polygons)
 		{
 			bool collision = false;
-			for (int i = 0; i < polygons.size() && !collision; i++)
+			for (int i = 0; i < (int)polygons.size() && !collision; i++)
 			{
-				for (int j = 0; j < polygons.size() && !collision; j++)
+				for (int j = 0; j < (int)polygons.size() && !collision; j++)
 				{
 					if (i != j)
 						collision = PolygonCollision(polygons[i], polygons[j]);

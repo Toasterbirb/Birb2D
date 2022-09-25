@@ -49,7 +49,7 @@ namespace Birb
 		active = true;
 
 		/* Mark the scene as active in scene objects */
-		for (int i = 0; i < objects.size(); i++)
+		for (int i = 0; i < (int)objects.size(); i++)
 			objects[i]->sceneActive = true;
 	}
 
@@ -58,7 +58,7 @@ namespace Birb
 		active = false;
 
 		/* Mark the scene as inactive in scene objects */
-		for (int i = 0; i < objects.size(); i++)
+		for (int i = 0; i < (int)objects.size(); i++)
 			objects[i]->sceneActive = false;
 	}
 
@@ -67,7 +67,7 @@ namespace Birb
 		active = !active;
 
 		/* Toggle the scene statuc in scene objects */
-		for (int i = 0; i < objects.size(); i++)
+		for (int i = 0; i < (int)objects.size(); i++)
 			objects[i]->sceneActive = active;
 	}
 

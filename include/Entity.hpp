@@ -61,11 +61,11 @@ namespace Birb
 			Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps);
 			Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop);
 
+			Vector2int spriteSize; ///< The size of one sprite in the atlas. Used for cropping
+			int frameCount; ///< Total amount of sprites in the atlas
 			int fps;
 			bool loop; ///< Start the animation over when it ends
 			int frameIndex; ///< Current visible frame
-			int frameCount; ///< Total amount of sprites in the atlas
-			Vector2int spriteSize; ///< The size of one sprite in the atlas. Used for cropping
 			Timer frameTimer; ///< Timer that is used to play the animation at a set fps
 
 			bool animationQueued; ///< Is the animation queued to start during the next rendering pass
@@ -140,12 +140,13 @@ namespace Birb
 
 		std::string name; 		///< Name of the entity. Used for debugging
 
-		/* Sprite handlings */
-		Texture sprite; 		///< Sprite to be rendered
 
 		float angle; 			///< Sets the rotation of the entity when rendering it
 		Rect rect; 				///< Sets the position and the dimensions of the entity
 		Vector2f localScale; 	///< Scale modifier for the Entity rendering
+
+		/* Sprite handlings */
+		Texture sprite; 		///< Sprite to be rendered
 
 		EntityComponent::Text textComponent; 				///< Enables the rendering of Text
 		EntityComponent::Click clickComponent; 				///< Enables button-like functionality

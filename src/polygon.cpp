@@ -101,7 +101,7 @@ namespace Birb
 		else
 		{
 			/* Loop trough rest of the points to find the first valid point */
-			for (int i = 1; i < points.size() - 1; i++)
+			for (int i = 1; i < (int)points.size() - 1; i++)
 			{
 				if (!PointsHaveSameAxis(points[i], points[i - 1], points[i + 1]))
 				{
@@ -121,7 +121,7 @@ namespace Birb
 		/* Go trough the polygon points and only keep those points that have
 		 * points with all different axis next to them. Don't check the first one
 		 * thought, because that has already been checked */
-		for (int i = startPoint + 1; i < points.size() - 1 && points.size() > 2; i++)
+		for (int i = startPoint + 1; i < (int)points.size() - 1 && points.size() > 2; i++)
 		{
 			if (!PointsHaveSameAxis(points[i], points[i - 1], points[i + 1]))
 				newPoints.push_back(points[i]);
