@@ -38,6 +38,7 @@ add_executable(test
 )
 
 
+target_compile_options(test PRIVATE -Wall -Wextra -Wpedantic)
 target_link_libraries(test
 	birb2d
 )
