@@ -445,7 +445,7 @@ namespace Birb
 
 		void DrawLines(const Color& color, Vector2int* points, const int& pointCount)
 		{
-			SDL_Point sdlPoints[pointCount];
+			SDL_Point* sdlPoints = new SDL_Point[pointCount];
 			for (int i = 0; i < pointCount; i++)
 			{
 				sdlPoints[i] = { points[i].x, points[i].y };
@@ -453,12 +453,13 @@ namespace Birb
 
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLines(Global::RenderVars::Renderer, sdlPoints, pointCount);
+			delete[] sdlPoints;
 			ResetDrawColor();
 		}
 
 		void DrawLines(const Color& color, Vector2f* points, const int& pointCount)
 		{
-			SDL_FPoint sdlPoints[pointCount];
+			SDL_FPoint* sdlPoints = new SDL_FPoint[pointCount];
 			for (int i = 0; i < pointCount; i++)
 			{
 				sdlPoints[i] = { points[i].x, points[i].y };
@@ -466,6 +467,7 @@ namespace Birb
 
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLinesF(Global::RenderVars::Renderer, sdlPoints, pointCount);
+			delete[] sdlPoints;
 			ResetDrawColor();
 		}
 
@@ -494,8 +496,8 @@ namespace Birb
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
 			/* Convert Vector2int points into Sint16 vectors */
-			Sint16 vx[pointCount];
-			Sint16 vy[pointCount];
+			Sint16* vx = new Sint16[pointCount];
+			Sint16* vy = new Sint16[pointCount];
 			for (int i = 0; i < pointCount; i++)
 			{
 				vx[i] = points[i].x;
@@ -504,11 +506,19 @@ namespace Birb
 
 			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
 			{
+				/* Cleanup */
+				delete[] vx;
+				delete[] vy;
+
 				Render::ResetDrawColor();
 				return true;
 			}
 			else
 			{
+				/* Cleanup */
+				delete[] vx;
+				delete[] vy;
+
 				Debug::Log("Error when drawing a polygon!", Debug::error);
 				return false;
 			}
@@ -519,9 +529,9 @@ namespace Birb
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
 			/* Convert Vector2int points into Sint16 vectors */
-			Sint16 vx[points.size()];
-			Sint16 vy[points.size()];
-			for (int i = 0; i < points.size(); i++)
+			Sint16* vx = new Sint16[points.size()];
+			Sint16* vy = new Sint16[points.size()];
+			for (int i = 0; i < (int)points.size(); i++)
 			{
 				vx[i] = points[i].x;
 				vy[i] = points[i].y;
@@ -529,11 +539,19 @@ namespace Birb
 
 			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
 			{
+				/* Cleanup */
+				delete[] vx;
+				delete[] vy;
+
 				Render::ResetDrawColor();
 				return true;
 			}
 			else
 			{
+				/* Cleanup */
+				delete[] vx;
+				delete[] vy;
+
 				Debug::Log("Error when drawing a polygon!", Debug::error);
 				return false;
 			}
@@ -543,24 +561,28 @@ namespace Birb
 		 * round the floating point vlues into integers */
 		bool DrawPolygon(const Color& color, Vector2f* points, const int& pointCount)
 		{
-			Vector2int intPoints[pointCount];
+			Vector2int* intPoints = new Vector2int[pointCount];
 			for (int i = 0; i < pointCount; i++)
 			{
 				intPoints[i].x = std::round(points[i].x);
 				intPoints[i].y = std::round(points[i].y);
 			}
-			return DrawPolygon(color, intPoints, pointCount);
+			bool success = DrawPolygon(color, intPoints, pointCount);
+			delete[] intPoints;
+			return success;
 		}
 
 		bool DrawPolygon(const Color& color, const std::vector<Vector2f>& points)
 		{
-			Vector2int intPoints[points.size()];
-			for (int i = 0; i < points.size(); i++)
+			Vector2int* intPoints = new Vector2int[points.size()];
+			for (int i = 0; i < (int)points.size(); i++)
 			{
 				intPoints[i].x = std::round(points[i].x);
 				intPoints[i].y = std::round(points[i].y);
 			}
-			return DrawPolygon(color, intPoints, points.size());
+			bool success = DrawPolygon(color, intPoints, points.size());
+			delete[] intPoints;
+			return success;
 		}
 
 		bool DrawPolygon(const Polygon& polygon)
