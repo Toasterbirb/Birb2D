@@ -11,6 +11,7 @@ include_directories(include)
 add_executable(${PROGRAM_NAME}
 	src/main.cpp
 	src/grid.cpp)
+target_compile_options(${PROGRAM_NAME} PRIVATE -Wall -Wextra -Wpedantic)
 target_link_libraries(${PROGRAM_NAME} birb2d)
 
 # Copy the resources into the build directory
