@@ -144,7 +144,7 @@ namespace Birb
 		polygon.Optimize();
 
 		CHECK(polygon.points.size() == expectedPoints.size());
-		for (int i = 0; i < (int)expectedPoints.size(); i++)
+		for (size_t i = 0; i < expectedPoints.size(); i++)
 			CHECK(polygon.points[i] == expectedPoints[i]);
 	}
 
@@ -240,7 +240,7 @@ namespace Birb
 		polygon.Optimize();
 
 		CHECK(polygon.size() == points.size());
-		for (int i = 0; i < (int)points.size(); i++)
+		for (size_t i = 0; i < points.size(); i++)
 			CHECK(polygon.points[i] == points[i]);
 	}
 }

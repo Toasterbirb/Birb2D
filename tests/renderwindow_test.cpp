@@ -92,7 +92,7 @@ namespace Birb
 			}
 
 			/* Add the entities to the scene */
-			for (int i = 0; i < (int)entities.size(); i++)
+			for (size_t i = 0; i < entities.size(); i++)
 				scene.AddObject(&entities[i]);
 
 			CHECK(scene.ObjectCount() == ENTITY_COUNT);

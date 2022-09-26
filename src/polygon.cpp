@@ -49,7 +49,7 @@ namespace Birb
 		Vector2f result;
 
 		/* Calculate the average of all points */
-		for (int i = 0; i < (int)points.size(); i++)
+		for (size_t i = 0; i < points.size(); i++)
 		{
 			result.x += points[i].x;
 			result.y += points[i].y;
@@ -101,7 +101,7 @@ namespace Birb
 		else
 		{
 			/* Loop trough rest of the points to find the first valid point */
-			for (int i = 1; i < (int)points.size() - 1; i++)
+			for (size_t i = 1; i < points.size() - 1; i++)
 			{
 				if (!PointsHaveSameAxis(points[i], points[i - 1], points[i + 1]))
 				{
@@ -121,7 +121,7 @@ namespace Birb
 		/* Go trough the polygon points and only keep those points that have
 		 * points with all different axis next to them. Don't check the first one
 		 * thought, because that has already been checked */
-		for (int i = startPoint + 1; i < (int)points.size() - 1 && points.size() > 2; i++)
+		for (size_t i = startPoint + 1; i < points.size() - 1 && points.size() > 2; i++)
 		{
 			if (!PointsHaveSameAxis(points[i], points[i - 1], points[i + 1]))
 				newPoints.push_back(points[i]);
@@ -151,7 +151,7 @@ namespace Birb
 
 	void Polygon::SetPos(const Vector2f& delta)
 	{
-		for (int i = 0; i < (int)points.size(); i++)
+		for (size_t i = 0; i < points.size(); i++)
 		{
 			points[i].x += delta.x;
 			points[i].y += delta.y;

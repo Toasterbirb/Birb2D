@@ -84,7 +84,7 @@ namespace Birb
 		T FindHighestValue(const std::vector<T>& values)
 		{
 			T result = values[0];
-			for (int i = 1; i < (int)values.size(); i++)
+			for (size_t i = 1; i < values.size(); i++)
 			{
 				if (values[i] > result)
 					result = values[i];
@@ -110,7 +110,7 @@ namespace Birb
 		T FindLowestValue(const std::vector<T>& values)
 		{
 			T result = values[0];
-			for (int i = 1; i < (int)values.size(); i++)
+			for (size_t i = 1; i < values.size(); i++)
 			{
 				if (values[i] < result)
 					result = values[i];

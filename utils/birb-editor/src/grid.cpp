@@ -49,10 +49,10 @@ void GenerateGridLines(const Birb::Window& window, Birb::Scene* grid_scene, cons
 	grid_scene->Clear();
 
 	/* Add the lines to the scene */
-	for (int i = 0; i < (int)horizontal_lines.size(); i++)
+	for (size_t i = 0; i < horizontal_lines.size(); i++)
 		grid_scene->AddObject(&horizontal_lines[i]);
 
-	for (int i = 0; i < (int)vertical_lines.size(); i++)
+	for (size_t i = 0; i < vertical_lines.size(); i++)
 		grid_scene->AddObject(&vertical_lines[i]);
 
 	grid_scene->SetPosition(scene_target_position);

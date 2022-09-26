@@ -49,7 +49,7 @@ namespace Birb
 		active = true;
 
 		/* Mark the scene as active in scene objects */
-		for (int i = 0; i < (int)objects.size(); i++)
+		for (size_t i = 0; i < objects.size(); i++)
 			objects[i]->sceneActive = true;
 	}
 
@@ -58,7 +58,7 @@ namespace Birb
 		active = false;
 
 		/* Mark the scene as inactive in scene objects */
-		for (int i = 0; i < (int)objects.size(); i++)
+		for (size_t i = 0; i < objects.size(); i++)
 			objects[i]->sceneActive = false;
 	}
 
@@ -67,7 +67,7 @@ namespace Birb
 		active = !active;
 
 		/* Toggle the scene statuc in scene objects */
-		for (int i = 0; i < (int)objects.size(); i++)
+		for (size_t i = 0; i < objects.size(); i++)
 			objects[i]->sceneActive = active;
 	}
 
@@ -83,7 +83,7 @@ namespace Birb
 		positionOffset = positionOffset + delta;
 
 		/* Set new positions for all of the scene objects */
-		for (int i = 0; i < (int)objects.size(); i++)
+		for (size_t i = 0; i < objects.size(); i++)
 		{
 			objects[i]->SetPos(delta);
 		}
@@ -94,7 +94,7 @@ namespace Birb
 		positionOffset = positionOffset + delta;
 
 		/* Set new positions for all of the scene objects */
-		for (int i = 0; i < (int)objects.size(); i++)
+		for (size_t i = 0; i < objects.size(); i++)
 		{
 			objects[i]->SetPos(delta);
 		}
@@ -118,7 +118,7 @@ namespace Birb
 			return;
 
 		/* Draw objects */
-		for (int i = 0; i < (int)objects.size(); i++)
+		for (size_t i = 0; i < objects.size(); i++)
 			if (objects[i]->active)
 				objects[i]->RenderFunc();
 	}
@@ -131,7 +131,7 @@ namespace Birb
 		do
 		{
 			ready = true;
-			for (int i = 0; i < (int)objects.size() - 1; i++)
+			for (size_t i = 0; i < objects.size() - 1; i++)
 			{
 				if (objects[i]->renderingPriority > objects[i + 1]->renderingPriority)
 				{

@@ -31,7 +31,7 @@ namespace Birb
 			Vector2int closestPoint;
 			result.push_back(startPoint);
 
-			for (int i = 0; i < (int)points.size(); i++)
+			for (size_t i = 0; i < points.size(); i++)
 			{
 				/* Skip the point if its the start point */
 				if (startPoint == points[i])

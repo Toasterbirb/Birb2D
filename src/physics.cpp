@@ -32,8 +32,8 @@ namespace Birb
 
 		bool RectCollision(const std::vector<Birb::Rect>& rects)
 		{
-			for (int i = 0; i < (int)rects.size(); i++)
-				for (int j = 0; j < (int)rects.size(); j++)
+			for (size_t i = 0; i < rects.size(); i++)
+				for (size_t j = 0; j < rects.size(); j++)
 					if (i != j && RectCollision(rects[i], rects[j]))
 						return true;
 			return false;
@@ -159,9 +159,9 @@ namespace Birb
 		bool PolygonCollision(std::vector<Polygon> polygons)
 		{
 			bool collision = false;
-			for (int i = 0; i < (int)polygons.size() && !collision; i++)
+			for (size_t i = 0; i < polygons.size() && !collision; i++)
 			{
-				for (int j = 0; j < (int)polygons.size() && !collision; j++)
+				for (size_t j = 0; j < polygons.size() && !collision; j++)
 				{
 					if (i != j)
 						collision = PolygonCollision(polygons[i], polygons[j]);
