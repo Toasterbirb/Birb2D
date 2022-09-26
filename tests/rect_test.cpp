@@ -72,9 +72,14 @@ namespace Birb
 	{
 		Rect rectA(10, 10, 10, 10);
 		Rect rectB(20, 10, 30, 30);
+		Rect rectC(-20, 20, 10, 30);
+		Rect rectD(20, 20, 40, -10);
 
 		CHECK(rectA == rectA);
+		CHECK(rectA != rectB);
+		CHECK(rectA != rectD);
 		CHECK_FALSE(rectA == rectB);
+		CHECK_FALSE(rectA != rectA);
 	}
 
 	TEST_CASE("Get rounded values from Rect")

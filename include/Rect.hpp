@@ -33,6 +33,14 @@ namespace Birb
 					&& h == other.h);
 		}
 
+		bool operator!=(const Rect& other) const
+		{
+			return 	(x != other.x
+					|| y != other.y
+					|| w != other.w
+					|| h != other.h);
+		}
+
 	private:
 		void RenderFunc() override;
 		void SetPos(const Vector2f& delta) override;
