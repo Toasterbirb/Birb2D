@@ -69,7 +69,7 @@ namespace Birb
 			Debug::Log("Initializing SDL...");
 #endif
 
-		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) > 0)
+		if (SDL_Init(SDL_INIT_VIDEO) > 0)
 		{
 			Debug::Log("SDL Init failed: " + (std::string)SDL_GetError(), Debug::error);
 			exit(2);
