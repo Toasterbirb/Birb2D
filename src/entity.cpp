@@ -186,14 +186,14 @@ namespace Birb
 		return pos;
 	}
 
-	void Entity::SetText(const std::string& newText)
+	bool Entity::SetText(const std::string& newText)
 	{
 		/* Don't do anything if the text hasn't changed at all */
 		if (textComponent.text == newText)
-			return;
+			return true;
 
 		textComponent.text = newText;
-		ReloadSprite();
+		return ReloadSprite();
 	}
 
 	void Entity::SetFont(const Font& font)
@@ -296,7 +296,7 @@ namespace Birb
 	}
 
 
-	void Entity::LoadSprite()
+	bool Entity::LoadSprite()
 	{
 		/* There's a text component. Let's generate a text sprite for it */
 		if (textComponent.text != "")
@@ -307,7 +307,10 @@ namespace Birb
 				sprite = Resources::TextSprite(textComponent.text, *textComponent.font, *textComponent.color, *textComponent.bgColor);
 
 			if (sprite.isLoaded() == false)
+			{
 				Debug::Log("Something went wrong while creating the text sprite for '" + name + "'", Debug::error);
+				return false;
+			}
 			else
 			{
 				/* Get texture scale automatically */
@@ -315,15 +318,17 @@ namespace Birb
 				rect.h = sprite.dimensions().y;
 			}
 		}
+
+		return true;
 	}
 
-	void Entity::ReloadSprite()
+	bool Entity::ReloadSprite()
 	{
 		/* Destroy the old sprite */
 		sprite.Destroy();
 
 		/* Create new text sprite */
-		LoadSprite();
+		return LoadSprite();
 	}
 
 	void Entity::RenderFunc()

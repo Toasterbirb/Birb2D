@@ -134,7 +134,7 @@ namespace Birb
 		Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
 
 		/* Make it possible to update the Text */
-		void SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
+		bool SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
 		void SetFont(const Font& font); 		///< Change the font in Text and reload the sprite
 		void SetColor(Color* color); 	///< Change the color in Text and reload the sprite
 
@@ -152,8 +152,8 @@ namespace Birb
 		EntityComponent::Click clickComponent; 				///< Enables button-like functionality
 		EntityComponent::Animation animationComponent; 		///< Enables animations for sprite rendering
 		EntityComponent::ProgressBar progressBarComponent; 	///< Turns the entity into a progress bar
-		void LoadSprite(); 				///< Create a sprite for the Entity using details found in the textComponent variable
-		void ReloadSprite(); 			///< Destroy the old sprite and create a new one. Useful for refreshing text after editing the textComponent variable
+		bool LoadSprite(); 				///< Create a sprite for the Entity using details found in the textComponent variable
+		bool ReloadSprite(); 			///< Destroy the old sprite and create a new one. Useful for refreshing text after editing the textComponent variable
 		void SetBaseEntityValues(); 	///< Used to set some default value when they aren't provided during Entity initialization
 		void CenterRelativeTo(const Rect& rect);
 
