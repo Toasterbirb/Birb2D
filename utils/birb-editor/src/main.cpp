@@ -82,6 +82,13 @@ int main(void)
 	Birb::Vector2int drag_start_pos;
 
 	Birb::Entity coordinate_text("Mouse coordinate text", Birb::Vector2int(5, 5), Birb::EntityComponent::Text("", &titleFont, &Birb::Colors::White));
+
+	/* Set some default values, so that there's something to render before
+	 * the user moves their cursor over the editor window */
+	coordinate_text.rect.w = 1;
+	coordinate_text.rect.h = 1;
+	coordinate_text.rect.color = level_view_background.color;
+
 	coordinate_text.textComponent.bgColor = &Birb::Colors::DarkGray;
 	coordinate_text.renderingPriority = 11;
 	level_view.AddObject(&coordinate_text);
