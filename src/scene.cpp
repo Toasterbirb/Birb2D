@@ -123,25 +123,23 @@ namespace Birb
 				objects[i]->RenderFunc();
 	}
 
-	/// FIXME: Switch bubble sort to some other more performant algorithm
 	void Scene::SortObjects()
 	{
 		SceneObject* tmpObject;
-		bool ready;
-		do
+		int j;
+
+		for (size_t i = 1; i < objects.size(); ++i)
 		{
-			ready = true;
-			for (size_t i = 0; i < objects.size() - 1; ++i)
+			tmpObject = objects[i];
+			j = i - 1;
+
+			while (j >= 0 && objects[j]->renderingPriority > tmpObject->renderingPriority)
 			{
-				if (objects[i]->renderingPriority > objects[i + 1]->renderingPriority)
-				{
-					tmpObject = objects[i];
-					objects[i] = objects[i + 1];
-					objects[i + 1] = tmpObject;
-					ready = false;
-				}
+				objects[j + 1] = objects[j];
+				j = j - 1;
 			}
-		} while (!ready);
+			objects[j + 1] = tmpObject;
+		}
 	}
 
 	void Scene::RenderFunc()
