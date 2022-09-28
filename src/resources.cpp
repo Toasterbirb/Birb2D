@@ -75,11 +75,11 @@ namespace Birb
 		// wrapLength of 0 is meant to only wrap with '\n', but seems to not work on some systems
 		// Disabling for now, as this breaks text rendering.
 		// FIXME: Enable when this feature is supported
-		if (wrapLength != 0) {
+		//if (wrapLength != 0) {
 			surface = TTF_RenderText_Blended_Wrapped(font.ttf(), text.c_str(), color.sdl(), wrapLength);
-		} else {
-			surface = TTF_RenderText_Blended(font.ttf(), text.c_str(), color.sdl());
-		}
+		//} else {
+		//	surface = TTF_RenderText_Blended(font.ttf(), text.c_str(), color.sdl());
+		//}
 
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
