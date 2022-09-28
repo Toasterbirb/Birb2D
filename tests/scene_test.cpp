@@ -159,4 +159,46 @@ namespace Birb
 		Scene sceneThatIsDisabled(false);
 		CHECK(sceneThatIsDisabled.isActive() == false);
 	}
+
+	TEST_CASE("Scene sorting")
+	{
+		/* Scene sorting is already partially tested in the previous
+		 * test cases, but this test case is meant to test that part
+		 * a bit more thoroughly just to make sure that the sorting algo
+		 * works as intended */
+		Scene testScene;
+
+		/* We'll be using empty scenes as testing objects */
+		Scene sceneA;
+		sceneA.renderingPriority = 4;
+		testScene.AddObject(&sceneA);
+
+		Scene sceneB;
+		sceneB.renderingPriority = 10;
+		testScene.AddObject(&sceneB);
+
+		Scene sceneC;
+		sceneC.renderingPriority = -2;
+		testScene.AddObject(&sceneC);
+
+		Scene sceneD;
+		sceneD.renderingPriority = 0;
+		testScene.AddObject(&sceneD);
+
+		Scene sceneE;
+		sceneE.renderingPriority = 2;
+		testScene.AddObject(&sceneE);
+
+		Scene sceneF;
+		sceneF.renderingPriority = 2;
+		testScene.AddObject(&sceneF);
+
+		std::vector<SceneObject*> sortedList = testScene.GetObjects();
+		CHECK(sortedList[0] == &sceneC);
+		CHECK(sortedList[1] == &sceneD);
+		CHECK(sortedList[2] == &sceneE);
+		CHECK(sortedList[3] == &sceneF);
+		CHECK(sortedList[4] == &sceneA);
+		CHECK(sortedList[5] == &sceneB);
+	}
 }
