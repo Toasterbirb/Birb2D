@@ -96,7 +96,7 @@ int main(void)
 {
 	Project project;
 
-	std::cout << "\003[32mWelcome to the Birb2D project wizard!\003[0m\n";
+	std::cout << "\033[32mWelcome to the Birb2D project wizard!\033[0m\n";
 
 	std::cout << "Project path: ";
 	std::cin >> project.project_path;
@@ -141,14 +141,14 @@ int main(void)
 		}
 		else
 		{
-			std::cout << "\003[31mBirb2D source wasn't provided. You need to clone it manually!\003[0m\n";
+			std::cout << "\033[31mBirb2D source wasn't provided. You need to clone it manually!\033[0m\n";
 		}
 
 		std::cout << "Creating some project files...\n";
 		Birb::Filesystem::File::Write(project.project_path + "/CMakeLists.txt", CMAKE_TEMPLATE);
 		Birb::Filesystem::File::Write(project.project_path + "/src/main.cpp", MAIN_TEMPLATE);
 
-		std::cout << "\003[32mProject created!\003[0m\n";
+		std::cout << "\033[32mProject created!\033[0m\n";
 	}
 
 	return 0;
