@@ -33,9 +33,9 @@ namespace Birb
 		Scene scene;
 
 		/* Loop trough the tiles */
-		for (int i = 0; i < grid_size.x; i++)
+		for (int i = 0; i < grid_size.x; ++i)
 		{
-			for (int j = 0; j < grid_size.y; j++)
+			for (int j = 0; j < grid_size.y; ++j)
 			{
 				/* Check if the tile has something */
 				if (!tiles[i][j].is_empty)
@@ -99,7 +99,7 @@ namespace Birb
 	void Level::PreallocateTiles(const Vector2int& dimensions)
 	{
 		tiles.reserve(dimensions.x);
-		for (int i = 0; i < grid_size.x; i++)
+		for (int i = 0; i < grid_size.x; ++i)
 		{
 			std::vector<Tile> line;
 			line.reserve(dimensions.y);

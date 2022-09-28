@@ -31,7 +31,7 @@ namespace Birb
 			Vector2int closestPoint;
 			result.push_back(startPoint);
 
-			for (size_t i = 0; i < points.size(); i++)
+			for (size_t i = 0; i < points.size(); ++i)
 			{
 				/* Skip the point if its the start point */
 				if (startPoint == points[i])
@@ -54,7 +54,7 @@ namespace Birb
 			{
 				std::string result = std::to_string(value);
 				int size = (int)result.size();
-				for (int i = size - 1; i > 0; i--)
+				for (int i = size - 1; i > 0; --i)
 				{
 					if (result[i] != '0' && i < size - 1)
 					{
@@ -71,7 +71,7 @@ namespace Birb
 		{
 			std::vector<Line> lines;
 
-			for (int i = 0; i < polygonSize - 1; i++)
+			for (int i = 0; i < polygonSize - 1; ++i)
 			{
 				lines.push_back(Line(polygon[i], polygon[i + 1]));
 			}

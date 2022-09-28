@@ -446,7 +446,7 @@ namespace Birb
 		void DrawLines(const Color& color, Vector2int* points, const int& pointCount)
 		{
 			SDL_Point* sdlPoints = new SDL_Point[pointCount];
-			for (int i = 0; i < pointCount; i++)
+			for (int i = 0; i < pointCount; ++i)
 			{
 				sdlPoints[i] = { points[i].x, points[i].y };
 			}
@@ -460,7 +460,7 @@ namespace Birb
 		void DrawLines(const Color& color, Vector2f* points, const int& pointCount)
 		{
 			SDL_FPoint* sdlPoints = new SDL_FPoint[pointCount];
-			for (int i = 0; i < pointCount; i++)
+			for (int i = 0; i < pointCount; ++i)
 			{
 				sdlPoints[i] = { points[i].x, points[i].y };
 			}
@@ -498,7 +498,7 @@ namespace Birb
 			/* Convert Vector2int points into Sint16 vectors */
 			Sint16* vx = new Sint16[pointCount];
 			Sint16* vy = new Sint16[pointCount];
-			for (int i = 0; i < pointCount; i++)
+			for (int i = 0; i < pointCount; ++i)
 			{
 				vx[i] = points[i].x;
 				vy[i] = points[i].y;
@@ -531,7 +531,7 @@ namespace Birb
 			/* Convert Vector2int points into Sint16 vectors */
 			Sint16* vx = new Sint16[points.size()];
 			Sint16* vy = new Sint16[points.size()];
-			for (size_t i = 0; i < points.size(); i++)
+			for (size_t i = 0; i < points.size(); ++i)
 			{
 				vx[i] = points[i].x;
 				vy[i] = points[i].y;
@@ -562,7 +562,7 @@ namespace Birb
 		bool DrawPolygon(const Color& color, Vector2f* points, const int& pointCount)
 		{
 			Vector2int* intPoints = new Vector2int[pointCount];
-			for (int i = 0; i < pointCount; i++)
+			for (int i = 0; i < pointCount; ++i)
 			{
 				intPoints[i].x = std::round(points[i].x);
 				intPoints[i].y = std::round(points[i].y);
@@ -575,7 +575,7 @@ namespace Birb
 		bool DrawPolygon(const Color& color, const std::vector<Vector2f>& points)
 		{
 			Vector2int* intPoints = new Vector2int[points.size()];
-			for (size_t i = 0; i < points.size(); i++)
+			for (size_t i = 0; i < points.size(); ++i)
 			{
 				intPoints[i].x = std::round(points[i].x);
 				intPoints[i].y = std::round(points[i].y);

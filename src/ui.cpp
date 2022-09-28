@@ -26,7 +26,7 @@ namespace Birb
                 break;
         }
 
-		for (size_t i = 0; i < Buttons.size(); i++)
+		for (size_t i = 0; i < Buttons.size(); ++i)
 		{
 			/* Skip inactive buttons */
 			if (!Buttons[i]->clickComponent.active)

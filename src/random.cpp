@@ -25,7 +25,7 @@ namespace Birb
 		Random rand;
 		int newIndex;
 		int placeHolder;
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < size; ++i)
 		{
 			newIndex = rand.RandomInt(0, size - 1);
 			if (newIndex != i)
@@ -42,7 +42,7 @@ namespace Birb
 		Random rand;
 		int newIndex;
 		float placeHolder;
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < size; ++i)
 		{
 			do
 			{
@@ -60,7 +60,7 @@ namespace Birb
 		Random rand;
 		int newIndex;
 		double placeHolder;
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < size; ++i)
 		{
 			do
 			{
@@ -78,7 +78,7 @@ namespace Birb
 		Random rand;
 		int newIndex;
 		std::string placeHolder;
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < size; ++i)
 		{
 			do
 			{

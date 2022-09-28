@@ -23,8 +23,8 @@ namespace Birb
 
 		bool RectCollision(const Birb::Rect rects[], const int& size)
 		{
-			for (int i = 0; i < size; i++)
-				for (int j = 0; j < size; j++)
+			for (int i = 0; i < size; ++i)
+				for (int j = 0; j < size; ++j)
 					if (i != j && RectCollision(rects[i], rects[j]))
 						return true;
 			return false;
@@ -32,8 +32,8 @@ namespace Birb
 
 		bool RectCollision(const std::vector<Birb::Rect>& rects)
 		{
-			for (size_t i = 0; i < rects.size(); i++)
-				for (size_t j = 0; j < rects.size(); j++)
+			for (size_t i = 0; i < rects.size(); ++i)
+				for (size_t j = 0; j < rects.size(); ++j)
 					if (i != j && RectCollision(rects[i], rects[j]))
 						return true;
 			return false;
@@ -99,7 +99,7 @@ namespace Birb
 			int j = pointCount - 1;
 			bool oddNodes = false; /* If the node count is odd, the point is in the polygon */
 
-			for (int i = 0; i < pointCount; i++)
+			for (int i = 0; i < pointCount; ++i)
 			{
 				if ((points[i].y < point.y && points[j].y >= point.y)
 						|| (points[j].y < point.y && points[i].y >= point.y))
@@ -120,11 +120,11 @@ namespace Birb
 		{
 			/* First test if any of the points of either polygon is inside of the other one
 			 * start with polygon A and then repeat the process the other way around */
-			for (int i = 0; i < polygonAsize; i++)
+			for (int i = 0; i < polygonAsize; ++i)
 				if (PointInPolygon(polygonB, polygonBsize, polygonA[i]))
 					return true;
 
-			for (int i = 0; i < polygonBsize; i++)
+			for (int i = 0; i < polygonBsize; ++i)
 				if (PointInPolygon(polygonA, polygonAsize, polygonB[i]))
 					return true;
 
@@ -134,9 +134,9 @@ namespace Birb
 			std::vector<Line> polygonBlines = utils::PolygonToLines(polygonB, polygonBsize);
 
 			/* Check if any of the lines intersect */
-			for (int i = 0; i < polygonAsize; i++)
+			for (int i = 0; i < polygonAsize; ++i)
 			{
-				for (int j = 0; j < polygonBsize; j++)
+				for (int j = 0; j < polygonBsize; ++j)
 				{
 					if (LineIntersection(polygonAlines[i], polygonBlines[j]))
 						return true;
@@ -159,9 +159,9 @@ namespace Birb
 		bool PolygonCollision(std::vector<Polygon> polygons)
 		{
 			bool collision = false;
-			for (size_t i = 0; i < polygons.size() && !collision; i++)
+			for (size_t i = 0; i < polygons.size() && !collision; ++i)
 			{
-				for (size_t j = 0; j < polygons.size() && !collision; j++)
+				for (size_t j = 0; j < polygons.size() && !collision; ++j)
 				{
 					if (i != j)
 						collision = PolygonCollision(polygons[i], polygons[j]);
