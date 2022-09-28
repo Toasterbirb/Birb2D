@@ -31,6 +31,7 @@ add_executable(test
 	rect_test.cpp
 	renderwindow_test.cpp
 	scene_test.cpp
+	textrendering_test.cpp
 	timer_test.cpp
 	utils_test.cpp
 	values_test.cpp

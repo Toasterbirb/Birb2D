@@ -96,10 +96,6 @@ TEST_CASE("Window and rendering functions")
 	testScene.AddObject(&areaGraph);
 
 
-
-	Birb::Entity textEntity("Text entity", Birb::Vector2int(50, 250), Birb::EntityComponent::Text("Hello World", &font, &Birb::Colors::Red));
-	Birb::Entity textEntityWithBackground("Text entity with background color", Birb::Vector2int(50, 300), Birb::EntityComponent::Text("Hello World", &font, &Birb::Colors::Red, &Birb::Colors::White));
-
 	CHECK(window.win_title == "Title");
 	CHECK(window.dimensions.x == 1280);
 	CHECK(window.dimensions.y == 720);
@@ -113,8 +109,6 @@ TEST_CASE("Window and rendering functions")
 	{
 		CHECK_NOTHROW(testScene.Render());
 		CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
-		CHECK(Birb::Render::DrawEntity(textEntity));
-		CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
 
 		CHECK(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2int(400, 400), 50));
 		CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
@@ -138,12 +132,6 @@ TEST_CASE("Window and rendering functions")
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);
 
-	/* Try changing text */
-	textEntity.SetText("The birbs disappeared");
-	textEntity.SetColor(&Birb::Colors::Green);
-	CHECK(textEntity.textComponent.text == "The birbs disappeared");
-	CHECK(textEntity.textComponent.color == &Birb::Colors::Green);
-
 	/* Toggle the test scene */
 	testScene.Toggle();
 
@@ -161,8 +149,6 @@ TEST_CASE("Window and rendering functions")
 
 		testScene.Render();
 		CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
-		CHECK(Birb::Render::DrawEntity(textEntity));
-		CHECK(Birb::Render::DrawEntity(textEntityWithBackground));
 
 		CHECK(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
 		CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
