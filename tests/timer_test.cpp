@@ -30,8 +30,8 @@ namespace Birb
 		CHECK(timer.DigitalFormat() == "00:00:01:200"); /* Test digital format since we have already spent time on timing */
 
 		/* Make sure the timer actually stops after stopping it */
-		Debug::Log("Delaying for 500 milliseconds to see if the timer stopped");
-		std::this_thread::sleep_for(1200ms);
+		Debug::Log("Delaying for 100 milliseconds to see if the timer stopped");
+		std::this_thread::sleep_for(100ms);
 		CHECK(timer.ElapsedSeconds() == 1.20);
 	}
 
