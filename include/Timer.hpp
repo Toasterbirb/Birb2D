@@ -27,4 +27,16 @@ namespace Birb
 		std::chrono::time_point<std::chrono::steady_clock> startTime;
 		std::chrono::time_point<std::chrono::steady_clock> endTime;
 	};
+
+	/// Class for timing stuff for debuggin purposes
+	class Stopwatch
+	{
+	public:
+		Stopwatch(std::string title);
+		void Stop();
+
+	private:
+		Timer timer;
+		std::string title;
+	};
 }
