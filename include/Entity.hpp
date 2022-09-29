@@ -46,6 +46,7 @@ namespace Birb
 			Click();
 			Click(const std::function<void()>& p_onClick);
 			bool active;
+			bool isPressed;
 			std::function<void()> onMouseDown;
 			std::function<void()> onClick;
             std::function<void()> onHover;

@@ -33,6 +33,7 @@ add_executable(test
 	scene_test.cpp
 	textrendering_test.cpp
 	timer_test.cpp
+	ui_test.cpp
 	utils_test.cpp
 	values_test.cpp
 	vector_test.cpp

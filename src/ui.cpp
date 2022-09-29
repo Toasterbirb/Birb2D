@@ -51,12 +51,16 @@ namespace Birb
 			else if (window.event.type == SDL_MOUSEBUTTONDOWN)
 			{
 				Buttons[i]->clickComponent.onMouseDown();
+				Buttons[i]->clickComponent.isPressed = true;
 				continue;
 			}
 
             /* Check if the mousebutton is released */
             if (window.event.type == SDL_MOUSEBUTTONUP)
+			{
                 Buttons[i]->clickComponent.onClick();
+				Buttons[i]->clickComponent.isPressed = false;
+			}
 
 			/* You can really only click one button at once, so lets stop if we got this far */
 			break;

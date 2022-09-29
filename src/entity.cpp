@@ -72,15 +72,17 @@ namespace Birb
 		Click::Click()
 		{
 			AssignPlaceholderEvents();
-			onClick = PlaceHolderClickEvent;
-			active = true;
+			onClick 	= PlaceHolderClickEvent;
+			active 		= true;
+			isPressed 	= false;
 		}
 
 		Click::Click(const std::function<void()>& p_onClick)
 		:onClick(p_onClick)
 		{
 			AssignPlaceholderEvents();
-			active = true;
+			active 		= true;
+			isPressed 	= false;
 		}
 
 		Animation::Animation()
