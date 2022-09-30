@@ -1,4 +1,6 @@
 #include "Input.hpp"
+#include "Math.hpp"
+#include "Renderwindow.hpp"
 
 namespace Birb
 {
@@ -365,6 +367,51 @@ namespace Birb
 			}
 
 			return code;
+		}
+
+		MouseDrag::MouseDrag()
+		{
+			m_dragging = false;
+		}
+
+		void MouseDrag::Poll(const SDL_Event& event)
+		{
+			if (m_dragging)
+			{
+				/* Update the current end position */
+				SDL_GetMouseState(&m_endPos.x, &m_endPos.y);
+
+				/* If we are already dragging, stop dragging if there's a mouseup event */
+				if (event.type == SDL_MOUSEBUTTONUP)
+					m_dragging = false;
+			}
+			/* Start drag if not dragging and there's mousedown event */
+			else if (event.type == SDL_MOUSEBUTTONDOWN)
+			{
+				SDL_GetMouseState(&m_startPos.x, &m_startPos.y);
+				m_endPos = m_startPos;
+				m_dragging = true;
+			}
+		}
+
+		bool MouseDrag::isDragging() const
+		{
+			return m_dragging;
+		}
+
+		Vector2int MouseDrag::startPos() const
+		{
+			return m_startPos;
+		}
+
+		Vector2int MouseDrag::endPos() const
+		{
+			return m_endPos;
+		}
+
+		float MouseDrag::distance() const
+		{
+			return Math::VectorDistance(m_startPos, m_endPos);
 		}
 	}
 }

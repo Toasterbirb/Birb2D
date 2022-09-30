@@ -35,6 +35,10 @@ namespace Birb
 
 	void Line::RenderFunc()
 	{
+		/* Don't draw invisible lines */
+		if (pointA == pointB)
+			return;
+
 		if (thickness == 1)
 			Render::DrawLine(*this);
 		else if (thickness > 1)
