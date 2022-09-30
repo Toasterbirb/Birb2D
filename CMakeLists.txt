@@ -41,11 +41,14 @@ else()
 	add_subdirectory(vendor/SDL_ttf)
 	include_directories(vendor/SDL_ttf)
 
-	include(ExternalProject)
-	ExternalProject_Add(SDL_gfx
-		SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx
-		CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx/configure --prefix=<INSTALL_DIR>
-		BUILD_COMMAND ${MAKE})
+	add_subdirectory(vendor/SDL2_gfx)
+	include_directories(vendor/SDL2_gfx)
+
+	#include(ExternalProject)
+	#ExternalProject_Add(SDL_gfx
+	#	SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx
+	#	CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx/configure --prefix=<INSTALL_DIR>
+	#	BUILD_COMMAND ${MAKE})
 
 endif()
 
