@@ -196,7 +196,7 @@ namespace Birb
 		CHECK(buttonA.clickComponent.active);
 
 		buttonA.rect.color = Colors::Red;
-		buttonA.renderingPriority = 2;
+		buttonA.renderingPriority = 3;
 
 		/* Button B */
 		Entity buttonB("Button B", Rect(window.dimensions.x / 2.2 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
@@ -204,12 +204,12 @@ namespace Birb
 		CHECK(buttonB.clickComponent.active);
 
 		buttonB.rect.color = Colors::Blue;
-		buttonB.renderingPriority = 1;
+		buttonB.renderingPriority = 2;
 
 		ui.AddButton(&buttonB);
 		ui.AddButton(&buttonA);
-		CHECK(ui.Buttons[0] == &buttonB);
-		CHECK(ui.Buttons[1] == &buttonA);
+		CHECK(ui.Buttons[0] == &buttonA);
+		CHECK(ui.Buttons[1] == &buttonB);
 
 		ApplicationInfo appInfo("Birb2D_tests");
 		appInfo.LocateResources();
@@ -222,6 +222,9 @@ namespace Birb
 		testScene.AddObject(&buttonB);
 		testScene.AddObject(&buttonA);
 		testScene.AddObject(&instruction_text);
+		CHECK(testScene.GetObjects()[0] == &instruction_text);
+		CHECK(testScene.GetObjects()[1] == &buttonB);
+		CHECK(testScene.GetObjects()[2] == &buttonA);
 
 		Timer timer;
 		timer.Start();

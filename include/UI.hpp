@@ -13,6 +13,7 @@ namespace Birb
 		std::vector<Entity*> Buttons;
 		void AddButton(Entity* buttonEntity); ///< Addin't an entity to this list makes it interactable as a button
 		void PollButtons(const Window& window); ///< Check if the user is clicking on any buttons etc.
+		void SortButtons(); ///< Sort buttons by their rendering priority
 
     private:
         bool mouseHeldDown;
