@@ -17,7 +17,7 @@ namespace Birb
 		success = true;
 	}
 
-	TEST_CASE("Button click")
+	TEST_CASE("Input: Button click")
 	{
 		success = false;
 
@@ -91,7 +91,7 @@ namespace Birb
 		CHECK(success);
 	}
 
-	TEST_CASE("Button hover")
+	TEST_CASE("Input: Button hover")
 	{
 		success = false;
 
@@ -176,7 +176,7 @@ namespace Birb
 		Debug::Log("Button B was clicked");
 	}
 
-	TEST_CASE("Overlapping button click")
+	TEST_CASE("Input: Overlapping button click")
 	{
 		ButtonA_clicked = false;
 		ButtonB_clicked = false;
