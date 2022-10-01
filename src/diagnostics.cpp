@@ -30,7 +30,7 @@ namespace Birb
 			else
 			{
 				/* Move everything back by one */
-				for (size_t i = 0; i < graph.values.size() - 1; i++)
+				for (size_t i = 0; i < graph.values.size() - 1; ++i)
 				{
 					graph.values[i] = graph.values[i + 1];
 				}
