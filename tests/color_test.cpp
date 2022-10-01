@@ -28,6 +28,21 @@ namespace Birb
 		CHECK(colorB.a == 40);
 	}
 
+	TEST_CASE("Color from SDL_Color")
+	{
+		SDL_Color sdl_color;
+		sdl_color.r = 25;
+		sdl_color.g = 64;
+		sdl_color.b = 128;
+		sdl_color.a = 9;
+
+		Color color(sdl_color);
+		CHECK(color.r == 25);
+		CHECK(color.g == 64);
+		CHECK(color.b == 128);
+		CHECK(color.a == 9);
+	}
+
 	TEST_CASE("Color from hex")
 	{
 		Color colorA(0xFFFFFF);
