@@ -26,6 +26,9 @@ namespace Birb
 		}
 
 		CHECK(differentValueFound);
+
+		CHECK(rand.RandomInt(0, 0) == 0);
+		CHECK(rand.RandomInt(0, -1) >= 0);
 	}
 
 	TEST_CASE("Random float")
@@ -50,6 +53,9 @@ namespace Birb
 		}
 
 		CHECK(differentValueFound);
+
+		CHECK(rand.RandomFloat(0.0f, 0.0f) == 0.0f);
+		CHECK(rand.RandomFloat(0.0f, -1.0f) >= 0.0f);
 	}
 
 	TEST_CASE("Shuffle an integer array")

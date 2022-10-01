@@ -10,11 +10,17 @@ namespace Birb
 
 	int Random::RandomInt(const int& min, const int& max)
 	{
+		if (max < min)
+			return min;
+
 		return rand() % (max + 1 - min) + min;
 	}
 
 	float Random::RandomFloat(const float& min, const float& max)
 	{
+		if (max < min)
+			return min;
+
 		float random = ((float) rand()) / (float) RAND_MAX;
 		float range = max - min;
 		return (random * range) + min;
