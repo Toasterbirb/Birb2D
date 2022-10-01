@@ -9,6 +9,7 @@ namespace Birb
 		Color();
 		Color(const int& r, const int& g, const int& b);
 		Color(const int& r, const int& g, const int& b, const int& a);
+		Color(const SDL_Color& sdl_color);
 		Color(const int& hex);
 
 		SDL_Color sdl() const; ///< Convert Color to SDL_Color
