@@ -39,7 +39,7 @@ namespace Birb
 		return objects;
 	}
 
-	int Scene::ObjectCount()
+	int Scene::ObjectCount() const
 	{
 		return objects.size();
 	}

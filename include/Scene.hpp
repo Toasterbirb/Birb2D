@@ -15,7 +15,7 @@ namespace Birb
 		void AddObject(SceneObject** obj, int objCount);
 		std::vector<SceneObject*> GetObjects() const;
 
-		int ObjectCount();
+		int ObjectCount() const;
 
 		void Activate();
 		void Deactivate();
