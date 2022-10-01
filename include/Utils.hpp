@@ -29,5 +29,7 @@ namespace Birb
 		std::string CleanDecimals(const double& value); ///< Returns a string with without trailing zeroes in decimals
 
 		std::vector<Line> PolygonToLines(const Vector2f polygon[], const int& polygonSize);
+
+		int FlatIndex(const Vector2int& array_position, const Vector2int& array_dimensions); ///< Returns a 1 dimensional index for a 2 dimensional array
 	}
 }

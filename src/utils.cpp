@@ -81,5 +81,20 @@ namespace Birb
 
 			return lines;
 		}
+
+		int FlatIndex(const Vector2int& array_position, const Vector2int& array_dimensions)
+		{
+			/* Do some sanity checking */
+			if (array_position.x > array_dimensions.x - 1 || array_position.y > array_dimensions.y - 1
+					|| array_position.x < 0 || array_position.y < 0)
+			{
+				return -1;
+			}
+
+			if (array_position.y == 0)
+				return array_position.x;
+
+			return (array_position.y * array_dimensions.x) + array_position.x;
+		}
 	}
 }

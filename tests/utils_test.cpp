@@ -68,4 +68,19 @@ namespace Birb
 		CHECK(lines[2] == expectedLines[2]);
 		CHECK(lines[3] == expectedLines[3]);
 	}
+
+	TEST_CASE("Converting 2 dimensional array position into 1 dimension")
+	{
+		CHECK(utils::FlatIndex({3, 2}, {4, 4}) == 11);
+		CHECK(utils::FlatIndex({0, 0}, {4, 4}) == 0);
+		CHECK(utils::FlatIndex({2, 2}, {5, 4}) == 12);
+		CHECK(utils::FlatIndex({1, 1}, {5, 4}) == 6);
+		CHECK(utils::FlatIndex({4, 3}, {5, 4}) == 19);
+		CHECK(utils::FlatIndex({1, 2}, {3, 4}) == 7);
+
+		CHECK(utils::FlatIndex({4, 4}, {5, 4}) == -1);
+		CHECK(utils::FlatIndex({5, 3}, {5, 4}) == -1);
+		CHECK(utils::FlatIndex({-1, 4}, {5, 4}) == -1);
+		CHECK(utils::FlatIndex({4, -1}, {5, 4}) == -1);
+	}
 }
