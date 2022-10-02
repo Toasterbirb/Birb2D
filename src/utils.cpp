@@ -71,6 +71,10 @@ namespace Birb
 		{
 			std::vector<Line> lines;
 
+			/* Abort the mission if there are less than 3 points in the "polygon" */
+			if (polygonSize < 3)
+				return lines;
+
 			for (int i = 0; i < polygonSize - 1; ++i)
 			{
 				lines.push_back(Line(polygon[i], polygon[i + 1]));
