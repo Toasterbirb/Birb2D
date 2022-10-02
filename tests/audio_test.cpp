@@ -29,7 +29,9 @@ namespace Birb
 
 		SDL_Delay(1000);
 
-		/* De-initialize SDL_mixer */
+		/* De-initialize SDL_mixer and free the sound files */
+		sound.free();
+		music.free();
 		Mix_Quit();
 	}
 }
