@@ -47,6 +47,9 @@ namespace Birb
 		return true;
 	}
 
+	Audio::MusicFile::MusicFile()
+	{}
+
 	//** Loads up a music file from given path. Shouldn't be used for short sound effects
 	Audio::MusicFile::MusicFile(const std::string& p_filePath)
 	:filePath(p_filePath)
@@ -59,6 +62,9 @@ namespace Birb
 			return;
 		}
 	}
+
+	Audio::SoundFile::SoundFile()
+	{}
 
 	//** Loads up a sound file from given path. Used for shorter sound effects and not music
 	Audio::SoundFile::SoundFile(const std::string& p_filePath)

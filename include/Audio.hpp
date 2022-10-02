@@ -15,6 +15,7 @@ namespace Birb
 		class SoundFile
 		{
 		public:
+			SoundFile();
 			SoundFile(const std::string& p_filePath);
 			void play();
 			void free()
@@ -37,6 +38,7 @@ namespace Birb
 		class MusicFile
 		{
 		public:
+			MusicFile();
 			MusicFile(const std::string& p_filePath);
 			void play();
 			void play(bool loop);
