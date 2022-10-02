@@ -15,7 +15,7 @@ namespace Birb
 		running = false;
 	}
 
-	double Timer::ElapsedMilliseconds()
+	double Timer::ElapsedMilliseconds() const
 	{
 		std::chrono::time_point<std::chrono::steady_clock> t_endTime;
 		if (running)
@@ -26,17 +26,17 @@ namespace Birb
 		return std::chrono::duration_cast<std::chrono::milliseconds>(t_endTime - startTime).count();
 	}
 
-	double Timer::ElapsedSeconds()
+	double Timer::ElapsedSeconds() const
 	{
 		return ElapsedMilliseconds() / 1000.0;
 	}
 
-	double Timer::ElapsedMinutes()
+	double Timer::ElapsedMinutes() const
 	{
 		return ElapsedSeconds() / 60.0;
 	}
 
-	double Timer::ElapsedHours()
+	double Timer::ElapsedHours() const
 	{
 		return ElapsedMinutes() / 60.0;
 	}
@@ -85,7 +85,7 @@ namespace Birb
 	}
 
 
-	std::string Timer::DigitalFormat()
+	std::string Timer::DigitalFormat() const
 	{
 		/* Return default 00:00:00:000 if timer is not running */
 		if (!running && ElapsedMilliseconds() == 0)
@@ -105,7 +105,7 @@ namespace Birb
 		return digital_string;
 	}
 
-	std::string Timer::SplitDigitalFormat(const double& previousmills)
+	std::string Timer::SplitDigitalFormat(const double& previousmills) const
 	{
 		/* Return default 00:00 if time hasn't passed */
 		if (!running && ElapsedMilliseconds() == 0)
