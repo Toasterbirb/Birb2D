@@ -47,26 +47,52 @@ namespace Birb
 
 	TEST_CASE("Polygon to lines")
 	{
-		const int polygonSize = 4;
-		Vector2f polygon[polygonSize] = {
-			Vector2f(7, -1),
-			Vector2f(9, -1),
-			Vector2f(11, 0),
-			Vector2f(9, 0),
-		};
+		SUBCASE("4 point polygon")
+		{
+			const int polygonSize = 4;
+			Vector2f polygon[polygonSize] = {
+				Vector2f(7, -1),
+				Vector2f(9, -1),
+				Vector2f(11, 0),
+				Vector2f(9, 0),
+			};
 
-		Line expectedLines[polygonSize] = {
-			Line(Vector2f(7, -1), Vector2f(9, -1)),
-			Line(Vector2f(9, -1), Vector2f(11, 0)),
-			Line(Vector2f(11, 0), Vector2f(9, 0)),
-			Line(Vector2f(9, 0), Vector2f(7, -1)),
-		};
+			Line expectedLines[polygonSize] = {
+				Line(Vector2f(7, -1), Vector2f(9, -1)),
+				Line(Vector2f(9, -1), Vector2f(11, 0)),
+				Line(Vector2f(11, 0), Vector2f(9, 0)),
+				Line(Vector2f(9, 0), Vector2f(7, -1)),
+			};
 
-		std::vector<Line> lines = utils::PolygonToLines(polygon, polygonSize);
-		CHECK(lines[0] == expectedLines[0]);
-		CHECK(lines[1] == expectedLines[1]);
-		CHECK(lines[2] == expectedLines[2]);
-		CHECK(lines[3] == expectedLines[3]);
+			std::vector<Line> lines = utils::PolygonToLines(polygon, polygonSize);
+			CHECK(lines[0] == expectedLines[0]);
+			CHECK(lines[1] == expectedLines[1]);
+			CHECK(lines[2] == expectedLines[2]);
+			CHECK(lines[3] == expectedLines[3]);
+			CHECK(lines.size() == 4);
+		}
+
+		SUBCASE("3 point polygon")
+		{
+			const int polygonSize = 3;
+			Vector2f polygon[polygonSize] = {
+				Vector2f(1050, 350),
+				Vector2f(1075, 400),
+				Vector2f(1025, 400),
+			};
+
+			Line expectedLines[polygonSize] = {
+				Line(Vector2f(1050, 350), Vector2f(1075, 400)),
+				Line(Vector2f(1075, 400), Vector2f(1025, 400)),
+				Line(Vector2f(1025, 400), Vector2f(1050, 350)),
+			};
+
+			std::vector<Line> lines = utils::PolygonToLines(polygon, polygonSize);
+			CHECK(lines[0] == expectedLines[0]);
+			CHECK(lines[1] == expectedLines[1]);
+			CHECK(lines[2] == expectedLines[2]);
+			CHECK(lines.size() == 3);
+		}
 	}
 
 	TEST_CASE("Converting 2 dimensional array position into 1 dimension")

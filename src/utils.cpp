@@ -81,7 +81,7 @@ namespace Birb
 			}
 
 			/* The last line connects the last point and the first point */
-			lines[polygonSize - 1] = Line(polygon[polygonSize - 1], polygon[0]);
+			lines.push_back(Line(polygon[polygonSize - 1], polygon[0]));
 
 			return lines;
 		}
