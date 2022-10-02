@@ -39,4 +39,19 @@ namespace Birb
 			CHECK(lineB.renderingPriority == 10);
 		}
 	}
+
+	TEST_CASE("Line comparisons")
+	{
+		Line lineA({0, 0}, {5, 0});
+		Line lineB({0, 0}, {5, 0});
+		Line lineC({0, 0}, {0, 5});
+		Line lineD({0, 1}, {5, 0});
+		Line lineE({1, 1}, {5, 4});
+
+		CHECK(lineA == lineB);
+		CHECK(lineA != lineC);
+		CHECK(lineA != lineD);
+		CHECK(lineA != lineE);
+	}
+
 }
