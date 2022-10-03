@@ -111,14 +111,26 @@ set(CORE_SRC
 add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
 target_compile_options(birb2d PRIVATE -Wall -Wextra -Wpedantic -Werror)
-target_link_libraries(birb2d
-	#	SDL2
-	SDL2main
-	SDL2_image
-	SDL2_ttf
-	SDL2_mixer
-	SDL2_gfx
-)
+
+if (STATIC_SDL)
+	target_link_libraries(birb2d
+		SDL2main
+		SDL2_image
+		SDL2_ttf
+		SDL2_mixer
+		SDL2_gfx
+	)
+else()
+	target_link_libraries(birb2d
+		SDL2
+		SDL2main
+		SDL2_image
+		SDL2_ttf
+		SDL2_mixer
+		SDL2_gfx
+	)
+endif()
+
 target_precompile_headers(birb2d PRIVATE include/SDL.hpp include/STD.hpp)
 
 # Compile tests if enabled
