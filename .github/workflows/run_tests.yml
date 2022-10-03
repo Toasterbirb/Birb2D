@@ -16,9 +16,9 @@ jobs:
     - name: Pull submodules
       run: git submodule update --init --recursive
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install valgrind libfluidsynth-dev libxmp-dev libflac-dev libopusfile-dev libsdl2-dev
+      run: sudo apt-get update && sudo apt-get install valgrind
     - name: Compile
-      run: mkdir build ; cd build ; cmake .. ; make -j4
+      run: mkdir build ; cd build ; cmake .. -DSTATIC_SDL=On ; make -j4
     - name: Run tests
       run: cd build/tests ; ./test -tce="*rendering*,*audio*,*timer*"
     - name: Valgrind memcheck
