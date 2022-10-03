@@ -33,6 +33,7 @@ namespace Birb
 
 
 	private:
+		void UpdateDimensions();
 		Vector2int texture_dimensions;
 		SDL_Texture* sdlTex;
 		bool textureLoaded;

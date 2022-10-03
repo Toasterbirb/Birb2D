@@ -13,13 +13,7 @@ namespace Birb
 
 	Texture::Texture(const std::string& filePath)
 	{
-		textureLoaded = LoadTexture(filePath);
-
-		/* If the texture was loaded successfully, get its dimensions */
-		if (textureLoaded)
-			texture_dimensions = utils::GetTextureDimensions(sdlTex);
-		else
-			texture_dimensions = Vector2int(0, 0);
+		LoadTexture(filePath);
 	}
 
 	Texture::Texture(SDL_Texture* sdlTexture)
@@ -44,6 +38,10 @@ namespace Birb
 		this->sdlTex = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
 
 		SDL_FreeSurface(surface);
+
+		textureLoaded = true;
+		UpdateDimensions();
+
 		return true;
 	}
 
@@ -81,5 +79,13 @@ namespace Birb
 	Vector2int Texture::dimensions() const
 	{
 		return texture_dimensions;
+	}
+
+	void Texture::UpdateDimensions()
+	{
+		if (textureLoaded)
+			texture_dimensions = utils::GetTextureDimensions(sdlTex);
+		else
+			texture_dimensions = Vector2int(0, 0);
 	}
 }
