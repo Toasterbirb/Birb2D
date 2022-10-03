@@ -14,9 +14,17 @@ systems)" OFF)
 option(TESTS "Compile tests" ON)
 option(EXAMPLES "Compile examples" OFF)
 option(DEBUG "Enable some extra debug output" ON)
+option(RELEASE "Compile a release build" OFF)
 
 if (DEBUG)
 	add_definitions(-DDEBUG)
+endif()
+
+if (RELEASE)
+	set(CMAKE_BUILD_TYPE Release)
+	set(STATIC_SDL ON)
+else()
+	set(CMAKE_BUILD_TYPE Debug)
 endif()
 
 if (SYSTEM_SDL)
