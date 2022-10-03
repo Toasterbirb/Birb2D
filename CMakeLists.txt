@@ -24,10 +24,34 @@ if (SYSTEM_SDL)
 else()
 	if (STATIC_SDL)
 		set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
+		set(BUILD_STATIC ON CACHE BOOL "Build static libs")
+
+		set(SDL2IMAGE_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
+		set(SDL2MIXER_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
+		set(SDL2TTF_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
+
 		add_definitions(-DSTATIC_SDL)
 	else()
 		set(BUILD_SHARED_LIBS ON CACHE BOOL "Build the library as a shared library")
 	endif()
+
+	# Disable some unnecessary SDL stuff
+	set(SDL2IMAGE_INSTALL OFF CACHE BOOL "Enable SDL2_image install target")
+	set(SDL2IMAGE_SAMPLES OFF CACHE BOOL "Build the SDL2_image sample program(s)")
+	set(SDL2MIXER_INSTALL OFF CACHE BOOL "Enable SDL2mixer install target")
+	set(SDL2MIXER_SAMPLES OFF CACHE BOOL "Build the SDL2_mixer sample program(s)")
+	set(SDL2TTF_SAMPLES OFF CACHE BOOL "Build the SDL2_ttf sample program(s)")
+	set(SDL2TTF_INSTALL OFF CACHE BOOL "Enable SDL2_ttf install target")
+
+	# Toggle off some rare image formats
+	set(SDL2IMAGE_LBM OFF CACHE BOOL "Support loading LBM images")
+	set(SDL2IMAGE_PCX OFF CACHE BOOL "Support loading PCX images")
+	set(SDL2IMAGE_PNM OFF CACHE BOOL "Support loading PNM images")
+	set(SDL2IMAGE_QOI OFF CACHE BOOL "Support loading QOI images")
+	set(SDL2IMAGE_XCF OFF CACHE BOOL "Support loading XCF images")
+	set(SDL2IMAGE_XPM OFF CACHE BOOL "Support loading XPM images")
+	set(SDL2IMAGE_XV OFF CACHE BOOL "Support loading XV images")
+
 
 	add_subdirectory(vendor/SDL)
 	include_directories(vendor/SDL/include)
@@ -88,7 +112,7 @@ add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
 target_compile_options(birb2d PRIVATE -Wall -Wextra -Wpedantic -Werror)
 target_link_libraries(birb2d
-	SDL2
+	#	SDL2
 	SDL2main
 	SDL2_image
 	SDL2_ttf

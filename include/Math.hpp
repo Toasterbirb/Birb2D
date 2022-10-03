@@ -129,5 +129,5 @@ namespace Birb
 		}
 
 		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum);
-	};
+	}
 }

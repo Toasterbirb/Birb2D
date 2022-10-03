@@ -87,5 +87,5 @@ namespace Birb
 		bool DrawPolygon(const Color& color, const std::vector<Vector2f>& points); ///< Draw a polygon from multiple points
 		bool DrawPolygon(const Polygon& polygon); ///< Draw a polygon
 
-	};
+	}
 }
