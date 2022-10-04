@@ -22,6 +22,7 @@ add_executable(test
 	graph_test.cpp
 	input_test.cpp
 	level_test.cpp
+	legacy_render_test.cpp
 	line_test.cpp
 	logger_test.cpp
 	math_test.cpp
