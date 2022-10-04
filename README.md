@@ -1,5 +1,6 @@
 # Birb2D
 ![Test workflow](https://github.com/toasterbirb/birb2d/actions/workflows/run_tests.yml/badge.svg)
+[![Windows build](https://github.com/Toasterbirb/Birb2D/actions/workflows/windows_build.yml/badge.svg)](https://github.com/Toasterbirb/Birb2D/actions/workflows/windows_build.yml)
 
 Birb2D is a small and delicate 2D game engine made as a learning project.
 
