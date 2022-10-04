@@ -1,6 +1,7 @@
 #!/bin/bash
 
-BUILD_DIR="./build"
+BUILD_DIR="$(dirname $0)/../build"
+echo "Building to $BUILD_DIR"
 
 # Delete any existing build directories
 [ -d "$BUILD_DIR" ] && rm -rv "$BUILD_DIR"
@@ -15,6 +16,3 @@ then
 else
 	cmake .. -DRELEASE=on -DTESTS=off -DWINDOWS=on -DUTILS=off -DSTATIC_SDL=on -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_C_FLAGS=-fstack-protector -DCMAKE_CXX_FLAGS=-fstack-protector -DMINGW=TRUE
 fi
-
-# Compile
-make -j$(nproc)
