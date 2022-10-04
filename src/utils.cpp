@@ -48,13 +48,13 @@ namespace Birb
 		{
 			if (Math::IsDigit(value))
 			{
-				return std::to_string((int)value);
+				return std::to_string(static_cast<int>(value));
 			}
 			else
 			{
 				std::string result = std::to_string(value);
-				int size = (int)result.size();
-				for (int i = size - 1; i > 0; --i)
+				size_t size = result.size();
+				for (size_t i = size - 1; i > 0; --i)
 				{
 					if (result[i] != '0' && i < size - 1)
 					{

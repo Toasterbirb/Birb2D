@@ -4,9 +4,11 @@
 #include "Diagnostics.hpp"
 #include <cstring>
 
-
 namespace Birb
 {
+	static void DrawProgressBar(const Entity& entity);
+	static void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst);
+
 	Window::Window()
 	{
 		InitSDL();
@@ -31,14 +33,14 @@ namespace Birb
 
 		if (win == NULL)
 		{
-			Debug::Log("Window failed to init: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Window failed to init: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 			exit(1);
 		}
 
 		renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer == NULL)
 		{
-			Debug::Log("Renderer failed to init: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Renderer failed to init: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 			exit(1);
 		}
 
@@ -71,7 +73,7 @@ namespace Birb
 
 		if (SDL_Init(SDL_INIT_VIDEO) > 0)
 		{
-			Debug::Log("SDL Init failed: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("SDL Init failed: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 			exit(2);
 		}
 		else
@@ -93,7 +95,7 @@ namespace Birb
 
 		if (!(IMG_Init(IMG_INIT_PNG)))
 		{
-			Debug::Log("IMG_Init has failed" + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("IMG_Init has failed" + static_cast<std::string>(SDL_GetError()), Debug::error);
 			exit(2);
 		}
 		else
@@ -176,8 +178,8 @@ namespace Birb
 
 	Vector2f Window::window_dimensions_multiplier()
 	{
-		return Vector2f((float)dimensions.x / (float)original_window_dimensions.x,
-						(float)dimensions.y / (float)original_window_dimensions.y);
+		return Vector2f(static_cast<float>(dimensions.x) / static_cast<float>(original_window_dimensions.x),
+						static_cast<float>(dimensions.y) / static_cast<float>(original_window_dimensions.y));
 	}
 
 	bool Window::PollEvents()

@@ -9,7 +9,7 @@ namespace Birb
 		texture = IMG_LoadTexture(Global::RenderVars::Renderer, p_filePath.c_str());
 
 		if (texture == NULL)
-			Debug::Log("Failed to load texture [" + p_filePath + "]: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Failed to load texture [" + p_filePath + "]: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 
 		return texture;
 	}
@@ -44,7 +44,7 @@ namespace Birb
 				*pitch = tmpSurface->pitch;
 
 			sizeInBytes = tmpSurface->pitch * tmpSurface->h;
-			pixels = (Uint8*)malloc( sizeInBytes );
+			pixels = static_cast<Uint8*>(malloc( sizeInBytes ));
 			SDL_LockTexture(texture, 0, &tmpPixels, &tmpPitch);
 			memcpy(pixels, tmpSurface->pixels, sizeInBytes);
 			SDL_UnlockTexture(texture);
@@ -82,11 +82,11 @@ namespace Birb
 		//}
 
 		if (surface == nullptr)
-			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Error creating SDL_Surface. Text: " + static_cast<std::string>(text) + ". SDL Error: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
 		if (texture == nullptr)
-			Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Error creating texture from surface: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 
 		SDL_FreeSurface(surface);
 		return texture;
@@ -103,12 +103,12 @@ namespace Birb
 
 		SDL_Surface* surface = TTF_RenderText_Shaded(font.ttf(), text.c_str(), color.sdl(), bgColor.sdl());
 		if (surface == nullptr)
-			Debug::Log("Error creating SDL_Surface. Text: " + (std::string)text + ". SDL Error: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Error creating SDL_Surface. Text: " + static_cast<std::string>(text) + ". SDL Error: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 
 		/* FIXME: Implement wrapping for this function too */
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
 		if (texture == nullptr)
-			Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Error creating texture from surface: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 
 		SDL_FreeSurface(surface);
 		return texture;

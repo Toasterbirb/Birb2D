@@ -34,6 +34,8 @@ namespace Birb
 		std::vector<Vector2f> points;
 
 	private:
+		bool PointsHaveSameAxis(Vector2f point, Vector2f sidePointA, Vector2f sidePointB) const;
+
 		void RenderFunc() override;
 		void SetPos(const Vector2f& delta) override;
 	};

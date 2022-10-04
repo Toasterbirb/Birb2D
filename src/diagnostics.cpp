@@ -23,7 +23,7 @@ namespace Birb
 				return;
 
 			/* Update values */
-			if ((int)graph.values.size() < pointCount)
+			if (static_cast<int>(graph.values.size()) < pointCount)
 			{
 				graph.values.push_back(timeStep.deltaTime * 1000);
 			}

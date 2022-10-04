@@ -37,7 +37,7 @@ namespace Birb
 		}
 		else
 		{
-			Debug::Log("Something went wrong when loading font '" + filePath + "' TTF_Error: " + (std::string)TTF_GetError(), Debug::error);
+			Debug::Log("Something went wrong when loading font '" + filePath + "' TTF_Error: " + static_cast<std::string>(TTF_GetError()), Debug::error);
 			fontLoaded = false;
 		}
 	}
@@ -80,7 +80,7 @@ namespace Birb
 
 		if (TTF_Init() == -1)
 		{
-			Debug::Log("TTF_Init has failed: " + (std::string)TTF_GetError(), Debug::error);
+			Debug::Log("TTF_Init has failed: " + static_cast<std::string>(TTF_GetError()), Debug::error);
 			exit(2);
 		}
 		else

@@ -67,7 +67,7 @@ namespace Birb
 
 			for (size_t i = 0; i < values.size(); ++i)
 			{
-				points[i].x = (((width / (int)values.size()) * (i + 0.5))) + rect.x + wallOffset;
+				points[i].x = (((width / static_cast<int>(values.size())) * (i + 0.5))) + rect.x + wallOffset;
 				points[i].y = Math::Normalize(values[i], highestValue, lowestValue, rect.h) + rect.y;
 			}
 
@@ -87,7 +87,7 @@ namespace Birb
 
 				case (GraphType::Block):
 					for (size_t i = 0; i < values.size(); ++i)
-						Render::DrawRect(graphColor, Rect(points[i].x - (((width / (int)values.size()) - blockSpacing) / 2), points[i].y, (width / values.size()) - blockSpacing, Math::Normalize(values[i], lowestValue, highestValue, rect.h)));
+						Render::DrawRect(graphColor, Rect(points[i].x - (((width / static_cast<int>(values.size())) - blockSpacing) / 2), points[i].y, (width / values.size()) - blockSpacing, Math::Normalize(values[i], lowestValue, highestValue, rect.h)));
 					break;
 
 				case(GraphType::Area):

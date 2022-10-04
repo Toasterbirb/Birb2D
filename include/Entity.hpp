@@ -53,6 +53,10 @@ namespace Birb
             std::function<void()> onDrag;
 		private:
 			void AssignPlaceholderEvents();
+			static void PlaceHolderMouseDownEvent();
+			static void PlaceHolderClickEvent();
+			static void PlaceHolderHoverEvent();
+			static void PlaceHolderDragEvent();
 		};
 
 		/// Animation allows for texture atlas based sprite animations

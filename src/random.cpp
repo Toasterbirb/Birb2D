@@ -21,7 +21,7 @@ namespace Birb
 		if (max < min)
 			return min;
 
-		float random = ((float) rand()) / (float) RAND_MAX;
+		float random = (static_cast<float> (rand())) / static_cast<float> (RAND_MAX);
 		float range = max - min;
 		return (random * range) + min;
 	}

@@ -56,9 +56,9 @@ namespace Birb
 		return mills / 1000.0 / 60.0 / 60.0;
 	}
 
-	std::string DoubleDigitify(const double& value)
+	std::string Timer::DoubleDigitify(const double& value) const
 	{
-		std::string valueString = std::to_string((int)std::floor(value));
+		std::string valueString = std::to_string(static_cast<int>(std::floor(value)));
 
 		if (valueString.size() > 2)
 			valueString = valueString.substr(valueString.size() - 2, 2);
@@ -69,9 +69,9 @@ namespace Birb
 			return valueString;
 	}
 
-	std::string TripleDigitify(const double& value)
+	std::string Timer::TripleDigitify(const double& value) const
 	{
-		std::string valueString = std::to_string((int)std::floor(value));
+		std::string valueString = std::to_string(static_cast<int>(std::floor(value)));
 
 		if (valueString.size() > 3)
 			valueString = valueString.substr(valueString.size() - 3, 3);
@@ -134,7 +134,7 @@ namespace Birb
 		timer.Stop();
 
 		if (timer.ElapsedSeconds() < 1)
-			Debug::Log("[" + title + "] Took " + std::to_string((int)timer.ElapsedMilliseconds()) + "ms");
+			Debug::Log("[" + title + "] Took " + std::to_string(static_cast<int>(timer.ElapsedMilliseconds())) + "ms");
 		else if (timer.ElapsedSeconds() < 60)
 			Debug::Log("[" + title + "] Took " + std::to_string(timer.ElapsedSeconds()) + "s");
 		else

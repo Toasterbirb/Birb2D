@@ -24,6 +24,8 @@ namespace Birb
 		bool running = false;
 
 	private:
+		std::string DoubleDigitify(const double& value) const;
+		std::string TripleDigitify(const double& value) const;
 		std::chrono::time_point<std::chrono::steady_clock> startTime;
 		std::chrono::time_point<std::chrono::steady_clock> endTime;
 	};

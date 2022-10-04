@@ -173,7 +173,7 @@ namespace Birb
 			for (size_t i = 0; i < points.size(); ++i)
 			{
 				bool ignored = false;
-				for (int j = 0; j < (int)ignoredPoints.size(); ++j)
+				for (size_t j = 0; j < ignoredPoints.size(); ++j)
 				{
 					if (points[i] == ignoredPoints[j])
 					{
@@ -198,7 +198,7 @@ namespace Birb
 				ignore = false;
 
 				/* Check if the point is in the ignore list */
-				for (int j = 0; j < (int)ignoredPoints.size(); ++j)
+				for (size_t j = 0; j < ignoredPoints.size(); ++j)
 					if (points[i] == ignoredPoints[j])
 					{
 						ignore = true;
@@ -233,12 +233,12 @@ namespace Birb
 
 		bool IsDigit(const float& value)
 		{
-			return ((int)value == value);
+			return (static_cast<int>(value) == value);
 		}
 
 		bool IsDigit(const double& value)
 		{
-			return ((int)value == value);
+			return (static_cast<int>(value) == value);
 		}
 
 		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum)

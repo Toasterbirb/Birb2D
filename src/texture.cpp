@@ -30,7 +30,7 @@ namespace Birb
 		SDL_Surface* surface = IMG_Load(filePath.c_str());
 		if (surface == NULL)
 		{
-			Debug::Log("Failed to load image [" + filePath + "]: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Failed to load image [" + filePath + "]: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 			return false;
 		}
 
@@ -56,7 +56,7 @@ namespace Birb
 
 		if (sdlTex == nullptr)
 		{
-			Debug::Log("Error creating texture from surface: " + (std::string)SDL_GetError(), Debug::error);
+			Debug::Log("Error creating texture from surface: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 			return false;
 		}
 		else

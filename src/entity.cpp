@@ -30,36 +30,40 @@ namespace Birb
 			wrapLength = 0;
 		}
 
-		void PlaceHolderMouseDownEvent()
+		void Click::PlaceHolderMouseDownEvent()
 		{
 #ifdef DEBUG
 			if (Diagnostics::Debugging::Buttons)
 				Debug::Log("Placeholder onMouseDown event");
 #endif
+			return;
 		}
 
-		void PlaceHolderClickEvent()
+		void Click::PlaceHolderClickEvent()
 		{
 #ifdef DEBUG
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onClick event");
 #endif
+			return;
 		}
 
-        void PlaceHolderHoverEvent()
+        void Click::PlaceHolderHoverEvent()
         {
 #ifdef DEBUG
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onHover event");
 #endif
+			return;
         }
 
-        void PlaceHolderDragEvent()
+        void Click::PlaceHolderDragEvent()
         {
 #ifdef DEBUG
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onDrag event");
 #endif
+			return;
         }
 
 		void Click::AssignPlaceholderEvents()
@@ -180,7 +184,7 @@ namespace Birb
 
 		int spritesPerRow = texWidth / animationComponent.spriteSize.x;
 		float fullRowCount = std::floor(index / spritesPerRow);
-		float leftOver = ((index / (float)spritesPerRow) - fullRowCount) * spritesPerRow;
+		float leftOver = ((index / static_cast<float>(spritesPerRow)) - fullRowCount) * spritesPerRow;
 
 		pos.x = leftOver * animationComponent.spriteSize.x;
 		pos.y = fullRowCount * animationComponent.spriteSize.y;

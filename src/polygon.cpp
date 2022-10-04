@@ -60,7 +60,7 @@ namespace Birb
 		return result;
 	}
 
-	bool PointsHaveSameAxis(Vector2f point, Vector2f sidePointA, Vector2f sidePointB)
+	bool Polygon::PointsHaveSameAxis(Vector2f point, Vector2f sidePointA, Vector2f sidePointB) const
 	{
 		bool x = (point.x == sidePointA.x && point.x == sidePointB.x);
 		bool y = (point.y == sidePointA.y && point.y == sidePointB.y);

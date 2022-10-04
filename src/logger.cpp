@@ -7,11 +7,13 @@ namespace Birb
 {
 	namespace Debug
 	{
+#ifndef __WINDOWS__
 		void Reset()
 		{
 			if (std::filesystem::exists(logfile) && std::filesystem::is_regular_file(logfile))
 				std::filesystem::remove(logfile);
 		}
+#endif
 
 		void Log(const std::string& text, Type type)
 		{
@@ -108,9 +110,11 @@ namespace Birb
 			}
 
 			// Append the line to a logfile
+#ifndef __WINDOWS__
 			std::ofstream outfile;
 			outfile.open(logfile, std::ios_base::app);
 			outfile << line;
+#endif
 		}
 	}
 }

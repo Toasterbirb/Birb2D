@@ -101,7 +101,7 @@ namespace Birb
 
 		Vector2int operator/(const Vector2int& other) const
 		{
-			return Vector2int((int)std::round((float)x / other.x), (int)std::round((float)y / other.y));
+			return Vector2int(static_cast<int>(std::round(static_cast<float>(x) / other.x)), static_cast<int>(std::round(static_cast<float>(y) / other.y)));
 		}
 
 		bool operator==(const Vector2int& other) const
@@ -212,7 +212,7 @@ namespace Birb
 
 		Vector3int operator/(const Vector3int& other) const
 		{
-			return Vector3int((int)std::round((float)x / other.x), (int)std::round((float)y / other.y), (int)std::round((float)z / other.z));
+			return Vector3int(static_cast<int>(std::round(static_cast<float>(x) / other.x)), static_cast<int>(std::round(static_cast<float>(y) / other.y)), static_cast<int>(std::round(static_cast<float>(z) / other.z)));
 		}
 
 		bool operator==(const Vector3int& other) const

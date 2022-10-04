@@ -19,6 +19,10 @@ namespace Birb
 
 	void ApplicationInfo::LocateResources()
 	{
+		/* Skip all of this if using windows */
+#ifdef __WINDOWS__
+		ResLocation = "./res";
+#else
 		/* Check if the application is in an AppImage */
 		char* AppPath = getenv("APPDIR");
 		if (AppPath != nullptr)
@@ -28,12 +32,12 @@ namespace Birb
 			{
 				/* Application is in an AppImage, but doesn't have AppName set */
 				Debug::Log("AppName not set. Resource path defaulted to /usr/share/birb2d/res", Debug::warning);
-				ResLocation = (std::string)AppPath + "/usr/share/birb2d/res";
+				ResLocation = static_cast<std::string>(AppPath) + "/usr/share/birb2d/res";
 			}
 			else
 			{
 				/* Application is in an AppImage and has a AppName set */
-				ResLocation = (std::string)AppPath + "/usr/share/" + AppName + "/res";
+				ResLocation = static_cast<std::string>(AppPath) + "/usr/share/" + AppName + "/res";
 			}
 
 			return;
@@ -55,14 +59,14 @@ namespace Birb
 
 		if (Birb::Filesystem::Directory::Exists("./res"))
 			ResLocation = "./res";
-		else if (Birb::Filesystem::Directory::Exists((std::string)getenv("HOME") + "/.local/share/" + AppName + "/res"))
-			ResLocation = (std::string)getenv("HOME") + "/.local/share/" + AppName + "/res";
+		else if (Birb::Filesystem::Directory::Exists(static_cast<std::string>(getenv("HOME")) + "/.local/share/" + AppName + "/res"))
+			ResLocation = static_cast<std::string>(getenv("HOME")) + "/.local/share/" + AppName + "/res";
 		else if (Birb::Filesystem::Directory::Exists("/usr/local/share/" + AppName + "/res"))
 			ResLocation = "/usr/local/share/" + AppName + "/res";
 		else if (Birb::Filesystem::Directory::Exists("/usr/share/" + AppName + "/res"))
 			ResLocation = "/usr/share/" + AppName + "/res";
 		else
 			ResLocation = "";
+#endif
 	}
-
 }
