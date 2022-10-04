@@ -25,7 +25,7 @@ namespace Birb
 			CAPS_LOCK,
 			CUT,
 			PASTE,
-			DELETE,
+			DELETE_KEY,
 			ARROW_DOWN, ARROW_UP, ARROW_LEFT, ARROW_RIGHT,
 			END,
 			EQUALS,

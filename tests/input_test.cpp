@@ -259,7 +259,7 @@ namespace Birb
 			SUBCASE("Delete")
 			{
 				event.key.keysym.scancode = SDL_SCANCODE_DELETE;
-				CHECK(EventToKeycode(event) == DELETE);
+				CHECK(EventToKeycode(event) == DELETE_KEY);
 			}
 
 			SUBCASE("Up arrow")

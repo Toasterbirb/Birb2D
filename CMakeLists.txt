@@ -16,6 +16,7 @@ option(UTILS "Compile extra utilities" ON)
 option(EXAMPLES "Compile examples" OFF)
 option(DEBUG "Enable some extra debug output" ON)
 option(RELEASE "Compile a release build" OFF)
+option(JOYSTICK "Enable joystick support." OFF)
 option(WINDOWS_BUILD "Enable some windows specific options" OFF)
 
 if (DEBUG)
@@ -27,6 +28,11 @@ if (RELEASE)
 	set(STATIC_SDL ON)
 else()
 	set(CMAKE_BUILD_TYPE Debug)
+endif()
+
+if (NOT JOYSTICK)
+	set(SDL_JOYSTICK OFF CACHE BOOL "Disable joystick support")
+	set(SDL_HAPTIC OFF CACHE BOOL "Disable haptic support")
 endif()
 
 if (WINDOWS_BUILD)
@@ -51,6 +57,8 @@ else()
 	endif()
 
 	# Disable some unnecessary SDL stuff
+	set(SDL2_DISABLE_SDL2MAIN OFF CACHE BOOL "Disable building/installation of
+	SDL2main")
 	set(SDL2IMAGE_INSTALL OFF CACHE BOOL "Enable SDL2_image install target")
 	set(SDL2IMAGE_SAMPLES OFF CACHE BOOL "Build the SDL2_image sample program(s)")
 	set(SDL2MIXER_INSTALL OFF CACHE BOOL "Enable SDL2mixer install target")
@@ -125,11 +133,11 @@ set(CORE_SRC
 
 add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
-target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
+target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
 
 if (STATIC_SDL)
 	target_link_libraries(birb2d
-		SDL2main
+		#SDL2main
 		SDL2_image
 		SDL2_ttf
 		SDL2_mixer

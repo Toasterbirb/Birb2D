@@ -138,7 +138,7 @@ namespace Birb
 					return PASTE;
 
 				case (SDL_SCANCODE_DELETE):
-					return DELETE;
+					return DELETE_KEY;
 
 				case (SDL_SCANCODE_UP):
 					return ARROW_UP;
