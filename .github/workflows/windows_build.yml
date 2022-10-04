@@ -20,6 +20,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Pull submodules
+      run: git submodule update --init --recursive
+
     - name: Install the compilers
       run: sudo apt-get update && sudo apt-get install gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64
 
@@ -31,4 +34,4 @@ jobs:
     - name: Build
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-      
+
