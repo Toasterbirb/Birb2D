@@ -12,9 +12,11 @@ compiling them from source" OFF)
 option(STATIC_SDL "Use static linking for SDL (might not work on all
 systems)" OFF)
 option(TESTS "Compile tests" ON)
+option(UTILS "Compile extra utilities" ON)
 option(EXAMPLES "Compile examples" OFF)
 option(DEBUG "Enable some extra debug output" ON)
 option(RELEASE "Compile a release build" OFF)
+option(WINDOWS_BUILD "Enable some windows specific options" OFF)
 
 if (DEBUG)
 	add_definitions(-DDEBUG)
@@ -25,6 +27,11 @@ if (RELEASE)
 	set(STATIC_SDL ON)
 else()
 	set(CMAKE_BUILD_TYPE Debug)
+endif()
+
+if (WINDOWS_BUILD)
+	#add_definitions(-DWINDOWS)
+	set(UTILS OFF)
 endif()
 
 if (SYSTEM_SDL)
@@ -118,7 +125,7 @@ set(CORE_SRC
 
 add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
-target_compile_options(birb2d PRIVATE -Wall -Wextra -Wpedantic -Werror)
+target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef -Werror -Wno-unused)
 
 if (STATIC_SDL)
 	target_link_libraries(birb2d
@@ -128,10 +135,10 @@ if (STATIC_SDL)
 		SDL2_mixer
 		SDL2_gfx
 	)
-else()
+elseif(WINDOWS OR NOT STATIC_SDL)
 	target_link_libraries(birb2d
 		SDL2
-		SDL2main
+		#SDL2main
 		SDL2_image
 		SDL2_ttf
 		SDL2_mixer
@@ -152,4 +159,6 @@ if (EXAMPLES)
 endif()
 
 # Add utilities
-add_subdirectory(utils)
+if (UTILS)
+	add_subdirectory(utils)
+endif()
