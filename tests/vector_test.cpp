@@ -12,22 +12,22 @@ namespace Birb
 
 		SUBCASE("To string")
 		{
-			CHECK(point2f.toString() == "(1.1, 1.1)");
-			CHECK(point2int.toString() == "(1, 1)");
-			CHECK(point3f.toString() == "(1.1, 1.1, 2.1)");
-			CHECK(point3int.toString() == "(1, 1, 2)");
+			CHECK(point2f.ToString() == "(1.1, 1.1)");
+			CHECK(point2int.ToString() == "(1, 1)");
+			CHECK(point3f.ToString() == "(1.1, 1.1, 2.1)");
+			CHECK(point3int.ToString() == "(1, 1, 2)");
 		}
 
 		SUBCASE("To int vector")
 		{
-			CHECK(point2f.toInt() == Vector2Int(1, 1));
-			CHECK(point3f.toInt() == Vector3Int(1, 1, 2));
+			CHECK(point2f.ToInt() == Vector2Int(1, 1));
+			CHECK(point3f.ToInt() == Vector3Int(1, 1, 2));
 		}
 
 		SUBCASE("To float vector")
 		{
-			CHECK(point2int.toFloat() == Vector2(1.0f, 1.0f));
-			CHECK(point3int.toFloat() == Vector3(1.0f, 1.0f, 2.0f));
+			CHECK(point2int.ToFloat() == Vector2(1.0f, 1.0f));
+			CHECK(point3int.ToFloat() == Vector3(1.0f, 1.0f, 2.0f));
 		}
 	}
 
