@@ -57,8 +57,7 @@ namespace Birb
             return Vector3Int(
                 static_cast<int>(std::round(static_cast<float>(x) / other.x)),
                 static_cast<int>(std::round(static_cast<float>(y) / other.y)),
-                static_cast<int>(std::round(static_cast<float>(z) / other.z))
-                );
+                static_cast<int>(std::round(static_cast<float>(z) / other.z)));
         }
 
         Vector3Int operator/(const int& other) const

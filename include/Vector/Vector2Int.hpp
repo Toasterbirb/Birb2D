@@ -60,7 +60,7 @@ namespace Birb
 
         Vector2Int operator/(const int& other) const
         {
-            return Vector3Int(
+            return Vector2Int(
                 static_cast<int>(std::round(static_cast<float>(x) / other)),
                 static_cast<int>(std::round(static_cast<float>(y) / other)));
         }
