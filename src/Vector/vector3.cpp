@@ -1,5 +1,4 @@
 #include "Vector/Vector3.hpp"
-#include "Vector/Vector3Int.hpp"
 
 namespace Birb
 {
