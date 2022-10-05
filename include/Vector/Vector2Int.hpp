@@ -1,5 +1,8 @@
 #pragma once
 
+#include "STD.hpp"
+#include "Vector/Vector2.hpp"
+
 namespace Birb
 {
     struct Vector2Int
