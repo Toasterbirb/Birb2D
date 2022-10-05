@@ -65,7 +65,7 @@ namespace Birb
 		CHECK(vecA * vecB == Vector2(2.0f, 4.8f));
 		CHECK(vecA / vecB == Vector2(0.5f, 0.46875f));
 
-	    CHECK(vecD * 2  == Vector2(2.0f, 3.0f));
+		CHECK(vecD * 2  == Vector2(2.0f, 3.0f));
 		CHECK(vecD / 2  == Vector2(0.5f, 0.75f));
 
 		CHECK(vecA == vecA);

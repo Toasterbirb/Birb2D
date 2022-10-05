@@ -6,9 +6,17 @@ namespace Birb
     {
         int x, y, z;
 
-        Vector3Int:x(0), y(0), z(0) {}
-        Vector3Int(const int& _x, const int& _y, const int& _z):x(_x), y(_y), z(_z) {}
-        Vector3Int(const int values[3]):x(values[0]),y(values[1]), z(values[2]) {}
+        Vector3Int()
+        :x(0), y(0), z(0)
+        {}
+
+        Vector3Int(const int& _x, const int& _y, const int& _z)
+        :x(_x), y(_y), z(_z)
+        {}
+
+        Vector3Int(const int values[3])
+        :x(values[0]),y(values[1]), z(values[2])
+        {}
 
         std::string ToString() const;
         Vector3 ToFloat() const;
@@ -35,12 +43,12 @@ namespace Birb
 
         Vector3Int operator/(const Vector3Int& other) const
         {
-			return Vector3Int(x / other.x, y / other.y, z / other.z);
+			return Vector3Int(static_cast<int>(x / other.x), static_cast<int>(y / other.y), static_cast<int>(z / other.z));
         }
 
         Vector3Int operator/(const int& other) const
         {
-			return Vector3Int(x / other, y / other, z / other);
+			return Vector3Int(static_cast<int>(x / other), static_cast<int>(y / other), static_cast<int>(z / other));
         }
 
         bool operator==(const Vector3Int& other) const
