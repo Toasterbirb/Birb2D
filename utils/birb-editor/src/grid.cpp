@@ -68,7 +68,7 @@ Birb::Vector2Int ClickToIndex(const Birb::Scene& grid_scene, const Birb::Vector2
 			|| cursor_pos.y > grid_scene.Position().y + (scale * dimensions.y))
 		return { -1, -1 };
 
-	result = grid_scene.Position().toInt() - cursor_pos;
+	result = grid_scene.Position().ToInt() - cursor_pos;
 	result.x /= scale;
 	result.y /= scale;
 
