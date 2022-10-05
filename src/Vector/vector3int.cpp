@@ -1,4 +1,4 @@
-#include "Vector/Vector3Int.hpp"
+#include "Vector.hpp"
 
 namespace Birb
 {

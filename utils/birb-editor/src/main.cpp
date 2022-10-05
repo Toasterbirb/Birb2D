@@ -4,7 +4,7 @@
 const static int top_bar_height = 20;
 const static int side_panel_width = 200;
 
-const static Birb::Vector2int DEFAULT_LEVEL_SIZE = { 256, 256 };
+const static Birb::Vector2Int DEFAULT_LEVEL_SIZE = { 256, 256 };
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
 const static float SCALE_TICK = 1;
 
@@ -22,7 +22,7 @@ void Quit()
 int main(void)
 {
 	Birb::Debug::Log("Creating the window");
-	Birb::Window window("Birb Editor", Birb::Vector2int(1280, 720), 75, false);
+	Birb::Window window("Birb Editor", Birb::Vector2Int(1280, 720), 75, false);
 	Birb::TimeStep timeStep;
 	timeStep.Init(&window);
 
@@ -42,7 +42,7 @@ int main(void)
 	top_bar_background.color = 0x2a2738;
 	top_bar.AddObject(&top_bar_background);
 
-	Birb::Entity titleText("Title text", Birb::Vector2int(4, 4), Birb::EntityComponent::Text("Birb Editor", &titleFont, &Birb::Colors::White));
+	Birb::Entity titleText("Title text", Birb::Vector2Int(4, 4), Birb::EntityComponent::Text("Birb Editor", &titleFont, &Birb::Colors::White));
 	titleText.renderingPriority = 1;
 	top_bar.AddObject(&titleText);
 
@@ -77,11 +77,11 @@ int main(void)
 	bool pending_level_scene_position_update = false;
 	bool pending_level_grid_update = false;
 
-	Birb::Vector2int grid_position_offset;
+	Birb::Vector2Int grid_position_offset;
 	bool mwheel_dragging = false;
-	Birb::Vector2int drag_start_pos;
+	Birb::Vector2Int drag_start_pos;
 
-	Birb::Entity coordinate_text("Mouse coordinate text", Birb::Vector2int(5, 5), Birb::EntityComponent::Text("", &titleFont, &Birb::Colors::White));
+	Birb::Entity coordinate_text("Mouse coordinate text", Birb::Vector2Int(5, 5), Birb::EntityComponent::Text("", &titleFont, &Birb::Colors::White));
 
 	/* Set some default values, so that there's something to render before
 	 * the user moves their cursor over the editor window */
@@ -113,7 +113,7 @@ int main(void)
 	exitButton.clickComponent = Birb::EntityComponent::Click(Quit);
 	ui.AddButton(&exitButton);
 
-	Birb::Vector2int last_cursor_pos;
+	Birb::Vector2Int last_cursor_pos;
 
 	while (ApplicationRunning)
 	{
@@ -162,7 +162,7 @@ int main(void)
 						/* Mouse click */
 						case (SDL_BUTTON_LEFT):
 						{
-							Birb::Vector2int tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
+							Birb::Vector2Int tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
 							std::cout << "Tile pos: " << tile_pos << std::endl;
 
 							/* Set the tile */
@@ -259,7 +259,7 @@ int main(void)
 
 		if (window.CursorPosition() != last_cursor_pos)
 		{
-			Birb::Vector2int current_tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
+			Birb::Vector2Int current_tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
 			coordinate_text.SetText(current_tile_pos.toString());
 			last_cursor_pos = window.CursorPosition();
 		}

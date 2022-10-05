@@ -1,10 +1,11 @@
 #pragma once
 
 #include "STD.hpp"
-#include "Vector/Vector3.hpp"
 
 namespace Birb
 {
+    struct Vector3;
+
     struct Vector3Int
     {
         int x, y, z;

@@ -1,10 +1,11 @@
 #pragma once
 
 #include "STD.hpp"
-#include "Vector/Vector2Int.hpp"
 
 namespace Birb
 {
+    struct Vector2Int;
+
     struct Vector2
     {
         float x, y;

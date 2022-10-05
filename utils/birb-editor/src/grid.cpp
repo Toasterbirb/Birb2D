@@ -6,7 +6,7 @@ void GenerateGridLines(const Birb::Window& window, Birb::Scene* grid_scene, cons
 	horizontal_lines.clear();
 	vertical_lines.clear();
 
-	Birb::Vector2 scene_target_position = level_scene.Position() + grid_position_offset.toFloat();
+	Birb::Vector2 scene_target_position = level_scene.Position() + grid_position_offset.ToFloat();
 
 	/* Horizontal lines */
 	float temp_pos = 0;

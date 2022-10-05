@@ -254,18 +254,18 @@ namespace Birb
 	TEST_CASE("Find a point on a circle given the angle")
 	{
 		Circle circle(1, {2, 2});
-		CHECK(Math::FindPointOnCircle(circle, 0).toInt() 	== Vector2Int(3, 2));
-		CHECK(Math::FindPointOnCircle(circle, 90).toInt() 	== Vector2Int(2, 3));
-		CHECK(Math::FindPointOnCircle(circle, 180).toInt() 	== Vector2Int(1, 2));
-		CHECK(Math::FindPointOnCircle(circle, 270).toInt() 	== Vector2Int(2, 1));
-		CHECK(Math::FindPointOnCircle(circle, 360).toInt() 	== Vector2Int(3, 2));
+		CHECK(Math::FindPointOnCircle(circle, 0).ToInt() 	== Vector2Int(3, 2));
+		CHECK(Math::FindPointOnCircle(circle, 90).ToInt() 	== Vector2Int(2, 3));
+		CHECK(Math::FindPointOnCircle(circle, 180).ToInt() 	== Vector2Int(1, 2));
+		CHECK(Math::FindPointOnCircle(circle, 270).ToInt() 	== Vector2Int(2, 1));
+		CHECK(Math::FindPointOnCircle(circle, 360).ToInt() 	== Vector2Int(3, 2));
 
 		Circle circleB(4, {0, 0});
-		CHECK(Math::FindPointOnCircle(circleB, 0).toInt() 		== Vector2Int(4, 0));
-		CHECK(Math::FindPointOnCircle(circleB, 90).toInt() 		== Vector2Int(0, 4));
-		CHECK(Math::FindPointOnCircle(circleB, 180).toInt() 	== Vector2Int(-4, 0));
-		CHECK(Math::FindPointOnCircle(circleB, 270).toInt() 	== Vector2Int(0, -4));
-		CHECK(Math::FindPointOnCircle(circleB, 360).toInt() 	== Vector2Int(4, 0));
+		CHECK(Math::FindPointOnCircle(circleB, 0).ToInt() 		== Vector2Int(4, 0));
+		CHECK(Math::FindPointOnCircle(circleB, 90).ToInt() 		== Vector2Int(0, 4));
+		CHECK(Math::FindPointOnCircle(circleB, 180).ToInt() 	== Vector2Int(-4, 0));
+		CHECK(Math::FindPointOnCircle(circleB, 270).ToInt() 	== Vector2Int(0, -4));
+		CHECK(Math::FindPointOnCircle(circleB, 360).ToInt() 	== Vector2Int(4, 0));
 	}
 
 	TEST_CASE("Find closest point to given point in a list of points")

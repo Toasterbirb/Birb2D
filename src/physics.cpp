@@ -178,7 +178,7 @@ namespace Birb
 
 		bool PointInCircle(const Vector2& point, const Circle& circle)
 		{
-			return (Math::VectorDistance(point, circle.pos.toFloat()) <= circle.radius);
+			return (Math::VectorDistance(point, circle.pos.ToFloat()) <= circle.radius);
 		}
 
 		bool CircleCollision(const Circle& circleA, const Circle& circleB)
