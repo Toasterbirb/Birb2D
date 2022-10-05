@@ -4,8 +4,8 @@ namespace Birb
 {
     std::string Vector2::ToString() const
 	{
-		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
-	}
+        return "(" + utils::CleanDecimals(x) + ", " + utils::CleanDecimals(y) + ")";
+    }
 
 	Vector2Int Vector2::ToInt() const
 	{
