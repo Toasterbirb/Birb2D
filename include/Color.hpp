@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL.hpp"
+#include "Vector.hpp"
 
 namespace Birb
 {
@@ -9,6 +10,13 @@ namespace Birb
 		Color();
 		Color(const int& r, const int& g, const int& b);
 		Color(const int& r, const int& g, const int& b, const int& a);
+
+		Color(const float& r, const float& g, const float& b);
+		Color(const float& r, const float& g, const float& b, const int& a);
+
+		Color(const Vector3Int &rgb); ///< Uses values between 0 - 255
+		Color(const Vector3 &rgb);	  ///< Uses values between 0.0 - 1.0
+
 		Color(const SDL_Color& sdl_color);
 		Color(const int& hex);
 

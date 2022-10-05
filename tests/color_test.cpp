@@ -28,6 +28,22 @@ namespace Birb
 		CHECK(colorB.a == 40);
 	}
 
+	TEST_CASE("Color with Vectors")
+	{
+		Color colorA(Vector3Int(10, 10, 20));
+		Color colorB(Vector3(0.5f, 0.4f, 0.3f));
+
+		CHECK(colorA.r == 10);
+		CHECK(colorA.g == 10);
+		CHECK(colorA.b == 20);
+		CHECK(colorA.a == 255);
+
+		CHECK(colorB.r == 128);
+		CHECK(colorB.g == 102);
+		CHECK(colorB.b == 77);
+		CHECK(colorB.a == 255);
+	}
+
 	TEST_CASE("Color from SDL_Color")
 	{
 		SDL_Color sdl_color;
