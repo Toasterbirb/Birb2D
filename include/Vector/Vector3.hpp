@@ -74,4 +74,11 @@ namespace Birb
         static Vector3 Left();
         static Vector3 Right();
     };
+
+    inline std::ostream &operator<<(std::ostream &stream, const Vector3 &other)
+    {
+        stream << other.x << ", " << other.y << ", " << other.z;
+        return stream;
+    }
 }
+

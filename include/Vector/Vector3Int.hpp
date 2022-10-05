@@ -22,6 +22,13 @@ namespace Birb
         :x(values[0]),y(values[1]), z(values[2])
         {}
 
+        Vector3Int(const float&_x, const float&_y, const float&_z)
+        {
+            x = std::round(_x);
+            y = std::round(_y);
+            z = std::round(_z);
+        }
+
         std::string ToString() const;
         Vector3 ToFloat() const;
 
@@ -74,4 +81,11 @@ namespace Birb
         static Vector3Int Left();
         static Vector3Int Right();
     };
+
+    inline std::ostream &operator<<(std::ostream &stream, const Vector3Int &other)
+    {
+        stream << other.x << ", " << other.y << ", " << other.z;
+        return stream;
+    }
 }
+

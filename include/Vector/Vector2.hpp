@@ -72,4 +72,11 @@ namespace Birb
         static Vector2 Left();
         static Vector2 Right();
     };
+
+    inline std::ostream &operator<<(std::ostream &stream, const Vector2 &other)
+    {
+        stream << other.x << ", " << other.y;
+        return stream;
+    }
 }
+

@@ -260,7 +260,7 @@ int main(void)
 		if (window.CursorPosition() != last_cursor_pos)
 		{
 			Birb::Vector2Int current_tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
-			coordinate_text.SetText(current_tile_pos.toString());
+			coordinate_text.SetText(current_tile_pos.ToString());
 			last_cursor_pos = window.CursorPosition();
 		}
 

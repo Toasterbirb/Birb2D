@@ -22,6 +22,12 @@ namespace Birb
         :x(values[0]),y(values[1])
         {}
 
+        Vector2Int(const float& _x, const float& _y)
+        {
+            x = std::round(_x);
+            y = std::round(_y);
+        }
+
         std::string ToString() const;
         Vector2 ToFloat() const;
 
@@ -72,4 +78,11 @@ namespace Birb
         static Vector2Int Left();
         static Vector2Int Right();
     };
+
+    inline std::ostream &operator<<(std::ostream &stream, const Vector2Int &other)
+    {
+        stream << other.x << ", " << other.y;
+        return stream;
+    }
 }
+
