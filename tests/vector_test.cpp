@@ -58,11 +58,16 @@ namespace Birb
 		Vector2 vecA(1.0f, 1.5f);
 		Vector2 vecB(2.0f, 3.2f);
 		Vector2 vecC(1.0f, 2.0f);
+		Vector2 vecD(1.0f, 1.5f);
 
 		CHECK(vecA + vecB == Vector2(3.0f, 4.7f));
 		CHECK(vecA - vecB == Vector2(-1.0f, -1.7f));
 		CHECK(vecA * vecB == Vector2(2.0f, 4.8f));
 		CHECK(vecA / vecB == Vector2(0.5f, 0.46875f));
+
+	    CHECK(vecD * 2  == Vector2(2.0f, 3.0f));
+		CHECK(vecD / 2  == Vector2(0.5f, 0.75f));
+
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
@@ -96,11 +101,16 @@ namespace Birb
 		Vector2Int vecA(4, 2);
 		Vector2Int vecB(2, 3);
 		Vector2Int vecC(4, 3);
+		Vector2Int vecD(2, 2);
 
 		CHECK(vecA + vecB == Vector2Int(6, 5));
 		CHECK(vecA - vecB == Vector2Int(2, -1));
 		CHECK(vecA * vecB == Vector2Int(8, 6));
 		CHECK(vecA / vecB == Vector2Int(2, 1));
+
+		CHECK(vecD * 2  == Vector2Int(4, 4));
+		CHECK(vecD / 2  == Vector2Int(1, 1));
+
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
@@ -138,11 +148,16 @@ namespace Birb
 		Vector3 vecA(1.0f, 1.5f, 0.2f);
 		Vector3 vecB(2.0f, 3.2f, 2.0f);
 		Vector3 vecC(1.0f, 2.5f, 0.2f);
+		Vector3 vecD(1.0f, 1.5f, 2.0f);
 
 		CHECK(vecA + vecB == Vector3(3.0f, 4.7f, 2.2f));
 		CHECK(vecA - vecB == Vector3(-1.0f, -1.7f, -1.8f));
 		CHECK(vecA * vecB == Vector3(2.0f, 4.8f, 0.4f));
 		CHECK(vecA / vecB == Vector3(0.5f, 0.468750f, 0.1f));
+
+	    CHECK(vecD * 2  == Vector3(2.0f, 3.0f, 4.0f));
+		CHECK(vecD / 2  == Vector3(0.5f, 0.75f, 1.0f));
+
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
@@ -180,11 +195,16 @@ namespace Birb
 		Vector3Int vecA(4, 6, 5);
 		Vector3Int vecB(2, 3, 2);
 		Vector3Int vecC(4, 7, 5);
+		Vector3Int vecD(2, 2, 2);
 
 		CHECK(vecA + vecB == Vector3Int(6, 9, 7));
 		CHECK(vecA - vecB == Vector3Int(2, 3, 3));
 		CHECK(vecA * vecB == Vector3Int(8, 18, 10));
 		CHECK(vecA / vecB == Vector3Int(2, 2, 3));
+
+		CHECK(vecD * 2  == Vector3Int(4, 4, 4));
+		CHECK(vecD / 2  == Vector3Int(1, 1, 1));
+
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
