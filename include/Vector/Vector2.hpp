@@ -13,25 +13,15 @@ namespace Birb
         std::string ToString() const;
         Vector2Int ToInt() const;
 
-        #pragma region Add Operator
-
         Vector2 operator+(const Vector2& other) const
         {
 			return Vector2(x + other.x, y + other.y);
         }
 
-        #pragma endregion
-
-        #pragma region Subtract Operator
-
         Vector2 operator-(const Vector2& other) const
         {
 			return Vector2(x - other.x, y - other.y);
         }
-
-        #pragma endregion
-
-        #pragma region Multiply Operator
 
         Vector2 operator*(const Vector2& other) const
         {
@@ -43,10 +33,6 @@ namespace Birb
 			return Vector2(x * other, y * other);
         }
 
-        #pragma endregion
-
-        #pragma region Divide Operator
-
         Vector2 operator/(const Vector2& other) const
         {
 			return Vector2(x / other.x, y / other.y);
@@ -57,27 +43,15 @@ namespace Birb
 			return Vector2(x / other, y / other);
         }
 
-        #pragma endregion
-
-        #pragma region Is Equal Operator
-
         bool operator==(const Vector2& other) const
 		{
 			return (x == other.x && y == other.y);
 		}
 
-        #pragma endregion
-
-        #pragma region Is Not Equal Operator
-
 		bool operator!=(const Vector2& other) const
 		{
 			return (x != other.x || y != other.y);
 		}
-
-       #pragma endregion
-
-       #pragma region Quick Returns
 
         static Vector2 One();
         static Vector2 Zero();
@@ -85,7 +59,5 @@ namespace Birb
         static Vector2 Down();
         static Vector2 Left();
         static Vector2 Right();
-
-       #pragma endregion
-    }
+    };
 }
