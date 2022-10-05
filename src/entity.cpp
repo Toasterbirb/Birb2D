@@ -99,7 +99,7 @@ namespace Birb
 			animationQueued = false;
 		}
 
-		Animation::Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps)
+		Animation::Animation(const Vector2Int& p_spriteSize, const int& p_frameCount, const int& p_fps)
 		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), lastFrame(p_frameCount - 1)
 		{
 			frameIndex 		= 0;
@@ -107,7 +107,7 @@ namespace Birb
 			animationQueued = false;
 		}
 
-		Animation::Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop)
+		Animation::Animation(const Vector2Int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop)
 		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), loop(p_loop), lastFrame(p_frameCount - 1)
 		{
 			frameIndex 		= 0;
@@ -172,9 +172,9 @@ namespace Birb
 		}
 	}
 
-	Vector2int Entity::getAtlasPosition(const int& frame)
+	Vector2Int Entity::getAtlasPosition(const int& frame)
 	{
-		Vector2int pos;
+		Vector2Int pos;
 		int index = frame;
 
 		int texWidth;
@@ -227,13 +227,13 @@ namespace Birb
 	void Entity::SetBaseEntityValues()
 	{
 		angle = 0;
-		localScale = Vector2f(1, 1);
+		localScale = Vector2(1, 1);
 		active = true;
 	}
 
 	void Entity::CenterRelativeTo(const Rect& rect)
 	{
-		Vector2int textureDimensions = sprite.dimensions();
+		Vector2Int textureDimensions = sprite.dimensions();
 		this->rect.x = ((rect.w / 2) - (textureDimensions.x / 2.0)) + rect.x;
 		this->rect.y = ((rect.h / 2) - (textureDimensions.y / 2.0)) + rect.y;
 	}
@@ -263,7 +263,7 @@ namespace Birb
 		SetBaseEntityValues();
 	}
 
-	Entity::Entity(const std::string& name, const Vector2int& pos, Texture texture)
+	Entity::Entity(const std::string& name, const Vector2Int& pos, Texture texture)
 	:name(name), sprite(texture)
 	{
 		SetBaseEntityValues();
@@ -275,7 +275,7 @@ namespace Birb
 		rect.h = texture.dimensions().y;
 	}
 
-	Entity::Entity(const std::string& name, const Vector2int& pos, Texture texture, const EntityComponent::Animation& animationComponent)
+	Entity::Entity(const std::string& name, const Vector2Int& pos, Texture texture, const EntityComponent::Animation& animationComponent)
 	:name(name), sprite(texture), animationComponent(animationComponent)
 	{
 		/* Load the text sprite */
@@ -288,7 +288,7 @@ namespace Birb
 		rect.h = animationComponent.spriteSize.y;
 	}
 
-	Entity::Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent)
+	Entity::Entity(const std::string& p_name, const Vector2Int& pos, const EntityComponent::Text& p_textComponent)
 	:name(p_name)
 	{
 		/* Load the text sprite */
@@ -342,7 +342,7 @@ namespace Birb
 		Render::DrawEntity(*this);
 	}
 
-	void Entity::SetPos(const Vector2f& delta)
+	void Entity::SetPos(const Vector2& delta)
 	{
 		rect.x += delta.x;
 		rect.y += delta.y;

@@ -72,66 +72,66 @@ namespace Birb
 			graphs[1].rect = {50, 100, 128, 72};
 
 			/* Set a specific position */
-			scene.SetPosition(Vector2f(10, 10));
-			CHECK(scene.Position() == Vector2f(10, 10));
+			scene.SetPosition(Vector2(10, 10));
+			CHECK(scene.Position() == Vector2(10, 10));
 
 			CHECK(entityA.rect == Rect(10, 160, 128, 72));
 			CHECK(entityB.rect == Rect(60, 110, 128, 72));
 			CHECK(graphs[0].rect == Rect(60, 110, 128, 72));
 			CHECK(graphs[1].rect == Rect(60, 110, 128, 72));
 
-			CHECK(polygon.points[0] == Vector2f(10, 10));
-			CHECK(polygon.points[1] == Vector2f(12, 10));
-			CHECK(polygon.points[2] == Vector2f(11, 11));
+			CHECK(polygon.points[0] == Vector2(10, 10));
+			CHECK(polygon.points[1] == Vector2(12, 10));
+			CHECK(polygon.points[2] == Vector2(11, 11));
 
-			CHECK(line.pointA == Vector2f(10, 10));
-			CHECK(line.pointB == Vector2f(13, 13));
+			CHECK(line.pointA == Vector2(10, 10));
+			CHECK(line.pointB == Vector2(13, 13));
 
 			CHECK(rect == Rect(10, 10, 10, 10));
-			CHECK(circle.pos == Vector2int(10, 10));
+			CHECK(circle.pos == Vector2Int(10, 10));
 
 			/* Move the scene to the other direction with a delta amount */
-			scene.Translate(Vector2f(-20, -20));
-			CHECK(scene.Position() == Vector2f(-10, -10));
+			scene.Translate(Vector2(-20, -20));
+			CHECK(scene.Position() == Vector2(-10, -10));
 
 			CHECK(entityA.rect == Rect(-10, 140, 128, 72));
 			CHECK(entityB.rect == Rect(40, 90, 128, 72));
 			CHECK(graphs[0].rect == Rect(40, 90, 128, 72));
 			CHECK(graphs[1].rect == Rect(40, 90, 128, 72));
 
-			CHECK(polygon.points[0] == Vector2f(-10, -10));
-			CHECK(polygon.points[1] == Vector2f(-8, -10));
-			CHECK(polygon.points[2] == Vector2f(-9, -9));
+			CHECK(polygon.points[0] == Vector2(-10, -10));
+			CHECK(polygon.points[1] == Vector2(-8, -10));
+			CHECK(polygon.points[2] == Vector2(-9, -9));
 
-			CHECK(line.pointA == Vector2f(-10, -10));
-			CHECK(line.pointB == Vector2f(-7, -7));
+			CHECK(line.pointA == Vector2(-10, -10));
+			CHECK(line.pointB == Vector2(-7, -7));
 
 			CHECK(rect == Rect(-10, -10, 10, 10));
-			CHECK(circle.pos == Vector2int(-10, -10));
+			CHECK(circle.pos == Vector2Int(-10, -10));
 
 			/* Reset scene position back to the original position */
-			scene.SetPosition(Vector2f(0, 0));
-			CHECK(scene.Position() == Vector2f(0, 0));
+			scene.SetPosition(Vector2(0, 0));
+			CHECK(scene.Position() == Vector2(0, 0));
 			CHECK(entityA.rect == Rect(0, 150, 128, 72));
 			CHECK(entityB.rect == Rect(50, 100, 128, 72));
 			CHECK(graphs[0].rect == Rect(50, 100, 128, 72));
 			CHECK(graphs[1].rect == Rect(50, 100, 128, 72));
 
-			CHECK(polygon.points[0] == Vector2f(0, 0));
-			CHECK(polygon.points[1] == Vector2f(2, 0));
-			CHECK(polygon.points[2] == Vector2f(1, 1));
+			CHECK(polygon.points[0] == Vector2(0, 0));
+			CHECK(polygon.points[1] == Vector2(2, 0));
+			CHECK(polygon.points[2] == Vector2(1, 1));
 
-			CHECK(line.pointA == Vector2f(0, 0));
-			CHECK(line.pointB == Vector2f(3, 3));
+			CHECK(line.pointA == Vector2(0, 0));
+			CHECK(line.pointB == Vector2(3, 3));
 
 			CHECK(rect == Rect(0, 0, 10, 10));
-			CHECK(circle.pos == Vector2int(0, 0));
+			CHECK(circle.pos == Vector2Int(0, 0));
 		}
 
 		SUBCASE("Update the changed scene position for new objects")
 		{
 			entityA.rect = Rect(10, 10, 20, 20);
-			scene.SetPosition(Vector2f(10, 10));
+			scene.SetPosition(Vector2(10, 10));
 			CHECK(entityA.rect == Rect(20, 20, 20, 20));
 
 			/* Add a new objects after setting the position */
@@ -139,7 +139,7 @@ namespace Birb
 			scene.AddObject(&newRect);
 			CHECK(newRect == Rect(20, 20, 20, 20));
 
-			scene.Translate(Vector2f(10, 10));
+			scene.Translate(Vector2(10, 10));
 			Rect newRectB(10, 10, 30, 30);
 			scene.AddObject(&newRectB);
 			CHECK(newRect == Rect(30, 30, 20, 20));

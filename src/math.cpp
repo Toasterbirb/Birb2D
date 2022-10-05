@@ -7,22 +7,22 @@ namespace Birb
 {
 	namespace Math
 	{
-		float VectorDistance(const Vector2f& a, const Vector2f& b)
+		float VectorDistance(const Vector2& a, const Vector2& b)
 		{
 			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
 		}
 
-		float VectorDistance(const Vector2int& a, const Vector2int& b)
+		float VectorDistance(const Vector2Int& a, const Vector2Int& b)
 		{
 			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
 		}
 
-		float VectorDistance(const Vector3f& a, const Vector3f& b)
+		float VectorDistance(const Vector3& a, const Vector3& b)
 		{
 			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2) + std::pow(b.z - a.z, 2));
 		}
 
-		float VectorDistance(const Vector3int& a, const Vector3int& b)
+		float VectorDistance(const Vector3Int& a, const Vector3Int& b)
 		{
 			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2) + std::pow(b.z - a.z, 2));
 		}
@@ -43,24 +43,24 @@ namespace Birb
 			return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
 		}
 
-		Vector2f Lerp(const Vector2f& a, const Vector2f& b, const float& t)
+		Vector2 Lerp(const Vector2& a, const Vector2& b, const float& t)
 		{
-			return Vector2f(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
+			return Vector2(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
 		}
 
-		Vector2int Lerp(const Vector2int& a, const Vector2int& b, const float& t)
+		Vector2Int Lerp(const Vector2Int& a, const Vector2Int& b, const float& t)
 		{
-			return Vector2int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
+			return Vector2Int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
 		}
 
-		Vector3f Lerp(const Vector3f& a, const Vector3f& b, const float& t)
+		Vector3 Lerp(const Vector3& a, const Vector3& b, const float& t)
 		{
-			return Vector3f(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
+			return Vector3(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 		}
 
-		Vector3int Lerp(const Vector3int& a, const Vector3int& b, const float& t)
+		Vector3Int Lerp(const Vector3Int& a, const Vector3Int& b, const float& t)
 		{
-			return Vector3int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
+			return Vector3Int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 		}
 
 		Color Lerp(const Color& a, const Color& b, const float& t)
@@ -74,27 +74,27 @@ namespace Birb
 			return (a + b) / 2;
 		}
 
-		Vector2f CenterPoint(const Vector2f& a, const Vector2f& b)
+		Vector2 CenterPoint(const Vector2& a, const Vector2& b)
 		{
-			return Vector2f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y));
+			return Vector2(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y));
 		}
 
-		Vector2f CenterPoint(const Vector2int& a, const Vector2int& b)
+		Vector2 CenterPoint(const Vector2Int& a, const Vector2Int& b)
 		{
-			return Vector2f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y));
+			return Vector2(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y));
 		}
 
-		Vector3f CenterPoint(const Vector3f& a, const Vector3f& b)
+		Vector3 CenterPoint(const Vector3& a, const Vector3& b)
 		{
-			return Vector3f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y), CenterPoint(a.z, b.z));
+			return Vector3(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y), CenterPoint(a.z, b.z));
 		}
 
-		Vector3f CenterPoint(const Vector3int& a, const Vector3int& b)
+		Vector3 CenterPoint(const Vector3Int& a, const Vector3Int& b)
 		{
-			return Vector3f(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y), CenterPoint(a.z, b.z));
+			return Vector3(CenterPoint(a.x, b.x), CenterPoint(a.y, b.y), CenterPoint(a.z, b.z));
 		}
 
-		bool PointOnLine(const Line& line, const Vector2f& point)
+		bool PointOnLine(const Line& line, const Vector2& point)
 		{
 			/* Check if the point is in the area of the line
 			 *
@@ -114,7 +114,7 @@ namespace Birb
 			return (point.y == (slope * point.x + y_intersection));
 		}
 
-		Vector2f FindPointOnCircle(const Circle& circle, const float& angle)
+		Vector2 FindPointOnCircle(const Circle& circle, const float& angle)
 		{
 			/* Convert the angle into radians */
 			float radians = (PI / 180) * angle;
@@ -122,12 +122,12 @@ namespace Birb
 			float x = circle.pos.x + circle.radius * cos(radians);
 			float y = circle.pos.y + circle.radius * sin(radians);
 
-			return Vector2f(x, y);
+			return Vector2(x, y);
 		}
 
-		Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount)
+		Vector2Int FindClosestPoint(const Vector2Int& point, Vector2Int points[], const int& pointCount)
 		{
-			Vector2int currentClosestPoint = points[0];
+			Vector2Int currentClosestPoint = points[0];
 			float currentClosestDistance = VectorDistance(point, points[0]);
 
 			for (int i = 1; i < pointCount; ++i)
@@ -145,9 +145,9 @@ namespace Birb
 			return currentClosestPoint;
 		}
 
-		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points)
+		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points)
 		{
-			Vector2int currentClosestPoint = points[0];
+			Vector2Int currentClosestPoint = points[0];
 			float currentClosestDistance = VectorDistance(point, points[0]);
 
 			for (size_t i = 1; i < points.size(); ++i)
@@ -166,10 +166,10 @@ namespace Birb
 		}
 
 
-		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints)
+		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points, const std::vector<Vector2Int>& ignoredPoints)
 		{
 			/* Find the first non-ignored point */
-			Vector2int firstNotIgnored;
+			Vector2Int firstNotIgnored;
 			for (size_t i = 0; i < points.size(); ++i)
 			{
 				bool ignored = false;
@@ -189,7 +189,7 @@ namespace Birb
 				}
 			}
 
-			Vector2int currentClosestPoint = firstNotIgnored;
+			Vector2Int currentClosestPoint = firstNotIgnored;
 			float currentClosestDistance = VectorDistance(point, points[0]);
 
 			bool ignore;

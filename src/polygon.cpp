@@ -12,41 +12,41 @@ namespace Birb
 	:color(color)
 	{}
 
-	Polygon::Polygon(const Vector2f points[], const int& pointCount)
+	Polygon::Polygon(const Vector2 points[], const int& pointCount)
 	{
-		this->points = std::vector<Vector2f>(points, points + pointCount);
+		this->points = std::vector<Vector2>(points, points + pointCount);
 	}
 
-	Polygon::Polygon(const Vector2f points[], const int& pointCount, const Color& color)
+	Polygon::Polygon(const Vector2 points[], const int& pointCount, const Color& color)
 	:color(color)
 	{
-		this->points = std::vector<Vector2f>(points, points + pointCount);
+		this->points = std::vector<Vector2>(points, points + pointCount);
 	}
 
-	Polygon::Polygon(const std::vector<Vector2f>& points)
+	Polygon::Polygon(const std::vector<Vector2>& points)
 	{
 		this->points = points;
 	}
 
-	Polygon::Polygon(const std::vector<Vector2f>& points, const Color& color)
+	Polygon::Polygon(const std::vector<Vector2>& points, const Color& color)
 	:color(color)
 	{
 		this->points = points;
 	}
 
-	void Polygon::AddPoints(const Vector2f points[], const int& pointCount)
+	void Polygon::AddPoints(const Vector2 points[], const int& pointCount)
 	{
 		this->points.insert(std::end(this->points), points, points + pointCount);
 	}
 
-	void Polygon::AddPoints(const std::vector<Vector2f>& points)
+	void Polygon::AddPoints(const std::vector<Vector2>& points)
 	{
 		this->points.insert(std::end(this->points), std::begin(points), std::end(points));
 	}
 
-	Vector2f Polygon::CenterPoint() const
+	Vector2 Polygon::CenterPoint() const
 	{
-		Vector2f result;
+		Vector2 result;
 
 		/* Calculate the average of all points */
 		for (size_t i = 0; i < points.size(); ++i)
@@ -60,7 +60,7 @@ namespace Birb
 		return result;
 	}
 
-	bool Polygon::PointsHaveSameAxis(Vector2f point, Vector2f sidePointA, Vector2f sidePointB) const
+	bool Polygon::PointsHaveSameAxis(Vector2 point, Vector2 sidePointA, Vector2 sidePointB) const
 	{
 		bool x = (point.x == sidePointA.x && point.x == sidePointB.x);
 		bool y = (point.y == sidePointA.y && point.y == sidePointB.y);
@@ -87,7 +87,7 @@ namespace Birb
 		if (points.size() < 4)
 			return;
 
-		std::vector<Vector2f> newPoints;
+		std::vector<Vector2> newPoints;
 
 		/* Find the first valid point */
 		int startPoint = -1;
@@ -149,7 +149,7 @@ namespace Birb
 		Render::DrawPolygon(color, points);
 	}
 
-	void Polygon::SetPos(const Vector2f& delta)
+	void Polygon::SetPos(const Vector2& delta)
 	{
 		for (size_t i = 0; i < points.size(); ++i)
 		{

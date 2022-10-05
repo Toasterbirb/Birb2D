@@ -12,18 +12,18 @@ namespace Birb
 	public:
 		Circle();
 		Circle(const float& radius);
-		Circle(const float& radius, const Vector2int& pos, Color color = 0xFFFFFF);
+		Circle(const float& radius, const Vector2Int& pos, Color color = 0xFFFFFF);
 
 		float Circumference() const;
 		float Diameter() const;
 		Rect toRect() const; ///< Returns a rect around the circle
 
 		float radius;
-		Vector2int pos;
+		Vector2Int pos;
 		Color color;
 
 	private:
 		void RenderFunc() override;
-		void SetPos(const Vector2f& delta) override;
+		void SetPos(const Vector2& delta) override;
 	};
 }

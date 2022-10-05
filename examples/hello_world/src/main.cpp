@@ -3,7 +3,7 @@
 int main(int argc, char** argv)
 {
 	Birb::Debug::Log("Creating the window");
-	Birb::Window window("Birb2D project template", Birb::Vector2int(1280, 720), 75, false);
+	Birb::Window window("Birb2D project template", Birb::Vector2Int(1280, 720), 75, false);
 	Birb::TimeStep timeStep;
 	timeStep.Init(&window);
 

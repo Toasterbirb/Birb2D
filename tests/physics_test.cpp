@@ -95,7 +95,7 @@ namespace Birb
 
 			Rect rectA(0, 0, 4, 2);
 			entityA.rect = rectA;
-			entityA.localScale = Vector2f(2, 1);
+			entityA.localScale = Vector2(2, 1);
 
 			Rect rectB(5, 1, 3, 2);
 			entityB.rect = rectB;
@@ -105,14 +105,14 @@ namespace Birb
 
 		TEST_CASE("Line intersection")
 		{
-			Line lineA(Vector2f(1, 1), Vector2f(5, 3));
-			Line lineB(Vector2f(4.5f, 1.5f), Vector2f(6, 4));
-			Line lineC(Vector2f(3, 1), Vector2f(2, 3));
-			Line lineD(Vector2f(0,0), Vector2f(7, 5));
-			Line lineE(Vector2f(0, 5), Vector2f(7, 0));
+			Line lineA(Vector2(1, 1), Vector2(5, 3));
+			Line lineB(Vector2(4.5f, 1.5f), Vector2(6, 4));
+			Line lineC(Vector2(3, 1), Vector2(2, 3));
+			Line lineD(Vector2(0,0), Vector2(7, 5));
+			Line lineE(Vector2(0, 5), Vector2(7, 0));
 
-			Line lineF(Vector2f(7, 1), Vector2f(7, 3)); /* This should only collide with its overlapping line */
-			//Line lineG(Vector2f(7, 2), Vector2f(7, 3)); /* This line overlaps with lineF and should collide with it */
+			Line lineF(Vector2(7, 1), Vector2(7, 3)); /* This should only collide with its overlapping line */
+			//Line lineG(Vector2(7, 2), Vector2(7, 3)); /* This line overlaps with lineF and should collide with it */
 
 			CHECK_FALSE(LineIntersection(lineA, lineB));
 			CHECK(LineIntersection(lineA, lineC));
@@ -137,22 +137,22 @@ namespace Birb
 		TEST_CASE("Point in polygon")
 		{
 			const int pointCount = 6;
-			Vector2f points[pointCount] = {
-				Vector2f(0, 0),
-				Vector2f(2, 0),
-				Vector2f(3, 2),
-				Vector2f(4, 0),
-				Vector2f(4, 3),
-				Vector2f(0, 3)
+			Vector2 points[pointCount] = {
+				Vector2(0, 0),
+				Vector2(2, 0),
+				Vector2(3, 2),
+				Vector2(4, 0),
+				Vector2(4, 3),
+				Vector2(0, 3)
 			};
 
-			Vector2f testPointA(3, 1); /* Shouldn't be in the polygon */
-			Vector2f testPointB(2, 1); /* Should be in the polygon */
-			Vector2f testPointC(1, 2); /* Should be in the polygon */
-			Vector2f testPointD(3, 4); /* Shouldn't be in the polygon */
-			Vector2f testPointE(3.5, 0); /* Shouldn't be in the polygon */
-			Vector2f testPointF(-1, 1.5); /* Shouldn't be in the polygon */
-			Vector2f testPointG(0, 0); /* Should be in the polygon */
+			Vector2 testPointA(3, 1); /* Shouldn't be in the polygon */
+			Vector2 testPointB(2, 1); /* Should be in the polygon */
+			Vector2 testPointC(1, 2); /* Should be in the polygon */
+			Vector2 testPointD(3, 4); /* Shouldn't be in the polygon */
+			Vector2 testPointE(3.5, 0); /* Shouldn't be in the polygon */
+			Vector2 testPointF(-1, 1.5); /* Shouldn't be in the polygon */
+			Vector2 testPointG(0, 0); /* Should be in the polygon */
 
 			CHECK_FALSE(PointInPolygon(points, pointCount, testPointA));
 			CHECK(PointInPolygon(points, pointCount, testPointB));
@@ -166,43 +166,43 @@ namespace Birb
 		TEST_CASE("Polygon collision")
 		{
 			const int polygonAsize = 7;
-			Vector2f polygonA[polygonAsize] = {
-				Vector2f(2, 1),
-				Vector2f(4, -1),
-				Vector2f(9, 1),
-				Vector2f(7, 3),
-				Vector2f(10, 4),
-				Vector2f(5, 5),
-				Vector2f(1, 4)
+			Vector2 polygonA[polygonAsize] = {
+				Vector2(2, 1),
+				Vector2(4, -1),
+				Vector2(9, 1),
+				Vector2(7, 3),
+				Vector2(10, 4),
+				Vector2(5, 5),
+				Vector2(1, 4)
 			};
 			Polygon polyA(polygonA, polygonAsize);
 
 			/* Triangle inside of the polygon A */
 			const int polygonBsize = 3;
-			Vector2f polygonB[polygonBsize] = {
-				Vector2f(3, 1),
-				Vector2f(4, 3),
-				Vector2f(3, 3)
+			Vector2 polygonB[polygonBsize] = {
+				Vector2(3, 1),
+				Vector2(4, 3),
+				Vector2(3, 3)
 			};
 			Polygon polyB(polygonB, polygonBsize);
 
 			/* 4 sided polygon with no points inside of polygon A, but the sides should collide */
 			const int polygonCsize = 4;
-			Vector2f polygonC[polygonCsize] = {
-				Vector2f(8, 3),
-				Vector2f(9, 3),
-				Vector2f(9, 6),
-				Vector2f(7, 6)
+			Vector2 polygonC[polygonCsize] = {
+				Vector2(8, 3),
+				Vector2(9, 3),
+				Vector2(9, 6),
+				Vector2(7, 6)
 			};
 			Polygon polyC(polygonC, polygonCsize);
 
 			/* 4 sided polygon completely outside of polygon A, shouldn't collide with it */
 			const int polygonDsize = 4;
-			Vector2f polygonD[polygonDsize] = {
-				Vector2f(7, -1),
-				Vector2f(9, -1),
-				Vector2f(11, 0),
-				Vector2f(9, 0)
+			Vector2 polygonD[polygonDsize] = {
+				Vector2(7, -1),
+				Vector2(9, -1),
+				Vector2(11, 0),
+				Vector2(9, 0)
 			};
 			Polygon polyD(polygonD, polygonDsize);
 
@@ -235,13 +235,13 @@ namespace Birb
 		{
 			Circle circle(2, {2, 2});
 
-			CHECK(PointInCircle(Vector2int(3, 2), circle));
-			CHECK_FALSE(PointInCircle(Vector2int(-1, 2), circle));
-			CHECK_FALSE(PointInCircle(Vector2int(4, 4), circle));
+			CHECK(PointInCircle(Vector2Int(3, 2), circle));
+			CHECK_FALSE(PointInCircle(Vector2Int(-1, 2), circle));
+			CHECK_FALSE(PointInCircle(Vector2Int(4, 4), circle));
 
-			CHECK(PointInCircle(Vector2f(3.5f, 2), circle));
-			CHECK(PointInCircle(Vector2f(3.303f, 0.7386), circle));
-			CHECK_FALSE(PointInCircle(Vector2f(0.0f, 0.0f), circle));
+			CHECK(PointInCircle(Vector2(3.5f, 2), circle));
+			CHECK(PointInCircle(Vector2(3.303f, 0.7386), circle));
+			CHECK_FALSE(PointInCircle(Vector2(0.0f, 0.0f), circle));
 		}
 
 		TEST_CASE("Circle collision")

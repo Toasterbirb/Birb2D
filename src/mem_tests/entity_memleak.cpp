@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	else
 		Debug::Log("The entity test part can be skipped with 'no_entity' flag after the duration");
 
-	Window window("Entity memleak test", Birb::Vector2int(128, 128), 75, false);
+	Window window("Entity memleak test", Birb::Vector2Int(128, 128), 75, false);
 	TimeStep timeStep;
 	timeStep.Init(&window);
 
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
 
 			testEntity.textComponent = EntityComponent::Text("Some text", &font, &Colors::Red);
 			testEntity.clickComponent = EntityComponent::Click();
-			testEntity.animationComponent = EntityComponent::Animation(Vector2int(16, 16), 4, 10);
+			testEntity.animationComponent = EntityComponent::Animation(Vector2Int(16, 16), 4, 10);
 
 			scene.AddObject(&testEntity);
 		}

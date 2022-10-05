@@ -30,11 +30,11 @@ namespace Birb
 
 	Polygon Rect::toPolygon() const
 	{
-		Vector2f points[4] = {
-			Vector2f(x, y),
-			Vector2f(x + w, y),
-			Vector2f(x + w, y + h),
-			Vector2f(x, y + h)
+		Vector2 points[4] = {
+			Vector2(x, y),
+			Vector2(x + w, y),
+			Vector2(x + w, y + h),
+			Vector2(x, y + h)
 		};
 
 		return Polygon(points, 4);
@@ -66,7 +66,7 @@ namespace Birb
 		Render::DrawRect(color, *this);
 	}
 
-	void Rect::SetPos(const Vector2f& delta)
+	void Rect::SetPos(const Vector2& delta)
 	{
 		x += delta.x;
 		y += delta.y;

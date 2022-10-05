@@ -55,7 +55,7 @@ namespace Birb
 			}
 
 			double width = rect.w - (wallOffset * 2);
-			std::vector<Vector2f> points(values.size());
+			std::vector<Vector2> points(values.size());
 
 			/* Calculate points */
 			double highestValue = Math::FindHighestValue(values);
@@ -95,8 +95,8 @@ namespace Birb
 					 * creates a polygon to fill in the area between the line and
 					 * the bottom of the graph */
 
-					Vector2f endBottomPoint(points[points.size() - 1].x, rect.y + rect.h);
-					Vector2f startBottomPoint(points[0].x, rect.y + rect.h);
+					Vector2 endBottomPoint(points[points.size() - 1].x, rect.y + rect.h);
+					Vector2 startBottomPoint(points[0].x, rect.y + rect.h);
 
 					/* End first, because we are working clockwise */
 					points.push_back(endBottomPoint);
@@ -116,7 +116,7 @@ namespace Birb
 			this->Render();
 		}
 
-		void Graph::SetPos(const Vector2f& delta)
+		void Graph::SetPos(const Vector2& delta)
 		{
 			rect.x += delta.x;
 			rect.y += delta.y;

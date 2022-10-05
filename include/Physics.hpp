@@ -24,13 +24,13 @@ namespace Birb
 		bool LineIntersection(const Line& lineA, const Line& lineB);
 
 		/// Check if a point is inside of the polygon
-		bool PointInPolygon(Vector2f points[], const int& pointCount, const Vector2f& point);
+		bool PointInPolygon(Vector2 points[], const int& pointCount, const Vector2& point);
 
 		/// Check if two polygons collide with each other
-		bool PolygonCollision(Vector2f polygonA[], const int& polygonAsize, Vector2f polygonB[], const int& polygonBsize);
+		bool PolygonCollision(Vector2 polygonA[], const int& polygonAsize, Vector2 polygonB[], const int& polygonBsize);
 
 		/// Check if two polygons collide with each other
-		bool PolygonCollision(std::vector<Vector2f> polygonA, std::vector<Vector2f> polygonB);
+		bool PolygonCollision(std::vector<Vector2> polygonA, std::vector<Vector2> polygonB);
 
 		/// Check if two polygons collide with each other
 		bool PolygonCollision(const Polygon& polygonA, const Polygon& polygonB);
@@ -39,10 +39,10 @@ namespace Birb
 		bool PolygonCollision(std::vector<Polygon> polygons);
 
 		/// Check if a point is inside of a circle
-		bool PointInCircle(const Vector2int& point, const Circle& circle);
+		bool PointInCircle(const Vector2Int& point, const Circle& circle);
 
 		/// Check if a point is inside of a circle
-		bool PointInCircle(const Vector2f& point, const Circle& circle);
+		bool PointInCircle(const Vector2& point, const Circle& circle);
 
 		/// Check if a circle is colliding with another circle
 		bool CircleCollision(const Circle& circleA, const Circle& circleB);

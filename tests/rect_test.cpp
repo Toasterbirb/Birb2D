@@ -35,37 +35,37 @@ namespace Birb
 		Rect rectA(0, 0, 10, 10);
 		Polygon polygonA = rectA.toPolygon();
 
-		CHECK(polygonA.points[0] == Vector2f(0, 0));
-		CHECK(polygonA.points[1] == Vector2f(10, 0));
-		CHECK(polygonA.points[2] == Vector2f(10, 10));
-		CHECK(polygonA.points[3] == Vector2f(0, 10));
+		CHECK(polygonA.points[0] == Vector2(0, 0));
+		CHECK(polygonA.points[1] == Vector2(10, 0));
+		CHECK(polygonA.points[2] == Vector2(10, 10));
+		CHECK(polygonA.points[3] == Vector2(0, 10));
 
 
 		Rect rectB(0, 0, -10, -10);
 		Polygon polygonB = rectB.toPolygon();
 
-		CHECK(polygonB.points[0] == Vector2f(0, 0));
-		CHECK(polygonB.points[1] == Vector2f(-10, 0));
-		CHECK(polygonB.points[2] == Vector2f(-10, -10));
-		CHECK(polygonB.points[3] == Vector2f(0, -10));
+		CHECK(polygonB.points[0] == Vector2(0, 0));
+		CHECK(polygonB.points[1] == Vector2(-10, 0));
+		CHECK(polygonB.points[2] == Vector2(-10, -10));
+		CHECK(polygonB.points[3] == Vector2(0, -10));
 
 
 		Rect rectC(2, 2, 1, 3);
 		Polygon polygonC = rectC.toPolygon();
 
-		CHECK(polygonC.points[0] == Vector2f(2, 2));
-		CHECK(polygonC.points[1] == Vector2f(3, 2));
-		CHECK(polygonC.points[2] == Vector2f(3, 5));
-		CHECK(polygonC.points[3] == Vector2f(2, 5));
+		CHECK(polygonC.points[0] == Vector2(2, 2));
+		CHECK(polygonC.points[1] == Vector2(3, 2));
+		CHECK(polygonC.points[2] == Vector2(3, 5));
+		CHECK(polygonC.points[3] == Vector2(2, 5));
 
 
 		Rect rectD(6, 5, 2, 1);
 		Polygon polygonD = rectD.toPolygon();
 
-		CHECK(polygonD.points[0] == Vector2f(6, 5));
-		CHECK(polygonD.points[1] == Vector2f(8, 5));
-		CHECK(polygonD.points[2] == Vector2f(8, 6));
-		CHECK(polygonD.points[3] == Vector2f(6, 6));
+		CHECK(polygonD.points[0] == Vector2(6, 5));
+		CHECK(polygonD.points[1] == Vector2(8, 5));
+		CHECK(polygonD.points[2] == Vector2(8, 6));
+		CHECK(polygonD.points[3] == Vector2(6, 6));
 	}
 
 	TEST_CASE("Rect comparison")

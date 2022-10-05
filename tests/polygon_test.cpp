@@ -14,11 +14,11 @@ namespace Birb
 	TEST_CASE("Polygon initialization with an array")
 	{
 		const int POINT_COUNT = 4;
-		Vector2f points[POINT_COUNT] = {
-			Vector2f(3, 5),
-			Vector2f(3, 5),
-			Vector2f(3, 5),
-			Vector2f(3, 5)
+		Vector2 points[POINT_COUNT] = {
+			Vector2(3, 5),
+			Vector2(3, 5),
+			Vector2(3, 5),
+			Vector2(3, 5)
 		};
 
 		Polygon polygon(points, POINT_COUNT, 0xAAAAAA);
@@ -32,11 +32,11 @@ namespace Birb
 	TEST_CASE("Polygon initialization with a vector")
 	{
 		const int POINT_COUNT = 4;
-		std::vector<Vector2f> points = {
-			Vector2f(3, 5),
-			Vector2f(3, 5),
-			Vector2f(3, 5),
-			Vector2f(3, 5)
+		std::vector<Vector2> points = {
+			Vector2(3, 5),
+			Vector2(3, 5),
+			Vector2(3, 5),
+			Vector2(3, 5)
 		};
 
 		Polygon polygon(points, 0xAAAAAA);
@@ -48,32 +48,32 @@ namespace Birb
 
 		SUBCASE("Append points to existing polygon")
 		{
-			std::vector<Vector2f> morePointsA = {
-				Vector2f(3, 5),
-				Vector2f(3, 5),
-				Vector2f(3, 5),
-				Vector2f(3, 5)
+			std::vector<Vector2> morePointsA = {
+				Vector2(3, 5),
+				Vector2(3, 5),
+				Vector2(3, 5),
+				Vector2(3, 5)
 			};
 
-			Vector2f morePointsB[POINT_COUNT] = {
-				Vector2f(3, 5),
-				Vector2f(3, 5),
-				Vector2f(3, 5),
-				Vector2f(4, 5)
+			Vector2 morePointsB[POINT_COUNT] = {
+				Vector2(3, 5),
+				Vector2(3, 5),
+				Vector2(3, 5),
+				Vector2(4, 5)
 			};
 
 			polygon.AddPoints(morePointsA);
 			polygon.AddPoints(morePointsB, POINT_COUNT);
 
 			CHECK(polygon.size() == POINT_COUNT * 3);
-			CHECK(polygon.points[POINT_COUNT * 3 - 1] == Vector2f(4, 5));
+			CHECK(polygon.points[POINT_COUNT * 3 - 1] == Vector2(4, 5));
 		}
 	}
 
 	TEST_CASE("Polygon optimization with a lot of points to optimize")
 	{
-		std::vector<Vector2f> points;
-		std::vector<Vector2f> expectedPoints;
+		std::vector<Vector2> points;
+		std::vector<Vector2> expectedPoints;
 
 		SUBCASE("Case A")
 		{
@@ -151,7 +151,7 @@ namespace Birb
 	TEST_CASE("Find Polygon center point")
 	{
 		Polygon polygonA({{2, 2}, {8, 3}, {2, 4}});
-		CHECK(polygonA.CenterPoint() == Vector2f(4, 3));
+		CHECK(polygonA.CenterPoint() == Vector2(4, 3));
 
 		Polygon polygonB({
 				{1, 2}, {2, 5},
@@ -163,7 +163,7 @@ namespace Birb
 
 	TEST_CASE("Polygon optimization when there are no points to optimize")
 	{
-		std::vector<Vector2f> points;
+		std::vector<Vector2> points;
 
 		SUBCASE("Case A")
 		{

@@ -20,7 +20,7 @@ namespace Birb
 		objects.push_back(obj);
 
 		/* If the positionOffset has changed, apply that to new objects */
-		if (positionOffset != Vector2f(0, 0))
+		if (positionOffset != Vector2(0, 0))
 			obj->SetPos(positionOffset);
 
 		SortObjects();
@@ -76,10 +76,10 @@ namespace Birb
 		return active;
 	}
 
-	void Scene::SetPosition(const Vector2f& newPosition)
+	void Scene::SetPosition(const Vector2& newPosition)
 	{
 		/* Calculate the delta between the current and new position */
-		Vector2f delta = newPosition - positionOffset;
+		Vector2 delta = newPosition - positionOffset;
 		positionOffset = positionOffset + delta;
 
 		/* Set new positions for all of the scene objects */
@@ -89,7 +89,7 @@ namespace Birb
 		}
 	}
 
-	void Scene::Translate(const Vector2f& delta)
+	void Scene::Translate(const Vector2& delta)
 	{
 		positionOffset = positionOffset + delta;
 
@@ -100,7 +100,7 @@ namespace Birb
 		}
 	}
 
-	Vector2f Scene::Position() const
+	Vector2 Scene::Position() const
 	{
 		return positionOffset;
 	}
@@ -147,7 +147,7 @@ namespace Birb
 		this->Render();
 	}
 
-	void Scene::SetPos(const Vector2f& delta)
+	void Scene::SetPos(const Vector2& delta)
 	{
 		this->Translate(delta);
 	}

@@ -12,22 +12,22 @@ namespace Birb
 
 	Line::Line()
 	{
-		pointA = Vector2f(0, 0);
-		pointB = Vector2f(0, 0);
+		pointA = Vector2(0, 0);
+		pointB = Vector2(0, 0);
 		DefaultLineValues();
 	}
 
-	Line::Line(const Vector2f& pointA, const Vector2f& pointB)
+	Line::Line(const Vector2& pointA, const Vector2& pointB)
 	:pointA(pointA), pointB(pointB)
 	{
 		DefaultLineValues();
 	}
 
-	Line::Line(const Vector2f& pointA, const Vector2f& pointB, const Color& color)
+	Line::Line(const Vector2& pointA, const Vector2& pointB, const Color& color)
 	:pointA(pointA), pointB(pointB), color(color)
 	{}
 
-	Line::Line(const Vector2f& pointA, const Vector2f& pointB, const Color& color, const int& renderingPriority)
+	Line::Line(const Vector2& pointA, const Vector2& pointB, const Color& color, const int& renderingPriority)
 	:pointA(pointA), pointB(pointB), color(color)
 	{
 		this->renderingPriority = renderingPriority;
@@ -47,7 +47,7 @@ namespace Birb
 			Debug::Log("Tried to render a line with thickness <=0", Debug::error);
 	}
 
-	void Line::SetPos(const Vector2f& delta)
+	void Line::SetPos(const Vector2& delta)
 	{
 		pointA = pointA + delta;
 		pointB = pointB + delta;

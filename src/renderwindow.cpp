@@ -15,7 +15,7 @@ namespace Birb
 		InitSDL_image();
 	}
 
-	Window::Window(const std::string& p_title, const Vector2int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
+	Window::Window(const std::string& p_title, const Vector2Int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
 	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
 #ifdef DEBUG
@@ -152,16 +152,16 @@ namespace Birb
 		SDL_RenderPresent(Global::RenderVars::Renderer);
 	}
 
-	Vector2int Window::CursorPosition() const
+	Vector2Int Window::CursorPosition() const
 	{
-		Vector2int pos;
+		Vector2Int pos;
 		SDL_GetMouseState(&pos.x, &pos.y);
 		return pos;
 	}
 
 	bool Window::CursorInRect(const Rect& rect) const
 	{
-		Vector2int cursorPos = CursorPosition();
+		Vector2Int cursorPos = CursorPosition();
 
 		if (cursorPos.x > rect.x && cursorPos.x < rect.x + rect.w)
 			if (cursorPos.y > rect.y && cursorPos.y < rect.y + rect.h)
@@ -170,15 +170,15 @@ namespace Birb
 		return false;
 	}
 
-	void Window::SetWindowSize(const Vector2int& dimensions)
+	void Window::SetWindowSize(const Vector2Int& dimensions)
 	{
 		SDL_SetWindowSize(win, dimensions.x, dimensions.y);
 		this->dimensions = dimensions;
 	}
 
-	Vector2f Window::window_dimensions_multiplier()
+	Vector2 Window::window_dimensions_multiplier()
 	{
-		return Vector2f(static_cast<float>(dimensions.x) / static_cast<float>(original_window_dimensions.x),
+		return Vector2(static_cast<float>(dimensions.x) / static_cast<float>(original_window_dimensions.x),
 						static_cast<float>(dimensions.y) / static_cast<float>(original_window_dimensions.y));
 	}
 
@@ -194,7 +194,7 @@ namespace Birb
 			/* Handle window resizing */
 			case (SDL_WINDOWEVENT):
 				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
-					SetWindowSize(Vector2int(event.window.data1, event.window.data2));
+					SetWindowSize(Vector2Int(event.window.data1, event.window.data2));
 				break;
 
 			case (SDL_QUIT):
@@ -234,7 +234,7 @@ namespace Birb
 
 	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
 	{
-		Vector2int atlasPos = entity->getAtlasPosition(entity->animationComponent.frameIndex);
+		Vector2Int atlasPos = entity->getAtlasPosition(entity->animationComponent.frameIndex);
 		src->x = atlasPos.x;
 		src->y = atlasPos.y;
 		src->w = entity->animationComponent.spriteSize.x;
@@ -310,7 +310,7 @@ namespace Birb
 
 		SDL_Rect src;
 		SDL_Rect dst;
-		Vector2int centerPoint;
+		Vector2Int centerPoint;
 
 		/* Get texture data */
 		int texWidth 	= 0;
@@ -367,7 +367,7 @@ namespace Birb
 		/* Skip rendering the texture if one doesn't exist on the entity */
 		if (entity.sprite.isLoaded())
 		{
-			centerPoint = Vector2int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
+			centerPoint = Vector2Int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
 			SDL_Point center = { centerPoint.x, centerPoint.y };
 
 			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite.sdlTexture(), &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
@@ -410,14 +410,14 @@ namespace Birb
 			DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
 		}
 
-		void DrawLine(const Color& color, const Vector2int& pointA, const Vector2int& pointB)
+		void DrawLine(const Color& color, const Vector2Int& pointA, const Vector2Int& pointB)
 		{
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
 			ResetDrawColor();
 		}
 
-		void DrawLine(const Color& color, const Vector2f& pointA, const Vector2f& pointB)
+		void DrawLine(const Color& color, const Vector2& pointA, const Vector2& pointB)
 		{
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLineF(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
@@ -436,7 +436,7 @@ namespace Birb
 			/* Use a polygon to draw a thicker line */
 			const int POINT_COUNT = 4;
 			float pointOffset = thickness / 2.0;
-			Vector2f points[POINT_COUNT] = {
+			Vector2 points[POINT_COUNT] = {
 				{ line.pointA.x - pointOffset, line.pointA.y - pointOffset },
 				{ line.pointA.x + pointOffset, line.pointA.y + pointOffset },
 				{ line.pointB.x + pointOffset, line.pointB.y + pointOffset },
@@ -445,7 +445,7 @@ namespace Birb
 			DrawPolygon(line.color, points, POINT_COUNT);
 		}
 
-		void DrawLines(const Color& color, Vector2int* points, const int& pointCount)
+		void DrawLines(const Color& color, Vector2Int* points, const int& pointCount)
 		{
 			SDL_Point* sdlPoints = new SDL_Point[pointCount];
 			for (int i = 0; i < pointCount; ++i)
@@ -459,7 +459,7 @@ namespace Birb
 			ResetDrawColor();
 		}
 
-		void DrawLines(const Color& color, Vector2f* points, const int& pointCount)
+		void DrawLines(const Color& color, Vector2* points, const int& pointCount)
 		{
 			SDL_FPoint* sdlPoints = new SDL_FPoint[pointCount];
 			for (int i = 0; i < pointCount; ++i)
@@ -478,7 +478,7 @@ namespace Birb
 			return DrawCircle(circle.color, circle.pos, circle.radius);
 		}
 
-		bool DrawCircle(const Color& color, const Vector2int& pos, const int& radius)
+		bool DrawCircle(const Color& color, const Vector2Int& pos, const int& radius)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
@@ -493,11 +493,11 @@ namespace Birb
 			}
 		}
 
-		bool DrawPolygon(const Color& color, Vector2int* points, const int& pointCount)
+		bool DrawPolygon(const Color& color, Vector2Int* points, const int& pointCount)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
-			/* Convert Vector2int points into Sint16 vectors */
+			/* Convert Vector2Int points into Sint16 vectors */
 			Sint16* vx = new Sint16[pointCount];
 			Sint16* vy = new Sint16[pointCount];
 			for (int i = 0; i < pointCount; ++i)
@@ -526,11 +526,11 @@ namespace Birb
 			}
 		}
 
-		bool DrawPolygon(const Color& color, const std::vector<Vector2int>& points)
+		bool DrawPolygon(const Color& color, const std::vector<Vector2Int>& points)
 		{
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
-			/* Convert Vector2int points into Sint16 vectors */
+			/* Convert Vector2Int points into Sint16 vectors */
 			Sint16* vx = new Sint16[points.size()];
 			Sint16* vy = new Sint16[points.size()];
 			for (size_t i = 0; i < points.size(); ++i)
@@ -561,9 +561,9 @@ namespace Birb
 
 		/* filledPolygonColor works only with integers, so this will just
 		 * round the floating point vlues into integers */
-		bool DrawPolygon(const Color& color, Vector2f* points, const int& pointCount)
+		bool DrawPolygon(const Color& color, Vector2* points, const int& pointCount)
 		{
-			Vector2int* intPoints = new Vector2int[pointCount];
+			Vector2Int* intPoints = new Vector2Int[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
 				intPoints[i].x = std::round(points[i].x);
@@ -574,9 +574,9 @@ namespace Birb
 			return success;
 		}
 
-		bool DrawPolygon(const Color& color, const std::vector<Vector2f>& points)
+		bool DrawPolygon(const Color& color, const std::vector<Vector2>& points)
 		{
-			Vector2int* intPoints = new Vector2int[points.size()];
+			Vector2Int* intPoints = new Vector2Int[points.size()];
 			for (size_t i = 0; i < points.size(); ++i)
 			{
 				intPoints[i].x = std::round(points[i].x);

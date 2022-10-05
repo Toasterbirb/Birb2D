@@ -5,14 +5,14 @@ namespace Birb
 {
 	namespace utils
 	{
-		Vector2int GetTextureDimensions(SDL_Texture* texture)
+		Vector2Int GetTextureDimensions(SDL_Texture* texture)
 		{
-			Vector2int result;
+			Vector2Int result;
 			SDL_QueryTexture(texture, NULL, NULL, &result.x, &result.y);
 			return result;
 		}
 
-		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2int& pixelPosition, const int& textureWidth)
+		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2Int& pixelPosition, const int& textureWidth)
 		{
 			// Some weird BGRA format
 			Uint8 b = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 0]; // Blue
@@ -25,10 +25,10 @@ namespace Birb
 			return color;
 		}
 
-		std::vector<Vector2int> SortPath(const Vector2int& startPoint, const std::vector<Vector2int>& points)
+		std::vector<Vector2Int> SortPath(const Vector2Int& startPoint, const std::vector<Vector2Int>& points)
 		{
-			std::vector<Vector2int> result;
-			Vector2int closestPoint;
+			std::vector<Vector2Int> result;
+			Vector2Int closestPoint;
 			result.push_back(startPoint);
 
 			for (size_t i = 0; i < points.size(); ++i)
@@ -67,7 +67,7 @@ namespace Birb
 			}
 		}
 
-		std::vector<Line> PolygonToLines(const Vector2f polygon[], const int& polygonSize)
+		std::vector<Line> PolygonToLines(const Vector2 polygon[], const int& polygonSize)
 		{
 			std::vector<Line> lines;
 
@@ -86,7 +86,7 @@ namespace Birb
 			return lines;
 		}
 
-		int FlatIndex(const Vector2int& array_position, const Vector2int& array_dimensions)
+		int FlatIndex(const Vector2Int& array_position, const Vector2Int& array_dimensions)
 		{
 			/* Do some sanity checking */
 			if (array_position.x > array_dimensions.x - 1 || array_position.y > array_dimensions.y - 1

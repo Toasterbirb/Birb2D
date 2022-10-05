@@ -11,7 +11,7 @@ namespace Birb
 	class Level
 	{
 	public:
-		Level(const Vector2int& dimensions);
+		Level(const Vector2Int& dimensions);
 		Level(const std::string& level_path);
 
 		Scene ToScene();
@@ -32,13 +32,13 @@ namespace Birb
 			Rect rect;
 		};
 
-		void SetTile(Vector2int tile_pos, Tile tile);
-		Tile GetTile(Vector2int tile_pos) const;
+		void SetTile(Vector2Int tile_pos, Tile tile);
+		Tile GetTile(Vector2Int tile_pos) const;
 
 	private:
-		void PreallocateTiles(const Vector2int& dimensions);
+		void PreallocateTiles(const Vector2Int& dimensions);
 
-		Vector2int grid_size;
+		Vector2Int grid_size;
 		float scale;
 		bool has_been_modified;
 		Scene latest_scene;

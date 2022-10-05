@@ -5,7 +5,7 @@ namespace Birb
 {
 	TEST_CASE("Setting tiles")
 	{
-		Vector2int level_dimensions = { 10, 10 };
+		Vector2Int level_dimensions = { 10, 10 };
 		Level level(level_dimensions);
 
 		Level::Tile tileA;

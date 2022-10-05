@@ -13,10 +13,10 @@ namespace Birb
 	/// Misc math functions
 	namespace Math
 	{
-		float VectorDistance(const Vector2f& a, const Vector2f& b); ///< Calculate the distance between two 2D floating point vectors
-		float VectorDistance(const Vector2int& a, const Vector2int& b); ///< Calculate the distance between two 2D integer vectors
-		float VectorDistance(const Vector3f& a, const Vector3f& b); ///< Calculate the distance between two 3D floating point vectors
-		float VectorDistance(const Vector3int& a, const Vector3int& b); ///< Calculate the distance between two 3D integer vectors
+		float VectorDistance(const Vector2& a, const Vector2& b); ///< Calculate the distance between two 2D floating point vectors
+		float VectorDistance(const Vector2Int& a, const Vector2Int& b); ///< Calculate the distance between two 2D integer vectors
+		float VectorDistance(const Vector3& a, const Vector3& b); ///< Calculate the distance between two 3D floating point vectors
+		float VectorDistance(const Vector3Int& a, const Vector3Int& b); ///< Calculate the distance between two 3D integer vectors
 
 		template<typename T>
 		T Clamp(const T& value, const T& min, const T& max)
@@ -32,33 +32,33 @@ namespace Birb
 		int 		Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
 		float 		Lerp(const float& a, const float& b, const float& t); ///< Interpolate a value between two values given time t
 		double 		Lerp(const double& a, const double& b, const float& t); ///< Interpolate a value between two values given time t
-		Vector2f 	Lerp(const Vector2f& a, const Vector2f& b, const float& t); ///< Interpolate a point between two 2D floating point vectors given time t
-		Vector2int 	Lerp(const Vector2int& a, const Vector2int& b, const float& t); ///< Interpolate a point between two 2D integer vectors given time t
-		Vector3f 	Lerp(const Vector3f& a, const Vector3f& b, const float& t); ///< Interpolate a point between two 3D floating point vectors given time t
-		Vector3int 	Lerp(const Vector3int& a, const Vector3int& b, const float& t); ///< Interpolate a point between two 3D integer vectors given time t
+		Vector2 	Lerp(const Vector2& a, const Vector2& b, const float& t); ///< Interpolate a point between two 2D floating point vectors given time t
+		Vector2Int 	Lerp(const Vector2Int& a, const Vector2Int& b, const float& t); ///< Interpolate a point between two 2D integer vectors given time t
+		Vector3 	Lerp(const Vector3& a, const Vector3& b, const float& t); ///< Interpolate a point between two 3D floating point vectors given time t
+		Vector3Int 	Lerp(const Vector3Int& a, const Vector3Int& b, const float& t); ///< Interpolate a point between two 3D integer vectors given time t
 		Color 		Lerp(const Color& a, const Color& b, const float& t); ///< Interpolate between two colors given time t
 
 		float 	CenterPoint(const float& a, const float& b); ///< Calculate the "center" value between two 1D floats
-		Vector2f CenterPoint(const Vector2f& a, const Vector2f& b); ///< Calculate the center point between two 2D floating point vectors
-		Vector2f CenterPoint(const Vector2int& a, const Vector2int& b); ///< Calculate the center point between two 2D integer vectors
-		Vector3f CenterPoint(const Vector3f& a, const Vector3f& b); ///< Calculate the center point between two 3D floating point vectors
-		Vector3f CenterPoint(const Vector3int& a, const Vector3int& b); ///< Calculate the center point between two 3D integer vectors
+		Vector2 CenterPoint(const Vector2& a, const Vector2& b); ///< Calculate the center point between two 2D floating point vectors
+		Vector2 CenterPoint(const Vector2Int& a, const Vector2Int& b); ///< Calculate the center point between two 2D integer vectors
+		Vector3 CenterPoint(const Vector3& a, const Vector3& b); ///< Calculate the center point between two 3D floating point vectors
+		Vector3 CenterPoint(const Vector3Int& a, const Vector3Int& b); ///< Calculate the center point between two 3D integer vectors
 
-		bool PointOnLine(const Line& line, const Vector2f& point); ///< Check if the give point is on the line
+		bool PointOnLine(const Line& line, const Vector2& point); ///< Check if the give point is on the line
 
 		/// @param circle 	Circle object
 		/// @param angle 	Angle in degrees
 		/// @return 		A point on the circle rotated by the angle.
-		Vector2f FindPointOnCircle(const Circle& circle, const float& angle);
+		Vector2 FindPointOnCircle(const Circle& circle, const float& angle);
 
-		/// Find the closest point in an array to the given Vector2int point
+		/// Find the closest point in an array to the given Vector2Int point
 		/// @param point 		The current point
 		/// @param points 		List of points that we are comparing point to
 		/// @param pointCount 	Size of the points array
 		/// @return 			Closest point in the array
-		Vector2int FindClosestPoint(const Vector2int& point, Vector2int points[], const int& pointCount);
-		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points);
-		Vector2int FindClosestPoint(const Vector2int& point, const std::vector<Vector2int>& points, const std::vector<Vector2int>& ignoredPoints);
+		Vector2Int FindClosestPoint(const Vector2Int& point, Vector2Int points[], const int& pointCount);
+		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points);
+		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points, const std::vector<Vector2Int>& ignoredPoints);
 
 
 		double Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy

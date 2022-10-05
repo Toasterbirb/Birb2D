@@ -3,7 +3,7 @@
 
 namespace Birb
 {
-	Level::Level(const Vector2int& dimensions)
+	Level::Level(const Vector2Int& dimensions)
 	:grid_size(dimensions)
 	{
 		/* Creates a new level */
@@ -18,7 +18,7 @@ namespace Birb
 	{
 		// TODO: Read the grid size from the file
 		// Lets set it to 64x64 by default for now
-		grid_size = Vector2int(32, 32);
+		grid_size = Vector2Int(32, 32);
 
 		has_been_modified = false;
 		scale = 1.0f;
@@ -66,7 +66,7 @@ namespace Birb
 		this->scale = scale;
 	}
 
-	void Level::SetTile(Vector2int tile_pos, Tile tile)
+	void Level::SetTile(Vector2Int tile_pos, Tile tile)
 	{
 		/* Do some boundary checking */
 		if (tile_pos.x < 0 || tile_pos.y < 0)
@@ -82,7 +82,7 @@ namespace Birb
 		has_been_modified = true;
 	}
 
-	Level::Tile Level::GetTile(Vector2int tile_pos) const
+	Level::Tile Level::GetTile(Vector2Int tile_pos) const
 	{
 		/* Do some bounds checking */
 		if (tile_pos.x < 0 || tile_pos.y < 0
@@ -96,7 +96,7 @@ namespace Birb
 		return tiles[tile_pos.x][tile_pos.y];
 	}
 
-	void Level::PreallocateTiles(const Vector2int& dimensions)
+	void Level::PreallocateTiles(const Vector2Int& dimensions)
 	{
 		tiles.reserve(dimensions.x);
 		for (int i = 0; i < grid_size.x; ++i)
