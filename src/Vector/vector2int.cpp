@@ -4,15 +4,13 @@ namespace Birb
 {
     std::string Vector2Int::ToString() const
 	{
-		return "(" + x + ", " + y + ")";
+		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 	}
 
 	Vector2 Vector2Int::ToFloat() const
 	{
 		return Vector2(x, y);
 	}
-
-    #pragma region Quick Returns
 
     Vector2Int Vector2Int::One()
     {
@@ -43,6 +41,4 @@ namespace Birb
     {
         return Vector2Int(1,0);
     }
-
-    #pragma endregion
 }

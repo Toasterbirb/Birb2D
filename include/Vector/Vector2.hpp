@@ -7,7 +7,7 @@ namespace Birb
         float x, y;
 
         Vector2()
-        :x(0f), y(0f)
+        :x(0.0f), y(0.0f)
         {}
 
         Vector2(const float& _x, const float& _y)

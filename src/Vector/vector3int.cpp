@@ -4,15 +4,13 @@ namespace Birb
 {
     std::string Vector3Int::ToString() const
 	{
-		return "(" + x + ", " + y + ", " + z + ")";
+		return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 	}
 
 	Vector3 Vector3Int::ToFloat() const
 	{
 		return Vector3(x, y, z);
 	}
-
-    #pragma region Quick Returns
 
     Vector3Int Vector3Int::One()
     {
@@ -53,6 +51,4 @@ namespace Birb
     {
         return Vector3Int(1,0,0);
     }
-
-    #pragma endregion
 }

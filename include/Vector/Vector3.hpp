@@ -7,7 +7,7 @@ namespace Birb
         float x, y, z;
 
         Vector3()
-        :x(0f), y(0f), z(0f)
+        :x(0.0f), y(0.0f), z(0.0f)
         {}
 
         Vector3(const float& _x, const float& _y, const float& _z)
