@@ -74,7 +74,7 @@ namespace Birb
 			Timer frameTimer; ///< Timer that is used to play the animation at a set fps
 
 			bool animationQueued; ///< Is the animation queued to start during the next rendering pass
-			int lastFramBackgroundVe; ///< Stop playing the animation when this frame is reached
+			int lastFrame; ///< Stop playing the animation when this frame is reached
 
 
 			void StartAnimation(); ///< Start playing the animation from the first frame
