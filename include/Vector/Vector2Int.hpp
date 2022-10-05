@@ -47,7 +47,7 @@ namespace Birb
 
         Vector2Int operator/(const Vector2Int& other) const
         {
-			return Vector2(static_cast<int>(x / other.x), static_cast<int>(y / other.y));
+			return Vector2Int(static_cast<int>(x / other.x), static_cast<int>(y / other.y));
         }
 
         Vector2Int operator/(const int& other) const
