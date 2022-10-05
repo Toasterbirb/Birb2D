@@ -22,9 +22,9 @@ namespace Birb
 		void Toggle();
 		bool isActive() const;
 
-		void SetPosition(const Vector2f& newPosition);
-		void Translate(const Vector2f& delta);
-		Vector2f Position() const;
+		void SetPosition(const Vector2& newPosition);
+		void Translate(const Vector2& delta);
+		Vector2 Position() const;
 
 		void Clear(); ///< Empty the scene
 		void Render() const; ///< Render all objects in the scene if the scene is active
@@ -35,10 +35,10 @@ namespace Birb
 		std::vector<SceneObject*> objects;
 		bool active;
 
-		Vector2f positionOffset;
+		Vector2 positionOffset;
 
 		/* Variables for a scene that is a child of another scene */
 		void RenderFunc() override; ///< Gets called when the scene is a child of another scene
-		void SetPos(const Vector2f& delta) override; ///< The same as Translate, used when the scene is a SceneObject
+		void SetPos(const Vector2& delta) override; ///< The same as Translate, used when the scene is a SceneObject
 	};
 }

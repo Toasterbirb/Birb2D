@@ -6,12 +6,12 @@ namespace Birb
 	TEST_CASE("Line constructors")
 	{
 		Line lineA;
-		CHECK(lineA.pointA == Vector2f(0, 0));
-		CHECK(lineA.pointB == Vector2f(0, 0));
+		CHECK(lineA.pointA == Vector2(0, 0));
+		CHECK(lineA.pointB == Vector2(0, 0));
 		CHECK(lineA.color == Color(255, 255, 255, 255));
 
-		Vector2f vecA(1, 2);
-		Vector2f vecB(4, 4);
+		Vector2 vecA(1, 2);
+		Vector2 vecB(4, 4);
 		Color color(1, 2, 3, 4);
 
 		SUBCASE("Line without color")

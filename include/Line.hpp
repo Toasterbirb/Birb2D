@@ -11,12 +11,12 @@ namespace Birb
 	{
 	public:
 		Line();
-		Line(const Vector2f& pointA, const Vector2f& pointB);
-		Line(const Vector2f& pointA, const Vector2f& pointB, const Color& color);
-		Line(const Vector2f& pointA, const Vector2f& pointB, const Color& color, const int& renderingPriority);
+		Line(const Vector2& pointA, const Vector2& pointB);
+		Line(const Vector2& pointA, const Vector2& pointB, const Color& color);
+		Line(const Vector2& pointA, const Vector2& pointB, const Color& color, const int& renderingPriority);
 
-		Vector2f pointA;
-		Vector2f pointB;
+		Vector2 pointA;
+		Vector2 pointB;
 		Color color; ///< In case the line will be rendered
 		int thickness;
 
@@ -32,7 +32,7 @@ namespace Birb
 
 	private:
 		void RenderFunc() override;
-		void SetPos(const Vector2f& delta) override;
+		void SetPos(const Vector2& delta) override;
 		void DefaultLineValues();
 	};
 

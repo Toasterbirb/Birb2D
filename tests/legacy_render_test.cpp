@@ -17,21 +17,21 @@ TEST_CASE("Window and rendering functions")
 {
 	Birb::ApplicationInfo appInfo("Birb2D_tests");
 
-	Birb::Window window("Title", Birb::Vector2int(1280, 720), 60, false);
+	Birb::Window window("Title", Birb::Vector2Int(1280, 720), 60, false);
 	SDL_Texture* texture 	= Birb::Resources::LoadTexture(appInfo.ResLocation + "/textures/birb.png");
 	Birb::Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
 
 	Birb::Scene testScene;
 	testScene.Activate();
 
-	Birb::Entity testEntity("Test entity", Birb::Vector2int(10, 10), texture);
+	Birb::Entity testEntity("Test entity", Birb::Vector2Int(10, 10), texture);
 	Birb::Entity secondEntityWithSameTexture("Second entity with the same texture", Birb::Rect(200, 400, 128 * 2, 72 * 2), texture);
 	Birb::Entity rotatedEntity("Rotated entity with custom localscale", Birb::Rect(300, 100, 128, 72), texture);
 	rotatedEntity.angle = 45;
-	rotatedEntity.localScale = Birb::Vector2f(3.5, 2);
+	rotatedEntity.localScale = Birb::Vector2(3.5, 2);
 	Birb::Entity entityWithNegativeSize("Entity with negative size", Birb::Rect(300, 100, -128, 72), texture);
 
-	Birb::Line line(Birb::Vector2f(0, 0), Birb::Vector2f(1280, 720));
+	Birb::Line line(Birb::Vector2(0, 0), Birb::Vector2(1280, 720));
 	line.renderingPriority = -1;
 
 	Birb::Line lineB({0, 720}, {1280, 0});
@@ -42,10 +42,10 @@ TEST_CASE("Window and rendering functions")
 
 	Birb::Polygon polygon(
 	{
-		Birb::Vector2f(0, 200),
-		Birb::Vector2f(200, 184),
-		Birb::Vector2f(230, 110),
-		Birb::Vector2f(0, 180)
+		Birb::Vector2(0, 200),
+		Birb::Vector2(200, 184),
+		Birb::Vector2(230, 110),
+		Birb::Vector2(0, 180)
 	}, 0x81E176);
 
 	Birb::Circle circle(32, {500, 650}, 0x32DDAA);
@@ -99,17 +99,17 @@ TEST_CASE("Window and rendering functions")
 		CHECK_NOTHROW(testScene.Render());
 		CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
 
-		CHECK(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2int(400, 400), 50));
-		CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
+		CHECK(Birb::Render::DrawCircle(Birb::Colors::Blue, Birb::Vector2Int(400, 400), 50));
+		CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2Int(450, 600), Birb::Vector2Int(400, 200)));
 		CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 200, 20)));
 
 		/* Draw a polygon */
-		Birb::Vector2int polyPoints[5] = {
-			Birb::Vector2int(100, 59),
-			Birb::Vector2int(150, 34),
-			Birb::Vector2int(170, 99),
-			Birb::Vector2int(87, 24),
-			Birb::Vector2int(53, 10),
+		Birb::Vector2Int polyPoints[5] = {
+			Birb::Vector2Int(100, 59),
+			Birb::Vector2Int(150, 34),
+			Birb::Vector2Int(170, 99),
+			Birb::Vector2Int(87, 24),
+			Birb::Vector2Int(53, 10),
 		};
 		CHECK(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints, 5));
 
@@ -127,20 +127,20 @@ TEST_CASE("Window and rendering functions")
 	CHECK_NOTHROW(window.Clear());
 	{
 		/* Draw a polygon */
-		std::vector<Birb::Vector2int> polyPoints2 = {
-			Birb::Vector2int(10, 5),
-			Birb::Vector2int(150, 34),
-			Birb::Vector2int(170, 99),
-			Birb::Vector2int(87, 24),
-			Birb::Vector2int(53, 10),
+		std::vector<Birb::Vector2Int> polyPoints2 = {
+			Birb::Vector2Int(10, 5),
+			Birb::Vector2Int(150, 34),
+			Birb::Vector2Int(170, 99),
+			Birb::Vector2Int(87, 24),
+			Birb::Vector2Int(53, 10),
 		};
 		CHECK(Birb::Render::DrawPolygon(Birb::Colors::White, polyPoints2));
 
 		testScene.Render();
 		CHECK_FALSE(Birb::Render::DrawEntity(entityWithNegativeSize));
 
-		CHECK(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2int(400, 400), 50));
-		CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2int(450, 600), Birb::Vector2int(400, 200)));
+		CHECK(Birb::Render::DrawCircle(Birb::Colors::White, Birb::Vector2Int(400, 400), 50));
+		CHECK_NOTHROW(Birb::Render::DrawLine(Birb::Colors::Red, Birb::Vector2Int(450, 600), Birb::Vector2Int(400, 200)));
 		CHECK_NOTHROW(Birb::Render::DrawRect(Birb::Colors::Green, Birb::Rect(500, 500, 200, 20)));
 
 		/* Draw the graph */
@@ -157,14 +157,14 @@ TEST_CASE("Window and rendering functions")
 	SDL_Texture* animationSprite = Birb::Resources::LoadTexture(appInfo.ResLocation + "/textures/birb_animation.png");
 	Birb::Entity animationBirb(
 			"Animated birb",
-			Birb::Vector2int(100, 100),
+			Birb::Vector2Int(100, 100),
 			animationSprite,
 			Birb::EntityComponent::Animation(
-				Birb::Vector2int(64, 64),
+				Birb::Vector2Int(64, 64),
 				16,
 				8,
 				true));
-	animationBirb.localScale = Birb::Vector2f(3, 3);
+	animationBirb.localScale = Birb::Vector2(3, 3);
 	animationBirb.animationComponent.StartAnimation();
 
 	/* Progres bar */

@@ -94,7 +94,7 @@ namespace Birb
 		}
 
 		/* Inspired/yoinked from https://alienryderflex.com/polygon */
-		bool PointInPolygon(Vector2f points[], const int& pointCount, const Vector2f& point)
+		bool PointInPolygon(Vector2 points[], const int& pointCount, const Vector2& point)
 		{
 			int j = pointCount - 1;
 			bool oddNodes = false; /* If the node count is odd, the point is in the polygon */
@@ -116,7 +116,7 @@ namespace Birb
 			return oddNodes;
 		}
 
-		bool PolygonCollision(Vector2f polygonA[], const int& polygonAsize, Vector2f polygonB[], const int& polygonBsize)
+		bool PolygonCollision(Vector2 polygonA[], const int& polygonAsize, Vector2 polygonB[], const int& polygonBsize)
 		{
 			/* First test if any of the points of either polygon is inside of the other one
 			 * start with polygon A and then repeat the process the other way around */
@@ -146,7 +146,7 @@ namespace Birb
 			return false;
 		}
 
-		bool PolygonCollision(std::vector<Vector2f> polygonA, std::vector<Vector2f> polygonB)
+		bool PolygonCollision(std::vector<Vector2> polygonA, std::vector<Vector2> polygonB)
 		{
 			return PolygonCollision(&polygonA[0], polygonA.size(), &polygonB[0], polygonB.size());
 		}
@@ -171,14 +171,14 @@ namespace Birb
 			return collision;
 		}
 
-		bool PointInCircle(const Vector2int& point, const Circle& circle)
+		bool PointInCircle(const Vector2Int& point, const Circle& circle)
 		{
 			return (Math::VectorDistance(point, circle.pos) <= circle.radius);
 		}
 
-		bool PointInCircle(const Vector2f& point, const Circle& circle)
+		bool PointInCircle(const Vector2& point, const Circle& circle)
 		{
-			return (Math::VectorDistance(point, circle.pos.toFloat()) <= circle.radius);
+			return (Math::VectorDistance(point, circle.pos.ToFloat()) <= circle.radius);
 		}
 
 		bool CircleCollision(const Circle& circleA, const Circle& circleB)

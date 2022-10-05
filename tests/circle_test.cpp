@@ -13,11 +13,11 @@ namespace Birb
 		SUBCASE("Variable construction")
 		{
 			CHECK(circleA.radius == 0);
-			CHECK(circleA.pos == Vector2int(0, 4));
+			CHECK(circleA.pos == Vector2Int(0, 4));
 			CHECK(circleA.color == 0xFFFFFF);
 
 			CHECK(circleB.radius == 1.5f);
-			CHECK(circleB.pos == Vector2int(0, 0));
+			CHECK(circleB.pos == Vector2Int(0, 0));
 			CHECK(circleB.color == 0xFFFFFF);
 		}
 

@@ -10,12 +10,12 @@ namespace Birb
 {
 	TEST_CASE("Rendering: Renderwindow")
 	{
-		Window window("Birb2D tests", Vector2int(1280, 720), 75, false);
+		Window window("Birb2D tests", Vector2Int(1280, 720), 75, false);
 
 		CHECK(window.refresh_rate == 75);
-		CHECK(window.dimensions == Vector2int(1280, 720));
+		CHECK(window.dimensions == Vector2Int(1280, 720));
 		CHECK(window.win_title == "Birb2D tests");
-		CHECK(window.original_window_dimensions == Vector2int(1280, 720));
+		CHECK(window.original_window_dimensions == Vector2Int(1280, 720));
 
 		CHECK(Global::RenderVars::Renderer == window.renderer);
 		CHECK(window.win == Global::RenderVars::MainWindow);
@@ -63,7 +63,7 @@ namespace Birb
 
 	TEST_CASE("Rendering: General")
 	{
-		Window window("Birb2D tests", Vector2int(1280, 720), 75, false);
+		Window window("Birb2D tests", Vector2Int(1280, 720), 75, false);
 		ApplicationInfo appInfo("Birb2D_tests");
 		Scene scene;
 		scene.Activate();
@@ -76,24 +76,24 @@ namespace Birb
 		{
 			Texture emptyTexture;
 			CHECK(emptyTexture.isLoaded() == false);
-			CHECK(emptyTexture.dimensions() == Vector2int(0, 0));
+			CHECK(emptyTexture.dimensions() == Vector2Int(0, 0));
 
 			/* Now load the texture manually */
 			CHECK(emptyTexture.LoadTexture(appInfo.ResLocation + "/textures/birb.png"));
 			CHECK(emptyTexture.isLoaded() == true);
-			CHECK(emptyTexture.dimensions() == Vector2int(64, 64));
+			CHECK(emptyTexture.dimensions() == Vector2Int(64, 64));
 
 
 			const int ENTITY_COUNT = 5;
 			Texture birbSprite(appInfo.ResLocation + "/textures/birb.png");
 
 			CHECK(birbSprite.isLoaded() == true);
-			CHECK(birbSprite.dimensions() == Vector2int(64, 64));
+			CHECK(birbSprite.dimensions() == Vector2Int(64, 64));
 
 			/* Create the entities */
 			for (int i = 0; i < ENTITY_COUNT; i++)
 			{
-				Entity testEntity("Test entity", Vector2int(i * 70, 10), birbSprite);
+				Entity testEntity("Test entity", Vector2Int(i * 70, 10), birbSprite);
 				entities.push_back(testEntity);
 			}
 

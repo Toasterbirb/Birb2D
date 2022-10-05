@@ -399,12 +399,12 @@ namespace Birb
 			return m_dragging;
 		}
 
-		Vector2int MouseDrag::startPos() const
+		Vector2Int MouseDrag::startPos() const
 		{
 			return m_startPos;
 		}
 
-		Vector2int MouseDrag::endPos() const
+		Vector2Int MouseDrag::endPos() const
 		{
 			return m_endPos;
 		}

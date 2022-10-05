@@ -6,22 +6,22 @@ namespace Birb
 {
 	TEST_CASE("Sort path with a startpoint")
 	{
-		std::vector<Vector2int> points = {
-			Vector2int(0, 0),
-			Vector2int(3, 3),
-			Vector2int(1, 1),
-			Vector2int(8, 9),
-			Vector2int(6, 6),
+		std::vector<Vector2Int> points = {
+			Vector2Int(0, 0),
+			Vector2Int(3, 3),
+			Vector2Int(1, 1),
+			Vector2Int(8, 9),
+			Vector2Int(6, 6),
 		};
 
 		points = utils::SortPath(points[0], points);
 
 		CHECK(points.size() == 5);
-		CHECK(points[0] == Vector2int(0, 0));
-		CHECK(points[1] == Vector2int(1, 1));
-		CHECK(points[2] == Vector2int(3, 3));
-		CHECK(points[3] == Vector2int(6, 6));
-		CHECK(points[4] == Vector2int(8, 9));
+		CHECK(points[0] == Vector2Int(0, 0));
+		CHECK(points[1] == Vector2Int(1, 1));
+		CHECK(points[2] == Vector2Int(3, 3));
+		CHECK(points[3] == Vector2Int(6, 6));
+		CHECK(points[4] == Vector2Int(8, 9));
 	}
 
 	TEST_CASE("Create a string out of floating point number without trailing zeroes in decimals")
@@ -50,18 +50,18 @@ namespace Birb
 		SUBCASE("4 point polygon")
 		{
 			const int polygonSize = 4;
-			Vector2f polygon[polygonSize] = {
-				Vector2f(7, -1),
-				Vector2f(9, -1),
-				Vector2f(11, 0),
-				Vector2f(9, 0),
+			Vector2 polygon[polygonSize] = {
+				Vector2(7, -1),
+				Vector2(9, -1),
+				Vector2(11, 0),
+				Vector2(9, 0),
 			};
 
 			Line expectedLines[polygonSize] = {
-				Line(Vector2f(7, -1), Vector2f(9, -1)),
-				Line(Vector2f(9, -1), Vector2f(11, 0)),
-				Line(Vector2f(11, 0), Vector2f(9, 0)),
-				Line(Vector2f(9, 0), Vector2f(7, -1)),
+				Line(Vector2(7, -1), Vector2(9, -1)),
+				Line(Vector2(9, -1), Vector2(11, 0)),
+				Line(Vector2(11, 0), Vector2(9, 0)),
+				Line(Vector2(9, 0), Vector2(7, -1)),
 			};
 
 			std::vector<Line> lines = utils::PolygonToLines(polygon, polygonSize);
@@ -75,16 +75,16 @@ namespace Birb
 		SUBCASE("3 point polygon")
 		{
 			const int polygonSize = 3;
-			Vector2f polygon[polygonSize] = {
-				Vector2f(1050, 350),
-				Vector2f(1075, 400),
-				Vector2f(1025, 400),
+			Vector2 polygon[polygonSize] = {
+				Vector2(1050, 350),
+				Vector2(1075, 400),
+				Vector2(1025, 400),
 			};
 
 			Line expectedLines[polygonSize] = {
-				Line(Vector2f(1050, 350), Vector2f(1075, 400)),
-				Line(Vector2f(1075, 400), Vector2f(1025, 400)),
-				Line(Vector2f(1025, 400), Vector2f(1050, 350)),
+				Line(Vector2(1050, 350), Vector2(1075, 400)),
+				Line(Vector2(1075, 400), Vector2(1025, 400)),
+				Line(Vector2(1025, 400), Vector2(1050, 350)),
 			};
 
 			std::vector<Line> lines = utils::PolygonToLines(polygon, polygonSize);

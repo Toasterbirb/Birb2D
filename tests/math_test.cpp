@@ -6,11 +6,11 @@ namespace Birb
 {
 	TEST_CASE("Distance calculation with 2D vectors")
 	{
-		Vector2f pointAf(1.0f, 1.0f);
-		Vector2f pointBf(8.0f, 3.0f);
+		Vector2 pointAf(1.0f, 1.0f);
+		Vector2 pointBf(8.0f, 3.0f);
 
-		Vector2int pointAint(1, 1);
-		Vector2int pointBint(8, 3);
+		Vector2Int pointAint(1, 1);
+		Vector2Int pointBint(8, 3);
 
 		CHECK(Math::VectorDistance(pointAf, pointBf) == 7.2801098892805f);
 		CHECK(Math::VectorDistance(pointAint, pointBint) == 7.2801098892805f);
@@ -18,11 +18,11 @@ namespace Birb
 
 	TEST_CASE("Distance calculation with 3D vectors")
 	{
-		Vector3f pointAf(1.0f, 1.0f, 1.0f);
-		Vector3f pointBf(8.0f, 3.0f, 2.0f);
+		Vector3 pointAf(1.0f, 1.0f, 1.0f);
+		Vector3 pointBf(8.0f, 3.0f, 2.0f);
 
-		Vector3int pointAint(1, 1, 1);
-		Vector3int pointBint(8, 3, 2);
+		Vector3Int pointAint(1, 1, 1);
+		Vector3Int pointBint(8, 3, 2);
 
 		CHECK(std::roundf(Math::VectorDistance(pointAf, pointBf)) == std::roundf(7.3484792283495));
 		CHECK(std::roundf(Math::VectorDistance(pointAint, pointBint)) == std::roundf(7.3484692283495));
@@ -93,46 +93,46 @@ namespace Birb
 
 	TEST_CASE("Lerping / interpolation with 2D float vectors")
 	{
-		Vector2f vecAf = { 1.0f, 1.0f };
-		Vector2f vecBf = { 4.0f, 2.0f };
+		Vector2 vecAf = { 1.0f, 1.0f };
+		Vector2 vecBf = { 4.0f, 2.0f };
 
-		CHECK(Math::Lerp(vecAf, vecBf, 0) == Birb::Vector2f(1, 1));
-		CHECK(Math::Lerp(vecAf, vecBf, 0.5) == Birb::Vector2f(2.5, 1.5));
-		CHECK(Math::Lerp(vecAf, vecBf, 0.75) == Birb::Vector2f(3.25, 1.75));
-		CHECK(Math::Lerp(vecAf, vecBf, 1) == Birb::Vector2f(4, 2));
+		CHECK(Math::Lerp(vecAf, vecBf, 0) == Birb::Vector2(1, 1));
+		CHECK(Math::Lerp(vecAf, vecBf, 0.5) == Birb::Vector2(2.5, 1.5));
+		CHECK(Math::Lerp(vecAf, vecBf, 0.75) == Birb::Vector2(3.25, 1.75));
+		CHECK(Math::Lerp(vecAf, vecBf, 1) == Birb::Vector2(4, 2));
 	}
 
 	TEST_CASE("Lerping / interpolation with 2D integer vectors")
 	{
-		Vector2int vecAint = { 10, 10 };
-		Vector2int vecBint = { 40, 20 };
+		Vector2Int vecAint = { 10, 10 };
+		Vector2Int vecBint = { 40, 20 };
 
-		CHECK(Math::Lerp(vecAint, vecBint, 0) == Birb::Vector2int(10, 10));
-		CHECK(Math::Lerp(vecAint, vecBint, 0.5) == Birb::Vector2int(25, 15));
-		CHECK(Math::Lerp(vecAint, vecBint, 0.75) == Birb::Vector2int(33, 18));
-		CHECK(Math::Lerp(vecAint, vecBint, 1) == Birb::Vector2int(40, 20));
+		CHECK(Math::Lerp(vecAint, vecBint, 0) == Birb::Vector2Int(10, 10));
+		CHECK(Math::Lerp(vecAint, vecBint, 0.5) == Birb::Vector2Int(25, 15));
+		CHECK(Math::Lerp(vecAint, vecBint, 0.75) == Birb::Vector2Int(33, 18));
+		CHECK(Math::Lerp(vecAint, vecBint, 1) == Birb::Vector2Int(40, 20));
 	}
 
 	TEST_CASE("Lerping / interpolation with 3D float vectors")
 	{
-		Vector3f vecAf = { 1.0f, 1.0f, 1.0f };
-		Vector3f vecBf = { 4.0f, 2.0f, 3.0f };
+		Vector3 vecAf = { 1.0f, 1.0f, 1.0f };
+		Vector3 vecBf = { 4.0f, 2.0f, 3.0f };
 
-		CHECK(Math::Lerp(vecAf, vecBf, 0) == Birb::Vector3f(1, 1, 1));
-		CHECK(Math::Lerp(vecAf, vecBf, 0.5) == Birb::Vector3f(2.5, 1.5, 2));
-		CHECK(Math::Lerp(vecAf, vecBf, 0.75) == Birb::Vector3f(3.25, 1.75, 2.5));
-		CHECK(Math::Lerp(vecAf, vecBf, 1) == Birb::Vector3f(4, 2, 3));
+		CHECK(Math::Lerp(vecAf, vecBf, 0) == Birb::Vector3(1, 1, 1));
+		CHECK(Math::Lerp(vecAf, vecBf, 0.5) == Birb::Vector3(2.5, 1.5, 2));
+		CHECK(Math::Lerp(vecAf, vecBf, 0.75) == Birb::Vector3(3.25, 1.75, 2.5));
+		CHECK(Math::Lerp(vecAf, vecBf, 1) == Birb::Vector3(4, 2, 3));
 	}
 
 	TEST_CASE("Lerping / interpolation with 3D integer vectors")
 	{
-		Vector3int vecAint = { 10, 10, 10 };
-		Vector3int vecBint = { 40, 20, 30 };
+		Vector3Int vecAint = { 10, 10, 10 };
+		Vector3Int vecBint = { 40, 20, 30 };
 
-		CHECK(Math::Lerp(vecAint, vecBint, 0) == Birb::Vector3int(10, 10, 10));
-		CHECK(Math::Lerp(vecAint, vecBint, 0.5) == Birb::Vector3int(25, 15, 20));
-		CHECK(Math::Lerp(vecAint, vecBint, 0.75) == Birb::Vector3int(33, 18, 25));
-		CHECK(Math::Lerp(vecAint, vecBint, 1) == Birb::Vector3int(40, 20, 30));
+		CHECK(Math::Lerp(vecAint, vecBint, 0) == Birb::Vector3Int(10, 10, 10));
+		CHECK(Math::Lerp(vecAint, vecBint, 0.5) == Birb::Vector3Int(25, 15, 20));
+		CHECK(Math::Lerp(vecAint, vecBint, 0.75) == Birb::Vector3Int(33, 18, 25));
+		CHECK(Math::Lerp(vecAint, vecBint, 1) == Birb::Vector3Int(40, 20, 30));
 	}
 
 	TEST_CASE("Lerping / interpolation with colors")
@@ -159,44 +159,44 @@ namespace Birb
 
 	TEST_CASE("Calculate the centerpoint between two 2D float vectors")
 	{
-		Vector2f pointAf(1.0f, 1.0f);
-		Vector2f pointBf(8.0f, 3.0f);
+		Vector2 pointAf(1.0f, 1.0f);
+		Vector2 pointBf(8.0f, 3.0f);
 
-		Vector2f resultf = Birb::Math::CenterPoint(pointAf, pointBf);
-		Vector2f expectedResult(4.5f, 2.0f);
+		Vector2 resultf = Birb::Math::CenterPoint(pointAf, pointBf);
+		Vector2 expectedResult(4.5f, 2.0f);
 
 		CHECK(resultf == expectedResult);
 	}
 
 	TEST_CASE("Calculate the centerpoint between two 2D integer vectors")
 	{
-		Vector2int pointAint(1, 1);
-		Vector2int pointBint(8, 3);
+		Vector2Int pointAint(1, 1);
+		Vector2Int pointBint(8, 3);
 
-		Vector2f resultint = Birb::Math::CenterPoint(pointAint, pointBint);
-		Vector2f expectedResult(4.5f, 2.0f);
+		Vector2 resultint = Birb::Math::CenterPoint(pointAint, pointBint);
+		Vector2 expectedResult(4.5f, 2.0f);
 
 		CHECK(resultint == expectedResult);
 	}
 
 	TEST_CASE("Calculate the centerpoint between two 3D float vectors")
 	{
-		Vector3f pointAf(1.0f, 1.0f, 1.0f);
-		Vector3f pointBf(8.0f, 3.0f, 2.0f);
+		Vector3 pointAf(1.0f, 1.0f, 1.0f);
+		Vector3 pointBf(8.0f, 3.0f, 2.0f);
 
-		Vector3f resultf = Birb::Math::CenterPoint(pointAf, pointBf);
-		Vector3f expectedResult(4.5f, 2.0f, 1.5f);
+		Vector3 resultf = Birb::Math::CenterPoint(pointAf, pointBf);
+		Vector3 expectedResult(4.5f, 2.0f, 1.5f);
 
 		CHECK(resultf == expectedResult);
 	}
 
 	TEST_CASE("Calculate the centerpoint between two 3D integer vectors")
 	{
-		Vector3int pointAint(1, 1, 1);
-		Vector3int pointBint(8, 3, 2);
+		Vector3Int pointAint(1, 1, 1);
+		Vector3Int pointBint(8, 3, 2);
 
-		Vector3f resultint = Birb::Math::CenterPoint(pointAint, pointBint);
-		Vector3f expectedResult(4.5f, 2.0f, 1.5f);
+		Vector3 resultint = Birb::Math::CenterPoint(pointAint, pointBint);
+		Vector3 expectedResult(4.5f, 2.0f, 1.5f);
 
 		CHECK(resultint == expectedResult);
 	}
@@ -204,12 +204,12 @@ namespace Birb
 	TEST_CASE("Check if a point is on a line")
 	{
 		Line line;
-		Vector2f pointA(5, 3);
-		Vector2f pointB(6, 5);
-		Vector2f pointC(7, 5); /* Point not on the line */
-		Vector2f pointD(8, 9); /* Point on the line, but not between the given limits */
-		Vector2f pointE(3, -1); /* Point on the line, but not between the given limits */
-		Vector2f pointF(4, 1); /* Point at the beginning of the line, but still on the line */
+		Vector2 pointA(5, 3);
+		Vector2 pointB(6, 5);
+		Vector2 pointC(7, 5); /* Point not on the line */
+		Vector2 pointD(8, 9); /* Point on the line, but not between the given limits */
+		Vector2 pointE(3, -1); /* Point on the line, but not between the given limits */
+		Vector2 pointF(4, 1); /* Point at the beginning of the line, but still on the line */
 
 		SUBCASE("Line PointA before PointB")
 		{
@@ -232,9 +232,9 @@ namespace Birb
 	TEST_CASE("Check if a point is on a line with negative values")
 	{
 		Line line({4, -3}, {6, -1});
-		Vector2f pointA(5, -2);
-		Vector2f pointB(2, -5);
-		Vector2f pointC(2, -3);
+		Vector2 pointA(5, -2);
+		Vector2 pointB(2, -5);
+		Vector2 pointC(2, -3);
 
 		CHECK(Math::PointOnLine(line, pointA));
 		CHECK_FALSE(Math::PointOnLine(line, pointB));
@@ -244,8 +244,8 @@ namespace Birb
 	TEST_CASE("Check if a point is on a line that is going down")
 	{
 		Line line({0, 2}, {2, 0});
-		Vector2f pointA(1, 1);
-		Vector2f pointB(4, -2);
+		Vector2 pointA(1, 1);
+		Vector2 pointB(4, -2);
 
 		CHECK(Math::PointOnLine(line, pointA));
 		CHECK_FALSE(Math::PointOnLine(line, pointB));
@@ -254,43 +254,43 @@ namespace Birb
 	TEST_CASE("Find a point on a circle given the angle")
 	{
 		Circle circle(1, {2, 2});
-		CHECK(Math::FindPointOnCircle(circle, 0).toInt() 	== Vector2int(3, 2));
-		CHECK(Math::FindPointOnCircle(circle, 90).toInt() 	== Vector2int(2, 3));
-		CHECK(Math::FindPointOnCircle(circle, 180).toInt() 	== Vector2int(1, 2));
-		CHECK(Math::FindPointOnCircle(circle, 270).toInt() 	== Vector2int(2, 1));
-		CHECK(Math::FindPointOnCircle(circle, 360).toInt() 	== Vector2int(3, 2));
+		CHECK(Math::FindPointOnCircle(circle, 0).ToInt() 	== Vector2Int(3, 2));
+		CHECK(Math::FindPointOnCircle(circle, 90).ToInt() 	== Vector2Int(2, 3));
+		CHECK(Math::FindPointOnCircle(circle, 180).ToInt() 	== Vector2Int(1, 2));
+		CHECK(Math::FindPointOnCircle(circle, 270).ToInt() 	== Vector2Int(2, 1));
+		CHECK(Math::FindPointOnCircle(circle, 360).ToInt() 	== Vector2Int(3, 2));
 
 		Circle circleB(4, {0, 0});
-		CHECK(Math::FindPointOnCircle(circleB, 0).toInt() 		== Vector2int(4, 0));
-		CHECK(Math::FindPointOnCircle(circleB, 90).toInt() 		== Vector2int(0, 4));
-		CHECK(Math::FindPointOnCircle(circleB, 180).toInt() 	== Vector2int(-4, 0));
-		CHECK(Math::FindPointOnCircle(circleB, 270).toInt() 	== Vector2int(0, -4));
-		CHECK(Math::FindPointOnCircle(circleB, 360).toInt() 	== Vector2int(4, 0));
+		CHECK(Math::FindPointOnCircle(circleB, 0).ToInt() 		== Vector2Int(4, 0));
+		CHECK(Math::FindPointOnCircle(circleB, 90).ToInt() 		== Vector2Int(0, 4));
+		CHECK(Math::FindPointOnCircle(circleB, 180).ToInt() 	== Vector2Int(-4, 0));
+		CHECK(Math::FindPointOnCircle(circleB, 270).ToInt() 	== Vector2Int(0, -4));
+		CHECK(Math::FindPointOnCircle(circleB, 360).ToInt() 	== Vector2Int(4, 0));
 	}
 
 	TEST_CASE("Find closest point to given point in a list of points")
 	{
-		Vector2int points[5] = {
-			Vector2int(0, 0),
-			Vector2int(3, 3),
-			Vector2int(1, 1),
-			Vector2int(8, 9),
-			Vector2int(-5, 10),
+		Vector2Int points[5] = {
+			Vector2Int(0, 0),
+			Vector2Int(3, 3),
+			Vector2Int(1, 1),
+			Vector2Int(8, 9),
+			Vector2Int(-5, 10),
 		};
 
-		std::vector<Vector2int> pointList;
+		std::vector<Vector2Int> pointList;
 
-		std::vector<Vector2int> ignoreList =
+		std::vector<Vector2Int> ignoreList =
 		{
-			Vector2int(1, 1),
-			Vector2int(3, 3)
+			Vector2Int(1, 1),
+			Vector2Int(3, 3)
 		};
 
 		pointList.insert(pointList.end(), points, points + 5);
 
-		CHECK(Math::FindClosestPoint(points[0], points, 5) == Birb::Vector2int(1, 1));
-		CHECK(Math::FindClosestPoint(pointList[0], pointList) == Birb::Vector2int(1, 1));
-		CHECK(Math::FindClosestPoint(pointList[0], pointList, ignoreList) == Birb::Vector2int(-5, 10));
+		CHECK(Math::FindClosestPoint(points[0], points, 5) == Birb::Vector2Int(1, 1));
+		CHECK(Math::FindClosestPoint(pointList[0], pointList) == Birb::Vector2Int(1, 1));
+		CHECK(Math::FindClosestPoint(pointList[0], pointList, ignoreList) == Birb::Vector2Int(-5, 10));
 	}
 
 	TEST_CASE("Rounding with specified accuracy")

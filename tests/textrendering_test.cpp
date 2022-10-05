@@ -7,26 +7,26 @@ namespace Birb
 	{
 		ApplicationInfo appInfo("Birb2D_tests");
 
-		Window window("Title", Vector2int(1280, 720), 60, false);
+		Window window("Title", Vector2Int(1280, 720), 60, false);
 		Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
 
 		Scene testScene;
 		testScene.Activate();
 
-		Entity greenText("Normal green text", Vector2int(50, 50), EntityComponent::Text("", &font, &Colors::Green));
+		Entity greenText("Normal green text", Vector2Int(50, 50), EntityComponent::Text("", &font, &Colors::Green));
 		CHECK(greenText.textComponent.color == &Colors::Green);
 		CHECK(greenText.textComponent.text == "");
 		CHECK(greenText.SetText("Normal green text"));
 		CHECK(greenText.textComponent.text == "Normal green text");
 
-		Entity multilineWhiteText("Multiline white text", Vector2int(50, 120), EntityComponent::Text("", &font, &Colors::White));
+		Entity multilineWhiteText("Multiline white text", Vector2Int(50, 120), EntityComponent::Text("", &font, &Colors::White));
 		CHECK(multilineWhiteText.textComponent.color == &Colors::White);
 		CHECK(multilineWhiteText.textComponent.text == "");
 		CHECK(multilineWhiteText.SetText("1. First line\n2. Second line\n3. Third line"));
 		CHECK(multilineWhiteText.textComponent.text == "1. First line\n2. Second line\n3. Third line");
 		testScene.AddObject(&multilineWhiteText);
 
-		Entity textWithBackground("Text with background", Vector2int(50, 250), EntityComponent::Text("", &font, &Colors::LightGray, &Colors::DarkGray));
+		Entity textWithBackground("Text with background", Vector2Int(50, 250), EntityComponent::Text("", &font, &Colors::LightGray, &Colors::DarkGray));
 		CHECK(textWithBackground.textComponent.color == &Colors::LightGray);
 		CHECK(textWithBackground.textComponent.bgColor == &Colors::DarkGray);
 		CHECK(textWithBackground.textComponent.text == "");
@@ -34,7 +34,7 @@ namespace Birb
 		CHECK(textWithBackground.textComponent.text == "Text with a background color");
 		testScene.AddObject(&textWithBackground);
 
-		Entity changingText("Changing text", Vector2int(50, 300), EntityComponent::Text("Frame: 0", &font, &Colors::DarkGray, &Colors::LightGray));
+		Entity changingText("Changing text", Vector2Int(50, 300), EntityComponent::Text("Frame: 0", &font, &Colors::DarkGray, &Colors::LightGray));
 		CHECK(changingText.textComponent.color == &Colors::DarkGray);
 		CHECK(changingText.textComponent.bgColor == &Colors::LightGray);
 		testScene.AddObject(&changingText);

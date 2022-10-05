@@ -63,10 +63,10 @@ namespace Birb
 		struct Animation
 		{
 			Animation();
-			Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps);
-			Animation(const Vector2int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop);
+			Animation(const Vector2Int& p_spriteSize, const int& p_frameCount, const int& p_fps);
+			Animation(const Vector2Int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop);
 
-			Vector2int spriteSize; ///< The size of one sprite in the atlas. Used for cropping
+			Vector2Int spriteSize; ///< The size of one sprite in the atlas. Used for cropping
 			int frameCount; ///< Total amount of sprites in the atlas
 			int fps;
 			bool loop; ///< Start the animation over when it ends
@@ -133,10 +133,10 @@ namespace Birb
 		Entity(const std::string& p_name, const Rect& rect); ///< Creates an empty Entity object with size and position
 
 		Entity(const std::string& name, const Rect& rect, Texture texture);
-		Entity(const std::string& name, const Vector2int& pos, Texture texture);
-		Entity(const std::string& name, const Vector2int& pos, Texture texture, const EntityComponent::Animation& animationComponent);
+		Entity(const std::string& name, const Vector2Int& pos, Texture texture);
+		Entity(const std::string& name, const Vector2Int& pos, Texture texture, const EntityComponent::Animation& animationComponent);
 
-		Entity(const std::string& p_name, const Vector2int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
+		Entity(const std::string& p_name, const Vector2Int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
 
 		/* Make it possible to update the Text */
 		bool SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
@@ -148,7 +148,7 @@ namespace Birb
 
 		float angle; 			///< Sets the rotation of the entity when rendering it
 		Rect rect; 				///< Sets the position and the dimensions of the entity
-		Vector2f localScale; 	///< Scale modifier for the Entity rendering
+		Vector2 localScale; 	///< Scale modifier for the Entity rendering
 
 		/* Sprite handlings */
 		Texture sprite; 		///< Sprite to be rendered
@@ -164,7 +164,7 @@ namespace Birb
 
 		/* Informational functions */
 		bool isHovering(); ///< Check if the cursor is hovering over this entity
-		Vector2int getAtlasPosition(const int& frame); ///< Get position in a texture atlas given the sprite index
+		Vector2Int getAtlasPosition(const int& frame); ///< Get position in a texture atlas given the sprite index
 
 		bool operator==(const Entity& other) const
 		{
@@ -178,7 +178,7 @@ namespace Birb
 
 	private:
 		void RenderFunc() override;
-		void SetPos(const Vector2f& delta) override;
+		void SetPos(const Vector2& delta) override;
 	};
 
 }

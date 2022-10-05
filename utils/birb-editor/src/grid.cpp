@@ -1,12 +1,12 @@
 #include "Grid.hpp"
 
-void GenerateGridLines(const Birb::Window& window, Birb::Scene* grid_scene, const Birb::Scene level_scene, const Birb::Vector2int& grid_position_offset, const float& scale, const Birb::Vector2int& dimensions, std::vector<Birb::Line>& horizontal_lines, std::vector<Birb::Line>& vertical_lines)
+void GenerateGridLines(const Birb::Window& window, Birb::Scene* grid_scene, const Birb::Scene level_scene, const Birb::Vector2Int& grid_position_offset, const float& scale, const Birb::Vector2Int& dimensions, std::vector<Birb::Line>& horizontal_lines, std::vector<Birb::Line>& vertical_lines)
 {
 	/* Clear the arrays */
 	horizontal_lines.clear();
 	vertical_lines.clear();
 
-	Birb::Vector2f scene_target_position = level_scene.Position() + grid_position_offset.toFloat();
+	Birb::Vector2 scene_target_position = level_scene.Position() + grid_position_offset.ToFloat();
 
 	/* Horizontal lines */
 	float temp_pos = 0;
@@ -15,8 +15,8 @@ void GenerateGridLines(const Birb::Window& window, Birb::Scene* grid_scene, cons
 		/* Check if we are outside the view from the top */
 		if (scene_target_position.y + temp_pos > 0)
 		{
-			Birb::Vector2f pointA = { 0, temp_pos };
-			Birb::Vector2f pointB = { dimensions.x * scale, temp_pos };
+			Birb::Vector2 pointA = { 0, temp_pos };
+			Birb::Vector2 pointB = { dimensions.x * scale, temp_pos };
 			horizontal_lines.push_back(Birb::Line(pointA, pointB));
 		}
 
@@ -34,8 +34,8 @@ void GenerateGridLines(const Birb::Window& window, Birb::Scene* grid_scene, cons
 		/* Check if we are outside the view from the left side */
 		if (scene_target_position.x + temp_pos > 0)
 		{
-			Birb::Vector2f pointA = { temp_pos, 0 };
-			Birb::Vector2f pointB = { temp_pos, dimensions.y * scale };
+			Birb::Vector2 pointA = { temp_pos, 0 };
+			Birb::Vector2 pointB = { temp_pos, dimensions.y * scale };
 			vertical_lines.push_back(Birb::Line(pointA, pointB));
 		}
 
@@ -58,9 +58,9 @@ void GenerateGridLines(const Birb::Window& window, Birb::Scene* grid_scene, cons
 	grid_scene->SetPosition(scene_target_position);
 }
 
-Birb::Vector2int ClickToIndex(const Birb::Scene& grid_scene, const Birb::Vector2int& dimensions, const Birb::Vector2int& cursor_pos, const float& scale)
+Birb::Vector2Int ClickToIndex(const Birb::Scene& grid_scene, const Birb::Vector2Int& dimensions, const Birb::Vector2Int& cursor_pos, const float& scale)
 {
-	Birb::Vector2int result;
+	Birb::Vector2Int result;
 
 	if (cursor_pos.x < grid_scene.Position().x || cursor_pos.y < grid_scene.Position().y)
 		return { -1, -1};
@@ -68,7 +68,7 @@ Birb::Vector2int ClickToIndex(const Birb::Scene& grid_scene, const Birb::Vector2
 			|| cursor_pos.y > grid_scene.Position().y + (scale * dimensions.y))
 		return { -1, -1 };
 
-	result = grid_scene.Position().toInt() - cursor_pos;
+	result = grid_scene.Position().ToInt() - cursor_pos;
 	result.x /= scale;
 	result.y /= scale;
 

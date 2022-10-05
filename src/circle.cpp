@@ -19,7 +19,7 @@ namespace Birb
 		color = 0xFFFFFF;
 	}
 
-	Circle::Circle(const float& radius, const Vector2int& pos, Color color)
+	Circle::Circle(const float& radius, const Vector2Int& pos, Color color)
 	:radius(radius), pos(pos), color(color)
 	{}
 
@@ -43,7 +43,7 @@ namespace Birb
 		Render::DrawCircle(color, pos, radius);
 	}
 
-	void Circle::SetPos(const Vector2f& delta)
+	void Circle::SetPos(const Vector2& delta)
 	{
 		pos.x += delta.x;
 		pos.y += delta.y;

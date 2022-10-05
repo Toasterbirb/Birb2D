@@ -8,7 +8,7 @@ namespace Birb
 	Texture::Texture()
 	{
 		textureLoaded = false;
-		texture_dimensions = Vector2int(0, 0);
+		texture_dimensions = Vector2Int(0, 0);
 	}
 
 	Texture::Texture(const std::string& filePath)
@@ -76,7 +76,7 @@ namespace Birb
 		//SDL_DestroyTexture(sdlTex);
 	}
 
-	Vector2int Texture::dimensions() const
+	Vector2Int Texture::dimensions() const
 	{
 		return texture_dimensions;
 	}
@@ -86,6 +86,6 @@ namespace Birb
 		if (textureLoaded)
 			texture_dimensions = utils::GetTextureDimensions(sdlTex);
 		else
-			texture_dimensions = Vector2int(0, 0);
+			texture_dimensions = Vector2Int(0, 0);
 	}
 }

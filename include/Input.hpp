@@ -71,13 +71,13 @@ namespace Birb
 			MouseDrag(); ///< Initialize a MouseDrag "listener"
 			void 		Poll(const SDL_Event& event);
 			bool 		isDragging() const;
-			Vector2int 	startPos() const; ///< Drag start position. Value gets cleared when new drag starts
-			Vector2int 	endPos() const; ///< Current drag end position. Value gets cleared when new drag starts
+			Vector2Int 	startPos() const; ///< Drag start position. Value gets cleared when new drag starts
+			Vector2Int 	endPos() const; ///< Current drag end position. Value gets cleared when new drag starts
 			float 		distance() const; ///< Distance between start and end positions
 		private:
 			bool 		m_dragging;
-			Vector2int 	m_startPos;
-			Vector2int 	m_endPos;
+			Vector2Int 	m_startPos;
+			Vector2Int 	m_endPos;
 		};
 	}
 }
