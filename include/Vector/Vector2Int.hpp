@@ -53,12 +53,16 @@ namespace Birb
 
         Vector2Int operator/(const Vector2Int& other) const
         {
-			return Vector2Int(static_cast<int>(x / other.x), static_cast<int>(y / other.y));
+            return Vector2Int(
+                static_cast<int>(std::round(static_cast<float>(x) / other.x)),
+                static_cast<int>(std::round(static_cast<float>(y) / other.y)));
         }
 
         Vector2Int operator/(const int& other) const
         {
-			return Vector2Int(static_cast<int>(x / other), static_cast<int>(y / other));
+            return Vector3Int(
+                static_cast<int>(std::round(static_cast<float>(x) / other)),
+                static_cast<int>(std::round(static_cast<float>(y) / other)));
         }
 
         bool operator==(const Vector2Int& other) const

@@ -54,12 +54,19 @@ namespace Birb
 
         Vector3Int operator/(const Vector3Int& other) const
         {
-			return Vector3Int(static_cast<int>(x / other.x), static_cast<int>(y / other.y), static_cast<int>(z / other.z));
+            return Vector3Int(
+                static_cast<int>(std::round(static_cast<float>(x) / other.x)),
+                static_cast<int>(std::round(static_cast<float>(y) / other.y)),
+                static_cast<int>(std::round(static_cast<float>(z) / other.z))
+                );
         }
 
         Vector3Int operator/(const int& other) const
         {
-			return Vector3Int(static_cast<int>(x / other), static_cast<int>(y / other), static_cast<int>(z / other));
+            return Vector3Int(
+                static_cast<int>(std::round(static_cast<float>(x) / other)),
+                static_cast<int>(std::round(static_cast<float>(y) / other)),
+                static_cast<int>(std::round(static_cast<float>(z) / other)));
         }
 
         bool operator==(const Vector3Int& other) const
