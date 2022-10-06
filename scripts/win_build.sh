@@ -8,10 +8,11 @@ echo "Building to $BUILD_DIR"
 
 # Create a fresh build directory and move into it
 mkdir -pv "$BUILD_DIR"
+cd $BUILD_DIR
 
 if [ "$1" == "test" ]
 then
-	cmake -B${BUILD_DIR} -DRELEASE=on -DTESTS=on -DWINDOWS=on -DUTILS=off -DSTATIC_SDL=on -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc-posix -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++-posix -DCMAKE_C_FLAGS=-fstack-protector -DCMAKE_CXX_FLAGS=-fstack-protector -DMINGW=TRUE
+	cmake .. -DRELEASE=on -DTESTS=on -DWINDOWS=on -DUTILS=off -DSTATIC_SDL=on -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc-posix -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++-posix -DCMAKE_C_FLAGS=-fstack-protector -DCMAKE_CXX_FLAGS=-fstack-protector -DMINGW=TRUE
 else
-	cmake -B${BUILD_DIR} -DRELEASE=on -DTESTS=off -DWINDOWS=on -DUTILS=off -DSTATIC_SDL=on -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_C_FLAGS=-fstack-protector -DCMAKE_CXX_FLAGS=-fstack-protector -DMINGW=TRUE
+	cmake .. -DRELEASE=on -DTESTS=off -DWINDOWS=on -DUTILS=off -DSTATIC_SDL=on -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_C_FLAGS=-fstack-protector -DCMAKE_CXX_FLAGS=-fstack-protector -DMINGW=TRUE
 fi
