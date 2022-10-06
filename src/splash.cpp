@@ -88,7 +88,6 @@ namespace Birb
 						title_text += " ";
 						++text_iterator;
 						glitch_timer.Start();
-						std::cout << title_text << std::endl;
 					}
 					else if (static_cast<int>(glitch_timer.ElapsedSeconds()) % 5 == 0)
 					{
