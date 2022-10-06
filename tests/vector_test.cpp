@@ -218,10 +218,10 @@ namespace Birb
 		Vector3 vecC(2.0f, 3.0f, 4.0f);
 		Vector2 vecD(2.0f, 3.0f);
 
-		CHECK(Round(vecA.magnitude(), 2) == 2.67);
-		CHECK(Round(vecB.magnitude(), 2) == 5.39);
-		CHECK(Round(vecC.magnitude(), 2) == 5.39);
-		CHECK(Round(vecD.magnitude(), 2) == 2.67);
+		CHECK(Math::Round(vecA.magnitude(), 2) == 2.67);
+		CHECK(Math::Round(vecB.magnitude(), 2) == 5.39);
+		CHECK(Math::Round(vecC.magnitude(), 2) == 5.39);
+		CHECK(Math::Round(vecD.magnitude(), 2) == 2.67);
 	}
 
 	TEST_CASE("Vector normalize")
