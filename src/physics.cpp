@@ -248,12 +248,12 @@ namespace Birb
 			 * because we don't care about the locations of the points. We only need to
 			 * find out if there was an intersection. */
 
-			float a = std::pow(slope, 2) + 1;
+			float a = Math::Square(slope) + 1;
 			float b = ((circle.pos.x * -1) * 2) + (2 * slope * (y_intersection - circle.pos.y));
-			float c = (std::pow(circle.pos.x, 2) + std::pow(y_intersection - circle.pos.y, 2)) - std::pow(circle.radius, 2);
+			float c = (Math::Square(circle.pos.x) + Math::Square(y_intersection - circle.pos.y)) - Math::Square(circle.radius);
 
 
-			float discriminant = std::pow(b, 2) - (4 * a * c);
+			float discriminant = Math::Square(b) - (4 * a * c);
 
 			if (discriminant >= 0)
 				return true;

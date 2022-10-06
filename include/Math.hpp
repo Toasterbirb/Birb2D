@@ -29,6 +29,12 @@ namespace Birb
 			return value;
 		}
 
+		template<typename T>
+		T Square(const T& value)
+		{
+			return value * value;
+		}
+
 		int 		Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
 		float 		Lerp(const float& a, const float& b, const float& t); ///< Interpolate a value between two values given time t
 		double 		Lerp(const double& a, const double& b, const float& t); ///< Interpolate a value between two values given time t

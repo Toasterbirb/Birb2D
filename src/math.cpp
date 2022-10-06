@@ -9,22 +9,22 @@ namespace Birb
 	{
 		float VectorDistance(const Vector2& a, const Vector2& b)
 		{
-			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
+			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y));
 		}
 
 		float VectorDistance(const Vector2Int& a, const Vector2Int& b)
 		{
-			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
+			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y));
 		}
 
 		float VectorDistance(const Vector3& a, const Vector3& b)
 		{
-			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2) + std::pow(b.z - a.z, 2));
+			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y) + Square(b.z - a.z));
 		}
 
 		float VectorDistance(const Vector3Int& a, const Vector3Int& b)
 		{
-			return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2) + std::pow(b.z - a.z, 2));
+			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y) + Square(b.z - a.z));
 		}
 
 
