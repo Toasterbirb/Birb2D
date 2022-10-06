@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "Vector.hpp"
 #include "Math.hpp"
+#include "Logger.hpp"
 
 namespace Birb
 {
@@ -218,10 +219,14 @@ namespace Birb
 		Vector3 vecC(2.0f, 3.0f, 4.0f);
 		Vector2 vecD(2.0f, 3.0f);
 
-		CHECK(Math::Round(vecA.magnitude(), 2) == 2.67);
+		std::cout << vecC.ToString();
+		std::cout << vecC.magnitude();
+		std::cout << vecC.normalized();
+
+		CHECK(Math::Round(vecA.magnitude(), 2) == 3.61);
 		CHECK(Math::Round(vecB.magnitude(), 2) == 5.39);
 		CHECK(Math::Round(vecC.magnitude(), 2) == 5.39);
-		CHECK(Math::Round(vecD.magnitude(), 2) == 2.67);
+		CHECK(Math::Round(vecD.magnitude(), 2) == 3.61);
 	}
 
 	TEST_CASE("Vector normalize")
