@@ -1,5 +1,7 @@
 #include "doctest.h"
 #include "Vector.hpp"
+#include "Math.hpp"
+#include "Logger.hpp"
 
 namespace Birb
 {
@@ -208,5 +210,27 @@ namespace Birb
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
+	}
+
+	TEST_CASE("Vector magnitude")
+	{
+		Vector2Int vecA(2, 3);
+		Vector3Int vecB(2, 3, 4);
+		Vector3 vecC(2.0f, 3.0f, 4.0f);
+		Vector2 vecD(2.0f, 3.0f);
+
+		CHECK(Math::Round(vecA.magnitude(), 2) == 3.61);
+		CHECK(Math::Round(vecB.magnitude(), 2) == 5.39);
+		CHECK(Math::Round(vecC.magnitude(), 2) == 5.39);
+		CHECK(Math::Round(vecD.magnitude(), 2) == 3.61);
+	}
+
+	TEST_CASE("Vector normalize")
+	{
+		Vector3 vecA(2.0f, 3.0f, 4.0f);
+		Vector2 vecB(2.0f, 3.0f);
+
+		CHECK(vecA.normalized() == (vecA / vecA.magnitude()));
+		CHECK(vecB.normalized() == (vecB / vecB.magnitude()));
 	}
 }

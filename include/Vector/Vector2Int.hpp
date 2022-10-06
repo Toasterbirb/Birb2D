@@ -31,6 +31,8 @@ namespace Birb
         std::string ToString() const;
         Vector2 ToFloat() const;
 
+        float magnitude() const; ///< Returns the magnitude of the Vector
+
         Vector2Int operator+(const Vector2Int& other) const
         {
 			return Vector2Int(x + other.x, y + other.y);

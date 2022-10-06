@@ -12,6 +12,11 @@ namespace Birb
 		return Vector3(x, y, z);
 	}
 
+    float Vector3Int::magnitude() const
+    {
+        return std::sqrt((x * x) + (y * y) + (z * z));
+    }
+
     Vector3Int Vector3Int::One()
     {
         return Vector3Int(1,1,1);

@@ -13,6 +13,21 @@ namespace Birb
 		return Vector2Int(std::round(x), std::round(y));
 	}
 
+    float Vector2::magnitude() const
+    {
+        return std::sqrt((x * x) + (y * y));
+    }
+
+    Vector2 Vector2::normalized() const
+    {
+        return *this / magnitude();
+    }
+
+    void Vector2::Normalize()
+    {
+        *this = normalized();
+    }
+
     Vector2 Vector2::One()
     {
         return Vector2(1.0f,1.0f);
