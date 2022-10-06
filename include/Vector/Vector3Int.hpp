@@ -32,6 +32,8 @@ namespace Birb
         std::string ToString() const;
         Vector3 ToFloat() const;
 
+        float magnitude() const; ///< Returns the magnitude of the Vector
+
         Vector3Int operator+(const Vector3Int& other) const
         {
 			return Vector3Int(x + other.x, y + other.y, z + other.z);

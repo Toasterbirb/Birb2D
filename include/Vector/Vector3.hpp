@@ -25,6 +25,10 @@ namespace Birb
         std::string ToString() const;
         Vector3Int ToInt() const;
 
+        float magnitude() const;    ///< Returns the magnitude of the Vector
+        Vector3 normalized() const; ///< Returns the normalization of the Vector
+        void Normalize();           ///< Normalizes the Vector
+
         Vector3 operator+(const Vector3& other) const
         {
 			return Vector3(x + other.x, y + other.y, z + other.z);

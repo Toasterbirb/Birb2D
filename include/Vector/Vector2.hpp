@@ -22,8 +22,12 @@ namespace Birb
         :x(values[0]),y(values[1])
         {}
 
-        std::string ToString() const;
-        Vector2Int ToInt() const;
+        std::string ToString() const; ///< Returns the Vector as a string
+        Vector2Int ToInt() const;     ///< Returns the Vector2 as an Vector2Int
+
+        float magnitude() const; ///< Returns the magnitude of the Vector
+        Vector2 normalized() const; ///< Returns the normalization of the Vector
+        void Normalize();    ///< Normalizes the Vector
 
         Vector2 operator+(const Vector2& other) const
         {

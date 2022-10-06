@@ -13,6 +13,21 @@ namespace Birb
 		return Vector3Int(std::round(x), std::round(y), std::round(z));
 	}
 
+    float Vector3::magnitude() const
+    {
+        return std::sqrt(std::pow(x) + std::pow(y));
+    }
+
+    Vector3 Vector3::normalized() const
+    {
+        return *this / magnitude();
+    }
+
+    void Vector3::Normalize()
+    {
+        *this = normalized();
+    }
+
     Vector3 Vector3::One()
     {
         return Vector3(1.0f,1.0f,1.0f);
