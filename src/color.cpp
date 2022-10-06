@@ -76,13 +76,13 @@ namespace Birb
 
 	void Color::ChangeIntensity(const int& delta)
 	{
-		int temp_r += r + delta;
+		int temp_r = r + delta;
 		r = Math::Clamp(temp_r, 0, 255);
 
-		int temp_g += g + delta;
+		int temp_g = g + delta;
 		g = Math::Clamp(temp_g, 0, 255);
 
-		int temp_b += b + delta;
+		int temp_b = b + delta;
 		b = Math::Clamp(temp_b, 0, 255);
 	}
 }
