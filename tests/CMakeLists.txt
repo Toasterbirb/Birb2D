@@ -32,6 +32,7 @@ add_executable(test
 	rect_test.cpp
 	renderwindow_test.cpp
 	scene_test.cpp
+	splash_test.cpp
 	textrendering_test.cpp
 	timer_test.cpp
 	ui_test.cpp
@@ -47,3 +48,4 @@ target_link_libraries(test
 )
 
 file(COPY ./res DESTINATION ./)
+file(COPY ../birb2d_res DESTINATION ./res/)

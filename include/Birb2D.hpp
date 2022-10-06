@@ -20,6 +20,7 @@
 #include "Resources.hpp"
 #include "Scene.hpp"
 #include "SceneObject.hpp"
+#include "Splash.hpp"
 #include "Texture.hpp"
 #include "Timer.hpp"
 #include "Timestep.hpp"

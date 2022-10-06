@@ -127,6 +127,7 @@ set(CORE_SRC
 	src/resources.cpp
 	src/scene.cpp
 	src/sceneobject.cpp
+	src/splash.cpp
 	src/texture.cpp
 	src/timer.cpp
 	src/timestep.cpp
