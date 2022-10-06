@@ -67,6 +67,11 @@ namespace Birb
 				while (window.PollEvents())
 				{
 					window.EventTick(window.event, &splash_running);
+
+					/* Skip the splash screen if there's a mouse click or keyboard
+					 * input of any kind */
+					if (window.isMouseDown() || window.isKeyDown())
+						splash_running = false;
 				}
 
 				timeStep.Step();
