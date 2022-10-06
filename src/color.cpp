@@ -1,4 +1,5 @@
 #include "Color.hpp"
+#include "Math.hpp"
 
 namespace Birb
 {
@@ -19,6 +20,37 @@ namespace Birb
 	Color::Color(const int& r, const int& g, const int& b, const int& a)
 	:r(r), g(g), b(b), a(a)
 	{}
+
+
+	Color::Color(const float& r, const float& g, const float& b)
+	{
+		this->r = static_cast<int>(std::round(Math::Lerp(0, 255, r)));
+		this->g = static_cast<int>(std::round(Math::Lerp(0, 255, g)));
+		this->b = static_cast<int>(std::round(Math::Lerp(0, 255, b)));
+		a = 255;
+	}
+
+	Color::Color(const float& r, const float& g, const float& b, const float& a)
+	{
+		this->r = static_cast<int>(std::round(Math::Lerp(0, 255, r)));
+		this->g = static_cast<int>(std::round(Math::Lerp(0, 255, g)));
+		this->b = static_cast<int>(std::round(Math::Lerp(0, 255, b)));
+		this->a = static_cast<int>(std::round(Math::Lerp(0, 255, a)));
+	}
+
+	Color::Color(const Vector3Int& rgb)
+	:r(rgb.x), g(rgb.y), b(rgb.z)
+	{
+		a = 255;
+	}
+
+	Color::Color(const Vector3& rgb)
+	{
+		this->r = static_cast<int>(std::round(Math::Lerp(0, 255, rgb.x)));
+		this->g = static_cast<int>(std::round(Math::Lerp(0, 255, rgb.y)));
+		this->b = static_cast<int>(std::round(Math::Lerp(0, 255, rgb.z)));
+		a = 255;
+	}
 
 	Color::Color(const SDL_Color& sdl_color)
 	{
@@ -44,49 +76,13 @@ namespace Birb
 
 	void Color::ChangeIntensity(const int& delta)
 	{
-		if (delta > 0)
-		{
-			// Increase color intensity
+		int temp_r = r + delta;
+		r = Math::Clamp(temp_r, 0, 255);
 
-			// Red
-			if (r + delta > 255)
-				r = 255;
-			else
-				r += delta;
+		int temp_g = g + delta;
+		g = Math::Clamp(temp_g, 0, 255);
 
-			// Green
-			if (g + delta > 255)
-				g = 255;
-			else
-				g += delta;
-
-			// Blue
-			if (b + delta > 255)
-				b = 255;
-			else
-				b += delta;
-		}
-		else
-		{
-			// Decrease color intensity
-
-			// Red
-			if (r + delta < 0)
-				r = 0;
-			else
-				r += delta;
-
-			// Green
-			if (g + delta < 0)
-				g = 0;
-			else
-				g += delta;
-
-			// Blue
-			if (b + delta < 0)
-				b = 0;
-			else
-				b += delta;
-		}
+		int temp_b = b + delta;
+		b = Math::Clamp(temp_b, 0, 255);
 	}
 }
