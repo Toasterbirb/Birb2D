@@ -14,7 +14,7 @@ namespace Birb
 
     float Vector2Int::magnitude() const
     {
-        return std::sqrt(std::pow(x,2) + std::pow(y,2));
+        return std::sqrt((x * x) + (y * y));
     }
 
     Vector2Int Vector2Int::One()
