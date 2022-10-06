@@ -15,7 +15,7 @@ namespace Birb
 
     float Vector3::magnitude() const
     {
-        return std::sqrt(std::pow(x) + std::pow(y));
+        return std::sqrt(std::pow(x,2) + std::pow(y,2));
     }
 
     Vector3 Vector3::normalized() const
