@@ -17,3 +17,4 @@ target_link_libraries(${PROGRAM_NAME} birb2d)
 
 # Copy the resources into the build directory
 file(COPY ./res DESTINATION ./)
+file(COPY ../../birb2d_res DESTINATION ./res/)

@@ -26,6 +26,10 @@ int main(void)
 	Birb::TimeStep timeStep;
 	timeStep.Init(&window);
 
+	/* Show the splash screen */
+	Birb::Splash splash_screen(window);
+	splash_screen.Run();
+
 	/* --------- *
 	 * Variables *
 	 * --------- */

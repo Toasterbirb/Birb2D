@@ -16,14 +16,18 @@ namespace Birb
 		bool isCustom; 	///< Change this to true if you want to use a custom
 						/// splash screen.
 
-		bool insertLoadingScreenFrame;
 		void Run();
 
 	private:
 		Window& window;
+		Font manaspace;
+		Font manaspace_small;
+
 		Entity background_plane;
 		Entity birb2d_logo;
 		Entity birb2d_text;
-		Font manaspace;
+
+		Entity loading_text;
+
 	};
 }

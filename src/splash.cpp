@@ -5,10 +5,11 @@
 
 namespace Birb
 {
+	static const std::string res_base_path = "./res/birb2d_res";
+
 	Splash::Splash(Window& window, bool isCustom)
-	:duration(2.0f), insertLoadingScreenFrame(false), window(window)
+	:duration(2.0f), isCustom(false), window(window)
 	{
-		std::string res_base_path = "./res/birb2d_res";
 
 		if (!isCustom)
 		{
@@ -42,10 +43,20 @@ namespace Birb
 			scene.AddObject(&birb2d_text);
 			scene.AddObject(&background_plane);
 		}
+
 	}
 
 	void Splash::Run()
 	{
+		manaspace_small.LoadFont(res_base_path + "/fonts/manaspace/manaspc.ttf", 24);
+
+		loading_text = Entity("Loading text",
+				Vector2Int(32, 32),
+				EntityComponent::Text("Loading...", &manaspace_small, &Colors::Black));
+
+		loading_text.renderingPriority = 10;
+		loading_text.active = false;
+
 		/* Implement a simple rendering loop */
 		TimeStep timeStep;
 		timeStep.Init(&window);
@@ -114,5 +125,12 @@ namespace Birb
 			window.Display();
 			timeStep.End();
 		}
+
+		/* Clear the window one more time and create a loading screen frame */
+		loading_text.active = true;
+		window.Clear();
+		scene.Render();
+		Render::DrawEntity(loading_text);
+		window.Display();
 	}
 }
