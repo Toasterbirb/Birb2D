@@ -51,6 +51,11 @@ namespace Birb
 		return roundedRect;
 	}
 
+	Vector2 Rect::centerPoint() const
+	{
+		return {x + w / 2, y + h / 2};
+	}
+
 	SDL_Rect Rect::getSDLRect() const
 	{
 		SDL_Rect sdlrect;

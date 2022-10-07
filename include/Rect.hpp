@@ -19,6 +19,7 @@ namespace Birb
 		std::string toString() const;
 		Polygon toPolygon() const;
 		Rect getInt() const;
+		Vector2 centerPoint() const;
 
 		SDL_Rect getSDLRect() const;
 

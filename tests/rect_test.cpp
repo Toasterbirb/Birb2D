@@ -93,6 +93,13 @@ namespace Birb
 		CHECK(roundedRect.h == 99);
 	}
 
+	TEST_CASE("Calculate the centerpoint of a rect")
+	{
+		CHECK(Rect(0, 0, 7, 4).centerPoint() == Vector2(3.5, 2));
+		CHECK(Rect(2, 1, 13, 7).centerPoint() == Vector2(8.5, 4.5));
+		CHECK(Rect(1, -2, 5, 7).centerPoint() == Vector2(3.5, 1.5));
+	}
+
 	TEST_CASE("Set rect position with a vector")
 	{
 		Rect rect(1, 2, 3, 4);
