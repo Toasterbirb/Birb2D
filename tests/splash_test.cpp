@@ -23,4 +23,12 @@ namespace Birb
 		Splash splash_screen(window);
 		splash_screen.Run();
 	}
+
+	TEST_CASE("Rendering: Custom splash screen 16:9")
+	{
+		Window window("Birb2D tests", Vector2Int(1280, 720), 75, false);
+		Splash splash_screen(window, true);
+		splash_screen.isCustom = true;
+		splash_screen.Run();
+	}
 }

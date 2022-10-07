@@ -9,12 +9,12 @@ namespace Birb
 	class Splash
 	{
 	public:
-		Splash(Window& window); ///< Creates the default Birb2D splash screen
+		Splash(Window& window, bool isCustom = false); ///< Creates the default Birb2D splash screen
 
 		Scene scene;
 		float duration; ///< Splash screen duration in seconds
 		bool isCustom; 	///< Change this to true if you want to use a custom
-						/// splash screen
+						/// splash screen.
 
 		bool insertLoadingScreenFrame;
 		void Run();
