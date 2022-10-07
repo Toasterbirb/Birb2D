@@ -63,6 +63,7 @@ namespace Birb
 		};
 
 		KeyCode EventToKeycode(const SDL_Event& event);
+		Vector2 MovementDirection(const SDL_Event& event);
 
 		/// A class used for tracking mouse dragging
 		class MouseDrag

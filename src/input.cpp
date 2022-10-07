@@ -369,6 +369,42 @@ namespace Birb
 			return code;
 		}
 
+		Vector2 MovementDirection(const SDL_Event& event)
+		{
+			KeyCode key_code = EventToKeycode(event);
+			switch (key_code)
+			{
+				case (W):
+					return Vector2::Up();
+
+				case (A):
+					return Vector2::Left();
+
+				case (S):
+					return Vector2::Down();
+
+				case (D):
+					return Vector2::Right();
+
+				case (ARROW_UP):
+					return Vector2::Up();
+
+				case (ARROW_LEFT):
+					return Vector2::Left();
+
+				case (ARROW_DOWN):
+					return Vector2::Down();
+
+				case (ARROW_RIGHT):
+					return Vector2::Right();
+
+				default:
+					return {0, 0};
+			}
+
+			return {0, 0};
+		}
+
 		MouseDrag::MouseDrag()
 		{
 			m_dragging = false;

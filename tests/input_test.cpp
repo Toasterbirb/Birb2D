@@ -693,8 +693,64 @@ namespace Birb
 				event.key.keysym.mod = SDLK_UNDERSCORE;
 				CHECK(EventToKeycode(event) == UNDERSCORE);
 			}
-
-
 		}
+	}
+
+	TEST_CASE("Convert movement key to a direction")
+	{
+		SDL_Event event;
+		Vector2 direction;
+
+		event.type = SDL_KEYDOWN;
+
+		SUBCASE("W")
+		{
+			event.key.keysym.scancode = SDL_SCANCODE_W;
+			direction = Vector2::Up();
+		}
+
+		SUBCASE("A")
+		{
+			event.key.keysym.scancode = SDL_SCANCODE_A;
+			direction = Vector2::Left();
+		}
+
+		SUBCASE("S")
+		{
+			event.key.keysym.scancode = SDL_SCANCODE_S;
+			direction = Vector2::Down();
+		}
+
+		SUBCASE("D")
+		{
+			event.key.keysym.scancode = SDL_SCANCODE_D;
+			direction = Vector2::Right();
+		}
+
+		SUBCASE("Up arrow")
+		{
+			event.key.keysym.scancode = SDL_SCANCODE_UP;
+			direction = Vector2::Up();
+		}
+
+		SUBCASE("Left arrow")
+		{
+			event.key.keysym.scancode = SDL_SCANCODE_LEFT;
+			direction = Vector2::Left();
+		}
+
+		SUBCASE("Down arrow")
+		{
+			event.key.keysym.scancode = SDL_SCANCODE_DOWN;
+			direction = Vector2::Down();
+		}
+
+		SUBCASE("Right arrow")
+		{
+			event.key.keysym.scancode = SDL_SCANCODE_RIGHT;
+			direction = Vector2::Right();
+		}
+
+		CHECK(Input::MovementDirection(event) == direction);
 	}
 }
