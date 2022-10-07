@@ -9,8 +9,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(SYSTEM_SDL "Link Birb2D dynamically against system SDL libraries instead of
 compiling them from source" OFF)
-option(STATIC_SDL "Use static linking for SDL (might not work on all
-systems)" OFF)
+option(STATIC_SDL "Use static linking for SDL" ON)
 option(TESTS "Compile tests" ON)
 option(UTILS "Compile extra utilities" ON)
 option(EXAMPLES "Compile examples" OFF)
