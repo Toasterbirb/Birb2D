@@ -2,10 +2,28 @@
 
 namespace Birb
 {
+	Vector3Int::Vector3Int()
+	:x(0), y(0), z(0)
+	{}
+
+	Vector3Int::Vector3Int(const int& x, const int& y, const int& z)
+	:x(x), y(y), z(z)
+	{}
+
+	Vector3Int::Vector3Int(const int values[3])
+	:x(values[0]),y(values[1]), z(values[2])
+	{}
 
 	Vector3Int::Vector3Int(const Vector2Int& vec2)
 	:x(vec2.x), y(vec2.y), z(0)
 	{}
+
+	Vector3Int::Vector3Int(const float& x, const float& y, const float& z)
+	{
+		this->x = std::round(x);
+		this->y = std::round(y);
+		this->z = std::round(z);
+	}
 
     std::string Vector3Int::ToString() const
 	{

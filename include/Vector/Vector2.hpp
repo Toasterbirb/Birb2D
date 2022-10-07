@@ -10,17 +10,9 @@ namespace Birb
     {
         float x, y;
 
-        Vector2()
-        :x(0.0f), y(0.0f)
-        {}
-
-        Vector2(const float& _x, const float& _y)
-        :x(_x), y(_y)
-        {}
-
-        Vector2(const float values[2])
-        :x(values[0]),y(values[1])
-        {}
+        Vector2();
+        Vector2(const float& x, const float& y);
+        Vector2(const float values[2]);
 
         std::string ToString() const; ///< Returns the Vector as a string
         Vector2Int ToInt() const;     ///< Returns the Vector2 as an Vector2Int

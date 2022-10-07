@@ -3,6 +3,18 @@
 
 namespace Birb
 {
+	Vector3::Vector3()
+	:x(0.0f), y(0.0f), z(0.0f)
+	{}
+
+	Vector3::Vector3(const float& x, const float& y, const float& z)
+	:x(x), y(y), z(z)
+	{}
+
+	Vector3::Vector3(const float values[3])
+	:x(values[0]),y(values[1]), z(values[2])
+	{}
+
 	Vector3::Vector3(const Vector2& vec2)
 	:x(vec2.x), y(vec2.y), z(0)
 	{}

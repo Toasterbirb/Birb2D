@@ -2,6 +2,24 @@
 
 namespace Birb
 {
+	Vector2Int::Vector2Int()
+	:x(0), y(0)
+	{}
+
+	Vector2Int::Vector2Int(const int& x, const int& y)
+	:x(x), y(y)
+	{}
+
+	Vector2Int::Vector2Int(const int values[2])
+	:x(values[0]),y(values[1])
+	{}
+
+	Vector2Int::Vector2Int(const float& x, const float& y)
+	{
+		this->x = std::round(x);
+		this->y = std::round(y);
+	}
+
     std::string Vector2Int::ToString() const
 	{
 		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";

@@ -10,23 +10,10 @@ namespace Birb
     {
         int x, y;
 
-        Vector2Int()
-        :x(0), y(0)
-        {}
-
-        Vector2Int(const int& _x, const int& _y)
-        :x(_x), y(_y)
-        {}
-
-        Vector2Int(const int values[2])
-        :x(values[0]),y(values[1])
-        {}
-
-        Vector2Int(const float& _x, const float& _y)
-        {
-            x = std::round(_x);
-            y = std::round(_y);
-        }
+        Vector2Int();
+        Vector2Int(const int& x, const int& y);
+        Vector2Int(const int values[2]);
+        Vector2Int(const float& x, const float& y);
 
         std::string ToString() const;
         Vector2 ToFloat() const;
