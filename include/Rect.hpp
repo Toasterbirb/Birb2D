@@ -41,10 +41,39 @@ namespace Birb
 					|| h != other.h);
 		}
 
+		Rect& operator=(const Vector2& other)
+		{
+			this->x = other.x;
+			this->y = other.y;
+			return *this;
+		}
+
+		Rect& operator=(const Vector2Int& other)
+		{
+			this->x = other.x;
+			this->y = other.y;
+			return *this;
+		}
+
+		Rect& operator=(const Vector3& other)
+		{
+			this->x = other.x;
+			this->y = other.y;
+			return *this;
+		}
+
+		Rect& operator=(const Vector3Int& other)
+		{
+			this->x = other.x;
+			this->y = other.y;
+			return *this;
+		}
+
 	private:
 		void RenderFunc() override;
 		void SetPos(const Vector2& delta) override;
 	};
+
 
 	inline std::ostream& operator<<(std::ostream& stream, const Rect& other)
 	{

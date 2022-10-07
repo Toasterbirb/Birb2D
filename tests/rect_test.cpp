@@ -92,4 +92,26 @@ namespace Birb
 		CHECK(roundedRect.w == 101);
 		CHECK(roundedRect.h == 99);
 	}
+
+	TEST_CASE("Set rect position with a vector")
+	{
+		Rect rect(1, 2, 3, 4);
+
+		Vector2 vec2(5, 5);
+		Vector2Int vec2int(6, 6);
+		Vector3 vec3(7, 7, 7);
+		Vector3Int vec3int(8, 8, 8);
+
+		rect = vec2;
+		CHECK(rect == Rect(5, 5, 3, 4));
+
+		rect = vec2int;
+		CHECK(rect == Rect(6, 6, 3, 4));
+
+		rect = vec3;
+		CHECK(rect == Rect(7, 7, 3, 4));
+
+		rect = vec3int;
+		CHECK(rect == Rect(8, 8, 3, 4));
+	}
 }
