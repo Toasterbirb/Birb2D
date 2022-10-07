@@ -7,7 +7,6 @@ namespace Birb
 	{
 		Window window("Birb2D tests", Vector2Int(1280, 960), 75, false);
 		Splash splash_screen(window);
-		splash_screen.insertLoadingScreenFrame = true;
 		splash_screen.Run();
 	}
 
@@ -15,7 +14,6 @@ namespace Birb
 	{
 		Window window("Birb2D tests", Vector2Int(1280, 720), 75, false);
 		Splash splash_screen(window);
-		splash_screen.insertLoadingScreenFrame = true;
 		splash_screen.Run();
 	}
 
@@ -23,7 +21,6 @@ namespace Birb
 	{
 		Window window("Birb2D tests", Vector2Int(1280, 549), 75, false);
 		Splash splash_screen(window);
-		splash_screen.insertLoadingScreenFrame = true;
 		splash_screen.Run();
 	}
 
@@ -33,7 +30,6 @@ namespace Birb
 		Splash splash_screen(window, true);
 		splash_screen.duration = 0.5;
 		splash_screen.isCustom = true;
-		splash_screen.insertLoadingScreenFrame = true;
 		splash_screen.Run();
 	}
 }
