@@ -375,25 +375,25 @@ namespace Birb
 			switch (key_code)
 			{
 				case (W):
-					return Vector2::Up();
+					return Vector2::Down();
 
 				case (A):
 					return Vector2::Left();
 
 				case (S):
-					return Vector2::Down();
+					return Vector2::Up();
 
 				case (D):
 					return Vector2::Right();
 
 				case (ARROW_UP):
-					return Vector2::Up();
+					return Vector2::Down();
 
 				case (ARROW_LEFT):
 					return Vector2::Left();
 
 				case (ARROW_DOWN):
-					return Vector2::Down();
+					return Vector2::Up();
 
 				case (ARROW_RIGHT):
 					return Vector2::Right();

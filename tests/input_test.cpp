@@ -706,7 +706,7 @@ namespace Birb
 		SUBCASE("W")
 		{
 			event.key.keysym.scancode = SDL_SCANCODE_W;
-			direction = Vector2::Up();
+			direction = Vector2::Down();
 		}
 
 		SUBCASE("A")
@@ -718,7 +718,7 @@ namespace Birb
 		SUBCASE("S")
 		{
 			event.key.keysym.scancode = SDL_SCANCODE_S;
-			direction = Vector2::Down();
+			direction = Vector2::Up();
 		}
 
 		SUBCASE("D")
@@ -730,7 +730,7 @@ namespace Birb
 		SUBCASE("Up arrow")
 		{
 			event.key.keysym.scancode = SDL_SCANCODE_UP;
-			direction = Vector2::Up();
+			direction = Vector2::Down();
 		}
 
 		SUBCASE("Left arrow")
@@ -742,7 +742,7 @@ namespace Birb
 		SUBCASE("Down arrow")
 		{
 			event.key.keysym.scancode = SDL_SCANCODE_DOWN;
-			direction = Vector2::Down();
+			direction = Vector2::Up();
 		}
 
 		SUBCASE("Right arrow")
