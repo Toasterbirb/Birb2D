@@ -5,6 +5,7 @@
 namespace Birb
 {
     struct Vector3Int;
+	struct Vector2;
 
     struct Vector3
     {
@@ -14,13 +15,15 @@ namespace Birb
         :x(0.0f), y(0.0f), z(0.0f)
         {}
 
-        Vector3(const float& _x, const float& _y, const float& _z)
-        :x(_x), y(_y), z(_z)
+        Vector3(const float& x, const float& y, const float& z)
+        :x(x), y(y), z(z)
         {}
 
         Vector3(const float values[3])
         :x(values[0]),y(values[1]), z(values[2])
         {}
+
+		Vector3(const Vector2& vec2);
 
         std::string ToString() const;
         Vector3Int ToInt() const;

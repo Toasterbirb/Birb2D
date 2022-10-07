@@ -143,6 +143,12 @@ namespace Birb
 		CHECK(vecC.x == 2.2f);
 		CHECK(vecC.y == 5.1f);
 		CHECK(vecC.z == 8.08f);
+
+		Vector2 vec2(1.5f, 2.5f);
+		Vector3 vecD = vec2;
+		CHECK(vecD.x == 1.5f);
+		CHECK(vecD.y == 2.5f);
+		CHECK(vecD.z == 0.0f);
 	}
 
 	TEST_CASE("Vector3 operator overloads")
@@ -190,6 +196,12 @@ namespace Birb
 		CHECK(vecC.x == 2);
 		CHECK(vecC.y == 5);
 		CHECK(vecC.z == 8);
+
+		Vector2Int vec2(1, 2);
+		Vector3Int vecD = vec2;
+		CHECK(vecD.x == 1);
+		CHECK(vecD.y == 2);
+		CHECK(vecD.z == 0);
 	}
 
 	TEST_CASE("Vector3Int operator overloads")

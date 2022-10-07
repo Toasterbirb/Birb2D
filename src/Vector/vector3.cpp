@@ -3,6 +3,10 @@
 
 namespace Birb
 {
+	Vector3::Vector3(const Vector2& vec2)
+	:x(vec2.x), y(vec2.y), z(0)
+	{}
+
     std::string Vector3::ToString() const
 	{
         return "(" + utils::CleanDecimals(x) + ", " + utils::CleanDecimals(y) + ", " + utils::CleanDecimals(z) + ")";

@@ -2,6 +2,11 @@
 
 namespace Birb
 {
+
+	Vector3Int::Vector3Int(const Vector2Int& vec2)
+	:x(vec2.x), y(vec2.y), z(0)
+	{}
+
     std::string Vector3Int::ToString() const
 	{
 		return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";

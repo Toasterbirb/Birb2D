@@ -5,6 +5,7 @@
 namespace Birb
 {
     struct Vector3;
+	struct Vector2Int;
 
     struct Vector3Int
     {
@@ -21,6 +22,8 @@ namespace Birb
         Vector3Int(const int values[3])
         :x(values[0]),y(values[1]), z(values[2])
         {}
+
+		Vector3Int(const Vector2Int& vec2);
 
         Vector3Int(const float&_x, const float&_y, const float&_z)
         {
