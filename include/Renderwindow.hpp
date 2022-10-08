@@ -45,6 +45,10 @@ namespace Birb
 		bool isMouseUp() const;
 		/* ------------------------- */
 
+		/* -- Window event callbacks -- */
+		std::function<void()> OnWindowResize;
+		/* ---------------------------- */
+
 		/* -- Window variables -- */
 		std::string win_title; ///< Window title text
 		int refresh_rate; ///< Window refreshrate. Can be changed during runtime if needed for some reason
@@ -56,6 +60,7 @@ namespace Birb
 		/* ---------------------- */
 
 	private:
+		static void DefaultOnWindowResize();
 		void Cleanup(); ///< Frees resources allocated for the window and deinitializes SDL2 things
 	};
 

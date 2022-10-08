@@ -50,6 +50,9 @@ namespace Birb
 
 		Global::RenderVars::RefreshRate = refresh_rate;
 
+		/* Define callback functions to some default values */
+		OnWindowResize = DefaultOnWindowResize;
+
 #ifdef DEBUG
 		Debug::Log("Window '" + win_title + "' created successfully!");
 #endif
@@ -194,7 +197,10 @@ namespace Birb
 			/* Handle window resizing */
 			case (SDL_WINDOWEVENT):
 				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
+				{
 					SetWindowSize(Vector2Int(event.window.data1, event.window.data2));
+					OnWindowResize();
+				}
 				break;
 
 			case (SDL_QUIT):
@@ -230,6 +236,11 @@ namespace Birb
 	bool Window::isMouseUp() const
 	{
 		return (this->event.type == SDL_MOUSEBUTTONUP);
+	}
+
+	void Window::DefaultOnWindowResize()
+	{
+		return;
 	}
 
 	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
