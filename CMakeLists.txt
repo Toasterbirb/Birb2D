@@ -153,8 +153,8 @@ if (STATIC_SDL)
 	)
 elseif(WINDOWS OR NOT STATIC_SDL)
 	target_link_libraries(birb2d
-		SDL2
-		#SDL2main
+		#SDL2
+		SDL2main
 		SDL2_image
 		SDL2_ttf
 		SDL2_mixer
