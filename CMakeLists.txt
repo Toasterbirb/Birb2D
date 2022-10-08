@@ -27,6 +27,14 @@ if (RELEASE)
 	set(STATIC_SDL ON)
 else()
 	set(CMAKE_BUILD_TYPE Debug)
+
+	# Disable debug postfixes
+	set(DISABLE_FORCE_DEBUG_POSTFIX ON CACHE BOOL "Disable forced debug
+	postfixes")
+	set(SDL_CMAKE_DEBUG_POSTFIX "" CACHE STRING "Name suffix for debug builds")
+	set(SDL2IMAGE_DEBUG_POSTFIX "" CACHE STRING "Name suffix for debug builds")
+	set(SDL2MIXER_DEBUG_POSTFIX "" CACHE STRING "Name suffix for debug builds")
+	set(SDL2TTF_DEBUG_POSTFIX "" CACHE STRING "Name suffix for debug builds")
 endif()
 
 if (NOT JOYSTICK)
@@ -144,7 +152,7 @@ target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
 target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
 
 target_link_libraries(birb2d
-	SDL2
+	#SDL2
 	SDL2main
 	SDL2_image
 	SDL2_ttf
