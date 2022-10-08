@@ -143,24 +143,14 @@ add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
 target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
 
-if (STATIC_SDL)
-	target_link_libraries(birb2d
-		#SDL2main
-		SDL2_image
-		SDL2_ttf
-		SDL2_mixer
-		SDL2_gfx
-	)
-elseif(WINDOWS OR NOT STATIC_SDL)
-	target_link_libraries(birb2d
-		#SDL2
-		SDL2main
-		SDL2_image
-		SDL2_ttf
-		SDL2_mixer
-		SDL2_gfx
-	)
-endif()
+target_link_libraries(birb2d
+	SDL2
+	SDL2main
+	SDL2_image
+	SDL2_ttf
+	SDL2_mixer
+	SDL2_gfx
+)
 
 target_precompile_headers(birb2d PRIVATE include/SDL.hpp include/STD.hpp)
 
