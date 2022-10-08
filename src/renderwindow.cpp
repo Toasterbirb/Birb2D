@@ -199,7 +199,7 @@ namespace Birb
 				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 				{
 					SetWindowSize(Vector2Int(event.window.data1, event.window.data2));
-					OnWindowResize();
+					OnWindowResize(*this);
 				}
 				break;
 
@@ -238,7 +238,7 @@ namespace Birb
 		return (this->event.type == SDL_MOUSEBUTTONUP);
 	}
 
-	void Window::DefaultOnWindowResize()
+	void Window::DefaultOnWindowResize(Window& window)
 	{
 		return;
 	}

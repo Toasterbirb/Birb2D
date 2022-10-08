@@ -46,7 +46,7 @@ namespace Birb
 		/* ------------------------- */
 
 		/* -- Window event callbacks -- */
-		std::function<void()> OnWindowResize;
+		std::function<void(Window& window)> OnWindowResize;
 		/* ---------------------------- */
 
 		/* -- Window variables -- */
@@ -60,7 +60,7 @@ namespace Birb
 		/* ---------------------- */
 
 	private:
-		static void DefaultOnWindowResize();
+		static void DefaultOnWindowResize(Window& window);
 		void Cleanup(); ///< Frees resources allocated for the window and deinitializes SDL2 things
 	};
 
