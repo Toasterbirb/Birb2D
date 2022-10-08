@@ -39,6 +39,11 @@ if (WINDOWS_BUILD)
 	set(UTILS OFF)
 endif()
 
+find_program(CCACHE_FOUND ccache)
+if(CCACHE_FOUND)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+endif(CCACHE_FOUND)
+
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
 else()
