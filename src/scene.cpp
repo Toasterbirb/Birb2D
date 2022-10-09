@@ -16,8 +16,7 @@ namespace Birb
 		objects.push_back(obj);
 
 		/* If the positionOffset has changed, apply that to new objects */
-		if (positionOffset != Vector2(0, 0))
-			obj->SetPos(positionOffset);
+		obj->SetPos(positionOffset);
 
 		/* If the object has non-zero rendering priority, enable scene sorting */
 		if (obj->renderingPriority != 0)
@@ -32,8 +31,7 @@ namespace Birb
 		objects.push_back(obj);
 
 		/* If the positionOffset has changed, apply that to new objects */
-		if (positionOffset != Vector2(0, 0))
-			obj->SetPos(positionOffset);
+		obj->SetPos(positionOffset);
 	}
 
 	void Scene::AddObject(SceneObject* obj[], int objCount)
