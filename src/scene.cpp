@@ -26,7 +26,7 @@ namespace Birb
 		SortObjects();
 	}
 
-	void Scene::AddObjectQuick(SceneObject* obj)
+	void Scene::AddObjectFast(SceneObject* obj)
 	{
 		objects.push_back(obj);
 

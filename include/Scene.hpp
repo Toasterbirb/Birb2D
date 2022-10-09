@@ -12,7 +12,7 @@ namespace Birb
 		Scene();
 		Scene(const bool& isActive);
 		void AddObject(SceneObject* obj); ///< Add SceneObject to the scene and sort the scene
-		void AddObjectQuick(SceneObject* obj); ///< Add SceneObject to the scene, but skip sorting
+		void AddObjectFast(SceneObject* obj); ///< Add SceneObject to the scene, but skip sorting
 		void AddObject(SceneObject** obj, int objCount); ///< Add multiple SceneObjects to the scene and sort the scene
 		std::vector<SceneObject*> GetObjects() const;
 

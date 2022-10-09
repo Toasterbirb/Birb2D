@@ -208,27 +208,27 @@ namespace Birb
 
 		Scene sceneA;
 		sceneA.renderingPriority = 4;
-		testScene.AddObjectQuick(&sceneA);
+		testScene.AddObjectFast(&sceneA);
 
 		Scene sceneB;
 		sceneB.renderingPriority = 10;
-		testScene.AddObjectQuick(&sceneB);
+		testScene.AddObjectFast(&sceneB);
 
 		Scene sceneC;
 		sceneC.renderingPriority = -2;
-		testScene.AddObjectQuick(&sceneC);
+		testScene.AddObjectFast(&sceneC);
 
 		Scene sceneD;
 		sceneD.renderingPriority = 0;
-		testScene.AddObjectQuick(&sceneD);
+		testScene.AddObjectFast(&sceneD);
 
 		Scene sceneE;
 		sceneE.renderingPriority = 2;
-		testScene.AddObjectQuick(&sceneE);
+		testScene.AddObjectFast(&sceneE);
 
 		Scene sceneF;
 		sceneF.renderingPriority = 2;
-		testScene.AddObjectQuick(&sceneF);
+		testScene.AddObjectFast(&sceneF);
 
 		std::vector<SceneObject*> objList = testScene.GetObjects();
 		CHECK(objList[0] == &sceneA);
