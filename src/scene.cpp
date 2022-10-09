@@ -4,11 +4,11 @@
 namespace Birb
 {
 	Scene::Scene()
-	:active(true), positionOffset(0, 0)
+	:needs_sorting(false), active(true), positionOffset(0, 0)
 	{}
 
 	Scene::Scene(const bool& isActive)
-	:active(isActive), positionOffset(0, 0)
+	:needs_sorting(false), active(isActive), positionOffset(0, 0)
 	{}
 
 	void Scene::AddObject(SceneObject* obj)
