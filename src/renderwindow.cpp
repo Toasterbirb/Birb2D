@@ -2,6 +2,7 @@
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
+#include "Physics.hpp"
 #include <cstring>
 
 namespace Birb
@@ -45,10 +46,10 @@ namespace Birb
 		}
 
 		/* Set some global rendering variables */
-		Global::RenderVars::MainWindow 	= win;
-		Global::RenderVars::Renderer 	= renderer;
-
-		Global::RenderVars::RefreshRate = refresh_rate;
+		Global::RenderVars::RefreshRate 		= refresh_rate;
+		Global::RenderVars::WindowDimensions 	= dimensions;
+		Global::RenderVars::MainWindow 			= win;
+		Global::RenderVars::Renderer 			= renderer;
 
 		/* Define callback functions to some default values */
 		OnWindowResize = DefaultOnWindowResize;
@@ -200,6 +201,7 @@ namespace Birb
 				{
 					SetWindowSize(Vector2Int(event.window.data1, event.window.data2));
 					OnWindowResize(*this);
+					Global::RenderVars::WindowDimensions = dimensions;
 				}
 				break;
 
@@ -318,6 +320,10 @@ namespace Birb
 			Birb::Debug::Log("Tried to render an entity with size of <= 0", Debug::Type::warning);
 			return false;
 		}
+
+		/* Check if the entity is in the viewport and would be visible that way */
+		if (!Physics::RectCollision(entity.rect, Rect(0, 0, Global::RenderVars::WindowDimensions.x, Global::RenderVars::WindowDimensions.y)))
+			return true;
 
 		SDL_Rect src;
 		SDL_Rect dst;
