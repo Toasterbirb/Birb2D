@@ -394,7 +394,7 @@ namespace Birb
 		}
 
 		/* If nothing was rendered so far, simply render the rect */
-		DrawRect(entity.rect.color, entity.rect);
+		DrawRect(*entity.rect.color, entity.rect);
 
 		return true;
 	}

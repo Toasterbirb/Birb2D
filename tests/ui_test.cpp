@@ -33,7 +33,7 @@ namespace Birb
 		button.clickComponent.onClick = ButtonClick;
 		CHECK(button.clickComponent.active);
 
-		button.rect.color = Colors::Red;
+		button.rect.color = &Colors::Red;
 		ui.AddButton(&button);
 		CHECK(ui.Buttons[0] == &button);
 
@@ -69,7 +69,7 @@ namespace Birb
 			}
 
 			if (button.clickComponent.isPressed)
-				button.rect.color.ChangeIntensity(10);
+				button.rect.color->ChangeIntensity(10);
 
 			if (success)
 				ApplicationRunning = false;
@@ -107,7 +107,7 @@ namespace Birb
 		button.clickComponent.onHover = ButtonHover;
 		CHECK(button.clickComponent.active);
 
-		button.rect.color = Colors::Green;
+		button.rect.color = &Colors::Green;
 		ui.AddButton(&button);
 		CHECK(ui.Buttons[0] == &button);
 
@@ -195,7 +195,7 @@ namespace Birb
 		buttonA.clickComponent.onClick = ButtonAClick;
 		CHECK(buttonA.clickComponent.active);
 
-		buttonA.rect.color = Colors::Red;
+		buttonA.rect.color = &Colors::Red;
 		buttonA.renderingPriority = 3;
 
 		/* Button B */
@@ -203,7 +203,7 @@ namespace Birb
 		buttonB.clickComponent.onClick = ButtonBClick;
 		CHECK(buttonB.clickComponent.active);
 
-		buttonB.rect.color = Colors::Blue;
+		buttonB.rect.color = &Colors::Blue;
 		buttonB.renderingPriority = 2;
 
 		ui.AddButton(&buttonB);

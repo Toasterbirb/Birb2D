@@ -24,7 +24,7 @@ namespace Birb
 			{
 				is_empty 	= true;
 				is_collider = false;
-				rect.color	= 0x000050;
+				rect.color	= &Colors::DarkBlue;
 			}
 
 			bool is_empty;
