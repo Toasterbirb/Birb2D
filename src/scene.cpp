@@ -26,6 +26,15 @@ namespace Birb
 		SortObjects();
 	}
 
+	void Scene::AddObjectQuick(SceneObject* obj)
+	{
+		objects.push_back(obj);
+
+		/* If the positionOffset has changed, apply that to new objects */
+		if (positionOffset != Vector2(0, 0))
+			obj->SetPos(positionOffset);
+	}
+
 	void Scene::AddObject(SceneObject* obj[], int objCount)
 	{
 		for (int i = 0; i < objCount; ++i)

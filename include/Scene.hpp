@@ -11,8 +11,9 @@ namespace Birb
 	public:
 		Scene();
 		Scene(const bool& isActive);
-		void AddObject(SceneObject* obj);
-		void AddObject(SceneObject** obj, int objCount);
+		void AddObject(SceneObject* obj); ///< Add SceneObject to the scene and sort the scene
+		void AddObjectQuick(SceneObject* obj); ///< Add SceneObject to the scene, but skip sorting
+		void AddObject(SceneObject** obj, int objCount); ///< Add multiple SceneObjects to the scene and sort the scene
 		std::vector<SceneObject*> GetObjects() const;
 
 		int ObjectCount() const;
@@ -28,9 +29,9 @@ namespace Birb
 
 		void Clear(); ///< Empty the scene
 		void Render() const; ///< Render all objects in the scene if the scene is active
+		void SortObjects(); ///< Sort objects according to their priority
 
 	private:
-		void SortObjects(); ///< Sort objects according to their priority
 
 		std::vector<SceneObject*> objects;
 		bool active;

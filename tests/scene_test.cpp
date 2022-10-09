@@ -201,4 +201,52 @@ namespace Birb
 		CHECK(sortedList[4] == &sceneA);
 		CHECK(sortedList[5] == &sceneB);
 	}
+
+	TEST_CASE("Add objects to the scene without sorting")
+	{
+		Scene testScene;
+
+		Scene sceneA;
+		sceneA.renderingPriority = 4;
+		testScene.AddObjectQuick(&sceneA);
+
+		Scene sceneB;
+		sceneB.renderingPriority = 10;
+		testScene.AddObjectQuick(&sceneB);
+
+		Scene sceneC;
+		sceneC.renderingPriority = -2;
+		testScene.AddObjectQuick(&sceneC);
+
+		Scene sceneD;
+		sceneD.renderingPriority = 0;
+		testScene.AddObjectQuick(&sceneD);
+
+		Scene sceneE;
+		sceneE.renderingPriority = 2;
+		testScene.AddObjectQuick(&sceneE);
+
+		Scene sceneF;
+		sceneF.renderingPriority = 2;
+		testScene.AddObjectQuick(&sceneF);
+
+		std::vector<SceneObject*> objList = testScene.GetObjects();
+		CHECK(objList[0] == &sceneA);
+		CHECK(objList[1] == &sceneB);
+		CHECK(objList[2] == &sceneC);
+		CHECK(objList[3] == &sceneD);
+		CHECK(objList[4] == &sceneE);
+		CHECK(objList[5] == &sceneF);
+
+		/* Sort the list manually */
+		testScene.SortObjects();
+
+		std::vector<SceneObject*> sortedList = testScene.GetObjects();
+		CHECK(sortedList[0] == &sceneC);
+		CHECK(sortedList[1] == &sceneD);
+		CHECK(sortedList[2] == &sceneE);
+		CHECK(sortedList[3] == &sceneF);
+		CHECK(sortedList[4] == &sceneA);
+		CHECK(sortedList[5] == &sceneB);
+	}
 }
