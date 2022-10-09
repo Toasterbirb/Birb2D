@@ -45,6 +45,11 @@ namespace Birb
 		SortObjects();
 	}
 
+	void Scene::PreAllocate(const int& objCount)
+	{
+		objects.reserve(objCount);
+	}
+
 	std::vector<SceneObject*> Scene::GetObjects() const
 	{
 		return objects;

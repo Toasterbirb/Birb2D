@@ -205,6 +205,7 @@ namespace Birb
 	TEST_CASE("Add objects to the scene without sorting")
 	{
 		Scene testScene;
+		testScene.PreAllocate(6);
 
 		Scene sceneA;
 		sceneA.renderingPriority = 4;

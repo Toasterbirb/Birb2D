@@ -14,6 +14,9 @@ namespace Birb
 		void AddObject(SceneObject* obj); ///< Add SceneObject to the scene and sort the scene
 		void AddObjectFast(SceneObject* obj); ///< Add SceneObject to the scene, but skip sorting
 		void AddObject(SceneObject** obj, int objCount); ///< Add multiple SceneObjects to the scene and sort the scene
+		void PreAllocate(const int& objCount); ///< If you know approximately how many objects you are going to add
+											   /// pre-allocating the memory can help reduce unnecessary std::vector
+											   /// resizing
 		std::vector<SceneObject*> GetObjects() const;
 
 		int ObjectCount() const;
