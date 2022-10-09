@@ -4,16 +4,12 @@
 namespace Birb
 {
 	Scene::Scene()
-	{
-		active = true;
-		positionOffset = {0, 0};
-	}
+	:active(true), positionOffset(0, 0)
+	{}
 
 	Scene::Scene(const bool& isActive)
-	:active(isActive)
-	{
-		positionOffset = {0, 0};
-	}
+	:active(isActive), positionOffset(0, 0)
+	{}
 
 	void Scene::AddObject(SceneObject* obj)
 	{
@@ -23,7 +19,12 @@ namespace Birb
 		if (positionOffset != Vector2(0, 0))
 			obj->SetPos(positionOffset);
 
-		SortObjects();
+		/* If the object has non-zero rendering priority, enable scene sorting */
+		if (obj->renderingPriority != 0)
+			needs_sorting = true;
+
+		if (needs_sorting)
+			SortObjects();
 	}
 
 	void Scene::AddObjectFast(SceneObject* obj)

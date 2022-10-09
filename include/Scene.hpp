@@ -32,6 +32,8 @@ namespace Birb
 		void SortObjects(); ///< Sort objects according to their priority
 
 	private:
+		bool needs_sorting; ///< Set this to true if a SceneObject gets added with
+							/// rendering priority != 0
 
 		std::vector<SceneObject*> objects;
 		bool active;
