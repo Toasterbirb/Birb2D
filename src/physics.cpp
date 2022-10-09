@@ -15,10 +15,7 @@ namespace Birb
 			/* Check the Y-axis */
 			if (rectA.y + rectA.h < rectB.y)
 				return false;
-			else if (rectA.y > rectB.y + rectB.h)
-				return false;
-
-			return true;
+			return !(rectA.y > rectB.y + rectB.h);
 		}
 
 		bool RectCollision(const Birb::Rect rects[], const int& size)
