@@ -32,6 +32,7 @@ namespace Birb
 			obj[i]->SetPos(positionOffset);
 
 		this->objects.insert(std::end(this->objects), obj, obj + objCount);
+		SortObjects();
 	}
 
 	std::vector<SceneObject*> Scene::GetObjects() const
