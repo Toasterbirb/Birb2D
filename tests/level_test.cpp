@@ -14,6 +14,6 @@ namespace Birb
 
 		CHECK(level.GetTile({ 1, 1 }).is_collider);
 		CHECK_FALSE(level.GetTile({ 1, 1 }).is_empty);
-		CHECK(level.GetTile({ 1, 1 }).rect.color == &Colors::DarkBlue);
+		CHECK(level.GetTile({ 1, 1 }).rect.color == 0x000050);
 	}
 }

@@ -14,7 +14,7 @@ namespace Birb
 	public:
 		Rect();
 		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h);
-		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, Color& color);
+		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color);
 
 		std::string toString() const;
 		Polygon toPolygon() const;
@@ -24,7 +24,7 @@ namespace Birb
 		SDL_Rect getSDLRect() const;
 
 		float x, y, w, h;
-		Color* color;
+		Color color;
 
 		bool operator==(const Rect& other) const
 		{

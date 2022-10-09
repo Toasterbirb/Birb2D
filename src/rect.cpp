@@ -7,17 +7,17 @@ namespace Birb
 	Rect::Rect()
 	:x(0.0f), y(0.0f), w(0.0f), h(0.0f)
 	{
-		color = &Colors::White;
+		color = Color(255, 255, 255);
 	}
 
 	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h)
 	:x(p_x), y(p_y), w(p_w), h(p_h)
 	{
-		color = &Colors::White;
+		color = Color(255, 255, 255);
 	}
 
-	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, Color& color)
-	:x(p_x), y(p_y), w(p_w), h(p_h), color(&color)
+	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color)
+	:x(p_x), y(p_y), w(p_w), h(p_h), color(color)
 	{}
 
 	std::string Rect::toString() const
@@ -68,7 +68,7 @@ namespace Birb
 
 	void Rect::RenderFunc()
 	{
-		Render::DrawRect(*color, *this);
+		Render::DrawRect(color, *this);
 	}
 
 	void Rect::SetPos(const Vector2& delta)

@@ -6,7 +6,6 @@
 namespace Birb
 {
 	static const std::string res_base_path = "./res/birb2d_res";
-	static Color backgroundColor(0xaab9bd);
 
 	Splash::Splash(Window& window, bool isCustom)
 	:duration(2.0f), isCustom(false), window(window)
@@ -15,7 +14,7 @@ namespace Birb
 		if (!isCustom)
 		{
 			background_plane = Entity("Background plane", Rect(0, 0, window.dimensions.x, window.dimensions.y));
-			background_plane.rect.color = &backgroundColor;
+			background_plane.rect.color = 0xaab9bd;
 			background_plane.renderingPriority = -1;
 
 			Texture birb2d_logo_tex(res_base_path + "/logo.png");
