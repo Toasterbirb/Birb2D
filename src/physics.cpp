@@ -7,15 +7,14 @@ namespace Birb
 		bool RectCollision(const Rect& rectA, const Rect& rectB)
 		{
 			/* Check the X-axis */
-			if (rectA.x + rectA.w < rectB.x)
-				return false;
-			else if (rectA.x > rectB.x + rectB.w)
-				return false;
+			bool x_left = !(rectA.x + rectA.w < rectB.x);
+			bool x_right = !(rectA.x > rectB.x + rectB.w);
 
 			/* Check the Y-axis */
-			if (rectA.y + rectA.h < rectB.y)
-				return false;
-			return !(rectA.y > rectB.y + rectB.h);
+			bool y_left = !(rectA.y + rectA.h < rectB.y);
+			bool y_right = !(rectA.y > rectB.y + rectB.h);
+
+			return (x_left + x_right + y_left + y_right > 3);
 		}
 
 		bool RectCollision(const Birb::Rect rects[], const int& size)
