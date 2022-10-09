@@ -7,13 +7,13 @@ namespace Birb
 	Rect::Rect()
 	:x(0.0f), y(0.0f), w(0.0f), h(0.0f)
 	{
-		color = Color(0xFFFFFF);
+		color = Color(255, 255, 255);
 	}
 
 	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h)
 	:x(p_x), y(p_y), w(p_w), h(p_h)
 	{
-		color = Color(0xFFFFFF);
+		color = Color(255, 255, 255);
 	}
 
 	Rect::Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color)
