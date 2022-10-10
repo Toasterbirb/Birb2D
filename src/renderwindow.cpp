@@ -3,7 +3,11 @@
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
 #include "Physics.hpp"
+#include "microprofile.h"
 #include <cstring>
+
+#define PROFILER_GROUP "Rendering"
+#define PROFILER_COLOR MP_BLUE
 
 namespace Birb
 {
@@ -19,6 +23,8 @@ namespace Birb
 	Window::Window(const std::string& p_title, const Vector2Int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
 	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Create a new window", PROFILER_COLOR);
+
 #ifdef DEBUG
 		Debug::Log("Creating window '" + win_title + "'...");
 #endif
@@ -154,6 +160,7 @@ namespace Birb
 	void Window::Display()
 	{
 		SDL_RenderPresent(Global::RenderVars::Renderer);
+		MicroProfileFlip(nullptr);
 	}
 
 	Vector2Int Window::CursorPosition() const
@@ -305,6 +312,7 @@ namespace Birb
 
 	bool Render::DrawEntity(Entity& entity)
 	{
+		MICROPROFILE_SCOPEI("Rendering", "Draw entity", MP_BLUE);
 		if (!entity.active)
 			return true;
 

@@ -19,3 +19,6 @@
 [submodule "vendor/seed"]
 	path = vendor/seed
 	url = git@github.com:toasterbirb/seed.git
+[submodule "vendor/microprofile"]
+	path = vendor/microprofile
+	url = git@github.com:jonasmr/microprofile.git

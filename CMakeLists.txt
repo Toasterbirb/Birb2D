@@ -7,6 +7,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+find_program(CCACHE_FOUND ccache)
+if(CCACHE_FOUND)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+endif(CCACHE_FOUND)
+
 option(SYSTEM_SDL "Link Birb2D dynamically against system SDL libraries instead of
 compiling them from source" OFF)
 option(STATIC_SDL "Use static linking for SDL" ON)
@@ -17,6 +22,7 @@ option(DEBUG "Enable some extra debug output" ON)
 option(RELEASE "Compile a release build" OFF)
 option(JOYSTICK "Enable joystick support." OFF)
 option(WINDOWS_BUILD "Enable some windows specific options" OFF)
+option(PROFILER "Enable the profiler timers" OFF)
 
 if (DEBUG)
 	add_definitions(-DDEBUG)
@@ -47,10 +53,19 @@ if (WINDOWS_BUILD)
 	set(UTILS OFF)
 endif()
 
-find_program(CCACHE_FOUND ccache)
-if(CCACHE_FOUND)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-endif(CCACHE_FOUND)
+if (PROFILER)
+	# Enable microprofiler
+	add_compile_definitions(MICROPROFILE_ENABLED=1)
+else()
+	# Disable microprofiler
+	add_compile_definitions(MICROPROFILE_ENABLED=0)
+endif()
+
+# Include the microprofiler. It should get disabled by the
+# MICROPROFILER_ENABLED variable if it is set to zero
+add_subdirectory(vendor/microprofile)
+include_directories(vendor/microprofile)
+
 
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
@@ -149,7 +164,23 @@ set(CORE_SRC
 
 add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
-target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
+
+
+if (PROFILER)
+	target_link_libraries(birb2d microprofile)
+
+	# Compiler with less warnings when using microprofile. Microprofile
+	# doesn't compile with some warnings set as errors
+	target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align
+		-Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2
+		-Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs
+		-Wnoexcept -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Werror -Wno-unused)
+else()
+	target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align
+		-Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2
+		-Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs
+		-Wnoexcept -Wno-old-cast-style -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
+endif()
 
 target_link_libraries(birb2d
 	#SDL2
