@@ -3,6 +3,10 @@
 #include "Logger.hpp"
 #include "Renderwindow.hpp"
 #include "Values.hpp"
+#include "microprofile.h"
+
+#define PROFILER_GROUP "Entities"
+#define PROFILER_COLOR MP_LIGHTGREEN
 
 namespace Birb
 {
@@ -28,6 +32,8 @@ namespace Birb
 
 	bool Entity::SetText(const std::string& newText)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Set TextComponent text", PROFILER_COLOR);
+
 		/* Don't do anything if the text hasn't changed at all */
 		if (textComponent.text == newText)
 			return true;
@@ -48,6 +54,8 @@ namespace Birb
 
 	void Entity::SetColor(Color* color)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Set entity TextComponent color", PROFILER_COLOR);
+
 		/* Don't do anything if the color hasn't changed at all */
 		if (color->a == textComponent.color->a
 			&& color->r == textComponent.color->r
@@ -67,6 +75,7 @@ namespace Birb
 
 	void Entity::CenterRelativeTo(const Rect& rect)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Center entity relative to another entity", PROFILER_COLOR);
 		Vector2Int textureDimensions = sprite.dimensions();
 		this->rect.x = ((rect.w / 2) - (textureDimensions.x / 2.0)) + rect.x;
 		this->rect.y = ((rect.h / 2) - (textureDimensions.y / 2.0)) + rect.y;
@@ -74,6 +83,7 @@ namespace Birb
 
 	Entity::Entity()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
 		name = "Default Entity";
 		SetBaseEntityValues();
 	}
@@ -81,6 +91,7 @@ namespace Birb
 	Entity::Entity(const std::string& p_name)
 	:name(p_name)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
 		SetBaseEntityValues();
 	}
 
@@ -88,18 +99,21 @@ namespace Birb
 	Entity::Entity(const std::string& p_name, const Rect& rect)
 	:name(p_name), rect(rect)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
 		SetBaseEntityValues();
 	}
 
 	Entity::Entity(const std::string& name, const Rect& rect, Texture texture)
 	:name(name), rect(rect), sprite(texture)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with Texture", PROFILER_COLOR);
 		SetBaseEntityValues();
 	}
 
 	Entity::Entity(const std::string& name, const Vector2Int& pos, Texture texture)
 	:name(name), sprite(texture)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with Texture", PROFILER_COLOR);
 		SetBaseEntityValues();
 		rect.x = pos.x;
 		rect.y = pos.y;
@@ -112,6 +126,8 @@ namespace Birb
 	Entity::Entity(const std::string& name, const Vector2Int& pos, Texture texture, const EntityComponent::Animation& animationComponent)
 	:name(name), sprite(texture), animationComponent(animationComponent)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with AnimationComponent", PROFILER_COLOR);
+
 		/* Load the text sprite */
 		SetBaseEntityValues();
 		//this->animationComponent = animationComponent;
@@ -125,6 +141,8 @@ namespace Birb
 	Entity::Entity(const std::string& p_name, const Vector2Int& pos, const EntityComponent::Text& p_textComponent)
 	:name(p_name)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with TextComponent", PROFILER_COLOR);
+
 		/* Load the text sprite */
 		SetBaseEntityValues();
 		textComponent = p_textComponent;
@@ -138,6 +156,8 @@ namespace Birb
 
 	bool Entity::LoadSprite()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Load sprite", PROFILER_COLOR);
+
 		/* There's a text component. Let's generate a text sprite for it */
 		if (textComponent.text != "")
 		{
@@ -164,6 +184,8 @@ namespace Birb
 
 	bool Entity::ReloadSprite()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Reload sprite", PROFILER_COLOR);
+
 		/* Destroy the old sprite */
 		sprite.Destroy();
 
