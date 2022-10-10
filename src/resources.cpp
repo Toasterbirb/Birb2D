@@ -3,7 +3,7 @@
 #include "microprofile.h"
 
 #define PROFILER_GROUP "Resources"
-#define PROFILER_COLOR MP_LIGHTRED
+#define PROFILER_COLOR MP_RED
 
 namespace Birb
 {
