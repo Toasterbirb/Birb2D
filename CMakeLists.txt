@@ -138,6 +138,7 @@ set(CORE_SRC
 	src/color.cpp
 	src/diagnostics.cpp
 	src/entity.cpp
+	src/entitycomponent.cpp
 	src/filesystem.cpp
 	src/font.cpp
 	src/graphs.cpp

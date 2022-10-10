@@ -4,6 +4,7 @@
 #include "Color.hpp"
 #include "Diagnostics.hpp"
 #include "Entity.hpp"
+#include "EntityComponent.hpp"
 #include "Filesystem.hpp"
 #include "Font.hpp"
 #include "Graphs.hpp"
