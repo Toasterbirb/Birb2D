@@ -40,6 +40,16 @@ namespace Birb
 		return Polygon(points, 4);
 	}
 
+	std::vector<Line> Rect::toLines() const
+	{
+		std::vector<Line> lines(4);
+		lines[0] = (Line({ x, 		y 	}, 		{ x + w, 	y }));
+		lines[1] = (Line({ x + w, 	y 	}, 		{ x + w, 	y + h }));
+		lines[2] = (Line({ x + w, 	y + h }, 	{ x, 		y + h }));
+		lines[3] = (Line({ x, 		y + h }, 	{ x, 		y }));
+		return lines;
+	}
+
 	Rect Rect::getInt() const
 	{
 		Rect roundedRect;

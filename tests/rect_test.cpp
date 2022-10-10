@@ -68,6 +68,25 @@ namespace Birb
 		CHECK(polygonD.points[3] == Vector2(6, 6));
 	}
 
+	TEST_CASE("Rect to lines")
+	{
+		Rect rectA(0, 0, 4, 2);
+		std::vector<Line> lines = rectA.toLines();
+
+		CHECK(lines[0] == Line({0, 0}, {4, 0}));
+		CHECK(lines[1] == Line({4, 0}, {4, 2}));
+		CHECK(lines[2] == Line({4, 2}, {0, 2}));
+		CHECK(lines[3] == Line({0, 2}, {0, 0}));
+
+		Rect rectB(-2, -2, 3, 4);
+		lines = rectB.toLines();
+
+		CHECK(lines[0] == Line({-2, -2}, {1, -2}));
+		CHECK(lines[1] == Line({1, -2}, {1, 2}));
+		CHECK(lines[2] == Line({1, 2}, {-2, 2}));
+		CHECK(lines[3] == Line({-2, 2}, {-2, -2}));
+	}
+
 	TEST_CASE("Rect comparison")
 	{
 		Rect rectA(10, 10, 10, 10);

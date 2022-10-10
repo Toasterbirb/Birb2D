@@ -3,6 +3,7 @@
 #include "SDL.hpp"
 
 #include "Color.hpp"
+#include "Line.hpp"
 #include "Polygon.hpp"
 #include "SceneObject.hpp"
 #include "Vector.hpp"
@@ -18,6 +19,7 @@ namespace Birb
 
 		std::string toString() const;
 		Polygon toPolygon() const;
+		std::vector<Line> toLines() const; ///< Returns the four sides of the rect as lines
 		Rect getInt() const;
 		Vector2 centerPoint() const;
 
