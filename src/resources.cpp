@@ -1,10 +1,16 @@
 #include "Resources.hpp"
 #include "Logger.hpp"
+#include "microprofile.h"
+
+#define PROFILER_GROUP "Resources"
+#define PROFILER_COLOR MP_LIGHTRED
 
 namespace Birb
 {
 	SDL_Texture* Resources::LoadTexture(const std::string& p_filePath)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Load SDL_Texture", PROFILER_COLOR);
+
 		SDL_Texture* texture = NULL;
 		texture = IMG_LoadTexture(Global::RenderVars::Renderer, p_filePath.c_str());
 
@@ -20,6 +26,8 @@ namespace Birb
         int* height,
         int* pitch)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Copy texture pixels to Uint8 array", PROFILER_COLOR);
+
 		Uint8* pixels = 0;
 		SDL_Surface* tmpSurface = 0;
 		SDL_Texture* texture = 0;
@@ -63,6 +71,8 @@ namespace Birb
 
 	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color, int wrapLength)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Render text sprite", PROFILER_COLOR);
+
 		/* Check if the arguments are valid */
 		if (!font.isLoaded())
 		{
@@ -94,6 +104,8 @@ namespace Birb
 
 	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color, const Color& bgColor)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Render text sprite with background color", PROFILER_COLOR);
+
 		/* Check if the arguments are valid */
 		if (!font.isLoaded())
 		{

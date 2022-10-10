@@ -1,5 +1,9 @@
 #include "Scene.hpp"
 #include "Renderwindow.hpp"
+#include "microprofile.h"
+
+#define PROFILER_GROUP "Scenes"
+#define PROFILER_COLOR MP_WHITE
 
 namespace Birb
 {
@@ -13,6 +17,8 @@ namespace Birb
 
 	void Scene::AddObject(SceneObject* obj)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add SceneObject", PROFILER_COLOR);
+
 		objects.push_back(obj);
 
 		/* If the positionOffset has changed, apply that to new objects */
@@ -28,6 +34,8 @@ namespace Birb
 
 	void Scene::AddObjectFast(SceneObject* obj)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add SceneObject (fast)", PROFILER_COLOR);
+
 		objects.push_back(obj);
 
 		/* If the positionOffset has changed, apply that to new objects */
@@ -36,6 +44,8 @@ namespace Birb
 
 	void Scene::AddObject(SceneObject* obj[], int objCount)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add multiple SceneObjects", PROFILER_COLOR);
+
 		for (int i = 0; i < objCount; ++i)
 			obj[i]->SetPos(positionOffset);
 
@@ -60,6 +70,8 @@ namespace Birb
 
 	void Scene::Activate()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Activate the scene", PROFILER_COLOR);
+
 		active = true;
 
 		/* Mark the scene as active in scene objects */
@@ -69,6 +81,8 @@ namespace Birb
 
 	void Scene::Deactivate()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Deactivate the scene", PROFILER_COLOR);
+
 		active = false;
 
 		/* Mark the scene as inactive in scene objects */
@@ -78,6 +92,8 @@ namespace Birb
 
 	void Scene::Toggle()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Toggle the scene", PROFILER_COLOR);
+
 		active = !active;
 
 		/* Toggle the scene statuc in scene objects */
@@ -92,6 +108,8 @@ namespace Birb
 
 	void Scene::SetPosition(const Vector2& newPosition)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Set scene position (set)", PROFILER_COLOR);
+
 		/* Calculate the delta between the current and new position */
 		Vector2 delta = newPosition - positionOffset;
 		positionOffset = positionOffset + delta;
@@ -105,6 +123,8 @@ namespace Birb
 
 	void Scene::Translate(const Vector2& delta)
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Set scene position (translate)", PROFILER_COLOR);
+
 		positionOffset = positionOffset + delta;
 
 		/* Set new positions for all of the scene objects */
@@ -127,6 +147,8 @@ namespace Birb
 
 	void Scene::Render() const
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Render", PROFILER_COLOR);
+
 		/* Skip rendering if the scene isn't active */
 		if (!active)
 			return;
@@ -139,6 +161,8 @@ namespace Birb
 
 	void Scene::SortObjects()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Sort SceneObjects", PROFILER_COLOR);
+
 		SceneObject* tmpObject;
 		int j;
 

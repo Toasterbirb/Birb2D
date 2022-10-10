@@ -2,6 +2,10 @@
 
 #include "Timestep.hpp"
 #include "Values.hpp"
+#include "microprofile.h"
+
+#define PROFILER_GROUP "Timestep"
+#define PROFILER_COLOR MP_BLACK
 
 namespace Birb
 {
@@ -13,6 +17,7 @@ namespace Birb
 
 	void TimeStep::Start()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Begin step", PROFILER_COLOR);
 		startTick = SDL_GetTicks();
 
 		double newTime = utils::hireTimeInSeconds();
@@ -38,6 +43,7 @@ namespace Birb
 
 	void TimeStep::End()
 	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Step delay", PROFILER_COLOR);
 		int frameTicks = SDL_GetTicks() - startTick;
 
 		if (frameTicks < 1000 / mainWindow->refresh_rate)
