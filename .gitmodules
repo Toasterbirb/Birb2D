@@ -16,9 +16,6 @@
 [submodule "vendor/SDL2_gfx"]
 	path = vendor/SDL2_gfx
 	url = https://github.com/Toasterbirb/SDL2_gfx
-[submodule "vendor/seed"]
-	path = vendor/seed
-	url = git@github.com:toasterbirb/seed.git
 [submodule "vendor/microprofile"]
 	path = vendor/microprofile
-	url = git@github.com:jonasmr/microprofile.git
+	url = https://github.com/jonasmr/microprofile
