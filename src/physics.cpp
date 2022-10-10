@@ -1,4 +1,8 @@
 #include "Physics.hpp"
+#include "microprofile.h"
+
+#define PROFILER_GROUP "Physics"
+#define PROFILER_COLOR MP_LIGHTPINK
 
 namespace Birb
 {
@@ -6,6 +10,8 @@ namespace Birb
 	{
 		bool RectCollision(const Rect& rectA, const Rect& rectB)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Rect collision", PROFILER_COLOR);
+
 			/* Check the X-axis */
 			bool x_left = !(rectA.x + rectA.w < rectB.x);
 			bool x_right = !(rectA.x > rectB.x + rectB.w);
@@ -42,6 +48,7 @@ namespace Birb
 
 		bool EntityCollision(const Entity& entityA, const Entity& entityB)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity collision", PROFILER_COLOR);
 			Rect A = entityA.rect;
 			Rect B = entityB.rect;
 
@@ -62,6 +69,7 @@ namespace Birb
 		 * doesn't handle it for some reason. pls fix*/
 		bool LineIntersection(const Line& lineA, const Line& lineB)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Line intersection", PROFILER_COLOR);
 			/* If the two lines are the exact same, they should collide */
 			if (lineA == lineB)
 				return true;
@@ -92,6 +100,7 @@ namespace Birb
 		/* Inspired/yoinked from https://alienryderflex.com/polygon */
 		bool PointInPolygon(Vector2 points[], const int& pointCount, const Vector2& point)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Point in polygon", PROFILER_COLOR);
 			int j = pointCount - 1;
 			bool oddNodes = false; /* If the node count is odd, the point is in the polygon */
 
@@ -114,6 +123,7 @@ namespace Birb
 
 		bool PolygonCollision(Vector2 polygonA[], const int& polygonAsize, Vector2 polygonB[], const int& polygonBsize)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Polygon collision", PROFILER_COLOR);
 			/* First test if any of the points of either polygon is inside of the other one
 			 * start with polygon A and then repeat the process the other way around */
 			for (int i = 0; i < polygonAsize; ++i)
@@ -184,6 +194,8 @@ namespace Birb
 
 		bool CircleCollision(const Circle& circle, const Rect& rect)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Circle collision with a rect", PROFILER_COLOR);
+
 			/* Convert the rect into a polygon because it makes life a bit easier */
 			Polygon polygon = rect.toPolygon();
 
@@ -213,6 +225,8 @@ namespace Birb
 
 		bool CircleCollision(const Circle& circle, const Line& line)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Circle collision with a line", PROFILER_COLOR);
+
 			/* Check if either of the line points are inside of the circle */
 			if (PointInCircle(line.pointA, circle) || PointInCircle(line.pointB, circle))
 				return true;
@@ -260,6 +274,8 @@ namespace Birb
 
 		bool CircleCollision(const Circle& circle, const Polygon& polygon)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Circle collision with a polygon", PROFILER_COLOR);
+
 			/* Check if any of the polygon points are inside of the circle */
 			for (int i = 0; i < polygon.size(); i++)
 			{
