@@ -23,8 +23,6 @@ namespace Birb
 	Window::Window(const std::string& p_title, const Vector2Int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
 	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Create a new window", PROFILER_COLOR);
-
 #ifdef DEBUG
 		Debug::Log("Creating window '" + win_title + "'...");
 #endif
@@ -159,6 +157,7 @@ namespace Birb
 
 	void Window::Display()
 	{
+		MICROPROFILE_SCOPEI("Rendering", "Window display", MP_BLUE);
 		SDL_RenderPresent(Global::RenderVars::Renderer);
 		MicroProfileFlip(nullptr);
 	}
@@ -200,6 +199,7 @@ namespace Birb
 
 	void Window::EventTick(const SDL_Event& event, bool* GameRunning)
 	{
+		MICROPROFILE_SCOPEI("Rendering", "Window event tick", MP_BLUE);
 		switch (event.type)
 		{
 			/* Handle window resizing */
@@ -254,6 +254,7 @@ namespace Birb
 
 	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
 	{
+		MICROPROFILE_SCOPEI("Rendering", "Handle animations", MP_BLUE);
 		Vector2Int atlasPos = entity->getAtlasPosition(entity->animationComponent.frameIndex);
 		src->x = atlasPos.x;
 		src->y = atlasPos.y;
@@ -298,6 +299,7 @@ namespace Birb
 
 	void DrawProgressBar(const Entity& entity)
 	{
+		MICROPROFILE_SCOPEI("Rendering", "Draw progress bar", MP_BLUE);
 		/* Draw progress bar background unless the bar is full */
 		if (entity.progressBarComponent.value < entity.progressBarComponent.maxValue)
 			Render::DrawRect(*entity.progressBarComponent.backgroundColor, entity.rect);
@@ -421,6 +423,7 @@ namespace Birb
 
 		void DrawRect(const Color& color, const Rect& dimensions)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw rect", MP_BLUE);
 			SetRenderDrawColor(color);
 			SDL_Rect rectangle = dimensions.getSDLRect();
 			SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
@@ -429,6 +432,7 @@ namespace Birb
 
 		void DrawRect(const Color& color, const Rect& dimensions, const int& width)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw hollow rect", MP_BLUE);
 			DrawRect(color, Rect(dimensions.x, dimensions.y, dimensions.w, width)); /* Top */
 			DrawRect(color, Rect(dimensions.x, dimensions.y + dimensions.h - width, dimensions.w, width)); /* Bottom */
 			DrawRect(color, Rect(dimensions.x, dimensions.y, width, dimensions.h)); /* Left */
@@ -437,6 +441,7 @@ namespace Birb
 
 		void DrawLine(const Color& color, const Vector2Int& pointA, const Vector2Int& pointB)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw line (int)", MP_BLUE);
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
 			ResetDrawColor();
@@ -444,6 +449,7 @@ namespace Birb
 
 		void DrawLine(const Color& color, const Vector2& pointA, const Vector2& pointB)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw line (float)", MP_BLUE);
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLineF(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
 			ResetDrawColor();
@@ -451,6 +457,7 @@ namespace Birb
 
 		void DrawLine(const Line& line)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw line (float)", MP_BLUE);
 			SetRenderDrawColor(line.color);
 			SDL_RenderDrawLineF(Global::RenderVars::Renderer, line.pointA.x, line.pointA.y, line.pointB.x, line.pointB.y);
 			ResetDrawColor();
@@ -458,6 +465,7 @@ namespace Birb
 
 		void DrawLine(const Line& line, const int& thickness)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw polygon line", MP_BLUE);
 			/* Use a polygon to draw a thicker line */
 			const int POINT_COUNT = 4;
 			float pointOffset = thickness / 2.0;
@@ -472,6 +480,7 @@ namespace Birb
 
 		void DrawLines(const Color& color, Vector2Int* points, const int& pointCount)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw multiple lines", MP_BLUE);
 			SDL_Point* sdlPoints = new SDL_Point[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
@@ -486,6 +495,7 @@ namespace Birb
 
 		void DrawLines(const Color& color, Vector2* points, const int& pointCount)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw multiple lines", MP_BLUE);
 			SDL_FPoint* sdlPoints = new SDL_FPoint[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
@@ -505,6 +515,7 @@ namespace Birb
 
 		bool DrawCircle(const Color& color, const Vector2Int& pos, const int& radius)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw multiple lines", MP_BLUE);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
 			{
@@ -520,6 +531,7 @@ namespace Birb
 
 		bool DrawPolygon(const Color& color, Vector2Int* points, const int& pointCount)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw polygon", MP_BLUE);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
 			/* Convert Vector2Int points into Sint16 vectors */
@@ -553,6 +565,7 @@ namespace Birb
 
 		bool DrawPolygon(const Color& color, const std::vector<Vector2Int>& points)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw polygon", MP_BLUE);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
 			/* Convert Vector2Int points into Sint16 vectors */
@@ -588,6 +601,7 @@ namespace Birb
 		 * round the floating point vlues into integers */
 		bool DrawPolygon(const Color& color, Vector2* points, const int& pointCount)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw polygon", MP_BLUE);
 			Vector2Int* intPoints = new Vector2Int[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
@@ -601,6 +615,7 @@ namespace Birb
 
 		bool DrawPolygon(const Color& color, const std::vector<Vector2>& points)
 		{
+			MICROPROFILE_SCOPEI("Rendering", "Draw polygon", MP_BLUE);
 			Vector2Int* intPoints = new Vector2Int[points.size()];
 			for (size_t i = 0; i < points.size(); ++i)
 			{
