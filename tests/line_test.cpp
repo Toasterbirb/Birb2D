@@ -63,6 +63,9 @@ namespace Birb
 
 		Line lineC(Vector2(0, 0), Vector2(4, 0));
 		CHECK(lineC.boundingBox() == Rect(0, 0, 4, 0));
+
+		Line lineD(Vector2(1, 2), Vector2(5, 1));
+		CHECK(lineD.boundingBox() == Rect(1, 1, 4, 1));
 	}
 
 	TEST_CASE("Line comparisons")

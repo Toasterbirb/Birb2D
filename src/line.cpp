@@ -44,18 +44,18 @@ namespace Birb
 		/* Find the top left most point */
 		Rect result;
 
-		if (pointA.x <= pointB.x && pointA.y <= pointB.y)
-		{
-			result = pointA;
-			result.w = pointB.x - pointA.x;
-			result.h = pointB.y - pointA.y;
-		}
+		if (pointA.x <= pointB.x)
+			result.x = pointA.x;
 		else
-		{
-			result = pointB;
-			result.w = pointA.x - pointB.x;
-			result.h = pointA.y - pointB.y;
-		}
+			result.x = pointB.x;
+
+		if (pointA.y <= pointB.y)
+			result.y = pointA.y;
+		else
+			result.y = pointB.y;
+
+		result.w = std::abs(pointA.x - pointB.x);
+		result.h = std::abs(pointA.y - pointB.y);
 
 
 		return result;
