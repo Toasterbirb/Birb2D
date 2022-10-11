@@ -20,6 +20,8 @@ namespace Birb
 		Color color; ///< In case the line will be rendered
 		int thickness;
 
+		double length() const;
+
 		bool operator==(const Line& other) const
 		{
 			return (pointA == other.pointA && pointB == other.pointB);

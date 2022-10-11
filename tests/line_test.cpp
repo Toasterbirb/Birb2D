@@ -1,5 +1,6 @@
 #include "doctest.h"
 #include "Line.hpp"
+#include "Math.hpp"
 
 namespace Birb
 {
@@ -38,6 +39,18 @@ namespace Birb
 			CHECK(lineB.color == color);
 			CHECK(lineB.renderingPriority == 10);
 		}
+	}
+
+	TEST_CASE("Get line length")
+	{
+		Line lineA(Vector2(1, 1), Vector2(8, 2));
+		CHECK(Math::Round(lineA.length(), 2) == 7.07);
+
+		Line lineB(Vector2(7, 2), Vector2(4, -1));
+		CHECK(Math::Round(lineB.length(), 2) == 4.24);
+
+		Line lineC(Vector2(0, 0), Vector2(4, 0));
+		CHECK(lineC.length() == 4);
 	}
 
 	TEST_CASE("Line comparisons")

@@ -33,6 +33,11 @@ namespace Birb
 		this->renderingPriority = renderingPriority;
 	}
 
+	double Line::length() const
+	{
+		return Math::VectorDistance(pointA, pointB);
+	}
+
 	void Line::RenderFunc()
 	{
 		/* Don't draw invisible lines */
