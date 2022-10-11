@@ -53,6 +53,18 @@ namespace Birb
 		CHECK(lineC.length() == 4);
 	}
 
+	TEST_CASE("Get line bounding box as a rect")
+	{
+		Line lineA(Vector2(1, 1), Vector2(8, 2));
+		CHECK(lineA.boundingBox() == Rect(1, 1, 7, 1));
+
+		Line lineB(Vector2(7, 2), Vector2(4, -1));
+		CHECK(lineB.boundingBox() == Rect(4, -1, 3, 3));
+
+		Line lineC(Vector2(0, 0), Vector2(4, 0));
+		CHECK(lineC.boundingBox() == Rect(0, 0, 4, 0));
+	}
+
 	TEST_CASE("Line comparisons")
 	{
 		Line lineA({0, 0}, {5, 0});

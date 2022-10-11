@@ -1,4 +1,5 @@
 #include "Line.hpp"
+#include "Rect.hpp"
 #include "Renderwindow.hpp"
 #include "Logger.hpp"
 
@@ -36,6 +37,28 @@ namespace Birb
 	double Line::length() const
 	{
 		return Math::VectorDistance(pointA, pointB);
+	}
+
+	Rect Line::boundingBox() const
+	{
+		/* Find the top left most point */
+		Rect result;
+
+		if (pointA.x <= pointB.x && pointA.y <= pointB.y)
+		{
+			result = pointA;
+			result.w = pointB.x - pointA.x;
+			result.h = pointB.y - pointA.y;
+		}
+		else
+		{
+			result = pointB;
+			result.w = pointA.x - pointB.x;
+			result.h = pointA.y - pointB.y;
+		}
+
+
+		return result;
 	}
 
 	void Line::RenderFunc()
