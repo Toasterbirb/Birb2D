@@ -14,3 +14,8 @@ target_link_libraries(birb-project birb2d)
 
 # Simple level editor for creating 2D maps
 add_subdirectory(birb-editor)
+
+# Tool for packing assets into binary files
+add_executable(birb-asset-packer birb-asset-packer.cpp)
+target_compile_options(birb-asset-packer PRIVATE -Wall -Wextra -Wpedantic -Werror)
+target_link_libraries(birb-asset-packer birb2d)
