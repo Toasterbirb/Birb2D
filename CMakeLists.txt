@@ -133,6 +133,7 @@ set(CORE_SRC
 	src/Vector/vector3int.cpp
 	src/Vector/vector2.cpp
 	src/Vector/vector2int.cpp
+	src/assetmanager.cpp
 	src/audio.cpp
 	src/circle.cpp
 	src/color.cpp
