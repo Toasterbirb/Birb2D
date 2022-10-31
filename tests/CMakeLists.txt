@@ -13,6 +13,7 @@ add_definitions(-DLIB_SDL)
 
 add_executable(test
 	audio_test.cpp
+	assetmanager_test.cpp
 	circle_test.cpp
 	color_test.cpp
 	doctest_entry.cpp
@@ -34,6 +35,7 @@ add_executable(test
 	scene_test.cpp
 	splash_test.cpp
 	textrendering_test.cpp
+	texture_test.cpp
 	timer_test.cpp
 	ui_test.cpp
 	utils_test.cpp
