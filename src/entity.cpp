@@ -96,24 +96,27 @@ namespace Birb
 	}
 
 	/* FIXME: Write tests for this constructor */
-	Entity::Entity(const std::string& p_name, const Rect& rect)
+	Entity::Entity(const std::string& p_name, const Rect& rect, const int& rendering_priority)
 	:name(p_name), rect(rect)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
+		renderingPriority = rendering_priority;
 		SetBaseEntityValues();
 	}
 
-	Entity::Entity(const std::string& name, const Rect& rect, Texture texture)
+	Entity::Entity(const std::string& name, const Rect& rect, Texture texture, const int& rendering_priority)
 	:name(name), rect(rect), sprite(texture)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with Texture", PROFILER_COLOR);
+		renderingPriority = rendering_priority;
 		SetBaseEntityValues();
 	}
 
-	Entity::Entity(const std::string& name, const Vector2Int& pos, Texture texture)
+	Entity::Entity(const std::string& name, const Vector2Int& pos, Texture texture, const int& rendering_priority)
 	:name(name), sprite(texture)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with Texture", PROFILER_COLOR);
+		renderingPriority = rendering_priority;
 		SetBaseEntityValues();
 		rect.x = pos.x;
 		rect.y = pos.y;
@@ -123,7 +126,7 @@ namespace Birb
 		rect.h = texture.dimensions().y;
 	}
 
-	Entity::Entity(const std::string& name, const Vector2Int& pos, Texture texture, const EntityComponent::Animation& animationComponent)
+	Entity::Entity(const std::string& name, const Vector2Int& pos, Texture texture, const EntityComponent::Animation& animationComponent, const int& rendering_priority)
 	:name(name), sprite(texture), animationComponent(animationComponent)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with AnimationComponent", PROFILER_COLOR);
@@ -136,9 +139,11 @@ namespace Birb
 		rect.y = pos.y;
 		rect.w = animationComponent.spriteSize.x;
 		rect.h = animationComponent.spriteSize.y;
+
+		renderingPriority = rendering_priority;
 	}
 
-	Entity::Entity(const std::string& p_name, const Vector2Int& pos, const EntityComponent::Text& p_textComponent)
+	Entity::Entity(const std::string& p_name, const Vector2Int& pos, const EntityComponent::Text& p_textComponent, const int& rendering_priority)
 	:name(p_name)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with TextComponent", PROFILER_COLOR);
@@ -151,6 +156,7 @@ namespace Birb
 		rect.x = pos.x;
 		rect.y = pos.y;
 
+		renderingPriority = rendering_priority;
 	}
 
 

@@ -22,13 +22,13 @@ namespace Birb
 	public:
 		Entity();
 		Entity(const std::string& p_name); ///< Creates an empty Entity object
-		Entity(const std::string& p_name, const Rect& rect); ///< Creates an empty Entity object with size and position
+		Entity(const std::string& p_name, const Rect& rect, const int& rendering_priority = 0); ///< Creates an empty Entity object with size and position
 
-		Entity(const std::string& name, const Rect& rect, Texture texture);
-		Entity(const std::string& name, const Vector2Int& pos, Texture texture);
-		Entity(const std::string& name, const Vector2Int& pos, Texture texture, const EntityComponent::Animation& animationComponent);
+		Entity(const std::string& name, const Rect& rect, Texture texture, const int& rendering_priority = 0);
+		Entity(const std::string& name, const Vector2Int& pos, Texture texture, const int& rendering_priority = 0);
+		Entity(const std::string& name, const Vector2Int& pos, Texture texture, const EntityComponent::Animation& animationComponent, const int& rendering_priority = 0);
 
-		Entity(const std::string& p_name, const Vector2Int& pos, const EntityComponent::Text& p_textComponent); 	///< Creates a Text Entity using a Text
+		Entity(const std::string& p_name, const Vector2Int& pos, const EntityComponent::Text& p_textComponent, const int& rendering_priority = 0); 	///< Creates a Text Entity using a Text
 
 		/* Make it possible to update the Text */
 		bool SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
