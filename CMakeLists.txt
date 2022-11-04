@@ -66,6 +66,10 @@ endif()
 add_subdirectory(vendor/microprofile)
 
 # Include Cereal
+set(BUILD_DOC OFF CACHE BOOL "Disable compiling cereal docs")
+set(BUILD_SANDBOX OFF CACHE BOOL "Disable compiling cereal sandbox examples")
+set(SKIP_PERFORMANCE_COMPARISON ON CACHE BOOL "Disable compiling cereal
+sandbox performance comparisons")
 add_subdirectory(vendor/cereal)
 
 if (SYSTEM_SDL)
