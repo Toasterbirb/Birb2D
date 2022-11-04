@@ -30,7 +30,11 @@ int main(int argc, char** argv)
 		return 0;
 	}
 
+	/* Some variables */
 	Mode execution_mode = Mode::NONE;
+	std::string res_path;
+	std::string output_path;
+	std::string asset_path;
 
 	/* Make sure that the first argument is an option */
 	for (int i = 1; i < argc; ++i)
@@ -41,26 +45,39 @@ int main(int argc, char** argv)
 			{
 				case (NONE):
 				{
+					/* Options with no additional arguments */
 					switch (argv[i][1])
 					{
 						case('h'):
 							PrintHelp();
 							break;
+					}
 
-						case('p'):
-							execution_mode = Mode::PACKING;
-							break;
+					if (i < argc - 1)
+					{
+						switch (argv[i][1])
+						{
+							case('p'):
+								execution_mode = Mode::PACKING;
+								res_path = argv[i + 1];
+								++i;
+								break;
 
-						case('o'):
-							break;
+							case('o'):
+								output_path = argv[i + 1];
+								++i;
+								break;
 
-						case('i'):
-							execution_mode = Mode::INSPECTING;
-							break;
+							case('i'):
+								execution_mode = Mode::INSPECTING;
+								asset_path = argv[i + 1];
+								++i;
+								break;
 
-						default:
-							PrintInvalidArgument();
-							return 1;
+							default:
+								PrintInvalidArgument();
+								return 1;
+						}
 					}
 
 					break;
@@ -83,4 +100,5 @@ int main(int argc, char** argv)
 			return 1;
 		}
 	}
+
 }
