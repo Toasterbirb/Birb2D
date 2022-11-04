@@ -64,8 +64,9 @@ endif()
 # Include the microprofiler. It should get disabled by the
 # MICROPROFILER_ENABLED variable if it is set to zero
 add_subdirectory(vendor/microprofile)
-include_directories(vendor/microprofile)
 
+# Include Cereal
+add_subdirectory(vendor/cereal)
 
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
@@ -107,23 +108,9 @@ else()
 	include_directories(vendor/SDL/include)
 
 	add_subdirectory(vendor/SDL_image)
-	include_directories(vendor/SDL_image)
-
 	add_subdirectory(vendor/SDL_mixer)
-	include_directories(vendor/SDL_mixer/include)
-
 	add_subdirectory(vendor/SDL_ttf)
-	include_directories(vendor/SDL_ttf)
-
 	add_subdirectory(vendor/SDL2_gfx)
-	include_directories(vendor/SDL2_gfx)
-
-	#include(ExternalProject)
-	#ExternalProject_Add(SDL_gfx
-	#	SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx
-	#	CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL2_gfx/configure --prefix=<INSTALL_DIR>
-	#	BUILD_COMMAND ${MAKE})
-
 endif()
 
 include_directories(include/)

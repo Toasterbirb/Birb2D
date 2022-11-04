@@ -19,3 +19,6 @@
 [submodule "vendor/microprofile"]
 	path = vendor/microprofile
 	url = https://github.com/jonasmr/microprofile
+[submodule "vendor/cereal"]
+	path = vendor/cereal
+	url = https://github.com/USCiLab/cereal
