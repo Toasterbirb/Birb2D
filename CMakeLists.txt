@@ -71,6 +71,7 @@ set(BUILD_SANDBOX OFF CACHE BOOL "Disable compiling cereal sandbox examples")
 set(SKIP_PERFORMANCE_COMPARISON ON CACHE BOOL "Disable compiling cereal
 sandbox performance comparisons")
 add_subdirectory(vendor/cereal)
+include_directories(vendor/cereal/include)
 
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
@@ -183,7 +184,10 @@ target_link_libraries(birb2d
 	microprofile
 )
 
-target_precompile_headers(birb2d PRIVATE include/SDL.hpp include/STD.hpp)
+target_precompile_headers(birb2d PUBLIC
+	include/SDL.hpp
+	include/STD.hpp
+	vendor/cereal/include/cereal/cereal.hpp)
 
 # Compile tests if enabled
 if (TESTS)
