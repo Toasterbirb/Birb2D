@@ -1,5 +1,3 @@
-#include <filesystem>
-#include <fstream>
 #include "Filesystem.hpp"
 #include "Logger.hpp"
 
@@ -61,11 +59,19 @@ namespace Birb
 				std::ifstream file;
 				file.open(fpath, std::ios::in);
 
-				std::string fileContents;
-				file >> fileContents;
+				std::string file_contents;
+				char c;
+				while (file.good())
+				{
+					c = file.get();
+					file_contents += c;
+				}
+
+				/* Fix the null terminator */
+				file_contents.erase(file_contents.size() - 1, 1);
 
 				file.close();
-				return fileContents;
+				return file_contents;
 			}
 
 			bool Write(const std::string& fpath, const std::string& content, const bool& overwrite)
