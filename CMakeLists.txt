@@ -23,6 +23,11 @@ option(RELEASE "Compile a release build" OFF)
 option(JOYSTICK "Enable joystick support." OFF)
 option(WINDOWS_BUILD "Enable some windows specific options" OFF)
 option(PROFILER "Enable the profiler timers" OFF)
+option(BUNDLED_ASSETS "Bundle game assets directly into the game binary" OFF)
+
+if (BUNDLED_ASSETS)
+	add_definitions(-DBUNDLED_ASSETS)
+endif()
 
 if (DEBUG)
 	add_definitions(-DDEBUG)
@@ -61,23 +66,43 @@ else()
 	add_compile_definitions(MICROPROFILE_ENABLED=0)
 endif()
 
+if (STATIC_SDL)
+	set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
+endif()
+
 # Include the microprofiler. It should get disabled by the
 # MICROPROFILER_ENABLED variable if it is set to zero
 add_subdirectory(vendor/microprofile)
 
-# Include Cereal
-set(BUILD_DOC OFF CACHE BOOL "Disable compiling cereal docs")
-set(BUILD_SANDBOX OFF CACHE BOOL "Disable compiling cereal sandbox examples")
-set(SKIP_PERFORMANCE_COMPARISON ON CACHE BOOL "Disable compiling cereal
-sandbox performance comparisons")
-add_subdirectory(vendor/cereal)
-include_directories(vendor/cereal/include)
+# Include libzip and cppcodec
+find_package(ZLIB)
+
+if (${ZLIB_FOUND})
+	set(ZLIB_USE_STATIC_LIBS "ON")
+	option(ENABLE_COMMONCRYPTO "Enable use of CommonCrypto" OFF)
+	option(ENABLE_GNUTLS "Enable use of GnuTLS" OFF)
+	option(ENABLE_MBEDTLS "Enable use of mbed TLS" OFF)
+	option(ENABLE_OPENSSL "Enable use of OpenSSL" OFF)
+	option(ENABLE_WINDOWS_CRYPTO "Enable use of Windows cryptography libraries" OFF)
+	option(ENABLE_BZIP2 "Enable use of BZip2" OFF)
+	option(ENABLE_LZMA "Enable use of LZMA" OFF)
+	option(ENABLE_ZSTD "Enable use of Zstandard" OFF)
+	option(BUILD_TOOLS "Build tools in the src directory (zipcmp, zipmerge,
+	ziptool)" OFF)
+	option(BUILD_REGRESS "Build regression tests" OFF)
+	option(BUILD_EXAMPLES "Build examples" OFF)
+	option(BUILD_DOC "Build documentation" OFF)
+	option(LIBZIP_DO_INSTALL "Install libzip and the related files" OFF)
+	option(SHARED_LIB_VERSIONNING "Add SO version in .so build" OFF)
+	add_subdirectory(vendor/libzip)
+	add_subdirectory(vendor/cppcodec)
+	include_directories(vendor/cppcodec)
+endif()
 
 if (SYSTEM_SDL)
 	add_definitions(-DSYSTEM_SDL)
 else()
 	if (STATIC_SDL)
-		set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
 		set(BUILD_STATIC ON CACHE BOOL "Build static libs")
 
 		set(SDL2IMAGE_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
@@ -164,12 +189,12 @@ if (PROFILER)
 	# Compiler with less warnings when using microprofile. Microprofile
 	# doesn't compile with some warnings set as errors
 	target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align
-		-Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2
+		-Wcast-qual -Wdisabled-optimization -Wformat=2
 		-Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs
 		-Wnoexcept -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Werror -Wno-unused)
 else()
 	target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align
-		-Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2
+		-Wcast-qual -Wdisabled-optimization -Wformat=2
 		-Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs
 		-Wnoexcept -Wno-old-cast-style -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
 endif()
@@ -184,10 +209,13 @@ target_link_libraries(birb2d
 	microprofile
 )
 
+if (${ZLIB_FOUND})
+	target_link_libraries(birb2d zip)
+endif()
+
 target_precompile_headers(birb2d PUBLIC
 	include/SDL.hpp
-	include/STD.hpp
-	vendor/cereal/include/cereal/cereal.hpp)
+	include/STD.hpp)
 
 # Compile tests if enabled
 if (TESTS)

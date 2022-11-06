@@ -14,12 +14,15 @@ namespace Birb
 		ApplicationInfo(const std::string& ApplicationName);
 
 		std::string AppName;
-		std::string ResLocation;
-		void LocateResources();
 	};
 
 	namespace Global
 	{
+		struct FilePaths
+		{
+			static inline std::string Resources = "./res/";
+		};
+
 		struct IsInit
 		{
 			static inline bool SDL = false;

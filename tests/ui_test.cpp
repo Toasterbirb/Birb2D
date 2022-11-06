@@ -37,11 +37,8 @@ namespace Birb
 		ui.AddButton(&button);
 		CHECK(ui.Buttons[0] == &button);
 
-		ApplicationInfo appInfo("Birb2D_tests");
-		appInfo.LocateResources();
-
 		double timeout = 10.0;
-		Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 24);
+		Font font("fonts/freefont/FreeMonoBold.ttf", 24);
 		Entity instruction_text("Instruction text", Vector2Int(100, 100), EntityComponent::Text("*Click* the red square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, &Colors::White));
 
 		Scene testScene;
@@ -111,11 +108,8 @@ namespace Birb
 		ui.AddButton(&button);
 		CHECK(ui.Buttons[0] == &button);
 
-		ApplicationInfo appInfo("Birb2D_tests");
-		appInfo.LocateResources();
-
 		double timeout = 10.0;
-		Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 24);
+		Font font("fonts/freefont/FreeMonoBold.ttf", 24);
 		Entity instruction_text("Instruction text", Vector2Int(100, 100), EntityComponent::Text("*Hover* your cursor over the green square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, &Colors::White));
 
 		Scene testScene;
@@ -211,11 +205,8 @@ namespace Birb
 		CHECK(ui.Buttons[0] == &buttonA);
 		CHECK(ui.Buttons[1] == &buttonB);
 
-		ApplicationInfo appInfo("Birb2D_tests");
-		appInfo.LocateResources();
-
 		double timeout = 10.0;
-		Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 24);
+		Font font("fonts/freefont/FreeMonoBold.ttf", 24);
 		Entity instruction_text("Instruction text", Vector2Int(100, 100), EntityComponent::Text("*Click* the red square!\nThere are two buttons on top of eachother and only one of them should activate.\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, &Colors::White));
 
 		Scene testScene;

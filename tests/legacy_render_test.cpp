@@ -18,8 +18,8 @@ TEST_CASE("Window and rendering functions")
 	Birb::ApplicationInfo appInfo("Birb2D_tests");
 
 	Birb::Window window("Title", Birb::Vector2Int(1280, 720), 60, false);
-	SDL_Texture* texture 	= Birb::Resources::LoadTexture(appInfo.ResLocation + "/textures/birb.png");
-	Birb::Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
+	SDL_Texture* texture 	= Birb::Resources::LoadTexture("textures/birb.png");
+	Birb::Font font("fonts/freefont/FreeMonoBold.ttf", 32);
 
 	Birb::Scene testScene;
 	testScene.Activate();
@@ -154,7 +154,7 @@ TEST_CASE("Window and rendering functions")
 	CHECK_NOTHROW(window.Display());
 	SDL_Delay(1000);
 
-	SDL_Texture* animationSprite = Birb::Resources::LoadTexture(appInfo.ResLocation + "/textures/birb_animation.png");
+	SDL_Texture* animationSprite = Birb::Resources::LoadTexture("textures/birb_animation.png");
 	Birb::Entity animationBirb(
 			"Animated birb",
 			Birb::Vector2Int(100, 100),

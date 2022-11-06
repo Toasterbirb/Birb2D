@@ -1,18 +1,36 @@
 #pragma once
-#include <map>
-#include <string>
-
+#include "STD.hpp"
 #include "Font.hpp"
 #include "Texture.hpp"
 #include "Audio.hpp"
 
+#ifdef BUNDLED_ASSETS
+#include "zip.h"
+#endif
+
 namespace Birb
 {
+	struct Asset
+	{
+		//SDL_RWops* sdl_data;
+		char* buffer;
+		size_t size;
+		void Free();
+	};
+
 	/// Class for managing and loading assets
 	class AssetManager
 	{
 	public:
 		AssetManager(); ///< Initialize and empty asset manager
+
+		static bool InitializeBundledAssets();
+#ifdef BUNDLED_ASSETS
+		static inline std::map<std::string, Asset> assets;
+		static inline std::vector<std::string> asset_list;
+		static SDL_RWops* sdl_mem_read(const std::string& file_path);
+		static void FreeAssets();
+#endif
 
 		/* Textures */
 		void AddTexture(const std::string& name, Texture texture);

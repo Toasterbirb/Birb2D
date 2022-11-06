@@ -19,7 +19,7 @@ namespace Birb
 
 		SUBCASE("Texture constuction with a filepath")
 		{
-			Texture texture("./res/textures/birb.png");
+			Texture texture("textures/birb.png");
 			CHECK(texture.dimensions() == birb_texture_dimensions);
 			CHECK(texture.isLoaded());
 		}
@@ -27,7 +27,7 @@ namespace Birb
 		SUBCASE("Texture construction after creating an empty texture")
 		{
 			Texture texture;
-			texture.LoadTexture("./res/textures/birb.png");
+			texture.LoadTexture("textures/birb.png");
 			CHECK(texture.dimensions() == birb_texture_dimensions);
 			CHECK(texture.isLoaded());
 		}

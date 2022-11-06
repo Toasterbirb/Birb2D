@@ -5,10 +5,8 @@ namespace Birb
 {
 	TEST_CASE("Text rendering")
 	{
-		ApplicationInfo appInfo("Birb2D_tests");
-
 		Window window("Title", Vector2Int(1280, 720), 60, false);
-		Font font(appInfo.ResLocation + "/fonts/freefont/FreeMonoBold.ttf", 32);
+		Font font("fonts/freefont/FreeMonoBold.ttf", 32);
 
 		Scene testScene;
 		testScene.Activate();

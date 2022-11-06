@@ -5,7 +5,7 @@
 
 namespace Birb
 {
-	static const std::string res_base_path = "./res/birb2d_res";
+	static const std::string res_base_path = "birb2d_res";
 
 	Splash::Splash(Window& window, bool isCustom)
 	:duration(2.0f), isCustom(false), window(window)

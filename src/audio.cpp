@@ -3,6 +3,7 @@
 #include "Logger.hpp"
 #include "Values.hpp"
 #include "Diagnostics.hpp"
+#include "AssetManager.hpp"
 
 namespace Birb
 {
@@ -55,10 +56,17 @@ namespace Birb
 	:filePath(p_filePath)
 	{
 		Audio::Init(0);
-		music = Mix_LoadMUS(p_filePath.c_str());
+		std::string resource_path = Global::FilePaths::Resources + p_filePath;
+
+#ifdef BUNDLED_ASSETS
+		music = Mix_LoadMUS_RW(AssetManager::sdl_mem_read(p_filePath), true);
+#else
+		music = Mix_LoadMUS(resource_path.c_str());
+#endif
+
 		if (!music)
 		{
-			Debug::Log("Error loading music file [" + p_filePath + "] Error: " + static_cast<std::string>(Mix_GetError()), Debug::error);
+			Debug::Log("Error loading music file [" + resource_path + "] Error: " + static_cast<std::string>(Mix_GetError()), Debug::error);
 			return;
 		}
 	}
@@ -71,10 +79,15 @@ namespace Birb
 	:filePath(p_filePath)
 	{
 		Audio::Init(0);
-		sound = Mix_LoadWAV(p_filePath.c_str());
+		std::string resource_path = Global::FilePaths::Resources + p_filePath;
+#ifdef BUNDLED_ASSETS
+		sound = Mix_LoadWAV_RW(AssetManager::sdl_mem_read(p_filePath), true);
+#else
+		sound = Mix_LoadWAV(resource_path.c_str());
+#endif
 		if (!sound)
 		{
-			Debug::Log("Error loading sound file [" + p_filePath + "] Error: " + static_cast<std::string>(Mix_GetError()), Debug::error);
+			Debug::Log("Error loading sound file [" + resource_path + "] Error: " + static_cast<std::string>(Mix_GetError()), Debug::error);
 			return;
 		}
 	}

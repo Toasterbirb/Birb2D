@@ -1,7 +1,4 @@
 #include "Logger.hpp"
-#include <ctime>
-#include <fstream>
-#include <filesystem>
 
 namespace Birb
 {

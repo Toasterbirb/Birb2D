@@ -2,6 +2,7 @@
 #include "Logger.hpp"
 #include "Values.hpp"
 #include "Diagnostics.hpp"
+#include "AssetManager.hpp"
 
 namespace Birb
 {
@@ -27,18 +28,24 @@ namespace Birb
 	{
 		InitSDL_ttf();
 
+		std::string resource_path = Global::FilePaths::Resources + filePath;
 		this->filePath 	= filePath;
 		this->size 		= fontSize;
 
 		/* Attempt to load the font */
-		ttfFont = TTF_OpenFont(filePath.c_str(), fontSize);
+#ifdef BUNDLED_ASSETS
+		ttfFont = TTF_OpenFontRW(AssetManager::sdl_mem_read(filePath), true, fontSize);
+#else
+		ttfFont = TTF_OpenFont(resource_path.c_str(), fontSize);
+#endif
+
 		if (ttfFont != nullptr)
 		{
 			fontLoaded = true;
 		}
 		else
 		{
-			Debug::Log("Something went wrong when loading font '" + filePath + "' TTF_Error: " + static_cast<std::string>(TTF_GetError()), Debug::error);
+			Debug::Log("Something went wrong when loading font '" + resource_path + "' TTF_Error: " + static_cast<std::string>(TTF_GetError()), Debug::error);
 			fontLoaded = false;
 		}
 	}

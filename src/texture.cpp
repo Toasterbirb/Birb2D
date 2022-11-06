@@ -2,6 +2,7 @@
 #include "Logger.hpp"
 #include "Values.hpp"
 #include "Utils.hpp"
+#include "Resources.hpp"
 
 namespace Birb
 {
@@ -27,17 +28,19 @@ namespace Birb
 	{
 		this->sdlTex = NULL;
 
-		SDL_Surface* surface = IMG_Load(filePath.c_str());
-		if (surface == NULL)
-		{
-			Debug::Log("Failed to load image [" + filePath + "]: " + static_cast<std::string>(SDL_GetError()), Debug::error);
-			return false;
-		}
+		// FIXME Get rid of this code when its not *needed* any longer
+		//SDL_Surface* surface = IMG_Load(resource_path.c_str());
+		//if (surface == NULL)
+		//{
+		//	Debug::Log("Failed to load image [" + resource_path + "]: " + static_cast<std::string>(SDL_GetError()), Debug::error);
+		//	return false;
+		//}
 
 		/* Create a texture from the surface pixels */
-		this->sdlTex = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
+		//this->sdlTex = SDL_CreateTextureFromSurface(Global::RenderVars::Renderer, surface);
+		this->sdlTex = Resources::LoadTexture(filePath);
 
-		SDL_FreeSurface(surface);
+		//SDL_FreeSurface(surface);
 
 		textureLoaded = true;
 		UpdateDimensions();

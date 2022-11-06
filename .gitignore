@@ -1,3 +1,6 @@
+# AssetBundle header
+include/AssetBundle.hpp
+
 # playground
 [Bb]uild/
 [Pp]layground/

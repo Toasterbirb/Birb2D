@@ -5,7 +5,7 @@ namespace Birb
 {
 	TEST_CASE("Font loading")
 	{
-		std::string fontPath = "./res/fonts/freefont/FreeMonoBold.ttf";
+		std::string fontPath = "fonts/freefont/FreeMonoBold.ttf";
 
 		SUBCASE("With not parameters given to constructor")
 		{
@@ -14,7 +14,6 @@ namespace Birb
 			font.LoadFont(fontPath, 13);
 
 			CHECK(font.GetSize() == 13);
-			CHECK(font.filePath == fontPath);
 			CHECK(font.isLoaded());
 		}
 
@@ -22,7 +21,6 @@ namespace Birb
 		{
 			Font font(fontPath, 14);
 			CHECK(font.GetSize() == 14);
-			CHECK(font.filePath == fontPath);
 			CHECK(font.isLoaded());
 		}
 
@@ -30,7 +28,6 @@ namespace Birb
 		{
 			Font font(fontPath, 14);
 			CHECK(font.GetSize() == 14);
-			CHECK(font.filePath == fontPath);
 			CHECK(font.isLoaded());
 
 			font.SetSize(15);

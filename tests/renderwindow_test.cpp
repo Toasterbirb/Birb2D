@@ -79,13 +79,13 @@ namespace Birb
 			CHECK(emptyTexture.dimensions() == Vector2Int(0, 0));
 
 			/* Now load the texture manually */
-			CHECK(emptyTexture.LoadTexture(appInfo.ResLocation + "/textures/birb.png"));
+			CHECK(emptyTexture.LoadTexture("textures/birb.png"));
 			CHECK(emptyTexture.isLoaded() == true);
 			CHECK(emptyTexture.dimensions() == Vector2Int(64, 64));
 
 
 			const int ENTITY_COUNT = 5;
-			Texture birbSprite(appInfo.ResLocation + "/textures/birb.png");
+			Texture birbSprite("textures/birb.png");
 
 			CHECK(birbSprite.isLoaded() == true);
 			CHECK(birbSprite.dimensions() == Vector2Int(64, 64));

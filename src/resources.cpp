@@ -1,3 +1,4 @@
+#include "AssetManager.hpp"
 #include "Resources.hpp"
 #include "Logger.hpp"
 #include "microprofile.h"
@@ -12,10 +13,21 @@ namespace Birb
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Load SDL_Texture", PROFILER_COLOR);
 
 		SDL_Texture* texture = NULL;
-		texture = IMG_LoadTexture(Global::RenderVars::Renderer, p_filePath.c_str());
+
+#ifdef BUNDLED_ASSETS
+		//SDL_RWops* rw = SDL_RWFromMem(AssetManager::assets[p_filePath].buffer, AssetManager::assets[p_filePath].size);
+		texture = IMG_LoadTexture_RW(Global::RenderVars::Renderer, AssetManager::sdl_mem_read(p_filePath), true);
+		std::cout << "Reading asset from memory!" << std::endl;
 
 		if (texture == NULL)
 			Debug::Log("Failed to load texture [" + p_filePath + "]: " + static_cast<std::string>(SDL_GetError()), Debug::error);
+#else
+		std::string resource_path = Global::FilePaths::Resources + p_filePath;
+		texture = IMG_LoadTexture(Global::RenderVars::Renderer, resource_path.c_str());
+
+		if (texture == NULL)
+			Debug::Log("Failed to load texture [" + resource_path + "]: " + static_cast<std::string>(SDL_GetError()), Debug::error);
+#endif
 
 		return texture;
 	}

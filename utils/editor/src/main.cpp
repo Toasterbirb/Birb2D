@@ -10,8 +10,6 @@ const static float SCALE_TICK = 1;
 
 static bool ApplicationRunning = true;
 
-static Birb::ApplicationInfo appInfo("birb-editor");
-
 
 void Quit()
 {
@@ -34,11 +32,8 @@ int main(void)
 	 * Variables *
 	 * --------- */
 
-	/* Locate resources */
-	appInfo.LocateResources();
-
 	/* Fonts */
-	Birb::Font titleFont(appInfo.ResLocation + "/fonts/freefont/FreeSansBold.ttf");
+	Birb::Font titleFont("fonts/freefont/FreeSansBold.ttf");
 
 	/* Top bar */
 	Birb::Scene top_bar;
