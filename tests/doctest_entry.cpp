@@ -2,6 +2,7 @@
 #include "doctest.h"
 #include <iostream>
 #include <string.h>
+#include "AssetManager.hpp"
 
 int main(int argc, char** argv)
 {
@@ -19,7 +20,17 @@ int main(int argc, char** argv)
 
 	context.applyCommandLine(argc, argv);
 
+#ifdef BUNDLED_ASSETS
+	/* Load assets if they are in the binary */
+	Birb::AssetManager::InitializeBundledAssets();
+#endif
+
 	int result = context.run();
+
+#ifdef BUNDLED_ASSETS
+	/* Free the loaded assets */
+	Birb::AssetManager::FreeBundledAssets();
+#endif
 
 	if (context.shouldExit())
 		return result;

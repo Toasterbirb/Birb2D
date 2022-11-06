@@ -7,7 +7,6 @@ namespace Birb
 	TEST_CASE("Rendering: AssetManager texture resource handling")
 	{
 		Window window("Texture window", Vector2Int(1280, 720), 60, false);
-		AssetManager::InitializeBundledAssets();
 		Texture birb_texture("textures/birb.png");
 
 		AssetManager asset_manager;
@@ -23,11 +22,4 @@ namespace Birb
 		CHECK(asset_manager.texture("existing_birb_texture").dimensions() == Vector2Int(64, 64));
 		CHECK(asset_manager.texture("existing_birb_texture") == birb_texture);
 	}
-
-#ifdef BUNDLED_ASSETS
-	TEST_CASE("Load an assets from an asset bundle")
-	{
-		CHECK(AssetManager::InitializeBundledAssets());
-	}
-#endif
 }

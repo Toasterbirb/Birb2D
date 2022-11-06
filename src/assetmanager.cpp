@@ -69,6 +69,14 @@ namespace Birb
 	{
 		return SDL_RWFromMem(AssetManager::assets[file_path].buffer, AssetManager::assets[file_path].size);
 	}
+
+	void AssetManager::FreeBundledAssets()
+	{
+		for (size_t i = 0; i < AssetManager::asset_list.size(); ++i)
+		{
+			AssetManager::assets[AssetManager::asset_list[i]].Free();
+		}
+	}
 #endif
 
 	void AssetManager::AddTexture(const std::string& name, Texture texture)
