@@ -29,8 +29,8 @@ namespace Birb
 		static inline std::map<std::string, Asset> assets;
 		static inline std::vector<std::string> asset_list;
 		static SDL_RWops* sdl_mem_read(const std::string& file_path);
-		static void FreeBundledAssets();
 #endif
+		static void FreeBundledAssets();
 
 		/* Textures */
 		void AddTexture(const std::string& name, Texture texture);
