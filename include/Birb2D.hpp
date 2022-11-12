@@ -1,4 +1,5 @@
 #pragma once
+#include "AssetManager.hpp"
 #include "Audio.hpp"
 #include "Circle.hpp"
 #include "Color.hpp"
