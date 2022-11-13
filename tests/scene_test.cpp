@@ -147,6 +147,34 @@ namespace Birb
 			CHECK(entityA.rect == Rect(30, 30, 20, 20));
 		}
 
+		SUBCASE("Change between world and screen space")
+		{
+			CHECK(scene.world_space);
+			CHECK(entityA.world_space);
+			CHECK(entityB.world_space);
+
+			Rect some_new_rect;
+			scene.AddObject(&some_new_rect);
+			CHECK(some_new_rect.world_space);
+
+			scene.SetScreenSpace();
+			CHECK_FALSE(scene.world_space);
+			CHECK_FALSE(entityA.world_space);
+			CHECK_FALSE(entityB.world_space);
+			CHECK_FALSE(some_new_rect.world_space);
+
+			Entity new_entity;
+			scene.AddObject(&new_entity);
+			CHECK_FALSE(new_entity.world_space);
+
+			scene.SetWorldSpace();
+			CHECK(scene.world_space);
+			CHECK(entityA.world_space);
+			CHECK(entityB.world_space);
+			CHECK(some_new_rect.world_space);
+			CHECK(new_entity.world_space);
+		}
+
 		SUBCASE("Reset the scene")
 		{
 			scene.Clear();

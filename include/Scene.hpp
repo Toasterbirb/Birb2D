@@ -30,6 +30,9 @@ namespace Birb
 		void Translate(const Vector2& delta);
 		Vector2 Position() const;
 
+		void SetWorldSpace(); ///< Sets all current and future child objects to use world space coordinates
+		void SetScreenSpace(); ///< Sets all current and future child objects to use screen space coordinates
+
 		void Clear(); ///< Empty the scene
 		void Render() const; ///< Render all objects in the scene if the scene is active
 		void SortObjects(); ///< Sort objects according to their priority

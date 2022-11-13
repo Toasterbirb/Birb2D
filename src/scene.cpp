@@ -30,6 +30,9 @@ namespace Birb
 
 		if (needs_sorting)
 			SortObjects();
+
+		/* Make sure that the world / screen space setting is correct */
+		obj->world_space = this->world_space;
 	}
 
 	void Scene::AddObjectFast(SceneObject* obj)
@@ -137,6 +140,20 @@ namespace Birb
 	Vector2 Scene::Position() const
 	{
 		return positionOffset;
+	}
+
+	void Scene::SetWorldSpace()
+	{
+		world_space = true;
+		for (size_t i = 0; i < objects.size(); ++i)
+			objects[i]->world_space = world_space;
+	}
+
+	void Scene::SetScreenSpace()
+	{
+		world_space = false;
+		for (size_t i = 0; i < objects.size(); ++i)
+			objects[i]->world_space = world_space;
 	}
 
 	void Scene::Clear()
