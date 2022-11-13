@@ -1,0 +1,27 @@
+name: Void
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone Void
+      run: git clone --recursive https://github.com/Toasterbirb/Void
+    - name: Create the build directory
+      run: cd Void ; mkdir build ; cd build
+    - name: Compile
+      run: cmake .. && make -j$(nproc)
+
