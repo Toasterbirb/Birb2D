@@ -20,8 +20,5 @@ jobs:
     steps:
     - name: Clone Void
       run: git clone --recursive https://github.com/Toasterbirb/Void
-    - name: Create the build directory
-      run: cd Void ; mkdir build ; cd build
     - name: Compile
-      run: cmake .. && make -j$(nproc)
-
+      run: cd Void ; mkdir build ; cd build ; cmake .. && make -j$(nproc)
