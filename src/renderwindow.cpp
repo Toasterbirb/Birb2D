@@ -346,6 +346,7 @@ namespace Birb
 		/* Skip the texture width tests if the entity doesn't have a texture on it */
 		if (entity.sprite.isLoaded())
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity sprite scale calculation", PROFILER_COLOR);
 			texWidth 	= entity.sprite.dimensions().x;
 			texHeight 	= entity.sprite.dimensions().y;
 
@@ -394,6 +395,7 @@ namespace Birb
 		/* Skip rendering the texture if one doesn't exist on the entity */
 		if (entity.sprite.isLoaded())
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw entity sprite", PROFILER_COLOR);
 			centerPoint = Vector2Int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
 			SDL_Point center = { centerPoint.x, centerPoint.y };
 
