@@ -21,6 +21,6 @@ jobs:
     - name: Clone Void
       run: git clone --recursive https://github.com/Toasterbirb/Void
     - name: Update submodules
-      run: cd Void ; git submodule update --remote
+      run: cd Void ; git submodule update --init --remote
     - name: Compile
       run: cd Void ; mkdir build ; cd build ; cmake .. && make -j$(nproc)
