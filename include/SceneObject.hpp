@@ -13,6 +13,8 @@ namespace Birb
 		int renderingPriority;
 		bool sceneActive;
 		bool active;
+		bool world_space;
+
 		virtual void RenderFunc() = 0;
 		virtual void SetPos(const Vector2& delta) = 0;
 	};

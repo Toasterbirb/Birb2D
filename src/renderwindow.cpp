@@ -261,8 +261,8 @@ namespace Birb
 		src->w = entity->animationComponent.spriteSize.x;
 		src->h = entity->animationComponent.spriteSize.y;
 
-		dst->x = entity->rect.x - Global::RenderVars::CameraPosition.x;
-		dst->y = entity->rect.y - Global::RenderVars::CameraPosition.y;
+		dst->x = entity->rect.x - (Global::RenderVars::CameraPosition.x * entity->world_space);
+		dst->y = entity->rect.y - (Global::RenderVars::CameraPosition.y * entity->world_space);
 		dst->w = src->w * entity->localScale.x;
 		dst->h = src->h * entity->localScale.y;
 
@@ -363,8 +363,8 @@ namespace Birb
 				src.w = texWidth;
 				src.h = texHeight;
 
-				dst.x = entity.rect.x - Global::RenderVars::CameraPosition.x;
-				dst.y = entity.rect.y - Global::RenderVars::CameraPosition.y;
+				dst.x = entity.rect.x - (Global::RenderVars::CameraPosition.x * entity.world_space);
+				dst.y = entity.rect.y - (Global::RenderVars::CameraPosition.y * entity.world_space);
 				dst.w = entity.rect.w * entity.localScale.x;
 				dst.h = entity.rect.h * entity.localScale.y;
 			}
@@ -428,8 +428,8 @@ namespace Birb
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw rect", PROFILER_COLOR);
 			SetRenderDrawColor(color);
 			SDL_Rect rectangle = dimensions.getSDLRect();
-			rectangle.x -= Global::RenderVars::CameraPosition.x;
-			rectangle.y -= Global::RenderVars::CameraPosition.y;
+			rectangle.x -= (Global::RenderVars::CameraPosition.x * dimensions.world_space);
+			rectangle.y -= (Global::RenderVars::CameraPosition.y * dimensions.world_space);
 			SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
 			ResetDrawColor();
 		}
@@ -443,27 +443,27 @@ namespace Birb
 			DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
 		}
 
-		void DrawLine(const Color& color, const Vector2Int& pointA, const Vector2Int& pointB)
+		void DrawLine(const Color& color, const Vector2Int& pointA, const Vector2Int& pointB, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (int)", PROFILER_COLOR);
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLine(Global::RenderVars::Renderer,
-					pointA.x - Global::RenderVars::CameraPosition.x,
-					pointA.y - Global::RenderVars::CameraPosition.y,
-					pointB.x - Global::RenderVars::CameraPosition.x,
-					pointB.y - Global::RenderVars::CameraPosition.y);
+					pointA.x - (Global::RenderVars::CameraPosition.x * world_space),
+					pointA.y - (Global::RenderVars::CameraPosition.y * world_space),
+					pointB.x - (Global::RenderVars::CameraPosition.x * world_space),
+					pointB.y - (Global::RenderVars::CameraPosition.y * world_space));
 			ResetDrawColor();
 		}
 
-		void DrawLine(const Color& color, const Vector2& pointA, const Vector2& pointB)
+		void DrawLine(const Color& color, const Vector2& pointA, const Vector2& pointB, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (float)", PROFILER_COLOR);
 			SetRenderDrawColor(color);
 			SDL_RenderDrawLineF(Global::RenderVars::Renderer,
-					pointA.x - Global::RenderVars::CameraPosition.x,
-					pointA.y - Global::RenderVars::CameraPosition.y,
-					pointB.x - Global::RenderVars::CameraPosition.x,
-					pointB.y - Global::RenderVars::CameraPosition.y);
+					pointA.x - (Global::RenderVars::CameraPosition.x * world_space),
+					pointA.y - (Global::RenderVars::CameraPosition.y * world_space),
+					pointB.x - (Global::RenderVars::CameraPosition.x * world_space),
+					pointB.y - (Global::RenderVars::CameraPosition.y * world_space));
 			ResetDrawColor();
 		}
 
@@ -472,10 +472,10 @@ namespace Birb
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (float)", PROFILER_COLOR);
 			SetRenderDrawColor(line.color);
 			SDL_RenderDrawLineF(Global::RenderVars::Renderer,
-					line.pointA.x - Global::RenderVars::CameraPosition.x,
-					line.pointA.y - Global::RenderVars::CameraPosition.y,
-					line.pointB.x - Global::RenderVars::CameraPosition.x,
-					line.pointB.y - Global::RenderVars::CameraPosition.y);
+					line.pointA.x - (Global::RenderVars::CameraPosition.x * line.world_space),
+					line.pointA.y - (Global::RenderVars::CameraPosition.y * line.world_space),
+					line.pointB.x - (Global::RenderVars::CameraPosition.x * line.world_space),
+					line.pointB.y - (Global::RenderVars::CameraPosition.y * line.world_space));
 			ResetDrawColor();
 		}
 
@@ -491,18 +491,18 @@ namespace Birb
 				{ line.pointB.x + pointOffset, line.pointB.y + pointOffset },
 				{ line.pointB.x - pointOffset, line.pointB.y - pointOffset },
 			};
-			DrawPolygon(line.color, points, POINT_COUNT);
+			DrawPolygon(line.color, points, POINT_COUNT, line.world_space);
 		}
 
-		void DrawLines(const Color& color, Vector2Int* points, const int& pointCount)
+		void DrawLines(const Color& color, Vector2Int* points, const int& pointCount, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw multiple lines", PROFILER_COLOR);
 			SDL_Point* sdlPoints = new SDL_Point[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
 				sdlPoints[i] = {
-					points[i].x - static_cast<int>(Global::RenderVars::CameraPosition.x),
-					points[i].y - static_cast<int>(Global::RenderVars::CameraPosition.y)
+					points[i].x - static_cast<int>(Global::RenderVars::CameraPosition.x * world_space),
+					points[i].y - static_cast<int>(Global::RenderVars::CameraPosition.y * world_space)
 				};
 			}
 
@@ -512,15 +512,15 @@ namespace Birb
 			ResetDrawColor();
 		}
 
-		void DrawLines(const Color& color, Vector2* points, const int& pointCount)
+		void DrawLines(const Color& color, Vector2* points, const int& pointCount, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw multiple lines", PROFILER_COLOR);
 			SDL_FPoint* sdlPoints = new SDL_FPoint[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
 				sdlPoints[i] = {
-					points[i].x - Global::RenderVars::CameraPosition.x,
-					points[i].y - Global::RenderVars::CameraPosition.y
+					points[i].x - (Global::RenderVars::CameraPosition.x * world_space),
+					points[i].y - (Global::RenderVars::CameraPosition.y * world_space)
 				};
 			}
 
@@ -532,16 +532,16 @@ namespace Birb
 
 		bool DrawCircle(const Circle& circle)
 		{
-			return DrawCircle(circle.color, circle.pos, circle.radius);
+			return DrawCircle(circle.color, circle.pos, circle.radius, circle.world_space);
 		}
 
-		bool DrawCircle(const Color& color, const Vector2Int& pos, const int& radius)
+		bool DrawCircle(const Color& color, const Vector2Int& pos, const int& radius, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw multiple lines", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 			if (filledCircleColor(Global::RenderVars::Renderer,
-						pos.x - Global::RenderVars::CameraPosition.x,
-						pos.y - Global::RenderVars::CameraPosition.y,
+						pos.x - (Global::RenderVars::CameraPosition.x * world_space),
+						pos.y - (Global::RenderVars::CameraPosition.y * world_space),
 						radius, uColor) == 0)
 			{
 				Render::ResetDrawColor();
@@ -554,7 +554,7 @@ namespace Birb
 			}
 		}
 
-		bool DrawPolygon(const Color& color, Vector2Int* points, const int& pointCount)
+		bool DrawPolygon(const Color& color, Vector2Int* points, const int& pointCount, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
@@ -564,8 +564,8 @@ namespace Birb
 			Sint16* vy = new Sint16[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
-				vx[i] = points[i].x - Global::RenderVars::CameraPosition.x;
-				vy[i] = points[i].y - Global::RenderVars::CameraPosition.y;
+				vx[i] = points[i].x - (Global::RenderVars::CameraPosition.x * world_space);
+				vy[i] = points[i].y - (Global::RenderVars::CameraPosition.y * world_space);
 			}
 
 			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
@@ -588,7 +588,7 @@ namespace Birb
 			}
 		}
 
-		bool DrawPolygon(const Color& color, const std::vector<Vector2Int>& points)
+		bool DrawPolygon(const Color& color, const std::vector<Vector2Int>& points, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
@@ -598,8 +598,8 @@ namespace Birb
 			Sint16* vy = new Sint16[points.size()];
 			for (size_t i = 0; i < points.size(); ++i)
 			{
-				vx[i] = points[i].x - Global::RenderVars::CameraPosition.x;
-				vy[i] = points[i].y - Global::RenderVars::CameraPosition.y;
+				vx[i] = points[i].x - (Global::RenderVars::CameraPosition.x * world_space);
+				vy[i] = points[i].y - (Global::RenderVars::CameraPosition.y * world_space);
 			}
 
 			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
@@ -624,7 +624,7 @@ namespace Birb
 
 		/* filledPolygonColor works only with integers, so this will just
 		 * round the floating point vlues into integers */
-		bool DrawPolygon(const Color& color, Vector2* points, const int& pointCount)
+		bool DrawPolygon(const Color& color, Vector2* points, const int& pointCount, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Vector2Int* intPoints = new Vector2Int[pointCount];
@@ -633,12 +633,12 @@ namespace Birb
 				intPoints[i].x = std::round(points[i].x);
 				intPoints[i].y = std::round(points[i].y);
 			}
-			bool success = DrawPolygon(color, intPoints, pointCount);
+			bool success = DrawPolygon(color, intPoints, pointCount, world_space);
 			delete[] intPoints;
 			return success;
 		}
 
-		bool DrawPolygon(const Color& color, const std::vector<Vector2>& points)
+		bool DrawPolygon(const Color& color, const std::vector<Vector2>& points, const bool& world_space)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Vector2Int* intPoints = new Vector2Int[points.size()];
@@ -647,14 +647,14 @@ namespace Birb
 				intPoints[i].x = std::round(points[i].x);
 				intPoints[i].y = std::round(points[i].y);
 			}
-			bool success = DrawPolygon(color, intPoints, points.size());
+			bool success = DrawPolygon(color, intPoints, points.size(), world_space);
 			delete[] intPoints;
 			return success;
 		}
 
 		bool DrawPolygon(const Polygon& polygon)
 		{
-			return DrawPolygon(polygon.color, polygon.points);
+			return DrawPolygon(polygon.color, polygon.points, polygon.world_space);
 		}
 	}
 }
