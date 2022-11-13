@@ -17,7 +17,6 @@ namespace Birb
 #ifdef BUNDLED_ASSETS
 		//SDL_RWops* rw = SDL_RWFromMem(AssetManager::assets[p_filePath].buffer, AssetManager::assets[p_filePath].size);
 		texture = IMG_LoadTexture_RW(Global::RenderVars::Renderer, AssetManager::sdl_mem_read(p_filePath), true);
-		std::cout << "Reading asset from memory!" << std::endl;
 
 		if (texture == NULL)
 			Debug::Log("Failed to load texture [" + p_filePath + "]: " + static_cast<std::string>(SDL_GetError()), Debug::error);
