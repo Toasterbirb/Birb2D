@@ -1,3 +1,4 @@
+#include "AssetManager.hpp"
 #include "Splash.hpp"
 #include "Texture.hpp"
 #include "Timestep.hpp"
@@ -10,6 +11,10 @@ namespace Birb
 	Splash::Splash(Window& window, bool isCustom)
 	:duration(2.0f), isCustom(false), window(window)
 	{
+#ifdef BUNDLED_ASSETS
+		if (AssetManager::asset_list.size() == 0)
+			Debug::Log("Bundled assets have been enabled but no assets were loaded. Did you forget to initialize bundled assets?", Debug::fixme);
+#endif
 
 		if (!isCustom)
 		{
