@@ -261,8 +261,8 @@ namespace Birb
 		src->w = entity->animationComponent.spriteSize.x;
 		src->h = entity->animationComponent.spriteSize.y;
 
-		dst->x = entity->rect.x;
-		dst->y = entity->rect.y;
+		dst->x = entity->rect.x - Global::RenderVars::CameraPosition.x;
+		dst->y = entity->rect.y - Global::RenderVars::CameraPosition.y;
 		dst->w = src->w * entity->localScale.x;
 		dst->h = src->h * entity->localScale.y;
 
@@ -363,8 +363,8 @@ namespace Birb
 				src.w = texWidth;
 				src.h = texHeight;
 
-				dst.x = entity.rect.x;
-				dst.y = entity.rect.y;
+				dst.x = entity.rect.x - Global::RenderVars::CameraPosition.x;
+				dst.y = entity.rect.y - Global::RenderVars::CameraPosition.y;
 				dst.w = entity.rect.w * entity.localScale.x;
 				dst.h = entity.rect.h * entity.localScale.y;
 			}
@@ -428,6 +428,8 @@ namespace Birb
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw rect", PROFILER_COLOR);
 			SetRenderDrawColor(color);
 			SDL_Rect rectangle = dimensions.getSDLRect();
+			rectangle.x -= Global::RenderVars::CameraPosition.x;
+			rectangle.y -= Global::RenderVars::CameraPosition.y;
 			SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
 			ResetDrawColor();
 		}
@@ -445,7 +447,11 @@ namespace Birb
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (int)", PROFILER_COLOR);
 			SetRenderDrawColor(color);
-			SDL_RenderDrawLine(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
+			SDL_RenderDrawLine(Global::RenderVars::Renderer,
+					pointA.x - Global::RenderVars::CameraPosition.x,
+					pointA.y - Global::RenderVars::CameraPosition.y,
+					pointB.x - Global::RenderVars::CameraPosition.x,
+					pointB.y - Global::RenderVars::CameraPosition.y);
 			ResetDrawColor();
 		}
 
@@ -453,7 +459,11 @@ namespace Birb
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (float)", PROFILER_COLOR);
 			SetRenderDrawColor(color);
-			SDL_RenderDrawLineF(Global::RenderVars::Renderer, pointA.x, pointA.y, pointB.x, pointB.y);
+			SDL_RenderDrawLineF(Global::RenderVars::Renderer,
+					pointA.x - Global::RenderVars::CameraPosition.x,
+					pointA.y - Global::RenderVars::CameraPosition.y,
+					pointB.x - Global::RenderVars::CameraPosition.x,
+					pointB.y - Global::RenderVars::CameraPosition.y);
 			ResetDrawColor();
 		}
 
@@ -461,7 +471,11 @@ namespace Birb
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (float)", PROFILER_COLOR);
 			SetRenderDrawColor(line.color);
-			SDL_RenderDrawLineF(Global::RenderVars::Renderer, line.pointA.x, line.pointA.y, line.pointB.x, line.pointB.y);
+			SDL_RenderDrawLineF(Global::RenderVars::Renderer,
+					line.pointA.x - Global::RenderVars::CameraPosition.x,
+					line.pointA.y - Global::RenderVars::CameraPosition.y,
+					line.pointB.x - Global::RenderVars::CameraPosition.x,
+					line.pointB.y - Global::RenderVars::CameraPosition.y);
 			ResetDrawColor();
 		}
 
@@ -486,7 +500,10 @@ namespace Birb
 			SDL_Point* sdlPoints = new SDL_Point[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
-				sdlPoints[i] = { points[i].x, points[i].y };
+				sdlPoints[i] = {
+					points[i].x - static_cast<int>(Global::RenderVars::CameraPosition.x),
+					points[i].y - static_cast<int>(Global::RenderVars::CameraPosition.y)
+				};
 			}
 
 			SetRenderDrawColor(color);
@@ -501,7 +518,10 @@ namespace Birb
 			SDL_FPoint* sdlPoints = new SDL_FPoint[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
-				sdlPoints[i] = { points[i].x, points[i].y };
+				sdlPoints[i] = {
+					points[i].x - Global::RenderVars::CameraPosition.x,
+					points[i].y - Global::RenderVars::CameraPosition.y
+				};
 			}
 
 			SetRenderDrawColor(color);
@@ -519,7 +539,10 @@ namespace Birb
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw multiple lines", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
-			if (filledCircleColor(Global::RenderVars::Renderer, pos.x, pos.y, radius, uColor) == 0)
+			if (filledCircleColor(Global::RenderVars::Renderer,
+						pos.x - Global::RenderVars::CameraPosition.x,
+						pos.y - Global::RenderVars::CameraPosition.y,
+						radius, uColor) == 0)
 			{
 				Render::ResetDrawColor();
 				return true;
@@ -536,13 +559,13 @@ namespace Birb
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
-			/* Convert Vector2Int points into Sint16 vectors */
+			/* Convert Vector2Int points into Sint16 vectors and add the camera offset */
 			Sint16* vx = new Sint16[pointCount];
 			Sint16* vy = new Sint16[pointCount];
 			for (int i = 0; i < pointCount; ++i)
 			{
-				vx[i] = points[i].x;
-				vy[i] = points[i].y;
+				vx[i] = points[i].x - Global::RenderVars::CameraPosition.x;
+				vy[i] = points[i].y - Global::RenderVars::CameraPosition.y;
 			}
 
 			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
@@ -570,13 +593,13 @@ namespace Birb
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
 
-			/* Convert Vector2Int points into Sint16 vectors */
+			/* Convert Vector2Int points into Sint16 vectors and add the camera offset */
 			Sint16* vx = new Sint16[points.size()];
 			Sint16* vy = new Sint16[points.size()];
 			for (size_t i = 0; i < points.size(); ++i)
 			{
-				vx[i] = points[i].x;
-				vy[i] = points[i].y;
+				vx[i] = points[i].x - Global::RenderVars::CameraPosition.x;
+				vy[i] = points[i].y - Global::RenderVars::CameraPosition.y;
 			}
 
 			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)

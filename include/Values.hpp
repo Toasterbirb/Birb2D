@@ -40,6 +40,8 @@ namespace Birb
 			static inline SDL_Renderer* Renderer = NULL;
 
 			static inline Color BackgroundColor = Color(0, 0, 0);
+
+			static inline Vector2 CameraPosition = {0, 0};
 		};
 	}
 }
