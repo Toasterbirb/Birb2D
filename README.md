@@ -35,7 +35,9 @@ Refer to [this](https://github.com/Toasterbirb/Birb2D/wiki/Setup) wiki page
 Birb2D can already do something. You can draw pictures, polygons and other shapes and check for collisions etc. Also sound, buttons, a basic scene system and some basic math stuff is there. Physics engine is still completely missing. Also the documentation is quite lacking
 
 ## Note to Windows users
-Could work, **not supported**. You might want to edit the enviromental variable usage and filepaths to fit Windows, but no guarantees are given.
+There's a [script](https://github.com/Toasterbirb/Birb2D/blob/master/scripts/win_build.sh) that can help with creating windows builds. Everything in the engine *should* compile, but the tests won't compile due to some issue with mingw and doctest. Builds have been tested with [wine](https://www.winehq.org/) on Linux and some brave people have also gotten them to run on a native windows installation.
+
+Compiling Birb2D on window is still a bit problematic since it requires installing mingw and several other tools. Also since the tests don't work on windows, native engine development is pretty difficult without the use of WSL. This is still a non-issue though since most, if not all, active contributors are Linux users. It's good enough that there is at least some way to create windows binaries for distribution since majority of the operating system market share is still in the windows camp.
 
 ## Credits
 Some notable people who have donated code to Birb2D or helped with ideas/issues. If you think you should be included here, shoot me a message ʕ •ᴥ•ʔ
