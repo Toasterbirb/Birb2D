@@ -318,22 +318,12 @@ namespace Birb
 		if (!entity.active)
 			return true;
 
-		//if (entity.sprite == nullptr)
-		//{
-		//	Debug::Log("Entity '" + entity.name + "' has no sprite to render", Debug::error);
-		//	return false;
-		//}
-
 		/* Check if the sprite would be even visible */
 		if (entity.rect.w <= 0 || entity.rect.h <= 0)
 		{
 			Birb::Debug::Log("Tried to render an entity with size of <= 0", Debug::Type::warning);
 			return false;
 		}
-
-		/* Check if the entity is in the viewport and would be visible that way */
-		if (!Physics::RectCollision(entity.rect, Rect(0, 0, Global::RenderVars::WindowDimensions.x, Global::RenderVars::WindowDimensions.y)))
-			return true;
 
 		SDL_Rect src;
 		SDL_Rect dst;
