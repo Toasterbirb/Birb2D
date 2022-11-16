@@ -169,6 +169,7 @@ set(CORE_SRC
 	src/polygon.cpp
 	src/random.cpp
 	src/rect.cpp
+	src/render.cpp
 	src/renderwindow.cpp
 	src/resources.cpp
 	src/scene.cpp
