@@ -1,7 +1,4 @@
-#include "STD.hpp"
-#include "Values.hpp"
-#include "Filesystem.hpp"
-#include "Logger.hpp"
+#include "AppInfo.hpp"
 
 namespace Birb
 {

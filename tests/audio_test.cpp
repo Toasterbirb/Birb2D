@@ -8,8 +8,6 @@ namespace Birb
 {
 	TEST_CASE("Audio tests")
 	{
-		Birb::ApplicationInfo appInfo("Birb2D_tests");
-
         CHECK_FALSE(Global::IsInit::SDL_mixer);
 		Audio::SoundFile sound("audio/game_over.wav");
         // FIXME: Global is not being updated properly

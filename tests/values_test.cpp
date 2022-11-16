@@ -1,5 +1,5 @@
 #include "doctest.h"
-#include "Values.hpp"
+#include "AppInfo.hpp"
 
 TEST_CASE("Create ApplicationInfo instance")
 {

@@ -64,7 +64,6 @@ namespace Birb
 	TEST_CASE("Rendering: General")
 	{
 		Window window("Birb2D tests", Vector2Int(1280, 720), 75, false);
-		ApplicationInfo appInfo("Birb2D_tests");
 		Scene scene;
 		scene.Activate();
 

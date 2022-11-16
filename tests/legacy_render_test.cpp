@@ -15,8 +15,6 @@
 // This test is full of SDL stuff
 TEST_CASE("Window and rendering functions")
 {
-	Birb::ApplicationInfo appInfo("Birb2D_tests");
-
 	Birb::Window window("Title", Birb::Vector2Int(1280, 720), 60, false);
 	SDL_Texture* texture 	= Birb::Resources::LoadTexture("textures/birb.png");
 	Birb::Font font("fonts/freefont/FreeMonoBold.ttf", 32);
