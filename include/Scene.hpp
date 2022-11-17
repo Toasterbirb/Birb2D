@@ -46,6 +46,8 @@ namespace Birb
 
 		Vector2 positionOffset;
 
+		void SetNewObjectWorldSpace(SceneObject* obj); ///< Apply world_space settings of the scnene to new SceneObjects
+
 		/* Variables for a scene that is a child of another scene */
 		void RenderFunc() override; ///< Gets called when the scene is a child of another scene
 		void SetPos(const Vector2& delta) override; ///< The same as Translate, used when the scene is a SceneObject

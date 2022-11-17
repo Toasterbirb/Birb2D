@@ -32,8 +32,7 @@ namespace Birb
 			SortObjects();
 
 		/* Make sure that the world / screen space settings are correct */
-		obj->world_space = this->world_space;
-		obj->parallax_multiplier = this->parallax_multiplier;
+		SetNewObjectWorldSpace(obj);
 	}
 
 	void Scene::AddObjectFast(SceneObject* obj)
@@ -44,6 +43,9 @@ namespace Birb
 
 		/* If the positionOffset has changed, apply that to new objects */
 		obj->SetPos(positionOffset);
+
+		/* Apply world_space settings */
+		SetNewObjectWorldSpace(obj);
 	}
 
 	void Scene::AddObject(SceneObject* obj[], int objCount)
@@ -51,7 +53,10 @@ namespace Birb
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add multiple SceneObjects", PROFILER_COLOR);
 
 		for (int i = 0; i < objCount; ++i)
+		{
 			obj[i]->SetPos(positionOffset);
+			SetNewObjectWorldSpace(obj[i]);
+		}
 
 		this->objects.insert(std::end(this->objects), obj, obj + objCount);
 		SortObjects();
@@ -206,6 +211,12 @@ namespace Birb
 			}
 			objects[j + 1] = tmpObject;
 		}
+	}
+
+	void Scene::SetNewObjectWorldSpace(SceneObject* obj)
+	{
+		obj->world_space 			= this->world_space;
+		obj->parallax_multiplier 	= this->parallax_multiplier;
 	}
 
 	void Scene::RenderFunc()
