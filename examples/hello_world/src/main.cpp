@@ -1,6 +1,6 @@
 #include "Birb2D.hpp"
 
-int main(int argc, char** argv)
+int main(void)
 {
 	Birb::Debug::Log("Creating the window");
 	Birb::Window window("Birb2D project template", Birb::Vector2Int(1280, 720), 75, false);
