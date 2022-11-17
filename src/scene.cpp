@@ -31,8 +31,9 @@ namespace Birb
 		if (needs_sorting)
 			SortObjects();
 
-		/* Make sure that the world / screen space setting is correct */
+		/* Make sure that the world / screen space settings are correct */
 		obj->world_space = this->world_space;
+		obj->parallax_multiplier = this->parallax_multiplier;
 	}
 
 	void Scene::AddObjectFast(SceneObject* obj)
@@ -146,14 +147,24 @@ namespace Birb
 	{
 		world_space = true;
 		for (size_t i = 0; i < objects.size(); ++i)
-			objects[i]->world_space = world_space;
+		{
+			objects[i]->world_space = this->world_space;
+
+			/* Update parallax multipliers just in case */
+			objects[i]->parallax_multiplier = this->parallax_multiplier;
+		}
 	}
 
 	void Scene::SetScreenSpace()
 	{
 		world_space = false;
 		for (size_t i = 0; i < objects.size(); ++i)
+		{
 			objects[i]->world_space = world_space;
+
+			/* Update parallax multipliers just in case */
+			objects[i]->parallax_multiplier = this->parallax_multiplier;
+		}
 	}
 
 	void Scene::Clear()

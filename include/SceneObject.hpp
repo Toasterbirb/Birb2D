@@ -14,6 +14,7 @@ namespace Birb
 		bool sceneActive;
 		bool active;
 		bool world_space;
+		float parallax_multiplier;
 
 		virtual void RenderFunc() = 0;
 		virtual void SetPos(const Vector2& delta) = 0;
