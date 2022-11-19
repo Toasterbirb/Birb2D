@@ -146,10 +146,6 @@ endif()
 include_directories(include/)
 
 set(CORE_SRC
-	src/Vector/vector3.cpp
-	src/Vector/vector3int.cpp
-	src/Vector/vector2.cpp
-	src/Vector/vector2int.cpp
 	src/appinfo.cpp
 	src/assetmanager.cpp
 	src/audio.cpp
@@ -157,7 +153,6 @@ set(CORE_SRC
 	src/color.cpp
 	src/diagnostics.cpp
 	src/entity.cpp
-	src/entitycomponent.cpp
 	src/filesystem.cpp
 	src/font.cpp
 	src/graphs.cpp
@@ -181,7 +176,18 @@ set(CORE_SRC
 	src/timer.cpp
 	src/timestep.cpp
 	src/utils.cpp
-	src/ui.cpp)
+	src/ui.cpp
+
+	src/Vector/vector3.cpp
+	src/Vector/vector3int.cpp
+	src/Vector/vector2.cpp
+	src/Vector/vector2int.cpp
+
+	src/EntityComponent/animation.cpp
+	src/EntityComponent/click.cpp
+	src/EntityComponent/progressbar.cpp
+	src/EntityComponent/text.cpp
+)
 
 add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
