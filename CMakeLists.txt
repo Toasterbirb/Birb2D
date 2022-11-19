@@ -176,6 +176,7 @@ set(CORE_SRC
 	src/scene.cpp
 	src/sceneobject.cpp
 	src/splash.cpp
+	src/stopwatch.cpp
 	src/texture.cpp
 	src/timer.cpp
 	src/timestep.cpp

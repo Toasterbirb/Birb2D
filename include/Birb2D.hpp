@@ -23,6 +23,7 @@
 #include "Scene.hpp"
 #include "SceneObject.hpp"
 #include "Splash.hpp"
+#include "Stopwatch.hpp"
 #include "Texture.hpp"
 #include "Timer.hpp"
 #include "Timestep.hpp"
