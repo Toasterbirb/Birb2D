@@ -8,7 +8,7 @@ namespace Birb
 {
 	/* Forward declare the rect struct to avoid
 	 * circular include dependency */
-	struct Rect;
+	class Rect;
 
 	/* 2 Dimensions lines with point A and B */
 	class Line : public SceneObject
