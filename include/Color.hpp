@@ -46,5 +46,40 @@ namespace Birb
 		static Color Yellow =       { 255, 	255, 	0, 		255 };
 		static Color DarkGray =     { 60, 	60, 	60, 	255 };
 		static Color LightGray =    { 180, 	180, 	180, 	255 };
+
+		namespace Nord
+		{
+			namespace PolarNight
+			{
+				static Color nord0 = { 0x2e3440 };
+				static Color nord1 = { 0x3b4252 };
+				static Color nord2 = { 0x434c5e };
+				static Color nord3 = { 0x4c566a };
+			}
+
+			namespace SnowStorm
+			{
+				static Color nord4 = { 0xd8dee9 };
+				static Color nord5 = { 0xe5e9f0 };
+				static Color nord6 = { 0xeceff4 };
+			}
+
+			namespace Frost
+			{
+				static Color nord7 	= { 0x8fbcbb };
+				static Color nord8 	= { 0x88c0d0 };
+				static Color nord9 	= { 0x81a1c1 };
+				static Color nord10 = { 0x5e81ac };
+			}
+
+			namespace Aurora
+			{
+				static Color nord11 = { 0xbf616a }; ///< Red
+				static Color nord12 = { 0xd08770 }; ///< Orange
+				static Color nord13 = { 0xebcb8b }; ///< Yellow
+				static Color nord14 = { 0xa3be8c }; ///< Green
+				static Color nord15 = { 0xb48ead }; ///< Purple
+			}
+		}
 	}
 }
