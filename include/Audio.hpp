@@ -24,11 +24,6 @@ namespace Birb
 			}
 			bool isPlaying();
 
-			//~SoundFile()
-			//{
-			//	/* Free the soundfile when its destroyed */
-			//	free();
-			//}
 		private:
 			Mix_Chunk* sound;
 			std::string filePath;
@@ -48,11 +43,6 @@ namespace Birb
 			}
 			bool isPlaying();
 
-			//~MusicFile()
-			//{
-			//	/* Free the musicfile when its destroyed */
-			//	free();
-			//}
 		private:
 			Mix_Music* music;
 			std::string filePath;

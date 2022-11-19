@@ -12,7 +12,6 @@ namespace Birb
 {
 	struct Asset
 	{
-		//SDL_RWops* sdl_data;
 		char* buffer;
 		size_t size;
 		void Free();
