@@ -243,4 +243,50 @@ namespace Birb
 		for (size_t i = 0; i < points.size(); i++)
 			CHECK(polygon.points[i] == points[i]);
 	}
+
+	TEST_CASE("Polygon rotation")
+	{
+		std::vector<Vector2> points = {
+			{0, 0},
+			{1, 0},
+			{1, 1},
+			{0, 1}
+		};
+		Polygon polygon(points);
+
+		/* Set rotation to zero. This shouldn't affect the polygon at all */
+		polygon.SetRotation(0);
+		CHECK(polygon.points[0].ToInt() == points[0].ToInt());
+		CHECK(polygon.points[1].ToInt() == points[1].ToInt());
+		CHECK(polygon.points[2].ToInt() == points[2].ToInt());
+		CHECK(polygon.points[3].ToInt() == points[3].ToInt());
+
+		/* Rotate by 90 degrees */
+		polygon.SetRotation(90);
+		CHECK(polygon.points[0].ToInt() == points[1].ToInt());
+		CHECK(polygon.points[1].ToInt() == points[2].ToInt());
+		CHECK(polygon.points[2].ToInt() == points[3].ToInt());
+		CHECK(polygon.points[3].ToInt() == points[0].ToInt());
+
+		/* Rotate by 180 degrees */
+		polygon.SetRotation(180);
+		CHECK(polygon.points[0].ToInt() == points[2].ToInt());
+		CHECK(polygon.points[1].ToInt() == points[3].ToInt());
+		CHECK(polygon.points[2].ToInt() == points[0].ToInt());
+		CHECK(polygon.points[3].ToInt() == points[1].ToInt());
+
+		/* Rotate by 270 degrees */
+		polygon.SetRotation(270);
+		CHECK(polygon.points[0].ToInt() == points[3].ToInt());
+		CHECK(polygon.points[1].ToInt() == points[0].ToInt());
+		CHECK(polygon.points[2].ToInt() == points[1].ToInt());
+		CHECK(polygon.points[3].ToInt() == points[2].ToInt());
+
+		/* Rotate by 360 degrees. This should give the original values */
+		polygon.SetRotation(360);
+		CHECK(polygon.points[0].ToInt() == points[0].ToInt());
+		CHECK(polygon.points[1].ToInt() == points[1].ToInt());
+		CHECK(polygon.points[2].ToInt() == points[2].ToInt());
+		CHECK(polygon.points[3].ToInt() == points[3].ToInt());
+	}
 }

@@ -20,6 +20,10 @@ namespace Birb
 		void AddPoints(const Vector2 points[], const int& pointCount);
 		void AddPoints(const std::vector<Vector2>& points);
 
+		/// Rotates all of the points in the polygon around its center off mass
+		void SetRotation(const float& angle);
+		float CurrentAngle() const; //< Get the current angle incase it has been changed with SetRotation()
+
 		/// Gets the "center point" of the polygon by taking the average
 		/// of all points
 		Vector2 CenterPoint() const;
@@ -38,5 +42,6 @@ namespace Birb
 
 		void RenderFunc() override;
 		void SetPos(const Vector2& delta) override;
+		float angle;
 	};
 }

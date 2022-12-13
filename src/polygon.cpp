@@ -1,37 +1,46 @@
 #include "Polygon.hpp"
 #include "Renderwindow.hpp"
 
+#define PI 3.1415926535897932
+
 namespace Birb
 {
 	Polygon::Polygon()
 	{
 		color = Color(0xFFFFFF);
+		angle = 0;
 	}
 
 	Polygon::Polygon(const Color& color)
 	:color(color)
-	{}
+	{
+		angle = 0;
+	}
 
 	Polygon::Polygon(const Vector2 points[], const int& pointCount)
 	{
 		this->points = std::vector<Vector2>(points, points + pointCount);
+		angle = 0;
 	}
 
 	Polygon::Polygon(const Vector2 points[], const int& pointCount, const Color& color)
 	:color(color)
 	{
 		this->points = std::vector<Vector2>(points, points + pointCount);
+		angle = 0;
 	}
 
 	Polygon::Polygon(const std::vector<Vector2>& points)
 	{
 		this->points = points;
+		angle = 0;
 	}
 
 	Polygon::Polygon(const std::vector<Vector2>& points, const Color& color)
 	:color(color)
 	{
 		this->points = points;
+		angle = 0;
 	}
 
 	void Polygon::AddPoints(const Vector2 points[], const int& pointCount)
@@ -42,6 +51,31 @@ namespace Birb
 	void Polygon::AddPoints(const std::vector<Vector2>& points)
 	{
 		this->points.insert(std::end(this->points), std::begin(points), std::end(points));
+	}
+
+	void Polygon::SetRotation(const float& new_angle)
+	{
+		/* Calculate the difference between the new angle and the old angle
+		 * since the rotation math is done on the current position of the points
+		 * and not the original ones */
+		double angle_difference = new_angle - this->angle;
+
+		double radians = angle_difference * PI / 180;
+		double sin = std::sin(radians);
+		double cos = std::cos(radians);
+
+		std::vector<Vector2> old_points = points;
+		Vector2 center_point = CenterPoint();
+
+		/* Move each of the vertex points individually around the centroid of the polygon */
+		for (size_t i = 0; i < points.size(); ++i)
+		{
+			points[i].x = cos * (old_points[i].x - center_point.x) - sin * (old_points[i].y - center_point.y) + center_point.x;
+			points[i].y = sin * (old_points[i].x - center_point.x) + cos * (old_points[i].y - center_point.y) + center_point.y;
+		}
+
+		/* Update the angle */
+		this->angle += angle_difference;
 	}
 
 	Vector2 Polygon::CenterPoint() const
@@ -156,5 +190,10 @@ namespace Birb
 			points[i].x += delta.x;
 			points[i].y += delta.y;
 		}
+	}
+
+	float Polygon::CurrentAngle() const
+	{
+		return angle;
 	}
 }
