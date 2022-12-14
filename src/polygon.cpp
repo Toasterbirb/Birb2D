@@ -55,6 +55,11 @@ namespace Birb
 
 	void Polygon::SetRotation(const float& new_angle)
 	{
+		SetRotation(new_angle, CenterPoint());
+	}
+
+	void Polygon::SetRotation(const float& new_angle, const Vector2& pivot_point)
+	{
 		/* Calculate the difference between the new angle and the old angle
 		 * since the rotation math is done on the current position of the points
 		 * and not the original ones */
@@ -65,13 +70,12 @@ namespace Birb
 		double cos = std::cos(radians);
 
 		std::vector<Vector2> old_points = points;
-		Vector2 center_point = CenterPoint();
 
-		/* Move each of the vertex points individually around the centroid of the polygon */
+		/* Move each of the vertex points individually around the pivot point */
 		for (size_t i = 0; i < points.size(); ++i)
 		{
-			points[i].x = cos * (old_points[i].x - center_point.x) - sin * (old_points[i].y - center_point.y) + center_point.x;
-			points[i].y = sin * (old_points[i].x - center_point.x) + cos * (old_points[i].y - center_point.y) + center_point.y;
+			points[i].x = cos * (old_points[i].x - pivot_point.x) - sin * (old_points[i].y - pivot_point.y) + pivot_point.x;
+			points[i].y = sin * (old_points[i].x - pivot_point.x) + cos * (old_points[i].y - pivot_point.y) + pivot_point.y;
 		}
 
 		/* Update the angle */

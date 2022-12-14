@@ -22,6 +22,10 @@ namespace Birb
 
 		/// Rotates all of the points in the polygon around its center off mass
 		void SetRotation(const float& new_angle);
+
+		/// Rotates all of the points in the polygon around a custom pivot point
+		void SetRotation(const float& new_angle, const Vector2& pivot_point);
+
 		float CurrentAngle() const; //< Get the current angle incase it has been changed with SetRotation()
 
 		/// Gets the "center point" of the polygon by taking the average

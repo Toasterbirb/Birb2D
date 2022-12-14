@@ -289,4 +289,51 @@ namespace Birb
 		CHECK(polygon.points[2].ToInt() == points[2].ToInt());
 		CHECK(polygon.points[3].ToInt() == points[3].ToInt());
 	}
+
+	TEST_CASE("Polygon rotation around a custom pivot point")
+	{
+		std::vector<Vector2> points = {
+			{-1, -1},
+			{ 2, -1},
+			{ 2,  1},
+			{-1,  1}
+		};
+		Polygon polygon(points);
+		Vector2 custom_pivot_point = {0, 0};
+
+		/* Set rotation to zero. This shouldn't affect the polygon at all */
+		polygon.SetRotation(0, custom_pivot_point);
+		CHECK(polygon.points[0].ToInt() == points[0].ToInt());
+		CHECK(polygon.points[1].ToInt() == points[1].ToInt());
+		CHECK(polygon.points[2].ToInt() == points[2].ToInt());
+		CHECK(polygon.points[3].ToInt() == points[3].ToInt());
+
+		/* Rotate by 90 degrees */
+		polygon.SetRotation(90, custom_pivot_point);
+		CHECK(polygon.points[0].ToInt() == Vector2Int( 1, -1));
+		CHECK(polygon.points[1].ToInt() == Vector2Int( 1,  2));
+		CHECK(polygon.points[2].ToInt() == Vector2Int(-1,  2));
+		CHECK(polygon.points[3].ToInt() == Vector2Int(-1, -1));
+
+		/* Rotate by 180 degrees */
+		polygon.SetRotation(180, custom_pivot_point);
+		CHECK(polygon.points[0].ToInt() == Vector2Int( 1,  1));
+		CHECK(polygon.points[1].ToInt() == Vector2Int(-2,  1));
+		CHECK(polygon.points[2].ToInt() == Vector2Int(-2, -1));
+		CHECK(polygon.points[3].ToInt() == Vector2Int( 1, -1));
+
+		/* Rotate by 270 degrees */
+		polygon.SetRotation(270, custom_pivot_point);
+		CHECK(polygon.points[0].ToInt() == Vector2Int(-1,  1));
+		CHECK(polygon.points[1].ToInt() == Vector2Int(-1, -2));
+		CHECK(polygon.points[2].ToInt() == Vector2Int( 1, -2));
+		CHECK(polygon.points[3].ToInt() == Vector2Int( 1,  1));
+
+		/* Rotate by 360 degrees. This should give the original values */
+		polygon.SetRotation(360, custom_pivot_point);
+		CHECK(polygon.points[0].ToInt() == points[0].ToInt());
+		CHECK(polygon.points[1].ToInt() == points[1].ToInt());
+		CHECK(polygon.points[2].ToInt() == points[2].ToInt());
+		CHECK(polygon.points[3].ToInt() == points[3].ToInt());
+	}
 }
