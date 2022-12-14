@@ -26,7 +26,8 @@ namespace Birb
 		/// Rotates all of the points in the polygon around a custom pivot point
 		void SetRotation(const float& new_angle, const Vector2& pivot_point);
 
-		float CurrentAngle() const; //< Get the current angle incase it has been changed with SetRotation()
+		/// Get the current angle incase it has been changed with SetRotation()
+		float CurrentAngle() const;
 
 		/// Gets the "center point" of the polygon by taking the average
 		/// of all points
@@ -36,9 +37,14 @@ namespace Birb
 		// Shouldn't be called if the point locations are going to be modified since
 		// there is going to be detail lost
 		void Optimize();
+
+		/// Returns the point count of the polygon
 		int size() const;
 
+		/// The color used to render the polygon
 		Color color;
+
+		/// Polygon points / vertices
 		std::vector<Vector2> points;
 
 	private:
