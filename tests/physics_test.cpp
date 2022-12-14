@@ -69,6 +69,42 @@ namespace Birb
 			CHECK_FALSE(RectCollision(rectsB));
 		}
 
+		TEST_CASE("Floating point in Rect")
+		{
+			Rect rect(1, 1, 4, 2);
+
+			Vector2 pointA(2, 2);
+			CHECK(Physics::PointInRect(rect, pointA));
+
+			Vector2 pointB(4.5, 3.9);
+			Vector2 pointC(6.1, 2);
+			Vector2 pointD(0.1, -0.2);
+			Vector2 pointE(2, 0);
+
+			CHECK_FALSE(Physics::PointInRect(rect, pointB));
+			CHECK_FALSE(Physics::PointInRect(rect, pointC));
+			CHECK_FALSE(Physics::PointInRect(rect, pointD));
+			CHECK_FALSE(Physics::PointInRect(rect, pointE));
+		}
+
+		TEST_CASE("Integer point in Rect")
+		{
+			Rect rect(1, 1, 4, 2);
+
+			Vector2Int pointA(2, 2);
+			CHECK(Physics::PointInRect(rect, pointA));
+
+			Vector2Int pointB(4, 4);
+			Vector2Int pointC(6, 2);
+			Vector2Int pointD(0, 2);
+			Vector2Int pointE(2, 0);
+
+			CHECK_FALSE(Physics::PointInRect(rect, pointB));
+			CHECK_FALSE(Physics::PointInRect(rect, pointC));
+			CHECK_FALSE(Physics::PointInRect(rect, pointD));
+			CHECK_FALSE(Physics::PointInRect(rect, pointE));
+		}
+
 		TEST_CASE("Entity collision")
 		{
 			Entity entityA("Entity A");

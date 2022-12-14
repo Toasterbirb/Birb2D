@@ -46,6 +46,19 @@ namespace Birb
 			return CircleCollision(circle, rect);
 		}
 
+		bool PointInRect(const Rect& rect, const Vector2& point)
+		{
+			return (point.x > rect.x &&
+					point.y > rect.y &&
+					point.x < rect.x + rect.w &&
+					point.y < rect.y + rect.h);
+		}
+
+		bool PointInRect(const Rect& rect, const Vector2Int& point)
+		{
+			return PointInRect(rect, point.ToFloat());
+		}
+
 		bool EntityCollision(const Entity& entityA, const Entity& entityB)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity collision", PROFILER_COLOR);
