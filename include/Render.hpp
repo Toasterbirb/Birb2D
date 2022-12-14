@@ -14,6 +14,7 @@ namespace Birb
 		void ResetDrawColor(); ///< Resets the drawing color back to black, so that the window background color stays the same
 		void SetRenderDrawColor(const Color& color); ///< Sets the drawing color for base SDL2 drawing functions
 
+		void DrawRect(const Rect& rect); ///< Draw filled rect
 		void DrawRect(const Color& color, const Rect& dimensions); ///< Draw filled rect
 		void DrawRect(const Color& color, const Rect& dimensions, const int& width); ///< Draw hollow rect
 

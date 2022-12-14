@@ -18,6 +18,11 @@ namespace Birb
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 		}
 
+		void DrawRect(const Rect& rect)
+		{
+			DrawRect(rect.color, rect);
+		}
+
 		void DrawRect(const Color& color, const Rect& dimensions)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw rect", PROFILER_COLOR);
