@@ -17,7 +17,11 @@ namespace Birb
 		public:
 			SoundFile();
 			SoundFile(const std::string& p_filePath);
+
+			/// Play the sound file
 			void play();
+
+			/// Free the heap allocated audio file
 			void free()
 			{
 				Mix_FreeChunk(sound);
@@ -35,8 +39,14 @@ namespace Birb
 		public:
 			MusicFile();
 			MusicFile(const std::string& p_filePath);
+
+			/// Play the music file
 			void play();
+
+			/// Play the music file with the option of looping it
 			void play(bool loop);
+
+			/// Free the heap allocated music file
 			void free()
 			{
 				Mix_FreeMusic(music);

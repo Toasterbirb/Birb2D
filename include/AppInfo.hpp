@@ -8,6 +8,7 @@ namespace Birb
 		ApplicationInfo();
 		ApplicationInfo(const std::string& ApplicationName);
 
+		/// Application name
 		std::string AppName;
 	};
 }
