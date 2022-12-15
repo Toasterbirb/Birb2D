@@ -29,6 +29,28 @@ namespace Birb
 
 		CHECK(rand.RandomInt(0, 0) == 0);
 		CHECK(rand.RandomInt(0, -1) >= 0);
+
+		/* Make sure that the random value is between the correct range */
+		int lower_limit = 5;
+		int upper_limit = 10;
+		int test_count = 1000;
+		float out_of_limits_value = 0;
+
+		bool out_of_limits = false;
+		for (int i = 0; i < test_count; ++i)
+		{
+			float value = rand.RandomInt(lower_limit, upper_limit);
+			if (value < lower_limit || value > upper_limit)
+			{
+				out_of_limits_value = value;
+				out_of_limits = true;
+				break;
+			}
+		}
+		CHECK_FALSE(out_of_limits);
+
+		if (out_of_limits)
+			std::cout << "Limits: " << lower_limit << " - " << upper_limit << ". Value: " << out_of_limits_value << std::endl;
 	}
 
 	TEST_CASE("Random float")
@@ -56,6 +78,27 @@ namespace Birb
 
 		CHECK(rand.RandomFloat(0.0f, 0.0f) == 0.0f);
 		CHECK(rand.RandomFloat(0.0f, -1.0f) >= 0.0f);
+
+		/* Make sure that the random value is between the correct range */
+		float lower_limit = 5.00f;
+		float upper_limit = 6.00f;
+		int test_count = 1000;
+		float out_of_limits_value = 0;
+
+		bool out_of_limits = false;
+		for (int i = 0; i < test_count; ++i)
+		{
+			float value = rand.RandomFloat(lower_limit, upper_limit);
+			if (value < lower_limit || value > upper_limit)
+			{
+				out_of_limits_value = value;
+				out_of_limits = true;
+				break;
+			}
+		}
+		CHECK_FALSE(out_of_limits);
+		if (out_of_limits)
+			std::cout << "Limits: " << lower_limit << " - " << upper_limit << ". Value: " << out_of_limits_value << std::endl;
 	}
 
 	TEST_CASE("Shuffle an integer array")

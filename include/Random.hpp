@@ -1,5 +1,6 @@
 #pragma once
 
+#include <random>
 #include "STD.hpp"
 
 namespace Birb
@@ -7,8 +8,6 @@ namespace Birb
 	class Random
 	{
 	public:
-		Random();
-
 		int RandomInt(const int& min, const int& max);
 		float RandomFloat(const float& min, const float& max );
 
@@ -30,5 +29,8 @@ namespace Birb
 				}
 			}
 		}
+
+	private:
+		std::random_device random_machine;
 	};
 }
