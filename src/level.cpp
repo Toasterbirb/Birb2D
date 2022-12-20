@@ -53,10 +53,6 @@ namespace Birb
 	Level::Level(const std::string& level_path)
 	:file_path(level_path)
 	{
-		// TODO: Read the grid size from the file
-		// Lets set it to 64x64 by default for now
-		grid_size = Vector2Int(32, 32);
-
 		has_been_modified = false;
 		scale = 1.0f;
 
