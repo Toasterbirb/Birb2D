@@ -53,6 +53,7 @@ namespace Birb
 			}
 
 		private:
+			void SetDefaultColors();
 			void RenderFunc() override;
 			void SetPos(const Vector2& delta) override;
 		};

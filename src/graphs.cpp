@@ -6,11 +6,16 @@ namespace Birb
 {
 	namespace Widgets
 	{
-		Graph::Graph()
+		void Graph::SetDefaultColors()
 		{
 			borderColor 	= Colors::White;
 			backgroundColor = Colors::Black;
 			graphColor 		= Colors::White;
+		}
+
+		Graph::Graph()
+		{
+			SetDefaultColors();
 
 			borderSize = 3;
 		}
@@ -21,9 +26,7 @@ namespace Birb
 			this->rect = rect;
 			this->type = graphType;
 
-			borderColor 	= Colors::White;
-			backgroundColor = Colors::White;
-			graphColor 		= Colors::White;
+			SetDefaultColors();
 
 			borderSize = 3;
 		}
@@ -34,9 +37,7 @@ namespace Birb
 			this->rect = rect;
 			this->type = graphType;
 
-			borderColor 	= Colors::White;
-			backgroundColor = Colors::White;
-			graphColor 		= Colors::White;
+			SetDefaultColors();
 
 			borderSize = 3;
 		}
