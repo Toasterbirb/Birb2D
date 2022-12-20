@@ -82,6 +82,11 @@ namespace Birb
 		this->angle += angle_difference;
 	}
 
+	void Polygon::Translate(const Vector2& delta)
+	{
+		SetPos(delta);
+	}
+
 	Vector2 Polygon::CenterPoint() const
 	{
 		Vector2 result;

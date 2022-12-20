@@ -26,6 +26,9 @@ namespace Birb
 		/// Rotates all of the points in the polygon around a custom pivot point
 		void SetRotation(const float& new_angle, const Vector2& pivot_point);
 
+		/// Move the polygon relatively
+		void Translate(const Vector2& delta);
+
 		/// Get the current angle incase it has been changed with SetRotation()
 		float CurrentAngle() const;
 

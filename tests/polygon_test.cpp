@@ -336,4 +336,22 @@ namespace Birb
 		CHECK(polygon.points[2].ToInt() == points[2].ToInt());
 		CHECK(polygon.points[3].ToInt() == points[3].ToInt());
 	}
+
+	TEST_CASE("Translate a polygon by a relative amount")
+	{
+		/* This is probably already tested in SceneObject tests since
+		 * it uses SetPos, but testing the call here aswell doesn't hurt */
+		std::vector<Vector2> points = {
+			{ 0, 0 },
+			{ 2, 2 },
+			{ -1, -1 }
+		};
+		Polygon polygon(points);
+
+		polygon.Translate(Vector2(1, 1));
+
+		CHECK(polygon.points[0] == Vector2(1, 1));
+		CHECK(polygon.points[1] == Vector2(3, 3));
+		CHECK(polygon.points[2] == Vector2(0, 0));
+	}
 }
