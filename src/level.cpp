@@ -14,11 +14,21 @@ using namespace nlohmann;
 
 namespace Birb
 {
+	Level::Tile::Tile(json json_object)
+	{
+		is_empty 		= json_object[JSON_IS_EMPTY];
+		is_collider 	= json_object[JSON_IS_COLLIDER];
+		rect.color.r 	= json_object[JSON_COLOR_R];
+		rect.color.g 	= json_object[JSON_COLOR_G];
+		rect.color.b 	= json_object[JSON_COLOR_B];
+		rect.color.a 	= json_object[JSON_COLOR_A];
+	}
+	
 	nlohmann::json Level::Tile::ToJson() const
 	{
 		json json_object;
 		
-		json_object[JSON_IS_EMPTY] 	= this->is_empty;
+		json_object[JSON_IS_EMPTY] 		= this->is_empty;
 		json_object[JSON_IS_COLLIDER] 	= this->is_collider;
 		json_object[JSON_COLOR_R] 		= this->rect.color.r;
 		json_object[JSON_COLOR_G] 		= this->rect.color.g;
@@ -60,6 +70,11 @@ namespace Birb
 		tiles = std::vector<std::vector<Tile>>(grid_size.x);
 		for (int i = 0; i < grid_size.x; ++i)
 			tiles[i] = std::vector<Tile>(grid_size.y);
+
+		/* Read the grid from the json data */
+		for (int i = 0; i < grid_size.x; ++i)
+			for (int j = 0; j < grid_size.y; ++j)
+				tiles[i][j] = Tile(json_data["tiles"][i][j]);
 	}
 
 
@@ -106,6 +121,11 @@ namespace Birb
 
 	void Level::Save(const std::string& file_path)
 	{
+		/* Update the json data */
+		for (int i = 0; i < grid_size.x; ++i)
+			for (int j = 0; j < grid_size.y; ++j)
+				json_data["tiles"][i][j] = tiles[i][j].ToJson();
+
 		std::ofstream file(file_path);
 		file << std::setw(4) << json_data << std::endl;
 	}

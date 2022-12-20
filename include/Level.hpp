@@ -29,6 +29,8 @@ namespace Birb
 				rect.color	= 0x000050;
 			}
 
+			Tile(nlohmann::json json_object);
+
 			nlohmann::json ToJson() const;
 
 			bool is_empty;

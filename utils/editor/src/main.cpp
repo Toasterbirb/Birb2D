@@ -9,8 +9,17 @@ static Birb::Vector2Int level_size;
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
 const static float SCALE_TICK = 1;
 
+static Birb::Level level;
+static std::string level_path;
+
 static bool ApplicationRunning = true;
 
+void Save()
+{
+	Birb::Debug::Log("Saving the level data...");
+	level.Save(level_path);
+	Birb::Debug::Log("Level saved!");
+}
 
 void Quit()
 {
@@ -59,6 +68,13 @@ int main(int argc, char** argv)
 	side_panel_background.color = 0x3a3844;
 	side_panel.AddObject(&side_panel_background);
 
+	Birb::Font buttonFont("fonts/freefont/FreeSansBold.ttf", 18);
+	Birb::Entity saveButton("Save button", Birb::Vector2Int(8, window.dimensions.y - top_bar_height - 32), Birb::EntityComponent::Text("Save", &buttonFont, &Birb::Colors::Nord::SnowStorm::nord5, &Birb::Colors::Nord::PolarNight::nord1));
+	saveButton.renderingPriority = 1;
+
+	side_panel.AddObject(&saveButton);
+
+
 	/* Level viewer window */
 	Birb::Scene level_view;
 	level_view.SetPosition({ side_panel_width, top_bar_height });
@@ -73,7 +89,8 @@ int main(int argc, char** argv)
 	Birb::Scene level_scene;
 	level_scene.renderingPriority = 1;
 
-	bool pending_level_scene_update = false;
+	/* Update the level scene on startup */
+	bool pending_level_scene_update = true;
 	bool pending_level_scene_position_update = false;
 	bool pending_level_grid_update = false;
 
@@ -98,11 +115,11 @@ int main(int argc, char** argv)
 	level_view.AddObject(&level_scene);
 
 	/* Load a level from file if a path was provided */
-	Birb::Level level;
 	if (argc == 1)
 	{
 		level = Birb::Level(DEFAULT_LEVEL_SIZE);
 		level_size = DEFAULT_LEVEL_SIZE;
+		level_path = "new_level.json";
 	}
 	else if (argc == 2)
 	{
@@ -125,6 +142,7 @@ int main(int argc, char** argv)
 		/* Load the level from the given path */
 		level = Birb::Level(argv[1]);
 		level_size = level.GridSize();
+		level_path = argv[1];
 	}
 
 	level.SetScale(DEFAULT_LEVEL_SCALE);
@@ -140,7 +158,10 @@ int main(int argc, char** argv)
 	Birb::UI ui;
 
 	exitButton.clickComponent = Birb::EntityComponent::Click(Quit);
+	saveButton.clickComponent = Birb::EntityComponent::Click(Save);
+
 	ui.AddButton(&exitButton);
+	ui.AddButton(&saveButton);
 
 	Birb::Vector2Int last_cursor_pos;
 
