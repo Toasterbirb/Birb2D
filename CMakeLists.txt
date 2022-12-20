@@ -77,9 +77,6 @@ add_subdirectory(vendor/microprofile)
 # Include libzip and cppcodec
 find_package(ZLIB)
 
-# Include json library
-include_directories(vendor/json)
-
 if (${ZLIB_FOUND})
 	set(ZLIB_USE_STATIC_LIBS "ON")
 	option(ENABLE_COMMONCRYPTO "Enable use of CommonCrypto" OFF)
