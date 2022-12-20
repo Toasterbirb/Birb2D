@@ -4,7 +4,7 @@
 const static int top_bar_height = 20;
 const static int side_panel_width = 200;
 
-const static Birb::Vector2Int DEFAULT_LEVEL_SIZE = { 64, 32 };
+const static Birb::Vector2Int DEFAULT_LEVEL_SIZE = { 32, 16 };
 static Birb::Vector2Int level_size;
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
 const static float SCALE_TICK = 1;
