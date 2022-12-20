@@ -82,7 +82,7 @@ namespace Birb
 			switch (type)
 			{
 				case (GraphType::Line):
-					Render::DrawLines(graphColor, &points[0], values.size());
+					Render::DrawLines(graphColor, &points[0], values.size(), world_space);
 					break;
 
 				case (GraphType::Block):
@@ -102,10 +102,9 @@ namespace Birb
 					points.push_back(endBottomPoint);
 					points.push_back(startBottomPoint);
 
-					Render::DrawPolygon(graphColor, points);
+					Render::DrawPolygon(graphColor, points, world_space);
 					break;
 			}
-
 
 			/* Draw the graph border */
 			Render::DrawRect(borderColor, rect, 3);

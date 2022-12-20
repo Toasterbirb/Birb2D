@@ -9,11 +9,14 @@ namespace Birb
 		:pointCount(pointCount), rect(rect), timeStep(timeStep)
 		{
 			enabled = true;
+
 			graph = Widgets::Graph(Widgets::GraphType::Line, rect);
 			graph.backgroundColor 	= Colors::Black;
 			graph.graphColor 		= Colors::White;
 			graph.borderColor 		= Colors::White;
 			graph.normalizedZeroValue = true;
+			graph.world_space 		= false;
+			graph.rect.world_space 	= false;
 		}
 
 		void FrametimeGraph::Render()
