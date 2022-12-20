@@ -37,10 +37,23 @@ namespace Birb
 		void DrawRect(const Color& color, const Rect& dimensions, const int& width)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw hollow rect", PROFILER_COLOR);
-			DrawRect(color, Rect(dimensions.x, dimensions.y, dimensions.w, width)); /* Top */
-			DrawRect(color, Rect(dimensions.x, dimensions.y + dimensions.h - width, dimensions.w, width)); /* Bottom */
-			DrawRect(color, Rect(dimensions.x, dimensions.y, width, dimensions.h)); /* Left */
-			DrawRect(color, Rect(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h)); /* Right */
+
+			/* Create the rectangles */
+			Rect top(dimensions.x, dimensions.y, dimensions.w, width);
+			Rect bottom(dimensions.x, dimensions.y + dimensions.h - width, dimensions.w, width);
+			Rect left(dimensions.x, dimensions.y, width, dimensions.h);
+			Rect right(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h);
+
+			/* Set world_space values */
+			top.world_space = dimensions.world_space;
+			bottom.world_space = dimensions.world_space;
+			left.world_space = dimensions.world_space;
+			right.world_space = dimensions.world_space;
+
+			DrawRect(color, top); /* Top */
+			DrawRect(color, bottom); /* Bottom */
+			DrawRect(color, left); /* Left */
+			DrawRect(color, right); /* Right */
 		}
 
 		void DrawLine(const Color& color, const Vector2Int& pointA, const Vector2Int& pointB, const bool& world_space, const float& parallax_multiplier)
