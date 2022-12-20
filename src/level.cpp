@@ -53,7 +53,7 @@ namespace Birb
 	Level::Level(const std::string& level_path)
 	:file_path(level_path)
 	{
-		has_been_modified = false;
+		has_been_modified = true;
 		scale = 1.0f;
 
 		std::string json_string = Birb::Filesystem::File::Read(level_path);
