@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Entity.hpp"
 #include "Graphs.hpp"
 #include "Timestep.hpp"
 
@@ -15,6 +16,10 @@ namespace Birb
 			bool enabled;
 			int pointCount;
 			Rect rect;
+
+			Font font;
+			Entity fps_text;
+			Entity frametime_text;
 
 		private:
 			TimeStep& timeStep;

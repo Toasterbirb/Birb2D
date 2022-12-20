@@ -1,5 +1,6 @@
 #include "Diagnostics.hpp"
 #include "Values.hpp"
+#include "Utils.hpp"
 
 namespace Birb
 {
@@ -17,6 +18,17 @@ namespace Birb
 			graph.normalizedZeroValue = true;
 			graph.world_space 		= false;
 			graph.rect.world_space 	= false;
+
+			font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 14);
+			fps_text.textComponent = EntityComponent::Text("", &font, &Colors::White);
+			fps_text.rect.x = rect.x + rect.w + 8;
+			fps_text.rect.y = rect.y + 8;
+			fps_text.world_space = false;
+
+			frametime_text.textComponent = EntityComponent::Text("", &font, &Colors::White);
+			frametime_text.rect.x = rect.x + rect.w + 8;
+			frametime_text.rect.y = rect.y + 32;
+			frametime_text.world_space = false;
 		}
 
 		void FrametimeGraph::Render()
@@ -41,6 +53,12 @@ namespace Birb
 				/* Set the last value to the new value */
 				graph.values[graph.values.size() - 1] = timeStep.deltaTime * 1000;
 			}
+
+			/* Draw fps and frametime next to the graph */
+			fps_text.SetText(utils::CleanDecimals(Math::Round(1.0f / timeStep.deltaTime, 2)) + "fps");
+			frametime_text.SetText(utils::CleanDecimals(timeStep.deltaTime) + "ms");
+			Render::DrawEntity(fps_text);
+			Render::DrawEntity(frametime_text);
 
 			graph.Render();
 		}
