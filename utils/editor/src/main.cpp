@@ -4,7 +4,8 @@
 const static int top_bar_height = 20;
 const static int side_panel_width = 200;
 
-const static Birb::Vector2Int DEFAULT_LEVEL_SIZE = { 256, 256 };
+const static Birb::Vector2Int DEFAULT_LEVEL_SIZE = { 64, 32 };
+static Birb::Vector2Int level_size;
 const static float DEFAULT_LEVEL_SCALE = 16.0f;
 const static float SCALE_TICK = 1;
 
@@ -17,7 +18,7 @@ void Quit()
 	ApplicationRunning = false;
 }
 
-int main(void)
+int main(int argc, char** argv)
 {
 	Birb::Debug::Log("Creating the window");
 	Birb::Window window("Birb Editor", Birb::Vector2Int(1280, 720), 75, false);
@@ -96,14 +97,43 @@ int main(void)
 	level_view.AddObject(&level_grid);
 	level_view.AddObject(&level_scene);
 
-	Birb::Level level(DEFAULT_LEVEL_SIZE);
+	/* Load a level from file if a path was provided */
+	Birb::Level level;
+	if (argc == 1)
+	{
+		level = Birb::Level(DEFAULT_LEVEL_SIZE);
+		level_size = DEFAULT_LEVEL_SIZE;
+	}
+	else if (argc == 2)
+	{
+		/* If the level doesn't exist, create a new file */
+		if (!Birb::Filesystem::File::Exists(argv[1]))
+		{
+			Birb::Debug::Log("Level not found. Creating a new one...");
+			Birb::Vector2Int dimensions;
+
+			std::cout << "Level width: ";
+			std::cin >> dimensions.x;
+
+			std::cout << "Level height: ";
+			std::cin >> dimensions.y;
+
+			/* Write a boilerplate level file */
+			Birb::Level::CreateLevelFile(dimensions, argv[1]);
+		}
+
+		/* Load the level from the given path */
+		level = Birb::Level(argv[1]);
+		level_size = level.GridSize();
+	}
+
 	level.SetScale(DEFAULT_LEVEL_SCALE);
 
 	/** Create the grid lines **/
 	std::vector<Birb::Line> horizontal_lines;
 	std::vector<Birb::Line> vertical_lines;
 
-	GenerateGridLines(window, &level_grid, level_view, grid_position_offset, DEFAULT_LEVEL_SCALE, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
+	GenerateGridLines(window, &level_grid, level_view, grid_position_offset, DEFAULT_LEVEL_SCALE, level_size, horizontal_lines, vertical_lines);
 
 	Birb::Debug::Log("Starting the game loop");
 
@@ -161,7 +191,7 @@ int main(void)
 						/* Mouse click */
 						case (SDL_BUTTON_LEFT):
 						{
-							Birb::Vector2Int tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
+							Birb::Vector2Int tile_pos = ClickToIndex(level_grid, level_size, window.CursorPosition(), current_scale);
 							std::cout << "Tile pos: " << tile_pos << std::endl;
 
 							/* Set the tile */
@@ -239,7 +269,7 @@ int main(void)
 
 		if (pending_level_grid_update)
 		{
-			GenerateGridLines(window, &level_grid, level_view, grid_position_offset, current_scale, DEFAULT_LEVEL_SIZE, horizontal_lines, vertical_lines);
+			GenerateGridLines(window, &level_grid, level_view, grid_position_offset, current_scale, level_size, horizontal_lines, vertical_lines);
 			pending_level_grid_update = false;
 		}
 
@@ -258,7 +288,7 @@ int main(void)
 
 		if (window.CursorPosition() != last_cursor_pos)
 		{
-			Birb::Vector2Int current_tile_pos = ClickToIndex(level_grid, DEFAULT_LEVEL_SIZE, window.CursorPosition(), current_scale);
+			Birb::Vector2Int current_tile_pos = ClickToIndex(level_grid, level_size, window.CursorPosition(), current_scale);
 			coordinate_text.SetText(current_tile_pos.ToString());
 			last_cursor_pos = window.CursorPosition();
 		}
