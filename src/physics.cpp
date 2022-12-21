@@ -48,6 +48,8 @@ namespace Birb
 
 		RectSide RectCollisionDetailed(const Rect& rectA, const Rect& rectB)
 		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Detailed Rect collision", PROFILER_COLOR);
+
 			/* First do a simple collision check to get rid of the 'None'
 			 * cases. */
 			if (!RectCollision(rectA, rectB))
