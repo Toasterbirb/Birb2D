@@ -79,7 +79,6 @@ namespace Birb
 			Rect rectF(1, 4, 1, 1);
 			Rect rectG(5, 2, 1, 1);
 
-
 			CHECK(RectCollisionDetailed(rectA, rectB) == RectSide::Left);
 			CHECK(RectCollisionDetailed(rectB, rectA) == RectSide::Right);
 
@@ -91,8 +90,6 @@ namespace Birb
 
 			CHECK(RectCollisionDetailed(rectE, rectB) == RectSide::Bottom);
 			CHECK(RectCollisionDetailed(rectB, rectE) == RectSide::Top);
-
-			CHECK(RectCollisionDetailed(rectB, rectB) == RectSide::All);
 
 			CHECK(RectCollisionDetailed(rectF, rectB) == RectSide::None);
 			CHECK(RectCollisionDetailed(rectB, rectF) == RectSide::None);

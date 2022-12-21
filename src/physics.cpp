@@ -51,79 +51,44 @@ namespace Birb
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Detailed Rect collision", PROFILER_COLOR);
 
 			/* First do a simple collision check to get rid of the 'None'
-			 * cases. */
+			 * cases */
 			if (!RectCollision(rectA, rectB))
 				return None;
 
-			/* Now we can expect that there is a collision. Just gotta find
-			 * out where */
-			
-			/* Calculate the middle points of rectB */
-			float vertical_middle 	= rectB.x + (rectB.w / 2.0f);
-			float horizontal_middle = rectB.y + (rectB.h / 2.0f);
+			/* Now that we can expect that there is a collision, we'll
+			 * have to figure out the side */
 
-			/* Check what side of rectB the rectA is */
+			/* Calculate the centerpoint of rectA */
+			Vector2 rectA_center = { rectA.x + (rectA.w / 2.0f), rectA.y + (rectA.h / 2.0f) };
 
-			/* If both are true, rectA is more to the left */
-			bool A_left_most_point 	= (rectA.x < vertical_middle);
-			bool A_right_most_point = (rectA.x + rectA.w < vertical_middle);
+			/* Calculate the coordinates of rectB side center
+			 * points */
+			Vector2 top_point 	 = { rectB.x + (rectB.w / 2.0f), rectB.y };
+			Vector2 bottom_point = { rectB.x + (rectB.w / 2.0f), rectB.y + rectB.h };
+			Vector2 left_point 	 = { rectB.x, (rectB.y + rectB.h / 2.0f) };
+			Vector2 right_point	 = { rectB.x + rectB.w, (rectB.y + rectB.h / 2.0f) };
 
-			if (A_left_most_point && A_right_most_point)
-				return Left;
-			else if (!A_left_most_point && !A_right_most_point)
-				return Right;
+			/* Find point that has the shortest distance to the center
+			 * point of rectA */
+			float sides[4];
+			sides[0] = Math::VectorDistance(rectA_center, left_point);
+			sides[1] = Math::VectorDistance(rectA_center, right_point);
+			sides[2] = Math::VectorDistance(rectA_center, top_point);
+			sides[3] = Math::VectorDistance(rectA_center, bottom_point);
 
-			/* If both are true, rectA is more to the top */
-			bool A_top_most_point 	 = (rectA.y < horizontal_middle);
-			bool A_bottom_most_point = (rectA.y + rectA.h < horizontal_middle);
-
-			if (A_top_most_point && A_bottom_most_point)
-				return Top;
-			else if (!A_top_most_point && !A_bottom_most_point)
-				return Bottom;
-
-			/* Handle a bit more complicated cases where parts of rectA
-			 * are on the other side of the middle point */
-
-			/* Check if the entire rectA is inside of rectB */
-			if (rectA.x >= rectB.x
-					&& rectA.x + rectA.w <= rectB.x + rectB.w
-					&& rectA.y >= rectB.y
-					&& rectA.y + rectA.h <= rectB.y + rectB.h)
-				return All;
-
-			/* Check the distance of the left-most and right-most points
-			 * to the middle point */
-
-			/* If this value is positive, we are more to the left */
-			float A_distance_to_vertical_middle = (vertical_middle - rectA.x) + (vertical_middle - (rectA.x + rectA.w));
-
-			/* If this value is positive, we are more to the top */
-			float A_distance_to_horizontal_middle = (horizontal_middle - rectA.y) + (horizontal_middle - (rectA.y + rectA.h));
-
-			/* Calculate which value is higher, horizontal or vertical */
-			if (std::abs(A_distance_to_horizontal_middle) > std::abs(A_distance_to_vertical_middle))
+			/* Find the lowest value */
+			int lowest_value = sides[0];
+			int lowest_index = 0;
+			for (int i = 1; i < 4; ++i)
 			{
-				/* Horizontal value matters more */
-				if (A_distance_to_horizontal_middle > 0)
-					return Top;
-				else
-					return Bottom;
+				if (sides[i] < lowest_value)
+				{
+					lowest_value = sides[i];
+					lowest_index = i;
+				}
 			}
-			else if (std::abs(A_distance_to_horizontal_middle) < std::abs(A_distance_to_vertical_middle))
-			{
-				/* Vertical value matter more */
-				if (A_distance_to_vertical_middle > 0)
-					return Left;
-				else
-					return Right;
-			}
-			else
-			{
-				/* Both values are equal, the result can't really be
-				 * solved properly */
-				return All;
-			}
+
+			return static_cast<RectSide>(lowest_index);
 		}
 
 		bool PointInRect(const Rect& rect, const Vector2& point)

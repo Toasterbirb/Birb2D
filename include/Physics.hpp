@@ -24,7 +24,7 @@ namespace Birb
 
 		enum RectSide
 		{
-			Left, Right, Top, Bottom, All, None
+			Left, Right, Top, Bottom, None
 		};
 
 		/// Collision between two rects with information
