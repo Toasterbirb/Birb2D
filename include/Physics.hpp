@@ -22,6 +22,15 @@ namespace Birb
 		/// Check for collision between a circle and a rect
 		bool RectCollision(const Rect& rect, const Circle& circle);
 
+		enum RectSide
+		{
+			Left, Right, Top, Bottom, All, None
+		};
+
+		/// Collision between two rects with information
+		/// about the collision side
+		RectSide RectCollisionDetailed(const Rect& rectA, const Rect& rectB);
+
 		/// Check if a float 2D point is inside of a rect
 		bool PointInRect(const Rect& rect, const Vector2& point);
 

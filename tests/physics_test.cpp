@@ -69,6 +69,38 @@ namespace Birb
 			CHECK_FALSE(RectCollision(rectsB));
 		}
 
+		TEST_CASE("Detailed Rect collision")
+		{
+			Rect rectA(1, 1, 3, 1);
+			Rect rectB(3, 0, 2, 3);
+			Rect rectC(4, 1, 3, 1);
+			Rect rectD(2, -1, 4, 2);
+			Rect rectE(2, 2, 4, 2);
+			Rect rectF(1, 4, 1, 1);
+			Rect rectG(5, 2, 1, 1);
+
+
+			CHECK(RectCollisionDetailed(rectA, rectB) == RectSide::Left);
+			CHECK(RectCollisionDetailed(rectB, rectA) == RectSide::Right);
+
+			CHECK(RectCollisionDetailed(rectC, rectB) == RectSide::Right);
+			CHECK(RectCollisionDetailed(rectB, rectC) == RectSide::Left);
+
+			CHECK(RectCollisionDetailed(rectD, rectB) == RectSide::Top);
+			CHECK(RectCollisionDetailed(rectB, rectD) == RectSide::Bottom);
+
+			CHECK(RectCollisionDetailed(rectE, rectB) == RectSide::Bottom);
+			CHECK(RectCollisionDetailed(rectB, rectE) == RectSide::Top);
+
+			CHECK(RectCollisionDetailed(rectB, rectB) == RectSide::All);
+
+			CHECK(RectCollisionDetailed(rectF, rectB) == RectSide::None);
+			CHECK(RectCollisionDetailed(rectB, rectF) == RectSide::None);
+
+			CHECK(RectCollisionDetailed(rectG, rectB) == RectSide::Right);
+			CHECK(RectCollisionDetailed(rectB, rectG) == RectSide::Left);
+		}
+
 		TEST_CASE("Floating point in Rect")
 		{
 			Rect rect(1, 1, 4, 2);

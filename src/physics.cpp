@@ -46,6 +46,84 @@ namespace Birb
 			return CircleCollision(circle, rect);
 		}
 
+		RectSide RectCollisionDetailed(const Rect& rectA, const Rect& rectB)
+		{
+			/* First do a simple collision check to get rid of the 'None'
+			 * cases. */
+			if (!RectCollision(rectA, rectB))
+				return None;
+
+			/* Now we can expect that there is a collision. Just gotta find
+			 * out where */
+			
+			/* Calculate the middle points of rectB */
+			float vertical_middle 	= rectB.x + (rectB.w / 2.0f);
+			float horizontal_middle = rectB.y + (rectB.h / 2.0f);
+
+			/* Check what side of rectB the rectA is */
+
+			/* If both are true, rectA is more to the left */
+			bool A_left_most_point 	= (rectA.x < vertical_middle);
+			bool A_right_most_point = (rectA.x + rectA.w < vertical_middle);
+
+			if (A_left_most_point && A_right_most_point)
+				return Left;
+			else if (!A_left_most_point && !A_right_most_point)
+				return Right;
+
+			/* If both are true, rectA is more to the top */
+			bool A_top_most_point 	 = (rectA.y < horizontal_middle);
+			bool A_bottom_most_point = (rectA.y + rectA.h < horizontal_middle);
+
+			if (A_top_most_point && A_bottom_most_point)
+				return Top;
+			else if (!A_top_most_point && !A_bottom_most_point)
+				return Bottom;
+
+			/* Handle a bit more complicated cases where parts of rectA
+			 * are on the other side of the middle point */
+
+			/* Check if the entire rectA is inside of rectB */
+			if (rectA.x >= rectB.x
+					&& rectA.x + rectA.w <= rectB.x + rectB.w
+					&& rectA.y >= rectB.y
+					&& rectA.y + rectA.h <= rectB.y + rectB.h)
+				return All;
+
+			/* Check the distance of the left-most and right-most points
+			 * to the middle point */
+
+			/* If this value is positive, we are more to the left */
+			float A_distance_to_vertical_middle = (vertical_middle - rectA.x) + (vertical_middle - (rectA.x + rectA.w));
+
+			/* If this value is positive, we are more to the top */
+			float A_distance_to_horizontal_middle = (horizontal_middle - rectA.y) + (horizontal_middle - (rectA.y + rectA.h));
+
+			/* Calculate which value is higher, horizontal or vertical */
+			if (std::abs(A_distance_to_horizontal_middle) > std::abs(A_distance_to_vertical_middle))
+			{
+				/* Horizontal value matters more */
+				if (A_distance_to_horizontal_middle > 0)
+					return Top;
+				else
+					return Bottom;
+			}
+			else if (std::abs(A_distance_to_horizontal_middle) < std::abs(A_distance_to_vertical_middle))
+			{
+				/* Vertical value matter more */
+				if (A_distance_to_vertical_middle > 0)
+					return Left;
+				else
+					return Right;
+			}
+			else
+			{
+				/* Both values are equal, the result can't really be
+				 * solved properly */
+				return All;
+			}
+		}
+
 		bool PointInRect(const Rect& rect, const Vector2& point)
 		{
 			return (point.x > rect.x &&
