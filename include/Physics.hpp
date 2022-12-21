@@ -10,9 +10,14 @@ namespace Birb
 	/// Functions for collision checking etc.
 	namespace Physics
 	{
-		bool RectCollision(const Rect& rectA, const Rect& rectB); ///< Collision between two rects
-		bool RectCollision(const Birb::Rect rects[], const int& size); ///< Rect collision with other rects
-		bool RectCollision(const std::vector<Birb::Rect>& rects); ///< Rect collision with other rects
+		/// Collision between two rects
+		bool RectCollision(const Rect& rectA, const Rect& rectB);
+
+		/// Rect collision with other rects
+		bool RectCollision(const Birb::Rect rects[], const int& size);
+
+		/// Rect collision with other rects
+		bool RectCollision(const std::vector<Birb::Rect>& rects);
 
 		/// Check for collision between a circle and a rect
 		bool RectCollision(const Rect& rect, const Circle& circle);
