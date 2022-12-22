@@ -1,6 +1,4 @@
-#include <functional>
 #include "GameLoop.hpp"
-#include "Timestep.hpp"
 
 namespace Birb
 {

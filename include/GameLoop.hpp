@@ -1,7 +1,6 @@
 #pragma once
 #include "STD.hpp"
 #include "Timestep.hpp"
-#include <functional>
 #include <thread>
 
 namespace Birb
