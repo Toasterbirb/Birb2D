@@ -1,8 +1,8 @@
-#include "GameLoop.hpp"
+#include "Game.hpp"
 
 namespace Birb
 {
-	GameLoop::GameLoop(WindowOpts window_options,
+	Game::Game(WindowOpts window_options,
 			std::function<void()> start_func,
 			std::function<void(const SDL_Event& input_event)> input_func,
 			std::function<void(const TimeStep& ts)> update_func,
@@ -13,7 +13,7 @@ namespace Birb
 		post_render = post_render_placeholder;
 	}
 
-	void GameLoop::StartLoop()
+	void Game::Start()
 	{
 		application_running = true;
 
@@ -68,9 +68,9 @@ namespace Birb
 		cleanup();
 	}
 
-	void GameLoop::post_render_placeholder()
+	void Game::post_render_placeholder()
 	{}
 
-	void GameLoop::cleanup_placeholder()
+	void Game::cleanup_placeholder()
 	{}
 }

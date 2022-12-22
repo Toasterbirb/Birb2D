@@ -155,7 +155,7 @@ set(CORE_SRC
 	src/entity.cpp
 	src/filesystem.cpp
 	src/font.cpp
-	src/gameloop.cpp
+	src/game.cpp
 	src/graphs.cpp
 	src/input.cpp
 	src/level.cpp

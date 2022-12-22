@@ -8,7 +8,7 @@ namespace Birb
 {
 	class Window;
 
-	class GameLoop
+	class Game
 	{
 	public:
 		/// Game window settings
@@ -20,7 +20,7 @@ namespace Birb
 			bool resizable = false;
 		};
 
-		GameLoop(WindowOpts window_options,
+		Game(WindowOpts window_options,
 				std::function<void()> start_func,
 				std::function<void(const SDL_Event& input_event)> input,
 				std::function<void(const TimeStep& ts)> update_func,
@@ -31,9 +31,9 @@ namespace Birb
 		bool application_running;
 
 		/// Start calling the game loop functions
-		void StartLoop();
+		void Start();
 
-		/* Gameloop functions. The functions will be called
+		/* Game functions. The functions will be called
 		 * in the same order as they are listed down below */
 
 		/// start() is called only called once. It should be used
@@ -67,7 +67,7 @@ namespace Birb
 		Window* window;
 
 	private:
-		/* Placeholder functions for optional gameloop functions */
+		/* Placeholder functions for optional game loop functions */
 		static void post_render_placeholder();
 		static void cleanup_placeholder();
 
