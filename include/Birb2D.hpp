@@ -8,6 +8,7 @@
 #include "EntityComponent.hpp"
 #include "Filesystem.hpp"
 #include "Font.hpp"
+#include "GameLoop.hpp"
 #include "Graphs.hpp"
 #include "Input.hpp"
 #include "Level.hpp"
