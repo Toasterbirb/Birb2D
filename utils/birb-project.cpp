@@ -1,8 +1,8 @@
 #include "STD.hpp"
 #include "Filesystem.hpp"
 
-const std::string CMAKE_TEMPLATE = R"~~(
-cmake_minimum_required(VERSION 3.12)
+const std::string CMAKE_TEMPLATE = 
+	R"~~(cmake_minimum_required(VERSION 3.12)
 
 set(PROGRAM_NAME birb_project)
 
@@ -28,11 +28,10 @@ target_precompile_headers(${PROGRAM_NAME} PRIVATE birb2d/include/Birb2D.hpp)
 
 # Copy the resources into the build directory
 file(COPY ./res DESTINATION ./)
-file(COPY ./birb2d/birb2d_res DESTINATION ./res/)
-)~~";
+file(COPY ./birb2d/birb2d_res DESTINATION ./res/))~~";
 
-const std::string MAIN_TEMPLATE = R"~~(
-#include "Birb2D.hpp"
+const std::string MAIN_TEMPLATE = 
+R"~~(#include "Birb2D.hpp"
 
 int main(int argc, char** argv)
 {
@@ -69,8 +68,7 @@ int main(int argc, char** argv)
 	}
 
 	return 0;
-}
-)~~";
+})~~";
 
 struct Project
 {
