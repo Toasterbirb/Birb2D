@@ -1,6 +1,7 @@
 #pragma once
 #include "STD.hpp"
 #include "Timestep.hpp"
+#include "Vector/Vector2Int.hpp"
 #include <thread>
 
 namespace Birb
@@ -10,7 +11,16 @@ namespace Birb
 	class GameLoop
 	{
 	public:
-		GameLoop(Window& main_window,
+		/// Game window settings
+		struct WindowOpts
+		{
+			std::string title = "Birb2D game";
+			Vector2Int window_dimensions = Vector2Int(1280, 720);
+			int refresh_rate = 75;
+			bool resizable = false;
+		};
+
+		GameLoop(WindowOpts window_options,
 				std::function<void()> start_func,
 				std::function<void(const SDL_Event& input_event)> input,
 				std::function<void(const TimeStep& ts)> update_func,
@@ -53,12 +63,15 @@ namespace Birb
 		/// application would be closed
 		std::function<void()> cleanup;
 
+		/// Game window that the game loop class creates
+		Window* window;
+
 	private:
 		/* Placeholder functions for optional gameloop functions */
 		static void post_render_placeholder();
 		static void cleanup_placeholder();
 
 		TimeStep timeStep;
-		Window& window;
+		WindowOpts window_options;
 	};
 }
