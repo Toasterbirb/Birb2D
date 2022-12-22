@@ -2,6 +2,7 @@
 #include "STD.hpp"
 #include "Timestep.hpp"
 #include "Vector/Vector2Int.hpp"
+#include <future>
 
 namespace Birb
 {
@@ -72,5 +73,7 @@ namespace Birb
 
 		TimeStep timeStep;
 		WindowOpts window_options;
+
+		std::future<void> post_render_future;
 	};
 }

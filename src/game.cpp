@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include <thread>
 
 namespace Birb
 {
@@ -56,13 +55,13 @@ namespace Birb
 			game_window.Display();
 
 			/* Start the post render thread */
-			std::thread post_render_thread(post_render);
+			post_render_future = std::async(post_render);
 
 			/* End of timestep */
 			timeStep.End();
 
 			/* Join the post render thread */
-			post_render_thread.join();
+			post_render_future.wait();
 		}
 
 		/* Free memory allocations and stuff. Up to the user to decide */
