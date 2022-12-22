@@ -74,6 +74,8 @@ namespace Birb
 		TimeStep timeStep;
 		WindowOpts window_options;
 
+#ifndef __WINDOWS__
 		std::future<void> post_render_future;
+#endif
 	};
 }

@@ -54,14 +54,23 @@ namespace Birb
 			render();
 			game_window.Display();
 
+#ifndef __WINDOWS__
 			/* Start the post render thread */
 			post_render_future = std::async(post_render);
+#else
+			/* mingw doesn't really like std::future yet,
+			 * so we'll have to skip on multithreading on
+			 * Windows for now :( */
+			post_render();
+#endif
 
 			/* End of timestep */
 			timeStep.End();
 
+#ifndef __WINDOWS__
 			/* Join the post render thread */
 			post_render_future.wait();
+#endif
 		}
 
 		/* Free memory allocations and stuff. Up to the user to decide */
