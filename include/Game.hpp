@@ -2,7 +2,6 @@
 #include "STD.hpp"
 #include "Timestep.hpp"
 #include "Vector/Vector2Int.hpp"
-#include <thread>
 
 namespace Birb
 {
