@@ -1,4 +1,5 @@
 #include <SDL.hpp>
+#include <vector>
 
 #include "Timestep.hpp"
 #include "Utils.hpp"
@@ -14,6 +15,10 @@ namespace Birb
 	{
 		currentTime = utils::hireTimeInSeconds();
 		mainWindow = p_mainWindow;
+
+		/* Use the target fps as the amount of samples
+		 * for the frame budget average calculation */
+		frame_budget_values = std::vector<double>(mainWindow->refresh_rate);
 	}
 
 	void TimeStep::Start()
@@ -48,7 +53,18 @@ namespace Birb
 
 		/* Calculate the frame budget usage */
 		double current_frame_time = utils::hireTimeInSeconds() - currentTime;
-		frame_budget = (current_frame_time / (1.0f / mainWindow->refresh_rate)) * 100;
+		frame_budget_values[frame_budget_avg_counter] = (current_frame_time / (1.0f / mainWindow->refresh_rate)) * 100;
+
+		if (frame_budget_avg_counter < frame_budget_values.size() - 1)
+			++frame_budget_avg_counter;
+		else
+			frame_budget_avg_counter = 0;
+
+		/* Calculate the average */
+		for (size_t i = 0; i < frame_budget_values.size(); ++i)
+			frame_budget += frame_budget_values[i];
+
+		frame_budget /= frame_budget_values.size();
 
 		/* Stall to reach the fps target */
 		int frameTicks = SDL_GetTicks() - startTick;

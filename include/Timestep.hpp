@@ -1,12 +1,14 @@
 #pragma once
 
 #include "Renderwindow.hpp"
+#include <vector>
 
 namespace Birb
 {
 	/// Limit the runtime speed and handle delta time
-	struct TimeStep
+	class TimeStep
 	{
+	public:
 		/* Functions */
 		void Init(Window* p_mainWindow); 	///< Reset the currentTime variable
 		void Start(); 	///< Start a new step. Call this in the beginning of the gameloop
@@ -23,8 +25,12 @@ namespace Birb
 		float deltaTime;
 		int startTick;
 
-		/// A percentage value that represents the amount of frame budget
-		/// used before the frametime exceeds the FPS target
+		/// A percentage value that represents the average amount
+		/// of frame budget used before the frametime exceeds the FPS target
 		double frame_budget = 0.00f;
+
+	private:
+		size_t frame_budget_avg_counter = 0;
+		std::vector<double> frame_budget_values;
 	};
 }
