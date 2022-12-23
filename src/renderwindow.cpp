@@ -117,6 +117,7 @@ namespace Birb
 #ifdef DEBUG
 		Debug::Log("Starting window cleanup for '" + win_title + "'...");
 #endif /* DEBUG */
+		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(win);
 
 		/* FIXME: There's some sort of memory leak with SDL_Renderer. Destroying the renderer
@@ -128,7 +129,6 @@ namespace Birb
 		IMG_Quit();
 		TTF_Quit();
 		SDL_Quit();
-		SDL_DestroyRenderer(renderer);
 
 		/* Also de-initialize SDL_Mixer if audio has been used */
 		if (Global::IsInit::SDL_mixer)
