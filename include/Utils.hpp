@@ -14,9 +14,9 @@ namespace Birb
 {
 	namespace utils
 	{
-		inline float hireTimeInSeconds()
+		inline double hireTimeInSeconds()
 		{
-			float t = SDL_GetTicks();
+			double t = SDL_GetTicks();
 			t *= 0.001f;
 
 			return t;
