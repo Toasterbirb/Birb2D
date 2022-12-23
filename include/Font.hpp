@@ -10,7 +10,8 @@ namespace Birb
 	public:
 		Font();
 		Font(const std::string& filePath, const int& fontSize = 12);
-		~Font();
+		void Free();
+		//~Font();
 		std::string filePath;
 
 		void LoadFont(const std::string& filePath, const int& fontSize = 12);

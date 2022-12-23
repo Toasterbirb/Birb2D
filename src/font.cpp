@@ -18,7 +18,7 @@ namespace Birb
 		LoadFont(filePath, fontSize);
 	}
 
-	Font::~Font()
+	void Font::Free()
 	{
 		if (isLoaded())
 			TTF_CloseFont(ttfFont);
