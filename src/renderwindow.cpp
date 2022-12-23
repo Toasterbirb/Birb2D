@@ -1,4 +1,5 @@
 #include "Renderwindow.hpp"
+#include "SDL.h"
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
@@ -120,26 +121,13 @@ namespace Birb
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(win);
 
-		/* FIXME: There's some sort of memory leak with SDL_Renderer. Destroying the renderer
-		 * causes heck of a lot of valgrind errors
-		 * Ref: https://stackoverflow.com/questions/20823886/sdl2-memory-leaks-on-sdl-destroyrenderer
-		 *
-		 * Also, this deconstructor is getting called twice in some cases for some weird reason */
+		SDL_QuitSubSystem(SDL_INIT_VIDEO);
 
 		IMG_Quit();
-		TTF_Quit();
 		SDL_Quit();
-
-		/* Also de-initialize SDL_Mixer if audio has been used */
-		if (Global::IsInit::SDL_mixer)
-		{
-			Mix_Quit();
-			Global::IsInit::SDL_mixer = false;
-		}
 
 		Global::IsInit::SDL = false;
 		Global::IsInit::SDL_image = false;
-		Global::IsInit::SDL_ttf = false;
 
 		Global::RenderVars::MainWindow = NULL;
 		Global::RenderVars::Renderer = NULL;

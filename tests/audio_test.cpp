@@ -9,8 +9,8 @@ namespace Birb
 	TEST_CASE("Audio tests")
 	{
         CHECK_FALSE(Global::IsInit::SDL_mixer);
+
 		Audio::SoundFile sound("audio/game_over.wav");
-        // FIXME: Global is not being updated properly
 
         CHECK(Global::IsInit::SDL_mixer);
 
@@ -31,6 +31,7 @@ namespace Birb
 		sound.free();
 		music.free();
 		Mix_Quit();
+		Global::IsInit::SDL_mixer = false;
 	}
 }
 #endif /* NO_SOUND */

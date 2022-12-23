@@ -10,7 +10,6 @@ namespace Birb
 	{
 	public:
 		Splash(Window& window, bool isCustom = false); ///< Creates the default Birb2D splash screen
-		~Splash();
 
 		Scene scene;
 		float duration; ///< Splash screen duration in seconds

@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Values.hpp"
 
 namespace Birb
 {
@@ -26,6 +27,17 @@ namespace Birb
 
 		/* Initialize timestep */
 		timeStep.Init(&game_window);
+
+		/* Initialize SDL stuff */
+		if (TTF_Init() == -1)
+		{
+			Debug::Log("TTF_Init has failed: " + static_cast<std::string>(TTF_GetError()), Debug::error);
+			exit(2);
+		}
+		else
+		{
+			Global::IsInit::SDL_ttf = true;
+		}
 
 		/* Call the start function before starting the game loop */
 		start();
@@ -73,6 +85,23 @@ namespace Birb
 			post_render_future.wait();
 #endif
 		}
+
+		/* Quit SDL things */
+
+		/* De-initialize SDL TTF if any fonts have been used */
+		if (Global::IsInit::SDL_ttf)
+		{
+			TTF_Quit();
+			Global::IsInit::SDL_mixer = false;
+		}
+
+		/* De-initialize SDL_Mixer if audio has been used */
+		if (Global::IsInit::SDL_mixer)
+		{
+			Mix_Quit();
+			Global::IsInit::SDL_mixer = false;
+		}
+
 
 		/* Free memory allocations and stuff. Up to the user to decide */
 		cleanup();

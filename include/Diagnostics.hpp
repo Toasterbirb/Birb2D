@@ -12,7 +12,6 @@ namespace Birb
 		{
 		public:
 			FrametimeGraph(const Rect& rect, const int& pointCount, TimeStep& timeStep);
-			~FrametimeGraph();
 			void Render();
 			bool enabled;
 			int pointCount;

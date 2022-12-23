@@ -1,7 +1,9 @@
 #pragma once
 
 #include "SDL.hpp"
+#include "SDL_ttf.h"
 #include "STD.hpp"
+#include <cstdlib>
 
 namespace Birb
 {
@@ -9,8 +11,10 @@ namespace Birb
 	{
 	public:
 		Font();
+		Font(const Font& other);
 		Font(const std::string& filePath, const int& fontSize = 12);
-		void Free();
+		~Font();
+
 		std::string filePath;
 
 		void LoadFont(const std::string& filePath, const int& fontSize = 12);
@@ -21,11 +25,26 @@ namespace Birb
 		int GetSize() const;
 		void SetSize(const int& size);
 
+		/* Copy assignment */
+		Birb::Font& operator=(const Font& other)
+		{
+			if (this == &other)
+				return *this;
+
+			this->size 			= other.size;
+			this->filePath 		= other.filePath;
+			this->fontLoaded 	= false;
+			this->ttfFont 		= nullptr;
+
+			// TODO: Copy the memory instead of opening the font-file again
+			LoadFont(other.filePath, other.size);
+			return *this;
+		}
+
 	private:
 		int size;
 		bool fontLoaded;
 
 		TTF_Font* ttfFont;
-		void InitSDL_ttf(); ///< Initializes SDL2_ttf (if its not already initialized)
 	};
 }

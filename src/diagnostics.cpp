@@ -37,12 +37,6 @@ namespace Birb
 			framebudget_text.world_space = false;
 		}
 
-		FrametimeGraph::~FrametimeGraph()
-		{
-			/* Free the fonts */
-			font.Free();
-		}
-
 		void FrametimeGraph::Render()
 		{
 			/* Skip rendering if the graph is disableD */

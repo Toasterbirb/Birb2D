@@ -1,3 +1,4 @@
+#include "Values.hpp"
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "doctest.h"
 #include <iostream>
@@ -31,6 +32,19 @@ int main(int argc, char** argv)
 	/* Free the loaded assets */
 	Birb::AssetManager::FreeBundledAssets();
 #endif
+
+	/* Check if all SDL things have been shut down properly */
+	if (Birb::Global::IsInit::SDL)
+		std::cout << "!> SDL wasn't shut down properly <!" << std::endl;
+
+	if (Birb::Global::IsInit::SDL_image)
+		std::cout << "!> SDL_image wasn't shut down properly <!" << std::endl;
+
+	if (Birb::Global::IsInit::SDL_mixer)
+		std::cout << "!> SDL_mixer wasn't shut down properly <!" << std::endl;
+
+	if (Birb::Global::IsInit::SDL_ttf)
+		std::cout << "!> SDL_ttf wasn't shut down properly <!" << std::endl;
 
 	if (context.shouldExit())
 		return result;

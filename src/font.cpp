@@ -13,21 +13,30 @@ namespace Birb
 		fontLoaded = false;
 	}
 
+	Font::Font(const Font& other)
+	{
+		this->size 			= other.size;
+		this->filePath 		= other.filePath;
+		this->fontLoaded 	= false;
+		this->ttfFont 		= nullptr;
+
+		// TODO: Copy the memory instead of opening the font-file again
+		LoadFont(other.filePath, size);
+	}
+
 	Font::Font(const std::string& filePath, const int& fontSize)
 	{
 		LoadFont(filePath, fontSize);
 	}
 
-	void Font::Free()
+	Font::~Font()
 	{
-		if (isLoaded())
+		if (isLoaded() && ttfFont != nullptr)
 			TTF_CloseFont(ttfFont);
 	}
 
 	void Font::LoadFont(const std::string& filePath, const int& fontSize)
 	{
-		InitSDL_ttf();
-
 		std::string resource_path = Global::FilePaths::Resources + filePath;
 		this->filePath 	= filePath;
 		this->size 		= fontSize;
@@ -73,27 +82,5 @@ namespace Birb
 		TTF_CloseFont(ttfFont);
 
 		LoadFont(this->filePath, size);
-	}
-
-	void Font::InitSDL_ttf()
-	{
-		/* Check if SDL_ttf has already been initialized */
-		if (Global::IsInit::SDL_ttf)
-			return;
-
-#ifdef DEBUG
-		if (Diagnostics::Debugging::InitMessages)
-			Debug::Log("Initializing SDL_ttf...");
-#endif
-
-		if (TTF_Init() == -1)
-		{
-			Debug::Log("TTF_Init has failed: " + static_cast<std::string>(TTF_GetError()), Debug::error);
-			exit(2);
-		}
-		else
-		{
-			Global::IsInit::SDL_ttf = true;
-		}
 	}
 }
