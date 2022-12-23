@@ -11,7 +11,6 @@ namespace Birb
 		Font();
 		Font(const std::string& filePath, const int& fontSize = 12);
 		void Free();
-		//~Font();
 		std::string filePath;
 
 		void LoadFont(const std::string& filePath, const int& fontSize = 12);
