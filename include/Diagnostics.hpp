@@ -12,6 +12,7 @@ namespace Birb
 		{
 		public:
 			FrametimeGraph(const Rect& rect, const int& pointCount, TimeStep& timeStep);
+			~FrametimeGraph();
 			void Render();
 			bool enabled;
 			int pointCount;
@@ -20,6 +21,7 @@ namespace Birb
 			Font font;
 			Entity fps_text;
 			Entity frametime_text;
+			Entity framebudget_text;
 
 		private:
 			TimeStep& timeStep;

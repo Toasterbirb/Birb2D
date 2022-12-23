@@ -1,4 +1,5 @@
 #include "Diagnostics.hpp"
+#include "Render.hpp"
 #include "Values.hpp"
 #include "Utils.hpp"
 
@@ -29,6 +30,17 @@ namespace Birb
 			frametime_text.rect.x = rect.x + rect.w + 8;
 			frametime_text.rect.y = rect.y + 32;
 			frametime_text.world_space = false;
+
+			framebudget_text.textComponent = EntityComponent::Text("", &font, &Colors::White);
+			framebudget_text.rect.x = rect.x + rect.w + 8;
+			framebudget_text.rect.y = rect.y + 56;
+			framebudget_text.world_space = false;
+		}
+
+		FrametimeGraph::~FrametimeGraph()
+		{
+			/* Free the fonts */
+			font.Free();
 		}
 
 		void FrametimeGraph::Render()
@@ -57,8 +69,11 @@ namespace Birb
 			/* Draw fps and frametime next to the graph */
 			fps_text.SetText(utils::CleanDecimals(Math::Round(1.0f / timeStep.deltaTime, 2)) + "fps");
 			frametime_text.SetText(utils::CleanDecimals(timeStep.deltaTime) + "ms");
+			framebudget_text.SetText(utils::CleanDecimals(timeStep.frame_budget) + "%");
+
 			Render::DrawEntity(fps_text);
 			Render::DrawEntity(frametime_text);
+			Render::DrawEntity(framebudget_text);
 
 			graph.Render();
 		}
