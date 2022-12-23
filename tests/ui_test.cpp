@@ -86,6 +86,8 @@ namespace Birb
 		}
 
 		CHECK(success);
+
+		font.Free();
 	}
 
 	TEST_CASE("Input: Button hover")
@@ -154,6 +156,8 @@ namespace Birb
 		}
 
 		CHECK(success);
+
+		font.Free();
 	}
 
 	bool ButtonA_clicked = false;
@@ -256,5 +260,7 @@ namespace Birb
 
 		CHECK(ButtonA_clicked);
 		CHECK_FALSE(ButtonB_clicked);
+
+		font.Free();
 	}
 }
