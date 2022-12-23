@@ -52,12 +52,13 @@ namespace Birb
 			/* Handle rendering */
 			game_window.Clear();
 			render();
-			game_window.Display();
-
 #ifndef __WINDOWS__
 			/* Start the post render thread */
 			post_render_future = std::async(post_render);
-#else
+#endif
+			game_window.Display();
+
+#ifdef __WINDOWS__
 			/* mingw doesn't really like std::future yet,
 			 * so we'll have to skip on multithreading on
 			 * Windows for now :( */
