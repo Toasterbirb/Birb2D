@@ -60,16 +60,22 @@ namespace Birb
 		else
 			frame_budget_avg_counter = 0;
 
-		/* Calculate the average */
-		for (size_t i = 0; i < frame_budget_values.size(); ++i)
-			frame_budget += frame_budget_values[i];
-
-		frame_budget /= frame_budget_values.size();
-
 		/* Stall to reach the fps target */
 		int frameTicks = SDL_GetTicks() - startTick;
 
 		if (frameTicks < 1000 / mainWindow->refresh_rate)
 			SDL_Delay(1000 / mainWindow->refresh_rate - frameTicks);
+	}
+
+	double TimeStep::FrameBudget() const
+	{
+		double frame_budget = 0.00;
+
+		/* Calculate the average */
+		for (size_t i = 0; i < frame_budget_values.size(); ++i)
+			frame_budget += frame_budget_values[i];
+
+		frame_budget /= frame_budget_values.size();
+		return frame_budget;
 	}
 }

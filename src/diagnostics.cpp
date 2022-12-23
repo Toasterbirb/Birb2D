@@ -69,7 +69,7 @@ namespace Birb
 			/* Draw fps and frametime next to the graph */
 			fps_text.SetText(utils::CleanDecimals(Math::Round(1.0f / timeStep.deltaTime, 2)) + "fps");
 			frametime_text.SetText(utils::CleanDecimals(timeStep.deltaTime) + "ms");
-			framebudget_text.SetText(utils::CleanDecimals(timeStep.frame_budget) + "%");
+			framebudget_text.SetText(utils::CleanDecimals(timeStep.FrameBudget()) + "%");
 
 			Render::DrawEntity(fps_text);
 			Render::DrawEntity(frametime_text);

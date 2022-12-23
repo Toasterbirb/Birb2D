@@ -27,7 +27,7 @@ namespace Birb
 
 		/// A percentage value that represents the average amount
 		/// of frame budget used before the frametime exceeds the FPS target
-		double frame_budget = 0.00f;
+		double FrameBudget() const;
 
 	private:
 		size_t frame_budget_avg_counter = 0;
