@@ -309,62 +309,62 @@ namespace Birb
 					return TAB;
 
 				default:
-					break;
-			}
-
-			switch (event.key.keysym.mod)
-			{
-				case (SDLK_AMPERSAND):
-					return AMPERSAND;
-
-				case (SDLK_ASTERISK):
-					return ASTERISK;
-
-				case (SDLK_AT):
-					return AT;
-
-				case (SDLK_CARET):
-					return CARET;
-
-				case (SDLK_DOLLAR):
-					return DOLLAR;
-
-				case (SDLK_EXCLAIM):
-					return EXCLAIM;
-
-				case (SDLK_GREATER):
-					return GREATER_THAN;
-
-				case (SDLK_LESS):
-					return LESS_THAN;
-
-				case (SDLK_HASH):
-					return HASH;
-
-				case (SDLK_LEFTPAREN):
-					return LEFT_PAREN;
-
-				case (SDLK_RIGHTPAREN):
-					return RIGHT_PAREN;
-
-				case (SDLK_PERCENT):
-					return PERCENT;
-
-				case (SDLK_PLUS):
-					return PLUS;
-
-				case (SDLK_QUESTION):
-					return QUESTION;
-
-				case (SDLK_QUOTE):
-					return QUOTE;
-
-				case (SDLK_UNDERSCORE):
-					return UNDERSCORE;
-
-				default:
 					return NOT_RECOGNIZED;
 			}
+
+			//switch (event.key.keysym.mod)
+			//{
+			//	case (SDLK_AMPERSAND):
+			//		return AMPERSAND;
+
+			//	case (SDLK_ASTERISK):
+			//		return ASTERISK;
+
+			//	case (SDLK_AT):
+			//		return AT;
+
+			//	case (SDLK_CARET):
+			//		return CARET;
+
+			//	case (SDLK_DOLLAR):
+			//		return DOLLAR;
+
+			//	case (SDLK_EXCLAIM):
+			//		return EXCLAIM;
+
+			//	case (SDLK_GREATER):
+			//		return GREATER_THAN;
+
+			//	case (SDLK_LESS):
+			//		return LESS_THAN;
+
+			//	case (SDLK_HASH):
+			//		return HASH;
+
+			//	case (SDLK_LEFTPAREN):
+			//		return LEFT_PAREN;
+
+			//	case (SDLK_RIGHTPAREN):
+			//		return RIGHT_PAREN;
+
+			//	case (SDLK_PERCENT):
+			//		return PERCENT;
+
+			//	case (SDLK_PLUS):
+			//		return PLUS;
+
+			//	case (SDLK_QUESTION):
+			//		return QUESTION;
+
+			//	case (SDLK_QUOTE):
+			//		return QUOTE;
+
+			//	case (SDLK_UNDERSCORE):
+			//		return UNDERSCORE;
+
+			//	default:
+			//		return NOT_RECOGNIZED;
+			//}
 
 			return code;
 		}

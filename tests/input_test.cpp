@@ -598,101 +598,101 @@ namespace Birb
 				CHECK(EventToKeycode(event) == TAB);
 			}
 
-			SUBCASE("Ampersand &")
-			{
-				event.key.keysym.mod = SDLK_AMPERSAND;
-				CHECK(EventToKeycode(event) == AMPERSAND);
-			}
+			//SUBCASE("Ampersand &")
+			//{
+			//	event.key.keysym.mod = SDLK_AMPERSAND;
+			//	CHECK(EventToKeycode(event) == AMPERSAND);
+			//}
 
-			SUBCASE("Asterisk *")
-			{
-				event.key.keysym.mod = SDLK_ASTERISK;
-				CHECK(EventToKeycode(event) == ASTERISK);
-			}
+			//SUBCASE("Asterisk *")
+			//{
+			//	event.key.keysym.mod = SDLK_ASTERISK;
+			//	CHECK(EventToKeycode(event) == ASTERISK);
+			//}
 
-			SUBCASE("At @")
-			{
-				event.key.keysym.mod = SDLK_AT;
-				CHECK(EventToKeycode(event) == AT);
-			}
+			//SUBCASE("At @")
+			//{
+			//	event.key.keysym.mod = SDLK_AT;
+			//	CHECK(EventToKeycode(event) == AT);
+			//}
 
-			SUBCASE("Caret ^")
-			{
-				event.key.keysym.mod = SDLK_CARET;
-				CHECK(EventToKeycode(event) == CARET);
-			}
+			//SUBCASE("Caret ^")
+			//{
+			//	event.key.keysym.mod = SDLK_CARET;
+			//	CHECK(EventToKeycode(event) == CARET);
+			//}
 
-			SUBCASE("Dollar $")
-			{
-				event.key.keysym.mod = SDLK_CARET;
-				CHECK(EventToKeycode(event) == CARET);
-			}
+			//SUBCASE("Dollar $")
+			//{
+			//	event.key.keysym.mod = SDLK_CARET;
+			//	CHECK(EventToKeycode(event) == CARET);
+			//}
 
-			SUBCASE("Exclaim !")
-			{
-				event.key.keysym.mod = SDLK_EXCLAIM;
-				CHECK(EventToKeycode(event) == EXCLAIM);
-			}
+			//SUBCASE("Exclaim !")
+			//{
+			//	event.key.keysym.mod = SDLK_EXCLAIM;
+			//	CHECK(EventToKeycode(event) == EXCLAIM);
+			//}
 
-			SUBCASE("Greater than >")
-			{
-				event.key.keysym.mod = SDLK_GREATER;
-				CHECK(EventToKeycode(event) == GREATER_THAN);
-			}
+			//SUBCASE("Greater than >")
+			//{
+			//	event.key.keysym.mod = SDLK_GREATER;
+			//	CHECK(EventToKeycode(event) == GREATER_THAN);
+			//}
 
-			SUBCASE("Less than <")
-			{
-				event.key.keysym.mod = SDLK_LESS;
-				CHECK(EventToKeycode(event) == LESS_THAN);
-			}
+			//SUBCASE("Less than <")
+			//{
+			//	event.key.keysym.mod = SDLK_LESS;
+			//	CHECK(EventToKeycode(event) == LESS_THAN);
+			//}
 
-			SUBCASE("Hash #")
-			{
-				event.key.keysym.mod = SDLK_HASH;
-				CHECK(EventToKeycode(event) == HASH);
-			}
+			//SUBCASE("Hash #")
+			//{
+			//	event.key.keysym.mod = SDLK_HASH;
+			//	CHECK(EventToKeycode(event) == HASH);
+			//}
 
-			SUBCASE("Left parenthesis (")
-			{
-				event.key.keysym.mod = SDLK_LEFTPAREN;
-				CHECK(EventToKeycode(event) == LEFT_PAREN);
-			}
+			//SUBCASE("Left parenthesis (")
+			//{
+			//	event.key.keysym.mod = SDLK_LEFTPAREN;
+			//	CHECK(EventToKeycode(event) == LEFT_PAREN);
+			//}
 
-			SUBCASE("Right parenthesis )")
-			{
-				event.key.keysym.mod = SDLK_RIGHTPAREN;
-				CHECK(EventToKeycode(event) == RIGHT_PAREN);
-			}
+			//SUBCASE("Right parenthesis )")
+			//{
+			//	event.key.keysym.mod = SDLK_RIGHTPAREN;
+			//	CHECK(EventToKeycode(event) == RIGHT_PAREN);
+			//}
 
-			SUBCASE("Percent %")
-			{
-				event.key.keysym.mod = SDLK_PERCENT;
-				CHECK(EventToKeycode(event) == PERCENT);
-			}
+			//SUBCASE("Percent %")
+			//{
+			//	event.key.keysym.mod = SDLK_PERCENT;
+			//	CHECK(EventToKeycode(event) == PERCENT);
+			//}
 
-			SUBCASE("Plus +")
-			{
-				event.key.keysym.mod = SDLK_PLUS;
-				CHECK(EventToKeycode(event) == PLUS);
-			}
+			//SUBCASE("Plus +")
+			//{
+			//	event.key.keysym.mod = SDLK_PLUS;
+			//	CHECK(EventToKeycode(event) == PLUS);
+			//}
 
-			SUBCASE("Question ?")
-			{
-				event.key.keysym.mod = SDLK_QUESTION;
-				CHECK(EventToKeycode(event) == QUESTION);
-			}
+			//SUBCASE("Question ?")
+			//{
+			//	event.key.keysym.mod = SDLK_QUESTION;
+			//	CHECK(EventToKeycode(event) == QUESTION);
+			//}
 
-			SUBCASE("Quote \"")
-			{
-				event.key.keysym.mod = SDLK_QUOTE;
-				CHECK(EventToKeycode(event) == QUOTE);
-			}
+			//SUBCASE("Quote \"")
+			//{
+			//	event.key.keysym.mod = SDLK_QUOTE;
+			//	CHECK(EventToKeycode(event) == QUOTE);
+			//}
 
-			SUBCASE("Underscore _")
-			{
-				event.key.keysym.mod = SDLK_UNDERSCORE;
-				CHECK(EventToKeycode(event) == UNDERSCORE);
-			}
+			//SUBCASE("Underscore _")
+			//{
+			//	event.key.keysym.mod = SDLK_UNDERSCORE;
+			//	CHECK(EventToKeycode(event) == UNDERSCORE);
+			//}
 		}
 	}
 
