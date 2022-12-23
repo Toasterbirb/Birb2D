@@ -22,5 +22,9 @@ namespace Birb
 		double currentTime;
 		float deltaTime;
 		int startTick;
+
+		/// A percentage value that represents the amount of frame budget
+		/// used before the frametime exceeds the FPS target
+		double frame_budget = 0.00f;
 	};
 }

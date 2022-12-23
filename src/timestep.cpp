@@ -1,6 +1,7 @@
 #include <SDL.hpp>
 
 #include "Timestep.hpp"
+#include "Utils.hpp"
 #include "Values.hpp"
 #include "microprofile.h"
 
@@ -44,6 +45,12 @@ namespace Birb
 	void TimeStep::End()
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Step delay", PROFILER_COLOR);
+
+		/* Calculate the frame budget usage */
+		double current_frame_time = utils::hireTimeInSeconds() - currentTime;
+		frame_budget = (current_frame_time / (1.0f / mainWindow->refresh_rate)) * 100;
+
+		/* Stall to reach the fps target */
 		int frameTicks = SDL_GetTicks() - startTick;
 
 		if (frameTicks < 1000 / mainWindow->refresh_rate)
