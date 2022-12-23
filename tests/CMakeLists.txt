@@ -16,6 +16,7 @@ add_executable(test
 	assetmanager_test.cpp
 	circle_test.cpp
 	color_test.cpp
+	diagnostics_test.cpp
 	doctest_entry.cpp
 	entity_test.cpp
 	filesystem_test.cpp
