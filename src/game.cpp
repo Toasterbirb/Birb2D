@@ -78,6 +78,11 @@ namespace Birb
 		cleanup();
 	}
 
+	TimeStep* Game::time_step()
+	{
+		return &timeStep;
+	}
+
 	void Game::post_render_placeholder()
 	{}
 

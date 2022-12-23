@@ -66,6 +66,8 @@ namespace Birb
 		/// Game window that the game loop class creates
 		Window* window;
 
+		TimeStep* time_step();
+
 	private:
 		/* Placeholder functions for optional game loop functions */
 		static void post_render_placeholder();
