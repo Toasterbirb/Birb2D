@@ -33,41 +33,92 @@ file(COPY ./birb2d/birb2d_res DESTINATION ./res/))~~";
 const std::string MAIN_TEMPLATE = 
 R"~~(#include "Birb2D.hpp"
 
-int main(int argc, char** argv)
+using namespace Birb;
+
+/* Function declarations */
+static void start();
+static void input(const SDL_Event& input_event);
+static void update(const TimeStep& ts);
+static void render();
+static void post_render();
+static void cleanup();
+
+Window* game_window;
+Game* game;
+
+int main(void)
 {
-	Birb::Debug::Log("Creating the window");
-	Birb::Window window("Birb2D project template", Birb::Vector2Int(1280, 720), 75, false);
-	Birb::TimeStep timeStep;
-	timeStep.Init(&window);
+	Game::WindowOpts window_options {
+		.title 				= "Game",
+		.window_dimensions 	= { 1280, 720 },
+		.refresh_rate 		= 75,
+		.resizable 			= false
+	};
 
-	Birb::Debug::Log("Starting the game loop");
-	bool ApplicationRunning = true;
-	while (ApplicationRunning)
-	{
-		timeStep.Start();
-		while (timeStep.Running())
-		{
-			/* Handle input stuff */
-			while (window.PollEvents())
-			{
-				window.EventTick(window.event, &ApplicationRunning);
-			}
+	Game game_loop(window_options, start, input, update, render);
+	game = &game_loop;
 
-			timeStep.Step();
-		}
+	/* Optional extra functions */
+	game_loop.post_render = post_render;
+	game_loop.cleanup = cleanup;
 
-		window.Clear();
-		/* Handle rendering */
-
-
-
-		/* End of rendering */
-		window.Display();
-
-		timeStep.End();
-	}
+	/* Start the game loop */
+	game_loop.Start();
 
 	return 0;
+}
+
+/* start() is called before the game loop starts.
+ * Useful for doing stuff that will only run once before
+ * the game starts */
+void start()
+{
+	game_window = game->window;
+}
+
+/* input() is called at the beginning of the frame
+ * before update(). Behind the curtains it does input
+ * polling etc. and then passes the SDL_Event into
+ * this function */
+void input(const SDL_Event& input_event)
+{
+
+}
+
+/* update() is called after input has been handled and
+ * before the frame gets rendered. Its useful for any game
+ * logic that needs to be updated before rendering */
+void update(const TimeStep& ts)
+{
+
+}
+
+/* render() is called after update() has been finished.
+ * Before it gets called, the window will be cleared and
+ * after the function has finished running, the rendered frame
+ * will be presented */
+void render()
+{
+
+}
+
+/* post_render() will be called after rendering has finished
+ * and the timestep stalling has started. On non-windows systems
+ * this function call will be done on a separate thread, so you
+ * could use it to do some extra preparations for the next frame
+ * while the main thread is sitting around doing nothing
+ * and waiting to maintain the correct frame rate */
+void post_render()
+{
+
+}
+
+/* cleanup() gets called after the game loop has finished running
+ * and the application is getting closed. This is useful for doing any
+ * cleanup that is necessary, like freeing heap allocations etc. */
+void cleanup()
+{
+
 })~~";
 
 struct Project
