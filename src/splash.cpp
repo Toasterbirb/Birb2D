@@ -51,6 +51,16 @@ namespace Birb
 
 	}
 
+	Splash::~Splash()
+	{
+		/* Free the fonts if the default splash screen is used */
+		if (!isCustom)
+		{
+			manaspace.Free();
+			manaspace_small.Free();
+		}
+	}
+
 	void Splash::Run()
 	{
 		manaspace_small.LoadFont(res_base_path + "/fonts/manaspace/manaspc.ttf", 24);
