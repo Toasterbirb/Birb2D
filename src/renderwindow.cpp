@@ -159,13 +159,7 @@ namespace Birb
 
 	bool Window::CursorInRect(const Rect& rect) const
 	{
-		Vector2Int cursorPos = CursorPosition();
-
-		if (cursorPos.x > rect.x && cursorPos.x < rect.x + rect.w)
-			if (cursorPos.y > rect.y && cursorPos.y < rect.y + rect.h)
-				return true;
-
-		return false;
+		return Physics::PointInRect(rect, CursorPosition());
 	}
 
 	void Window::SetWindowSize(const Vector2Int& dimensions)
