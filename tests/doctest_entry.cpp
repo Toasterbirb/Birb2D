@@ -33,6 +33,9 @@ int main(int argc, char** argv)
 	Birb::AssetManager::FreeBundledAssets();
 #endif
 
+	/* Clear the SDL error buffer since it can be a bit leaky */
+	SDL_TLSCleanup();
+
 	/* Check if all SDL things have been shut down properly */
 	if (Birb::Global::IsInit::SDL)
 		std::cout << "!> SDL wasn't shut down properly <!" << std::endl;
