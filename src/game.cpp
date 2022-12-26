@@ -12,6 +12,17 @@ namespace Birb
 	{
 		cleanup 	= cleanup_placeholder;
 		post_render = post_render_placeholder;
+
+		/* Initialize SDL stuff */
+		if (TTF_Init() == -1)
+		{
+			Debug::Log("TTF_Init has failed: " + static_cast<std::string>(TTF_GetError()), Debug::error);
+			exit(2);
+		}
+		else
+		{
+			Global::IsInit::SDL_ttf = true;
+		}
 	}
 
 	void Game::Start()
@@ -27,17 +38,6 @@ namespace Birb
 
 		/* Initialize timestep */
 		timeStep.Init(&game_window);
-
-		/* Initialize SDL stuff */
-		if (TTF_Init() == -1)
-		{
-			Debug::Log("TTF_Init has failed: " + static_cast<std::string>(TTF_GetError()), Debug::error);
-			exit(2);
-		}
-		else
-		{
-			Global::IsInit::SDL_ttf = true;
-		}
 
 		/* Call the start function before starting the game loop */
 		start();
