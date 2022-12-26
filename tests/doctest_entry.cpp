@@ -15,7 +15,7 @@ int main(int argc, char** argv)
 		if (strcmp(argv[1], "quick") == 0)
 		{
 			std::cout << "Running quick tests only..." << std::endl;
-			context.addFilter("test-case-exclude", "*rendering*,*audio*,*timer*,*input*");
+			context.addFilter("test-case-exclude", "*rendering*,*audio*,*timer*,*input*,*splash*");
 		}
 	}
 
