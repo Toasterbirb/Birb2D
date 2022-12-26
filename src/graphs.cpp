@@ -69,7 +69,7 @@ namespace Birb
 			for (size_t i = 0; i < values.size(); ++i)
 			{
 				points[i].x = (((width / static_cast<int>(values.size())) * (i + 0.5))) + rect.x + wallOffset;
-				points[i].y = Math::Normalize(values[i], highestValue, lowestValue, rect.h) + rect.y;
+				points[i].y = Math::Normalize(values[i], highestValue, lowestValue, rect.h - 12) + rect.y + 6;
 			}
 
 			/* Draw the background if its not the same color as the graph color */
