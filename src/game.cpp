@@ -86,6 +86,9 @@ namespace Birb
 #endif
 		}
 
+		/* Free memory allocations and stuff. Up to the user to decide */
+		cleanup();
+
 		/* Quit SDL things */
 
 		/* De-initialize SDL TTF if any fonts have been used */
@@ -104,9 +107,6 @@ namespace Birb
 
 		/* Clear the SDL error buffer since it can be a bit leaky */
 		SDL_TLSCleanup();
-
-		/* Free memory allocations and stuff. Up to the user to decide */
-		cleanup();
 	}
 
 	TimeStep* Game::time_step()
