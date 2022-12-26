@@ -102,6 +102,8 @@ namespace Birb
 			Global::IsInit::SDL_mixer = false;
 		}
 
+		/* Clear the SDL error buffer since it can be a bit leaky */
+		SDL_TLSCleanup();
 
 		/* Free memory allocations and stuff. Up to the user to decide */
 		cleanup();
