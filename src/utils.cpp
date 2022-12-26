@@ -1,5 +1,7 @@
 #include "Utils.hpp"
 #include "Logger.hpp"
+#include "SDL_error.h"
+#include "STD.hpp"
 
 namespace Birb
 {
@@ -8,7 +10,8 @@ namespace Birb
 		Vector2Int GetTextureDimensions(SDL_Texture* texture)
 		{
 			Vector2Int result;
-			SDL_QueryTexture(texture, NULL, NULL, &result.x, &result.y);
+			if (SDL_QueryTexture(texture, NULL, NULL, &result.x, &result.y) < 0)
+				Debug::Log("Couldn't query for texture dimensions: " + std::string(SDL_GetError()), Debug::Type::warning);
 			return result;
 		}
 
