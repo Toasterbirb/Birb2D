@@ -12,12 +12,12 @@ include_directories(include/ ${CMAKE_SOURCE_DIR}/include)
 add_definitions(-DLIB_SDL)
 
 add_executable(test
+	doctest_entry.cpp
 	general_tests/audio_test.cpp
 	general_tests/assetmanager_test.cpp
 	general_tests/circle_test.cpp
 	general_tests/color_test.cpp
 	general_tests/diagnostics_test.cpp
-	general_tests/doctest_entry.cpp
 	general_tests/entity_test.cpp
 	general_tests/filesystem_test.cpp
 	general_tests/font_test.cpp
@@ -51,6 +51,7 @@ target_link_libraries(test
 
 # Input tests that require user action
 add_executable(input_test
+	doctest_entry.cpp
 	ui_tests/button_test.cpp)
 
 target_compile_options(input_test PRIVATE -Wall -Wextra -Wpedantic -Werror)
