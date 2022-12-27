@@ -239,7 +239,7 @@ namespace Birb
 				intPoints[i].x = std::round(points[i].x);
 				intPoints[i].y = std::round(points[i].y);
 			}
-			bool success = DrawPolygon(color, intPoints, pointCount, world_space);
+			bool success = DrawPolygon(color, intPoints, pointCount, world_space, parallax_multiplier);
 			delete[] intPoints;
 			return success;
 		}
@@ -253,7 +253,7 @@ namespace Birb
 				intPoints[i].x = std::round(points[i].x);
 				intPoints[i].y = std::round(points[i].y);
 			}
-			bool success = DrawPolygon(color, intPoints, points.size(), world_space);
+			bool success = DrawPolygon(color, intPoints, points.size(), world_space, parallax_multiplier);
 			delete[] intPoints;
 			return success;
 		}
