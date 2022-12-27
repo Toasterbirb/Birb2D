@@ -82,14 +82,7 @@ namespace Birb
 
 		void DrawLine(const Line& line)
 		{
-			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (float)", PROFILER_COLOR);
-			SetRenderDrawColor(line.color);
-			SDL_RenderDrawLineF(Global::RenderVars::Renderer,
-					line.pointA.x - (Global::RenderVars::CameraPosition.x * line.world_space * line.parallax_multiplier),
-					line.pointA.y - (Global::RenderVars::CameraPosition.y * line.world_space * line.parallax_multiplier),
-					line.pointB.x - (Global::RenderVars::CameraPosition.x * line.world_space * line.parallax_multiplier),
-					line.pointB.y - (Global::RenderVars::CameraPosition.y * line.world_space * line.parallax_multiplier));
-			ResetDrawColor();
+			DrawLine(line.color, line.pointA, line.pointB, line.world_space, line.parallax_multiplier);
 		}
 
 		void DrawLine(const Line& line, const int& thickness)
