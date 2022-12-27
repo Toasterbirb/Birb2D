@@ -1,3 +1,4 @@
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "SDL_ttf.h"
 #include "doctest.h"
 #include "Birb2D.hpp"

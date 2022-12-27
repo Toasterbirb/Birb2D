@@ -39,15 +39,22 @@ add_executable(test
 	textrendering_test.cpp
 	texture_test.cpp
 	timer_test.cpp
-	ui_test.cpp
 	utils_test.cpp
 	values_test.cpp
 	vector_test.cpp
 )
 
-
 target_compile_options(test PRIVATE -Wall -Wextra -Wpedantic -Werror)
 target_link_libraries(test
+	birb2d
+)
+
+# Input tests that require user action
+add_executable(input_test
+	ui_test.cpp)
+
+target_compile_options(input_test PRIVATE -Wall -Wextra -Wpedantic -Werror)
+target_link_libraries(input_test
 	birb2d
 )
 
