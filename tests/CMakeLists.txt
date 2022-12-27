@@ -59,5 +59,8 @@ target_link_libraries(input_test
 	birb2d
 )
 
+# Compartmentalized tests for finding memory leaks
+add_subdirectory(mem_leak_tests)
+
 file(COPY ./res DESTINATION ./)
 file(COPY ../birb2d_res DESTINATION ./res/)
