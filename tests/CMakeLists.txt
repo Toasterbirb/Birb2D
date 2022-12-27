@@ -12,36 +12,36 @@ include_directories(include/ ${CMAKE_SOURCE_DIR}/include)
 add_definitions(-DLIB_SDL)
 
 add_executable(test
-	audio_test.cpp
-	assetmanager_test.cpp
-	circle_test.cpp
-	color_test.cpp
-	diagnostics_test.cpp
-	doctest_entry.cpp
-	entity_test.cpp
-	filesystem_test.cpp
-	font_test.cpp
-	game_test.cpp
-	graph_test.cpp
-	input_test.cpp
-	level_test.cpp
-	legacy_render_test.cpp
-	line_test.cpp
-	logger_test.cpp
-	math_test.cpp
-	physics_test.cpp
-	polygon_test.cpp
-	random_test.cpp
-	rect_test.cpp
-	renderwindow_test.cpp
-	scene_test.cpp
-	splash_test.cpp
-	textrendering_test.cpp
-	texture_test.cpp
-	timer_test.cpp
-	utils_test.cpp
-	values_test.cpp
-	vector_test.cpp
+	general_tests/audio_test.cpp
+	general_tests/assetmanager_test.cpp
+	general_tests/circle_test.cpp
+	general_tests/color_test.cpp
+	general_tests/diagnostics_test.cpp
+	general_tests/doctest_entry.cpp
+	general_tests/entity_test.cpp
+	general_tests/filesystem_test.cpp
+	general_tests/font_test.cpp
+	general_tests/game_test.cpp
+	general_tests/graph_test.cpp
+	general_tests/input_test.cpp
+	general_tests/level_test.cpp
+	general_tests/legacy_render_test.cpp
+	general_tests/line_test.cpp
+	general_tests/logger_test.cpp
+	general_tests/math_test.cpp
+	general_tests/physics_test.cpp
+	general_tests/polygon_test.cpp
+	general_tests/random_test.cpp
+	general_tests/rect_test.cpp
+	general_tests/renderwindow_test.cpp
+	general_tests/scene_test.cpp
+	general_tests/splash_test.cpp
+	general_tests/textrendering_test.cpp
+	general_tests/texture_test.cpp
+	general_tests/timer_test.cpp
+	general_tests/utils_test.cpp
+	general_tests/values_test.cpp
+	general_tests/vector_test.cpp
 )
 
 target_compile_options(test PRIVATE -Wall -Wextra -Wpedantic -Werror)
@@ -51,7 +51,7 @@ target_link_libraries(test
 
 # Input tests that require user action
 add_executable(input_test
-	ui_test.cpp)
+	ui_tests/button_test.cpp)
 
 target_compile_options(input_test PRIVATE -Wall -Wextra -Wpedantic -Werror)
 target_link_libraries(input_test
