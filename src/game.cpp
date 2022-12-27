@@ -95,7 +95,7 @@ namespace Birb
 		if (Global::IsInit::SDL_ttf)
 		{
 			TTF_Quit();
-			Global::IsInit::SDL_mixer = false;
+			Global::IsInit::SDL_ttf = false;
 		}
 
 		/* De-initialize SDL_Mixer if audio has been used */
