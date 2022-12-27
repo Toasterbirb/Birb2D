@@ -20,6 +20,6 @@ jobs:
     - name: Compile
       run: mkdir build ; cd build ; cmake .. -DSTATIC_SDL=On ; make -j4
     - name: Run tests
-      run: cd build/tests ; ./test -tce="*rendering*,*audio*,*timer*,*input*"
+      run: cd build/tests ; ./test quick
     - name: Valgrind memcheck
       run: chmod +x ${GITHUB_WORKSPACE}/.github/workflows/valgrind_test.sh ; ${GITHUB_WORKSPACE}/.github/workflows/valgrind_test.sh
