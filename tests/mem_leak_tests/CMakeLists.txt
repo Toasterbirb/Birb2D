@@ -15,6 +15,7 @@ set(WARNINGS -Wall -Wextra -Wpedantic -Werror)
 
 file(COPY ../res DESTINATION ./)
 file(COPY ../../birb2d_res DESTINATION ./res/)
+file(COPY valgrind.sh DESTINATION ./)
 
 function (add_test_target TEST_NAME)
 	add_executable(${TEST_NAME}
