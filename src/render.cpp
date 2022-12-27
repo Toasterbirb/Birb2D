@@ -1,3 +1,5 @@
+#include "SDL_stdinc.h"
+#include "Values.hpp"
 #include "microprofile.h"
 #include "Render.hpp"
 
@@ -8,6 +10,9 @@ namespace Birb
 {
 	namespace Render
 	{
+		/* Private function declarations */
+		bool _DrawFilledPolygon(SDL_Renderer* renderer, Sint16* vx, Sint16* vy, int point_count, Uint32 color);
+
 		void ResetDrawColor()
 		{
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, Global::RenderVars::BackgroundColor.r, Global::RenderVars::BackgroundColor.g, Global::RenderVars::BackgroundColor.b, 255);
@@ -160,21 +165,10 @@ namespace Birb
 			}
 		}
 
-		bool DrawPolygon(const Color& color, Vector2Int* points, const int& pointCount, const bool& world_space, const float& parallax_multiplier)
+		/* Draw a filled polygon and free the heap allocated point integer arrays */
+		bool _DrawFilledPolygon(SDL_Renderer* renderer, Sint16* vx, Sint16* vy, int point_count, Uint32 color)
 		{
-			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
-			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
-
-			/* Convert Vector2Int points into Sint16 vectors and add the camera offset */
-			Sint16* vx = new Sint16[pointCount];
-			Sint16* vy = new Sint16[pointCount];
-			for (int i = 0; i < pointCount; ++i)
-			{
-				vx[i] = points[i].x - (Global::RenderVars::CameraPosition.x * world_space * parallax_multiplier);
-				vy[i] = points[i].y - (Global::RenderVars::CameraPosition.y * world_space * parallax_multiplier);
-			}
-
-			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, pointCount, uColor) == 0)
+			if (filledPolygonColor(renderer, vx, vy, point_count, color) == 0)
 			{
 				/* Cleanup */
 				delete[] vx;
@@ -194,6 +188,23 @@ namespace Birb
 			}
 		}
 
+		bool DrawPolygon(const Color& color, Vector2Int* points, const int& pointCount, const bool& world_space, const float& parallax_multiplier)
+		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
+			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
+
+			/* Convert Vector2Int points into Sint16 vectors and add the camera offset */
+			Sint16* vx = new Sint16[pointCount];
+			Sint16* vy = new Sint16[pointCount];
+			for (int i = 0; i < pointCount; ++i)
+			{
+				vx[i] = points[i].x - (Global::RenderVars::CameraPosition.x * world_space * parallax_multiplier);
+				vy[i] = points[i].y - (Global::RenderVars::CameraPosition.y * world_space * parallax_multiplier);
+			}
+
+			return _DrawFilledPolygon(Global::RenderVars::Renderer, vx, vy, pointCount, uColor);
+		}
+
 		bool DrawPolygon(const Color& color, const std::vector<Vector2Int>& points, const bool& world_space, const float& parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
@@ -208,24 +219,7 @@ namespace Birb
 				vy[i] = points[i].y - (Global::RenderVars::CameraPosition.y * world_space * parallax_multiplier);
 			}
 
-			if (filledPolygonColor(Global::RenderVars::Renderer, vx, vy, points.size(), uColor) == 0)
-			{
-				/* Cleanup */
-				delete[] vx;
-				delete[] vy;
-
-				Render::ResetDrawColor();
-				return true;
-			}
-			else
-			{
-				/* Cleanup */
-				delete[] vx;
-				delete[] vy;
-
-				Debug::Log("Error when drawing a polygon!", Debug::error);
-				return false;
-			}
+			return _DrawFilledPolygon(Global::RenderVars::Renderer, vx, vy, points.size(), uColor);
 		}
 
 		/* filledPolygonColor works only with integers, so this will just
