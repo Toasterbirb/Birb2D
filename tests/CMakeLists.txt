@@ -21,6 +21,7 @@ add_executable(test
 	entity_test.cpp
 	filesystem_test.cpp
 	font_test.cpp
+	game_test.cpp
 	graph_test.cpp
 	input_test.cpp
 	level_test.cpp
