@@ -1,7 +1,10 @@
 #include "Font.hpp"
 #include "SDL_ttf.h"
+#include <iostream>
+
 int main(void)
 {
+	std::cout << " > Initialize SDL_ttf, load a font, uninitialize SDL_ttf and quit the program" << std::endl;
 	TTF_Init();
 
 	/* The font needs to be in its own scope, because otherwise
