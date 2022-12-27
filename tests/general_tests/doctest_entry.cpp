@@ -1,3 +1,5 @@
+#include "SDL.h"
+#include "SDL_ttf.h"
 #include "Values.hpp"
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "doctest.h"
@@ -37,7 +39,7 @@ int main(int argc, char** argv)
 	SDL_TLSCleanup();
 
 	/* Check if all SDL things have been shut down properly */
-	if (Birb::Global::IsInit::SDL)
+	if (Birb::Global::IsInit::SDL || SDL_WasInit(SDL_INIT_VIDEO))
 		std::cout << "!> SDL wasn't shut down properly <!" << std::endl;
 
 	if (Birb::Global::IsInit::SDL_image)
@@ -46,7 +48,7 @@ int main(int argc, char** argv)
 	if (Birb::Global::IsInit::SDL_mixer)
 		std::cout << "!> SDL_mixer wasn't shut down properly <!" << std::endl;
 
-	if (Birb::Global::IsInit::SDL_ttf)
+	if (Birb::Global::IsInit::SDL_ttf || TTF_WasInit())
 		std::cout << "!> SDL_ttf wasn't shut down properly <!" << std::endl;
 
 	if (context.shouldExit())
