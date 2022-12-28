@@ -1,13 +1,14 @@
 #include "Game.hpp"
 #include "Values.hpp"
+#include <future>
 
 namespace Birb
 {
 	Game::Game(WindowOpts window_options,
-			std::function<void()> start_func,
-			std::function<void(const SDL_Event& input_event)> input_func,
-			std::function<void(const TimeStep& ts)> update_func,
-			std::function<void()> render_func)
+			std::function<void(Game& game)> start_func,
+			std::function<void(Game& game)> input_func,
+			std::function<void(Game& game)> update_func,
+			std::function<void(Game& game)> render_func)
 	:start(start_func), input(input_func), update(update_func), render(render_func), window_options(window_options)
 	{
 		cleanup 	= cleanup_placeholder;
@@ -40,7 +41,7 @@ namespace Birb
 		timeStep.Init(&game_window);
 
 		/* Call the start function before starting the game loop */
-		start();
+		start(*this);
 
 		/* The main game loop */
 		while (application_running)
@@ -52,21 +53,21 @@ namespace Birb
 				while (window->PollEvents())
 				{
 					window->EventTick(window->event, &application_running);
-					input(window->event);
+					input(*this);
 				}
 
 				timeStep.Step();
 			}
 
 			/* Handle any game logic */
-			update(timeStep);
+			update(*this);
 
 			/* Handle rendering */
 			game_window.Clear();
-			render();
+			render(*this);
 #ifndef __WINDOWS__
 			/* Start the post render thread */
-			post_render_future = std::async(post_render);
+			post_render_future = std::async(std::launch::async, post_render);
 #endif
 			game_window.Display();
 
@@ -74,7 +75,7 @@ namespace Birb
 			/* mingw doesn't really like std::future yet,
 			 * so we'll have to skip on multithreading on
 			 * Windows for now :( */
-			post_render();
+			post_render(*this);
 #endif
 
 			/* End of timestep */

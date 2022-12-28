@@ -36,27 +36,22 @@ R"~~(#include "Birb2D.hpp"
 using namespace Birb;
 
 /* Function declarations */
-static void start();
-static void input(const SDL_Event& input_event);
-static void update(const TimeStep& ts);
-static void render();
+static void start(Game& game);
+static void input(Game& game);
+static void update(Game& game);
+static void render(Game& game);
 static void post_render();
 static void cleanup();
 
-Window* game_window;
-Game* game;
-
 int main(void)
 {
-	Game::WindowOpts window_options {
-		.title 				= "Game",
-		.window_dimensions 	= { 1280, 720 },
-		.refresh_rate 		= 75,
-		.resizable 			= false
-	};
+	Game::WindowOpts window_options;
+	window_options.title 				= "Game";
+	window_options.window_dimensions 	= { 1280, 720 };
+	window_options.refresh_rate 		= 75;
+	window_options.resizable 			= false;
 
 	Game game_loop(window_options, start, input, update, render);
-	game = &game_loop;
 
 	/* Optional extra functions */
 	game_loop.post_render = post_render;
@@ -71,16 +66,16 @@ int main(void)
 /* start() is called before the game loop starts.
  * Useful for doing stuff that will only run once before
  * the game starts */
-void start()
+void start(Game& game)
 {
-	game_window = game->window;
+
 }
 
 /* input() is called at the beginning of the frame
  * before update(). Behind the curtains it does input
  * polling etc. and then passes the SDL_Event into
  * this function */
-void input(const SDL_Event& input_event)
+void input(Game& game)
 {
 
 }
@@ -88,7 +83,7 @@ void input(const SDL_Event& input_event)
 /* update() is called after input has been handled and
  * before the frame gets rendered. Its useful for any game
  * logic that needs to be updated before rendering */
-void update(const TimeStep& ts)
+void update(Game& game)
 {
 
 }
@@ -97,7 +92,7 @@ void update(const TimeStep& ts)
  * Before it gets called, the window will be cleared and
  * after the function has finished running, the rendered frame
  * will be presented */
-void render()
+void render(Game& game)
 {
 
 }

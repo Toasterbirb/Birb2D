@@ -21,10 +21,10 @@ namespace Birb
 		};
 
 		Game(WindowOpts window_options,
-				std::function<void()> start_func,
-				std::function<void(const SDL_Event& input_event)> input,
-				std::function<void(const TimeStep& ts)> update_func,
-				std::function<void()> render);
+				std::function<void(Game& game)> start_func,
+				std::function<void(Game& game)> input_func,
+				std::function<void(Game& game)> update_func,
+				std::function<void(Game& game)> render_func);
 
 		/// When this variable is set to false, the game loop
 		/// will quit at the start of the next frame
@@ -39,17 +39,17 @@ namespace Birb
 		/// start() is called only called once. It should be used
 		/// for constructing anything needed in the game loop
 		/// instead of bloating the main() function
-		std::function<void()> start;
+		std::function<void(Game& game)> start;
 
 		/// Handles any user input, like keyboard, mouse etc.
-		std::function<void(const SDL_Event& input_event)> input;
+		std::function<void(Game& game)> input;
 
 		/// This function is meant for handling any game logic
 		/// before rendering
-		std::function<void(const TimeStep& ts)> update;
+		std::function<void(Game& game)> update;
 
 		/// Anything to do with rendering happens in here
-		std::function<void()> render;
+		std::function<void(Game& game)> render;
 
 		/// This function gets ran on a separate thread after 
 		/// the frame has been rendered and the main thread is

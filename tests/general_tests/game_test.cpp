@@ -12,10 +12,10 @@
 
 namespace Birb
 {
-	void start();
-	void input(const SDL_Event& event);
-	void update(const TimeStep& ts);
-	void render();
+	void start(Game& game);
+	void input(Game& game);
+	void update(Game& game);
+	void render(Game& game);
 	void post_render();
 	void cleanup();
 
@@ -79,7 +79,7 @@ namespace Birb
 		CHECK(TTF_WasInit() == 0);
 	}
 
-	void start()
+	void start(Game& game)
 	{
 		start_called = true;
 		start_call_count++;
@@ -96,12 +96,12 @@ namespace Birb
 		});
 	}
 
-	void input(const SDL_Event& event)
+	void input(Game& game)
 	{
 		input_called = true;
 	}
 
-	void update(const TimeStep& ts)
+	void update(Game& game)
 	{
 		update_called = true;
 		update_call_count++;
@@ -111,7 +111,7 @@ namespace Birb
 		polygon.SetRotation(polygon_angle);
 	}
 
-	void render()
+	void render(Game& game)
 	{
 		render_called = true;
 		render_call_count++;
