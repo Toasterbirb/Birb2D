@@ -15,7 +15,7 @@ endif(CCACHE_FOUND)
 option(SYSTEM_SDL "Link Birb2D dynamically against system SDL libraries instead of
 compiling them from source" OFF)
 option(STATIC_SDL "Use static linking for SDL" ON)
-option(TESTS "Compile tests" ON)
+option(TESTS "Compile tests" OFF)
 option(UTILS "Compile extra utilities" ON)
 option(EXAMPLES "Compile examples" OFF)
 option(DEBUG "Enable some extra debug output" ON)

@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install valgrind
     - name: Compile
-      run: mkdir build ; cd build ; cmake .. -DSTATIC_SDL=On ; make -j4
+      run: mkdir build ; cd build ; cmake .. -DTESTS=On -DSTATIC_SDL=On ; make -j4
     - name: Run tests
       run: cd build/tests ; ./test quick
     - name: Valgrind memcheck
