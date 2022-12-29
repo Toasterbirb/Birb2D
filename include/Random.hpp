@@ -29,8 +29,5 @@ namespace Birb
 				}
 			}
 		}
-
-	private:
-		std::random_device random_machine;
 	};
 }

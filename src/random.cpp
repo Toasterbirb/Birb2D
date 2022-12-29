@@ -1,5 +1,7 @@
 #include "Random.hpp"
 
+static std::random_device random_machine;
+
 namespace Birb
 {
 	int Random::RandomInt(const int& min, const int& max)
