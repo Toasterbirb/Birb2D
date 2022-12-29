@@ -5,6 +5,7 @@
 **Project compatibility**
 
 [![Void](https://github.com/Toasterbirb/Birb2D/actions/workflows/void_compat.yml/badge.svg)](https://github.com/Toasterbirb/Birb2D/actions/workflows/void_compat.yml)
+[![Tic-Tac-Toe](https://github.com/Toasterbirb/Birb2D/actions/workflows/tic-tac-toe_compat.yml/badge.svg)](https://github.com/Toasterbirb/Birb2D/actions/workflows/tic-tac-toe_compat.yml)
 
 
 Birb2D is a small and delicate 2D game engine made as a learning project.
@@ -19,6 +20,7 @@ Birb2D is not meant to be *production* quality, but there's a chance it can be u
 - [LD50.exe (Ludum Dare game)](https://ldjam.com/events/ludum-dare/50/ld50-exe)
 - [The Diamond Heist (Ludum Dare game)](https://ldjam.com/events/ludum-dare/51/the-diamond-heist)
 - [Void](https://github.com/Toasterbirb/Void)
+- [Tic-Tac-Toe](https://github.com/Toasterbirb/tic-tac-toe)
 
 ## External libraries
 - SDL2
