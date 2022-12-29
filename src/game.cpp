@@ -75,7 +75,7 @@ namespace Birb
 			/* mingw doesn't really like std::future yet,
 			 * so we'll have to skip on multithreading on
 			 * Windows for now :( */
-			post_render(*this);
+			post_render();
 #endif
 
 			/* End of timestep */
