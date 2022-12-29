@@ -11,7 +11,7 @@ namespace Birb
 		int RandomInt(const int& min, const int& max);
 		float RandomFloat(const float& min, const float& max );
 
-		/// Shuffles an array of any time
+		/// Shuffles an array of any type
 		template<typename T>
 		static void ShuffleArray(T* values, const int& size)
 		{
