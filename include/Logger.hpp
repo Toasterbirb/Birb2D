@@ -22,5 +22,6 @@ namespace Birb
 		static const std::string WarningLabel 	= "W";
 		static const std::string ErrorLabel 	= "E";
 		static const std::string FixmeLabel 	= "F";
+		std::string ColorLog(const std::string& color_code, const std::string& label, const std::string& text);
 	}
 }

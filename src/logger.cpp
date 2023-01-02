@@ -12,6 +12,18 @@ namespace Birb
 		}
 #endif
 
+		std::string ColorLog(const std::string& color_code, const std::string& label, const std::string& text)
+		{
+#ifndef __WINDOWS__
+			return "\033[" + color_code + "m[" + label + "] " + text + "\033[0m";
+#else
+			/* Skip colors on windows since the windows CLI isn't
+			 * capable of showing them and thus the color codes
+			 * only clutter the program output */
+			return "[" + color_code + "[" + label + "] " + text;
+#endif
+		}
+
 		void Log(const std::string& text, Type type)
 		{
 #ifndef DEBUG
@@ -51,22 +63,22 @@ namespace Birb
 			switch (type)
 			{
 				case (Type::log):
-					printline = line + "\033[32m[" + LogLabel + "] " + text + "\033[0m";
+					printline = line + ColorLog("32", LogLabel, text);
 					line = line + "[" + LogLabel + "] " + text + "\n";
 					break;
 
 				case (Type::warning):
-					printline = line + "\033[33m[" + WarningLabel +"] " + text + "\033[0m";
+					printline = line + ColorLog("33", WarningLabel, text);
 					line = line + "[" + WarningLabel + "] " + text + "\n";
 					break;
 
 				case (Type::error):
-					printline = line + "\033[31m[" + ErrorLabel + "] " + text + "\033[0m";
+					printline = line + ColorLog("31", ErrorLabel, text);
 					line = line + "[" + ErrorLabel + "] " + text + "\n";
 					break;
 
 				case (Type::fixme):
-					printline = line + "\033[35m[" + FixmeLabel + "] " + text + "\033[0m";
+					printline = line + ColorLog("35", FixmeLabel, text);
 					line = line + "[" + FixmeLabel + "] " + text + "\n";
 
 				default:
