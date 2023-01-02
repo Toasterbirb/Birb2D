@@ -2,6 +2,7 @@
 #include "Entity.hpp"
 #include "Graphs.hpp"
 #include "Scene.hpp"
+#include <ostream>
 
 namespace Birb
 {
@@ -277,5 +278,28 @@ namespace Birb
 		CHECK(sortedList[3] == &sceneF);
 		CHECK(sortedList[4] == &sceneA);
 		CHECK(sortedList[5] == &sceneB);
+	}
+
+	TEST_CASE("Circular scene dependency prevention")
+	{
+		std::cout << "Testing circular scene dependency prevention... There will be some warnings" << std::endl;
+		Scene scene;
+		scene.AddObject(&scene);
+		CHECK(scene.ObjectCount() == 0);
+	}
+
+	TEST_CASE("Recursive scene dependency prevention")
+	{
+		Scene sceneA;
+		Scene sceneB;
+
+		sceneA.AddScene(&sceneB);
+		CHECK(sceneA.ObjectCount() == 1);
+
+		sceneB.AddScene(&sceneA);
+		CHECK(sceneB.ObjectCount() == 0);
+
+		/* Move to a new line because doctest would otherwise overwrite some debug output */
+		std::cout << "\n";
 	}
 }

@@ -1,4 +1,5 @@
 #include "Scene.hpp"
+#include "Logger.hpp"
 #include "Renderwindow.hpp"
 #include "microprofile.h"
 
@@ -15,10 +16,38 @@ namespace Birb
 	:needs_sorting(false), active(isActive), positionOffset(0, 0)
 	{}
 
+	void Scene::AddScene(Scene* scene)
+	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add Scene to a Scene", PROFILER_COLOR);
+
+		/* Add this scene as a parent scene */
+		scene->parent_scenes.push_back(this);
+
+		/* Try to prevent stack overflows due to a scene being
+		 * included into itself. This check won't be done in the fast AddObject()
+		 * so if you need more performance with the cost of safety, use that instead */
+		if (SceneIsInScene(this, this))
+		{
+			PrintCircularDependendencyWarning();
+			return;
+		}
+
+		/* If everything went fine, add the scene as a SceneObject */
+		AddObject(scene);
+	}
+
 	void Scene::AddObject(SceneObject* obj)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add SceneObject", PROFILER_COLOR);
 
+		/* Make sure that the object being added isn't the scene itself */
+		if (obj == this)
+		{
+			PrintCircularDependendencyWarning();
+			return;
+		}
+
+		/* Add the object into the scene object list */
 		objects.push_back(obj);
 
 		/* If the positionOffset has changed, apply that to new objects */
@@ -75,6 +104,32 @@ namespace Birb
 	int Scene::ObjectCount() const
 	{
 		return objects.size();
+	}
+
+	bool Scene::SceneIsInScene(Scene* scene, Scene* calling_scene) const
+	{
+		bool is_caller = (this == calling_scene);
+
+		if (parent_scenes.size() == 0)
+			return false;
+
+		for (size_t i = 0; i < parent_scenes.size(); ++i)
+		{
+			if (is_caller)
+			{
+				return parent_scenes[i]->SceneIsInScene(scene, calling_scene);
+			}
+			else if (parent_scenes[i] == scene)
+			{
+				return true;
+			}
+			else
+			{
+				return parent_scenes[i]->SceneIsInScene(scene, calling_scene);
+			}
+		}
+
+		return false;
 	}
 
 	void Scene::Activate()
@@ -217,6 +272,11 @@ namespace Birb
 	{
 		obj->world_space 			= this->world_space;
 		obj->parallax_multiplier 	= this->parallax_multiplier;
+	}
+
+	void Scene::PrintCircularDependendencyWarning() const
+	{
+		Debug::Log("There was an attempt to add a scene into itself! This was prevented to avoid a stack overflow", Debug::warning);
 	}
 
 	void Scene::RenderFunc()

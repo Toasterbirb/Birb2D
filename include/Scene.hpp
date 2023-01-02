@@ -11,6 +11,7 @@ namespace Birb
 	public:
 		Scene();
 		Scene(const bool& isActive);
+		void AddScene(Scene* scene); ///< Same as AddObject() but has extra safety checks for adding scenes
 		void AddObject(SceneObject* obj); ///< Add SceneObject to the scene and sort the scene
 		void AddObjectFast(SceneObject* obj); ///< Add SceneObject to the scene, but skip sorting
 		void AddObject(SceneObject** obj, int objCount); ///< Add multiple SceneObjects to the scene and sort the scene
@@ -20,6 +21,10 @@ namespace Birb
 		std::vector<SceneObject*> GetObjects() const;
 
 		int ObjectCount() const;
+
+		/// Do a recursive check if the object is already in the scene.
+		/// This can also be used to avoid circular scene dependencies
+		bool SceneIsInScene(Scene* scene, Scene* calling_scene) const;
 
 		void Activate();
 		void Deactivate();
@@ -42,11 +47,18 @@ namespace Birb
 							/// rendering priority != 0
 
 		std::vector<SceneObject*> objects;
+
+		/// Parent scene pointers are only stored if the
+		/// AddScene() function is used. This is used for circular
+		/// dependency prevention
+		std::vector<Scene*> parent_scenes;
+
 		bool active;
 
 		Vector2 positionOffset;
 
 		void SetNewObjectWorldSpace(SceneObject* obj); ///< Apply world_space settings of the scnene to new SceneObjects
+		void PrintCircularDependendencyWarning() const;
 
 		/* Variables for a scene that is a child of another scene */
 		void RenderFunc() override; ///< Gets called when the scene is a child of another scene
