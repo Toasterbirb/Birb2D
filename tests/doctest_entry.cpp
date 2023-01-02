@@ -11,13 +11,31 @@ int main(int argc, char** argv)
 {
 	doctest::Context context;
 
-	/* Simply run the tests, don't do any filtering */
 	if (argc == 2)
 	{
-		if (strcmp(argv[1], "quick") == 0)
+		/* Simply run the tests, don't do any filtering */
+		if (strcmp(argv[1], "quick") == 0 || strcmp(argv[1], "--quick") == 0)
 		{
 			std::cout << "Running quick tests only..." << std::endl;
 			context.addFilter("test-case-exclude", "*rendering*,*audio*,*timer*,*input*,*splash*");
+		}
+
+		/* Print the help page */
+		if (strcmp(argv[1], "help") == 0)
+		{
+			std::cout << "Note! If you need doctest help page, use arg '--help' instead!" << std::endl;
+			std::cout << "\nOptions:\n"\
+				<< "\t--filter [doctest filter]\tUse a doctest filter to only run specific tests\n"\
+				<< "\t--quick\t\t\t\tOnly run quick non-graphical and non-delayed tests" << std::endl;
+			return 0;
+		}
+	}
+	else if (argc == 3)
+	{
+		/* Use custom filters */
+		if (strcmp(argv[1], "--filter") == 0)
+		{
+			context.addFilter("test-case", argv[2]);
 		}
 	}
 
