@@ -1,3 +1,4 @@
+#include "Vector/Vector2Int.hpp"
 #include "doctest.h"
 #include "Vector.hpp"
 #include "Math.hpp"
@@ -73,6 +74,21 @@ namespace Birb
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
+
+		Vector2 vecE(1.0f, 2.0f);
+		Vector2 vecF(2.0f, 1.0f);
+
+		vecE += vecF;
+		CHECK(vecE == Vector2(3.0f, 3.0f));
+
+		vecE -= vecF;
+		CHECK(vecE == Vector2(1.0f, 2.0f));
+
+		vecE *= vecF;
+		CHECK(vecE == Vector2(2.0f, 2.0f));
+
+		vecE /= vecF;
+		CHECK(vecE == Vector2(1.0f, 2.0f));
 	}
 
 	/* Vector2Int */
@@ -116,6 +132,21 @@ namespace Birb
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
+
+		Vector2Int vecE(1, 2);
+		Vector2Int vecF(2, 1);
+
+		vecE += vecF;
+		CHECK(vecE == Vector2Int(3, 3));
+
+		vecE -= vecF;
+		CHECK(vecE == Vector2Int(1, 2));
+
+		vecE *= vecF;
+		CHECK(vecE == Vector2Int(2, 2));
+
+		vecE /= vecF;
+		CHECK(vecE == Vector2Int(1, 2));
 	}
 
 	/* Vector3 */
@@ -169,6 +200,21 @@ namespace Birb
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
+
+		Vector3 vecE(1.0f, 2.0f, 1.0f);
+		Vector3 vecF(2.0f, 1.0f, 2.0f);
+
+		vecE += vecF;
+		CHECK(vecE == Vector3(3.0f, 3.0f, 3.0f));
+
+		vecE -= vecF;
+		CHECK(vecE == Vector3(1.0f, 2.0f, 1.0f));
+
+		vecE *= vecF;
+		CHECK(vecE == Vector3(2.0f, 2.0f, 2.0f));
+
+		vecE /= vecF;
+		CHECK(vecE == Vector3(1.0f, 2.0f, 1.0f));
 	}
 
 	/* Vector3Int */
@@ -222,6 +268,21 @@ namespace Birb
 		CHECK(vecA == vecA);
 		CHECK(vecA != vecB);
 		CHECK(vecA != vecC);
+
+		Vector3Int vecE(1, 2, 1);
+		Vector3Int vecF(2, 1, 2);
+
+		vecE += vecF;
+		CHECK(vecE == Vector3Int(3, 3, 3));
+
+		vecE -= vecF;
+		CHECK(vecE == Vector3Int(1, 2, 1));
+
+		vecE *= vecF;
+		CHECK(vecE == Vector3Int(2, 2, 2));
+
+		vecE /= vecF;
+		CHECK(vecE == Vector3Int(1, 2, 1));
 	}
 
 	TEST_CASE("Vector magnitude")

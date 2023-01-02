@@ -25,14 +25,35 @@ namespace Birb
 			return Vector2Int(x + other.x, y + other.y);
         }
 
+        Vector2Int& operator+=(const Vector2Int& other)
+        {
+			x += other.x;
+			y += other.y;
+			return *this;
+        }
+
         Vector2Int operator-(const Vector2Int& other) const
         {
 			return Vector2Int(x - other.x, y - other.y);
         }
 
+        Vector2Int& operator-=(const Vector2Int& other)
+        {
+			x -= other.x;
+			y -= other.y;
+			return *this;
+        }
+
         Vector2Int operator*(const Vector2Int& other) const
         {
 			return Vector2Int(x * other.x, y * other.y);
+        }
+
+        Vector2Int& operator*=(const Vector2Int& other)
+        {
+			x *= other.x;
+			y *= other.y;
+			return *this;
         }
 
         Vector2Int operator*(const int& other) const
@@ -45,6 +66,13 @@ namespace Birb
             return Vector2Int(
                 static_cast<int>(std::round(static_cast<float>(x) / other.x)),
                 static_cast<int>(std::round(static_cast<float>(y) / other.y)));
+        }
+
+        Vector2Int& operator/=(const Vector2Int& other)
+        {
+			x /= static_cast<float>(other.x);
+			y /= static_cast<float>(other.y);
+			return *this;
         }
 
         Vector2Int operator/(const int& other) const

@@ -28,14 +28,38 @@ namespace Birb
 			return Vector3Int(x + other.x, y + other.y, z + other.z);
         }
 
+        Vector3Int& operator+=(const Vector3Int& other)
+        {
+			x += other.x;
+			y += other.y;
+			z += other.z;
+			return *this;
+        }
+
         Vector3Int operator-(const Vector3Int& other) const
         {
 			return Vector3Int(x - other.x, y - other.y, z - other.z);
         }
 
+        Vector3Int& operator-=(const Vector3Int& other)
+        {
+			x -= other.x;
+			y -= other.y;
+			z -= other.z;
+			return *this;
+        }
+
         Vector3Int operator*(const Vector3Int& other) const
         {
 			return Vector3Int(x * other.x, y * other.y, z * other.z);
+        }
+
+        Vector3Int& operator*=(const Vector3Int& other)
+        {
+			x *= other.x;
+			y *= other.y;
+			z *= other.z;
+			return *this;
         }
 
         Vector3Int operator*(const int& other) const
@@ -49,6 +73,14 @@ namespace Birb
                 static_cast<int>(std::round(static_cast<float>(x) / other.x)),
                 static_cast<int>(std::round(static_cast<float>(y) / other.y)),
                 static_cast<int>(std::round(static_cast<float>(z) / other.z)));
+        }
+
+        Vector3Int& operator/=(const Vector3Int& other)
+        {
+			x /= static_cast<float>(other.x);
+			y /= static_cast<float>(other.y);
+			z /= static_cast<float>(other.z);
+			return *this;
         }
 
         Vector3Int operator/(const int& other) const
