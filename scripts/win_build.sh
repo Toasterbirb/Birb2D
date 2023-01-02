@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BUILD_DIR="$(dirname $0)/../build"
+BUILD_DIR="$(dirname $0)/../build_win"
 echo "Building to $BUILD_DIR"
 
 # Delete any existing build directories

@@ -57,6 +57,7 @@ log.txt
 
 # CMake stuff
 build/
+build_win/
 .cache/
 CMakeLists.txt.user
 CMakeCache.txt
