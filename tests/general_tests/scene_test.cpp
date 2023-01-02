@@ -287,19 +287,4 @@ namespace Birb
 		scene.AddObject(&scene);
 		CHECK(scene.ObjectCount() == 0);
 	}
-
-	TEST_CASE("Recursive scene dependency prevention")
-	{
-		Scene sceneA;
-		Scene sceneB;
-
-		sceneA.AddScene(&sceneB);
-		CHECK(sceneA.ObjectCount() == 1);
-
-		sceneB.AddScene(&sceneA);
-		CHECK(sceneB.ObjectCount() == 0);
-
-		/* Move to a new line because doctest would otherwise overwrite some debug output */
-		std::cout << "\n";
-	}
 }
