@@ -20,7 +20,7 @@ namespace Birb
 			/* Skip colors on windows since the windows CLI isn't
 			 * capable of showing them and thus the color codes
 			 * only clutter the program output */
-			return "[" + color_code + "[" + label + "] " + text;
+			return "[" + label + "] " + text;
 #endif
 		}
 
