@@ -29,6 +29,10 @@ Birb2D is not meant to be *production* quality, but there's a chance it can be u
 - SDL2_mixer
 - SDL2_gfx
 - [doctest](https://github.com/doctest/doctest) (included as a headerfile)
+- [cppcodec](https://github.com/tplgy/cppcodec)
+- [json](https://github.com/nlohmann/json) (included as a headerfile)
+- [libzip](https://github.com/nih-at/libzip)
+- [microprofile](https://github.com/jonasmr/microprofile)
 
 ## Building
 Refer to [this](https://github.com/Toasterbirb/Birb2D/wiki/Setup) wiki page
