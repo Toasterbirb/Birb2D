@@ -14,6 +14,7 @@ namespace Birb
 	SceneObject::SceneObject(const int& priority)
 	:renderingPriority(priority)
 	{
+		sceneActive = true;
 		active 		= true;
 		world_space = true;
 		parallax_multiplier = 1;
