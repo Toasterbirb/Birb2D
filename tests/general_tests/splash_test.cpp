@@ -34,6 +34,15 @@ namespace Birb
 			Splash splash_screen(window, true);
 			splash_screen.duration = 0.5;
 			splash_screen.isCustom = true;
+
+			/* Create a scene to show in the custom splash screen */
+			Scene scene;
+			Font font("birb2d_res/fonts/manaspace/manaspc.ttf", 24);
+			EntityComponent::Text splash_text("Custom splash screen test", &font, &Colors::Nord::Aurora::nord15);
+			Entity text_entity("Splash text", Vector2Int(64, 64), splash_text);
+			scene.AddObject(&text_entity);
+			splash_screen.scene = scene;
+
 			splash_screen.Run();
 		}
 
