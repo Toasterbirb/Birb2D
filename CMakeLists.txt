@@ -160,10 +160,12 @@ set(CORE_SRC
 	src/game.cpp
 	src/graphs.cpp
 	src/input.cpp
+	src/keep.cpp
 	src/level.cpp
 	src/line.cpp
 	src/logger.cpp
 	src/math.cpp
+	src/particlesource.cpp
 	src/physics.cpp
 	src/polygon.cpp
 	src/random.cpp
@@ -178,8 +180,8 @@ set(CORE_SRC
 	src/texture.cpp
 	src/timer.cpp
 	src/timestep.cpp
-	src/utils.cpp
 	src/ui.cpp
+	src/utils.cpp
 
 	src/Vector/vector3.cpp
 	src/Vector/vector3int.cpp
@@ -190,6 +192,9 @@ set(CORE_SRC
 	src/EntityComponent/click.cpp
 	src/EntityComponent/progressbar.cpp
 	src/EntityComponent/text.cpp
+
+	src/particlepattern.cpp
+	src/ParticlePatterns/randomized.cpp
 )
 
 add_library(birb2d STATIC ${CORE_SRC})

@@ -12,12 +12,12 @@
 
 namespace Birb
 {
-	void start(Game& game);
-	void input(Game& game);
-	void update(Game& game);
-	void render(Game& game);
-	void post_render();
-	void cleanup();
+	void game_start(Game& game);
+	void game_input(Game& game);
+	void game_update(Game& game);
+	void game_render(Game& game);
+	void game_post_render();
+	void game_cleanup();
 
 	bool start_called 		= false;
 	bool input_called 		= false;
@@ -51,9 +51,9 @@ namespace Birb
 		window_options.resizable 			= false;
 
 		/* Create the game object */
-		Game game(window_options, start, input, update, render);
-		game.post_render 	= post_render;
-		game.cleanup 		= cleanup;
+		Game game(window_options, game_start, game_input, game_update, game_render);
+		game.post_render 	= game_post_render;
+		game.cleanup 		= game_cleanup;
 		game_ptr = &game;
 
 		/* "Run" the game 200 frames */
@@ -79,7 +79,7 @@ namespace Birb
 		CHECK(TTF_WasInit() == 0);
 	}
 
-	void start(Game& game)
+	void game_start(Game& game)
 	{
 		start_called = true;
 		start_call_count++;
@@ -96,12 +96,12 @@ namespace Birb
 		});
 	}
 
-	void input(Game& game)
+	void game_input(Game& game)
 	{
 		input_called = true;
 	}
 
-	void update(Game& game)
+	void game_update(Game& game)
 	{
 		update_called = true;
 		update_call_count++;
@@ -111,7 +111,7 @@ namespace Birb
 		polygon.SetRotation(polygon_angle);
 	}
 
-	void render(Game& game)
+	void game_render(Game& game)
 	{
 		render_called = true;
 		render_call_count++;
@@ -125,7 +125,7 @@ namespace Birb
 			game_ptr->application_running = false;
 	}
 
-	void post_render()
+	void game_post_render()
 	{
 		post_render_called = true;
 		post_render_call_count++;
@@ -134,7 +134,7 @@ namespace Birb
 		Global::RenderVars::CameraPosition.x -= game_ptr->time_step()->deltaTime * 100;
 	}
 
-	void cleanup()
+	void game_cleanup()
 	{
 		cleanup_called = true;
 		cleanup_call_count++;

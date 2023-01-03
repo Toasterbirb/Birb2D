@@ -10,5 +10,8 @@ namespace Birb
 
 		/// Application name
 		std::string AppName;
+
+		/// Get a path to the data directory of the game
+		std::string locate_data_path() const;
 	};
 }

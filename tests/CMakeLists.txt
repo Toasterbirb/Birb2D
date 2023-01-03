@@ -13,8 +13,8 @@ add_definitions(-DLIB_SDL)
 
 add_executable(test
 	doctest_entry.cpp
-	general_tests/audio_test.cpp
 	general_tests/assetmanager_test.cpp
+	general_tests/audio_test.cpp
 	general_tests/circle_test.cpp
 	general_tests/color_test.cpp
 	general_tests/diagnostics_test.cpp
@@ -24,11 +24,13 @@ add_executable(test
 	general_tests/game_test.cpp
 	general_tests/graph_test.cpp
 	general_tests/input_test.cpp
-	general_tests/level_test.cpp
+	general_tests/keep_tests.cpp
 	general_tests/legacy_render_test.cpp
+	general_tests/level_test.cpp
 	general_tests/line_test.cpp
 	general_tests/logger_test.cpp
 	general_tests/math_test.cpp
+	general_tests/particle_test.cpp
 	general_tests/physics_test.cpp
 	general_tests/polygon_test.cpp
 	general_tests/random_test.cpp
