@@ -4,15 +4,17 @@
 #include "Values.hpp"
 #include "doctest.h"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Audio tests")
 	{
-        CHECK_FALSE(Global::IsInit::SDL_mixer);
+		CHECK_FALSE(Global::IsInit::SDL_mixer);
 
 		Audio::SoundFile sound("audio/game_over.wav");
 
-        CHECK(Global::IsInit::SDL_mixer);
+		CHECK(Global::IsInit::SDL_mixer);
 
 		Audio::MusicFile music("audio/score.wav");
 

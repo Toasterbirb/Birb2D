@@ -4,7 +4,9 @@
 #include "Scene.hpp"
 #include <ostream>
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Scenes")
 	{

@@ -2,9 +2,10 @@
 #include "Renderwindow.hpp"
 #include "Texture.hpp"
 
+using namespace Birb;
 const static Birb::Vector2Int birb_texture_dimensions = Birb::Vector2Int(64, 64);
 
-namespace Birb
+namespace BirbTest
 {
 	TEST_CASE("Rendering: Texture construction")
 	{

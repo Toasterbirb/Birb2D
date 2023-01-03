@@ -3,7 +3,9 @@
 #include "Logger.hpp"
 #include "Timer.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Timer format conversions")
 	{

@@ -3,7 +3,9 @@
 #include "Font.hpp"
 #include <chrono>
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Font loading")
 	{

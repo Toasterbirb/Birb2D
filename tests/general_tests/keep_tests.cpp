@@ -3,7 +3,9 @@
 #include "Keep.hpp"
 #include <vector>
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Get a value from a Keep vault")
 	{

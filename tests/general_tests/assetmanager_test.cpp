@@ -2,7 +2,9 @@
 #include "AssetManager.hpp"
 #include "Renderwindow.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Rendering: AssetManager texture resource handling")
 	{

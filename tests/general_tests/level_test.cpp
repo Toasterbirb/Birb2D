@@ -1,7 +1,9 @@
 #include "doctest.h"
 #include "Level.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Setting tiles")
 	{

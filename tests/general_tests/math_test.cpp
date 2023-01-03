@@ -2,7 +2,9 @@
 #include "doctest.h"
 #include "Vector.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Distance calculation with 2D vectors")
 	{

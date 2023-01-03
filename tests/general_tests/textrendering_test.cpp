@@ -1,7 +1,9 @@
 #include "doctest.h"
 #include "Birb2D.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Text rendering")
 	{

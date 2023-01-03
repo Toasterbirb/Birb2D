@@ -7,7 +7,9 @@
 #include "Vector/Vector2Int.hpp"
 #include "doctest.h"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Rendering: Frametime graph")
 	{

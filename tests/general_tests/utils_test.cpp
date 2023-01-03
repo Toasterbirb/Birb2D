@@ -1,8 +1,9 @@
 #include "Utils.hpp"
 #include "doctest.h"
 
+using namespace Birb;
 
-namespace Birb
+namespace BirbTest
 {
 	TEST_CASE("Sort path with a startpoint")
 	{

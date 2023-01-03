@@ -2,7 +2,9 @@
 #include "Logger.hpp"
 #include <filesystem>
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Logging")
 	{

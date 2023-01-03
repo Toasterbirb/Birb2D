@@ -6,7 +6,9 @@
 #include "Timestep.hpp"
 #include "Texture.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Rendering: Renderwindow")
 	{

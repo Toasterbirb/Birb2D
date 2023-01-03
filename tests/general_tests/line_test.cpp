@@ -2,7 +2,9 @@
 #include "Line.hpp"
 #include "Math.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Line constructors")
 	{
@@ -81,5 +83,4 @@ namespace Birb
 		CHECK(lineA != lineD);
 		CHECK(lineA != lineE);
 	}
-
 }

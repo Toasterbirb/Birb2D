@@ -2,7 +2,9 @@
 #include "Circle.hpp"
 #include "Math.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Circles")
 	{

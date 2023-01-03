@@ -2,7 +2,9 @@
 #include "Math.hpp"
 #include "Polygon.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Default polygon")
 	{

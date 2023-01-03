@@ -2,7 +2,9 @@
 #include "doctest.h"
 #include "Birb2D.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	static bool success = false;
 

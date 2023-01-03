@@ -1,7 +1,9 @@
 #include "doctest.h"
 #include "Rect.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Default Rect")
 	{

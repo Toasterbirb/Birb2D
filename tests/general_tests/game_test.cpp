@@ -10,7 +10,9 @@
 #include "Game.hpp"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	void game_start(Game& game);
 	void game_input(Game& game);

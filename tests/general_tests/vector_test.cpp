@@ -4,7 +4,9 @@
 #include "Math.hpp"
 #include "Logger.hpp"
 
-namespace Birb
+using namespace Birb;
+
+namespace BirbTest
 {
 	TEST_CASE("Vector conversions")
 	{
@@ -194,7 +196,7 @@ namespace Birb
 		CHECK(vecA * vecB == Vector3(2.0f, 4.8f, 0.4f));
 		CHECK(vecA / vecB == Vector3(0.5f, 0.468750f, 0.1f));
 
-	    CHECK(vecD * 2  == Vector3(2.0f, 3.0f, 4.0f));
+		CHECK(vecD * 2  == Vector3(2.0f, 3.0f, 4.0f));
 		CHECK(vecD / 2  == Vector3(0.5f, 0.75f, 1.0f));
 
 		CHECK(vecA == vecA);
