@@ -66,6 +66,9 @@ namespace Birb
 			/// Absolute position where all of the particles will be spawned from
 			Vector2 pos;
 
+			/// Pops off dead particles at the end of the particle list
+			void RemoveDeadParticles();
+
 		private:
 			TimeStep* timestep;
 			std::vector<Particle> particles;

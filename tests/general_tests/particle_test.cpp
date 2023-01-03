@@ -13,6 +13,7 @@ void particles_start(Game& game);
 void particles_input(Game& game);
 void particles_update(Game& game);
 void particles_render(Game& game);
+void particles_post_render();
 void particles_cleanup();
 
 Timer timer;
@@ -23,8 +24,10 @@ Scene main_scene;
 TEST_CASE("Rendering: Simple particle effect")
 {
 	Game::WindowOpts win_opts;
+	win_opts.refresh_rate = 240;
 	win_opts.title = "Birb2D particle system test";
 	Game game(win_opts, particles_start, particles_input, particles_update, particles_render);
+	game.post_render = particles_post_render;
 	game.cleanup = particles_cleanup;
 
 	game.Start();
@@ -40,7 +43,9 @@ void particles_start(Game& game)
 	ps->pos.y = game.window->dimensions.y / 2.0f;
 
 	ps->reference_particle.color = Colors::White;
-	ps->reference_particle.life = 1.0f;
+	ps->reference_particle.life = 1.3f;
+	ps->reference_particle.particle_speed = 200.0f;
+	ps->speed = 0.5;
 	ps->pattern = &particle_pattern;
 }
 
@@ -64,6 +69,11 @@ void particles_update(Game& game)
 void particles_render(Game& game)
 {
 	main_scene.Render();
+}
+
+void particles_post_render()
+{
+	ps->RemoveDeadParticles();
 }
 
 void particles_cleanup()
