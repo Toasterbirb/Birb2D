@@ -112,7 +112,7 @@ sleep 2
 # Start creating the project
 echo "Copying the project skeleton..."
 mkdir -p $PROJECT_PATH
-cp -r $EXEC_PATH/project_skeleton/* $PROJECT_PATH/
+cp -rL $EXEC_PATH/project_skeleton/* $PROJECT_PATH/
 
 echo "Setting project values..."
 sed -i "s/<PROJECT_NAME>/$PROJECT_NAME/" $PROJECT_PATH/CMakeLists.txt
