@@ -11,6 +11,11 @@ namespace Birb
 	{
 		static bool Init(int flags); ///< Initializes the SDL_mixer library
 
+		/// Set all for volume channels. The volume value should be
+		/// between 0 and 1
+		static void SetGlobalVolume(float volume_percent);
+		static int GetCurrentGlobalVolume();
+
 		/// Used for short sound effects
 		class SoundFile
 		{

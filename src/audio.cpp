@@ -1,3 +1,4 @@
+#include "SDL_mixer.h"
 #ifndef NO_SOUND
 #include "Audio.hpp"
 #include "Logger.hpp"
@@ -46,6 +47,16 @@ namespace Birb
 
 		Global::IsInit::SDL_mixer = true;
 		return true;
+	}
+
+	void Audio::SetGlobalVolume(float volume_percent)
+	{
+		Mix_Volume(-1, MIX_MAX_VOLUME * volume_percent);
+	}
+
+	int Audio::GetCurrentGlobalVolume()
+	{
+		return Mix_Volume(-1, -1);
 	}
 
 	Audio::MusicFile::MusicFile()
