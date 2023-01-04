@@ -28,7 +28,7 @@ namespace Birb
 		/* Make it possible to update the Text */
 		bool SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
 		void SetFont(const Font& font); 		///< Change the font in Text and reload the sprite
-		void SetColor(Color* color); 	///< Change the color in Text and reload the sprite
+		void SetTextColor(Color* color); 	///< Change the color in Text and reload the sprite
 
 		std::string name; 		///< Name of the entity. Used for debugging
 

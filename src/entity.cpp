@@ -53,7 +53,7 @@ namespace Birb
 		ReloadSprite();
 	}
 
-	void Entity::SetColor(Color* color)
+	void Entity::SetTextColor(Color* color)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Set entity TextComponent color", PROFILER_COLOR);
 
