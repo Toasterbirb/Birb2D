@@ -16,7 +16,7 @@ case $WIN_BUILD_ENABLED in
 
 		if [ -n $(which distrobox) ]
 		then
-			read -p "Use ubuntu distrobox for the windows build? [y/N]: " USE_DISTROBOX
+			read -p "Use distrobox for the windows build? [y/N]: " USE_DISTROBOX
 
 			case $USE_DISTROBOX in
 				y|Y) USE_DISTROBOX=y ;;
@@ -40,7 +40,7 @@ if [ "$WIN_BUILD_ENABLED" == "y" ]
 then
 	if [ "$USE_DISTROBOX" == "y" ]
 	then
-		distrobox enter ubuntu -- ./win_build.sh
+		distrobox enter birb2d_win_build_env -- ./win_build.sh
 	else
 		./win_build.sh
 	fi
