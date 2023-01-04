@@ -1,6 +1,6 @@
 #include "ParticlePatterns/Randomized.hpp"
 #include "Color.hpp"
-#include "Particles.hpp"
+#include "ParticleSource.hpp"
 #include "Scene.hpp"
 #include "Timer.hpp"
 #include "Game.hpp"

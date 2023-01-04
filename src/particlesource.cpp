@@ -1,5 +1,5 @@
 #include "Circle.hpp"
-#include "Particles.hpp"
+#include "ParticleSource.hpp"
 #include "Render.hpp"
 #include "Vector/Vector2.hpp"
 
