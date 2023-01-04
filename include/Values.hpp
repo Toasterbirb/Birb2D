@@ -2,9 +2,11 @@
 #pragma GCC diagnostic ignored "-Wunused-variable"
 
 #include "SDL.hpp"
-
 #include "STD.hpp"
+
 #include "Color.hpp"
+#include "Vector/Vector2.hpp"
+#include "Vector/Vector2Int.hpp"
 
 namespace Birb
 {

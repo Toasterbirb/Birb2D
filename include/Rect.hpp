@@ -1,15 +1,19 @@
 #pragma once
 
-#include "SDL.hpp"
+#include "STD.hpp"
 
 #include "Color.hpp"
 #include "Line.hpp"
-#include "Polygon.hpp"
 #include "SceneObject.hpp"
-#include "Vector.hpp"
+#include "Vector/Vector2.hpp"
+#include "Vector/Vector2Int.hpp"
+#include "Vector/Vector3.hpp"
+#include "Vector/Vector3Int.hpp"
 
 namespace Birb
 {
+	class Polygon;
+
 	class Rect : public SceneObject
 	{
 	public:

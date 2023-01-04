@@ -1,6 +1,8 @@
 #include "AssetManager.hpp"
-#include "Resources.hpp"
+#include "Font.hpp"
 #include "Logger.hpp"
+#include "Resources.hpp"
+#include "Values.hpp"
 #include "microprofile.h"
 
 #define PROFILER_GROUP "Resources"

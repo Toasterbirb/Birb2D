@@ -231,7 +231,10 @@ endif()
 
 target_precompile_headers(birb2d PUBLIC
 	include/SDL.hpp
-	include/STD.hpp)
+	include/STD.hpp
+	include/json.hpp
+	vendor/microprofile/microprofile.h
+	vendor/cppcodec/cppcodec/base64_rfc4648.hpp)
 
 # Compile tests if enabled
 if (TESTS)

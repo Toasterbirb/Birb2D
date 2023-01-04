@@ -1,13 +1,8 @@
 #pragma once
 
 #include "STD.hpp"
-#include "Font.hpp"
 #include "EntityComponent.hpp"
-#include "Utils.hpp"
-#include "Timer.hpp"
-#include "Color.hpp"
 #include "Rect.hpp"
-#include "Resources.hpp"
 #include "SceneObject.hpp"
 #include "Texture.hpp"
 

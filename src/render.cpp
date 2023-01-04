@@ -1,7 +1,9 @@
-#include "SDL_stdinc.h"
+#include "Circle.hpp"
+#include "Logger.hpp"
+#include "Polygon.hpp"
+#include "Render.hpp"
 #include "Values.hpp"
 #include "microprofile.h"
-#include "Render.hpp"
 
 #define PROFILER_GROUP "Rendering"
 #define PROFILER_COLOR MP_LIGHTBLUE

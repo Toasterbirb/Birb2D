@@ -1,5 +1,8 @@
-#include "Math.hpp"
+#include "Circle.hpp"
+#include "Color.hpp"
+#include "Line.hpp"
 #include "Logger.hpp"
+#include "Math.hpp"
 
 #define PI 3.141592654
 

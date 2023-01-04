@@ -1,6 +1,5 @@
 #include "Game.hpp"
 #include "Values.hpp"
-#include <future>
 
 namespace Birb
 {

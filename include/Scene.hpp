@@ -1,8 +1,8 @@
 #pragma once
 
 #include "STD.hpp"
-#include "Vector.hpp"
 #include "SceneObject.hpp"
+#include "Vector/Vector2.hpp"
 
 namespace Birb
 {

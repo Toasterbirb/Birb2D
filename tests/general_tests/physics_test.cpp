@@ -1,4 +1,8 @@
+#include "Circle.hpp"
+#include "Entity.hpp"
 #include "Physics.hpp"
+#include "Polygon.hpp"
+#include "Rect.hpp"
 #include "doctest.h"
 
 using namespace Birb;

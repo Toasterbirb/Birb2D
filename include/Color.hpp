@@ -1,10 +1,12 @@
 #pragma once
 
 #include "SDL.hpp"
-#include "Vector.hpp"
 
 namespace Birb
 {
+	struct Vector3;
+	struct Vector3Int;
+
 	struct Color
 	{
 		Color();

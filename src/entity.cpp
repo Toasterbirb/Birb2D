@@ -2,6 +2,7 @@
 #include "Entity.hpp"
 #include "Logger.hpp"
 #include "Renderwindow.hpp"
+#include "Resources.hpp"
 #include "Values.hpp"
 #include "microprofile.h"
 

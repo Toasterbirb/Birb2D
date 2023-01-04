@@ -1,6 +1,8 @@
+#include "Circle.hpp"
+#include "Line.hpp"
 #include "Math.hpp"
-#include "doctest.h"
 #include "Vector.hpp"
+#include "doctest.h"
 
 using namespace Birb;
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Vector.hpp"
-
 namespace Birb
 {
+	struct Vector2;
+
 	class SceneObject
 	{
 	public:

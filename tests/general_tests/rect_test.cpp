@@ -1,5 +1,6 @@
 #include "doctest.h"
 #include "Rect.hpp"
+#include "Polygon.hpp"
 
 using namespace Birb;
 

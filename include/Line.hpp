@@ -2,7 +2,7 @@
 
 #include "Color.hpp"
 #include "SceneObject.hpp"
-#include "Vector.hpp"
+#include "Vector/Vector2.hpp"
 
 namespace Birb
 {

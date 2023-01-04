@@ -1,13 +1,16 @@
 #pragma once
 
 #include "STD.hpp"
-#include "Vector.hpp"
-#include "Color.hpp"
-#include "Circle.hpp"
-#include "Line.hpp"
+#include "Vector/Vector2.hpp"
+#include "Vector/Vector2Int.hpp"
+#include "Vector/Vector3.hpp"
+#include "Vector/Vector3Int.hpp"
 
 namespace Birb
 {
+	class Circle;
+	class Color;
+	class Line;
 
 
 	/// Misc math functions

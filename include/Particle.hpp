@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Color.hpp"
+#include "Vector/Vector2.hpp"
 
 namespace Birb
 {

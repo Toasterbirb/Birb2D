@@ -1,4 +1,9 @@
+#include "Circle.hpp"
+#include "Entity.hpp"
 #include "Physics.hpp"
+#include "Polygon.hpp"
+#include "Rect.hpp"
+#include "Utils.hpp"
 #include "microprofile.h"
 
 #define PROFILER_GROUP "Physics"

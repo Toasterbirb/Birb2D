@@ -1,8 +1,11 @@
-#include "doctest.h"
+#include "Circle.hpp"
 #include "Entity.hpp"
 #include "Graphs.hpp"
+#include "Polygon.hpp"
+#include "Rect.hpp"
+#include "STD.hpp"
 #include "Scene.hpp"
-#include <ostream>
+#include "doctest.h"
 
 using namespace Birb;
 

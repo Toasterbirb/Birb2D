@@ -3,10 +3,13 @@
 #include "Entity.hpp"
 #include "Line.hpp"
 #include "Rect.hpp"
-#include "Vector.hpp"
+#include "Vector/Vector2.hpp"
+#include "Vector/Vector2Int.hpp"
 
 namespace Birb
 {
+	class Circle;
+
 	namespace Render
 	{
 		bool DrawEntity(Entity& entity); ///< Renders an entity

@@ -1,14 +1,13 @@
 #pragma once
 
 #include "STD.hpp"
-
 #include "SDL.hpp"
-
-#include "Font.hpp"
-#include "Values.hpp"
 
 namespace Birb
 {
+	class Color;
+	class Font;
+
 	/// Methods for loading different resources like fonts and textures
 	struct Resources
 	{

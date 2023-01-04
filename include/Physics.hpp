@@ -1,12 +1,17 @@
 #pragma once
 
-#include "Circle.hpp"
-#include "Entity.hpp"
-#include "Utils.hpp"
-#include "Polygon.hpp"
+#include "STD.hpp"
 
 namespace Birb
 {
+	class Circle;
+	class Entity;
+	class Line;
+	class Polygon;
+	class Rect;
+	class Vector2;
+	class Vector2Int;
+
 	/// Functions for collision checking etc.
 	namespace Physics
 	{

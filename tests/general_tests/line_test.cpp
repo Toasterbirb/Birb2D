@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "Line.hpp"
 #include "Math.hpp"
+#include "Rect.hpp"
 
 using namespace Birb;
 

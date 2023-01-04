@@ -15,6 +15,7 @@
 #include "Line.hpp"
 #include "Logger.hpp"
 #include "Math.hpp"
+#include "ParticleSource.hpp"
 #include "Physics.hpp"
 #include "Polygon.hpp"
 #include "Random.hpp"

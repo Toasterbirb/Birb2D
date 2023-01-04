@@ -1,9 +1,9 @@
 #pragma once
 #include "Color.hpp"
-#include "Texture.hpp"
-#include "Vector.hpp"
 #include "Rect.hpp"
 #include "Scene.hpp"
+#include "Texture.hpp"
+#include "Vector/Vector2Int.hpp"
 #include "STD.hpp"
 #include "json.hpp"
 

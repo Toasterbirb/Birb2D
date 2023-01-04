@@ -1,5 +1,6 @@
-#include "Vector.hpp"
 #include "Utils.hpp"
+#include "Vector/Vector2.hpp"
+#include "Vector/Vector3.hpp"
 
 namespace Birb
 {

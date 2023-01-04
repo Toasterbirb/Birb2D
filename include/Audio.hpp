@@ -1,8 +1,8 @@
 #pragma once
 
 #ifndef NO_SOUND
-#include <iostream>
 
+#include "STD.hpp"
 #include "SDL.hpp"
 
 namespace Birb

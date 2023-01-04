@@ -1,5 +1,7 @@
 #include "Circle.hpp"
+#include "Rect.hpp"
 #include "Renderwindow.hpp"
+#include "Vector/Vector2Int.hpp"
 
 #define PI 3.141592654
 

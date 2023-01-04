@@ -1,6 +1,5 @@
 #include "Utils.hpp"
 #include "Logger.hpp"
-#include "SDL_error.h"
 #include "STD.hpp"
 #include "Vector/Vector2Int.hpp"
 

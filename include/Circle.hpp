@@ -2,11 +2,12 @@
 
 #include "Color.hpp"
 #include "SceneObject.hpp"
-#include "Rect.hpp"
-#include "Vector.hpp"
+#include "Vector/Vector2Int.hpp"
 
 namespace Birb
 {
+	class Rect;
+
 	class Circle : public SceneObject
 	{
 	public:

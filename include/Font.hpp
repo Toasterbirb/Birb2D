@@ -1,9 +1,7 @@
 #pragma once
 
 #include "SDL.hpp"
-#include "SDL_ttf.h"
 #include "STD.hpp"
-#include <cstdlib>
 
 namespace Birb
 {

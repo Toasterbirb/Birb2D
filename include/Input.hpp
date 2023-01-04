@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
-#include "Vector.hpp"
+#include "Vector/Vector2.hpp"
+#include "Vector/Vector2Int.hpp"
 
 namespace Birb
 {

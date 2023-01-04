@@ -1,11 +1,9 @@
 #include "Renderwindow.hpp"
-#include "SDL.h"
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
 #include "Physics.hpp"
 #include "microprofile.h"
-#include <cstring>
 
 #define PROFILER_GROUP "Rendering"
 #define PROFILER_COLOR MP_LIGHTBLUE

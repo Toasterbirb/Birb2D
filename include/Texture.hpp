@@ -3,7 +3,7 @@
 #include "SDL.hpp"
 
 #include "STD.hpp"
-#include "Vector.hpp"
+#include "Vector/Vector2Int.hpp"
 
 namespace Birb
 {
