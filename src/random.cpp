@@ -1,5 +1,9 @@
 #include "Random.hpp"
 
+#ifdef DISTCC
+#include <random>
+#endif
+
 static std::random_device random_machine;
 
 namespace Birb

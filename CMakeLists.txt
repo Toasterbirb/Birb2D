@@ -24,9 +24,14 @@ option(JOYSTICK "Enable joystick support." OFF)
 option(WINDOWS_BUILD "Enable some windows specific options" OFF)
 option(PROFILER "Enable the profiler timers" OFF)
 option(BUNDLED_ASSETS "Bundle game assets directly into the game binary" OFF)
+option(DISTCC "Disable precompiled headers for better distcc performance" OFF)
 
 if (BUNDLED_ASSETS)
 	add_definitions(-DBUNDLED_ASSETS)
+endif()
+
+if (DISTCC)
+	add_definitions(-DDISTCC)
 endif()
 
 if (DEBUG)
@@ -230,12 +235,14 @@ if (${ZLIB_FOUND})
 	target_link_libraries(birb2d zip)
 endif()
 
-target_precompile_headers(birb2d PUBLIC
-	include/SDL.hpp
-	include/STD.hpp
-	include/json.hpp
-	vendor/microprofile/microprofile.h
-	vendor/cppcodec/cppcodec/base64_rfc4648.hpp)
+if (NOT DISTCC)
+	target_precompile_headers(birb2d PUBLIC
+		include/SDL.hpp
+		include/STD.hpp
+		include/json.hpp
+		vendor/microprofile/microprofile.h
+		vendor/cppcodec/cppcodec/base64_rfc4648.hpp)
+endif()
 
 # Compile tests if enabled
 if (TESTS)

@@ -1,7 +1,12 @@
 #pragma once
 
 #include "SDL.hpp"
+
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <string>
+#endif
 
 namespace Birb
 {

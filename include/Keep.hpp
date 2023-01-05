@@ -1,6 +1,12 @@
 #pragma once
-#include "AppInfo.hpp"
+
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <string>
+#endif
+
+#include "AppInfo.hpp"
 #include "json.hpp"
 
 namespace Birb

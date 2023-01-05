@@ -1,8 +1,13 @@
 #pragma once
 
+#ifndef DISTCC
+#include "STD.hpp"
+#else
+#include <string>
+#endif
+
 #include "SDL.hpp"
 
-#include "STD.hpp"
 #include "Vector/Vector2Int.hpp"
 
 namespace Birb

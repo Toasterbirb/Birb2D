@@ -1,8 +1,13 @@
 #pragma once
 #pragma GCC diagnostic ignored "-Wunused-variable"
 
-#include "SDL.hpp"
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <string>
+#endif
+
+#include "SDL.hpp"
 
 #include "Color.hpp"
 #include "Vector/Vector2.hpp"

@@ -5,6 +5,10 @@
 #include "Values.hpp"
 #include "microprofile.h"
 
+#ifdef DISTCC
+#include <cstring>
+#endif
+
 #define PROFILER_GROUP "Resources"
 #define PROFILER_COLOR MP_RED
 

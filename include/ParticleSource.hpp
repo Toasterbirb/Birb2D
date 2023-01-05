@@ -1,10 +1,15 @@
 #pragma once
 
+#ifndef DISTCC
+#include "STD.hpp"
+#else
+
+#endif
+
 #include "Color.hpp"
 #include "Particle.hpp"
 #include "ParticlePattern.hpp"
 #include "Random.hpp"
-#include "STD.hpp"
 #include "SceneObject.hpp"
 #include "Timestep.hpp"
 #include "Vector/Vector2.hpp"

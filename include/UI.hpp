@@ -1,6 +1,11 @@
 #pragma once
 
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <vector>
+#endif
+
 #include "Entity.hpp"
 #include "Renderwindow.hpp"
 

@@ -1,5 +1,11 @@
 #pragma once
+
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <string>
+#endif
+
 #include "Timer.hpp"
 
 namespace Birb

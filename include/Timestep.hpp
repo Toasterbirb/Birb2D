@@ -1,7 +1,12 @@
 #pragma once
 
-#include "Renderwindow.hpp"
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <vector>
+#endif
+
+#include "Renderwindow.hpp"
 
 namespace Birb
 {

@@ -1,5 +1,12 @@
 #pragma once
+
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <functional>
+#include <future>
+#endif
+
 #include "Timestep.hpp"
 #include "Vector/Vector2Int.hpp"
 

@@ -1,5 +1,11 @@
 #include "Logger.hpp"
 
+#ifdef DISTCC
+#include <filesystem>
+#include <iostream>
+#include <fstream>
+#endif
+
 namespace Birb
 {
 	namespace Debug

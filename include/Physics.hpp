@@ -1,6 +1,10 @@
 #pragma once
 
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <vector>
+#endif
 
 namespace Birb
 {

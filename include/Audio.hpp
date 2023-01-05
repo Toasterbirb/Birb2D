@@ -2,7 +2,12 @@
 
 #ifndef NO_SOUND
 
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <string>
+#endif
+
 #include "SDL.hpp"
 
 namespace Birb

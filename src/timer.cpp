@@ -1,6 +1,10 @@
 #include "Timer.hpp"
 #include "Logger.hpp"
 
+#ifdef DISTCC
+#include <cmath>
+#endif
+
 namespace Birb
 {
 	void Timer::Start()

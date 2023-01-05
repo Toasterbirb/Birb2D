@@ -1,5 +1,12 @@
 #pragma once
+
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <vector>
+#include <map>
+#endif
+
 #include "Font.hpp"
 #include "Texture.hpp"
 #include "Audio.hpp"

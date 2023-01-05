@@ -1,10 +1,16 @@
 #pragma once
+
+#ifndef DISTCC
+#include "STD.hpp"
+#else
+#include <string>
+#endif
+
 #include "Color.hpp"
 #include "Rect.hpp"
 #include "Scene.hpp"
 #include "Texture.hpp"
 #include "Vector/Vector2Int.hpp"
-#include "STD.hpp"
 #include "json.hpp"
 
 namespace Birb

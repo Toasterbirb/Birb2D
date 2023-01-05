@@ -1,6 +1,12 @@
 #pragma once
 
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <string>
+#endif
+
+
 #include "EntityComponent.hpp"
 #include "Rect.hpp"
 #include "SceneObject.hpp"

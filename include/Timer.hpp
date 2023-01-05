@@ -1,6 +1,11 @@
 #pragma once
 
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <chrono>
+#include <string>
+#endif
 
 namespace Birb
 {

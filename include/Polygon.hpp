@@ -1,6 +1,11 @@
 #pragma once
 
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <vector>
+#endif
+
 #include "Color.hpp"
 #include "SceneObject.hpp"
 #include "Vector/Vector2.hpp"

@@ -1,10 +1,16 @@
 #pragma once
 #pragma GCC diagnostic ignored "-Wunused-function"
 
+#ifndef DISTCC
+#include "STD.hpp"
+#else
+#include <string>
+#include <vector>
+#endif
+
 #include "SDL.hpp"
 #include "Logger.hpp"
 
-#include "STD.hpp"
 
 #include "Math.hpp"
 #include "Line.hpp"

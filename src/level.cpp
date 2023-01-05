@@ -2,6 +2,10 @@
 #include "Level.hpp"
 #include "Logger.hpp"
 
+#ifdef DISTCC
+#include <fstream>
+#endif
+
 using namespace nlohmann;
 
 /* json keys */
@@ -23,11 +27,11 @@ namespace Birb
 		rect.color.b 	= json_object[JSON_COLOR_B];
 		rect.color.a 	= json_object[JSON_COLOR_A];
 	}
-	
+
 	nlohmann::json Level::Tile::ToJson() const
 	{
 		json json_object;
-		
+
 		json_object[JSON_IS_EMPTY] 		= this->is_empty;
 		json_object[JSON_IS_COLLIDER] 	= this->is_collider;
 		json_object[JSON_COLOR_R] 		= this->rect.color.r;

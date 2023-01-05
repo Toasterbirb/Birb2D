@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "Logger.hpp"
 #include <filesystem>
+#include <iostream>
 
 using namespace Birb;
 

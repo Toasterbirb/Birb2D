@@ -47,9 +47,9 @@ then
 	cd tests
 	if [ "$DISTCC" == "true" ]
 	then
-		find $TEST_MONITOR_DIRS -print | entr -sc 'make -j$(distcc -j) && ./test quick'
+		find $TEST_MONITOR_DIRS -print | entr -sc 'time make -j$(distcc -j) && ./test quick'
 	else
-		find $TEST_MONITOR_DIRS -print | entr -sc 'make -j$(nproc) && ./test quick'
+		find $TEST_MONITOR_DIRS -print | entr -sc 'time make -j$(nproc) && ./test quick'
 	fi
 else
 	find $MONITOR_DIRS -print | entr -sc 'make -j$(nproc)'

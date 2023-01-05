@@ -1,6 +1,11 @@
 #include "Filesystem.hpp"
 #include "Logger.hpp"
 
+#ifdef DISTCC
+#include <filesystem>
+#include <fstream>
+#endif
+
 namespace Birb
 {
 	namespace Filesystem

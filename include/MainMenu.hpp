@@ -1,6 +1,10 @@
 #pragma once
 
+#ifndef DISTCC
 #include "STD.hpp"
+#else
+#include <functional>
+#endif
 
 namespace Birb
 {
@@ -18,9 +22,9 @@ namespace Birb
 
 	private:
 		Game& game;
-		std::function<void(Game& game)> game_input;		
-		std::function<void(Game& game)> game_update;		
-		std::function<void(Game& game)> game_render;		
+		std::function<void(Game& game)> game_input;
+		std::function<void(Game& game)> game_update;
+		std::function<void(Game& game)> game_render;
 
 		static void menu_input(Game& game);
 		static void menu_update(Game& game);
