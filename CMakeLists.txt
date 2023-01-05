@@ -164,6 +164,7 @@ set(CORE_SRC
 	src/level.cpp
 	src/line.cpp
 	src/logger.cpp
+	src/mainmenu.cpp
 	src/math.cpp
 	src/particlesource.cpp
 	src/physics.cpp

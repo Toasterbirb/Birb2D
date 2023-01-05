@@ -54,7 +54,8 @@ target_link_libraries(test
 # Input tests that require user action
 add_executable(input_test
 	doctest_entry.cpp
-	ui_tests/button_test.cpp)
+	ui_tests/button_test.cpp
+	ui_tests/main_menu_test.cpp)
 
 target_compile_options(input_test PRIVATE -Wall -Wextra -Wpedantic -Werror)
 target_link_libraries(input_test
