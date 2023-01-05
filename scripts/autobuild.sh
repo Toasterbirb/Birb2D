@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script will continuously monitor directories
 # src, include, utils and tests for changes. If any
@@ -18,6 +18,9 @@ TEST_MONITOR_DIRS="$(echo $MONITOR_DIRS | sed 's/\.\.\//\.\.\/\.\.\//g')"
 # Check if we should also test
 [ "$1" == "test" ] && TEST=true
 
+# Check if we should test and also use distcc
+[ "$1" == "test-distcc" ] && TEST=true && DISTCC=true
+
 BUILD_DIR="$(dirname $0)/../build"
 
 mkdir -pv "$BUILD_DIR"
@@ -28,6 +31,12 @@ cd $BUILD_DIR
 if [ "$TEST" == "true" ]
 then
 	cmake .. -DTESTS=on
+
+	# Enable distcc
+	if [ "$DISTCC" == "true" ]
+	then
+		cmake -DDISTCC=on -DCMAKE_C_COMPILER_LAUNCHER="ccache;distcc" -DCMAKE_CXX_COMPILER_LAUNCHER="ccache;distcc" ..
+	fi
 else
 	cmake ..
 fi
@@ -36,7 +45,12 @@ fi
 if [ "$TEST" == "true" ]
 then
 	cd tests
-	find $TEST_MONITOR_DIRS -print | entr -sc 'make -j$(nproc) && ./test quick'
+	if [ "$DISTCC" == "true" ]
+	then
+		find $TEST_MONITOR_DIRS -print | entr -sc 'make -j$(distcc -j) && ./test quick'
+	else
+		find $TEST_MONITOR_DIRS -print | entr -sc 'make -j$(nproc) && ./test quick'
+	fi
 else
 	find $MONITOR_DIRS -print | entr -sc 'make -j$(nproc)'
 fi
