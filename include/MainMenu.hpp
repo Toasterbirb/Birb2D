@@ -6,6 +6,12 @@
 #include <functional>
 #endif
 
+#include "Audio.hpp"
+#include "Entity.hpp"
+#include "Input.hpp"
+#include "MainMenuSettings.hpp"
+#include "Scene.hpp"
+
 namespace Birb
 {
 	class Game;
@@ -17,18 +23,44 @@ namespace Birb
 	class MainMenu
 	{
 	public:
-		MainMenu(Game& game);
+		MainMenu();
+		MainMenu(Game& game, MainMenuSettings& settings);
 		void Launch();
 
 	private:
-		Game& game;
-		std::function<void(Game& game)> game_input;
-		std::function<void(Game& game)> game_update;
-		std::function<void(Game& game)> game_render;
+		Game* game;
+		MainMenuSettings* settings;
 
-		static void menu_input(Game& game);
-		static void menu_update(Game& game);
-		static void menu_render(Game& game);
+		Scene menu_scene;
+		Scene credits_scene;
+		Entity title_text;
+		Entity background;
+
+		/* Settings panel */
+		Scene settings_scene;
+		Entity settings_title_text;
+
+		struct Setting
+		{
+			enum SettingType
+			{
+				TOGGLE, SLIDER
+			};
+
+			Setting();
+			Setting(const Vector2Int& pos, const std::string& text, SettingType type, MainMenuSettings& settings);
+			void AddToScene(Scene* scene);
+
+			Vector2Int position;
+			Entity text;
+			Entity button;
+		};
+
+
+		Setting volume_slider;
+		Audio::SoundFile volume_slider_sound;
+
+		std::vector<Entity> menu_buttons;
 
 		void StartGame();
 	};

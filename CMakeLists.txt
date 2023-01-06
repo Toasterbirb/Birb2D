@@ -170,6 +170,7 @@ set(CORE_SRC
 	src/line.cpp
 	src/logger.cpp
 	src/mainmenu.cpp
+	src/mainmenusettings.cpp
 	src/math.cpp
 	src/particlesource.cpp
 	src/physics.cpp
@@ -218,7 +219,7 @@ else()
 	target_compile_options(birb2d PRIVATE -pedantic -Wall -Wextra -Wcast-align
 		-Wcast-qual -Wdisabled-optimization -Wformat=2
 		-Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs
-		-Wnoexcept -Wno-old-cast-style -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
+		-Wnoexcept -Woverloaded-virtual -Wsign-promo -Wstrict-null-sentinel -Wundef -Werror -Wno-unused)
 endif()
 
 target_link_libraries(birb2d

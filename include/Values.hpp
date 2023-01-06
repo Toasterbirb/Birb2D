@@ -42,5 +42,10 @@ namespace Birb
 
 			static inline Vector2 CameraPosition = {0, 0};
 		};
+
+		struct DefaultSettings
+		{
+			static inline float DefaultVolume = 0.75f;
+		};
 	}
 }

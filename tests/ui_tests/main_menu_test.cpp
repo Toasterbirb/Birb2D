@@ -23,6 +23,9 @@ namespace BirbTest
 	Entity game_reached_text;
 	Scene game_scene;
 
+	MainMenu main_menu;
+
+
 	TEST_CASE("Rendering: Main menu")
 	{
 		Game::WindowOpts win_opts;
@@ -42,7 +45,8 @@ namespace BirbTest
 		game_scene.AddObject(&game_reached_text);
 
 		/* Create the main menu and start it */
-		MainMenu main_menu(game);
+		MainMenuSettings menu_settings;
+		main_menu = MainMenu(game, menu_settings);
 		main_menu.Launch();
 	}
 

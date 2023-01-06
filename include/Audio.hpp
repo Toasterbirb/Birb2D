@@ -19,7 +19,7 @@ namespace Birb
 		/// Set all for volume channels. The volume value should be
 		/// between 0 and 1
 		static void SetGlobalVolume(float volume_percent);
-		static int GetCurrentGlobalVolume();
+		static float GetCurrentGlobalVolume();
 
 		/// Used for short sound effects
 		class SoundFile

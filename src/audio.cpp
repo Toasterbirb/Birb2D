@@ -46,6 +46,10 @@ namespace Birb
 #endif /* DEBUG */
 
 		Global::IsInit::SDL_mixer = true;
+
+		/* Set default volume */
+		SetGlobalVolume(Global::DefaultSettings::DefaultVolume);
+
 		return true;
 	}
 
@@ -54,9 +58,9 @@ namespace Birb
 		Mix_Volume(-1, MIX_MAX_VOLUME * volume_percent);
 	}
 
-	int Audio::GetCurrentGlobalVolume()
+	float Audio::GetCurrentGlobalVolume()
 	{
-		return Mix_Volume(-1, -1);
+		return Mix_Volume(-1, -1) / 128.0f;
 	}
 
 	Audio::MusicFile::MusicFile()
