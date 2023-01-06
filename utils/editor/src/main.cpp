@@ -1,5 +1,6 @@
 #include "Birb2D.hpp"
 #include "Grid.hpp"
+#include <iostream>
 
 const static int top_bar_height = 20;
 const static int side_panel_width = 200;
