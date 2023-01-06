@@ -4,7 +4,7 @@
 #include "STD.hpp"
 #else
 #include <string>
-#include <iostream>
+#include <iosfwd>
 #include <cmath>
 #endif
 
@@ -117,10 +117,6 @@ namespace Birb
         static Vector3Int Right();
     };
 
-    inline std::ostream &operator<<(std::ostream &stream, const Vector3Int &other)
-    {
-        stream << other.x << ", " << other.y << ", " << other.z;
-        return stream;
-    }
+    std::ostream &operator<<(std::ostream &stream, const Vector3Int &other);
 }
 

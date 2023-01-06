@@ -5,6 +5,7 @@
 #include "Timer.hpp"
 #include "Game.hpp"
 #include "doctest.h"
+#include <iostream>
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 using namespace Birb;

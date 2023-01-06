@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "Random.hpp"
 #include "Math.hpp"
+#include "Logger.hpp"
 
 using namespace Birb;
 
@@ -52,7 +53,7 @@ namespace BirbTest
 		CHECK_FALSE(out_of_limits);
 
 		if (out_of_limits)
-			std::cout << "Limits: " << lower_limit << " - " << upper_limit << ". Value: " << out_of_limits_value << std::endl;
+			Debug::Log("Limits: " + std::to_string(lower_limit) + " - " + std::to_string(upper_limit) + ". Value: " + std::to_string(out_of_limits_value));
 	}
 
 	TEST_CASE("Random float")
@@ -100,7 +101,7 @@ namespace BirbTest
 		}
 		CHECK_FALSE(out_of_limits);
 		if (out_of_limits)
-			std::cout << "Limits: " << lower_limit << " - " << upper_limit << ". Value: " << out_of_limits_value << std::endl;
+			Debug::Log("Limits: " + std::to_string(lower_limit) + " - " + std::to_string(upper_limit) + ". Value: " + std::to_string(out_of_limits_value));
 	}
 
 	TEST_CASE("Shuffle an integer array")

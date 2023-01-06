@@ -3,6 +3,10 @@
 #include "Renderwindow.hpp"
 #include "Logger.hpp"
 
+#ifdef DISTCC
+#include <iostream>
+#endif
+
 namespace Birb
 {
 	void Line::DefaultLineValues()
@@ -79,5 +83,11 @@ namespace Birb
 	{
 		pointA = pointA + delta;
 		pointB = pointB + delta;
+	}
+
+	std::ostream& operator<<(std::ostream& stream, const Line& other)
+	{
+		stream << "[(" << other.pointA.x << ", " << other.pointA.y << "), (" << other.pointB.x << ", " << other.pointB.y << ")]";
+		return stream;
 	}
 }

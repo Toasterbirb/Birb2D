@@ -2,8 +2,6 @@
 
 #ifndef DISTCC
 #include "STD.hpp"
-#else
-
 #endif
 
 #include "Color.hpp"

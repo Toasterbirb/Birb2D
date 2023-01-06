@@ -4,6 +4,10 @@
 #include "SceneObject.hpp"
 #include "Vector/Vector2.hpp"
 
+#ifdef DISTCC
+#include <iosfwd>
+#endif
+
 namespace Birb
 {
 	/* Forward declare the rect struct to avoid
@@ -43,9 +47,5 @@ namespace Birb
 		void DefaultLineValues();
 	};
 
-	inline std::ostream& operator<<(std::ostream& stream, const Line& other)
-	{
-		stream << "[(" << other.pointA.x << ", " << other.pointA.y << "), (" << other.pointB.x << ", " << other.pointB.y << ")]";
-		return stream;
-	}
+	std::ostream& operator<<(std::ostream& stream, const Line& other);
 }

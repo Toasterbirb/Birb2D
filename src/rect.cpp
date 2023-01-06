@@ -3,6 +3,10 @@
 #include "Render.hpp"
 #include "Utils.hpp"
 
+#ifdef DISTCC
+#include <iostream>
+#endif
+
 namespace Birb
 {
 	Rect::Rect()
@@ -86,5 +90,11 @@ namespace Birb
 	{
 		x += delta.x;
 		y += delta.y;
+	}
+
+	std::ostream& operator<<(std::ostream& stream, const Rect& other)
+	{
+		stream << other.x << ", " << other.y << ", " << other.w << ", " << other.h;
+		return stream;
 	}
 }

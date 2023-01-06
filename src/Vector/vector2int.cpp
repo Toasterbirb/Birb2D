@@ -1,6 +1,10 @@
 #include "Vector/Vector2.hpp"
 #include "Vector/Vector2Int.hpp"
 
+#ifdef DISTCC
+#include <iostream>
+#endif
+
 namespace Birb
 {
 	Vector2Int::Vector2Int()
@@ -64,5 +68,11 @@ namespace Birb
     Vector2Int Vector2Int::Right()
     {
         return Vector2Int(1,0);
+    }
+
+    std::ostream &operator<<(std::ostream &stream, const Vector2Int &other)
+    {
+        stream << other.x << ", " << other.y;
+        return stream;
     }
 }

@@ -3,6 +3,7 @@
 #ifndef DISTCC
 #include "STD.hpp"
 #else
+#include <iosfwd>
 #include <vector>
 #include <string>
 #endif
@@ -87,9 +88,5 @@ namespace Birb
 	};
 
 
-	inline std::ostream& operator<<(std::ostream& stream, const Rect& other)
-	{
-		stream << other.x << ", " << other.y << ", " << other.w << ", " << other.h;
-		return stream;
-	}
+	std::ostream& operator<<(std::ostream& stream, const Rect& other);
 }
