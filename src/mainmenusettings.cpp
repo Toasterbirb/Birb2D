@@ -12,7 +12,7 @@ namespace Birb
 		};
 
 		/* Set some default values */
-		title.font.LoadFont("fonts/manaspace/manaspc.ttf", 55);
+		title.font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 55);
 		title.text 		= "Placeholder title";
 		title.position 	= Vector2Int(64, 64);
 		title.color 	= Colors::Nord::SnowStorm::nord4;
@@ -42,7 +42,7 @@ namespace Birb
 
 	MainMenuSettings::Button::Button()
 	{
-		font.LoadFont("fonts/manaspace/manaspc.ttf", 32);
+		font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 32);
 		text_color 			= Colors::Nord::SnowStorm::nord6;
 		background_color 	= Colors::Nord::PolarNight::nord2;
 		highlight_color 	= Colors::Nord::Aurora::nord15;
@@ -58,15 +58,12 @@ namespace Birb
 		text = "Button";
 	}
 
-	MainMenuSettings::Settings::Settings()
+	MainMenuSettings::Window::Window()
 	{
-		title_font.LoadFont("fonts/manaspace/manaspc.ttf", 24);
-		setting_font.LoadFont("fonts/manaspace/manaspc.ttf", 20);
-
+		title_font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 24);
 		title_color 	= Colors::Nord::Frost::nord9;
-		setting_color 	= Colors::Nord::Frost::nord7;
 
-		background = Rect(500, 220, 300, 100);
+		background = Rect(500, 420, 300, 100);
 		background.color = Colors::Nord::PolarNight::nord1;
 		background.renderingPriority = 2;
 
@@ -74,8 +71,20 @@ namespace Birb
 		top_bar.color = Colors::Nord::PolarNight::nord2;
 		top_bar.renderingPriority = 3;
 
+		text_color 		= Colors::Nord::Frost::nord7;
+	}
+
+	MainMenuSettings::Settings::Settings()
+	{
+		setting_font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 20);
+
 		slider_fill_color 		= Colors::Nord::Aurora::nord14;
 		slider_background_color = Colors::Nord::PolarNight::nord3;
 		slider_border_color 	= Colors::Nord::Frost::nord7;
+	}
+
+	MainMenuSettings::Credits::Credits()
+	{
+		text_font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 16);
 	}
 }

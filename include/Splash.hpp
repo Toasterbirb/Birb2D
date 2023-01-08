@@ -16,6 +16,9 @@ namespace Birb
 		bool isCustom; 	///< Change this to true if you want to use a custom
 						/// splash screen.
 
+		/// Text used for the loading screen frame
+		std::string loading_text;
+
 		void Run();
 
 	private:
@@ -27,7 +30,7 @@ namespace Birb
 		Entity birb2d_logo;
 		Entity birb2d_text;
 
-		Entity loading_text;
+		Entity loading_text_entity;
 
 	};
 }

@@ -49,7 +49,7 @@ fi
 echo "Building finished! Packing up..."
 LINUX_DIST_PATH="${PROGRAM_NAME}_linux"
 WINDOWS_DIST_PATH="${PROGRAM_NAME}_windows"
-rm -rv ./build/dist
+rm -rfv ./build/dist
 mkdir -pv ./build/dist/${LINUX_DIST_PATH}
 [ "$WIN_BUILD_ENABLED" == "y" ] && mkdir -pv ./build/dist/${WINDOWS_DIST_PATH}
 

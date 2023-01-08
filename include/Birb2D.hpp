@@ -14,6 +14,8 @@
 #include "Level.hpp"
 #include "Line.hpp"
 #include "Logger.hpp"
+#include "MainMenu.hpp"
+#include "MainMenuSettings.hpp"
 #include "Math.hpp"
 #include "ParticleSource.hpp"
 #include "Physics.hpp"

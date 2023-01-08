@@ -10,6 +10,7 @@
 #include "SDL.hpp"
 
 #include "Color.hpp"
+#include "Random.hpp"
 #include "Vector/Vector2.hpp"
 #include "Vector/Vector2Int.hpp"
 
@@ -47,5 +48,7 @@ namespace Birb
 		{
 			static inline float DefaultVolume = 0.75f;
 		};
+
+		static inline Random random;
 	}
 }

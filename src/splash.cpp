@@ -18,6 +18,8 @@ namespace Birb
 
 		if (!isCustom)
 		{
+			loading_text = "Loading...";
+
 			background_plane = Entity("Background plane", Rect(0, 0, window.dimensions.x, window.dimensions.y));
 			background_plane.rect.color = 0xaab9bd;
 			background_plane.renderingPriority = -1;
@@ -55,12 +57,12 @@ namespace Birb
 	{
 		manaspace_small.LoadFont(res_base_path + "/fonts/manaspace/manaspc.ttf", 24);
 
-		loading_text = Entity("Loading text",
+		loading_text_entity = Entity("Loading text",
 				Vector2Int(32, 32),
-				EntityComponent::Text("Loading...", &manaspace_small, &Colors::Black));
+				EntityComponent::Text(loading_text, &manaspace_small, &Colors::Black));
 
-		loading_text.renderingPriority = 10;
-		loading_text.active = false;
+		loading_text_entity.renderingPriority = 10;
+		loading_text_entity.active = false;
 
 		/* Implement a simple rendering loop */
 		TimeStep timeStep;
@@ -132,10 +134,10 @@ namespace Birb
 		}
 
 		/* Clear the window one more time and create a loading screen frame */
-		loading_text.active = true;
+		loading_text_entity.active = true;
 		window.Clear();
 		scene.Render();
-		Render::DrawEntity(loading_text);
+		Render::DrawEntity(loading_text_entity);
 		window.Display();
 	}
 }

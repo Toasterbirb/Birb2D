@@ -18,6 +18,9 @@ namespace Birb
 		/* Load the volume slider sound */
 		volume_slider_sound = Audio::SoundFile("birb2d_res/sounds/volume_slider.wav");
 
+		/* Load button on-hover sound */
+		button_hover = Audio::SoundFile("birb2d_res/sounds/button_hover.wav");
+
 		/* If a background texture is set, use that */
 		if (this->settings->background_texture.isLoaded())
 		{
@@ -65,21 +68,36 @@ namespace Birb
 
 		/* Construct the settings page */
 		settings_scene.Deactivate();
-		settings_scene.AddObject(&this->settings->settings_menu.background);
-		settings_scene.AddObject(&this->settings->settings_menu.top_bar);
+		settings_scene.AddObject(&this->settings->settings_menu.window.background);
+		settings_scene.AddObject(&this->settings->settings_menu.window.top_bar);
 
-		settings_title_text = Entity("Settings title text",
-				Vector2Int(this->settings->settings_menu.top_bar.x + 4, this->settings->settings_menu.top_bar.y + 4),
+		window_title_text = Entity("Settings title text",
+				Vector2Int(this->settings->settings_menu.window.top_bar.x + 4, this->settings->settings_menu.window.top_bar.y + 4),
 				EntityComponent::Text("Settings",
-					&this->settings->settings_menu.title_font,
-					&this->settings->settings_menu.title_color),
+					&this->settings->settings_menu.window.title_font,
+					&this->settings->settings_menu.window.title_color),
 				4);
-		settings_scene.AddObject(&settings_title_text);
+		settings_scene.AddObject(&window_title_text);
 
 		/** Create options **/
 		int option_padding = 16;
-		volume_slider = Setting(Vector2Int(this->settings->settings_menu.top_bar.x + option_padding, this->settings->settings_menu.top_bar.y + this->settings->settings_menu.top_bar.h + option_padding), "Volume ", Setting::SLIDER, settings);
+		volume_slider = Setting(Vector2Int(this->settings->settings_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding), "Volume ", Setting::SLIDER, settings);
 		volume_slider.button.progressBarComponent.parent_entity = &volume_slider.button;
+
+
+		/* Construct the credits page */
+		credits_scene.Deactivate();
+		credits_scene.AddObject(&this->settings->settings_menu.window.background);
+		credits_scene.AddObject(&this->settings->settings_menu.window.top_bar);
+		credits_scene.AddObject(&this->window_title_text);
+
+		credits_text = Entity("Credits text",
+				Vector2Int(this->settings->credits_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding),
+				EntityComponent::Text(this->settings->credits_menu.credits_text,
+					&this->settings->credits_menu.text_font,
+					&this->settings->credits_menu.window.text_color),
+				4);
+		credits_scene.AddObject(&credits_text);
 	}
 
 	void MainMenu::Launch()
@@ -109,6 +127,11 @@ namespace Birb
 					{
 						if (game->window->CursorInRect(settings->buttons[i]->rect))
 						{
+							/* Play a *click* sound on hover */
+							if (settings->buttons[i]->button_background.color == settings->buttons[i]->background_color)
+								button_hover.play();
+
+
 							/* Set highlight color */
 							settings->buttons[i]->button_background.color = settings->buttons[i]->highlight_color;
 
@@ -125,6 +148,7 @@ namespace Birb
 
 									case (MainMenuSettings::SETTINGS):
 									{
+										window_title_text.SetText("Settings");
 										credits_scene.Deactivate();
 										settings_scene.Toggle();
 										break;
@@ -132,6 +156,7 @@ namespace Birb
 
 									case (MainMenuSettings::CREDITS):
 									{
+										window_title_text.SetText("Credits");
 										settings_scene.Deactivate();
 										credits_scene.Toggle();
 										break;
@@ -198,7 +223,7 @@ namespace Birb
 		this->text = Entity("Setting option text", pos,
 				EntityComponent::Text(text,
 					&settings.settings_menu.setting_font,
-					&settings.settings_menu.setting_color),
+					&settings.settings_menu.window.text_color),
 				5);
 
 		switch (type)

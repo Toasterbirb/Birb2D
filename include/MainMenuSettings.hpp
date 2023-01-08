@@ -54,24 +54,38 @@ namespace Birb
 			QUIT 		= 3
 		};
 
+		struct Window
+		{
+			Window();
+			Font 		title_font;
+			Color 		title_color;
+			Rect 		top_bar;
+			Rect 		background;
+
+			Color 		text_color;
+		};
+
 		struct Settings
 		{
 			Settings();
-			Font 		title_font;
-			Color 		title_color;
-
+			Window 		window;
 			Font 		setting_font;
-			Color 		setting_color;
-
-			Rect 		background;
-			Rect 		top_bar;
 
 			Color 		slider_fill_color;
 			Color 		slider_background_color;
 			Color 		slider_border_color;
 		};
 
-		Settings settings_menu;
+		struct Credits
+		{
+			Credits();
+			Window 		window;
+			Font 		text_font;
+			std::string credits_text;
+		};
+
+		Settings 	settings_menu;
+		Credits 	credits_menu;
 
 		Texture background_texture;
 		Color background_color;

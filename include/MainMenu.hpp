@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #ifndef DISTCC
 #include "STD.hpp"
 #else
@@ -36,9 +37,10 @@ namespace Birb
 		Entity title_text;
 		Entity background;
 
+		Entity window_title_text;
+
 		/* Settings panel */
 		Scene settings_scene;
-		Entity settings_title_text;
 
 		struct Setting
 		{
@@ -59,6 +61,11 @@ namespace Birb
 
 		Setting volume_slider;
 		Audio::SoundFile volume_slider_sound;
+		Audio::SoundFile button_hover;
+
+		/* Credits panel */
+		Entity credits_text;
+
 
 		std::vector<Entity> menu_buttons;
 
