@@ -1,7 +1,4 @@
 #include "Diagnostics.hpp"
-#include "Render.hpp"
-#include "Values.hpp"
-#include "Utils.hpp"
 
 namespace Birb
 {

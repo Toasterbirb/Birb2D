@@ -8,6 +8,9 @@ namespace Birb
 {
 	namespace Diagnostics
 	{
+		/* --------------------------------- */
+		/* Implemented in frametimegraph.cpp */
+		/* --------------------------------- */
 		class FrametimeGraph
 		{
 		public:
