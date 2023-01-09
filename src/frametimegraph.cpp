@@ -1,4 +1,4 @@
-#include "Diagnostics.hpp"
+#include "FrametimeGraph.hpp"
 
 namespace Birb
 {
