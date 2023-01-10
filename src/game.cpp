@@ -39,6 +39,9 @@ namespace Birb
 		/* Initialize timestep */
 		timeStep.Init(&game_window);
 
+		/* Initialize statistics */
+		statistics = Diagnostics::Statistics(&timeStep);
+
 		/* Call the start function before starting the game loop */
 		start(*this);
 
@@ -64,29 +67,57 @@ namespace Birb
 			/* Handle rendering */
 			game_window.Clear();
 			render(*this);
+
+			/* Render the statistics overlay if debugging is enabled */
+#ifdef DEBUG
+			statistics.Render();
+#endif
+
 #ifndef __WINDOWS__
+			/* Start the fixed update thread and refresh statistics */
+			if (timeStep.ShouldRunFixedUpdate())
+			{
+				fixed_update_future = std::async(std::launch::async, fixed_update);
+				statistics.Refresh();
+			}
+
 			/* Start the post render thread */
 			post_render_future = std::async(std::launch::async, post_render);
-#endif
+#endif /* __WINDOWS__ */
 			game_window.Display();
 
 #ifdef __WINDOWS__
 			/* mingw doesn't really like std::future yet,
 			 * so we'll have to skip on multithreading on
 			 * Windows for now :( */
+			if (timeStep.ShouldRunFixedUpdate())
+			{
+				fixed_update();
+
+#ifdef DEBUG
+				statistics.Refresh();
+#endif /* DEBUG */
+			}
+
 			post_render();
-#endif
+#endif /* __WINDOWS__ */
 
 			/* End of timestep */
 			timeStep.End();
 
 #ifndef __WINDOWS__
+			/* Join the fixed update thread */
+			fixed_update_future.wait();
+
 			/* Join the post render thread */
 			post_render_future.wait();
 #endif
 		}
 
 		/* Free memory allocations and stuff. Up to the user to decide */
+#ifdef DEBUG
+		statistics.Free();
+#endif
 		cleanup();
 
 		/* Quit SDL things */
@@ -113,6 +144,9 @@ namespace Birb
 	{
 		return &timeStep;
 	}
+
+	void Game::fixed_update_placeholder()
+	{}
 
 	void Game::post_render_placeholder()
 	{}

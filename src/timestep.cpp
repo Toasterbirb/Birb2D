@@ -19,6 +19,10 @@ namespace Birb
 		/* Use the target fps as the amount of samples
 		 * for the frame budget average calculation */
 		frame_budget_values = std::vector<double>(mainWindow->refresh_rate);
+
+		/* Set fixed update frequency to 25fps by default */
+		fixedUpdateFrequency = 25;
+		fixedUpdateAccumulator = 0;
 	}
 
 	void TimeStep::Start()
@@ -29,6 +33,9 @@ namespace Birb
 		double newTime = utils::hireTimeInSeconds();
 		double frameTime = newTime - currentTime;
 		deltaTime = frameTime;
+
+		/* Increment the fixed update accumulator with the new deltatime */
+		fixedUpdateAccumulator += deltaTime;
 
 		if (frameTime > 0.25f)
 			frameTime = 0.25f;
@@ -65,6 +72,16 @@ namespace Birb
 
 		if (frameTicks < 1000 / mainWindow->refresh_rate)
 			SDL_Delay(1000 / mainWindow->refresh_rate - frameTicks);
+	}
+
+	bool TimeStep::ShouldRunFixedUpdate()
+	{
+		bool result = (1 / deltaTime) * fixedUpdateFrequency > fixedUpdateAccumulator;
+
+		if (result == true)
+			fixedUpdateAccumulator = 0.0f;
+
+		return result;
 	}
 
 	double TimeStep::FrameBudget() const

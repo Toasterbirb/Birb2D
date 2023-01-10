@@ -30,6 +30,15 @@ namespace Birb
 		float deltaTime;
 		int startTick;
 
+		/// FixedUpdate frequency in frames per second
+		int fixedUpdateFrequency;
+
+		/// Checks if you should run fixed update.
+		/// If true, it'll also reset the fixedUpdateAccumulator
+		/// with the assumption that FixedUpdate gets run when
+		/// this function returns true
+		bool ShouldRunFixedUpdate();
+
 		/// A percentage value that represents the average amount
 		/// of frame budget used before the frametime exceeds the FPS target
 		double FrameBudget() const;
@@ -37,5 +46,8 @@ namespace Birb
 	private:
 		size_t frame_budget_avg_counter = 0;
 		std::vector<double> frame_budget_values;
+
+		/// If this value goes over the fixedUpdateFrequency, FixedUpdate runs.
+		float fixedUpdateAccumulator;
 	};
 }

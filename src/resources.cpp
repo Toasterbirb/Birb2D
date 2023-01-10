@@ -119,7 +119,7 @@ namespace Birb
 		return texture;
 	}
 
-	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color, const Color& bgColor)
+	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color, const Color& bgColor, const int& wrapLength)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Render text sprite with background color", PROFILER_COLOR);
 
@@ -130,7 +130,8 @@ namespace Birb
 			return NULL;
 		}
 
-		SDL_Surface* surface = TTF_RenderText_Shaded(font.ttf(), text.c_str(), color.sdl(), bgColor.sdl());
+		//SDL_Surface* surface = TTF_RenderText_Shaded(font.ttf(), text.c_str(), color.sdl(), bgColor.sdl());
+		SDL_Surface* surface = TTF_RenderText_Shaded_Wrapped(font.ttf(), text.c_str(), color.sdl(), bgColor.sdl(), wrapLength);
 		if (surface == nullptr)
 			Debug::Log("Error creating SDL_Surface. Text: " + static_cast<std::string>(text) + ". SDL Error: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 

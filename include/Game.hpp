@@ -7,6 +7,10 @@
 #include <future>
 #endif
 
+#ifdef DEBUG
+#include "Statistics.hpp"
+#endif
+
 #include "Timestep.hpp"
 #include "Vector/Vector2Int.hpp"
 
@@ -54,10 +58,19 @@ namespace Birb
 		/// before rendering
 		std::function<void(Game& game)> update;
 
+		/// Same as update(), but gets run with a fixed framerate.
+		/// By default it is 25fps, but it can be controller via
+		/// a variable in TimeStep.
+		///
+		/// FixedUpdate() gets run on a separate thread similar to post_render,
+		/// so it shouldn't be used with anything related to SDL that can't be
+		/// multithreaded
+		std::function<void()> fixed_update;
+
 		/// Anything to do with rendering happens in here
 		std::function<void(Game& game)> render;
 
-		/// This function gets ran on a separate thread after 
+		/// This function gets ran on a separate thread after
 		/// the frame has been rendered and the main thread is
 		/// waiting to keep up with the refreshrate. You can use
 		/// that downtime for preparing things for the next frame
@@ -76,13 +89,19 @@ namespace Birb
 
 	private:
 		/* Placeholder functions for optional game loop functions */
+		static void fixed_update_placeholder();
 		static void post_render_placeholder();
 		static void cleanup_placeholder();
 
 		TimeStep timeStep;
 		WindowOpts window_options;
 
+#ifdef DEBUG
+		Diagnostics::Statistics statistics;
+#endif
+
 #ifndef __WINDOWS__
+		std::future<void> fixed_update_future;
 		std::future<void> post_render_future;
 #endif
 	};
