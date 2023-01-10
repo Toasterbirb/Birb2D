@@ -32,7 +32,7 @@ esac
 
 # Compile for linux
 mkdir -p build
-cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DRELEASE=On -DUTILS=Off -DTESTS=Off && make -j$(nproc)
+cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DRELEASE=On -DDEBUG=Off -DUTILS=Off -DTESTS=Off && make -j$(nproc)
 cd ..
 
 # Compile for windows
