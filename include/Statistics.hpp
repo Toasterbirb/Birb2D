@@ -15,8 +15,6 @@
 
 namespace Birb
 {
-	class Entity;
-	class Font;
 	class TimeStep;
 
 	namespace Diagnostics
@@ -24,7 +22,7 @@ namespace Birb
 		/// Draw a text overlay that shows some
 		/// runtime performance statistics. Due to the nature of
 		/// some statistics, some features are only available on Linux
-		class Statistics : public SceneObject
+		class Statistics
 		{
 		public:
 			Statistics();
@@ -45,9 +43,6 @@ namespace Birb
 			int PID;
 			struct rusage memory_usage;
 #endif
-
-			void RenderFunc() override;
-			void SetPos(const Vector2& delta) override;
 		};
 	}
 }

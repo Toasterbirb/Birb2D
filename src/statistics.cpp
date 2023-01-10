@@ -13,7 +13,7 @@ namespace Birb
 		Statistics::Statistics(TimeStep* timestep)
 		{
 			/* Load the debug font */
-			debug_text_font = new Font("fonts/manaspace/manaspc.ttf", 14);
+			debug_text_font = new Font("birb2d_res/fonts/manaspace/manaspc.ttf", 14);
 
 			/* Create the text entity */
 			EntityComponent::Text text_component("NULL", debug_text_font, &Colors::Nord::Frost::nord9, &Colors::Nord::PolarNight::nord0);
@@ -50,24 +50,13 @@ namespace Birb
 
 		void Statistics::Render()
 		{
-			RenderFunc();
+			debug_text_entity.SetText(debug_text);
+			Render::DrawEntity(debug_text_entity);
 		}
 
 		void Statistics::Free()
 		{
 			delete debug_text_font;
-		}
-
-		void Statistics::RenderFunc()
-		{
-			debug_text_entity.SetText(debug_text);
-			Render::DrawEntity(debug_text_entity);
-		}
-
-		void Statistics::SetPos(const Vector2& delta)
-		{
-			/* Don't do anything. The statistics window is supposed to stick
-			 * to the top left corner */
 		}
 	}
 }

@@ -97,7 +97,7 @@ namespace Birb
 		WindowOpts window_options;
 
 #ifdef DEBUG
-		Diagnostics::Statistics statistics;
+		Diagnostics::Statistics* statistics;
 #endif
 
 #ifndef __WINDOWS__

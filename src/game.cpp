@@ -39,8 +39,10 @@ namespace Birb
 		/* Initialize timestep */
 		timeStep.Init(&game_window);
 
+#ifdef DEBUG
 		/* Initialize statistics */
-		statistics = Diagnostics::Statistics(&timeStep);
+		statistics = new Diagnostics::Statistics(&timeStep);
+#endif
 
 		/* Call the start function before starting the game loop */
 		start(*this);
@@ -68,18 +70,21 @@ namespace Birb
 			game_window.Clear();
 			render(*this);
 
-			/* Render the statistics overlay if debugging is enabled */
-#ifdef DEBUG
-			statistics.Render();
-#endif
 
 #ifndef __WINDOWS__
 			/* Start the fixed update thread and refresh statistics */
 			if (timeStep.ShouldRunFixedUpdate())
 			{
 				fixed_update_future = std::async(std::launch::async, fixed_update);
-				statistics.Refresh();
+#ifdef DEBUG
+				statistics->Refresh();
+#endif
 			}
+
+			/* Render the statistics overlay if debugging is enabled */
+#ifdef DEBUG
+			statistics->Render();
+#endif
 
 			/* Start the post render thread */
 			post_render_future = std::async(std::launch::async, post_render);
@@ -116,7 +121,8 @@ namespace Birb
 
 		/* Free memory allocations and stuff. Up to the user to decide */
 #ifdef DEBUG
-		statistics.Free();
+		statistics->Free();
+		delete statistics;
 #endif
 		cleanup();
 
