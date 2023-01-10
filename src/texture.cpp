@@ -76,7 +76,7 @@ namespace Birb
 
 	void Texture::Destroy()
 	{
-		//SDL_DestroyTexture(sdlTex);
+		SDL_DestroyTexture(sdlTex);
 	}
 
 	Vector2Int Texture::dimensions() const
