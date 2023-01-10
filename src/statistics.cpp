@@ -35,15 +35,12 @@ namespace Birb
 			/* Get all of the required data */
 			float fps = 1.0f / timestep->deltaTime;
 
-#ifndef __WINDOWS__
-			getrusage(PID, &memory_usage);
-			long resident_memory_usage = memory_usage.ru_maxrss;
-#endif
-
 			debug_text = "FPS: " + utils::CleanDecimals(Math::Round(fps, 1));
 
 #ifndef __WINDOWS__
-			/* Linux version */
+			getrusage(PID, &memory_usage);
+			long resident_memory_usage = memory_usage.ru_maxrss;
+
 			debug_text += "\nMemory usage: " + std::to_string(resident_memory_usage / 1024) + " MB";
 #endif
 		}
