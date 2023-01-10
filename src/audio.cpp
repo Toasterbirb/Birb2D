@@ -14,10 +14,10 @@ namespace Birb
 		if (Global::IsInit::SDL_mixer)
 			return true;
 
-#ifdef DEBUG
-		if (Diagnostics::Debugging::InitMessages)
-			Debug::Log("Initializing audio...");
-#endif /* DEBUG */
+
+//		if (Diagnostics::Debugging::InitMessages)
+//			Debug::Log("Initializing audio...");
+//#endif /* BIRB2D_DEBUG */
 
 		int initted = Mix_Init(flags);
 		if ((initted&flags) != flags)
@@ -40,10 +40,10 @@ namespace Birb
 		}
 
 		// Audio initialization was successful
-#ifdef DEBUG
-		if (Diagnostics::Debugging::InitMessages)
-			Debug::Log("Audio initialized successfully!");
-#endif /* DEBUG */
+
+//		if (Diagnostics::Debugging::InitMessages)
+//			Debug::Log("Audio initialized successfully!");
+//#endif /* BIRB2D_DEBUG */
 
 		Global::IsInit::SDL_mixer = true;
 

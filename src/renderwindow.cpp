@@ -22,9 +22,9 @@ namespace Birb
 	Window::Window(const std::string& p_title, const Vector2Int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
 	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
 	{
-#ifdef DEBUG
-		Debug::Log("Creating window '" + win_title + "'...");
-#endif
+
+//		Debug::Log("Creating window '" + win_title + "'...");
+//#endif
 
 		/* Create a new window and initialize stuff for it */
 		InitSDL();
@@ -57,9 +57,9 @@ namespace Birb
 		/* Define callback functions to some default values */
 		OnWindowResize = DefaultOnWindowResize;
 
-#ifdef DEBUG
-		Debug::Log("Window '" + win_title + "' created successfully!");
-#endif
+
+//		Debug::Log("Window '" + win_title + "' created successfully!");
+//#endif
 	}
 
 	Window::~Window()
@@ -73,10 +73,10 @@ namespace Birb
 		if (Global::IsInit::SDL)
 			return;
 
-#ifdef DEBUG
-		if (Birb::Diagnostics::Debugging::InitMessages)
-			Debug::Log("Initializing SDL...");
-#endif
+
+//		if (Birb::Diagnostics::Debugging::InitMessages)
+//			Debug::Log("Initializing SDL...");
+//#endif
 
 		if (SDL_Init(SDL_INIT_VIDEO) > 0)
 		{
@@ -95,10 +95,10 @@ namespace Birb
 		if (Global::IsInit::SDL_image)
 			return;
 
-#ifdef DEBUG
-		if (Birb::Diagnostics::Debugging::InitMessages)
-			Debug::Log("Initializing SDL_image...");
-#endif
+
+//		if (Birb::Diagnostics::Debugging::InitMessages)
+//			Debug::Log("Initializing SDL_image...");
+//#endif
 
 		if (!(IMG_Init(IMG_INIT_PNG)))
 		{
@@ -113,9 +113,9 @@ namespace Birb
 
 	void Window::Cleanup()
 	{
-#ifdef DEBUG
-		Debug::Log("Starting window cleanup for '" + win_title + "'...");
-#endif /* DEBUG */
+
+//		Debug::Log("Starting window cleanup for '" + win_title + "'...");
+//#endif /* BIRB2D_DEBUG */
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(win);
 
@@ -130,9 +130,9 @@ namespace Birb
 		Global::RenderVars::MainWindow = NULL;
 		Global::RenderVars::Renderer = NULL;
 
-#ifdef DEBUG
-		Debug::Log("Window '" + win_title + "' destroyed!");
-#endif /* DEBUG */
+
+//		Debug::Log("Window '" + win_title + "' destroyed!");
+//#endif /* BIRB2D_DEBUG */
 	}
 
 	void Window::Clear()

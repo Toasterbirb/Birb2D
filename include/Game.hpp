@@ -7,9 +7,9 @@
 #include <future>
 #endif
 
-#ifdef DEBUG
+
 #include "Statistics.hpp"
-#endif
+//#endif
 
 #include "Timestep.hpp"
 #include "Vector/Vector2Int.hpp"
@@ -96,9 +96,9 @@ namespace Birb
 		TimeStep timeStep;
 		WindowOpts window_options;
 
-#ifdef DEBUG
+
 		Diagnostics::Statistics* statistics;
-#endif
+//#endif
 
 #ifndef __WINDOWS__
 		std::future<void> fixed_update_future;

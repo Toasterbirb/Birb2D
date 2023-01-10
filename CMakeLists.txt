@@ -18,7 +18,6 @@ option(STATIC_SDL "Use static linking for SDL" ON)
 option(TESTS "Compile tests" OFF)
 option(UTILS "Compile extra utilities" ON)
 option(EXAMPLES "Compile examples" OFF)
-option(DEBUG "Enable some extra debug output" ON)
 option(RELEASE "Compile a release build" OFF)
 option(JOYSTICK "Enable joystick support." OFF)
 option(WINDOWS_BUILD "Enable some windows specific options" OFF)
@@ -32,10 +31,6 @@ endif()
 
 if (DISTCC)
 	add_definitions(-DDISTCC)
-endif()
-
-if (DEBUG)
-	add_definitions(-DDEBUG)
 endif()
 
 if (RELEASE)
