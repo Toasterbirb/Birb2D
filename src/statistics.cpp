@@ -26,8 +26,6 @@ namespace Birb
 #endif
 
 			Statistics::timestep = timestep;
-
-			Refresh();
 		}
 
 		void Statistics::Refresh()
