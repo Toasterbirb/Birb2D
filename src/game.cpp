@@ -101,14 +101,10 @@ namespace Birb
 
 
 				statistics.Refresh();
-//#endif /* BIRB2D_DEBUG */
 			}
 
 			post_render();
 #endif /* __WINDOWS__ */
-
-			/* End of timestep */
-			timeStep.End();
 
 #ifndef __WINDOWS__
 			/* Join the fixed update thread */
@@ -117,13 +113,16 @@ namespace Birb
 			/* Join the post render thread */
 			post_render_future.wait();
 #endif
+
+			/* End of timestep */
+			timeStep.End();
+
 		}
 
 		/* Free memory allocations and stuff. Up to the user to decide */
 
 		statistics->Free();
 		delete statistics;
-//#endif
 		cleanup();
 
 		/* Quit SDL things */
