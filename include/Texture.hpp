@@ -38,6 +38,7 @@ namespace Birb
 
 	private:
 		void UpdateDimensions();
+		Vector2Int GetTextureDimensions(SDL_Texture* texture);
 		Vector2Int texture_dimensions;
 		SDL_Texture* sdlTex;
 		bool textureLoaded;

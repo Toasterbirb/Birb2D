@@ -21,7 +21,7 @@ namespace Birb
 	Texture::Texture(SDL_Texture* sdlTexture)
 	:sdlTex(sdlTexture)
 	{
-		texture_dimensions = utils::GetTextureDimensions(sdlTexture);
+		texture_dimensions = GetTextureDimensions(sdlTexture);
 		textureLoaded = true; /* Assuming the sdlTexture is valid */
 	}
 
@@ -76,8 +76,19 @@ namespace Birb
 	void Texture::UpdateDimensions()
 	{
 		if (textureLoaded)
-			texture_dimensions = utils::GetTextureDimensions(sdlTex);
+			texture_dimensions = GetTextureDimensions(sdlTex);
 		else
 			texture_dimensions = Vector2Int(0, 0);
+	}
+
+	Vector2Int Texture::GetTextureDimensions(SDL_Texture* texture)
+	{
+		Vector2Int result;
+		if (SDL_QueryTexture(texture, NULL, NULL, &result.x, &result.y) < 0)
+		{
+			Debug::Log("Couldn't query for texture dimensions: " + std::string(SDL_GetError()), Debug::Type::warning);
+			return Vector2Int(0, 0);
+		}
+		return result;
 	}
 }

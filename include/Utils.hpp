@@ -28,7 +28,6 @@ namespace Birb
 			return t;
 		}
 
-		Vector2Int GetTextureDimensions(SDL_Texture* texture);
 		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2Int& pixelPosition, const int& textureWidth);
 
 		std::vector<Vector2Int> SortPath(const Vector2Int& startPoint, const std::vector<Vector2Int>& points);

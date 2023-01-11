@@ -7,17 +7,6 @@ namespace Birb
 {
 	namespace utils
 	{
-		Vector2Int GetTextureDimensions(SDL_Texture* texture)
-		{
-			Vector2Int result;
-			if (SDL_QueryTexture(texture, NULL, NULL, &result.x, &result.y) < 0)
-			{
-				Debug::Log("Couldn't query for texture dimensions: " + std::string(SDL_GetError()), Debug::Type::warning);
-				return Vector2Int(0, 0);
-			}
-			return result;
-		}
-
 		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2Int& pixelPosition, const int& textureWidth)
 		{
 			// Some weird BGRA format
