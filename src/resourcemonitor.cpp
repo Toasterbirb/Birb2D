@@ -13,7 +13,7 @@ namespace Birb
 		ResourceMonitor::ResourceMonitor(TimeStep* timestep)
 		{
 			/* Load the debug font */
-			debug_text_font = new Font("birb2d_res/fonts/manaspace/manaspc.ttf", 14);
+			debug_text_font = new Font("birb2d_res/fonts/freefont/FreeMonoBold.ttf", 14);
 
 			/* Create the text entity */
 			EntityComponent::Text text_component("NULL", debug_text_font, &Colors::Nord::Frost::nord9, &Colors::Nord::PolarNight::nord0);
@@ -26,14 +26,38 @@ namespace Birb
 #endif
 
 			ResourceMonitor::timestep = timestep;
+
+			/* Reset the fps values */
+			for (int i = 0; i < framerate_avg_accuracy; ++i)
+				rolling_framerate_list[i] = 0;
+
+			current_framerate_index = 0;
 		}
 
 		void ResourceMonitor::Refresh()
 		{
 			/* Get all of the required data */
 			float fps = 1.0f / timestep->deltaTime;
+			rolling_framerate_list[current_framerate_index++] = fps;
+			if (current_framerate_index > framerate_avg_accuracy - 1)
+				current_framerate_index = 0;
 
-			debug_text = "FPS: " + utils::CleanDecimals(Math::Round(fps, 1));
+			float lowest_framerate = rolling_framerate_list[0];
+			float fps_total = 0;
+			for (int i = 0; i < framerate_avg_accuracy; ++i)
+			{
+				fps_total += rolling_framerate_list[i];
+
+				if (lowest_framerate > rolling_framerate_list[i])
+					lowest_framerate = rolling_framerate_list[i];
+			}
+
+			float fps_average = fps_total / framerate_avg_accuracy;
+
+			debug_text = "FPS: " + 				utils::CleanDecimals(Math::Round(fps, 1));
+			debug_text += "\nFPS avg.: " + 		utils::CleanDecimals(Math::Round(fps_average, 1));
+			debug_text += "\nFPS 1% low: " + 	utils::CleanDecimals(Math::Round(lowest_framerate, 1));
+
 
 #ifndef __WINDOWS__
 			getrusage(PID, &memory_usage);

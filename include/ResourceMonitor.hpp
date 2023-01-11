@@ -2,6 +2,7 @@
 
 #include "Entity.hpp"
 #include "Font.hpp"
+#include "Input.hpp"
 #include "SceneObject.hpp"
 
 /* Linux only things */
@@ -38,6 +39,10 @@ namespace Birb
 			Entity 			debug_text_entity;
 			TimeStep* 		timestep;
 			std::string 	debug_text;
+
+			static constexpr int 	framerate_avg_accuracy = 100;
+			float 					rolling_framerate_list[framerate_avg_accuracy];
+			int 					current_framerate_index;
 
 #ifndef __WINDOWS__
 			int PID;
