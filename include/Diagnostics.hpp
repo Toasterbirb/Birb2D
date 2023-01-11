@@ -15,8 +15,13 @@ namespace Birb
 		/// quite a bit, so be careful
         struct Debugging
         {
-            static inline bool Buttons = false;
-			static inline bool InitMessages = false;
+            static inline bool Buttons 			= false;
+			static inline bool InitMessages		= false;
+
+			struct Overlays
+			{
+				static inline bool Statistics 	= false;
+			};
         };
 
 	}

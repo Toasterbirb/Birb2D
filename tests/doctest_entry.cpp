@@ -5,6 +5,7 @@
 #include "doctest.h"
 #include <iostream>
 #include <string.h>
+#include "Diagnostics.hpp"
 #include "AssetManager.hpp"
 
 int main(int argc, char** argv)
@@ -45,6 +46,9 @@ int main(int argc, char** argv)
 	/* Load assets if they are in the binary */
 	Birb::AssetManager::InitializeBundledAssets();
 #endif
+
+	/* Enable some debugging things */
+	Birb::Diagnostics::Debugging::Overlays::Statistics = true;
 
 	int result = context.run();
 

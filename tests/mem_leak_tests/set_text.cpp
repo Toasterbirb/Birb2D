@@ -47,6 +47,9 @@ void start(Game& game)
 
 	EntityComponent::Text component("0", font, &Colors::Nord::Frost::nord9);
 	text_2 = Entity("Text", Vector2Int(128, 256), component);
+
+	/* Enable the resource monitor to check if there's a memory leak */
+	Diagnostics::Debugging::Overlays::Statistics = true;
 }
 
 /* input() is called at the beginning of the frame

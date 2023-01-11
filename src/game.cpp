@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "Values.hpp"
+#include "Diagnostics.hpp"
 
 namespace Birb
 {
@@ -76,13 +77,13 @@ namespace Birb
 			{
 				fixed_update_future = std::async(std::launch::async, fixed_update);
 
-
-				statistics->Refresh();
+				if (Diagnostics::Debugging::Overlays::Statistics)
+					statistics->Refresh();
 			}
 
 			/* Render the statistics overlay if debugging is enabled */
-
-			statistics->Render();
+			if (Diagnostics::Debugging::Overlays::Statistics)
+				statistics->Render();
 
 			/* Start the post render thread */
 			post_render_future = std::async(std::launch::async, post_render);
@@ -98,7 +99,8 @@ namespace Birb
 				fixed_update();
 
 
-				statistics.Refresh();
+				if (Diagnostics::Debugging::Overlays::Statistics)
+					statistics.Refresh();
 			}
 
 			post_render();
