@@ -42,7 +42,6 @@ namespace Birb
 
 		/* Initialize statistics */
 		statistics = new Diagnostics::Statistics(&timeStep);
-//#endif
 
 		/* Call the start function before starting the game loop */
 		start(*this);
@@ -77,14 +76,13 @@ namespace Birb
 			{
 				fixed_update_future = std::async(std::launch::async, fixed_update);
 
+
 				statistics->Refresh();
-//#endif
 			}
 
 			/* Render the statistics overlay if debugging is enabled */
 
 			statistics->Render();
-//#endif
 
 			/* Start the post render thread */
 			post_render_future = std::async(std::launch::async, post_render);

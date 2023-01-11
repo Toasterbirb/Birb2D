@@ -7,37 +7,33 @@ namespace Birb
 	{
 		void Click::PlaceHolderMouseDownEvent()
 		{
+			if (Diagnostics::Debugging::Buttons)
+				Debug::Log("Placeholder onMouseDown event");
 
-//			if (Diagnostics::Debugging::Buttons)
-//				Debug::Log("Placeholder onMouseDown event");
-//#endif
 			return;
 		}
 
 		void Click::PlaceHolderClickEvent()
 		{
+            if (Diagnostics::Debugging::Buttons)
+                Debug::Log("Placeholder onClick event");
 
-//            if (Diagnostics::Debugging::Buttons)
-//                Debug::Log("Placeholder onClick event");
-//#endif
 			return;
 		}
 
         void Click::PlaceHolderHoverEvent()
         {
+            if (Diagnostics::Debugging::Buttons)
+                Debug::Log("Placeholder onHover event");
 
-//            if (Diagnostics::Debugging::Buttons)
-//                Debug::Log("Placeholder onHover event");
-//#endif
 			return;
         }
 
         void Click::PlaceHolderDragEvent()
         {
+            if (Diagnostics::Debugging::Buttons)
+                Debug::Log("Placeholder onDrag event");
 
-//            if (Diagnostics::Debugging::Buttons)
-//                Debug::Log("Placeholder onDrag event");
-//#endif
 			return;
         }
 
