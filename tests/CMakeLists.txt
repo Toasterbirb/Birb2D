@@ -43,6 +43,7 @@ add_executable(test
 	general_tests/timer_test.cpp
 	general_tests/utils_test.cpp
 	general_tests/values_test.cpp
+	general_tests/var_test.cpp
 	general_tests/vector_test.cpp
 )
 
