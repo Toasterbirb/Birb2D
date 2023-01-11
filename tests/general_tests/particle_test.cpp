@@ -24,6 +24,10 @@ namespace BirbTest
 	Particles::ParticleSource* ps;
 	Scene main_scene;
 
+	float effect_duration = 2.0f;
+	int effect_counter = 0;
+	static constexpr int effect_count = 3;
+
 	TEST_CASE("Rendering: Simple particle effect")
 	{
 		Game::WindowOpts win_opts;
@@ -42,8 +46,9 @@ namespace BirbTest
 		ps = new Particles::ParticleSource(game.time_step());
 		main_scene.AddObject(ps);
 
-		ps->pos.x = game.window->dimensions.x / 2.0f;
-		ps->pos.y = game.window->dimensions.y / 2.0f;
+		ps->spawn_area.x = game.window->dimensions.x / 2.0f;
+		ps->spawn_area.y = game.window->dimensions.y / 2.0f;
+		ps->spawn_area.color = Colors::Nord::PolarNight::nord0;
 
 		ps->reference_particle.color = Colors::White;
 		ps->reference_particle.life = 1.3f;
@@ -59,18 +64,53 @@ namespace BirbTest
 
 	void particles_update(Game& game)
 	{
-		if (timer.ElapsedSeconds() < 1.0f)
+		if (timer.ElapsedSeconds() < effect_duration)
 			ps->Emit(true);
-		else if (timer.ElapsedSeconds() > 2.0f)
-			game.application_running = false;
+		else if (timer.ElapsedSeconds() > effect_duration + 0.5f)
+		{
+			effect_counter++;
+			timer.Start();
+
+			/* Clear the particles */
+			ps->ClearParticles();
+
+			switch (effect_counter)
+			{
+				case (1):
+				{
+					ps->spawn_area.x -= 20;
+					ps->spawn_area.y -= 20;
+					ps->spawn_area.w += 40;
+					ps->spawn_area.h += 40;
+					break;
+				}
+
+				case (2):
+				{
+					ps->spawn_area.x += 20;
+					ps->spawn_area.y += 20;
+					ps->spawn_area.w -= 40;
+					ps->spawn_area.h -= 40;
+
+					ps->reference_particle.particle_speed = 500;
+					ps->reference_particle.gravity = 5.0f;
+					ps->reference_particle.life = 4.0f;
+					effect_duration = 5.0f;
+				}
+			}
+		}
 		else
 			ps->Emit(false);
+
+		if (effect_counter > effect_count - 1)
+			game.application_running = false;
 
 		std::cout << "\rParticle count: " << ps->ParticleCount() << "\t";
 	}
 
 	void particles_render(Game& game)
 	{
+		Render::DrawRect(ps->spawn_area);
 		main_scene.Render();
 	}
 

@@ -29,6 +29,9 @@ namespace Birb
 			/// The speed and direction of the particle
 			Vector2 direction;
 
+			/// Particle weight
+			float gravity = 0;
+
 			/// If the particle is dead, it won't be rendered.
 			bool alive = true;
 		};

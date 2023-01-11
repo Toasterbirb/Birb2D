@@ -41,11 +41,14 @@ namespace Birb
 
 			int ParticleCount() const;
 
-			/// Absolute position where all of the particles will be spawned from
-			Vector2 pos;
+			/// 2D area where all of the particles will be spawned from
+			Rect spawn_area;
 
 			/// Pops off dead particles at the end of the particle list
 			void RemoveDeadParticles();
+
+			/// Gets rid of all particles
+			void ClearParticles();
 
 		private:
 			TimeStep* timestep;

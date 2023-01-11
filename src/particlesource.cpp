@@ -1,6 +1,8 @@
 #include "Circle.hpp"
 #include "ParticleSource.hpp"
+#include "Random.hpp"
 #include "Render.hpp"
+#include "Values.hpp"
 #include "Vector/Vector2.hpp"
 
 /* Randomness source */
@@ -35,6 +37,10 @@ namespace Birb
 
 				/* Move the particle according to its direction */
 				particles[i].pos += particles[i].direction * timestep->deltaTime;
+
+				/* Handle gravity */
+				particles[i].direction.y += particles[i].gravity;
+
 			}
 
 
@@ -48,7 +54,10 @@ namespace Birb
 					dead_particle_index = particles.size() - 1;
 				}
 
-				particles[dead_particle_index].pos = pos;
+				/* Pick a random position in the spawn area */
+				particles[dead_particle_index].pos.x = Global::random.RandomFloat(spawn_area.x, spawn_area.x + spawn_area.w);
+				particles[dead_particle_index].pos.y = Global::random.RandomFloat(spawn_area.y, spawn_area.y + spawn_area.h);
+
 
 				Vector2 next_dir = pattern->NextDirection();
 				particles[dead_particle_index].direction.x = next_dir.x * particles[dead_particle_index].particle_speed;
@@ -86,6 +95,11 @@ namespace Birb
 			}
 		}
 
+		void ParticleSource::ClearParticles()
+		{
+			particles.clear();
+		}
+
 		void ParticleSource::RenderFunc()
 		{
 			switch (type)
@@ -108,7 +122,8 @@ namespace Birb
 
 		void ParticleSource::SetPos(const Vector2& delta)
 		{
-			pos += delta;
+			spawn_area.x += delta.x;
+			spawn_area.y += delta.y;
 		}
 	}
 }
