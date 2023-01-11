@@ -8,8 +8,9 @@ namespace Birb
 {
 	Texture::Texture()
 	{
-		textureLoaded = false;
-		texture_dimensions = Vector2Int(0, 0);
+		textureLoaded 		= false;
+		texture_dimensions 	= Vector2Int(0, 0);
+		sdlTex 				= nullptr;
 	}
 
 	Texture::Texture(const std::string& filePath)

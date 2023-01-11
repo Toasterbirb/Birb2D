@@ -149,12 +149,6 @@ namespace Birb
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct with TextComponent", PROFILER_COLOR);
 
-		/* Reset the sprite pointer. There something causing entities to
-		 * share the same texture pointer which causes annoying scope issues.
-		 * This might not be the correct way to go about this, but it works well
-		 * enough for now*/
-		sprite = nullptr;
-
 		/* Load the text sprite */
 		SetBaseEntityValues();
 		textComponent = p_textComponent;
