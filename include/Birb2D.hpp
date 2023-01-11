@@ -34,5 +34,6 @@
 #include "UI.hpp"
 #include "Utils.hpp"
 #include "Values.hpp"
+#include "Var.hpp"
 #include "Vector.hpp"
 #include "microprofile.h"
