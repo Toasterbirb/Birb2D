@@ -25,6 +25,11 @@ namespace Birb
 		textureLoaded = true; /* Assuming the sdlTexture is valid */
 	}
 
+	Texture::~Texture()
+	{
+		Destroy();
+	}
+
 	bool Texture::LoadTexture(const std::string& filePath)
 	{
 		this->sdlTex = NULL;

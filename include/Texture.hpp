@@ -18,7 +18,7 @@ namespace Birb
 		Texture();
 		Texture(const std::string& filePath);
 		Texture(SDL_Texture* sdlTexture); ///< Initialize with a SDL_Texture
-		//~Texture();
+		~Texture();
 
 		bool LoadTexture(const std::string& filePath);
 		bool isLoaded() const;

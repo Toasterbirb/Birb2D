@@ -49,7 +49,7 @@ void start(Game& game)
 	text_2 = Entity("Text", Vector2Int(128, 256), component);
 
 	/* Enable the resource monitor to check if there's a memory leak */
-	Diagnostics::Debugging::Overlays::Statistics = true;
+	Diagnostics::Debugging::Overlays::ResourceMonitor = true;
 }
 
 /* input() is called at the beginning of the frame

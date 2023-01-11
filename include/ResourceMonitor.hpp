@@ -22,11 +22,11 @@ namespace Birb
 		/// Draw a text overlay that shows some
 		/// runtime performance statistics. Due to the nature of
 		/// some statistics, some features are only available on Linux
-		class Statistics
+		class ResourceMonitor
 		{
 		public:
-			Statistics();
-			Statistics(TimeStep* timestep);
+			ResourceMonitor();
+			ResourceMonitor(TimeStep* timestep);
 
 			/// Update all of the values
 			void Refresh();

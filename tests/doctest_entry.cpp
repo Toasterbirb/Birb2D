@@ -48,7 +48,7 @@ int main(int argc, char** argv)
 #endif
 
 	/* Enable some debugging things */
-	Birb::Diagnostics::Debugging::Overlays::Statistics = true;
+	Birb::Diagnostics::Debugging::Overlays::ResourceMonitor = true;
 
 	int result = context.run();
 

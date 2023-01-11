@@ -1,6 +1,6 @@
+#include "Diagnostics.hpp"
 #include "Game.hpp"
 #include "Values.hpp"
-#include "Diagnostics.hpp"
 
 namespace Birb
 {
@@ -42,7 +42,7 @@ namespace Birb
 
 
 		/* Initialize statistics */
-		statistics = new Diagnostics::Statistics(&timeStep);
+		statistics = Diagnostics::ResourceMonitor(&timeStep);
 
 		/* Call the start function before starting the game loop */
 		start(*this);
@@ -77,13 +77,13 @@ namespace Birb
 			{
 				fixed_update_future = std::async(std::launch::async, fixed_update);
 
-				if (Diagnostics::Debugging::Overlays::Statistics)
-					statistics->Refresh();
+				if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+					statistics.Refresh();
 			}
 
 			/* Render the statistics overlay if debugging is enabled */
-			if (Diagnostics::Debugging::Overlays::Statistics)
-				statistics->Render();
+			if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+				statistics.Render();
 
 			/* Start the post render thread */
 			post_render_future = std::async(std::launch::async, post_render);
@@ -121,8 +121,7 @@ namespace Birb
 
 		/* Free memory allocations and stuff. Up to the user to decide */
 
-		statistics->Free();
-		delete statistics;
+		statistics.Free();
 		cleanup();
 
 		/* Quit SDL things */

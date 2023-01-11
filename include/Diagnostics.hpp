@@ -20,7 +20,7 @@ namespace Birb
 
 			struct Overlays
 			{
-				static inline bool Statistics 	= false;
+				static inline bool ResourceMonitor 	= false;
 			};
         };
 

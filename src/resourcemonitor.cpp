@@ -1,6 +1,6 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #include "Render.hpp"
-#include "Statistics.hpp"
+#include "ResourceMonitor.hpp"
 #include "Timestep.hpp"
 
 
@@ -8,9 +8,9 @@ namespace Birb
 {
 	namespace Diagnostics
 	{
-		Statistics::Statistics() {}
+		ResourceMonitor::ResourceMonitor() {}
 
-		Statistics::Statistics(TimeStep* timestep)
+		ResourceMonitor::ResourceMonitor(TimeStep* timestep)
 		{
 			/* Load the debug font */
 			debug_text_font = new Font("birb2d_res/fonts/manaspace/manaspc.ttf", 14);
@@ -25,10 +25,10 @@ namespace Birb
 			PID = RUSAGE_SELF;
 #endif
 
-			Statistics::timestep = timestep;
+			ResourceMonitor::timestep = timestep;
 		}
 
-		void Statistics::Refresh()
+		void ResourceMonitor::Refresh()
 		{
 			/* Get all of the required data */
 			float fps = 1.0f / timestep->deltaTime;
@@ -43,13 +43,13 @@ namespace Birb
 #endif
 		}
 
-		void Statistics::Render()
+		void ResourceMonitor::Render()
 		{
 			debug_text_entity.SetText(debug_text);
 			Render::DrawEntity(debug_text_entity);
 		}
 
-		void Statistics::Free()
+		void ResourceMonitor::Free()
 		{
 			delete debug_text_font;
 		}

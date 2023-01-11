@@ -174,11 +174,11 @@ set(CORE_SRC
 	src/rect.cpp
 	src/render.cpp
 	src/renderwindow.cpp
+	src/resourcemonitor.cpp
 	src/resources.cpp
 	src/scene.cpp
 	src/sceneobject.cpp
 	src/splash.cpp
-	src/statistics.cpp
 	src/stopwatch.cpp
 	src/texture.cpp
 	src/timer.cpp

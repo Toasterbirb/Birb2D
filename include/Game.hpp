@@ -7,10 +7,7 @@
 #include <future>
 #endif
 
-
-#include "Statistics.hpp"
-//#endif
-
+#include "ResourceMonitor.hpp"
 #include "Timestep.hpp"
 #include "Vector/Vector2Int.hpp"
 
@@ -97,7 +94,7 @@ namespace Birb
 		WindowOpts window_options;
 
 
-		Diagnostics::Statistics* statistics;
+		Diagnostics::ResourceMonitor statistics;
 //#endif
 
 #ifndef __WINDOWS__
