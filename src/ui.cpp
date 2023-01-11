@@ -60,7 +60,7 @@ namespace Birb
                 active_buttons[i]->clickComponent.onDrag();
                 continue; /* It is impossible to click and drag at the same time */
             }
-			else if (window.event.type == SDL_MOUSEBUTTONDOWN)
+			else if (window.event.type == SDL_MOUSEBUTTONDOWN && window.event.button.button == SDL_BUTTON_LEFT)
 			{
 				active_buttons[i]->clickComponent.onMouseDown();
 				active_buttons[i]->clickComponent.isPressed = true;
@@ -68,7 +68,7 @@ namespace Birb
 			}
 
             /* Check if the mousebutton is released */
-            if (window.event.type == SDL_MOUSEBUTTONUP)
+            if (window.event.type == SDL_MOUSEBUTTONUP && window.event.button.button == SDL_BUTTON_LEFT)
 			{
                 active_buttons[i]->clickComponent.onClick();
 				active_buttons[i]->clickComponent.isPressed = false;
