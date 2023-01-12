@@ -27,7 +27,7 @@ namespace Birb
 		float VectorDistance(const Vector3Int& a, const Vector3Int& b); ///< Calculate the distance between two 3D integer vectors
 
 		template<typename T>
-		T Clamp(const T& value, const T& min, const T& max)
+		constexpr T Clamp(const T& value, const T& min, const T& max)
 		{
 			if (value < min)
 				return min;
@@ -75,14 +75,29 @@ namespace Birb
 		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points, const std::vector<Vector2Int>& ignoredPoints);
 
 
-		double Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
+		//double Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
 
-		bool IsDigit(const float& value); 	///< Check if the float has any decimal points
-		bool IsDigit(const double& value); 	///< Check if the double has any decimal points
+		template<typename T>
+		constexpr double Round(const T& value, const int& decimal_points)
+		{
+			/* How this thing works:
+			 * 1. Multiply the value with 10 ^ decimal points. This will leave the needed values before the decimal point
+			 * 2. Round to integer
+			 * 3. Divide the value with 10 ^ decimal points to get the desired rounded decimal value
+			 * */
+			return std::round(value * std::pow(10, decimal_points)) / std::pow(10, decimal_points);
+		}
+
+		/// Check if the given value has any decimal points
+		template<typename T>
+		constexpr bool IsDigit(const T& value)
+		{
+			return (static_cast<int>(value) == value);
+		}
 
 		/// Find the highest value in an array
 		template<typename T>
-		T FindHighestValue(T* values, const int& valueCount)
+		constexpr T FindHighestValue(T* values, const int& valueCount)
 		{
 			T result = values[0];
 			for (int i = 1; i < valueCount; i++)
@@ -95,7 +110,7 @@ namespace Birb
 
 		/// Find the highest value in a vector
 		template<typename T>
-		T FindHighestValue(const std::vector<T>& values)
+		constexpr T FindHighestValue(const std::vector<T>& values)
 		{
 			T result = values[0];
 			for (size_t i = 1; i < values.size(); i++)
@@ -121,7 +136,7 @@ namespace Birb
 
 		/// Find the lowest value in a list
 		template<typename T>
-		T FindLowestValue(const std::vector<T>& values)
+		constexpr T FindLowestValue(const std::vector<T>& values)
 		{
 			T result = values[0];
 			for (size_t i = 1; i < values.size(); i++)
@@ -132,7 +147,6 @@ namespace Birb
 			return result;
 		}
 
-
 		template<typename T>
 		double Average(T* values, const int& valueCount)
 		{
@@ -140,6 +154,15 @@ namespace Birb
 			for (int i = 0; i < valueCount; i++)
 				total += values[i];
 			return total / valueCount;
+		}
+
+		template<typename T>
+		constexpr double Average(std::vector<T> values)
+		{
+			double total = 0;
+			for (size_t i = 0; i < values.size(); i++)
+				total += values[i];
+			return total / values.size();
 		}
 
 		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum);

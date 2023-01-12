@@ -224,26 +224,6 @@ namespace Birb
 			return currentClosestPoint;
 		}
 
-		double Round(const double& value, const int& decimal_points)
-		{
-			/* How this thing works:
-			 * 1. Multiply the value with 10 ^ decimal points. This will leave the needed values before the decimal point
-			 * 2. Round to integer
-			 * 3. Divide the value with 10 ^ decimal points to get the desired rounded decimal value
-			 * */
-			return std::round(value * std::pow(10, decimal_points)) / std::pow(10, decimal_points);
-		}
-
-		bool IsDigit(const float& value)
-		{
-			return (static_cast<int>(value) == value);
-		}
-
-		bool IsDigit(const double& value)
-		{
-			return (static_cast<int>(value) == value);
-		}
-
 		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum)
 		{
 			return ((value - min) / (max - min)) * normalized_maximum;

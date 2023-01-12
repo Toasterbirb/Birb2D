@@ -398,6 +398,13 @@ namespace BirbTest
 		};
 
 		CHECK(Math::Round(Math::Average(values, 5), 2) == 6.14);
+
+		std::vector<double> values_vector =
+		{
+			4, 5, 1.6, 16.5, 3.6
+		};
+
+		CHECK(Math::Round(Math::Average(values_vector), 2) == 6.14);
 	}
 
 	TEST_CASE("Calculate average from float array")
@@ -408,6 +415,13 @@ namespace BirbTest
 		};
 
 		CHECK(Math::Round(Math::Average(values, 5), 2) == 6.14);
+
+		std::vector<float> values_vector =
+		{
+			4, 5, 1.6f, 16.5f, 3.6f
+		};
+
+		CHECK(Math::Round(Math::Average(values_vector), 2) == 6.14);
 	}
 
 	TEST_CASE("Calculate average from int array")
@@ -418,6 +432,13 @@ namespace BirbTest
 		};
 
 		CHECK(Math::Round(Math::Average(values, 5), 2) == 5.8);
+
+		std::vector<int> values_vector =
+		{
+			4, 5, 1, 16, 3
+		};
+
+		CHECK(Math::Round(Math::Average(values_vector), 2) == 5.8);
 	}
 
 	TEST_CASE("Normalize a value to set range")
