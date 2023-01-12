@@ -139,14 +139,14 @@ namespace BirbTest
 		{
 			Color colorC = colorA * colorB;
 			CHECK(colorC.r == 100);
-			CHECK(colorC.g == 1024);
-			CHECK(colorC.b == 1764);
+			CHECK(colorC.g == 255);
+			CHECK(colorC.b == 255);
 			CHECK(colorC.a == 144);
 		}
 
 		SUBCASE("Divide two colors")
 		{
-			Color colorC = colorA * colorB;
+			Color colorC = colorA / colorB;
 			CHECK(colorC.r == 1);
 			CHECK(colorC.g == 1);
 			CHECK(colorC.b == 1);

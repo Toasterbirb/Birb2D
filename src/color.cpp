@@ -14,14 +14,20 @@ namespace Birb
 	}
 
 	Color::Color(const int& r, const int& g, const int& b)
-	:r(r), g(g), b(b)
 	{
+		this->r = Math::Clamp(r, 0, 255);
+		this->g = Math::Clamp(g, 0, 255);
+		this->b = Math::Clamp(b, 0, 255);
 		a = 255;
 	}
 
 	Color::Color(const int& r, const int& g, const int& b, const int& a)
-	:r(r), g(g), b(b), a(a)
-	{}
+	{
+		this->r = Math::Clamp(r, 0, 255);
+		this->g = Math::Clamp(g, 0, 255);
+		this->b = Math::Clamp(b, 0, 255);
+		this->a = Math::Clamp(a, 0, 255);
+	}
 
 
 	Color::Color(const float& r, const float& g, const float& b)
