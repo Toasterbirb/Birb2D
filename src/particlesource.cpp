@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Circle.hpp"
 #include "ParticleSource.hpp"
 #include "Random.hpp"
@@ -14,13 +15,15 @@ namespace Birb
 		ParticleSource::ParticleSource(TimeStep* timestep)
 		:timestep(timestep)
 		{
-			type = ParticleType::Circle;
+			type 			= ParticleType::Circle;
+			particle_count 	= 1;
 		}
 
 		void ParticleSource::Emit(bool spawn_new_particles)
 		{
 			/* Find the first dead particle that we can re-use later on */
-			int dead_particle_index = -1;
+			//int dead_particle_index = -1;
+			dead_particles.clear();
 
 			for (size_t i = 0; i < particles.size(); ++i)
 			{
@@ -31,7 +34,8 @@ namespace Birb
 				if (particles[i].life < 0)
 				{
 					particles[i].alive = false;
-					dead_particle_index = i;
+					dead_particles.push_back(i);
+					//dead_particle_index = i;
 					continue;
 				}
 
@@ -46,24 +50,42 @@ namespace Birb
 
 			/* Spawn new particles or re-use old ones */
 			time_until_next_particle += timestep->deltaTime;
+
+			int dead_particle_index 	= 0;
+			int dead_particle_counter 	= 0;
+
+			if (dead_particles.size() == 0)
+				dead_particle_index = -1;
+			else
+				dead_particle_index = dead_particles[0];
+
 			if (time_until_next_particle > speed && spawn_new_particles)
 			{
-				if (dead_particle_index == -1)
+				time_until_next_particle = 0;
+				for (int i = 0; i < particle_count; ++i)
 				{
-					particles.push_back(reference_particle);
-					dead_particle_index = particles.size() - 1;
+					if (dead_particle_index == -1 || dead_particle_counter > static_cast<int>(dead_particles.size() - 1))
+					{
+						particles.push_back(reference_particle);
+						dead_particle_index = particles.size() - 1;
+					}
+					else
+					{
+						dead_particle_index = dead_particles[dead_particle_counter];
+						dead_particle_counter++;
+					}
+
+					/* Pick a random position in the spawn area */
+					particles[dead_particle_index].pos.x = Global::random.RandomFloat(spawn_area.x, spawn_area.x + spawn_area.w);
+					particles[dead_particle_index].pos.y = Global::random.RandomFloat(spawn_area.y, spawn_area.y + spawn_area.h);
+
+
+					Vector2 next_dir = pattern->NextDirection();
+					particles[dead_particle_index].direction.x = next_dir.x * particles[dead_particle_index].particle_speed;
+					particles[dead_particle_index].direction.y = next_dir.y * particles[dead_particle_index].particle_speed;
+					particles[dead_particle_index].alive = true;
+					particles[dead_particle_index].life = reference_particle.life;
 				}
-
-				/* Pick a random position in the spawn area */
-				particles[dead_particle_index].pos.x = Global::random.RandomFloat(spawn_area.x, spawn_area.x + spawn_area.w);
-				particles[dead_particle_index].pos.y = Global::random.RandomFloat(spawn_area.y, spawn_area.y + spawn_area.h);
-
-
-				Vector2 next_dir = pattern->NextDirection();
-				particles[dead_particle_index].direction.x = next_dir.x * particles[dead_particle_index].particle_speed;
-				particles[dead_particle_index].direction.y = next_dir.y * particles[dead_particle_index].particle_speed;
-				particles[dead_particle_index].alive = true;
-				particles[dead_particle_index].life = reference_particle.life;
 			}
 		}
 

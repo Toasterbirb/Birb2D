@@ -15,6 +15,7 @@ namespace BirbTest
 	void particles_start(Game& game);
 	void particles_input(Game& game);
 	void particles_update(Game& game);
+	void particles_fixed_update();
 	void particles_render(Game& game);
 	void particles_post_render();
 	void particles_cleanup();
@@ -26,7 +27,7 @@ namespace BirbTest
 
 	float effect_duration = 2.0f;
 	int effect_counter = 0;
-	static constexpr int effect_count = 3;
+	static constexpr int effect_count = 4;
 
 	TEST_CASE("Rendering: Simple particle effect")
 	{
@@ -35,6 +36,7 @@ namespace BirbTest
 		win_opts.title = "Birb2D particle system test";
 		Game game(win_opts, particles_start, particles_input, particles_update, particles_render);
 		game.post_render = particles_post_render;
+		game.fixed_update = particles_fixed_update;
 		game.cleanup = particles_cleanup;
 
 		game.Start();
@@ -53,7 +55,7 @@ namespace BirbTest
 		ps->reference_particle.color = Colors::White;
 		ps->reference_particle.life = 1.3f;
 		ps->reference_particle.particle_speed = 200.0f;
-		ps->speed = 0.5;
+		ps->speed = 0.01;
 		ps->pattern = &particle_pattern;
 	}
 
@@ -92,10 +94,18 @@ namespace BirbTest
 					ps->spawn_area.w -= 40;
 					ps->spawn_area.h -= 40;
 
-					ps->reference_particle.particle_speed = 500;
+					ps->reference_particle.particle_speed = 300;
 					ps->reference_particle.gravity = 5.0f;
 					ps->reference_particle.life = 4.0f;
-					effect_duration = 5.0f;
+					break;
+				}
+
+				case (3):
+				{
+					ps->particle_count = 400;
+					ps->speed = 0.5f;
+					ps->reference_particle.gravity = 1.0f;
+					break;
 				}
 			}
 		}
@@ -108,6 +118,11 @@ namespace BirbTest
 		std::cout << "\rParticle count: " << ps->ParticleCount() << "\t";
 	}
 
+	void particles_fixed_update()
+	{
+		ps->RemoveDeadParticles();
+	}
+
 	void particles_render(Game& game)
 	{
 		Render::DrawRect(ps->spawn_area);
@@ -116,7 +131,7 @@ namespace BirbTest
 
 	void particles_post_render()
 	{
-		ps->RemoveDeadParticles();
+
 	}
 
 	void particles_cleanup()

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #ifndef DISTCC
 #include "STD.hpp"
 #endif
@@ -44,6 +45,9 @@ namespace Birb
 			/// 2D area where all of the particles will be spawned from
 			Rect spawn_area;
 
+			/// How many particles to spawn at once
+			int particle_count;
+
 			/// Pops off dead particles at the end of the particle list
 			void RemoveDeadParticles();
 
@@ -53,6 +57,7 @@ namespace Birb
 		private:
 			TimeStep* timestep;
 			std::vector<Particle> particles;
+			std::vector<int> dead_particles;
 
 			float time_until_next_particle = 0.0f;
 
