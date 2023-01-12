@@ -116,6 +116,42 @@ namespace BirbTest
 			colorA = colorB;
 			CHECK(colorA == colorB);
 		}
+
+		SUBCASE("Add two colors together")
+		{
+			Color colorC = colorA + colorB;
+			CHECK(colorC.r == 20);
+			CHECK(colorC.g == 64);
+			CHECK(colorC.b == 84);
+			CHECK(colorC.a == 24);
+		}
+
+		SUBCASE("Subtract two colors")
+		{
+			Color colorC = colorA - colorB;
+			CHECK(colorC.r == 0);
+			CHECK(colorC.g == 0);
+			CHECK(colorC.b == 0);
+			CHECK(colorC.a == 0);
+		}
+
+		SUBCASE("Multiply two colors")
+		{
+			Color colorC = colorA * colorB;
+			CHECK(colorC.r == 100);
+			CHECK(colorC.g == 1024);
+			CHECK(colorC.b == 1764);
+			CHECK(colorC.a == 144);
+		}
+
+		SUBCASE("Divide two colors")
+		{
+			Color colorC = colorA * colorB;
+			CHECK(colorC.r == 1);
+			CHECK(colorC.g == 1);
+			CHECK(colorC.b == 1);
+			CHECK(colorC.a == 1);
+		}
 	}
 
 	TEST_CASE("Color intensity modification (lighten/darken)")

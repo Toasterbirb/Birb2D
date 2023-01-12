@@ -36,6 +36,26 @@ namespace Birb
 					&& a == other.a);
 		}
 
+		Color operator+(const Color& other) const
+		{
+			return Color(this->r + other.r, this->g + other.g, this->b + other.b, this->a + other.a);
+		}
+
+		Color operator-(const Color& other) const
+		{
+			return Color(this->r - other.r, this->g - other.g, this->b - other.b, this->a - other.a);
+		}
+
+		Color operator*(const Color& other) const
+		{
+			return Color(this->r * other.r, this->g * other.g, this->b * other.b, this->a * other.a);
+		}
+
+		Color operator/(const Color& other) const
+		{
+			return Color(this->r / other.r, this->g / other.g, this->b / other.b, this->a / other.a);
+		}
+
 	};
 
 	namespace Colors
