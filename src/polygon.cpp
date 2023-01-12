@@ -1,7 +1,7 @@
 #include "Polygon.hpp"
 #include "Renderwindow.hpp"
 
-#define PI 3.1415926535897932
+constexpr double PI = 3.1415926535897932;
 
 namespace Birb
 {
