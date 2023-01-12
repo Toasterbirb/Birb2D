@@ -31,34 +31,9 @@ namespace Birb
 		}
 
 
-		int Lerp(const int& a, const int& b, const float& t)
-		{
-			return std::round(a + (b - a) * Clamp(t, 0.0f, 1.0f));
-		}
-
-		float Lerp(const float& a, const float& b, const float& t)
-		{
-			return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
-		}
-
-		double Lerp(const double& a, const double& b, const float& t)
-		{
-			return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
-		}
-
-		Vector2 Lerp(const Vector2& a, const Vector2& b, const float& t)
-		{
-			return Vector2(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
-		}
-
 		Vector2Int Lerp(const Vector2Int& a, const Vector2Int& b, const float& t)
 		{
 			return Vector2Int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
-		}
-
-		Vector3 Lerp(const Vector3& a, const Vector3& b, const float& t)
-		{
-			return Vector3(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 		}
 
 		Vector3Int Lerp(const Vector3Int& a, const Vector3Int& b, const float& t)

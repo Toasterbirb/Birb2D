@@ -38,19 +38,26 @@ namespace Birb
 		}
 
 		template<typename T>
-		T Square(const T& value)
+		constexpr T Square(const T& value)
 		{
 			return value * value;
 		}
 
-		int 		Lerp(const int& a, const int& b, const float& t); ///< Interpolate a value between two values given time t
-		float 		Lerp(const float& a, const float& b, const float& t); ///< Interpolate a value between two values given time t
-		double 		Lerp(const double& a, const double& b, const float& t); ///< Interpolate a value between two values given time t
-		Vector2 	Lerp(const Vector2& a, const Vector2& b, const float& t); ///< Interpolate a point between two 2D floating point vectors given time t
-		Vector2Int 	Lerp(const Vector2Int& a, const Vector2Int& b, const float& t); ///< Interpolate a point between two 2D integer vectors given time t
-		Vector3 	Lerp(const Vector3& a, const Vector3& b, const float& t); ///< Interpolate a point between two 3D floating point vectors given time t
-		Vector3Int 	Lerp(const Vector3Int& a, const Vector3Int& b, const float& t); ///< Interpolate a point between two 3D integer vectors given time t
-		Color 		Lerp(const Color& a, const Color& b, const float& t); ///< Interpolate between two colors given time t
+		template<typename T>
+		constexpr T Lerp(const T& a, const T& b, const float& t)
+		{
+			return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
+		}
+
+		template<>
+		constexpr int Lerp(const int& a, const int& b, const float& t)
+		{
+			return std::round(a + (b - a) * Clamp(t, 0.0f, 1.0f));
+		}
+
+		Vector2Int 	Lerp(const Vector2Int& a, const Vector2Int& b, const float& t);
+		Vector3Int 	Lerp(const Vector3Int& a, const Vector3Int& b, const float& t);
+		Color 		Lerp(const Color& a, const Color& b, const float& t);
 
 		float 	CenterPoint(const float& a, const float& b); ///< Calculate the "center" value between two 1D floats
 		Vector2 CenterPoint(const Vector2& a, const Vector2& b); ///< Calculate the center point between two 2D floating point vectors
