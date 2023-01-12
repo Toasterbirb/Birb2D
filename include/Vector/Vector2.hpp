@@ -5,101 +5,147 @@
 #else
 #include <string>
 #include <iosfwd>
+#include <cmath>
 #endif
 
 namespace Birb
 {
-    struct Vector2Int;
+	struct Vector2Int;
 
     struct Vector2
     {
         float x, y;
 
-        Vector2();
-        Vector2(const float& x, const float& y);
-        Vector2(const float values[2]);
+        constexpr Vector2()
+		:x(0.0f), y(0.0f)
+		{}
+
+        constexpr Vector2(const float& x, const float& y)
+		:x(x), y(y)
+		{}
+
+        constexpr Vector2(const float values[2])
+		:x(values[0]), y(values[1])
+		{}
 
         std::string ToString() const; ///< Returns the Vector as a string
         Vector2Int ToInt() const;     ///< Returns the Vector2 as an Vector2Int
 
-        float magnitude() const; ///< Returns the magnitude of the Vector
-        Vector2 normalized() const; ///< Returns the normalization of the Vector
-        void Normalize();    ///< Normalizes the Vector
+		/// Returns the magnitude of the Vector
+        constexpr float magnitude() const
+		{
+			return std::sqrt((x * x) + (y * y));
+		}
 
-        Vector2 operator+(const Vector2& other) const
+		/// Returns the normalization of the Vector
+        constexpr Vector2 normalized() const
+		{
+			return *this / magnitude();
+		}
+
+		/// Normalizes the Vector
+        constexpr void Normalize()
+		{
+			*this = normalized();
+		}
+
+        constexpr Vector2 operator+(const Vector2& other) const
         {
 			return Vector2(x + other.x, y + other.y);
         }
 
-        Vector2& operator+=(const Vector2& other)
+        constexpr Vector2& operator+=(const Vector2& other)
         {
 			x += other.x;
 			y += other.y;
 			return *this;
         }
 
-        Vector2 operator-(const Vector2& other) const
+        constexpr Vector2 operator-(const Vector2& other) const
         {
 			return Vector2(x - other.x, y - other.y);
         }
 
-        Vector2& operator-=(const Vector2& other)
+        constexpr Vector2& operator-=(const Vector2& other)
         {
 			x -= other.x;
 			y -= other.y;
 			return *this;
         }
 
-        Vector2 operator*(const Vector2& other) const
+        constexpr Vector2 operator*(const Vector2& other) const
         {
 			return Vector2(x * other.x, y * other.y);
         }
 
-        Vector2& operator*=(const Vector2& other)
+        constexpr Vector2& operator*=(const Vector2& other)
         {
 			x *= other.x;
 			y *= other.y;
 			return *this;
         }
 
-        Vector2 operator*(const float& other) const
+        constexpr Vector2 operator*(const float& other) const
         {
 			return Vector2(x * other, y * other);
         }
 
-        Vector2 operator/(const Vector2& other) const
+        constexpr Vector2 operator/(const Vector2& other) const
         {
 			return Vector2(x / other.x, y / other.y);
         }
 
-        Vector2& operator/=(const Vector2& other)
+        constexpr Vector2& operator/=(const Vector2& other)
         {
 			x /= other.x;
 			y /= other.y;
 			return *this;
         }
 
-        Vector2 operator/(const float& other) const
+        constexpr Vector2 operator/(const float& other) const
         {
 			return Vector2(x / other, y / other);
         }
 
-        bool operator==(const Vector2& other) const
+        constexpr bool operator==(const Vector2& other) const
 		{
 			return (x == other.x && y == other.y);
 		}
 
-		bool operator!=(const Vector2& other) const
+		constexpr bool operator!=(const Vector2& other) const
 		{
 			return (x != other.x || y != other.y);
 		}
 
-        static Vector2 One();
-        static Vector2 Zero();
-        static Vector2 Up();
-        static Vector2 Down();
-        static Vector2 Left();
-        static Vector2 Right();
+        static constexpr Vector2 One()
+		{
+			return Vector2(1.0f,1.0f);
+		}
+
+        static constexpr Vector2 Zero()
+		{
+			return Vector2(0.0f,0.0f);
+		}
+
+        static constexpr Vector2 Up()
+		{
+			return Vector2(0.0f,1.0f);
+		}
+
+        static constexpr Vector2 Down()
+		{
+			return Vector2(0.0f,-1.0f);
+		}
+
+        static constexpr Vector2 Left()
+		{
+			return Vector2(-1.0f,0.0f);
+		}
+
+        static constexpr Vector2 Right()
+		{
+			return Vector2(1.0f,0.0f);
+		}
     };
 
     std::ostream &operator<<(std::ostream &stream, const Vector2 &other);
