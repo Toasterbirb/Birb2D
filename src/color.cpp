@@ -2,6 +2,7 @@
 #include "Math.hpp"
 #include "Vector/Vector3.hpp"
 #include "Vector/Vector3Int.hpp"
+#include <iostream>
 
 namespace Birb
 {
@@ -92,5 +93,11 @@ namespace Birb
 
 		int temp_b = b + delta;
 		b = Math::Clamp(temp_b, 0, 255);
+	}
+
+	std::ostream& operator<<(std::ostream& stream, const Color& other)
+	{
+		stream << static_cast<short>(other.r) << ", " << static_cast<short>(other.g) << ", " << static_cast<short>(other.b) << ", " << static_cast<short>(other.a);
+		return stream;
 	}
 }

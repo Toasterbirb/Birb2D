@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL.hpp"
+#include <iosfwd>
 
 namespace Birb
 {
@@ -55,8 +56,9 @@ namespace Birb
 		{
 			return Color(this->r / other.r, this->g / other.g, this->b / other.b, this->a / other.a);
 		}
-
 	};
+
+	std::ostream& operator<<(std::ostream& stream, const Color& other);
 
 	namespace Colors
 	{
