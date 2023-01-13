@@ -11,6 +11,12 @@ namespace Birb
 		SceneObject(const int& priority);
 		SceneObject(const int& priority, const bool& active);
 
+		virtual ~SceneObject() 						= default;
+		SceneObject(const SceneObject&) 			= default;
+		SceneObject(SceneObject&&) 					= default;
+		SceneObject& operator=(const SceneObject&) 	= default;
+		SceneObject& operator=(SceneObject&&) 		= default;
+
 		/// The rendering priority determnies the order that objects are rendered with
 		int renderingPriority;
 
