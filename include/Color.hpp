@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Math.hpp"
 #include "SDL.hpp"
 #include <iosfwd>
 
@@ -10,18 +11,46 @@ namespace Birb
 
 	struct Color
 	{
-		Color();
-		Color(const int& r, const int& g, const int& b);
-		Color(const int& r, const int& g, const int& b, const int& a);
+		constexpr Color()
+		:r(0), g(0), b(0), a(255)
+		{}
 
-		Color(const float& r, const float& g, const float& b);
-		Color(const float& r, const float& g, const float& b, const float& a);
+		/* Int constructors */
+		constexpr Color(const int& r, const int& g, const int& b)
+		:r(Math::Clamp(r, 0, 255)), g(Math::Clamp(g, 0, 255)), b(Math::Clamp(b, 0, 255)), a(255) {}
 
-		Color(const Vector3Int &rgb); ///< Uses values between 0 - 255
-		Color(const Vector3 &rgb);	  ///< Uses values between 0.0 - 1.0
+		constexpr Color(const int& r, const int& g, const int& b, const int& a)
+		:r(Math::Clamp(r, 0, 255)), g(Math::Clamp(g, 0, 255)), b(Math::Clamp(b, 0, 255)), a(Math::Clamp(a, 0, 255)) {}
 
-		Color(const SDL_Color& sdl_color);
-		Color(const int& hex);
+		/* Float constructors */
+		constexpr Color(const float& r, const float& g, const float& b)
+		:r(static_cast<int>(std::round(Math::Lerp(0, 255, r)))),
+		g(static_cast<int>(std::round(Math::Lerp(0, 255, g)))),
+		b(static_cast<int>(std::round(Math::Lerp(0, 255, b)))), a(255) {}
+
+		constexpr Color(const float& r, const float& g, const float& b, const float& a)
+		:r(static_cast<int>(std::round(Math::Lerp(0, 255, r)))),
+		g(static_cast<int>(std::round(Math::Lerp(0, 255, g)))),
+		b(static_cast<int>(std::round(Math::Lerp(0, 255, b)))),
+		a(static_cast<int>(std::round(Math::Lerp(0, 255, a)))) {}
+
+		/* Vector3 constructors */
+		/// Uses values between 0 - 255
+		constexpr Color(const Vector3Int &rgb)
+		:r(rgb.x), g(rgb.y), b(rgb.z), a(255) {}
+
+		/// Uses values between 0.0 - 1.0
+		constexpr Color(const Vector3 &rgb)
+		:r(static_cast<int>(std::round(Math::Lerp(0, 255, rgb.x)))),
+		g(static_cast<int>(std::round(Math::Lerp(0, 255, rgb.y)))),
+		b(static_cast<int>(std::round(Math::Lerp(0, 255, rgb.z)))), a(255) {}
+
+		constexpr Color(const SDL_Color& sdl_color)
+		:r(sdl_color.r), g(sdl_color.g), b(sdl_color.b), a(sdl_color.a) {}
+
+		constexpr Color(const int& hex)
+		:r((hex & 0xff0000) >> 16), g((hex & 0xff00) >> 8), b((hex & 0xff) >> 0), a(255)
+		{}
 
 		SDL_Color sdl() const; ///< Convert Color to SDL_Color
 		Uint8 r, g, b, a;
@@ -29,7 +58,7 @@ namespace Birb
 		void ChangeIntensity(const int& delta);
 
 
-		bool operator==(const Color& other) const
+		constexpr bool operator==(const Color& other) const
 		{
 			return 	(r == other.r
 					&& g == other.g
@@ -37,22 +66,22 @@ namespace Birb
 					&& a == other.a);
 		}
 
-		Color operator+(const Color& other) const
+		constexpr Color operator+(const Color& other) const
 		{
 			return Color(this->r + other.r, this->g + other.g, this->b + other.b, this->a + other.a);
 		}
 
-		Color operator-(const Color& other) const
+		constexpr Color operator-(const Color& other) const
 		{
 			return Color(this->r - other.r, this->g - other.g, this->b - other.b, this->a - other.a);
 		}
 
-		Color operator*(const Color& other) const
+		constexpr Color operator*(const Color& other) const
 		{
 			return Color(this->r * other.r, this->g * other.g, this->b * other.b, this->a * other.a);
 		}
 
-		Color operator/(const Color& other) const
+		constexpr Color operator/(const Color& other) const
 		{
 			return Color(this->r / other.r, this->g / other.g, this->b / other.b, this->a / other.a);
 		}
