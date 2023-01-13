@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ParticlePattern.hpp"
-#include "Random.hpp"
 #include "Circle.hpp"
 
 namespace Birb
