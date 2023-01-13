@@ -18,7 +18,7 @@ namespace Birb
 		SceneObject& operator=(SceneObject&&) 		= default;
 
 		/// The rendering priority determnies the order that objects are rendered with
-		int renderingPriority;
+		short renderingPriority;
 
 		/// Tells if the parent scene is active or not
 		bool sceneActive;
