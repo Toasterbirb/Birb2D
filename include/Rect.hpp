@@ -23,9 +23,14 @@ namespace Birb
 	class Rect : public SceneObject
 	{
 	public:
-		Rect();
-		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h);
-		Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color);
+		constexpr Rect()
+		:x(0.0f), y(0.0f), w(0.0f), h(0.0f), color(Color(255, 255, 255)) {}
+
+		constexpr Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h)
+		:x(p_x), y(p_y), w(p_w), h(p_h), color(Color(255, 255, 255)) {}
+
+		constexpr Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color)
+		:x(p_x), y(p_y), w(p_w), h(p_h), color(color) {}
 
 		std::string toString() const;
 		Polygon toPolygon() const;
@@ -38,7 +43,7 @@ namespace Birb
 		float x, y, w, h;
 		Color color;
 
-		bool operator==(const Rect& other) const
+		constexpr bool operator==(const Rect& other) const
 		{
 			return 	(x == other.x
 					&& y == other.y
@@ -46,7 +51,7 @@ namespace Birb
 					&& h == other.h);
 		}
 
-		bool operator!=(const Rect& other) const
+		constexpr bool operator!=(const Rect& other) const
 		{
 			return 	(x != other.x
 					|| y != other.y
@@ -54,28 +59,28 @@ namespace Birb
 					|| h != other.h);
 		}
 
-		Rect& operator=(const Vector2& other)
+		constexpr Rect& operator=(const Vector2& other)
 		{
 			this->x = other.x;
 			this->y = other.y;
 			return *this;
 		}
 
-		Rect& operator=(const Vector2Int& other)
+		constexpr Rect& operator=(const Vector2Int& other)
 		{
 			this->x = other.x;
 			this->y = other.y;
 			return *this;
 		}
 
-		Rect& operator=(const Vector3& other)
+		constexpr Rect& operator=(const Vector3& other)
 		{
 			this->x = other.x;
 			this->y = other.y;
 			return *this;
 		}
 
-		Rect& operator=(const Vector3Int& other)
+		constexpr Rect& operator=(const Vector3Int& other)
 		{
 			this->x = other.x;
 			this->y = other.y;
