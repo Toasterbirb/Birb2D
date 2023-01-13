@@ -200,6 +200,7 @@ set(CORE_SRC
 	src/ParticlePatterns/randomized.cpp
 	src/ParticlePatterns/randomizedcircle.cpp
 	src/ParticlePatterns/spiral.cpp
+	src/ParticlePatterns/stablecircle.cpp
 )
 
 add_library(birb2d STATIC ${CORE_SRC})

@@ -16,7 +16,7 @@ namespace Birb
 
 			Vector2 RandomizedCircle::NextDirection()
 			{
-				return Math::FindPointOnCircle(circle, Global::random.RandomFloat(0, 360));
+				return Math::FindPointOnCircle(circle, Global::random.RandomFloat(0, 360)) * Global::random.RandomFloat(0, 1);
 			}
 		}
 	}
