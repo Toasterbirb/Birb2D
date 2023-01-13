@@ -1,5 +1,6 @@
 #include "ParticlePatterns/Randomized.hpp"
 #include "Vector/Vector2.hpp"
+#include "Values.hpp"
 
 
 namespace Birb
@@ -10,7 +11,7 @@ namespace Birb
 		{
 			Vector2 Randomized::NextDirection()
 			{
-				return Vector2(rand.RandomFloat(-1, 1), rand.RandomFloat(-1, 1));
+				return Vector2(Global::random.RandomFloat(-1, 1), Global::random.RandomFloat(-1, 1));
 			}
 		}
 	}
