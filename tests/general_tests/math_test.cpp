@@ -2,6 +2,7 @@
 #include "Line.hpp"
 #include "Math.hpp"
 #include "Vector.hpp"
+#include "PointOnLine.hpp"
 #include "doctest.h"
 
 using namespace Birb;

@@ -85,8 +85,6 @@ namespace Birb
 		Vector3 CenterPoint(const Vector3& a, const Vector3& b); ///< Calculate the center point between two 3D floating point vectors
 		Vector3 CenterPoint(const Vector3Int& a, const Vector3Int& b); ///< Calculate the center point between two 3D integer vectors
 
-		bool PointOnLine(const Line& line, const Vector2& point); ///< Check if the give point is on the line
-
 		/// @param circle 	Circle object
 		/// @param angle 	Angle in degrees
 		/// @return 		A point on the circle rotated by the angle.

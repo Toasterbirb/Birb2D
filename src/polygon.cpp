@@ -1,5 +1,6 @@
 #include "Polygon.hpp"
 #include "Renderwindow.hpp"
+#include "PointOnLine.hpp"
 
 constexpr double PI = 3.1415926535897932;
 
