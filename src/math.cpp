@@ -3,8 +3,6 @@
 #include "Logger.hpp"
 #include "Math.hpp"
 
-constexpr double PI = 3.141592654;
-
 namespace Birb
 {
 	namespace Math
@@ -54,7 +52,7 @@ namespace Birb
 		Vector2 FindPointOnCircle(const Circle& circle, const float& angle)
 		{
 			/* Convert the angle into radians */
-			float radians = (PI / 180) * angle;
+			float radians = (M_PI / 180) * angle;
 
 			float x = circle.pos.x + circle.radius * cos(radians);
 			float y = circle.pos.y + circle.radius * sin(radians);
