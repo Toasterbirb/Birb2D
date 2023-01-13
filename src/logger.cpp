@@ -118,7 +118,7 @@ namespace Birb
 
 			// Print out the debug line
 			if (!repeatingLine)
-				std::cout << printline << std::endl;
+				std::cout << printline << '\n';
 			else
 			{
 				std::cout << printline << " (" << Debug::lines.size() << "x)" << "\t\r" << std::flush;
