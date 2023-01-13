@@ -9,40 +9,6 @@
 
 namespace Birb
 {
-	void Line::DefaultLineValues()
-	{
-		color = Color(0xFFFFFF);
-		thickness = 1;
-	}
-
-	Line::Line()
-	{
-		pointA = Vector2(0, 0);
-		pointB = Vector2(0, 0);
-		DefaultLineValues();
-	}
-
-	Line::Line(const Vector2& pointA, const Vector2& pointB)
-	:pointA(pointA), pointB(pointB)
-	{
-		DefaultLineValues();
-	}
-
-	Line::Line(const Vector2& pointA, const Vector2& pointB, const Color& color)
-	:pointA(pointA), pointB(pointB), color(color)
-	{}
-
-	Line::Line(const Vector2& pointA, const Vector2& pointB, const Color& color, const int& renderingPriority)
-	:pointA(pointA), pointB(pointB), color(color)
-	{
-		this->renderingPriority = renderingPriority;
-	}
-
-	double Line::length() const
-	{
-		return Math::VectorDistance(pointA, pointB);
-	}
-
 	Rect Line::boundingBox() const
 	{
 		/* Find the top left most point */

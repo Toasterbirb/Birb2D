@@ -18,25 +18,39 @@ namespace Birb
 	class Line : public SceneObject
 	{
 	public:
-		Line();
-		Line(const Vector2& pointA, const Vector2& pointB);
-		Line(const Vector2& pointA, const Vector2& pointB, const Color& color);
-		Line(const Vector2& pointA, const Vector2& pointB, const Color& color, const int& renderingPriority);
+		constexpr Line()
+		:pointA(Vector2(0, 0)), pointB(Vector2(0, 0)), color(0xFFFFFF), thickness(1) {}
+
+		Line(const Vector2& pointA, const Vector2& pointB)
+		:pointA(pointA), pointB(pointB), color(0xFFFFFF), thickness(1) {}
+
+		Line(const Vector2& pointA, const Vector2& pointB, const Color& color)
+		:pointA(pointA), pointB(pointB), color(color), thickness(1) {}
+
+		Line(const Vector2& pointA, const Vector2& pointB, const Color& color, const int& renderingPriority)
+		:pointA(pointA), pointB(pointB), color(color), thickness(1)
+		{
+			this->renderingPriority = renderingPriority;
+		}
 
 		Vector2 pointA;
 		Vector2 pointB;
 		Color color; ///< In case the line will be rendered
 		int thickness;
 
-		double length() const;
+		constexpr double length() const
+		{
+			return Math::VectorDistance(pointA, pointB);
+		}
+
 		Rect boundingBox() const;
 
-		bool operator==(const Line& other) const
+		constexpr bool operator==(const Line& other) const
 		{
 			return (pointA == other.pointA && pointB == other.pointB);
 		}
 
-		bool operator!=(const Line& other) const
+		constexpr bool operator!=(const Line& other) const
 		{
 			return (pointA != other.pointA || pointB != other.pointB);
 		}
@@ -44,7 +58,6 @@ namespace Birb
 	private:
 		void RenderFunc() override;
 		void SetPos(const Vector2& delta) override;
-		void DefaultLineValues();
 	};
 
 	std::ostream& operator<<(std::ostream& stream, const Line& other);

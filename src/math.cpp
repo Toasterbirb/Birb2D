@@ -10,27 +10,6 @@ namespace Birb
 {
 	namespace Math
 	{
-		float VectorDistance(const Vector2& a, const Vector2& b)
-		{
-			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y));
-		}
-
-		float VectorDistance(const Vector2Int& a, const Vector2Int& b)
-		{
-			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y));
-		}
-
-		float VectorDistance(const Vector3& a, const Vector3& b)
-		{
-			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y) + Square(b.z - a.z));
-		}
-
-		float VectorDistance(const Vector3Int& a, const Vector3Int& b)
-		{
-			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y) + Square(b.z - a.z));
-		}
-
-
 		Vector2Int Lerp(const Vector2Int& a, const Vector2Int& b, const float& t)
 		{
 			return Vector2Int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));

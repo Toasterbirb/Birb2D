@@ -21,10 +21,36 @@ namespace Birb
 	/// Misc math functions
 	namespace Math
 	{
-		float VectorDistance(const Vector2& a, const Vector2& b); ///< Calculate the distance between two 2D floating point vectors
-		float VectorDistance(const Vector2Int& a, const Vector2Int& b); ///< Calculate the distance between two 2D integer vectors
-		float VectorDistance(const Vector3& a, const Vector3& b); ///< Calculate the distance between two 3D floating point vectors
-		float VectorDistance(const Vector3Int& a, const Vector3Int& b); ///< Calculate the distance between two 3D integer vectors
+		/// Multiply the value with itself (power of two)
+		template<typename T>
+		constexpr T Square(const T& value)
+		{
+			return value * value;
+		}
+
+		/// Calculate the distance between two 2D floating point vectors
+		constexpr float VectorDistance(const Vector2& a, const Vector2& b)
+		{
+			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y));
+		}
+
+		/// Calculate the distance between two 2D integer vectors
+		constexpr float VectorDistance(const Vector2Int& a, const Vector2Int& b)
+		{
+			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y));
+		}
+
+		/// Calculate the distance between two 3D floating point vectors
+		constexpr float VectorDistance(const Vector3& a, const Vector3& b)
+		{
+			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y) + Square(b.z - a.z));
+		}
+
+		/// Calculate the distance between two 3D integer vectors
+		constexpr float VectorDistance(const Vector3Int& a, const Vector3Int& b)
+		{
+			return std::sqrt(Square(b.x - a.x) + Square(b.y - a.y) + Square(b.z - a.z));
+		}
 
 		template<typename T>
 		constexpr T Clamp(const T& value, const T& min, const T& max)
@@ -35,12 +61,6 @@ namespace Birb
 				return max;
 
 			return value;
-		}
-
-		template<typename T>
-		constexpr T Square(const T& value)
-		{
-			return value * value;
 		}
 
 		template<typename T>
