@@ -1,4 +1,4 @@
-#include "ParticlePatterns/Randomized.hpp"
+#include "ParticlePatterns.hpp"
 #include "Color.hpp"
 #include "ParticleSource.hpp"
 #include "Scene.hpp"
@@ -21,13 +21,16 @@ namespace BirbTest
 	void particles_cleanup();
 
 	Timer timer;
-	Particles::Patterns::Randomized particle_pattern;
+	Particles::Patterns::Randomized 		particle_pattern;
+	Particles::Patterns::RandomizedCircle 	randomized_circle;
+	Particles::Patterns::StableCircle 		stable_circle;
+	Particles::Patterns::Spiral 			spiral(20.0f);
 	Particles::ParticleSource* ps;
 	Scene main_scene;
 
-	float effect_duration = 2.0f;
+	float effect_duration = 1.0f;
 	int effect_counter = 0;
-	static constexpr int effect_count = 4;
+	static constexpr int effect_count = 7;
 
 	TEST_CASE("Rendering: Simple particle effect")
 	{
@@ -105,6 +108,28 @@ namespace BirbTest
 					ps->particle_count = 400;
 					ps->speed = 0.5f;
 					ps->reference_particle.gravity = 1.0f;
+					effect_duration = 0.3f;
+					break;
+				}
+
+				case (4):
+				{
+					ps->pattern = &randomized_circle;
+					break;
+				}
+
+				case (5):
+				{
+					ps->pattern = &stable_circle;
+					break;
+				}
+
+				case (6):
+				{
+					ps->pattern = &spiral;
+					ps->speed = 0.02f;
+					ps->particle_count = 1;
+					effect_duration = 2.0f;
 					break;
 				}
 			}
