@@ -23,8 +23,6 @@ namespace BirbTest
 	Entity game_reached_text;
 	Scene game_scene;
 
-	MainMenu main_menu;
-
 
 	TEST_CASE("Rendering: Main menu")
 	{
@@ -46,7 +44,7 @@ namespace BirbTest
 
 		/* Create the main menu and start it */
 		MainMenuSettings menu_settings;
-		main_menu = MainMenu(game, menu_settings);
+		MainMenu main_menu(game, menu_settings);
 		main_menu.Launch();
 	}
 
