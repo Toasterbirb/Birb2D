@@ -1,4 +1,4 @@
-#include "ParticlePatterns/Randomized.hpp"
+#include "ParticlePatterns/RandomizedSquare.hpp"
 #include "Vector/Vector2.hpp"
 #include "Values.hpp"
 
@@ -9,7 +9,7 @@ namespace Birb
 	{
 		namespace Patterns
 		{
-			Vector2 Randomized::NextDirection()
+			Vector2 RandomizedSquare::NextDirection()
 			{
 				return Vector2(Global::random.RandomFloat(-1, 1), Global::random.RandomFloat(-1, 1));
 			}

@@ -197,7 +197,7 @@ set(CORE_SRC
 	src/EntityComponent/text.cpp
 
 	src/particlepattern.cpp
-	src/ParticlePatterns/randomized.cpp
+	src/ParticlePatterns/randomizedsquare.cpp
 	src/ParticlePatterns/randomizedcircle.cpp
 	src/ParticlePatterns/spiral.cpp
 	src/ParticlePatterns/stablecircle.cpp

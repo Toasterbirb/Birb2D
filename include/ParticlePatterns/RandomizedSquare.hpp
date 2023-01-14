@@ -8,7 +8,7 @@ namespace Birb
 	{
 		namespace Patterns
 		{
-			class Randomized : public ParticlePattern
+			class RandomizedSquare : public ParticlePattern
 			{
 			public:
 				Vector2 NextDirection() override;

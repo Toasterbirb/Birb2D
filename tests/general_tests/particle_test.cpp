@@ -22,7 +22,7 @@ namespace BirbTest
 	void particles_cleanup();
 
 	Timer timer;
-	Particles::Patterns::Randomized 		particle_pattern;
+	Particles::Patterns::RandomizedSquare	particle_pattern;
 	Particles::Patterns::RandomizedCircle 	randomized_circle;
 	Particles::Patterns::StableCircle 		stable_circle;
 	Particles::Patterns::Spiral 			spiral(20.0f);
