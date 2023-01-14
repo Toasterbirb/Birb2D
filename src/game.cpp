@@ -99,7 +99,7 @@ namespace Birb
 				fixed_update();
 
 
-				if (Diagnostics::Debugging::Overlays::Statistics)
+				if (Diagnostics::Debugging::Overlays::ResourceMonitor)
 					statistics.Refresh();
 			}
 
