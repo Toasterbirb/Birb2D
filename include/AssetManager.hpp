@@ -4,7 +4,7 @@
 #include "STD.hpp"
 #else
 #include <vector>
-#include <map>
+#include <unordered_map>
 #endif
 
 #include "Font.hpp"
@@ -46,6 +46,9 @@ namespace Birb
 		/// Free all heap allocated asset objects
 		static void FreeBundledAssets();
 
+		/// Free all assets (doesn't touch bundled assets)
+		void Free();
+
 		/** Textures **/
 		/// Add a texture into the asset manager
 		void AddTexture(const std::string& name, Texture texture);
@@ -58,9 +61,9 @@ namespace Birb
 
 	private:
 		/* Maps for different asset types */
-		std::map<std::string, Texture> textures;
-		std::map<std::string, Font> fonts;
-		std::map<std::string, Audio::SoundFile> sounds;
-		std::map<std::string, Audio::MusicFile> musics;
+		std::unordered_map<std::string, Texture> textures;
+		std::unordered_map<std::string, Font> fonts;
+		std::unordered_map<std::string, Audio::SoundFile> sounds;
+		std::unordered_map<std::string, Audio::MusicFile> musics;
 	};
 }

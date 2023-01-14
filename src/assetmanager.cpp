@@ -81,6 +81,27 @@ namespace Birb
 #endif
 	}
 
+	void AssetManager::Free()
+	{
+		/* Textures */
+		for (auto tex : textures)
+			tex.second.Destroy();
+		textures.clear();
+
+		/* Fonts have a destructor, so we can just throw them away */
+		fonts.clear();
+
+		/* Sounds */
+		for (auto sound : sounds)
+			sound.second.free();
+		sounds.clear();
+
+		/* Music */
+		for (auto music : musics)
+			music.second.free();
+		musics.clear();
+	}
+
 	void AssetManager::AddTexture(const std::string& name, Texture texture)
 	{
 		textures[name] = texture;
