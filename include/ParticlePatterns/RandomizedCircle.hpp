@@ -12,10 +12,11 @@ namespace Birb
 			class RandomizedCircle : public ParticlePattern
 			{
 			public:
-				RandomizedCircle();
+				RandomizedCircle(float randomness_control = 0.0f);
 				Vector2 NextDirection() override;
 
 			private:
+				float randomness_control;
 				Circle circle;
 			};
 		}

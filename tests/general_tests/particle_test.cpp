@@ -23,7 +23,7 @@ namespace BirbTest
 
 	Timer timer;
 	Particles::Patterns::RandomizedSquare	particle_pattern;
-	Particles::Patterns::RandomizedCircle 	randomized_circle;
+	Particles::Patterns::RandomizedCircle 	randomized_circle(0.5f);
 	Particles::Patterns::StableCircle 		stable_circle;
 	Particles::Patterns::StableSquare 		stable_square;
 	Particles::Patterns::Spiral 			spiral(20.0f);

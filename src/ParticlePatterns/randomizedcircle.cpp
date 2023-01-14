@@ -10,13 +10,13 @@ namespace Birb
 	{
 		namespace Patterns
 		{
-			RandomizedCircle::RandomizedCircle()
-			:circle(1, Vector2Int(0, 0))
+			RandomizedCircle::RandomizedCircle(float randomness_control)
+			:randomness_control(randomness_control), circle(1, Vector2Int(0, 0))
 			{}
 
 			Vector2 RandomizedCircle::NextDirection()
 			{
-				return Math::FindPointOnCircle(circle, Global::random.RandomFloat(0, 360)) * Global::random.RandomFloat(0, 1);
+				return Math::FindPointOnCircle(circle, Global::random.RandomFloat(0, 360)) * Global::random.RandomFloat(randomness_control, 1);
 			}
 		}
 	}

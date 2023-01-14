@@ -12,6 +12,9 @@ namespace Birb
 			{
 			public:
 				Vector2 NextDirection() override;
+
+			private:
+				float randomness_control;
 			};
 		}
 	}
