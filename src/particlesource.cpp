@@ -1,6 +1,6 @@
-#include <iostream>
 #include "Circle.hpp"
 #include "ParticleSource.hpp"
+#include "Physics.hpp"
 #include "Random.hpp"
 #include "Render.hpp"
 #include "Values.hpp"
@@ -92,6 +92,15 @@ namespace Birb
 		int ParticleSource::ParticleCount() const
 		{
 			return particles.size();
+		}
+
+		void ParticleSource::CullParticles(const Rect& area)
+		{
+			for (size_t i = 0; i < particles.size(); ++i)
+			{
+				if (!Physics::PointInRect(area, particles[i].pos))
+					particles[i].alive = false;
+			}
 		}
 
 		void ParticleSource::RemoveDeadParticles()

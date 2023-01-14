@@ -48,6 +48,9 @@ namespace Birb
 			/// How many particles to spawn at once
 			int particle_count;
 
+			/// Kill particles that are out of the given area
+			void CullParticles(const Rect& area);
+
 			/// Pops off dead particles at the end of the particle list
 			void RemoveDeadParticles();
 

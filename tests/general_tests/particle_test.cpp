@@ -29,6 +29,8 @@ namespace BirbTest
 	Particles::ParticleSource* ps;
 	Scene main_scene;
 
+	Rect viewport_area(0, 0, 1280, 720);
+
 	float effect_duration = 1.0f;
 	int effect_counter = 0;
 	static constexpr int effect_count = 7;
@@ -153,6 +155,7 @@ namespace BirbTest
 
 	void particles_fixed_update()
 	{
+		ps->CullParticles(viewport_area);
 		ps->RemoveDeadParticles();
 	}
 
