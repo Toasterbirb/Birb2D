@@ -1,3 +1,4 @@
+#include "Values.hpp"
 #include "ParticlePatterns.hpp"
 #include "Color.hpp"
 #include "ParticleSource.hpp"
@@ -70,7 +71,14 @@ namespace BirbTest
 	void particles_update(Game& game)
 	{
 		if (timer.ElapsedSeconds() < effect_duration)
+		{
+			/* If we are demoing the spiral pattern, randomize
+			 * the particle colors */
+			if (effect_counter == 6)
+				ps->reference_particle.color = Color(Global::random.RandomInt(0, 255), Global::random.RandomInt(0, 255), Global::random.RandomInt(0, 255));
+
 			ps->Emit(true);
+		}
 		else if (timer.ElapsedSeconds() > effect_duration + 0.5f)
 		{
 			effect_counter++;
