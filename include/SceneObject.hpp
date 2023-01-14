@@ -16,7 +16,7 @@ namespace Birb
 		constexpr SceneObject(const int& priority, const bool& active)
 		:renderingPriority(priority), sceneActive(true), active(active), world_space(true), parallax_multiplier(1) {}
 
-		virtual ~SceneObject() 						= default;
+		//virtual ~SceneObject() 						= default;
 		constexpr SceneObject(const SceneObject&) 	= default;
 		constexpr SceneObject(SceneObject&&) 		= default;
 		SceneObject& operator=(const SceneObject&) 	= default;
