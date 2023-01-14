@@ -197,10 +197,11 @@ set(CORE_SRC
 	src/EntityComponent/text.cpp
 
 	src/particlepattern.cpp
-	src/ParticlePatterns/randomizedsquare.cpp
 	src/ParticlePatterns/randomizedcircle.cpp
+	src/ParticlePatterns/randomizedsquare.cpp
 	src/ParticlePatterns/spiral.cpp
 	src/ParticlePatterns/stablecircle.cpp
+	src/ParticlePatterns/stablesquare.cpp
 )
 
 add_library(birb2d STATIC ${CORE_SRC})

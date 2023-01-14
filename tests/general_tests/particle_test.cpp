@@ -25,6 +25,7 @@ namespace BirbTest
 	Particles::Patterns::RandomizedSquare	particle_pattern;
 	Particles::Patterns::RandomizedCircle 	randomized_circle;
 	Particles::Patterns::StableCircle 		stable_circle;
+	Particles::Patterns::StableSquare 		stable_square;
 	Particles::Patterns::Spiral 			spiral(20.0f);
 	Particles::ParticleSource* ps;
 	Scene main_scene;
@@ -33,7 +34,7 @@ namespace BirbTest
 
 	float effect_duration = 1.0f;
 	int effect_counter = 0;
-	static constexpr int effect_count = 7;
+	static constexpr int effect_count = 8;
 
 	TEST_CASE("Rendering: Simple particle effect")
 	{
@@ -76,7 +77,7 @@ namespace BirbTest
 		{
 			/* If we are demoing the spiral pattern, randomize
 			 * the particle colors */
-			if (effect_counter == 6)
+			if (effect_counter == effect_count - 1)
 				ps->reference_particle.color = Color(Global::random.RandomInt(0, 255), Global::random.RandomInt(0, 255), Global::random.RandomInt(0, 255));
 
 			ps->Emit(true);
@@ -135,6 +136,12 @@ namespace BirbTest
 				}
 
 				case (6):
+				{
+					ps->pattern = &stable_square;
+					break;
+				}
+
+				case (7):
 				{
 					ps->pattern = &spiral;
 					ps->speed = 0.02f;
