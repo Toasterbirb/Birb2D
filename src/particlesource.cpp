@@ -13,11 +13,8 @@ namespace Birb
 	namespace Particles
 	{
 		ParticleSource::ParticleSource(TimeStep* timestep)
-		:timestep(timestep)
-		{
-			type 			= ParticleType::Circle;
-			particle_count 	= 1;
-		}
+		:type(ParticleType::Circle), particle_count(1), timestep(timestep)
+		{}
 
 		void ParticleSource::Emit(bool spawn_new_particles)
 		{
