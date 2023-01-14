@@ -85,7 +85,7 @@ namespace Birb
 
 	MainMenuSettings::Credits::Credits()
 	{
-		credits_text 			= "Someone really cool made\nthis game";
+		credits_text 			= "Someone really cool made this game";
 		text_font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 16);
 	}
 }

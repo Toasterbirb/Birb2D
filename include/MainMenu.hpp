@@ -58,7 +58,6 @@ namespace Birb
 			Entity button;
 		};
 
-
 		Setting volume_slider;
 		Audio::SoundFile volume_slider_sound;
 		Audio::SoundFile button_hover;

@@ -85,11 +85,8 @@ namespace Birb
 		volume_slider.button.progressBarComponent.parent_entity = &volume_slider.button;
 
 
-		/* Construct the credits page */
+		/** Construct the credits page **/
 		credits_scene.Deactivate();
-		credits_scene.AddObject(&this->settings->settings_menu.window.background);
-		credits_scene.AddObject(&this->settings->settings_menu.window.top_bar);
-		credits_scene.AddObject(&this->window_title_text);
 
 		credits_text = Entity("Credits text",
 				Vector2Int(this->settings->credits_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding),
@@ -98,6 +95,16 @@ namespace Birb
 					&this->settings->credits_menu.window.text_color),
 				4);
 		credits_scene.AddObject(&credits_text);
+
+		/* Scale the credits window to fit the credit text */
+		this->settings->credits_menu.window.background.w = credits_text.sprite.dimensions().x + 32;
+		this->settings->credits_menu.window.background.h = credits_text.sprite.dimensions().y + this->settings->credits_menu.window.top_bar.h + 32;
+		this->settings->credits_menu.window.top_bar.w = this->settings->credits_menu.window.background.w;
+
+		credits_scene.AddObject(&this->settings->credits_menu.window.background);
+		credits_scene.AddObject(&this->settings->credits_menu.window.top_bar);
+		credits_scene.AddObject(&this->window_title_text);
+
 	}
 
 	void MainMenu::Launch()
