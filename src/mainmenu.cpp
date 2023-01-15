@@ -48,19 +48,25 @@ namespace Birb
 			menu_scene.AddObject(&this->settings->buttons[i]->button_background);
 
 		/* Allocate menu buttons */
-		menu_buttons = std::vector<Entity>(4);
+		menu_buttons = std::vector<Entity::Text>(4);
 
 		for (size_t i = 0; i < menu_buttons.size(); ++i)
 		{
-			menu_buttons[i] = Entity("Main menu button text",
+			//menu_buttons[i] = Entity("Main menu button text",
+			//		Vector2Int(this->settings->buttons[i]->rect.x + this->settings->button_text_padding, this->settings->buttons[i]->rect.y + 7),
+			//		EntityComponent::Text(this->settings->buttons[i]->text,
+			//			&this->settings->buttons[i]->font,
+			//			&this->settings->buttons[i]->text_color),
+			//		2);
+
+			menu_buttons[i] = Entity::Text(this->settings->buttons[i]->text,
 					Vector2Int(this->settings->buttons[i]->rect.x + this->settings->button_text_padding, this->settings->buttons[i]->rect.y + 7),
-					EntityComponent::Text(this->settings->buttons[i]->text,
-						&this->settings->buttons[i]->font,
-						&this->settings->buttons[i]->text_color),
-					2);
+					this->settings->buttons[i]->font,
+					this->settings->buttons[i]->text_color);
+			menu_buttons[i].renderingPriority = 2;
 
 			/* Update button background dimensions to fit the text */
-			this->settings->buttons[i]->button_background.w = menu_buttons[i].sprite.dimensions().x + (this->settings->button_text_padding * 2);
+			this->settings->buttons[i]->button_background.w = menu_buttons[i].sprite_dimensions().x + (this->settings->button_text_padding * 2);
 			this->settings->buttons[i]->rect = this->settings->buttons[i]->button_background;
 		}
 
@@ -74,34 +80,43 @@ namespace Birb
 		settings_scene.AddObject(&this->settings->settings_menu.window.background);
 		settings_scene.AddObject(&this->settings->settings_menu.window.top_bar);
 
-		window_title_text = Entity("Settings title text",
+		//window_title_text = Entity("Settings title text",
+		//		Vector2Int(this->settings->settings_menu.window.top_bar.x + 4, this->settings->settings_menu.window.top_bar.y + 4),
+		//		EntityComponent::Text("Settings",
+		//			&this->settings->settings_menu.window.title_font,
+		//			&this->settings->settings_menu.window.title_color),
+		//		4);
+		window_title_text = Entity::Text("Settings",
 				Vector2Int(this->settings->settings_menu.window.top_bar.x + 4, this->settings->settings_menu.window.top_bar.y + 4),
-				EntityComponent::Text("Settings",
-					&this->settings->settings_menu.window.title_font,
-					&this->settings->settings_menu.window.title_color),
-				4);
+				this->settings->settings_menu.window.title_font,
+				this->settings->settings_menu.window.title_color);
 		settings_scene.AddObject(&window_title_text);
 
 		/** Create options **/
 		int option_padding = 16;
 		volume_slider = Setting(Vector2Int(this->settings->settings_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding), "Volume ", Setting::SLIDER, settings);
-		volume_slider.button.progressBarComponent.parent_entity = &volume_slider.button;
+		//volume_slider.button.progressBarComponent.parent_entity = &volume_slider.button;
 
 
 		/** Construct the credits page **/
 		credits_scene.Deactivate();
 
-		credits_text = Entity("Credits text",
+		//credits_text = Entity("Credits text",
+		//		Vector2Int(this->settings->credits_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding),
+		//		EntityComponent::Text(this->settings->credits_menu.credits_text,
+		//			&this->settings->credits_menu.text_font,
+		//			&this->settings->credits_menu.window.text_color),
+		//		4);
+		credits_text = Entity::Text(this->settings->credits_menu.credits_text,
 				Vector2Int(this->settings->credits_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding),
-				EntityComponent::Text(this->settings->credits_menu.credits_text,
-					&this->settings->credits_menu.text_font,
-					&this->settings->credits_menu.window.text_color),
-				4);
+				this->settings->credits_menu.text_font,
+				this->settings->credits_menu.window.text_color);
+		credits_text.renderingPriority = 4;
 		credits_scene.AddObject(&credits_text);
 
 		/* Scale the credits window to fit the credit text */
-		this->settings->credits_menu.window.background.w = credits_text.sprite.dimensions().x + 32;
-		this->settings->credits_menu.window.background.h = credits_text.sprite.dimensions().y + this->settings->credits_menu.window.top_bar.h + 32;
+		this->settings->credits_menu.window.background.w = credits_text.sprite_dimensions().x + 32;
+		this->settings->credits_menu.window.background.h = credits_text.sprite_dimensions().y + this->settings->credits_menu.window.top_bar.h + 32;
 		this->settings->credits_menu.window.top_bar.w = this->settings->credits_menu.window.background.w;
 
 		credits_scene.AddObject(&this->settings->credits_menu.window.background);
@@ -198,11 +213,11 @@ namespace Birb
 
 				if (mouse_down)
 				{
-					float old_volume = volume_slider.button.progressBarComponent.value;
-					volume_slider.button.progressBarComponent.SetValueFromRelativePoint(game->window->CursorPosition().ToFloat());
-					if (!volume_slider_sound.isPlaying() && old_volume != volume_slider.button.progressBarComponent.value)
+					float old_volume = volume_slider.button.value;
+					volume_slider.button.SetValueFromRelativePoint(game->window->CursorPosition().ToFloat());
+					if (!volume_slider_sound.isPlaying() && old_volume != volume_slider.button.value)
 					{
-						Audio::SetGlobalVolume(volume_slider.button.progressBarComponent.value);
+						Audio::SetGlobalVolume(volume_slider.button.value);
 						volume_slider_sound.play();
 					}
 
@@ -230,26 +245,31 @@ namespace Birb
 	MainMenu::Setting::Setting(const Vector2Int& pos, const std::string& text, SettingType type, MainMenuSettings& settings)
 	:position(pos)
 	{
-		this->text = Entity("Setting option text", pos,
-				EntityComponent::Text(text,
-					&settings.settings_menu.setting_font,
-					&settings.settings_menu.window.text_color),
-				5);
+		//this->text = Entity("Setting option text", pos,
+		//		EntityComponent::Text(text,
+		//			&settings.settings_menu.setting_font,
+		//			&settings.settings_menu.window.text_color),
+		//		5);
+		this->text = Entity::Text(text, pos, settings.settings_menu.setting_font, settings.settings_menu.window.text_color);
+		this->text.renderingPriority = 5;
 
 		switch (type)
 		{
 			case (SLIDER):
 			{
-				this->button = Entity("Setting option button",
-						Rect(pos.x + this->text.sprite.dimensions().x + 8, pos.y + 2, 128, 16),
-						3);
-				this->button.progressBarComponent = EntityComponent::ProgressBar(1,
-						&settings.settings_menu.slider_border_color,
-						&settings.settings_menu.slider_background_color,
-						&settings.settings_menu.slider_fill_color);
-				this->button.progressBarComponent.minValue 		= 0.0f;
-				this->button.progressBarComponent.maxValue 		= 1.0f;
-				this->button.progressBarComponent.value 		= Audio::GetCurrentGlobalVolume();
+				//this->button = Entity("Setting option button",
+				//		Rect(pos.x + this->text.sprite.dimensions().x + 8, pos.y + 2, 128, 16),
+				//		3);
+				this->button = Entity::ProgressBar(1,
+						settings.settings_menu.slider_border_color,
+						settings.settings_menu.slider_background_color,
+						settings.settings_menu.slider_fill_color);
+				this->button.rect = Rect(pos.x + this->text.sprite_dimensions().x + 8, pos.y + 2, 128, 16);
+				this->button.renderingPriority = 3;
+
+				this->button.minValue 	= 0.0f;
+				this->button.maxValue 	= 1.0f;
+				this->button.value 		= Audio::GetCurrentGlobalVolume();
 				this->button.renderingPriority = 5;
 				break;
 			}

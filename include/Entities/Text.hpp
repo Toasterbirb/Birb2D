@@ -14,6 +14,7 @@ namespace Birb
 		{
 		public:
 			Text();
+			Text(const std::string& text, const Vector2Int& pos, Font& font, const Color& color);
 			Text(const std::string& text, Font& font, const Color& color);
 			Text(const std::string& text, Font& font, const Color& color, const Color& bgColor);
 
@@ -26,6 +27,8 @@ namespace Birb
 			bool SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
 			void SetFont(Font& font); 			///< Change the font in Text and reload the sprite
 			void SetTextColor(Color& color); 			///< Change the color in Text and reload the sprite
+
+			Vector2Int sprite_dimensions() const;
 
 			Text& operator=(const Text& other)
 			{
@@ -52,6 +55,7 @@ namespace Birb
 			Texture sprite;
 			std::string text;
 			Font& font;
+			bool has_background_color;
 
 			void RenderFunc() override;
 		};

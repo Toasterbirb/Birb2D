@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entities/Image.hpp"
+#include "Entities/ProgressBar.hpp"
 #include "Entities/Text.hpp"
 #include <vector>
 #ifndef DISTCC
@@ -38,7 +39,7 @@ namespace Birb
 		Entity::Text title_text;
 		Rect background;
 
-		Entity window_title_text;
+		Entity::Text window_title_text;
 
 		/* Settings panel */
 		Scene settings_scene;
@@ -55,8 +56,8 @@ namespace Birb
 			void AddToScene(Scene* scene);
 
 			Vector2Int position;
-			Entity text;
-			Entity button;
+			Entity::Text text;
+			Entity::ProgressBar button;
 		};
 
 		Setting volume_slider;
@@ -64,10 +65,10 @@ namespace Birb
 		Audio::SoundFile button_hover;
 
 		/* Credits panel */
-		Entity credits_text;
+		Entity::Text credits_text;
 
 
-		std::vector<Entity> menu_buttons;
+		std::vector<Entity::Text> menu_buttons;
 
 		void StartGame();
 	};

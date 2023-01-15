@@ -13,24 +13,29 @@ namespace Birb
 	namespace Entity
 	{
 		Text::Text()
-		:font(Global::DefaultSettings::DefaultFont)
+		:font(Global::DefaultSettings::DefaultFont), has_background_color(false)
 		{
 			text 	= "";
 			color 	= Colors::White;
-			bgColor = NULL;
+			bgColor = Colors::Black;
 			wrapLength = 0;
 		}
 
-		Text::Text(const std::string& text, Font& font, const Color& color)
-		:color(color), text(text), font(font)
+		Text::Text(const std::string& text, const Vector2Int& pos, Font& font, const Color& color)
+		:color(color), text(text), font(font), has_background_color(false)
 		{
-			bgColor = NULL;
+			this->rect = pos;
+		}
+
+		Text::Text(const std::string& text, Font& font, const Color& color)
+		:color(color), text(text), font(font), has_background_color(false)
+		{
 			wrapLength = 0;
 			LoadSprite();
 		}
 
 		Text::Text(const std::string& text, Font& font, const Color& color, const Color& bgColor)
-		:color(color), bgColor(bgColor), text(text), font(font)
+		:color(color), bgColor(bgColor), text(text), font(font), has_background_color(true)
 		{
 			wrapLength = 0;
 			LoadSprite();
@@ -72,6 +77,11 @@ namespace Birb
 			ReloadSprite();
 		}
 
+		Vector2Int Text::sprite_dimensions() const
+		{
+			return sprite.dimensions();
+		}
+
 		bool Text::ReloadSprite()
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Reload sprite", PROFILER_COLOR);
@@ -90,7 +100,7 @@ namespace Birb
 			/* Generate the sprite if there's text to render */
 			if (text != "")
 			{
-				if (bgColor == NULL)
+				if (!has_background_color)
 					sprite = Resources::TextSprite(text, font, color, wrapLength);
 				else
 					sprite = Resources::TextSprite(text, font, color, bgColor);
