@@ -6,16 +6,18 @@
 #include <functional>
 #endif
 
+#include "BaseEntity.hpp"
+
 namespace Birb
 {
-	namespace EntityComponent
+	namespace Entity
 	{
 		/// Click adds button functionality to the Entity
-		class Click
+		class Button : public BaseEntity
 		{
 		public:
-			Click();
-			Click(const std::function<void()>& p_onClick);
+			Button();
+			Button(const std::function<void()>& p_onClick);
 			bool active;
 			bool isPressed;
 			std::function<void()> onMouseDown;

@@ -6,7 +6,6 @@
 #include "Color.hpp"
 #include "Input.hpp"
 #include "Utils.hpp"
-#include "Entity.hpp"
 #include "Polygon.hpp"
 #include "Render.hpp"
 

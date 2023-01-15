@@ -1,11 +1,11 @@
-#include "EntityComponent/Click.hpp"
+#include "Entities/Button.hpp"
 #include "Diagnostics.hpp"
 
 namespace Birb
 {
 	namespace EntityComponent
 	{
-		void Click::PlaceHolderMouseDownEvent()
+		void Button::PlaceHolderMouseDownEvent()
 		{
 			if (Diagnostics::Debugging::Buttons)
 				Debug::Log("Placeholder onMouseDown event");
@@ -13,7 +13,7 @@ namespace Birb
 			return;
 		}
 
-		void Click::PlaceHolderClickEvent()
+		void Button::PlaceHolderClickEvent()
 		{
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onClick event");
@@ -21,7 +21,7 @@ namespace Birb
 			return;
 		}
 
-        void Click::PlaceHolderHoverEvent()
+        void Button::PlaceHolderHoverEvent()
         {
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onHover event");
@@ -29,7 +29,7 @@ namespace Birb
 			return;
         }
 
-        void Click::PlaceHolderDragEvent()
+        void Button::PlaceHolderDragEvent()
         {
             if (Diagnostics::Debugging::Buttons)
                 Debug::Log("Placeholder onDrag event");
@@ -37,14 +37,14 @@ namespace Birb
 			return;
         }
 
-		void Click::AssignPlaceholderEvents()
+		void Button::AssignPlaceholderEvents()
 		{
 			onMouseDown = PlaceHolderMouseDownEvent;
             onHover = PlaceHolderHoverEvent;
             onDrag  = PlaceHolderDragEvent;
 		}
 
-		Click::Click()
+		Button::Button()
 		{
 			AssignPlaceholderEvents();
 			onClick 	= PlaceHolderClickEvent;
@@ -52,7 +52,7 @@ namespace Birb
 			isPressed 	= false;
 		}
 
-		Click::Click(const std::function<void()>& p_onClick)
+		Button::Button(const std::function<void()>& p_onClick)
 		:onClick(p_onClick)
 		{
 			AssignPlaceholderEvents();

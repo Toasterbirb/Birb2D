@@ -1,12 +1,11 @@
-#include "Entity.hpp"
-#include "EntityComponent/ProgressBar.hpp"
+#include "Entities/ProgressBar.hpp"
 #include "Logger.hpp"
 #include "Physics.hpp"
 #include "Vector/Vector2.hpp"
 
 namespace Birb
 {
-	namespace EntityComponent
+	namespace Entity
 	{
 		ProgressBar::ProgressBar()
 		{

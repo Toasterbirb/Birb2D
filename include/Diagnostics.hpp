@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Entity.hpp"
 #include "Graphs.hpp"
 #include "Timestep.hpp"
 

@@ -153,7 +153,7 @@ set(CORE_SRC
 	src/audio.cpp
 	src/circle.cpp
 	src/color.cpp
-	src/entity.cpp
+	src/baseentity.cpp
 	src/filesystem.cpp
 	src/font.cpp
 	src/frametimegraph.cpp
@@ -191,10 +191,10 @@ set(CORE_SRC
 	src/Vector/vector2.cpp
 	src/Vector/vector2int.cpp
 
-	src/EntityComponent/animation.cpp
-	src/EntityComponent/click.cpp
-	src/EntityComponent/progressbar.cpp
-	src/EntityComponent/text.cpp
+	src/Entities/animation.cpp
+	src/Entities/button.cpp
+	src/Entities/progressbar.cpp
+	src/Entities/text.cpp
 
 	src/particlepattern.cpp
 	src/ParticlePatterns/randomizedcircle.cpp

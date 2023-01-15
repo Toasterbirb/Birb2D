@@ -1,8 +1,8 @@
-#include "EntityComponent/Animation.hpp"
+#include "Entities/Animation.hpp"
 
 namespace Birb
 {
-	namespace EntityComponent
+	namespace Entity
 	{
 		Animation::Animation()
 		{
@@ -54,6 +54,26 @@ namespace Birb
 			frameIndex = p_startFrame;
 			lastFrame = p_lastFrame;
 			animationQueued = true;
+		}
+
+		Vector2Int Animation::getAtlasPosition(const int& frame)
+		{
+			Vector2Int pos;
+			int index = frame;
+
+			int texWidth;
+			//int texHeight;
+			texWidth = sprite.dimensions().x;
+			//texHeight = sprite.dimensions().y;
+
+			int spritesPerRow = texWidth / spriteSize.x;
+			float fullRowCount = std::floor(index / spritesPerRow);
+			float leftOver = ((index / static_cast<float>(spritesPerRow)) - fullRowCount) * spritesPerRow;
+
+			pos.x = leftOver * spriteSize.x;
+			pos.y = fullRowCount * spriteSize.y;
+
+			return pos;
 		}
 	}
 }

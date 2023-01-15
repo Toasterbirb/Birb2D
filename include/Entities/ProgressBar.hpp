@@ -1,17 +1,17 @@
 #pragma once
 
 #include "Color.hpp"
+#include "BaseEntity.hpp"
 
 namespace Birb
 {
-	class Entity;
 	struct Vector2;
 
-	namespace EntityComponent
+	namespace Entity
 	{
 		/// ProgressBar is used to create... well... progress bars
 		/// If the entity has a sprite on it. That will be used instead of the fill color
-		class ProgressBar
+		class ProgressBar : public BaseEntity
 		{
 		public:
 			ProgressBar();
@@ -32,7 +32,6 @@ namespace Birb
 			/// given point. Nothing will happen if the point given
 			/// is outside of the Entity surface area
 			void SetValueFromRelativePoint(Vector2 point);
-			Entity* parent_entity;
 
 			bool operator==(const ProgressBar& other) const
 			{

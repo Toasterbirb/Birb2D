@@ -1,4 +1,5 @@
 #include "Renderwindow.hpp"
+#include "Entities/Animation.hpp"
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
@@ -227,7 +228,7 @@ namespace Birb
 		return;
 	}
 
-	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
+	void HandleAnimations(Animation* entity, SDL_Rect* src, SDL_Rect* dst)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Handle animations", PROFILER_COLOR);
 		Vector2Int atlasPos = entity->getAtlasPosition(entity->animationComponent.frameIndex);
