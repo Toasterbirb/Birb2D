@@ -32,7 +32,10 @@ namespace Birb
 	Font::~Font()
 	{
 		if (isLoaded() && ttfFont != nullptr)
+		{
 			TTF_CloseFont(ttfFont);
+			fontLoaded = false;
+		}
 	}
 
 	void Font::LoadFont(const std::string& filePath, const int& fontSize)
