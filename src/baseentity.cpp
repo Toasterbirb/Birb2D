@@ -6,6 +6,10 @@
 #include "Values.hpp"
 #include "microprofile.h"
 
+#ifdef DISTCC
+#include <iostream>
+#endif
+
 #define PROFILER_GROUP "Entities"
 #define PROFILER_COLOR MP_LIGHTGREEN
 
@@ -20,6 +24,7 @@ namespace Birb
 	}
 
 	BaseEntity::BaseEntity()
+	:name("Default Entity")
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
 		SetBaseEntityValues();
@@ -51,4 +56,10 @@ namespace Birb
 		rect.x += delta.x;
 		rect.y += delta.y;
 	}
+
+    std::ostream &operator<<(std::ostream &stream, const BaseEntity &other)
+    {
+        stream << "[Name: " << other.name << ", Rect: (" << other.rect << "), Angle: " << other.angle << "]";
+        return stream;
+    }
 }

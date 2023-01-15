@@ -4,6 +4,7 @@
 #include "STD.hpp"
 #else
 #include <string>
+#include <iosfwd>
 #endif
 
 
@@ -43,4 +44,5 @@ namespace Birb
 		void SetPos(const Vector2& delta) override;
 	};
 
+	std::ostream &operator<<(std::ostream &stream, const BaseEntity &other);
 }

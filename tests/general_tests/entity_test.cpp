@@ -13,7 +13,7 @@ namespace BirbTest
 		BaseEntity entityB("Second entity");
 		CHECK_FALSE(entityA == entityB);
 		entityB.name = "First entity";
-		CHECK_FALSE(entityA == entityB);
+		CHECK(entityA == entityB);
 	}
 
 	TEST_CASE("Empty entity")
