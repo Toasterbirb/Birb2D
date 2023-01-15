@@ -24,6 +24,11 @@ namespace Birb
 
 			Image& operator=(const Image& other)
 			{
+				/* Base entity stuff */
+				this->name 		= other.name;
+				this->angle 	= other.angle;
+				this->rect 		= other.rect;
+
 				this->sprite 	= other.sprite;
 				this->angle 	= other.angle;
 				return *this;

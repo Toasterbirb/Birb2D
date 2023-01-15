@@ -43,6 +43,11 @@ namespace Birb
 
 			Text& operator=(const Text& other)
 			{
+				/* Base entity stuff */
+				this->name 		= other.name;
+				this->angle 	= other.angle;
+				this->rect 		= other.rect;
+
 				this->sprite 	= other.sprite;
 				this->text 		= other.text;
 				this->font 		= other.font;

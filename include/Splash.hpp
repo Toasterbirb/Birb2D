@@ -1,9 +1,10 @@
 #pragma once
+#include "AssetManager.hpp"
 #include "Entities/Image.hpp"
 #include "Entities/Text.hpp"
+#include "Font.hpp"
 #include "Renderwindow.hpp"
 #include "Scene.hpp"
-#include "Font.hpp"
 
 namespace Birb
 {
@@ -24,11 +25,13 @@ namespace Birb
 		void Run();
 
 	private:
+		AssetManager asset_manager;
+
 		Window& window;
 		Font manaspace;
 		Font manaspace_small;
 
-		Entity::Image background_plane;
+		Rect background_plane;
 		Entity::Image birb2d_logo;
 		Entity::Text birb2d_text;
 
