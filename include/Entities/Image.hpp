@@ -7,7 +7,7 @@ namespace Birb
 {
 	namespace Entity
 	{
-		class Image : public BaseEntity
+		class Image : public BaseEntity, public SceneObject
 		{
 		public:
 			Image();
@@ -36,6 +36,7 @@ namespace Birb
 
 		private:
 			void RenderFunc() override;
+			void SetPos(const Vector2& delta) override;
 		};
 	}
 }

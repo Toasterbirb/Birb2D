@@ -18,7 +18,7 @@ namespace Birb
 	/// Entities are objects that contain all of the information required to render stuff
 
 	/// Entities can be anything really. For example, it could be text or a picture. This could be extended to animations in the future
-	class BaseEntity : public SceneObject
+	class BaseEntity
 	{
 	public:
 		BaseEntity();
@@ -40,8 +40,8 @@ namespace Birb
 		}
 
 	private:
-		void RenderFunc() override;
-		void SetPos(const Vector2& delta) override;
+		//virtual void RenderFunc() override = 0;
+		//void SetPos(const Vector2& delta) override;
 	};
 
 	std::ostream &operator<<(std::ostream &stream, const BaseEntity &other);

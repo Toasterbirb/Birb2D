@@ -37,5 +37,11 @@ namespace Birb
 		{
 			Render::DrawTexture(sprite, rect, world_space, angle);
 		}
+
+		void Image::SetPos(const Vector2& delta)
+		{
+			rect.x += delta.x;
+			rect.y += delta.y;
+		}
 	}
 }

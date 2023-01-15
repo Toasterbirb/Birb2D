@@ -1,5 +1,6 @@
-#include "Diagnostics.hpp"
 #include "BaseEntity.hpp"
+#include "Diagnostics.hpp"
+#include "Logger.hpp"
 #include "Logger.hpp"
 #include "Renderwindow.hpp"
 #include "Resources.hpp"
@@ -20,7 +21,7 @@ namespace Birb
 	void BaseEntity::SetBaseEntityValues()
 	{
 		angle = 0;
-		active = true;
+		//active = true;
 	}
 
 	BaseEntity::BaseEntity()
@@ -38,24 +39,19 @@ namespace Birb
 	}
 
 	/* FIXME: Write tests for this constructor */
-	BaseEntity::BaseEntity(const std::string& p_name, const Rect& rect, const int& rendering_priority)
-	:name(p_name), rect(rect)
-	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
-		renderingPriority = rendering_priority;
-		SetBaseEntityValues();
-	}
+	//BaseEntity::BaseEntity(const std::string& p_name, const Rect& rect, const int& rendering_priority)
+	//:name(p_name), rect(rect)
+	//{
+	//	MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
+	//	//renderingPriority = rendering_priority;
+	//	SetBaseEntityValues();
+	//}
 
-	void BaseEntity::RenderFunc()
-	{
-		Render::DrawRect(this->rect);
-	}
-
-	void BaseEntity::SetPos(const Vector2& delta)
-	{
-		rect.x += delta.x;
-		rect.y += delta.y;
-	}
+	//void BaseEntity::SetPos(const Vector2& delta)
+	//{
+	//	rect.x += delta.x;
+	//	rect.y += delta.y;
+	//}
 
     std::ostream &operator<<(std::ostream &stream, const BaseEntity &other)
     {

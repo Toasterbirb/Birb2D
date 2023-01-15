@@ -124,5 +124,11 @@ namespace Birb
 		{
 			Render::DrawTexture(sprite, src, dst, angle);
 		}
+
+		void Animation::SetPos(const Vector2& delta)
+		{
+			rect.x += delta.x;
+			rect.y += delta.y;
+		}
 	}
 }

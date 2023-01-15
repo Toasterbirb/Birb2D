@@ -60,5 +60,11 @@ namespace Birb
 			/* Draw the progress bar outer box */
 			Render::DrawRect(borderColor, rect, borderWidth);
 		}
+
+		void ProgressBar::SetPos(const Vector2& delta)
+		{
+			rect.x += delta.x;
+			rect.y += delta.y;
+		}
 	}
 }

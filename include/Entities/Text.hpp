@@ -10,7 +10,7 @@ namespace Birb
 	namespace Entity
 	{
 		/// Text contains details needed to generate a sprite for the Entity in case the Entity is used to display text.
-		class Text : public BaseEntity
+		class Text : public BaseEntity, public SceneObject
 		{
 		public:
 			Text();
@@ -74,6 +74,7 @@ namespace Birb
 			bool has_background_color;
 
 			void RenderFunc() override;
+			void SetPos(const Vector2& delta) override;
 		};
 	}
 }

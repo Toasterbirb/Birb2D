@@ -73,5 +73,17 @@ namespace Birb
             onHover = PlaceHolderHoverEvent;
             onDrag  = PlaceHolderDragEvent;
 		}
+
+		void Button::RenderFunc()
+		{
+			Render::DrawRect(rect);
+		}
+
+		void Button::SetPos(const Vector2& delta)
+		{
+			rect.x += delta.x;
+			rect.y += delta.y;
+		}
+
 	}
 }

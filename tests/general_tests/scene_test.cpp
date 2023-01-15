@@ -1,5 +1,5 @@
 #include "Circle.hpp"
-#include "BaseEntity.hpp"
+#include "Entities/Empty.hpp"
 #include "Graphs.hpp"
 #include "Polygon.hpp"
 #include "Rect.hpp"
@@ -15,8 +15,8 @@ namespace BirbTest
 	{
 		Scene scene;
 
-		BaseEntity entityA("Test entity A");
-		BaseEntity entityB("Test entity B");
+		Entity::Empty entityA("Test entity A");
+		Entity::Empty entityB("Test entity B");
 		entityB.renderingPriority = 5;
 
 		Widgets::Graph graphs[2] = {
@@ -169,7 +169,7 @@ namespace BirbTest
 			CHECK_FALSE(entityB.world_space);
 			CHECK_FALSE(some_new_rect.world_space);
 
-			BaseEntity new_entity;
+			Entity::Empty new_entity;
 			scene.AddObject(&new_entity);
 			CHECK_FALSE(new_entity.world_space);
 

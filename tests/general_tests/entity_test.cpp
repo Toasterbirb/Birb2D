@@ -1,5 +1,5 @@
 #include "doctest.h"
-#include "BaseEntity.hpp"
+#include "Entities/Empty.hpp"
 
 using namespace Birb;
 
@@ -7,10 +7,10 @@ namespace BirbTest
 {
 	TEST_CASE("Entity comparison")
 	{
-		BaseEntity entityA("First entity");
+		Entity::Empty entityA("First entity");
 		CHECK(entityA == entityA);
 
-		BaseEntity entityB("Second entity");
+		Entity::Empty entityB("Second entity");
 		CHECK_FALSE(entityA == entityB);
 		entityB.name = "First entity";
 		CHECK(entityA == entityB);
@@ -18,7 +18,7 @@ namespace BirbTest
 
 	TEST_CASE("Empty entity")
 	{
-		BaseEntity entity;
+		Entity::Empty entity;
 		CHECK(entity.name == "Default Entity");
 	}
 

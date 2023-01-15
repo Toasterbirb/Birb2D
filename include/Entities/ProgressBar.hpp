@@ -11,7 +11,7 @@ namespace Birb
 	{
 		/// ProgressBar is used to create... well... progress bars
 		/// If the entity has a sprite on it. That will be used instead of the fill color
-		class ProgressBar : public BaseEntity
+		class ProgressBar : public BaseEntity, public SceneObject
 		{
 		public:
 			ProgressBar();
@@ -45,6 +45,7 @@ namespace Birb
 
 		private:
 			void RenderFunc() override;
+			void SetPos(const Vector2& delta) override;
 		};
 	}
 }

@@ -13,7 +13,7 @@ namespace Birb
 	namespace Entity
 	{
 		/// Click adds button functionality to the Entity
-		class Button : public BaseEntity
+		class Button : public BaseEntity, public SceneObject
 		{
 		public:
 			Button();
@@ -32,6 +32,9 @@ namespace Birb
 			static void PlaceHolderClickEvent();
 			static void PlaceHolderHoverEvent();
 			static void PlaceHolderDragEvent();
+
+			void RenderFunc() override;
+			void SetPos(const Vector2& delta) override;
 		};
 	}
 }

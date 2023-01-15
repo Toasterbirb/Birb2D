@@ -1,5 +1,5 @@
 #include "Circle.hpp"
-#include "BaseEntity.hpp"
+#include "Entities/Empty.hpp"
 #include "Physics.hpp"
 #include "Polygon.hpp"
 #include "Rect.hpp"
@@ -140,9 +140,9 @@ namespace BirbTest
 
 	TEST_CASE("Entity collision")
 	{
-		BaseEntity entityA("Entity A");
-		BaseEntity entityB("Entity B");
-		BaseEntity entityC("Entity C");
+		Entity::Empty entityA("Entity A");
+		Entity::Empty entityB("Entity B");
+		Entity::Empty entityC("Entity C");
 
 		Rect rectA(0, 0, 4, 2);
 		entityA.rect = rectA;
@@ -160,8 +160,8 @@ namespace BirbTest
 	// TODO: Consider adding local scale back
 	//TEST_CASE("Entity collision with localScale")
 	//{
-	//	BaseEntity entityA("Entity A");
-	//	BaseEntity entityB("Entity B");
+	//	Entity::Empty entityA("Entity A");
+	//	Entity::Empty entityB("Entity B");
 
 	//	Rect rectA(0, 0, 4, 2);
 	//	entityA.rect = rectA;

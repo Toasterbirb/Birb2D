@@ -193,6 +193,7 @@ set(CORE_SRC
 
 	src/Entities/animation.cpp
 	src/Entities/button.cpp
+	src/Entities/empty.cpp
 	src/Entities/image.cpp
 	src/Entities/progressbar.cpp
 	src/Entities/text.cpp

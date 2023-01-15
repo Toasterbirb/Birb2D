@@ -1,4 +1,5 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+#include "Logger.hpp"
 #include "Render.hpp"
 #include "ResourceMonitor.hpp"
 #include "Timestep.hpp"
@@ -12,6 +13,8 @@ namespace Birb
 
 		ResourceMonitor::ResourceMonitor(TimeStep* timestep)
 		{
+			scene.world_space = false;
+
 			/* Load the debug font */
 			debug_text_font = new Font("birb2d_res/fonts/freefont/FreeMonoBold.ttf", 14);
 

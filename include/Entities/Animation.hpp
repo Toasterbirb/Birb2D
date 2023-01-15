@@ -10,7 +10,7 @@ namespace Birb
 	namespace Entity
 	{
 		/// Animation allows for texture atlas based sprite animations
-		class Animation : public BaseEntity
+		class Animation : public BaseEntity, public SceneObject
 		{
 		public:
 			Animation();
@@ -50,6 +50,7 @@ namespace Birb
 			SDL_Rect dst;
 
 			void RenderFunc() override;
+			void SetPos(const Vector2& delta) override;
 		};
 	}
 }
