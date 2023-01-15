@@ -43,6 +43,13 @@ namespace Birb
 						&& spriteSize 	== other.spriteSize
 						&& lastFrame 	== other.lastFrame);
 			}
+
+		private:
+			void StepFrame();
+			SDL_Rect src;
+			SDL_Rect dst;
+
+			void RenderFunc() override;
 		};
 	}
 }

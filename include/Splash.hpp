@@ -1,7 +1,9 @@
 #pragma once
+#include "Entities/Image.hpp"
+#include "Entities/Text.hpp"
 #include "Renderwindow.hpp"
-#include "Entity.hpp"
 #include "Scene.hpp"
+#include "Font.hpp"
 
 namespace Birb
 {
@@ -26,11 +28,11 @@ namespace Birb
 		Font manaspace;
 		Font manaspace_small;
 
-		Entity background_plane;
-		Entity birb2d_logo;
-		Entity birb2d_text;
+		Entity::Image background_plane;
+		Entity::Image birb2d_logo;
+		Entity::Text birb2d_text;
 
-		Entity loading_text_entity;
+		Entity::Text loading_text_entity;
 
 	};
 }

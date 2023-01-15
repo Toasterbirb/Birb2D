@@ -1,8 +1,9 @@
 #include "Entities/Text.hpp"
-#include "microprofile.h"
-#include "Resources.hpp"
 #include "Logger.hpp"
+#include "Render.hpp"
+#include "Resources.hpp"
 #include "Values.hpp"
+#include "microprofile.h"
 
 #define PROFILER_GROUP "Entities"
 #define PROFILER_COLOR MP_LIGHTGREEN
@@ -25,12 +26,14 @@ namespace Birb
 		{
 			bgColor = NULL;
 			wrapLength = 0;
+			LoadSprite();
 		}
 
 		Text::Text(const std::string& text, Font& font, const Color& color, const Color& bgColor)
 		:color(color), bgColor(bgColor), text(text), font(font)
 		{
 			wrapLength = 0;
+			LoadSprite();
 		}
 
 		bool Text::SetText(const std::string& newText)
@@ -74,7 +77,7 @@ namespace Birb
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Reload sprite", PROFILER_COLOR);
 
 			/* Destroy the old sprite */
-			texture.Destroy();
+			sprite.Destroy();
 
 			/* Create new text sprite */
 			return LoadSprite();
@@ -84,28 +87,33 @@ namespace Birb
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Load sprite", PROFILER_COLOR);
 
-			/* Generate the texture if there's text to render */
+			/* Generate the sprite if there's text to render */
 			if (text != "")
 			{
 				if (bgColor == NULL)
-					texture = Resources::TextSprite(text, font, color, wrapLength);
+					sprite = Resources::TextSprite(text, font, color, wrapLength);
 				else
-					texture = Resources::TextSprite(text, font, color, bgColor);
+					sprite = Resources::TextSprite(text, font, color, bgColor);
 
-				if (texture.isLoaded() == false)
+				if (sprite.isLoaded() == false)
 				{
 					Debug::Log("Something went wrong while creating the text sprite for '" + name + "'", Debug::error);
 					return false;
 				}
 				else
 				{
-					/* Get texture scale automatically */
+					/* Get sprite scale automatically */
 					rect.w = sprite.dimensions().x;
 					rect.h = sprite.dimensions().y;
 				}
 			}
 
 			return true;
+		}
+
+		void Text::RenderFunc()
+		{
+			Render::DrawTexture(sprite, rect, world_space, angle);
 		}
 	}
 }

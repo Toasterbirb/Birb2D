@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Entities/Image.hpp"
+#include "Entities/Text.hpp"
 #include <vector>
 #ifndef DISTCC
 #include "STD.hpp"
@@ -8,7 +10,6 @@
 #endif
 
 #include "Audio.hpp"
-#include "Entity.hpp"
 #include "Input.hpp"
 #include "MainMenuSettings.hpp"
 #include "Scene.hpp"
@@ -34,8 +35,8 @@ namespace Birb
 
 		Scene menu_scene;
 		Scene credits_scene;
-		Entity title_text;
-		Entity background;
+		Entity::Text title_text;
+		Rect background;
 
 		Entity window_title_text;
 

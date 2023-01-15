@@ -25,6 +25,56 @@ namespace Birb
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 		}
 
+		bool DrawTexture(const Texture& texture, const Rect& rect, const bool& world_space, const float& angle)
+		{
+			SDL_Rect src;
+			SDL_Rect dst;
+			src.x = 0;
+			src.y = 0;
+			src.w = texture.dimensions().x;
+			src.h = texture.dimensions().y;
+
+			dst.x = rect.x - (Global::RenderVars::CameraPosition.x * world_space);
+			dst.y = rect.y - (Global::RenderVars::CameraPosition.y * world_space);
+			dst.w = rect.w; // * entity.localScale.x;
+			dst.h = rect.h; // * entity.localScale.y;
+			return DrawTexture(texture, src, dst, angle);
+		}
+
+		bool DrawTexture(const Texture& texture, const SDL_Rect& src, const SDL_Rect& dst, const float& angle)
+		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw texture", PROFILER_COLOR);
+
+			/* Make sure that the texture is loaded */
+			if (!texture.isLoaded())
+				return false;
+
+			/* Get texture data */
+			int texWidth 	= 0;
+			int texHeight 	= 0;
+
+			if (texture.dimensions().x <= 0 || texture.dimensions().y <= 0)
+			{
+				Birb::Debug::Log("Tried to render an entity with a texture with size of <= 0", Debug::Type::warning);
+				return false;
+			}
+
+			Vector2Int centerPoint(texture.dimensions().x / 2, texture.dimensions().y / 2);
+			SDL_Point center = { centerPoint.x, centerPoint.y };
+
+			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, texture.sdlTexture(), &src, &dst, angle, &center, SDL_FLIP_NONE) < 0)
+			{
+				Debug::Log("Error rendering a texture with dimensions [ " + texture.dimensions().ToString() + " ]. SDL Error: " + SDL_GetError(), Debug::error);
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+
+			return true;
+		}
+
 		void DrawRect(const Rect& rect)
 		{
 			DrawRect(rect.color, rect);

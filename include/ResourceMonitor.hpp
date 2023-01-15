@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity.hpp"
+#include "Entities/Text.hpp"
 #include "Font.hpp"
 #include "Input.hpp"
 #include "SceneObject.hpp"
@@ -36,7 +36,7 @@ namespace Birb
 
 		private:
 			Font* 			debug_text_font;
-			Entity 			debug_text_entity;
+			Entity::Text 	debug_text_entity;
 			TimeStep* 		timestep;
 			std::string 	debug_text;
 

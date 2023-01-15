@@ -16,8 +16,9 @@ namespace Birb
 			debug_text_font = new Font("birb2d_res/fonts/freefont/FreeMonoBold.ttf", 14);
 
 			/* Create the text entity */
-			EntityComponent::Text text_component("NULL", debug_text_font, &Colors::Nord::Frost::nord9, &Colors::Nord::PolarNight::nord0);
-			debug_text_entity = Entity("Debug text", Vector2Int(0, 0), text_component, 1);
+			//EntityComponent::Text text_component("NULL", debug_text_font, &Colors::Nord::Frost::nord9, &Colors::Nord::PolarNight::nord0);
+			//debug_text_entity = Entity("Debug text", Vector2Int(0, 0), text_component, 1);
+			debug_text_entity = Entity::Text("NULL", *debug_text_font, Colors::Nord::Frost::nord9, Colors::Nord::PolarNight::nord0);
 			debug_text_entity.world_space = false;
 
 #ifndef __WINDOWS__

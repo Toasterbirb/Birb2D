@@ -1,3 +1,18 @@
+# FZF stuff
+include/doctest.h
+include/json.hpp
+vendor/
+CODE_OF_CONDUCT.md
+README.md
+compile_flags.txt
+doxygen_config
+birb2d_res/
+tests/res/
+utils/editor/res/
+LICENSE
+COPYING
+AUTHORS
+
 # AssetBundle header
 include/AssetBundle.hpp
 
@@ -47,7 +62,6 @@ log.txt
 
 # Vim stuff
 .undodir
-tags
 
 # AppImage
 *.AppDir

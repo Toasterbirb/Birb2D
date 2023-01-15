@@ -1,4 +1,6 @@
 #include "Entities/Animation.hpp"
+#include "Render.hpp"
+#include "Values.hpp"
 
 namespace Birb
 {
@@ -74,6 +76,53 @@ namespace Birb
 			pos.y = fullRowCount * spriteSize.y;
 
 			return pos;
+		}
+
+		void Animation::StepFrame()
+		{
+			/* Set the current atlas position to the next frame */
+			if (animationQueued || loop)
+			{
+				Vector2Int atlasPos = getAtlasPosition(frameIndex);
+				src.x = atlasPos.x;
+				src.y = atlasPos.y;
+				src.w = spriteSize.x;
+				src.h = spriteSize.y;
+
+				dst.x = rect.x - (Global::RenderVars::CameraPosition.x * world_space);
+				dst.y = rect.y - (Global::RenderVars::CameraPosition.y * world_space);
+				dst.w = src.w; // * entity->localScale.x;
+				dst.h = src.h; // * entity->localScale.y;
+
+				if (frameTimer.running && frameTimer.ElapsedSeconds() >= (1.0 / fps))
+				{
+					if (frameIndex < lastFrame)
+					{
+						frameIndex++;
+						frameTimer.Start();
+					}
+				}
+				else if (!frameTimer.running)
+				{
+					/* Start the frame timer */
+					frameTimer.Start();
+				}
+
+				if (loop && frameIndex >= lastFrame)
+				{
+					frameIndex = 0;
+				}
+				else if (animationQueued && frameIndex >= lastFrame)
+				{
+					frameIndex = lastFrame;
+					animationQueued = false;
+				}
+			}
+		}
+
+		void Animation::RenderFunc()
+		{
+			Render::DrawTexture(sprite, src, dst, angle);
 		}
 	}
 }

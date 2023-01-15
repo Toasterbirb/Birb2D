@@ -9,6 +9,7 @@
 namespace Birb
 {
 	class Circle;
+	class Texture;
 
 	namespace Render
 	{
@@ -16,6 +17,9 @@ namespace Birb
 
 		void ResetDrawColor(); ///< Resets the drawing color back to black, so that the window background color stays the same
 		void SetRenderDrawColor(const Color& color); ///< Sets the drawing color for base SDL2 drawing functions
+
+		bool DrawTexture(const Texture& texture, const Rect& rect, const bool& world_space = true, const float& angle = 0.0f);
+		bool DrawTexture(const Texture& texture, const SDL_Rect& src, const SDL_Rect& dst, const float& angle = 0.0f);
 
 		void DrawRect(const Rect& rect); ///< Draw filled rect
 		void DrawRect(const Color& color, const Rect& dimensions); ///< Draw filled rect

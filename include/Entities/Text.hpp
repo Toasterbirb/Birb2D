@@ -27,6 +27,17 @@ namespace Birb
 			void SetFont(Font& font); 			///< Change the font in Text and reload the sprite
 			void SetTextColor(Color& color); 			///< Change the color in Text and reload the sprite
 
+			Text& operator=(const Text& other)
+			{
+				this->sprite 	= other.sprite;
+				this->text 		= other.text;
+				this->font 		= other.font;
+				this->color 	= other.color;
+				this->bgColor 	= other.bgColor;
+				return *this;
+			}
+			//SceneObject& operator=(SceneObject&&) 		= default;
+
 			bool operator==(const Text& other) const
 			{
 				return 	(text 		== other.text
@@ -38,9 +49,11 @@ namespace Birb
 		private:
 			bool ReloadSprite();
 			bool LoadSprite();
-			Texture texture;
+			Texture sprite;
 			std::string text;
 			Font& font;
+
+			void RenderFunc() override;
 		};
 	}
 }

@@ -2,6 +2,12 @@
 
 #include "SDL.hpp"
 
+#ifdef DISTCC
+#include <functional>
+#else
+#include "STD.hpp"
+#endif
+
 #include "Circle.hpp"
 #include "Color.hpp"
 #include "Input.hpp"

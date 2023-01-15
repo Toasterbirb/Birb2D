@@ -1,6 +1,7 @@
 #include "Entities/ProgressBar.hpp"
 #include "Logger.hpp"
 #include "Physics.hpp"
+#include "Render.hpp"
 #include "Vector/Vector2.hpp"
 
 namespace Birb
@@ -10,51 +11,54 @@ namespace Birb
 		ProgressBar::ProgressBar()
 		{
 			borderWidth 	= 1;
-			borderColor 	= &Birb::Colors::White;
-			backgroundColor = &Birb::Colors::Black;
-			fillColor 		= &Birb::Colors::White;
+			borderColor 	= Birb::Colors::White;
+			backgroundColor = Birb::Colors::Black;
+			fillColor 		= Birb::Colors::White;
 
 			minValue = 0;
 			maxValue = 1;
 			value = 0;
 
 			active = false;
-			parent_entity = nullptr;
 		}
 
-		ProgressBar::ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor)
-		:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor)
+		ProgressBar::ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color)
+		:borderWidth(border_width), borderColor(border_color), backgroundColor(background_color), fillColor(fill_color)
 		{
 			minValue = 0;
 			maxValue = 1;
 			value = 0.25f;
 
 			active = true;
-			parent_entity = nullptr;
 		}
 
-		ProgressBar::ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value)
-		:borderWidth(p_borderWidth), borderColor(p_borderColor), backgroundColor(p_backgroundColor), fillColor(p_fillColor), minValue(p_minValue), maxValue(p_maxValue), value(p_value)
+		ProgressBar::ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color, const int& min_value, const int& max_value, const int& value)
+		:borderWidth(border_width), borderColor(border_color), backgroundColor(background_color), fillColor(fill_color), minValue(min_value), maxValue(max_value), value(value)
 		{
 			active = true;
-			parent_entity = nullptr;
 		}
 
 		void ProgressBar::SetValueFromRelativePoint(Vector2 point)
 		{
-			/* Check if the parent entity has been set */
-			// FIXME: Add a more elegant way to make th progressbars aware of their parent entity
-			if (parent_entity == nullptr)
-			{
-				Debug::Log("Set the slider parent entity first before using SetValueFromRelativePoint()", Debug::fixme);
-				return;
-			}
-
 			/* First test if the point is even on the Entity */
-			if (!Physics::PointInRect(parent_entity->rect, point))
+			if (!Physics::PointInRect(rect, point))
 				return;
 
-			value = ((point.x - parent_entity->rect.x) / parent_entity->rect.w) * maxValue;
+			value = ((point.x - rect.x) / rect.w) * maxValue;
+		}
+
+		void ProgressBar::RenderFunc()
+		{
+			/* Draw progress bar background unless the bar is full */
+			if (value < maxValue)
+				Render::DrawRect(backgroundColor, rect);
+
+			/* Draw the progress bar filler box */
+			Birb::Rect fillRect(rect.x, rect.y, (value / maxValue) * rect.w, rect.h);
+			Render::DrawRect(fillColor, fillRect);
+
+			/* Draw the progress bar outer box */
+			Render::DrawRect(borderColor, rect, borderWidth);
 		}
 	}
 }

@@ -3,7 +3,7 @@
 
 namespace Birb
 {
-	namespace EntityComponent
+	namespace Entity
 	{
 		void Button::PlaceHolderMouseDownEvent()
 		{

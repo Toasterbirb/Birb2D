@@ -22,22 +22,25 @@ namespace Birb
 		button_hover = Audio::SoundFile("birb2d_res/sounds/button_hover.wav");
 
 		/* If a background texture is set, use that */
-		if (this->settings->background_texture.isLoaded())
-		{
-			background = Entity("Main menu background", game.window->dimensions, this->settings->background_texture, -1);
-		}
-		else
-		{
-			background.rect = Rect(0, 0, this->game->window->dimensions.x, this->game->window->dimensions.y);
-			background.rect.color = this->settings->background_color;
-		}
+		//if (this->settings->background_texture.isLoaded())
+		//{
+		//	background = Entity("Main menu background", game.window->dimensions, this->settings->background_texture, -1);
+		//}
+		//else
+		//{
+		//	background.rect = Rect(0, 0, this->game->window->dimensions.x, this->game->window->dimensions.y);
+		//	background.rect.color = this->settings->background_color;
+		//}
+		background.color = this->settings->background_color;
 		menu_scene.AddObject(&background);
 
 		/* Initialize any entities */
-		title_text = Entity("Title text",
-				settings.title.position,
-				EntityComponent::Text(settings.title.text, &this->settings->title.font, &this->settings->title.color),
-				1);
+		//title_text = Entity("Title text",
+		//		settings.title.position,
+		//		EntityComponent::Text(settings.title.text, &this->settings->title.font, &this->settings->title.color),
+		//		1);
+		title_text = Entity::Text(settings.title.text, this->settings->title.font, this->settings->title.color);
+		title_text.rect = this->settings->title.position;
 		menu_scene.AddObject(&title_text);
 
 		/* Add button backgrounds to the scene */

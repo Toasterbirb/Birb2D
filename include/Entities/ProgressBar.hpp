@@ -15,14 +15,14 @@ namespace Birb
 		{
 		public:
 			ProgressBar();
-			ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor);
-			ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value);
+			ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color);
+			ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color, const int& min_value, const int& max_value, const int& value);
 			bool active; ///< Setting this value active toggles on the progress bar component
 
 			int borderWidth; ///< Sets the thickness of the borders around the progress bar
-			Color* borderColor; ///< Border color around the fill area
-			Color* backgroundColor; ///< Background color that is below the filled area
-			Color* fillColor; ///< Color that hides the background color
+			Color borderColor; ///< Border color around the fill area
+			Color backgroundColor; ///< Background color that is below the filled area
+			Color fillColor; ///< Color that hides the background color
 
 			float minValue; ///< Value where the progress bar should be empty
 			float maxValue; ///< Value where the progress bar should be full
@@ -44,6 +44,7 @@ namespace Birb
 			}
 
 		private:
+			void RenderFunc() override;
 		};
 	}
 }
