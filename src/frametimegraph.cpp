@@ -32,6 +32,10 @@ namespace Birb
 			framebudget_text.rect.x = rect.x + rect.w + 8;
 			framebudget_text.rect.y = rect.y + 56;
 			framebudget_text.world_space = false;
+
+			scene.AddObject(&fps_text);
+			scene.AddObject(&frametime_text);
+			scene.AddObject(&framebudget_text);
 		}
 
 		void FrametimeGraph::Render()
@@ -62,10 +66,7 @@ namespace Birb
 			frametime_text.SetText(utils::CleanDecimals(timeStep.deltaTime) + "ms");
 			framebudget_text.SetText(utils::CleanDecimals(timeStep.FrameBudget()) + "%");
 
-			Render::DrawEntity(fps_text);
-			Render::DrawEntity(frametime_text);
-			Render::DrawEntity(framebudget_text);
-
+			scene.Render();
 			graph.Render();
 		}
 	}

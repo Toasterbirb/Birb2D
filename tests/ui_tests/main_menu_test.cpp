@@ -1,4 +1,4 @@
-#include "EntityComponent/Text.hpp"
+#include "Entities/Text.hpp"
 #include "Font.hpp"
 #include "Scene.hpp"
 #include "Vector/Vector2Int.hpp"
@@ -20,7 +20,7 @@ namespace BirbTest
 
 	Font* font;
 
-	Entity game_reached_text;
+	Entity::Text game_reached_text;
 	Scene game_scene;
 
 
@@ -37,9 +37,8 @@ namespace BirbTest
 	{
 		font = new Font("fonts/freefont/FreeMonoBold.ttf", 64);
 
-		game_reached_text = Entity("Game reached", Vector2Int(128, 128),
-				EntityComponent::Text("This is the game", font, &Colors::Nord::Frost::nord9),
-				1);
+		game_reached_text = Entity::Text("Game reached", Vector2Int(128, 128), "This is the game", *font, Colors::Nord::Frost::nord9);
+		game_reached_text.renderingPriority = 1;
 		game_scene.AddObject(&game_reached_text);
 
 		/* Create the main menu and start it */

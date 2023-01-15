@@ -13,6 +13,12 @@ namespace Birb
 			Image();
 			Image(Texture& texture, const Rect& rect);
 
+			/// This is here just for compatiblitys sake
+			Image(const std::string& name, const Vector2Int& pos, Texture& texture);
+
+			/// This is here just for compatiblitys sake
+			Image(const std::string& name, const Rect& rect, Texture& texture);
+
 			Texture& sprite;
 			float angle;
 

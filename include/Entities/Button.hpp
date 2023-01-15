@@ -17,6 +17,8 @@ namespace Birb
 		{
 		public:
 			Button();
+			Button(const Rect& rect);
+			Button(const std::string& name, const Rect& rect);
 			Button(const std::function<void()>& p_onClick);
 			bool active;
 			bool isPressed;

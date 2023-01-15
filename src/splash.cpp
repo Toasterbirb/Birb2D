@@ -65,6 +65,7 @@ namespace Birb
 
 		loading_text_entity.renderingPriority = 10;
 		loading_text_entity.active = false;
+		loading_scene.AddObject(&loading_text_entity);
 
 		/* Implement a simple rendering loop */
 		TimeStep timeStep;
@@ -139,7 +140,7 @@ namespace Birb
 		loading_text_entity.active = true;
 		window.Clear();
 		scene.Render();
-		Render::DrawEntity(loading_text_entity);
+		loading_scene.Render();
 		window.Display();
 	}
 }

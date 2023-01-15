@@ -16,6 +16,20 @@ namespace Birb
 			this->rect = rect;
 		}
 
+		Image::Image(const std::string& name, const Vector2Int& pos, Texture& texture)
+		:sprite(texture), angle(0.0f)
+		{
+			this->name = name;
+			this->rect = pos;
+		}
+
+		Image::Image(const std::string& name, const Rect& rect, Texture& texture)
+		:sprite(texture), angle(0.0f)
+		{
+			this->name = name;
+			this->rect = rect;
+		}
+
 		void Image::RenderFunc()
 		{
 			Render::DrawTexture(sprite, rect, world_space, angle);

@@ -3,6 +3,7 @@
 #include "Entities/Text.hpp"
 #include "Font.hpp"
 #include "Input.hpp"
+#include "Scene.hpp"
 #include "SceneObject.hpp"
 
 /* Linux only things */
@@ -35,6 +36,8 @@ namespace Birb
 			void Free(); ///< Free the font
 
 		private:
+			Scene scene;
+
 			Font* 			debug_text_font;
 			Entity::Text 	debug_text_entity;
 			TimeStep* 		timestep;

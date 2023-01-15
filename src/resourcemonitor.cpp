@@ -20,6 +20,7 @@ namespace Birb
 			//debug_text_entity = Entity("Debug text", Vector2Int(0, 0), text_component, 1);
 			debug_text_entity = Entity::Text("NULL", *debug_text_font, Colors::Nord::Frost::nord9, Colors::Nord::PolarNight::nord0);
 			debug_text_entity.world_space = false;
+			scene.AddObject(&debug_text_entity);
 
 #ifndef __WINDOWS__
 			/* Get our own PID */
@@ -72,7 +73,7 @@ namespace Birb
 		void ResourceMonitor::Render()
 		{
 			debug_text_entity.SetText(debug_text);
-			Render::DrawEntity(debug_text_entity);
+			scene.Render();
 		}
 
 		void ResourceMonitor::Free()

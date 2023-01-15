@@ -34,5 +34,6 @@ namespace Birb
 
 		Entity::Text loading_text_entity;
 
+		Scene loading_scene;
 	};
 }

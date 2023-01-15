@@ -43,7 +43,7 @@ namespace Birb
 
 	void BaseEntity::RenderFunc()
 	{
-		Render::DrawEntity(*this);
+		Render::DrawRect(this->rect);
 	}
 
 	void BaseEntity::SetPos(const Vector2& delta)

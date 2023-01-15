@@ -21,6 +21,20 @@ namespace Birb
 			wrapLength = 0;
 		}
 
+		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font& font, const Color& color)
+		:color(color), text(text), font(font), has_background_color(false)
+		{
+			this->name = name;
+			this->rect = pos;
+		}
+
+		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font& font, const Color& color, const Color& bg_color)
+		:color(color), bgColor(bg_color), text(text), font(font), has_background_color(false)
+		{
+			this->name = name;
+			this->rect = pos;
+		}
+
 		Text::Text(const std::string& text, const Vector2Int& pos, Font& font, const Color& color)
 		:color(color), text(text), font(font), has_background_color(false)
 		{
@@ -34,11 +48,26 @@ namespace Birb
 			LoadSprite();
 		}
 
-		Text::Text(const std::string& text, Font& font, const Color& color, const Color& bgColor)
-		:color(color), bgColor(bgColor), text(text), font(font), has_background_color(true)
+		Text::Text(const std::string& text, Font& font, const Color& color, const Color& bg_color)
+		:color(color), bgColor(bg_color), text(text), font(font), has_background_color(true)
 		{
 			wrapLength = 0;
 			LoadSprite();
+		}
+
+		std::string Text::GetText() const
+		{
+			return this->text;
+		}
+
+		Color Text::GetColor() const
+		{
+			return this->color;
+		}
+
+		Color Text::GetBgColor() const
+		{
+			return this->bgColor;
 		}
 
 		bool Text::SetText(const std::string& newText)

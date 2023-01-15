@@ -1,5 +1,5 @@
 #include "Circle.hpp"
-#include "Entity.hpp"
+#include "BaseEntity.hpp"
 #include "Physics.hpp"
 #include "Polygon.hpp"
 #include "Rect.hpp"
@@ -140,9 +140,9 @@ namespace BirbTest
 
 	TEST_CASE("Entity collision")
 	{
-		Entity entityA("Entity A");
-		Entity entityB("Entity B");
-		Entity entityC("Entity C");
+		BaseEntity entityA("Entity A");
+		BaseEntity entityB("Entity B");
+		BaseEntity entityC("Entity C");
 
 		Rect rectA(0, 0, 4, 2);
 		entityA.rect = rectA;
@@ -157,20 +157,21 @@ namespace BirbTest
 		CHECK_FALSE(EntityCollision(entityA, entityC));
 	}
 
-	TEST_CASE("Entity collision with localScale")
-	{
-		Entity entityA("Entity A");
-		Entity entityB("Entity B");
+	// TODO: Consider adding local scale back
+	//TEST_CASE("Entity collision with localScale")
+	//{
+	//	BaseEntity entityA("Entity A");
+	//	BaseEntity entityB("Entity B");
 
-		Rect rectA(0, 0, 4, 2);
-		entityA.rect = rectA;
-		entityA.localScale = Vector2(2, 1);
+	//	Rect rectA(0, 0, 4, 2);
+	//	entityA.rect = rectA;
+	//	entityA.localScale = Vector2(2, 1);
 
-		Rect rectB(5, 1, 3, 2);
-		entityB.rect = rectB;
+	//	Rect rectB(5, 1, 3, 2);
+	//	entityB.rect = rectB;
 
-		CHECK(EntityCollision(entityA, entityB));
-	}
+	//	CHECK(EntityCollision(entityA, entityB));
+	//}
 
 	TEST_CASE("Line intersection")
 	{

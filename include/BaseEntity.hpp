@@ -31,6 +31,13 @@ namespace Birb
 
 		void SetBaseEntityValues(); 	///< Used to set some default value when they aren't provided during Entity initialization
 
+		bool operator==(const BaseEntity& other) const
+		{
+			return 	(name 		== other.name
+					&& angle 	== other.angle
+					&& rect 	== other.rect);
+		}
+
 	private:
 		void RenderFunc() override;
 		void SetPos(const Vector2& delta) override;

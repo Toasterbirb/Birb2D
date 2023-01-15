@@ -5,6 +5,36 @@ namespace Birb
 {
 	namespace Entity
 	{
+		Button::Button()
+		{
+			AssignPlaceholderEvents();
+			onClick 	= PlaceHolderClickEvent;
+			active 		= true;
+			isPressed 	= false;
+		}
+
+		Button::Button(const Rect& rect)
+		:active(true), isPressed(false)
+		{
+			AssignPlaceholderEvents();
+			this->rect = rect;
+		}
+
+		Button::Button(const std::string& name, const Rect& rect)
+		:active(true), isPressed(false)
+		{
+			this->rect = rect;
+			this->name = name;
+		}
+
+		Button::Button(const std::function<void()>& p_onClick)
+		:onClick(p_onClick)
+		{
+			AssignPlaceholderEvents();
+			active 		= true;
+			isPressed 	= false;
+		}
+
 		void Button::PlaceHolderMouseDownEvent()
 		{
 			if (Diagnostics::Debugging::Buttons)
@@ -42,22 +72,6 @@ namespace Birb
 			onMouseDown = PlaceHolderMouseDownEvent;
             onHover = PlaceHolderHoverEvent;
             onDrag  = PlaceHolderDragEvent;
-		}
-
-		Button::Button()
-		{
-			AssignPlaceholderEvents();
-			onClick 	= PlaceHolderClickEvent;
-			active 		= true;
-			isPressed 	= false;
-		}
-
-		Button::Button(const std::function<void()>& p_onClick)
-		:onClick(p_onClick)
-		{
-			AssignPlaceholderEvents();
-			active 		= true;
-			isPressed 	= false;
 		}
 	}
 }

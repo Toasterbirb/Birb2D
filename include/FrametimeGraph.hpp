@@ -3,6 +3,7 @@
 //#include "BaseEntity.hpp"
 #include "Graphs.hpp"
 #include "Rect.hpp"
+#include "Scene.hpp"
 #include "Timestep.hpp"
 
 namespace Birb
@@ -28,6 +29,7 @@ namespace Birb
 		private:
 			TimeStep& timeStep;
 			Widgets::Graph graph;
+			Scene scene;
 		};
 	}
 }

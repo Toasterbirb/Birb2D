@@ -16,30 +16,31 @@ namespace BirbTest
 			Scene testScene;
 			testScene.Activate();
 
-			Entity greenText("Normal green text", Vector2Int(50, 50), EntityComponent::Text("", &font, &Colors::Green));
-			CHECK(greenText.textComponent.color == &Colors::Green);
-			CHECK(greenText.textComponent.text == "");
+			Entity::Text greenText("Normal green text", Vector2Int(50, 50), "", font, Colors::Green);
+			CHECK(greenText.GetColor() == Colors::Green);
+			CHECK(greenText.GetText() == "");
 			CHECK(greenText.SetText("Normal green text"));
-			CHECK(greenText.textComponent.text == "Normal green text");
+			CHECK(greenText.GetText() == "Normal green text");
+			testScene.AddObject(&greenText);
 
-			Entity multilineWhiteText("Multiline white text", Vector2Int(50, 120), EntityComponent::Text("", &font, &Colors::White));
-			CHECK(multilineWhiteText.textComponent.color == &Colors::White);
-			CHECK(multilineWhiteText.textComponent.text == "");
+			Entity::Text multilineWhiteText("Multiline white text", Vector2Int(50, 120), "", font, Colors::White);
+			CHECK(multilineWhiteText.GetColor() == Colors::White);
+			CHECK(multilineWhiteText.GetText() == "");
 			CHECK(multilineWhiteText.SetText("1. First line\n2. Second line\n3. Third line"));
-			CHECK(multilineWhiteText.textComponent.text == "1. First line\n2. Second line\n3. Third line");
+			CHECK(multilineWhiteText.GetText() == "1. First line\n2. Second line\n3. Third line");
 			testScene.AddObject(&multilineWhiteText);
 
-			Entity textWithBackground("Text with background", Vector2Int(50, 250), EntityComponent::Text("", &font, &Colors::LightGray, &Colors::DarkGray));
-			CHECK(textWithBackground.textComponent.color == &Colors::LightGray);
-			CHECK(textWithBackground.textComponent.bgColor == &Colors::DarkGray);
-			CHECK(textWithBackground.textComponent.text == "");
+			Entity::Text textWithBackground("Text with background", Vector2Int(50, 250), "", font, Colors::LightGray, Colors::DarkGray);
+			CHECK(textWithBackground.GetColor() == Colors::LightGray);
+			CHECK(textWithBackground.GetBgColor() == Colors::DarkGray);
+			CHECK(textWithBackground.GetText() == "");
 			CHECK(textWithBackground.SetText("Text with a background color"));
-			CHECK(textWithBackground.textComponent.text == "Text with a background color");
+			CHECK(textWithBackground.GetText() == "Text with a background color");
 			testScene.AddObject(&textWithBackground);
 
-			Entity changingText("Changing text", Vector2Int(50, 300), EntityComponent::Text("Frame: 0", &font, &Colors::DarkGray, &Colors::LightGray));
-			CHECK(changingText.textComponent.color == &Colors::DarkGray);
-			CHECK(changingText.textComponent.bgColor == &Colors::LightGray);
+			Entity::Text changingText("Changing text", Vector2Int(50, 300), "Frame: 0", font, Colors::DarkGray, Colors::LightGray);
+			CHECK(changingText.GetColor() == Colors::DarkGray);
+			CHECK(changingText.GetBgColor() == Colors::LightGray);
 			testScene.AddObject(&changingText);
 
 			/* Render 24 frames to test changing text. This test should last about 1,5 seconds */
@@ -51,9 +52,6 @@ namespace BirbTest
 				CHECK(changingText.SetText("Frame: " + std::to_string(i)));
 
 				window.Clear();
-
-				/* Draw the "normal green text" manually */
-				CHECK(Render::DrawEntity(greenText));
 
 				testScene.Render();
 				window.Display();
