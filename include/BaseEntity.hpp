@@ -30,7 +30,14 @@ namespace Birb
 		float angle; 			///< Sets the rotation of the entity when rendering it
 		Rect rect; 				///< Sets the position and the dimensions of the entity
 
-		void SetBaseEntityValues(); 	///< Used to set some default value when they aren't provided during Entity initialization
+		/// Blow the error fuse in the entity. This function is mainly used for
+		/// automated testing purposes
+		void BlowErrorFuse();
+
+		/// Check the status of the error fuse.
+		/// If this function returns true, something has gone
+		/// wrong with the entity during its lifespan
+		bool ErrorFuseStatus() const;
 
 		bool operator==(const BaseEntity& other) const
 		{
@@ -40,8 +47,7 @@ namespace Birb
 		}
 
 	private:
-		//virtual void RenderFunc() override = 0;
-		//void SetPos(const Vector2& delta) override;
+		bool error_fuse;
 	};
 
 	std::ostream &operator<<(std::ostream &stream, const BaseEntity &other);

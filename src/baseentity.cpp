@@ -5,53 +5,30 @@
 #include "Renderwindow.hpp"
 #include "Resources.hpp"
 #include "Values.hpp"
-#include "microprofile.h"
 
 #ifdef DISTCC
 #include <iostream>
 #endif
 
-#define PROFILER_GROUP "Entities"
-#define PROFILER_COLOR MP_LIGHTGREEN
-
 namespace Birb
 {
-
-
-	void BaseEntity::SetBaseEntityValues()
-	{
-		angle = 0;
-		//active = true;
-	}
-
 	BaseEntity::BaseEntity()
-	:name("Default Entity")
-	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
-		SetBaseEntityValues();
-	}
+	:name("Default Entity"), angle(0), error_fuse(false)
+	{}
 
 	BaseEntity::BaseEntity(const std::string& p_name)
-	:name(p_name)
+	:name(p_name), angle(0), error_fuse(false)
+	{}
+
+	void BaseEntity::BlowErrorFuse()
 	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
-		SetBaseEntityValues();
+		error_fuse = true;
 	}
 
-	/* FIXME: Write tests for this constructor */
-	//BaseEntity::BaseEntity(const std::string& p_name, const Rect& rect, const int& rendering_priority)
-	//:name(p_name), rect(rect)
-	//{
-	//	MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity construct", PROFILER_COLOR);
-	//	//renderingPriority = rendering_priority;
-	//	SetBaseEntityValues();
-	//}
-
-	//void BaseEntity::SetPos(const Vector2& delta)
-	//{
-	//	rect.x += delta.x;
-	//	rect.y += delta.y;
-	//}
+	bool BaseEntity::ErrorFuseStatus() const
+	{
+		return error_fuse;
+	}
 
     std::ostream &operator<<(std::ostream &stream, const BaseEntity &other)
     {
