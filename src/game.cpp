@@ -97,10 +97,6 @@ namespace Birb
 			if (timeStep.ShouldRunFixedUpdate())
 			{
 				fixed_update();
-
-
-				if (Diagnostics::Debugging::Overlays::ResourceMonitor)
-					statistics.Refresh();
 			}
 
 			post_render();
@@ -142,6 +138,10 @@ namespace Birb
 
 		/* Clear the SDL error buffer since it can be a bit leaky */
 		SDL_TLSCleanup();
+
+		/* Check fuses */
+		if (statistics.ErrorFuseStatus())
+			BlowErrorFuse();
 	}
 
 	TimeStep* Game::time_step()

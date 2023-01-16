@@ -21,9 +21,11 @@ namespace Birb
 			/* Create the text entity */
 			//EntityComponent::Text text_component("NULL", debug_text_font, &Colors::Nord::Frost::nord9, &Colors::Nord::PolarNight::nord0);
 			//debug_text_entity = Entity("Debug text", Vector2Int(0, 0), text_component, 1);
-			debug_text_entity = Entity::Text("NULL", *debug_text_font, Colors::Nord::Frost::nord9, Colors::Nord::PolarNight::nord0);
-			debug_text_entity.world_space = false;
-			scene.AddObject(&debug_text_entity);
+			debug_text_entity = new Entity::Text("NULL", debug_text_font, Colors::Nord::Frost::nord9, Colors::Nord::PolarNight::nord0);
+			debug_text_entity->rect = Vector2Int(0, 0);
+			debug_text_entity->renderingPriority = 1;
+			debug_text_entity->world_space = false;
+			scene.AddObject(debug_text_entity);
 
 #ifndef __WINDOWS__
 			/* Get our own PID */
@@ -37,6 +39,10 @@ namespace Birb
 				rolling_framerate_list[i] = 0;
 
 			current_framerate_index = 0;
+
+			/* Do error checking */
+			if (debug_text_entity->ErrorFuseStatus())
+				BlowErrorFuse();
 		}
 
 		void ResourceMonitor::Refresh()
@@ -75,7 +81,12 @@ namespace Birb
 
 		void ResourceMonitor::Render()
 		{
-			debug_text_entity.SetText(debug_text);
+			debug_text_entity->SetText(debug_text);
+
+			/* Make sure that the debug text updated properly */
+			if (debug_text_entity->ErrorFuseStatus())
+				BlowErrorFuse();
+
 			scene.Render();
 		}
 

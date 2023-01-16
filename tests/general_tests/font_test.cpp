@@ -20,6 +20,7 @@ namespace BirbTest
 
 			CHECK(font.GetSize() == 13);
 			CHECK(font.isLoaded());
+			CHECK_FALSE(font.ErrorFuseStatus());
 		}
 
 		SUBCASE("With constructor parameters")
@@ -27,6 +28,7 @@ namespace BirbTest
 			Font font(fontPath, 14);
 			CHECK(font.GetSize() == 14);
 			CHECK(font.isLoaded());
+			CHECK_FALSE(font.ErrorFuseStatus());
 		}
 
 		SUBCASE("Change the font size")
@@ -38,6 +40,7 @@ namespace BirbTest
 			font.SetSize(15);
 			CHECK(font.GetSize() == 15);
 			CHECK(font.isLoaded());
+			CHECK_FALSE(font.ErrorFuseStatus());
 		}
 
 		SUBCASE("Create a copy of a Font object")
@@ -52,6 +55,9 @@ namespace BirbTest
 			/* The ttf font pointer shouldn't be the same in both fonts
 			 * because that would result in a double free */
 			CHECK_FALSE(font.ttf() == second_font.ttf());
+
+			CHECK_FALSE(font.ErrorFuseStatus());
+			CHECK_FALSE(second_font.ErrorFuseStatus());
 		}
 
 		TTF_Quit();

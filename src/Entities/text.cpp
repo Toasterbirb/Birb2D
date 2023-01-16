@@ -13,46 +13,50 @@ namespace Birb
 	namespace Entity
 	{
 		Text::Text()
-		:font(Global::DefaultSettings::DefaultFont), has_background_color(false)
+		:wrapLength(0), font(&Global::DefaultSettings::DefaultFont), has_background_color(false)
 		{
 			text 	= "";
 			color 	= Colors::White;
 			bgColor = Colors::Black;
 			wrapLength = 0;
+			sprite = Texture();
 		}
 
-		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font& font, const Color& color)
-		:color(color), text(text), font(font), has_background_color(false)
+		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color)
+		:color(color), wrapLength(0), text(text), font(font), has_background_color(false)
 		{
 			this->name = name;
 			this->rect = pos;
+			ReloadSprite();
 		}
 
-		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font& font, const Color& color, const Color& bg_color)
-		:color(color), bgColor(bg_color), text(text), font(font), has_background_color(false)
+		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color, const Color& bg_color)
+		:color(color), bgColor(bg_color), wrapLength(0), text(text), font(font), has_background_color(false)
 		{
 			this->name = name;
 			this->rect = pos;
+			ReloadSprite();
 		}
 
-		Text::Text(const std::string& text, const Vector2Int& pos, Font& font, const Color& color)
+		Text::Text(const std::string& text, const Vector2Int& pos, Font* font, const Color& color)
 		:color(color), text(text), font(font), has_background_color(false)
 		{
 			this->rect = pos;
+			ReloadSprite();
 		}
 
-		Text::Text(const std::string& text, Font& font, const Color& color)
+		Text::Text(const std::string& text, Font* font, const Color& color)
 		:color(color), text(text), font(font), has_background_color(false)
 		{
 			wrapLength = 0;
-			LoadSprite();
+			ReloadSprite();
 		}
 
-		Text::Text(const std::string& text, Font& font, const Color& color, const Color& bg_color)
+		Text::Text(const std::string& text, Font* font, const Color& color, const Color& bg_color)
 		:color(color), bgColor(bg_color), text(text), font(font), has_background_color(true)
 		{
 			wrapLength = 0;
-			LoadSprite();
+			ReloadSprite();
 		}
 
 		std::string Text::GetText() const
@@ -82,7 +86,7 @@ namespace Birb
 			return ReloadSprite();
 		}
 
-		void Text::SetFont(Font& font)
+		void Text::SetFont(Font* font)
 		{
 			/* Don't do anything if the font hasn't changed at all */
 			if (&this->font == &font)
@@ -116,10 +120,17 @@ namespace Birb
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Reload sprite", PROFILER_COLOR);
 
 			/* Destroy the old sprite */
-			sprite.Destroy();
+			if (sprite.isLoaded())
+				sprite.Destroy();
+
+			bool result = LoadSprite();
+
+			/* Check if everything is okay with the sprite */
+			if (sprite.ErrorFuseStatus() || !result)
+				BlowErrorFuse();
 
 			/* Create new text sprite */
-			return LoadSprite();
+			return result;
 		}
 
 		bool Text::LoadSprite()
@@ -130,13 +141,14 @@ namespace Birb
 			if (text != "")
 			{
 				if (!has_background_color)
-					sprite = Resources::TextSprite(text, font, color, wrapLength);
+					sprite = Resources::TextSprite(text, *font, color, wrapLength);
 				else
-					sprite = Resources::TextSprite(text, font, color, bgColor);
+					sprite = Resources::TextSprite(text, *font, color, bgColor);
 
 				if (sprite.isLoaded() == false)
 				{
 					Debug::Log("Something went wrong while creating the text sprite for '" + name + "'", Debug::error);
+					BlowErrorFuse();
 					return false;
 				}
 				else

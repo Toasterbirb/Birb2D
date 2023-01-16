@@ -79,6 +79,9 @@ namespace BirbTest
 		/* Make sure that SDL_ttf was uninitialized */
 		CHECK_FALSE(Global::IsInit::IsInit::SDL_ttf);
 		CHECK(TTF_WasInit() == 0);
+
+		/* Check fuses */
+		CHECK_FALSE(game.ErrorFuseStatus());
 	}
 
 	void game_start(Game& game)

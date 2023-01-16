@@ -39,7 +39,7 @@ namespace Birb
 		//		settings.title.position,
 		//		EntityComponent::Text(settings.title.text, &this->settings->title.font, &this->settings->title.color),
 		//		1);
-		title_text = Entity::Text(settings.title.text, this->settings->title.font, this->settings->title.color);
+		title_text = Entity::Text(settings.title.text, &this->settings->title.font, this->settings->title.color);
 		title_text.rect = this->settings->title.position;
 		menu_scene.AddObject(&title_text);
 
@@ -61,7 +61,7 @@ namespace Birb
 
 			menu_buttons[i] = Entity::Text(this->settings->buttons[i]->text,
 					Vector2Int(this->settings->buttons[i]->rect.x + this->settings->button_text_padding, this->settings->buttons[i]->rect.y + 7),
-					this->settings->buttons[i]->font,
+					&this->settings->buttons[i]->font,
 					this->settings->buttons[i]->text_color);
 			menu_buttons[i].renderingPriority = 2;
 
@@ -88,7 +88,7 @@ namespace Birb
 		//		4);
 		window_title_text = Entity::Text("Settings",
 				Vector2Int(this->settings->settings_menu.window.top_bar.x + 4, this->settings->settings_menu.window.top_bar.y + 4),
-				this->settings->settings_menu.window.title_font,
+				&this->settings->settings_menu.window.title_font,
 				this->settings->settings_menu.window.title_color);
 		settings_scene.AddObject(&window_title_text);
 
@@ -109,7 +109,7 @@ namespace Birb
 		//		4);
 		credits_text = Entity::Text(this->settings->credits_menu.credits_text,
 				Vector2Int(this->settings->credits_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding),
-				this->settings->credits_menu.text_font,
+				&this->settings->credits_menu.text_font,
 				this->settings->credits_menu.window.text_color);
 		credits_text.renderingPriority = 4;
 		credits_scene.AddObject(&credits_text);
@@ -122,7 +122,6 @@ namespace Birb
 		credits_scene.AddObject(&this->settings->credits_menu.window.background);
 		credits_scene.AddObject(&this->settings->credits_menu.window.top_bar);
 		credits_scene.AddObject(&this->window_title_text);
-
 	}
 
 	void MainMenu::Launch()
@@ -237,6 +236,18 @@ namespace Birb
 				game->time_step()->End();
 			}
 		}
+
+		/* Check fuses */
+		if (title_text.ErrorFuseStatus()
+				|| window_title_text.ErrorFuseStatus()
+				|| volume_slider.text.ErrorFuseStatus()
+				|| volume_slider.button.ErrorFuseStatus()
+				|| credits_text.ErrorFuseStatus())
+			BlowErrorFuse();
+
+		for (size_t i = 0; i < menu_buttons.size(); ++i)
+			if (menu_buttons[i].ErrorFuseStatus())
+				BlowErrorFuse();
 	}
 
 	MainMenu::Setting::Setting()
@@ -250,7 +261,7 @@ namespace Birb
 		//			&settings.settings_menu.setting_font,
 		//			&settings.settings_menu.window.text_color),
 		//		5);
-		this->text = Entity::Text(text, pos, settings.settings_menu.setting_font, settings.settings_menu.window.text_color);
+		this->text = Entity::Text(text, pos, &settings.settings_menu.setting_font, settings.settings_menu.window.text_color);
 		this->text.renderingPriority = 5;
 
 		switch (type)

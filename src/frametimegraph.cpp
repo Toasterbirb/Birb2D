@@ -18,17 +18,17 @@ namespace Birb
 			graph.rect.world_space 	= false;
 
 			font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 14);
-			fps_text = Entity::Text("", font, Colors::White);
+			fps_text = Entity::Text("", &font, Colors::White);
 			fps_text.rect.x = rect.x + rect.w + 8;
 			fps_text.rect.y = rect.y + 8;
 			fps_text.world_space = false;
 
-			frametime_text = Entity::Text("", font, Colors::White);
+			frametime_text = Entity::Text("", &font, Colors::White);
 			frametime_text.rect.x = rect.x + rect.w + 8;
 			frametime_text.rect.y = rect.y + 32;
 			frametime_text.world_space = false;
 
-			framebudget_text = Entity::Text("", font, Colors::White);
+			framebudget_text = Entity::Text("", &font, Colors::White);
 			framebudget_text.rect.x = rect.x + rect.w + 8;
 			framebudget_text.rect.y = rect.y + 56;
 			framebudget_text.world_space = false;

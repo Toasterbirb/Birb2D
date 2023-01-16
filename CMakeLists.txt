@@ -151,9 +151,10 @@ set(CORE_SRC
 	src/appinfo.cpp
 	src/assetmanager.cpp
 	src/audio.cpp
+	src/baseentity.cpp
 	src/circle.cpp
 	src/color.cpp
-	src/baseentity.cpp
+	src/errorfuse.cpp
 	src/filesystem.cpp
 	src/font.cpp
 	src/frametimegraph.cpp

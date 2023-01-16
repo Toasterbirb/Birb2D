@@ -8,9 +8,11 @@
 #include <string>
 #endif
 
+#include "ErrorFuse.hpp"
+
 namespace Birb
 {
-	class Font
+	class Font : public ErrorFuse
 	{
 	public:
 		Font();

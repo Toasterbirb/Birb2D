@@ -16,14 +16,14 @@ namespace Birb
 			Text();
 
 			/// This is here just for legacy compatibilitys sake
-			Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font& font, const Color& color);
+			Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color);
 
 			/// This is here just for legacy compatibilitys sake
-			Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font& font, const Color& color, const Color& bg_color);
+			Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color, const Color& bg_color);
 
-			Text(const std::string& text, const Vector2Int& pos, Font& font, const Color& color);
-			Text(const std::string& text, Font& font, const Color& color);
-			Text(const std::string& text, Font& font, const Color& color, const Color& bg_color);
+			Text(const std::string& text, const Vector2Int& pos, Font* font, const Color& color);
+			Text(const std::string& text, Font* font, const Color& color);
+			Text(const std::string& text, Font* font, const Color& color, const Color& bg_color);
 
 			Color color; 	///< Surface color of the text
 			Color bgColor; ///< Background color for the text component
@@ -36,7 +36,7 @@ namespace Birb
 			Color GetBgColor() const;
 
 			bool SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
-			void SetFont(Font& font); 			///< Change the font in Text and reload the sprite
+			void SetFont(Font* font); 			///< Change the font in Text and reload the sprite
 			void SetTextColor(Color& color); 			///< Change the color in Text and reload the sprite
 
 			Vector2Int sprite_dimensions() const;
@@ -48,7 +48,7 @@ namespace Birb
 				this->angle 	= other.angle;
 				this->rect 		= other.rect;
 
-				this->sprite 	= other.sprite;
+				//this->sprite 	= other.sprite;
 				this->text 		= other.text;
 				this->font 		= other.font;
 				this->color 	= other.color;
@@ -70,7 +70,7 @@ namespace Birb
 			bool LoadSprite();
 			Texture sprite;
 			std::string text;
-			Font& font;
+			Font* font;
 			bool has_background_color;
 
 			void RenderFunc() override;

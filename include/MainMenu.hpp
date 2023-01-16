@@ -3,6 +3,7 @@
 #include "Entities/Image.hpp"
 #include "Entities/ProgressBar.hpp"
 #include "Entities/Text.hpp"
+#include "ErrorFuse.hpp"
 #include <vector>
 #ifndef DISTCC
 #include "STD.hpp"
@@ -23,7 +24,7 @@ namespace Birb
 	/// game jams etc. where there might not be enough time
 	/// to create a fully polished main menu but the game
 	/// still needs some options menu and an exit button
-	class MainMenu
+	class MainMenu : public ErrorFuse
 	{
 	public:
 		MainMenu();

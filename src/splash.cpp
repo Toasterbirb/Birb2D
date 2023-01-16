@@ -41,7 +41,7 @@ namespace Birb
 			//birb2d_text = Entity("Birb2D logo text",
 			//		Vector2Int(birb2d_logo.rect.x + birb2d_logo.rect.w + 32, birb2d_logo.rect.y + (birb2d_logo.rect.y / 8)),
 			//		EntityComponent::Text("", &manaspace, &Colors::White));
-			birb2d_text = Entity::Text("", manaspace, Colors::White);
+			birb2d_text = Entity::Text("", &manaspace, Colors::White);
 			birb2d_text.rect = Vector2Int(birb2d_logo.rect.x + birb2d_logo.rect.w + 32, birb2d_logo.rect.y + (birb2d_logo.rect.y / 8));
 
 			/* Avoid problems that come from rendering an entity with size of <= 0 */
@@ -64,7 +64,7 @@ namespace Birb
 		//loading_text_entity = Entity("Loading text",
 		//		Vector2Int(32, 32),
 		//		EntityComponent::Text(loading_text, &manaspace_small, &Colors::Black));
-		loading_text_entity = Entity::Text(loading_text, manaspace_small, Colors::Black);
+		loading_text_entity = Entity::Text(loading_text, &manaspace_small, Colors::Black);
 		loading_text_entity.rect = Vector2Int(32, 32);
 
 		loading_text_entity.renderingPriority = 10;
@@ -146,5 +146,9 @@ namespace Birb
 		scene.Render();
 		loading_scene.Render();
 		window.Display();
+
+		/* Make sure that everythin went a-okay */
+		if (birb2d_logo.ErrorFuseStatus() || birb2d_text.ErrorFuseStatus() || loading_text_entity.ErrorFuseStatus())
+			BlowErrorFuse();
 	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ErrorFuse.hpp"
 #ifndef DISTCC
 #include "STD.hpp"
 #else
@@ -15,7 +16,7 @@ namespace Birb
 {
 	class Window;
 
-	class Game
+	class Game : public ErrorFuse
 	{
 	public:
 		/// Game window settings

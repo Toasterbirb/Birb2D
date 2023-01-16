@@ -1,5 +1,6 @@
 #pragma once
 
+
 namespace Birb
 {
 	/// A "fuse" that can be blown if an error occurs.
@@ -9,13 +10,13 @@ namespace Birb
 	public:
 		ErrorFuse();
 
-		/// Blow the error fuse in the entity. This function is mainly used for
+		/// Blow the error fuse in this object. This function is mainly used for
 		/// automated testing purposes
 		void BlowErrorFuse();
 
 		/// Check the status of the error fuse.
 		/// If this function returns true, something has gone
-		/// wrong with the entity during its lifespan
+		/// wrong with this object during its lifespan
 		bool ErrorFuseStatus() const;
 
 	private:

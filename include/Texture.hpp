@@ -8,11 +8,12 @@
 
 #include "SDL.hpp"
 
+#include "ErrorFuse.hpp"
 #include "Vector/Vector2Int.hpp"
 
 namespace Birb
 {
-	class Texture
+	class Texture : public ErrorFuse
 	{
 	public:
 		Texture();

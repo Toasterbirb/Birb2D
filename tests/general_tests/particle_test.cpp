@@ -47,6 +47,8 @@ namespace BirbTest
 		game.cleanup = particles_cleanup;
 
 		game.Start();
+
+		CHECK_FALSE(game.ErrorFuseStatus());
 	}
 
 	void particles_start(Game& game)

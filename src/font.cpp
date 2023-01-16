@@ -59,6 +59,7 @@ namespace Birb
 		{
 			Debug::Log("Something went wrong when loading font '" + resource_path + "' TTF_Error: " + static_cast<std::string>(TTF_GetError()), Debug::error);
 			fontLoaded = false;
+			BlowErrorFuse();
 		}
 	}
 

@@ -2,6 +2,7 @@
 #include "AssetManager.hpp"
 #include "Entities/Image.hpp"
 #include "Entities/Text.hpp"
+#include "ErrorFuse.hpp"
 #include "Font.hpp"
 #include "Renderwindow.hpp"
 #include "Scene.hpp"
@@ -9,7 +10,7 @@
 namespace Birb
 {
 	/// Creates simple splash screens with a customizable scene
-	class Splash
+	class Splash : public ErrorFuse
 	{
 	public:
 		Splash(Window& window, bool isCustom = false); ///< Creates the default Birb2D splash screen

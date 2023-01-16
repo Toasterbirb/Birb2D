@@ -16,21 +16,21 @@ namespace BirbTest
 			Scene testScene;
 			testScene.Activate();
 
-			Entity::Text greenText("Normal green text", Vector2Int(50, 50), "", font, Colors::Green);
+			Entity::Text greenText("Normal green text", Vector2Int(50, 50), "", &font, Colors::Green);
 			CHECK(greenText.GetColor() == Colors::Green);
 			CHECK(greenText.GetText() == "");
 			CHECK(greenText.SetText("Normal green text"));
 			CHECK(greenText.GetText() == "Normal green text");
 			testScene.AddObject(&greenText);
 
-			Entity::Text multilineWhiteText("Multiline white text", Vector2Int(50, 120), "", font, Colors::White);
+			Entity::Text multilineWhiteText("Multiline white text", Vector2Int(50, 120), "", &font, Colors::White);
 			CHECK(multilineWhiteText.GetColor() == Colors::White);
 			CHECK(multilineWhiteText.GetText() == "");
 			CHECK(multilineWhiteText.SetText("1. First line\n2. Second line\n3. Third line"));
 			CHECK(multilineWhiteText.GetText() == "1. First line\n2. Second line\n3. Third line");
 			testScene.AddObject(&multilineWhiteText);
 
-			Entity::Text textWithBackground("Text with background", Vector2Int(50, 250), "", font, Colors::LightGray, Colors::DarkGray);
+			Entity::Text textWithBackground("Text with background", Vector2Int(50, 250), "", &font, Colors::LightGray, Colors::DarkGray);
 			CHECK(textWithBackground.GetColor() == Colors::LightGray);
 			CHECK(textWithBackground.GetBgColor() == Colors::DarkGray);
 			CHECK(textWithBackground.GetText() == "");
@@ -38,7 +38,7 @@ namespace BirbTest
 			CHECK(textWithBackground.GetText() == "Text with a background color");
 			testScene.AddObject(&textWithBackground);
 
-			Entity::Text changingText("Changing text", Vector2Int(50, 300), "Frame: 0", font, Colors::DarkGray, Colors::LightGray);
+			Entity::Text changingText("Changing text", Vector2Int(50, 300), "Frame: 0", &font, Colors::DarkGray, Colors::LightGray);
 			CHECK(changingText.GetColor() == Colors::DarkGray);
 			CHECK(changingText.GetBgColor() == Colors::LightGray);
 			testScene.AddObject(&changingText);
@@ -57,6 +57,12 @@ namespace BirbTest
 				window.Display();
 				SDL_Delay(62);
 			}
+
+			/* Check fuses */
+			CHECK_FALSE(greenText.ErrorFuseStatus());
+			CHECK_FALSE(multilineWhiteText.ErrorFuseStatus());
+			CHECK_FALSE(textWithBackground.ErrorFuseStatus());
+			CHECK_FALSE(changingText.ErrorFuseStatus());
 		}
 
 		TTF_Quit();

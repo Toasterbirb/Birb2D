@@ -45,7 +45,7 @@ namespace BirbTest
 
 			double timeout = 10.0;
 			Font font("fonts/freefont/FreeMonoBold.ttf", 24);
-			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Click* the red square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", font, Colors::White);
+			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Click* the red square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, Colors::White);
 
 			Scene testScene;
 			testScene.AddObject(&button);
@@ -92,6 +92,7 @@ namespace BirbTest
 			}
 
 			CHECK(success);
+			CHECK_FALSE(button.ErrorFuseStatus());
 		}
 
 		TTF_Quit();
@@ -122,7 +123,7 @@ namespace BirbTest
 
 			double timeout = 10.0;
 			Font font("fonts/freefont/FreeMonoBold.ttf", 24);
-			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Hover* your cursor over the green square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", font, Colors::White);
+			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Hover* your cursor over the green square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, Colors::White);
 
 			Scene testScene;
 			testScene.AddObject(&button);
@@ -166,6 +167,7 @@ namespace BirbTest
 			}
 
 			CHECK(success);
+			CHECK_FALSE(button.ErrorFuseStatus());
 		}
 
 		TTF_Quit();
@@ -225,7 +227,7 @@ namespace BirbTest
 
 			double timeout = 10.0;
 			Font font("fonts/freefont/FreeMonoBold.ttf", 24);
-			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Click* the red square!\nThere are two buttons on top of eachother and only one of them should activate.\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", font, Colors::White);
+			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Click* the red square!\nThere are two buttons on top of eachother and only one of them should activate.\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, Colors::White);
 
 			Scene testScene;
 			testScene.AddObject(&buttonB);
@@ -274,6 +276,9 @@ namespace BirbTest
 
 			CHECK(ButtonA_clicked);
 			CHECK_FALSE(ButtonB_clicked);
+
+			CHECK_FALSE(buttonA.ErrorFuseStatus());
+			CHECK_FALSE(buttonB.ErrorFuseStatus());
 		}
 
 		TTF_Quit();
