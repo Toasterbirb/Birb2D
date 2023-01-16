@@ -20,16 +20,6 @@ namespace Birb
 	:name(p_name), angle(0), error_fuse(false)
 	{}
 
-	void BaseEntity::BlowErrorFuse()
-	{
-		error_fuse = true;
-	}
-
-	bool BaseEntity::ErrorFuseStatus() const
-	{
-		return error_fuse;
-	}
-
     std::ostream &operator<<(std::ostream &stream, const BaseEntity &other)
     {
         stream << "[Name: " << other.name << ", Rect: (" << other.rect << "), Angle: " << other.angle << "]";

@@ -8,6 +8,7 @@
 #endif
 
 
+#include "ErrorFuse.hpp"
 #include "EntityComponent.hpp"
 #include "Rect.hpp"
 #include "SceneObject.hpp"
@@ -18,7 +19,7 @@ namespace Birb
 	/// Entities are objects that contain all of the information required to render stuff
 
 	/// Entities can be anything really. For example, it could be text or a picture. This could be extended to animations in the future
-	class BaseEntity
+	class BaseEntity : public ErrorFuse
 	{
 	public:
 		BaseEntity();
@@ -29,15 +30,6 @@ namespace Birb
 
 		float angle; 			///< Sets the rotation of the entity when rendering it
 		Rect rect; 				///< Sets the position and the dimensions of the entity
-
-		/// Blow the error fuse in the entity. This function is mainly used for
-		/// automated testing purposes
-		void BlowErrorFuse();
-
-		/// Check the status of the error fuse.
-		/// If this function returns true, something has gone
-		/// wrong with the entity during its lifespan
-		bool ErrorFuseStatus() const;
 
 		bool operator==(const BaseEntity& other) const
 		{
