@@ -19,6 +19,7 @@ add_executable(test
 	general_tests/color_test.cpp
 	general_tests/diagnostics_test.cpp
 	general_tests/entity_test.cpp
+	general_tests/error_fuse_test.cpp
 	general_tests/filesystem_test.cpp
 	general_tests/font_test.cpp
 	general_tests/game_test.cpp
