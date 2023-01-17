@@ -36,7 +36,7 @@ namespace Birb
 		}
 
 		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color, const Color& bg_color)
-		:color(color), bgColor(bg_color), wrapLength(0), text(text), font(font), has_background_color(false)
+		:color(color), bgColor(bg_color), wrapLength(0), text(text), font(font), has_background_color(true)
 		{
 			this->name = name;
 			this->rect = pos;

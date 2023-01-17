@@ -57,6 +57,8 @@ namespace Birb
 				this->color 	= other.color;
 				this->bgColor 	= other.bgColor;
 
+				this->has_background_color = other.has_background_color;
+
 				/* Reload the sprite using the new information */
 				if (!this->ReloadSprite())
 					this->BlowErrorFuse();
