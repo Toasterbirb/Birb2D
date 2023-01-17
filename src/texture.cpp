@@ -70,14 +70,9 @@ namespace Birb
 	void Texture::Destroy()
 	{
 		if (isLoaded() && sdlTex != nullptr)
-		{
 			SDL_DestroyTexture(sdlTex);
-		}
 		else
-		{
-			Debug::Log("Tried to destroy a texture that wasn't loaded!", Debug::warning);
 			BlowErrorFuse();
-		}
 	}
 
 	Vector2Int Texture::dimensions() const

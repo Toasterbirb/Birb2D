@@ -93,6 +93,7 @@ namespace Birb
 		void ResourceMonitor::Free()
 		{
 			delete debug_text_font;
+			delete debug_text_entity;
 		}
 	}
 }

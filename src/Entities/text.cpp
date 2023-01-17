@@ -22,6 +22,11 @@ namespace Birb
 			sprite = Texture();
 		}
 
+		Text::~Text()
+		{
+			sprite.Destroy();
+		}
+
 		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color)
 		:color(color), wrapLength(0), text(text), font(font), has_background_color(false)
 		{

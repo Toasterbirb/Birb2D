@@ -14,6 +14,7 @@ namespace Birb
 		{
 		public:
 			Text();
+			virtual ~Text();
 
 			/// This is here just for legacy compatibilitys sake
 			Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color);
@@ -48,7 +49,9 @@ namespace Birb
 				this->angle 	= other.angle;
 				this->rect 		= other.rect;
 
-				//this->sprite 	= other.sprite;
+				/* Destroy the old sprite so it doesn't get left unused */
+				this->sprite.Destroy();
+
 				this->text 		= other.text;
 				this->font 		= other.font;
 				this->color 	= other.color;
