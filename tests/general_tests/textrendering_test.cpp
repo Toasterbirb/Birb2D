@@ -25,14 +25,22 @@ namespace BirbTest
 			CHECK(greenText.GetText() == "Normal green text");
 			testScene.AddObject(&greenText);
 
-			Entity::Text multilineWhiteText("Multiline white text", Vector2Int(50, 120), "", &font, Colors::White);
+			Entity::Text multilineWhiteText("Multiline white text", Vector2Int(50, 120), "", &font, Colors::Black);
+			CHECK(multilineWhiteText.GetColor() == Colors::Black);
+
+			multilineWhiteText.SetTextColor(Colors::White);
+
 			CHECK(multilineWhiteText.GetColor() == Colors::White);
 			CHECK(multilineWhiteText.GetText() == "");
 			CHECK(multilineWhiteText.SetText("1. First line\n2. Second line\n3. Third line"));
 			CHECK(multilineWhiteText.GetText() == "1. First line\n2. Second line\n3. Third line");
+			CHECK(multilineWhiteText.sprite_dimensions() != Vector2Int(0, 0));
 			testScene.AddObject(&multilineWhiteText);
 
-			Entity::Text textWithBackground("Text with background", Vector2Int(50, 250), "", &font, Colors::LightGray, Colors::DarkGray);
+			Entity::Text textWithBackground;
+			CHECK(textWithBackground.GetText() == "");
+
+			textWithBackground = Entity::Text("Text with background", Vector2Int(50, 250), "", &font, Colors::LightGray, Colors::DarkGray);
 			CHECK(textWithBackground.GetColor() == Colors::LightGray);
 			CHECK(textWithBackground.GetBgColor() == Colors::DarkGray);
 			CHECK(textWithBackground.GetText() == "");
