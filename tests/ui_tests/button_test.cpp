@@ -1,4 +1,3 @@
-#include "SDL_ttf.h"
 #include "doctest.h"
 #include "Birb2D.hpp"
 
