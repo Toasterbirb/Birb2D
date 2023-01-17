@@ -31,6 +31,8 @@ namespace Birb
 		//	background.rect = Rect(0, 0, this->game->window->dimensions.x, this->game->window->dimensions.y);
 		//	background.rect.color = this->settings->background_color;
 		//}
+		background.w = game.window->dimensions.x;
+		background.h = game.window->dimensions.y;
 		background.color = this->settings->background_color;
 		menu_scene.AddObject(&background);
 
