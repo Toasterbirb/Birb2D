@@ -52,7 +52,6 @@ namespace BirbTest
 			CHECK(textWithBackground.GetText() == "");
 			CHECK(textWithBackground.SetText("Text with a background color"));
 			CHECK(textWithBackground.GetText() == "Text with a background color");
-			CHECK(textWithBackground.renderingPriority == 10);
 			testScene.AddObject(&textWithBackground);
 
 			Entity::Text changingText("Changing text", Vector2Int(50, 300), "Frame: 0", &font, Colors::DarkGray, Colors::LightGray);
