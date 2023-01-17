@@ -23,6 +23,7 @@ namespace Birb
 		Button::Button(const std::string& name, const Rect& rect)
 		:active(true), isPressed(false)
 		{
+			AssignPlaceholderEvents();
 			this->rect = rect;
 			this->name = name;
 		}
