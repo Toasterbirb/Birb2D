@@ -52,12 +52,16 @@ namespace Birb
 				this->angle 	= other.angle;
 				this->rect 		= other.rect;
 
+				/* SceneObject stuff */
+				this->renderingPriority 	= other.renderingPriority;
+				this->active 				= other.active;
+
 				this->text 		= other.text;
 				this->font 		= other.font;
 				this->color 	= other.color;
 				this->bgColor 	= other.bgColor;
 
-				this->has_background_color = other.has_background_color;
+				this->has_background_color 	= other.has_background_color;
 
 				/* Reload the sprite using the new information */
 				if (!this->ReloadSprite())

@@ -17,8 +17,12 @@ namespace BirbTest
 			testScene.Activate();
 
 			Entity::Text greenText;
+			greenText.renderingPriority = 25;
+			CHECK(greenText.renderingPriority == 25);
+
 			greenText.Construct("", Vector2Int(50, 50), &font, Colors::Green);
 
+			CHECK(greenText.renderingPriority == 25);
 			CHECK(greenText.GetColor() == Colors::Green);
 			CHECK(greenText.GetText() == "");
 			CHECK(greenText.SetText("Normal green text"));
@@ -38,7 +42,9 @@ namespace BirbTest
 			testScene.AddObject(&multilineWhiteText);
 
 			Entity::Text textWithBackground;
+			textWithBackground.renderingPriority = 10;
 			CHECK(textWithBackground.GetText() == "");
+			CHECK(textWithBackground.renderingPriority == 10);
 
 			textWithBackground = Entity::Text("Text with background", Vector2Int(50, 250), "", &font, Colors::LightGray, Colors::DarkGray);
 			CHECK(textWithBackground.GetColor() == Colors::LightGray);
@@ -46,6 +52,7 @@ namespace BirbTest
 			CHECK(textWithBackground.GetText() == "");
 			CHECK(textWithBackground.SetText("Text with a background color"));
 			CHECK(textWithBackground.GetText() == "Text with a background color");
+			CHECK(textWithBackground.renderingPriority == 10);
 			testScene.AddObject(&textWithBackground);
 
 			Entity::Text changingText("Changing text", Vector2Int(50, 300), "Frame: 0", &font, Colors::DarkGray, Colors::LightGray);

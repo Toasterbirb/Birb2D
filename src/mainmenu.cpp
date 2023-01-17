@@ -92,13 +92,12 @@ namespace Birb
 				Vector2Int(this->settings->settings_menu.window.top_bar.x + 4, this->settings->settings_menu.window.top_bar.y + 4),
 				&this->settings->settings_menu.window.title_font,
 				this->settings->settings_menu.window.title_color);
+		window_title_text.renderingPriority = 4;
 		settings_scene.AddObject(&window_title_text);
 
 		/** Create options **/
 		int option_padding = 16;
 		volume_slider = Setting(Vector2Int(this->settings->settings_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding), "Volume ", Setting::SLIDER, settings);
-		//volume_slider.button.progressBarComponent.parent_entity = &volume_slider.button;
-
 
 		/** Construct the credits page **/
 		credits_scene.Deactivate();
@@ -263,7 +262,7 @@ namespace Birb
 		//			&settings.settings_menu.setting_font,
 		//			&settings.settings_menu.window.text_color),
 		//		5);
-		this->text = Entity::Text(text, pos, &settings.settings_menu.setting_font, settings.settings_menu.window.text_color);
+		this->text.Construct(text, pos, &settings.settings_menu.setting_font, settings.settings_menu.window.text_color);
 		this->text.renderingPriority = 5;
 
 		switch (type)
@@ -293,6 +292,10 @@ namespace Birb
 			}
 
 		}
+
+		/* Make sure that everything is okay with the setting */
+		if (this->text.ErrorFuseStatus() || this->button.ErrorFuseStatus())
+			Debug::Log("A blown fuse was found when constructing a setting object", Debug::warning);
 	}
 
 	void MainMenu::Setting::AddToScene(Scene* scene)
