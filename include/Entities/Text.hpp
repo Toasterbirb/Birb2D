@@ -52,13 +52,15 @@ namespace Birb
 				this->angle 	= other.angle;
 				this->rect 		= other.rect;
 
-				/* Destroy the old sprite so it doesn't get left unused */
-				this->sprite.Destroy();
-
 				this->text 		= other.text;
 				this->font 		= other.font;
 				this->color 	= other.color;
 				this->bgColor 	= other.bgColor;
+
+				/* Reload the sprite using the new information */
+				if (!this->ReloadSprite())
+					this->BlowErrorFuse();
+
 				return *this;
 			}
 			//SceneObject& operator=(SceneObject&&) 		= default;
