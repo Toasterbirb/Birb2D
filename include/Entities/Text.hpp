@@ -4,6 +4,7 @@
 #include "Color.hpp"
 #include "Texture.hpp"
 #include "BaseEntity.hpp"
+#include "Vector/Vector2Int.hpp"
 
 namespace Birb
 {
@@ -25,6 +26,8 @@ namespace Birb
 			Text(const std::string& text, const Vector2Int& pos, Font* font, const Color& color);
 			Text(const std::string& text, Font* font, const Color& color);
 			Text(const std::string& text, Font* font, const Color& color, const Color& bg_color);
+
+			void Construct(const std::string& text, const Vector2Int& pos, Font* font, const Color& color);
 
 			Color color; 	///< Surface color of the text
 			Color bgColor; ///< Background color for the text component

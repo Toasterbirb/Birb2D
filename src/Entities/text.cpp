@@ -64,6 +64,24 @@ namespace Birb
 			ReloadSprite();
 		}
 
+		void Text::Construct(const std::string& text, const Vector2Int& pos, Font* font, const Color& color)
+		{
+			/* If this text entity already had some text on it,
+			 * we can assume that its sprite has been generated
+			 * so we can safely clean it out */
+			this->sprite.Destroy();
+
+			this->text = text;
+			this->rect = pos;
+			this->font = font;
+			this->color = color;
+
+			/* Re-create the text sprite and blow the fuse if something
+			 * goes wrong */
+			if (!LoadSprite())
+				BlowErrorFuse();
+		}
+
 		std::string Text::GetText() const
 		{
 			return this->text;

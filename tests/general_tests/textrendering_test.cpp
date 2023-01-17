@@ -16,7 +16,9 @@ namespace BirbTest
 			Scene testScene;
 			testScene.Activate();
 
-			Entity::Text greenText("Normal green text", Vector2Int(50, 50), "", &font, Colors::Green);
+			Entity::Text greenText;
+			greenText.Construct("", Vector2Int(50, 50), &font, Colors::Green);
+
 			CHECK(greenText.GetColor() == Colors::Green);
 			CHECK(greenText.GetText() == "");
 			CHECK(greenText.SetText("Normal green text"));
