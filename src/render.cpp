@@ -101,11 +101,16 @@ namespace Birb
 			Rect left(dimensions.x, dimensions.y, width, dimensions.h);
 			Rect right(dimensions.x + dimensions.w - width, dimensions.y, width, dimensions.h);
 
-			/* Set world_space values */
-			top.world_space = dimensions.world_space;
-			bottom.world_space = dimensions.world_space;
-			left.world_space = dimensions.world_space;
-			right.world_space = dimensions.world_space;
+			/* Set world_space and parallax values */
+			top.world_space 	= dimensions.world_space;
+			bottom.world_space 	= dimensions.world_space;
+			left.world_space 	= dimensions.world_space;
+			right.world_space 	= dimensions.world_space;
+
+			top.parallax_multiplier 	= dimensions.parallax_multiplier;
+			bottom.parallax_multiplier 	= dimensions.parallax_multiplier;
+			left.parallax_multiplier 	= dimensions.parallax_multiplier;
+			right.parallax_multiplier 	= dimensions.parallax_multiplier;
 
 			DrawRect(color, top); /* Top */
 			DrawRect(color, bottom); /* Bottom */
