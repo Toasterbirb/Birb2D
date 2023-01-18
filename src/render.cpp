@@ -87,7 +87,7 @@ namespace Birb
 			SDL_Rect rectangle = dimensions.getSDLRect();
 			rectangle.x -= (Global::RenderVars::CameraPosition.x * dimensions.world_space * dimensions.parallax_multiplier);
 			rectangle.y -= (Global::RenderVars::CameraPosition.y * dimensions.world_space * dimensions.parallax_multiplier);
-			bool success = SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
+			bool success = !SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
 			ResetDrawColor();
 			return success;
 		}
