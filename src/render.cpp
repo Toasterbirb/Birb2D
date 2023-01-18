@@ -75,23 +75,24 @@ namespace Birb
 			return true;
 		}
 
-		void DrawRect(const Rect& rect)
+		bool DrawRect(const Rect& rect)
 		{
-			DrawRect(rect.color, rect);
+			return DrawRect(rect.color, rect);
 		}
 
-		void DrawRect(const Color& color, const Rect& dimensions)
+		bool DrawRect(const Color& color, const Rect& dimensions)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw rect", PROFILER_COLOR);
 			SetRenderDrawColor(color);
 			SDL_Rect rectangle = dimensions.getSDLRect();
 			rectangle.x -= (Global::RenderVars::CameraPosition.x * dimensions.world_space * dimensions.parallax_multiplier);
 			rectangle.y -= (Global::RenderVars::CameraPosition.y * dimensions.world_space * dimensions.parallax_multiplier);
-			SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
+			bool success = SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
 			ResetDrawColor();
+			return success;
 		}
 
-		void DrawRect(const Color& color, const Rect& dimensions, const int& width)
+		bool DrawRect(const Color& color, const Rect& dimensions, const int& width)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw hollow rect", PROFILER_COLOR);
 
@@ -112,10 +113,11 @@ namespace Birb
 			left.parallax_multiplier 	= dimensions.parallax_multiplier;
 			right.parallax_multiplier 	= dimensions.parallax_multiplier;
 
-			DrawRect(color, top); /* Top */
-			DrawRect(color, bottom); /* Bottom */
-			DrawRect(color, left); /* Left */
-			DrawRect(color, right); /* Right */
+			bool result_1 = DrawRect(color, top); /* Top */
+			bool result_2 = DrawRect(color, bottom); /* Bottom */
+			bool result_3 = DrawRect(color, left); /* Left */
+			bool result_4 = DrawRect(color, right); /* Right */
+			return result_1 + result_2 + result_3 + result_4;
 		}
 
 		void DrawLine(const Color& color, const Vector2Int& pointA, const Vector2Int& pointB, const bool& world_space, const float& parallax_multiplier)
