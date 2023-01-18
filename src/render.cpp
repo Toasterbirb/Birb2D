@@ -25,6 +25,14 @@ namespace Birb
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 		}
 
+		void AlphaBlendingToggle(bool state)
+		{
+			if (state)
+				SDL_SetRenderDrawBlendMode(Global::RenderVars::Renderer, SDL_BLENDMODE_BLEND);
+			else
+				SDL_SetRenderDrawBlendMode(Global::RenderVars::Renderer, SDL_BLENDMODE_NONE);
+		}
+
 		bool DrawTexture(const Texture& texture, const Rect& rect, const bool& world_space, const float& angle)
 		{
 			SDL_Rect src;
@@ -87,7 +95,16 @@ namespace Birb
 			SDL_Rect rectangle = dimensions.getSDLRect();
 			rectangle.x -= (Global::RenderVars::CameraPosition.x * dimensions.world_space * dimensions.parallax_multiplier);
 			rectangle.y -= (Global::RenderVars::CameraPosition.y * dimensions.world_space * dimensions.parallax_multiplier);
+
+			/* Handle alpha */
+			if (color.a != 255)
+				AlphaBlendingToggle(true);
+
 			bool success = !SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
+
+			if (color.a != 255)
+				AlphaBlendingToggle(false);
+
 			ResetDrawColor();
 			return success;
 		}

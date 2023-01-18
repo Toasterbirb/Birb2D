@@ -161,11 +161,16 @@ namespace BirbTest
 		Rect rectC(840, 0, 420, 720);
 		rectC.color = Colors::Nord::Frost::nord10;
 
+		Rect transparent_rect(0, 300, 1260, 100);
+		transparent_rect.color = Colors::Nord::Aurora::nord15;
+		transparent_rect.color.a -= 50;
+
 		window.Clear();
 		CHECK(Render::DrawRect(background));
 		CHECK(Render::DrawRect(rectA));
 		CHECK(Render::DrawRect(rectB.color, rectB));
 		CHECK(Render::DrawRect(rectC.color, rectC, 128));
+		CHECK(Render::DrawRect(transparent_rect));
 		window.Display();
 		SDL_Delay(500);
 	}
