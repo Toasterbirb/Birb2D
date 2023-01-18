@@ -43,6 +43,9 @@ namespace BirbTest
 
 			Entity::Text textWithBackground;
 			textWithBackground.renderingPriority = 10;
+			textWithBackground.parallax_multiplier = 5.0f;
+			textWithBackground.active = false;
+			textWithBackground.name = "asd";
 			CHECK(textWithBackground.GetText() == "");
 			CHECK(textWithBackground.renderingPriority == 10);
 
@@ -52,6 +55,9 @@ namespace BirbTest
 			CHECK(textWithBackground.GetText() == "");
 			CHECK(textWithBackground.SetText("Text with a background color"));
 			CHECK(textWithBackground.GetText() == "Text with a background color");
+			CHECK(textWithBackground.parallax_multiplier == 1.0f);
+			CHECK(textWithBackground.active);
+			CHECK(textWithBackground.name == "Text with background");
 			testScene.AddObject(&textWithBackground);
 
 			Entity::Text changingText("Changing text", Vector2Int(50, 300), "Frame: 0", &font, Colors::DarkGray, Colors::LightGray);

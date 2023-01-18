@@ -39,13 +39,15 @@ add_executable(test
 	general_tests/renderwindow_test.cpp
 	general_tests/scene_test.cpp
 	general_tests/splash_test.cpp
-	general_tests/textrendering_test.cpp
 	general_tests/texture_test.cpp
 	general_tests/timer_test.cpp
 	general_tests/utils_test.cpp
 	general_tests/values_test.cpp
 	general_tests/var_test.cpp
 	general_tests/vector_test.cpp
+
+	general_tests/entities/text_test.cpp
+	general_tests/entities/image_test.cpp
 )
 
 target_compile_options(test PRIVATE -Wall -Wextra -Wpedantic -Werror)

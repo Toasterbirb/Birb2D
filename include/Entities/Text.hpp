@@ -55,6 +55,8 @@ namespace Birb
 				/* SceneObject stuff */
 				this->renderingPriority 	= other.renderingPriority;
 				this->active 				= other.active;
+				this->parallax_multiplier 	= other.parallax_multiplier;
+				this->world_space 			= other.world_space;
 
 				this->text 		= other.text;
 				this->font 		= other.font;

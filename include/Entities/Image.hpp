@@ -29,6 +29,12 @@ namespace Birb
 				this->angle 	= other.angle;
 				this->rect 		= other.rect;
 
+				/* SceneObject stuff */
+				this->renderingPriority 	= other.renderingPriority;
+				this->active 				= other.active;
+				this->parallax_multiplier 	= other.parallax_multiplier;
+				this->world_space 			= other.world_space;
+
 				this->sprite 	= other.sprite;
 				this->angle 	= other.angle;
 				return *this;
