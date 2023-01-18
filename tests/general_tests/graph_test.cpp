@@ -49,6 +49,8 @@ namespace BirbTest
 		opts.window_dimensions.x = 640;
 		Game game(opts, graph_start, graph_input, graph_update, graph_render);
 		game.Start();
+
+		Global::RenderVars::CameraPosition = Vector2(0, 0);
 	}
 
 	void graph_start(Game& game)
