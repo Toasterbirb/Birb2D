@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Entities/Animation.hpp"
 #include "Render.hpp"
 #include "Values.hpp"
