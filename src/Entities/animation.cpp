@@ -73,8 +73,8 @@ namespace Birb
 			//texHeight = sprite.dimensions().y;
 
 			int spritesPerRow = texWidth / spriteSize.x;
-			float fullRowCount = std::floor(index / spritesPerRow);
-			float leftOver = std::round(((index / static_cast<float>(spritesPerRow)) - fullRowCount) * spritesPerRow);
+			int fullRowCount = std::floor(index / spritesPerRow);
+			int leftOver = ((index / static_cast<float>(spritesPerRow)) - fullRowCount) * spritesPerRow;
 
 			pos.x = leftOver * spriteSize.x;
 			pos.y = fullRowCount * spriteSize.y;
