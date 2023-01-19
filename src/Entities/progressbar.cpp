@@ -18,8 +18,6 @@ namespace Birb
 			minValue = 0;
 			maxValue = 1;
 			value = 0;
-
-			active = false;
 		}
 
 		ProgressBar::ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color)
@@ -28,15 +26,11 @@ namespace Birb
 			minValue = 0;
 			maxValue = 1;
 			value = 0.25f;
-
-			active = true;
 		}
 
 		ProgressBar::ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color, const int& min_value, const int& max_value, const int& value)
 		:borderWidth(border_width), borderColor(border_color), backgroundColor(background_color), fillColor(fill_color), minValue(min_value), maxValue(max_value), value(value)
-		{
-			active = true;
-		}
+		{}
 
 		void ProgressBar::SetValueFromRelativePoint(Vector2 point)
 		{
