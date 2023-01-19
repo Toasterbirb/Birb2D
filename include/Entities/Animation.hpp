@@ -14,8 +14,8 @@ namespace Birb
 		{
 		public:
 			Animation();
-			Animation(const Vector2Int& p_spriteSize, const int& p_frameCount, const int& p_fps);
-			Animation(const Vector2Int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop);
+			Animation(const Texture& sprite, const Vector2Int& sprite_size, const int& frame_count, const int& fps);
+			Animation(const Texture& sprite, const Vector2Int& sprite_size, const int& frame_count, const int& fps, const bool& loop);
 
 			Vector2Int spriteSize; ///< The size of one sprite in the atlas. Used for cropping
 			int frameCount; ///< Total amount of sprites in the atlas

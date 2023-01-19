@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Entities/Animation.hpp"
 #include "Render.hpp"
 #include "Values.hpp"
@@ -16,19 +17,23 @@ namespace Birb
 			animationQueued = false;
 		}
 
-		Animation::Animation(const Vector2Int& p_spriteSize, const int& p_frameCount, const int& p_fps)
-		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), lastFrame(p_frameCount - 1)
+		Animation::Animation(const Texture& sprite, const Vector2Int& sprite_size, const int& frame_count, const int& fps)
+		:spriteSize(sprite_size), frameCount(frame_count), fps(fps), lastFrame(frame_count - 1), sprite(sprite)
 		{
 			frameIndex 		= 0;
 			loop 			= false;
 			animationQueued = false;
+			rect.w 			= sprite.dimensions().x;
+			rect.h 			= sprite.dimensions().y;
 		}
 
-		Animation::Animation(const Vector2Int& p_spriteSize, const int& p_frameCount, const int& p_fps, const bool& p_loop)
-		:spriteSize(p_spriteSize), frameCount(p_frameCount), fps(p_fps), loop(p_loop), lastFrame(p_frameCount - 1)
+		Animation::Animation(const Texture& sprite, const Vector2Int& sprite_size, const int& frame_count, const int& fps, const bool& loop)
+		:spriteSize(sprite_size), frameCount(frame_count), fps(fps), loop(loop), lastFrame(frame_count - 1), sprite(sprite)
 		{
 			frameIndex 		= 0;
 			animationQueued = false;
+			rect.w 			= sprite.dimensions().x;
+			rect.h 			= sprite.dimensions().y;
 		}
 
 
@@ -70,7 +75,7 @@ namespace Birb
 
 			int spritesPerRow = texWidth / spriteSize.x;
 			float fullRowCount = std::floor(index / spritesPerRow);
-			float leftOver = ((index / static_cast<float>(spritesPerRow)) - fullRowCount) * spritesPerRow;
+			float leftOver = std::round(((index / static_cast<float>(spritesPerRow)) - fullRowCount) * spritesPerRow);
 
 			pos.x = leftOver * spriteSize.x;
 			pos.y = fullRowCount * spriteSize.y;
@@ -91,8 +96,8 @@ namespace Birb
 
 				dst.x = rect.x - (Global::RenderVars::CameraPosition.x * world_space);
 				dst.y = rect.y - (Global::RenderVars::CameraPosition.y * world_space);
-				dst.w = src.w; // * entity->localScale.x;
-				dst.h = src.h; // * entity->localScale.y;
+				dst.w = rect.w; // * entity->localScale.x;
+				dst.h = rect.h; // * entity->localScale.y;
 
 				if (frameTimer.running && frameTimer.ElapsedSeconds() >= (1.0 / fps))
 				{
@@ -122,7 +127,9 @@ namespace Birb
 
 		void Animation::RenderFunc()
 		{
-			Render::DrawTexture(sprite, src, dst, angle);
+			StepFrame();
+			if (!Render::DrawTexture(sprite, src, dst, angle))
+				BlowErrorFuse();
 		}
 
 		void Animation::SetPos(const Vector2& delta)

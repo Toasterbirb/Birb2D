@@ -46,8 +46,9 @@ add_executable(test
 	general_tests/var_test.cpp
 	general_tests/vector_test.cpp
 
-	general_tests/entities/text_test.cpp
+	general_tests/entities/animation_test.cpp
 	general_tests/entities/image_test.cpp
+	general_tests/entities/text_test.cpp
 )
 
 target_compile_options(test PRIVATE -Wall -Wextra -Wpedantic -Werror)
