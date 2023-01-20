@@ -1,5 +1,6 @@
 #include "Birb2D.hpp"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+#include <iostream>
 
 using namespace Birb;
 
@@ -11,8 +12,9 @@ static void render(Game& game);
 static void post_render();
 static void cleanup();
 
-Entity text;
-Entity text_2;
+Scene scene;
+Entity::Text text;
+Entity::Text text_2;
 Font* font;
 int counter = 0;
 
@@ -42,11 +44,20 @@ int main(int argc, char** argv)
 void start(Game& game)
 {
 	font = new Font("fonts/freefont/FreeMonoBold.ttf", 64);
-	EntityComponent::Text component_with_background("0", font, &Colors::Nord::Frost::nord9, &Colors::Nord::PolarNight::nord0);
-	text = Entity("Text", Vector2Int(128, 128), component_with_background);
+	text = Entity::Text("0", font, Colors::Nord::Frost::nord9, Colors::Nord::PolarNight::nord0);
+	text.rect = Vector2Int(128, 128);
 
-	EntityComponent::Text component("0", font, &Colors::Nord::Frost::nord9);
-	text_2 = Entity("Text", Vector2Int(128, 256), component);
+	if (text.ErrorFuseStatus())
+		Debug::Log("[text] fuse was blown", Debug::warning);
+
+	text_2 = Entity::Text("0", font, Colors::Nord::Frost::nord9);
+	text_2.rect = Vector2Int(128, 256);
+
+	if (text_2.ErrorFuseStatus())
+		Debug::Log("[text_2] fuse was blown", Debug::warning);
+
+	scene.AddObject(&text);
+	scene.AddObject(&text_2);
 
 	/* Enable the resource monitor to check if there's a memory leak */
 	Diagnostics::Debugging::Overlays::ResourceMonitor = true;
@@ -77,8 +88,7 @@ void update(Game& game)
  * will be presented */
 void render(Game& game)
 {
-	Render::DrawEntity(text);
-	Render::DrawEntity(text_2);
+	scene.Render();
 }
 
 /* post_render() will be called after rendering has finished
@@ -97,5 +107,5 @@ void post_render()
  * cleanup that is necessary, like freeing heap allocations etc. */
 void cleanup()
 {
-
+	delete font;
 }

@@ -1,12 +1,16 @@
 #pragma once
+#include "AssetManager.hpp"
+#include "Entities/Image.hpp"
+#include "Entities/Text.hpp"
+#include "ErrorFuse.hpp"
+#include "Font.hpp"
 #include "Renderwindow.hpp"
-#include "Entity.hpp"
 #include "Scene.hpp"
 
 namespace Birb
 {
 	/// Creates simple splash screens with a customizable scene
-	class Splash
+	class Splash : public ErrorFuse
 	{
 	public:
 		Splash(Window& window, bool isCustom = false); ///< Creates the default Birb2D splash screen
@@ -22,15 +26,18 @@ namespace Birb
 		void Run();
 
 	private:
+		AssetManager asset_manager;
+
 		Window& window;
 		Font manaspace;
 		Font manaspace_small;
 
-		Entity background_plane;
-		Entity birb2d_logo;
-		Entity birb2d_text;
+		Rect background_plane;
+		Entity::Image birb2d_logo;
+		Entity::Text birb2d_text;
 
-		Entity loading_text_entity;
+		Entity::Text loading_text_entity;
 
+		Scene loading_scene;
 	};
 }

@@ -1,10 +1,12 @@
 #include <memory>
-#include "doctest.h"
+#include "Entities/Image.hpp"
 #include "Renderwindow.hpp"
-#include "Values.hpp"
 #include "Scene.hpp"
-#include "Timestep.hpp"
 #include "Texture.hpp"
+#include "Timer.hpp"
+#include "Timestep.hpp"
+#include "Values.hpp"
+#include "doctest.h"
 
 using namespace Birb;
 
@@ -70,7 +72,7 @@ namespace BirbTest
 		scene.Activate();
 
 		/* Place to store stuff in subcases */
-		std::vector<Entity> entities;
+		std::vector<Entity::Image> entities;
 		std::vector<Circle> circles;
 
 		SUBCASE("Sprites / Textures in a scene")
@@ -94,7 +96,7 @@ namespace BirbTest
 			/* Create the entities */
 			for (int i = 0; i < ENTITY_COUNT; i++)
 			{
-				Entity testEntity("Test entity", Vector2Int(i * 70, 10), birbSprite);
+				Entity::Image testEntity("Test entity", Vector2Int(i * 70, 10), birbSprite);
 				entities.push_back(testEntity);
 			}
 

@@ -19,6 +19,7 @@ add_executable(test
 	general_tests/color_test.cpp
 	general_tests/diagnostics_test.cpp
 	general_tests/entity_test.cpp
+	general_tests/error_fuse_test.cpp
 	general_tests/filesystem_test.cpp
 	general_tests/font_test.cpp
 	general_tests/game_test.cpp
@@ -38,13 +39,18 @@ add_executable(test
 	general_tests/renderwindow_test.cpp
 	general_tests/scene_test.cpp
 	general_tests/splash_test.cpp
-	general_tests/textrendering_test.cpp
 	general_tests/texture_test.cpp
 	general_tests/timer_test.cpp
 	general_tests/utils_test.cpp
 	general_tests/values_test.cpp
 	general_tests/var_test.cpp
 	general_tests/vector_test.cpp
+
+	general_tests/entities/animation_test.cpp
+	general_tests/entities/empty_test.cpp
+	general_tests/entities/image_test.cpp
+	general_tests/entities/progressbar_test.cpp
+	general_tests/entities/text_test.cpp
 )
 
 target_compile_options(test PRIVATE -Wall -Wextra -Wpedantic -Werror)

@@ -31,6 +31,9 @@ namespace Birb
 
 		this->sdlTex = Resources::LoadTexture(filePath);
 
+		if (sdlTex == NULL)
+			BlowErrorFuse();
+
 		textureLoaded = true;
 		UpdateDimensions();
 
@@ -49,6 +52,7 @@ namespace Birb
 		if (sdlTex == nullptr)
 		{
 			Debug::Log("Error creating texture from surface: " + static_cast<std::string>(SDL_GetError()), Debug::error);
+			BlowErrorFuse();
 			return false;
 		}
 		else
@@ -65,7 +69,10 @@ namespace Birb
 
 	void Texture::Destroy()
 	{
-		SDL_DestroyTexture(sdlTex);
+		if (isLoaded() && sdlTex != nullptr)
+			SDL_DestroyTexture(sdlTex);
+		else
+			BlowErrorFuse();
 	}
 
 	Vector2Int Texture::dimensions() const
@@ -87,6 +94,7 @@ namespace Birb
 		if (SDL_QueryTexture(texture, NULL, NULL, &result.x, &result.y) < 0)
 		{
 			Debug::Log("Couldn't query for texture dimensions: " + std::string(SDL_GetError()), Debug::Type::warning);
+			BlowErrorFuse();
 			return Vector2Int(0, 0);
 		}
 		return result;

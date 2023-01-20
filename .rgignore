@@ -1,0 +1,90 @@
+# FZF stuff
+include/doctest.h
+include/json.hpp
+vendor/
+CODE_OF_CONDUCT.md
+README.md
+compile_flags.txt
+doxygen_config
+birb2d_res/
+tests/res/
+utils/editor/res/
+LICENSE
+COPYING
+AUTHORS
+
+# AssetBundle header
+include/AssetBundle.hpp
+
+# playground
+[Bb]uild/
+[Pp]layground/
+
+# Prerequisites
+*.d
+
+# Compiled docs
+[Dd]ocs/
+[Dd]oxygen/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Birb2D Custom Files
+log.txt
+
+# Vim stuff
+.undodir
+
+# AppImage
+*.AppDir
+*.AppImage
+
+# Dist files
+*.tar.gz
+
+# CMake stuff
+build/
+build_win/
+.cache/
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# VS Code
+.vscode/

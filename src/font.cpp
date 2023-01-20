@@ -32,7 +32,10 @@ namespace Birb
 	Font::~Font()
 	{
 		if (isLoaded() && ttfFont != nullptr)
+		{
 			TTF_CloseFont(ttfFont);
+			fontLoaded = false;
+		}
 	}
 
 	void Font::LoadFont(const std::string& filePath, const int& fontSize)
@@ -56,6 +59,7 @@ namespace Birb
 		{
 			Debug::Log("Something went wrong when loading font '" + resource_path + "' TTF_Error: " + static_cast<std::string>(TTF_GetError()), Debug::error);
 			fontLoaded = false;
+			BlowErrorFuse();
 		}
 	}
 

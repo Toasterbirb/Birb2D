@@ -1,4 +1,3 @@
-#include "SDL_ttf.h"
 #include "doctest.h"
 #include "Birb2D.hpp"
 
@@ -35,9 +34,9 @@ namespace BirbTest
 			timeStep.Init(&window);
 
 			UI ui;
-			Entity button("Button", Rect(window.dimensions.x / 2.2 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
-			button.clickComponent.onClick = ButtonClick;
-			CHECK(button.clickComponent.active);
+			Entity::Button button("Button", Rect(window.dimensions.x / 2.2 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
+			button.onClick = ButtonClick;
+			CHECK(button.active);
 
 			button.rect.color = Colors::Red;
 			ui.AddButton(&button);
@@ -45,7 +44,7 @@ namespace BirbTest
 
 			double timeout = 10.0;
 			Font font("fonts/freefont/FreeMonoBold.ttf", 24);
-			Entity instruction_text("Instruction text", Vector2Int(100, 100), EntityComponent::Text("*Click* the red square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, &Colors::White));
+			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Click* the red square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, Colors::White);
 
 			Scene testScene;
 			testScene.AddObject(&button);
@@ -71,7 +70,7 @@ namespace BirbTest
 					timeStep.Step();
 				}
 
-				if (button.clickComponent.isPressed)
+				if (button.isPressed)
 					button.rect.color.ChangeIntensity(10);
 
 				if (success)
@@ -92,6 +91,7 @@ namespace BirbTest
 			}
 
 			CHECK(success);
+			CHECK_FALSE(button.ErrorFuseStatus());
 		}
 
 		TTF_Quit();
@@ -112,9 +112,9 @@ namespace BirbTest
 			timeStep.Init(&window);
 
 			UI ui;
-			Entity button("Button", Rect(window.dimensions.x / 1.5 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
-			button.clickComponent.onHover = ButtonHover;
-			CHECK(button.clickComponent.active);
+			Entity::Button button("Button", Rect(window.dimensions.x / 1.5 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
+			button.onHover = ButtonHover;
+			CHECK(button.active);
 
 			button.rect.color = Colors::Green;
 			ui.AddButton(&button);
@@ -122,7 +122,7 @@ namespace BirbTest
 
 			double timeout = 10.0;
 			Font font("fonts/freefont/FreeMonoBold.ttf", 24);
-			Entity instruction_text("Instruction text", Vector2Int(100, 100), EntityComponent::Text("*Hover* your cursor over the green square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, &Colors::White));
+			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Hover* your cursor over the green square!\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, Colors::White);
 
 			Scene testScene;
 			testScene.AddObject(&button);
@@ -166,6 +166,7 @@ namespace BirbTest
 			}
 
 			CHECK(success);
+			CHECK_FALSE(button.ErrorFuseStatus());
 		}
 
 		TTF_Quit();
@@ -203,17 +204,17 @@ namespace BirbTest
 			UI ui;
 
 			/* Button A */
-			Entity buttonA("Button A", Rect(window.dimensions.x / 2.2 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
-			buttonA.clickComponent.onClick = ButtonAClick;
-			CHECK(buttonA.clickComponent.active);
+			Entity::Button buttonA("Button A", Rect(window.dimensions.x / 2.2 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
+			buttonA.onClick = ButtonAClick;
+			CHECK(buttonA.active);
 
 			buttonA.rect.color = Colors::Red;
 			buttonA.renderingPriority = 3;
 
 			/* Button B */
-			Entity buttonB("Button B", Rect(window.dimensions.x / 2.2 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
-			buttonB.clickComponent.onClick = ButtonBClick;
-			CHECK(buttonB.clickComponent.active);
+			Entity::Button buttonB("Button B", Rect(window.dimensions.x / 2.2 - button_dimensions.x / 2.0, window.dimensions.y / 2.0 - button_dimensions.y / 2.0, button_dimensions.x, button_dimensions.y));
+			buttonB.onClick = ButtonBClick;
+			CHECK(buttonB.active);
 
 			buttonB.rect.color = Colors::Blue;
 			buttonB.renderingPriority = 2;
@@ -225,7 +226,7 @@ namespace BirbTest
 
 			double timeout = 10.0;
 			Font font("fonts/freefont/FreeMonoBold.ttf", 24);
-			Entity instruction_text("Instruction text", Vector2Int(100, 100), EntityComponent::Text("*Click* the red square!\nThere are two buttons on top of eachother and only one of them should activate.\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, &Colors::White));
+			Entity::Text instruction_text("Instruction text", Vector2Int(100, 100), "*Click* the red square!\nThere are two buttons on top of eachother and only one of them should activate.\n\nIf nothing happens, there's a bug to fix.\nThis test will timeout in " + std::to_string((int)timeout) + " seconds", &font, Colors::White);
 
 			Scene testScene;
 			testScene.AddObject(&buttonB);
@@ -274,6 +275,9 @@ namespace BirbTest
 
 			CHECK(ButtonA_clicked);
 			CHECK_FALSE(ButtonB_clicked);
+
+			CHECK_FALSE(buttonA.ErrorFuseStatus());
+			CHECK_FALSE(buttonB.ErrorFuseStatus());
 		}
 
 		TTF_Quit();

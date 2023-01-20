@@ -1,4 +1,4 @@
-#include "EntityComponent/Text.hpp"
+#include "Entities/Text.hpp"
 #include "Font.hpp"
 #include "Scene.hpp"
 #include "Vector/Vector2Int.hpp"
@@ -20,7 +20,7 @@ namespace BirbTest
 
 	Font* font;
 
-	Entity game_reached_text;
+	Entity::Text game_reached_text;
 	Scene game_scene;
 
 
@@ -31,21 +31,25 @@ namespace BirbTest
 		Game game(win_opts, menu_start, menu_input, menu_update, menu_render);
 		game.cleanup = menu_cleanup;
 		game.Start();
+
+		CHECK_FALSE(game.ErrorFuseStatus());
 	}
 
 	void menu_start(Game& game)
 	{
 		font = new Font("fonts/freefont/FreeMonoBold.ttf", 64);
 
-		game_reached_text = Entity("Game reached", Vector2Int(128, 128),
-				EntityComponent::Text("This is the game", font, &Colors::Nord::Frost::nord9),
-				1);
+		game_reached_text = Entity::Text("Game reached", Vector2Int(128, 128), "This is the game", font, Colors::Nord::Frost::nord9);
+		game_reached_text.renderingPriority = 1;
 		game_scene.AddObject(&game_reached_text);
 
 		/* Create the main menu and start it */
 		MainMenuSettings menu_settings;
 		MainMenu main_menu(game, menu_settings);
 		main_menu.Launch();
+
+		CHECK_FALSE(main_menu.ErrorFuseStatus());
+		CHECK_FALSE(game_reached_text.ErrorFuseStatus());
 	}
 
 	void menu_input(Game& game)

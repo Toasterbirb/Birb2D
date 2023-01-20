@@ -1,28 +1,27 @@
 #pragma once
 
 #include "Color.hpp"
+#include "BaseEntity.hpp"
 
 namespace Birb
 {
-	class Entity;
 	struct Vector2;
 
-	namespace EntityComponent
+	namespace Entity
 	{
 		/// ProgressBar is used to create... well... progress bars
 		/// If the entity has a sprite on it. That will be used instead of the fill color
-		class ProgressBar
+		class ProgressBar : public BaseEntity, public SceneObject
 		{
 		public:
 			ProgressBar();
-			ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor);
-			ProgressBar(const int& p_borderWidth, Color* p_borderColor, Color* p_backgroundColor, Color* p_fillColor, const int& p_minValue, const int& p_maxValue, const int& p_value);
-			bool active; ///< Setting this value active toggles on the progress bar component
+			ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color);
+			ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color, const int& min_value, const int& max_value, const int& value);
 
 			int borderWidth; ///< Sets the thickness of the borders around the progress bar
-			Color* borderColor; ///< Border color around the fill area
-			Color* backgroundColor; ///< Background color that is below the filled area
-			Color* fillColor; ///< Color that hides the background color
+			Color borderColor; ///< Border color around the fill area
+			Color backgroundColor; ///< Background color that is below the filled area
+			Color fillColor; ///< Color that hides the background color
 
 			float minValue; ///< Value where the progress bar should be empty
 			float maxValue; ///< Value where the progress bar should be full
@@ -32,7 +31,6 @@ namespace Birb
 			/// given point. Nothing will happen if the point given
 			/// is outside of the Entity surface area
 			void SetValueFromRelativePoint(Vector2 point);
-			Entity* parent_entity;
 
 			bool operator==(const ProgressBar& other) const
 			{
@@ -45,6 +43,8 @@ namespace Birb
 			}
 
 		private:
+			void RenderFunc() override;
+			void SetPos(const Vector2& delta) override;
 		};
 	}
 }

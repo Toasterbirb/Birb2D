@@ -1,8 +1,10 @@
 #include "AssetManager.hpp"
+#include "Random.hpp"
 #include "Splash.hpp"
 #include "Texture.hpp"
+#include "Timer.hpp"
 #include "Timestep.hpp"
-#include "Random.hpp"
+#include "Values.hpp"
 
 namespace Birb
 {
@@ -20,25 +22,27 @@ namespace Birb
 		{
 			loading_text = "Loading...";
 
-			background_plane = Entity("Background plane", Rect(0, 0, window.dimensions.x, window.dimensions.y));
-			background_plane.rect.color = 0xaab9bd;
+			background_plane = Rect(0, 0, window.dimensions.x, window.dimensions.y);
+			background_plane.color = 0xaab9bd;
 			background_plane.renderingPriority = -1;
 
-			Texture birb2d_logo_tex(res_base_path + "/logo.png");
-			float birb_tex_height = static_cast<float>(window.dimensions.y) / birb2d_logo_tex.dimensions().y * 2;
-			float size_multiplier = birb_tex_height / birb2d_logo_tex.dimensions().y;
-			birb2d_logo = Entity("Birb2D logo",
-					Rect(window.dimensions.x / 3.0 - birb2d_logo_tex.dimensions().x * 2.0,
-						window.dimensions.y / 2.0 - birb2d_logo_tex.dimensions().y * 4,
-						birb2d_logo_tex.dimensions().x * size_multiplier,
-						birb_tex_height),
-					birb2d_logo_tex);
+			asset_manager.LoadTexture("logo", res_base_path + "/logo.png");
+			float birb_tex_height = static_cast<float>(window.dimensions.y) / asset_manager.texture("logo").dimensions().y * 2;
+			float size_multiplier = birb_tex_height / asset_manager.texture("logo").dimensions().y;
 
+			Rect logo_rect(window.dimensions.x / 3.0 - asset_manager.texture("logo").dimensions().x * 2.0,
+				window.dimensions.y / 2.0 - asset_manager.texture("logo").dimensions().y * 4,
+				asset_manager.texture("logo").dimensions().x * size_multiplier,
+				birb_tex_height);
 
-			manaspace.LoadFont(res_base_path + "/fonts/manaspace/manaspc.ttf", static_cast<float>(window.dimensions.y) / birb2d_logo_tex.dimensions().y - 4);
-			birb2d_text = Entity("Birb2D logo text",
-					Vector2Int(birb2d_logo.rect.x + birb2d_logo.rect.w + 32, birb2d_logo.rect.y + (birb2d_logo.rect.y / 8)),
-					EntityComponent::Text("", &manaspace, &Colors::White));
+			birb2d_logo = Entity::Image(asset_manager.texture("logo"), logo_rect);
+
+			manaspace.LoadFont(res_base_path + "/fonts/manaspace/manaspc.ttf", static_cast<float>(window.dimensions.y) / asset_manager.texture("logo").dimensions().y - 4);
+			//birb2d_text = Entity("Birb2D logo text",
+			//		Vector2Int(birb2d_logo.rect.x + birb2d_logo.rect.w + 32, birb2d_logo.rect.y + (birb2d_logo.rect.y / 8)),
+			//		EntityComponent::Text("", &manaspace, &Colors::White));
+			birb2d_text = Entity::Text("", &manaspace, Colors::White);
+			birb2d_text.rect = Vector2Int(birb2d_logo.rect.x + birb2d_logo.rect.w + 32, birb2d_logo.rect.y + (birb2d_logo.rect.y / 8));
 
 			/* Avoid problems that come from rendering an entity with size of <= 0 */
 			birb2d_text.rect.w = 1;
@@ -57,12 +61,15 @@ namespace Birb
 	{
 		manaspace_small.LoadFont(res_base_path + "/fonts/manaspace/manaspc.ttf", 24);
 
-		loading_text_entity = Entity("Loading text",
-				Vector2Int(32, 32),
-				EntityComponent::Text(loading_text, &manaspace_small, &Colors::Black));
+		//loading_text_entity = Entity("Loading text",
+		//		Vector2Int(32, 32),
+		//		EntityComponent::Text(loading_text, &manaspace_small, &Colors::Black));
+		loading_text_entity = Entity::Text(loading_text, &manaspace_small, Colors::Black);
+		loading_text_entity.rect = Vector2Int(32, 32);
 
 		loading_text_entity.renderingPriority = 10;
 		loading_text_entity.active = false;
+		loading_scene.AddObject(&loading_text_entity);
 
 		/* Implement a simple rendering loop */
 		TimeStep timeStep;
@@ -137,7 +144,11 @@ namespace Birb
 		loading_text_entity.active = true;
 		window.Clear();
 		scene.Render();
-		Render::DrawEntity(loading_text_entity);
+		loading_scene.Render();
 		window.Display();
+
+		/* Make sure that everythin went a-okay */
+		if (birb2d_logo.ErrorFuseStatus() || birb2d_text.ErrorFuseStatus() || loading_text_entity.ErrorFuseStatus())
+			BlowErrorFuse();
 	}
 }

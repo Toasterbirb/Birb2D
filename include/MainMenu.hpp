@@ -1,5 +1,9 @@
 #pragma once
 
+#include "Entities/Image.hpp"
+#include "Entities/ProgressBar.hpp"
+#include "Entities/Text.hpp"
+#include "ErrorFuse.hpp"
 #include <vector>
 #ifndef DISTCC
 #include "STD.hpp"
@@ -8,7 +12,6 @@
 #endif
 
 #include "Audio.hpp"
-#include "Entity.hpp"
 #include "Input.hpp"
 #include "MainMenuSettings.hpp"
 #include "Scene.hpp"
@@ -21,7 +24,7 @@ namespace Birb
 	/// game jams etc. where there might not be enough time
 	/// to create a fully polished main menu but the game
 	/// still needs some options menu and an exit button
-	class MainMenu
+	class MainMenu : public ErrorFuse
 	{
 	public:
 		MainMenu();
@@ -34,10 +37,10 @@ namespace Birb
 
 		Scene menu_scene;
 		Scene credits_scene;
-		Entity title_text;
-		Entity background;
+		Entity::Text title_text;
+		Rect background;
 
-		Entity window_title_text;
+		Entity::Text window_title_text;
 
 		/* Settings panel */
 		Scene settings_scene;
@@ -54,8 +57,8 @@ namespace Birb
 			void AddToScene(Scene* scene);
 
 			Vector2Int position;
-			Entity text;
-			Entity button;
+			Entity::Text text;
+			Entity::ProgressBar button;
 		};
 
 		Setting volume_slider;
@@ -63,10 +66,10 @@ namespace Birb
 		Audio::SoundFile button_hover;
 
 		/* Credits panel */
-		Entity credits_text;
+		Entity::Text credits_text;
 
 
-		std::vector<Entity> menu_buttons;
+		std::vector<Entity::Text> menu_buttons;
 
 		void StartGame();
 	};

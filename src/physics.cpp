@@ -1,5 +1,4 @@
 #include "Circle.hpp"
-#include "Entity.hpp"
 #include "Physics.hpp"
 #include "Polygon.hpp"
 #include "Rect.hpp"
@@ -109,24 +108,16 @@ namespace Birb
 			return PointInRect(rect, point.ToFloat());
 		}
 
-		bool EntityCollision(const Entity& entityA, const Entity& entityB)
+		bool EntityCollision(const BaseEntity& entityA, const BaseEntity& entityB)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity collision", PROFILER_COLOR);
-			Rect A = entityA.rect;
-			Rect B = entityB.rect;
-
-			/* Take localscale into account */
-			A.w *= entityA.localScale.x;
-			A.h *= entityA.localScale.y;
-			B.w *= entityB.localScale.x;
-			B.h *= entityB.localScale.y;
-
-			return RectCollision(A, B);
+			return RectCollision(entityA.rect, entityB.rect);
 		}
 
 		/* Inspired/yoinked from
 		 * https://stackoverflow/questions/563198/how-do-you-detect-where-two-line-segments-intersect
 		 *
+		 * TODO:
 		 * Doesn't handle cases where the lines overlap eachother and have the exact same X/Y values
 		 * for example A(7,1) B(7,3) and A(7,2) B(7,3) should technically collide, but this algorithm
 		 * doesn't handle it for some reason. pls fix*/

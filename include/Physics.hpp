@@ -6,10 +6,11 @@
 #include <vector>
 #endif
 
+#include "BaseEntity.hpp"
+
 namespace Birb
 {
 	class Circle;
-	class Entity;
 	class Line;
 	class Polygon;
 	class Rect;
@@ -47,7 +48,7 @@ namespace Birb
 		bool PointInRect(const Rect& rect, const Vector2Int& point);
 
 		/// Check for collision between two entities
-		bool EntityCollision(const Entity& entityA, const Entity& entityB);
+		bool EntityCollision(const BaseEntity& entityA, const BaseEntity& entityB);
 
 		/// Check if two lines intersect with each other
 		bool LineIntersection(const Line& lineA, const Line& lineB);

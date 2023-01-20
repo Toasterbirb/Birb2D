@@ -1,4 +1,6 @@
 #include "Renderwindow.hpp"
+#include "Entities/Animation.hpp"
+#include "Entities/ProgressBar.hpp"
 #include "Values.hpp"
 #include "Logger.hpp"
 #include "Diagnostics.hpp"
@@ -10,9 +12,6 @@
 
 namespace Birb
 {
-	static void DrawProgressBar(const Entity& entity);
-	static void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst);
-
 	Window::Window()
 	{
 		InitSDL();
@@ -225,154 +224,5 @@ namespace Birb
 	void Window::DefaultOnWindowResize(Window& window)
 	{
 		return;
-	}
-
-	void HandleAnimations(Entity* entity, SDL_Rect* src, SDL_Rect* dst)
-	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Handle animations", PROFILER_COLOR);
-		Vector2Int atlasPos = entity->getAtlasPosition(entity->animationComponent.frameIndex);
-		src->x = atlasPos.x;
-		src->y = atlasPos.y;
-		src->w = entity->animationComponent.spriteSize.x;
-		src->h = entity->animationComponent.spriteSize.y;
-
-		dst->x = entity->rect.x - (Global::RenderVars::CameraPosition.x * entity->world_space);
-		dst->y = entity->rect.y - (Global::RenderVars::CameraPosition.y * entity->world_space);
-		dst->w = src->w * entity->localScale.x;
-		dst->h = src->h * entity->localScale.y;
-
-
-
-		/* Set the current atlas position to the next frame */
-		if (entity->animationComponent.animationQueued || entity->animationComponent.loop)
-		{
-			if (entity->animationComponent.frameTimer.running && entity->animationComponent.frameTimer.ElapsedSeconds() >= (1.0 / entity->animationComponent.fps))
-			{
-				if (entity->animationComponent.frameIndex < entity->animationComponent.lastFrame)
-				{
-					entity->animationComponent.frameIndex++;
-					entity->animationComponent.frameTimer.Start();
-				}
-			}
-			else if (!entity->animationComponent.frameTimer.running)
-			{
-				/* Start the frame timer */
-				entity->animationComponent.frameTimer.Start();
-			}
-
-			if (entity->animationComponent.loop && entity->animationComponent.frameIndex >= entity->animationComponent.lastFrame)
-			{
-				entity->animationComponent.frameIndex = 0;
-			}
-			else if (entity->animationComponent.animationQueued && entity->animationComponent.frameIndex >= entity->animationComponent.lastFrame)
-			{
-				entity->animationComponent.frameIndex = entity->animationComponent.lastFrame;
-				entity->animationComponent.animationQueued = false;
-			}
-		}
-	}
-
-	void DrawProgressBar(const Entity& entity)
-	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw progress bar", PROFILER_COLOR);
-		/* Draw progress bar background unless the bar is full */
-		if (entity.progressBarComponent.value < entity.progressBarComponent.maxValue)
-			Render::DrawRect(*entity.progressBarComponent.backgroundColor, entity.rect);
-
-		/* Draw the progress bar filler box */
-		Birb::Rect fillRect(entity.rect.x, entity.rect.y, (entity.progressBarComponent.value / entity.progressBarComponent.maxValue) * entity.rect.w, entity.rect.h);
-		Render::DrawRect(*entity.progressBarComponent.fillColor, fillRect);
-
-		/* Draw the progress bar outer box */
-		Render::DrawRect(*entity.progressBarComponent.borderColor, entity.rect, entity.progressBarComponent.borderWidth);
-	}
-
-	bool Render::DrawEntity(Entity& entity)
-	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw entity", PROFILER_COLOR);
-		if (!entity.active)
-			return true;
-
-		/* Check if the sprite would be even visible */
-		if (entity.rect.w <= 0 || entity.rect.h <= 0)
-		{
-			Birb::Debug::Log("Tried to render an entity with size of <= 0", Debug::Type::warning);
-			return false;
-		}
-
-		SDL_Rect src;
-		SDL_Rect dst;
-		Vector2Int centerPoint;
-
-		/* Get texture data */
-		int texWidth 	= 0;
-		int texHeight 	= 0;
-
-		/* Skip the texture width tests if the entity doesn't have a texture on it */
-		if (entity.sprite.isLoaded())
-		{
-			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Entity sprite scale calculation", PROFILER_COLOR);
-			texWidth 	= entity.sprite.dimensions().x;
-			texHeight 	= entity.sprite.dimensions().y;
-
-			if (texWidth <= 0 || texHeight <= 0)
-			{
-				Birb::Debug::Log("Tried to render an entity with a texture with size of <= 0", Debug::Type::warning);
-				return false;
-			}
-
-			if (entity.animationComponent.frameCount <= 0) /* Check if the entity has animations */
-			{
-				src.x = 0;
-				src.y = 0;
-				src.w = texWidth;
-				src.h = texHeight;
-
-				dst.x = entity.rect.x - (Global::RenderVars::CameraPosition.x * entity.world_space);
-				dst.y = entity.rect.y - (Global::RenderVars::CameraPosition.y * entity.world_space);
-				dst.w = entity.rect.w * entity.localScale.x;
-				dst.h = entity.rect.h * entity.localScale.y;
-			}
-			else
-			{
-				/* Entity probably has an animation component */
-				HandleAnimations(&entity, &src, &dst);
-			}
-		}
-
-		/* Check if the entity has an active progress bar component */
-		if (entity.progressBarComponent.active)
-		{
-			/* Crop the sprite if the value of a the progress bar component is less than its max value */
-			if (entity.progressBarComponent.value < entity.progressBarComponent.maxValue)
-			{
-				dst.x = dst.x + entity.progressBarComponent.borderWidth;
-				src.w = (entity.progressBarComponent.value / entity.progressBarComponent.maxValue) * texWidth - (entity.progressBarComponent.borderWidth * 2);
-			}
-
-			DrawProgressBar(entity);
-
-			/* We are done if there isn't going to be a sprite to render */
-			if (!entity.sprite.isLoaded())
-				return true;
-		}
-
-		/* Skip rendering the texture if one doesn't exist on the entity */
-		if (entity.sprite.isLoaded())
-		{
-			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw entity sprite", PROFILER_COLOR);
-			centerPoint = Vector2Int((entity.rect.w * entity.localScale.x) / 2, (entity.rect.h * entity.localScale.y) / 2);
-			SDL_Point center = { centerPoint.x, centerPoint.y };
-
-			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, entity.sprite.sdlTexture(), &src, &dst, entity.angle, &center, SDL_FLIP_NONE) < 0)
-				Debug::Log("Error rendering [" + entity.name + ", (" + entity.rect.toString() + ")]. SDL Error: " + SDL_GetError(), Debug::error);
-			else
-				return true;
-		}
-
-		/* If nothing was rendered so far, simply render the rect */
-		DrawRect(entity.rect.color, entity.rect);
-
-		return true;
 	}
 }

@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "Rect.hpp"
 #include "Polygon.hpp"
+#include "Renderwindow.hpp"
 
 using namespace Birb;
 
@@ -142,5 +143,35 @@ namespace BirbTest
 
 		rect = vec3int;
 		CHECK(rect == Rect(8, 8, 3, 4));
+	}
+
+	TEST_CASE("Rendering: Rect drawing")
+	{
+		Window window("Rect testing", Vector2Int(1260, 720), 60, false);
+
+		Rect background(0, 0, 1260, 720);
+		background.color = Colors::Nord::PolarNight::nord0;
+
+		Rect rectA(0, 0, 420, 720);
+		rectA.color = Colors::Nord::Aurora::nord11;
+
+		Rect rectB(420, 0, 420, 720);
+		rectB.color = Colors::Nord::Aurora::nord14;
+
+		Rect rectC(840, 0, 420, 720);
+		rectC.color = Colors::Nord::Frost::nord10;
+
+		Rect transparent_rect(0, 300, 1260, 100);
+		transparent_rect.color = Colors::Nord::Aurora::nord15;
+		transparent_rect.color.a -= 50;
+
+		window.Clear();
+		CHECK(Render::DrawRect(background));
+		CHECK(Render::DrawRect(rectA));
+		CHECK(Render::DrawRect(rectB.color, rectB));
+		CHECK(Render::DrawRect(rectC.color, rectC, 128));
+		CHECK(Render::DrawRect(transparent_rect));
+		window.Display();
+		SDL_Delay(500);
 	}
 }

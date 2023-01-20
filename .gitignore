@@ -47,6 +47,7 @@ log.txt
 
 # Vim stuff
 .undodir
+tags
 
 # AppImage
 *.AppDir

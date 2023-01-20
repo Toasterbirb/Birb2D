@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Entity.hpp"
+#include "Entities/Text.hpp"
+#include "ErrorFuse.hpp"
 #include "Font.hpp"
 #include "Input.hpp"
+#include "Scene.hpp"
 #include "SceneObject.hpp"
 
 /* Linux only things */
@@ -23,7 +25,7 @@ namespace Birb
 		/// Draw a text overlay that shows some
 		/// runtime performance statistics. Due to the nature of
 		/// some statistics, some features are only available on Linux
-		class ResourceMonitor
+		class ResourceMonitor : public ErrorFuse
 		{
 		public:
 			ResourceMonitor();
@@ -35,8 +37,10 @@ namespace Birb
 			void Free(); ///< Free the font
 
 		private:
+			Scene scene;
+
 			Font* 			debug_text_font;
-			Entity 			debug_text_entity;
+			Entity::Text* 	debug_text_entity;
 			TimeStep* 		timestep;
 			std::string 	debug_text;
 

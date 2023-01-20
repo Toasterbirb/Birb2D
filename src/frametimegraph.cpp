@@ -18,20 +18,24 @@ namespace Birb
 			graph.rect.world_space 	= false;
 
 			font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 14);
-			fps_text.textComponent = EntityComponent::Text("", &font, &Colors::White);
+			fps_text = Entity::Text("", &font, Colors::White);
 			fps_text.rect.x = rect.x + rect.w + 8;
 			fps_text.rect.y = rect.y + 8;
 			fps_text.world_space = false;
 
-			frametime_text.textComponent = EntityComponent::Text("", &font, &Colors::White);
+			frametime_text = Entity::Text("", &font, Colors::White);
 			frametime_text.rect.x = rect.x + rect.w + 8;
 			frametime_text.rect.y = rect.y + 32;
 			frametime_text.world_space = false;
 
-			framebudget_text.textComponent = EntityComponent::Text("", &font, &Colors::White);
+			framebudget_text = Entity::Text("", &font, Colors::White);
 			framebudget_text.rect.x = rect.x + rect.w + 8;
 			framebudget_text.rect.y = rect.y + 56;
 			framebudget_text.world_space = false;
+
+			scene.AddObject(&fps_text);
+			scene.AddObject(&frametime_text);
+			scene.AddObject(&framebudget_text);
 		}
 
 		void FrametimeGraph::Render()
@@ -62,10 +66,7 @@ namespace Birb
 			frametime_text.SetText(utils::CleanDecimals(timeStep.deltaTime) + "ms");
 			framebudget_text.SetText(utils::CleanDecimals(timeStep.FrameBudget()) + "%");
 
-			Render::DrawEntity(fps_text);
-			Render::DrawEntity(frametime_text);
-			Render::DrawEntity(framebudget_text);
-
+			scene.Render();
 			graph.Render();
 		}
 	}

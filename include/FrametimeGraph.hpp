@@ -1,7 +1,9 @@
 #pragma once
-#include "Entity.hpp"
+#include "Entities/Text.hpp"
+//#include "BaseEntity.hpp"
 #include "Graphs.hpp"
 #include "Rect.hpp"
+#include "Scene.hpp"
 #include "Timestep.hpp"
 
 namespace Birb
@@ -20,13 +22,14 @@ namespace Birb
 			Rect rect;
 
 			Font font;
-			Entity fps_text;
-			Entity frametime_text;
-			Entity framebudget_text;
+			Entity::Text fps_text;
+			Entity::Text frametime_text;
+			Entity::Text framebudget_text;
 
 		private:
 			TimeStep& timeStep;
 			Widgets::Graph graph;
+			Scene scene;
 		};
 	}
 }

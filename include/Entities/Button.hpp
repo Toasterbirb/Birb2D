@@ -6,16 +6,20 @@
 #include <functional>
 #endif
 
+#include "BaseEntity.hpp"
+
 namespace Birb
 {
-	namespace EntityComponent
+	namespace Entity
 	{
 		/// Click adds button functionality to the Entity
-		class Click
+		class Button : public BaseEntity, public SceneObject
 		{
 		public:
-			Click();
-			Click(const std::function<void()>& p_onClick);
+			Button();
+			Button(const Rect& rect);
+			Button(const std::string& name, const Rect& rect);
+			Button(const std::function<void()>& p_onClick);
 			bool active;
 			bool isPressed;
 			std::function<void()> onMouseDown;
@@ -28,6 +32,9 @@ namespace Birb
 			static void PlaceHolderClickEvent();
 			static void PlaceHolderHoverEvent();
 			static void PlaceHolderDragEvent();
+
+			void RenderFunc() override;
+			void SetPos(const Vector2& delta) override;
 		};
 	}
 }
