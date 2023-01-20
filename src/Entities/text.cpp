@@ -13,7 +13,7 @@ namespace Birb
 	namespace Entity
 	{
 		Text::Text()
-		:wrapLength(0), font(&Global::DefaultSettings::DefaultFont), has_background_color(false)
+		:font(&Global::DefaultSettings::DefaultFont), wrapLength(0), has_background_color(false)
 		{
 			text 	= "";
 			color 	= Colors::White;
@@ -28,7 +28,7 @@ namespace Birb
 		}
 
 		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color)
-		:color(color), wrapLength(0), text(text), font(font), has_background_color(false)
+		:color(color), text(text), font(font), wrapLength(0), has_background_color(false)
 		{
 			this->name = name;
 			this->rect = pos;
@@ -36,7 +36,7 @@ namespace Birb
 		}
 
 		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color, const Color& bg_color)
-		:color(color), bgColor(bg_color), wrapLength(0), text(text), font(font), has_background_color(true)
+		:color(color), bgColor(bg_color), text(text), font(font), wrapLength(0), has_background_color(true)
 		{
 			this->name = name;
 			this->rect = pos;

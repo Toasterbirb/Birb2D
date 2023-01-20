@@ -29,11 +29,6 @@ namespace Birb
 
 			void Construct(const std::string& text, const Vector2Int& pos, Font* font, const Color& color);
 
-			Color color; 	///< Surface color of the text
-			Color bgColor; ///< Background color for the text component
-
-			/* FIXME: Create a constructor for this variable */
-			int wrapLength;
 
 			std::string GetText() const;
 			Color GetColor() const;
@@ -83,11 +78,15 @@ namespace Birb
 			}
 
 		private:
+			Color color; 	///< Surface color of the text
+			Color bgColor; 	///< Background color for the text component
+
 			bool ReloadSprite();
 			bool LoadSprite();
 			Texture sprite;
 			std::string text;
 			Font* font;
+			int wrapLength;
 			bool has_background_color;
 
 			void RenderFunc() override;
