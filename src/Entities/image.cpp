@@ -9,7 +9,7 @@ namespace Birb
 	namespace Entity
 	{
 		Image::Image()
-		:sprite(Global::Placeholder::empty_texture)
+		:sprite(Global::Placeholder::empty_texture), angle(0.0f)
 		{}
 
 		Image::Image(Texture& texture, const Rect& rect)

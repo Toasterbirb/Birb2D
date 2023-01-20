@@ -16,7 +16,7 @@ namespace BirbTest
 		CHECK(image.rect == Rect(0, 0, 0, 0));
 	}
 
-	TEST_CASE("Construct an image entity via move")
+	TEST_CASE("Construct an image entity via copy")
 	{
 		Entity::Image image;
 		image.active 				= false;
