@@ -30,6 +30,8 @@ void Quit()
 
 int main(int argc, char** argv)
 {
+	TTF_Init();
+
 	Birb::Debug::Log("Creating the window");
 	Birb::Window window("Birb Editor", Birb::Vector2Int(1280, 720), 75, false);
 	Birb::TimeStep timeStep;
@@ -330,5 +332,6 @@ int main(int argc, char** argv)
 		timeStep.End();
 	}
 
+	TTF_Quit();
 	return 0;
 }
