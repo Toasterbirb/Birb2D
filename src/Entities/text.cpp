@@ -119,9 +119,9 @@ namespace Birb
 			ReloadSprite();
 		}
 
-		void Text::SetTextColor(Color& color)
+		void Text::SetTextColor(const Color& color)
 		{
-			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Set entity TextComponent color", PROFILER_COLOR);
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Set entity text color", PROFILER_COLOR);
 
 			/* Don't do anything if the color hasn't changed at all */
 			if (this->color.a == color.a
@@ -130,6 +130,20 @@ namespace Birb
 				&& this->color.b == color.b) return;
 
 			this->color = color;
+			ReloadSprite();
+		}
+
+		void Text::SetTextBgColor(const Color& color)
+		{
+			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Set entity background text color", PROFILER_COLOR);
+
+			/* Don't do anything if the color hasn't changed at all */
+			if (this->bgColor.a == color.a
+				&& this->bgColor.r == color.r
+				&& this->bgColor.g == color.g
+				&& this->bgColor.b == color.b) return;
+
+			this->bgColor = color;
 			ReloadSprite();
 		}
 
