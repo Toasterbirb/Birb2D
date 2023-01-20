@@ -47,6 +47,7 @@ add_executable(test
 	general_tests/vector_test.cpp
 
 	general_tests/entities/animation_test.cpp
+	general_tests/entities/empty_test.cpp
 	general_tests/entities/image_test.cpp
 	general_tests/entities/progressbar_test.cpp
 	general_tests/entities/text_test.cpp

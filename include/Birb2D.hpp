@@ -6,6 +6,7 @@
 #include "Diagnostics.hpp"
 #include "Entities/Animation.hpp"
 #include "Entities/Button.hpp"
+#include "Entities/Empty.hpp"
 #include "Entities/Image.hpp"
 #include "Entities/Text.hpp"
 #include "EntityComponent.hpp"
