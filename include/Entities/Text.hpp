@@ -41,7 +41,8 @@ namespace Birb
 
 			bool SetText(const std::string& newText); 	///< Change the text in Text and reload the sprite
 			void SetFont(Font* font); 			///< Change the font in Text and reload the sprite
-			void SetTextColor(Color& color); 			///< Change the color in Text and reload the sprite
+			void SetTextColor(const Color& color); 			///< Change the color in Text and reload the sprite
+			void SetTextBgColor(const Color& color);
 
 			Vector2Int sprite_dimensions() const;
 

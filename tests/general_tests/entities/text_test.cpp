@@ -49,7 +49,10 @@ namespace BirbTest
 			CHECK(textWithBackground.GetText() == "");
 			CHECK(textWithBackground.renderingPriority == 10);
 
-			textWithBackground = Entity::Text("Text with background", Vector2Int(50, 250), "", &font, Colors::LightGray, Colors::DarkGray);
+			textWithBackground = Entity::Text("Text with background", Vector2Int(50, 250), "", &font, Colors::LightGray, Colors::LightGray);
+			CHECK(textWithBackground.GetBgColor() == Colors::LightGray);
+			textWithBackground.SetTextBgColor(Colors::DarkGray);
+
 			CHECK(textWithBackground.GetColor() == Colors::LightGray);
 			CHECK(textWithBackground.GetBgColor() == Colors::DarkGray);
 			CHECK(textWithBackground.GetText() == "");

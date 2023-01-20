@@ -30,6 +30,8 @@ void Quit()
 
 int main(int argc, char** argv)
 {
+	TTF_Init();
+
 	Birb::Debug::Log("Creating the window");
 	Birb::Window window("Birb Editor", Birb::Vector2Int(1280, 720), 75, false);
 	Birb::TimeStep timeStep;
@@ -52,11 +54,11 @@ int main(int argc, char** argv)
 	top_bar_background.color = 0x2a2738;
 	top_bar.AddObject(&top_bar_background);
 
-	Birb::Entity titleText("Title text", Birb::Vector2Int(4, 4), Birb::EntityComponent::Text("Birb Editor", &titleFont, &Birb::Colors::White));
+	Birb::Entity::Text titleText("Title text", Birb::Vector2Int(4, 4), "Birb Editor", &titleFont, Birb::Colors::White);
 	titleText.renderingPriority = 1;
 	top_bar.AddObject(&titleText);
 
-	Birb::Entity exitButton("Exit button", Birb::Rect(window.dimensions.x - 18, 2, 16, 16));
+	Birb::Entity::Button exitButton("Exit button", Birb::Rect(window.dimensions.x - 18, 2, 16, 16));
 	exitButton.rect.color = Birb::Colors::Red;
 	exitButton.renderingPriority = 20;
 	top_bar.AddObject(&exitButton);
@@ -70,7 +72,8 @@ int main(int argc, char** argv)
 	side_panel.AddObject(&side_panel_background);
 
 	Birb::Font buttonFont("fonts/freefont/FreeSansBold.ttf", 18);
-	Birb::Entity saveButton("Save button", Birb::Vector2Int(8, window.dimensions.y - top_bar_height - 32), Birb::EntityComponent::Text("Save", &buttonFont, &Birb::Colors::Nord::SnowStorm::nord5, &Birb::Colors::Nord::PolarNight::nord1));
+	//Birb::Entity::Button saveButton("Save button", Birb::Vector2Int(8, window.dimensions.y - top_bar_height - 32), "Save", &buttonFont, Birb::Colors::Nord::SnowStorm::nord5, Birb::Colors::Nord::PolarNight::nord1);
+	Birb::Entity::Button saveButton("Save button", Birb::Rect(8, window.dimensions.y - top_bar_height - 32, 64, 20));
 	saveButton.renderingPriority = 1;
 
 	side_panel.AddObject(&saveButton);
@@ -99,7 +102,7 @@ int main(int argc, char** argv)
 	bool mwheel_dragging = false;
 	Birb::Vector2Int drag_start_pos;
 
-	Birb::Entity coordinate_text("Mouse coordinate text", Birb::Vector2Int(5, 5), Birb::EntityComponent::Text("", &titleFont, &Birb::Colors::White));
+	Birb::Entity::Text coordinate_text("Mouse coordinate text", Birb::Vector2Int(5, 5), "", &titleFont, Birb::Colors::White);
 
 	/* Set some default values, so that there's something to render before
 	 * the user moves their cursor over the editor window */
@@ -107,7 +110,7 @@ int main(int argc, char** argv)
 	coordinate_text.rect.h = 1;
 	coordinate_text.rect.color = level_view_background.color;
 
-	coordinate_text.textComponent.bgColor = &Birb::Colors::DarkGray;
+	coordinate_text.SetTextBgColor(Birb::Colors::DarkGray);
 	coordinate_text.renderingPriority = 11;
 	level_view.AddObject(&coordinate_text);
 
@@ -158,8 +161,8 @@ int main(int argc, char** argv)
 
 	Birb::UI ui;
 
-	exitButton.clickComponent = Birb::EntityComponent::Click(Quit);
-	saveButton.clickComponent = Birb::EntityComponent::Click(Save);
+	exitButton.onClick = Quit;
+	saveButton.onClick = Save;
 
 	ui.AddButton(&exitButton);
 	ui.AddButton(&saveButton);
@@ -329,5 +332,6 @@ int main(int argc, char** argv)
 		timeStep.End();
 	}
 
+	TTF_Quit();
 	return 0;
 }
