@@ -44,7 +44,7 @@ namespace Birb
 		}
 
 		Text::Text(const std::string& text, const Vector2Int& pos, Font* font, const Color& color)
-		:color(color), text(text), font(font), has_background_color(false)
+		:color(color), text(text), font(font), wrapLength(0), has_background_color(false)
 		{
 			this->rect = pos;
 			ReloadSprite();
