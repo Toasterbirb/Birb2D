@@ -11,10 +11,11 @@ Birb2D is not meant to be *production* quality, but there's a chance it can be u
 - [Pong](https://github.com/Toasterbirb/Pong)
 - [SeedSplit](https://github.com/Toasterbirb/SeedSplit)
 - [Breakout](https://github.com/Toasterbirb/Breakout)
-- [LD50.exe (Ludum Dare game)](https://ldjam.com/events/ludum-dare/50/ld50-exe)
-- [The Diamond Heist (Ludum Dare game)](https://ldjam.com/events/ludum-dare/51/the-diamond-heist)
+- [LD50.exe (Ludum Dare 50)](https://ldjam.com/events/ludum-dare/50/ld50-exe)
+- [The Diamond Heist (Ludum Dare 51)](https://ldjam.com/events/ludum-dare/51/the-diamond-heist)
 - [Void](https://github.com/Toasterbirb/Void)
 - [Tic-Tac-Toe](https://github.com/Toasterbirb/tic-tac-toe)
+- [Let's get this bread (Ludum Dare 52)](https://ldjam.com/events/ludum-dare/52/lets-get-this-bread)
 
 ## External libraries
 - SDL2
