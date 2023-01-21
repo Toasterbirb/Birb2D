@@ -21,7 +21,7 @@ namespace BirbTest
 
 	Font* font;
 
-	Entity::Text game_reached_text;
+	Entity::Text* game_reached_text;
 	Scene game_scene;
 
 
@@ -40,9 +40,9 @@ namespace BirbTest
 	{
 		font = new Font("fonts/freefont/FreeMonoBold.ttf", 64);
 
-		game_reached_text = Entity::Text("Game reached", Vector2Int(128, 128), "This is the game", font, Colors::Nord::Frost::nord9);
-		game_reached_text.renderingPriority = 1;
-		game_scene.AddObject(&game_reached_text);
+		game_reached_text = new Entity::Text("Game reached", Vector2Int(128, 128), "This is the game", font, Colors::Nord::Frost::nord9);
+		game_reached_text->renderingPriority = 1;
+		game_scene.AddObject(game_reached_text);
 
 		/* Show the splash screen */
 		Splash splash(*game.window);
@@ -56,7 +56,7 @@ namespace BirbTest
 		main_menu.Launch();
 
 		CHECK_FALSE(main_menu.ErrorFuseStatus());
-		CHECK_FALSE(game_reached_text.ErrorFuseStatus());
+		CHECK_FALSE(game_reached_text->ErrorFuseStatus());
 	}
 
 	void menu_input(Game& game)
@@ -81,6 +81,7 @@ namespace BirbTest
 
 	void menu_cleanup()
 	{
+		delete game_reached_text;
 		delete font;
 	}
 }
