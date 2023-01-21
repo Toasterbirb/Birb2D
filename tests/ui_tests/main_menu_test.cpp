@@ -1,10 +1,11 @@
 #include "Entities/Text.hpp"
 #include "Font.hpp"
-#include "Scene.hpp"
-#include "Vector/Vector2Int.hpp"
-#include "doctest.h"
 #include "Game.hpp"
 #include "MainMenu.hpp"
+#include "Scene.hpp"
+#include "Splash.hpp"
+#include "Vector/Vector2Int.hpp"
+#include "doctest.h"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 using namespace Birb;
@@ -42,6 +43,12 @@ namespace BirbTest
 		game_reached_text = Entity::Text("Game reached", Vector2Int(128, 128), "This is the game", font, Colors::Nord::Frost::nord9);
 		game_reached_text.renderingPriority = 1;
 		game_scene.AddObject(&game_reached_text);
+
+		/* Show the splash screen */
+		Splash splash(*game.window);
+		splash.loading_text = "Loading... This is gonna take a single (1) moment";
+		splash.Run();
+
 
 		/* Create the main menu and start it */
 		MainMenuSettings menu_settings;
