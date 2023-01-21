@@ -31,12 +31,12 @@ namespace BirbTest
 		Circle circle(3, {0, 0});
 
 		scene.AddObject(&entityA);
-		scene.AddObject(&entityB);
+		scene.AddObject(entityB);
 		scene.AddObject(&graphs[0]);
-		scene.AddObject(&graphs[1]);
+		scene.AddObject(graphs[1]);
 		scene.AddObject(&polygon);
 		scene.AddObject(&line);
-		scene.AddObject(&rect);
+		scene.AddObject(rect);
 		scene.AddObject(&circle);
 
 		CHECK(scene.ObjectCount() == 8);
@@ -247,7 +247,7 @@ namespace BirbTest
 
 		Scene sceneB;
 		sceneB.renderingPriority = 10;
-		testScene.AddObjectFast(&sceneB);
+		testScene.AddObjectFast(sceneB);
 
 		Scene sceneC;
 		sceneC.renderingPriority = -2;
@@ -255,7 +255,7 @@ namespace BirbTest
 
 		Scene sceneD;
 		sceneD.renderingPriority = 0;
-		testScene.AddObjectFast(&sceneD);
+		testScene.AddObjectFast(sceneD);
 
 		Scene sceneE;
 		sceneE.renderingPriority = 2;
