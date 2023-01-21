@@ -71,7 +71,7 @@ namespace Birb
 			render(*this);
 
 
-#ifndef __WINDOWS__
+#if BIRB_MT == 1
 			/* Start the fixed update thread and refresh statistics */
 			if (timeStep.ShouldRunFixedUpdate())
 			{
@@ -90,7 +90,7 @@ namespace Birb
 #endif /* __WINDOWS__ */
 			game_window.Display();
 
-#ifdef __WINDOWS__
+#if BIRB_MT == 0
 			/* mingw doesn't really like std::future yet,
 			 * so we'll have to skip on multithreading on
 			 * Windows for now :( */
@@ -102,7 +102,7 @@ namespace Birb
 			post_render();
 #endif /* __WINDOWS__ */
 
-#ifndef __WINDOWS__
+#if BIRB_MT == 1
 			/* Join the fixed update thread */
 			fixed_update_future.wait();
 

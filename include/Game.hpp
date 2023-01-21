@@ -98,7 +98,7 @@ namespace Birb
 		Diagnostics::ResourceMonitor statistics;
 //#endif
 
-#ifndef __WINDOWS__
+#if BIRB_MT == 1
 		std::future<void> fixed_update_future;
 		std::future<void> post_render_future;
 #endif
