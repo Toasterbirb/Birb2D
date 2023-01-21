@@ -35,6 +35,19 @@ namespace Birb
 			rect.h 			= sprite.dimensions().y;
 		}
 
+		void Animation::Construct(const Texture& sprite, const Vector2Int& sprite_size, const int& frame_count, const int& fps, const bool& loop)
+		{
+			this->sprite = sprite;
+			this->spriteSize = sprite_size;
+			this->frameCount = frame_count;
+			this->fps = fps;
+			this->loop = loop;
+
+			frameIndex 		= 0;
+			animationQueued = false;
+			rect.w 			= sprite.dimensions().x;
+			rect.h 			= sprite.dimensions().y;
+		}
 
 		void Animation::ResetAnimationAtlas()
 		{
