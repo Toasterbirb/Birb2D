@@ -122,6 +122,9 @@ namespace Birb
 		}
 #endif
 
+		/* Clear the queue after it has been processed */
+		lazyload_queue.clear();
+
 		/* After the asset files have been read in, let SDL turn them into usable data */
 		for (size_t i = 0; i < asset_list.size(); ++i)
 		{
@@ -135,6 +138,9 @@ namespace Birb
 					break;
 			};
 		}
+
+		/* Free the asset list after they have been processed into textures, fonts, sounds etc. */
+		FreeBundledAssets();
 	}
 
 	AssetManager::AssetManager()
