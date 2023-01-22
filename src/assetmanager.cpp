@@ -10,8 +10,9 @@
 #if BIRB_MT == 1
 #include <future>
 #include <execution>
-#include <fstream>
 #endif /* BIRB_MT */
+
+#include <fstream>
 #endif /* DISTCC */
 
 #ifdef BUNDLED_ASSETS
@@ -83,13 +84,13 @@ namespace Birb
 		for (size_t i = 0; i < lazyload_queue.size(); ++i)
 		{
 			if (Diagnostics::Debugging::AssetLoading)
-				Debug::Log("Loading: " + lazy_asset.first);
+				Debug::Log("Loading: " + lazyload_queue[i].first);
 
-			std::ifstream file(Global::FilePaths::Resources + lazy_asset.first, std::ifstream::binary);
+			std::ifstream file(Global::FilePaths::Resources + lazyload_queue[i].first, std::ifstream::binary);
 			if (file)
 			{
 				Asset asset;
-				asset.type = lazy_asset.second;
+				asset.type = lazyload_queue[i].second;
 
 				/* Get the file length */
 				file.seekg(0, file.end);
@@ -111,8 +112,8 @@ namespace Birb
 				file.close();
 
 				/* Add the lazy loaded data into a map */
-				assets[lazy_asset.first] = asset;
-				asset_list.push_back(lazy_asset.first);
+				assets[lazyload_queue[i].first] = asset;
+				asset_list.push_back(lazyload_queue[i].first);
 			}
 			else
 			{
