@@ -5,8 +5,12 @@
 #include "STD.hpp"
 #else
 #include <functional>
-#include <future>
 #endif
+
+//#if BIRB_MT == 1
+#include <future>
+//#endif /* BIRB_MT */
+
 
 #include "ResourceMonitor.hpp"
 #include "Timestep.hpp"
@@ -94,13 +98,6 @@ namespace Birb
 		TimeStep timeStep;
 		WindowOpts window_options;
 
-
 		Diagnostics::ResourceMonitor statistics;
-//#endif
-
-#if BIRB_MT == 1
-		std::future<void> fixed_update_future;
-		std::future<void> post_render_future;
-#endif
 	};
 }

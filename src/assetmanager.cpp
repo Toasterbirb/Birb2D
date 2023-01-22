@@ -8,7 +8,6 @@
 
 #ifdef DISTCC
 #if BIRB_MT == 1
-#include <future>
 #include <execution>
 #endif /* BIRB_MT */
 
