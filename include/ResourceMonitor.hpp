@@ -31,6 +31,9 @@ namespace Birb
 			ResourceMonitor();
 			ResourceMonitor(TimeStep* timestep);
 
+			/// Live entity counter. Shouldn't be modified manually
+			static inline int EntityCount;
+
 			/// Update all of the values
 			void Refresh();
 			void Render();
