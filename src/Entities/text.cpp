@@ -105,6 +105,14 @@ namespace Birb
 			if (text == newText)
 				return true;
 
+			/* If the new text would be empty, simply disable the text entity. If the
+			 * entity then gets some actual text, toggle the entity back on and set the
+			 * text */
+			if (newText.empty())
+				this->active = false;
+			else
+				this->active = true;
+
 			text = newText;
 			return ReloadSprite();
 		}
