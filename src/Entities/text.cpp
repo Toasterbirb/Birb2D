@@ -109,9 +109,14 @@ namespace Birb
 			 * entity then gets some actual text, toggle the entity back on and set the
 			 * text */
 			if (newText.empty())
+			{
 				this->active = false;
+				return true;
+			}
 			else
+			{
 				this->active = true;
+			}
 
 			text = newText;
 			return ReloadSprite();
