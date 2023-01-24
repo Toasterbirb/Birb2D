@@ -41,6 +41,7 @@ namespace Birb
 				window_options.refresh_rate,
 				window_options.resizable);
 		window = &game_window;
+		event = &window->event;
 
 		/* Initialize timestep */
 		timeStep.Init(&game_window);

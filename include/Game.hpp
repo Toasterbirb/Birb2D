@@ -87,6 +87,9 @@ namespace Birb
 		/// Game window that the game loop class creates
 		Window* window;
 
+		/// A shortcut to the event variable in the window variable
+		SDL_Event* event;
+
 		TimeStep* time_step();
 
 	private:
