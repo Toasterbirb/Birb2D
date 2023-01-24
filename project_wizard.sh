@@ -78,6 +78,8 @@ else
 	fi
 fi
 
+USE_DISTCC=$(yes_no_prompt "Use distcc and ccache to help with compiling times" "n")
+
 # Basic game project details
 read -p "Game window title [Game]: " GAME_WINDOW_TITLE
 [ -z "$GAME_WINDOW_TITLE" ] && GAME_WINDOW_TITLE="Game"
@@ -96,6 +98,7 @@ then
 else
 	echo "Birb2D source code URL: $BIRB2D_REPO_URL"
 fi
+echo "Use distcc + ccache: $USE_DISTCC"
 printf "\n"
 echo "Game window title: $GAME_WINDOW_TITLE"
 echo "Default window resolution: $GAME_WINDOW_RESOLUTION"
@@ -113,6 +116,9 @@ sleep 2
 echo "Copying the project skeleton..."
 mkdir -p $PROJECT_PATH
 cp -rL $EXEC_PATH/project_skeleton/* $PROJECT_PATH/
+
+# Create any missing directories
+mkdir -p $PROJECT_PATH/include $PROJECT_PATH/res
 
 echo "Setting project values..."
 sed -i "s/<PROJECT_NAME>/$PROJECT_NAME/" $PROJECT_PATH/CMakeLists.txt
@@ -133,6 +139,11 @@ fi
 # Prepare a build
 mkdir -p $PROJECT_PATH/build
 cd $PROJECT_PATH/build
-cmake .. && make -j$(nproc)
+if [ "$USE_DISTCC" ]
+then
+	cmake -DDISTCC=on -DCMAKE_C_COMPILER_LAUNCHER="ccache;distcc" -DCMAKE_CXX_COMPILER_LAUNCHER="ccache;distcc" .. && make -j$(distcc -j)
+else
+	cmake .. && make -j$(nproc)
+fi
 
 echo "Project created successfully to $PROJECT_PATH"
