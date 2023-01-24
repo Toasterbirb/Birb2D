@@ -140,7 +140,10 @@ namespace Birb
 		}
 
 		/* Free the asset list after they have been processed into textures, fonts, sounds etc. */
-		FreeBundledAssets();
+		for (size_t i = 0; i < AssetManager::lazy_asset_list.size(); ++i)
+		{
+			AssetManager::lazy_assets[AssetManager::lazy_asset_list[i]].Free();
+		}
 	}
 
 	AssetManager::AssetManager()
