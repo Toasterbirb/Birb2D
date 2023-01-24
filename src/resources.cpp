@@ -39,10 +39,20 @@ namespace Birb
 
 	SDL_Texture* Resources::LoadTextureFromMem(const std::string& file_path)
 	{
-		SDL_Texture* texture = IMG_LoadTexture_RW(Global::RenderVars::Renderer, AssetManager::sdl_mem_read(file_path), true);
+		SDL_Texture* texture = IMG_LoadTexture_RW(Global::RenderVars::Renderer, AssetManager::sdl_mem_read_bundle(file_path), true);
 
 		if (texture == NULL)
 			Debug::Log("Failed to load texture [" + file_path + "]: " + static_cast<std::string>(SDL_GetError()), Debug::error);
+
+		return texture;
+	}
+
+	SDL_Texture* Resources::LoadTextureFromMem(const Asset& asset)
+	{
+		SDL_Texture* texture = IMG_LoadTexture_RW(Global::RenderVars::Renderer, AssetManager::sdl_mem_read(asset), true);
+
+		if (texture == NULL)
+			Debug::Log("Failed to load texture from an asset: " + static_cast<std::string>(SDL_GetError()), Debug::error);
 
 		return texture;
 	}

@@ -67,8 +67,8 @@ namespace Birb
 
 					/* Add the lazy loaded data into a map */
 					lazyloaded_assets_lock.lock();
-					assets[lazy_asset.first] = asset;
-					asset_list.push_back(lazy_asset.first);
+					lazy_assets[lazy_asset.first] = asset;
+					lazy_asset_list.push_back(lazy_asset.first);
 					lazyloaded_assets_lock.unlock();
 				}
 				else
@@ -126,12 +126,12 @@ namespace Birb
 		lazyload_queue.clear();
 
 		/* After the asset files have been read in, let SDL turn them into usable data */
-		for (size_t i = 0; i < asset_list.size(); ++i)
+		for (size_t i = 0; i < lazy_asset_list.size(); ++i)
 		{
-			switch (assets[asset_list[i]].type)
+			switch (lazy_assets[lazy_asset_list[i]].type)
 			{
 				case (TEXTURE):
-					textures[asset_list[i]] = Texture(Resources::LoadTextureFromMem(asset_list[i]));
+					textures[lazy_asset_list[i]] = Texture(Resources::LoadTextureFromMem(lazy_assets[lazy_asset_list[i]]));
 					break;
 
 				default:
@@ -193,9 +193,14 @@ namespace Birb
 #endif /* BUNDLED_ASSETS */
 	}
 
-	SDL_RWops* AssetManager::sdl_mem_read(const std::string& file_path)
+	SDL_RWops* AssetManager::sdl_mem_read_bundle(const std::string& file_path)
 	{
 		return SDL_RWFromMem(AssetManager::assets[file_path].buffer, AssetManager::assets[file_path].size);
+	}
+
+	SDL_RWops* AssetManager::sdl_mem_read(const Asset& asset)
+	{
+		return SDL_RWFromMem(asset.buffer, asset.size);
 	}
 
 	void AssetManager::FreeBundledAssets()

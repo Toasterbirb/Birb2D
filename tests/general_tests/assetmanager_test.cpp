@@ -50,7 +50,19 @@ namespace BirbTest
 		CHECK_FALSE(asset_manager.texture("textures/birb.png").ErrorFuseStatus());
 		CHECK_FALSE(asset_manager.texture("textures/birb_animation.png").ErrorFuseStatus());
 
+		/* Do simple texture dimensions checks to make sure that at least Something
+		 * was loaded*/
 		CHECK(asset_manager.texture("birb2d_res/logo.png").dimensions() == Vector2Int(13, 11));
+
+		CHECK(asset_manager.texture("birb2d_res/loading.png").dimensions().x > 0);
+		CHECK(asset_manager.texture("birb2d_res/loading.png").dimensions().y > 0);
+
+		CHECK(asset_manager.texture("textures/birb.png").dimensions().x > 0);
+		CHECK(asset_manager.texture("textures/birb.png").dimensions().y > 0);
+
+		CHECK(asset_manager.texture("textures/birb_animation.png").dimensions().x > 0);
+		CHECK(asset_manager.texture("textures/birb_animation.png").dimensions().y > 0);
+
 
 		Diagnostics::Debugging::AssetLoading = false;
 	}

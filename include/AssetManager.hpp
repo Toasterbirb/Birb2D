@@ -51,7 +51,10 @@ namespace Birb
 		static bool InitializeBundledAssets();
 
 		/// Read asset data at given relative path in bundled assets
-		static SDL_RWops* sdl_mem_read(const std::string& file_path);
+		static SDL_RWops* sdl_mem_read_bundle(const std::string& file_path);
+
+		/// Read asset data into SDL_RWops given an asset object
+		static SDL_RWops* sdl_mem_read(const Asset& asset);
 
 		/// Free all heap allocated asset objects
 		static void FreeBundledAssets();
@@ -87,6 +90,8 @@ namespace Birb
 
 		/* Lazy loading variables */
 		std::vector<std::pair<std::string, AssetType>> lazyload_queue;
+		static inline std::unordered_map<std::string, Asset> lazy_assets;
+		static inline std::vector<std::string> lazy_asset_list;
 
 #if BIRB_MT == 1
 		std::mutex lazyloaded_assets_lock;
