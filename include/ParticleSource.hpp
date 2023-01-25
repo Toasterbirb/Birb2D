@@ -26,6 +26,7 @@ namespace Birb
 		class ParticleSource : public SceneObject
 		{
 		public:
+			ParticleSource();
 			ParticleSource(TimeStep* timestep);
 
 			float speed = 0.05f; ///< The duration in seconds between spawning each particle
