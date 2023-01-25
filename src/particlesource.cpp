@@ -86,6 +86,7 @@ namespace Birb
 					particles[dead_particle_index].direction.y = next_dir.y * particles[dead_particle_index].particle_speed;
 					particles[dead_particle_index].alive = true;
 					particles[dead_particle_index].life = reference_particle.life;
+					particles[dead_particle_index].color = reference_particle.color;
 				}
 			}
 		}
