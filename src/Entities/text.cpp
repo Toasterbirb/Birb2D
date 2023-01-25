@@ -112,6 +112,7 @@ namespace Birb
 			{
 				this->active = false;
 				this->text = "";
+				this->rect.w = 0;
 				return true;
 			}
 			else
