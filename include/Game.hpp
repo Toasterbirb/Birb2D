@@ -7,11 +7,6 @@
 #include <functional>
 #endif
 
-//#if BIRB_MT == 1
-#include <future>
-//#endif /* BIRB_MT */
-
-
 #include "ResourceMonitor.hpp"
 #include "Timestep.hpp"
 #include "Vector/Vector2Int.hpp"

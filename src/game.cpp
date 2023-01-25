@@ -2,6 +2,10 @@
 #include "Game.hpp"
 #include "Values.hpp"
 
+#if BIRB_MT == 1
+#include <future>
+#endif /* BIRB_MT */
+
 namespace Birb
 {
 	Game::Game(WindowOpts window_options,
@@ -11,8 +15,9 @@ namespace Birb
 			std::function<void(Game& game)> render_func)
 	:start(start_func), input(input_func), update(update_func), render(render_func), window_options(window_options)
 	{
-		cleanup 	= cleanup_placeholder;
-		post_render = post_render_placeholder;
+		cleanup 		= cleanup_placeholder;
+		post_render 	= post_render_placeholder;
+		fixed_update 	= fixed_update_placeholder;
 
 		/* Initialize SDL stuff */
 		if (TTF_Init() == -1)
