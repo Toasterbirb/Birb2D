@@ -105,21 +105,6 @@ namespace Birb
 			if (text == newText)
 				return true;
 
-			/* If the new text would be empty, simply disable the text entity. If the
-			 * entity then gets some actual text, toggle the entity back on and set the
-			 * text */
-			if (newText.empty())
-			{
-				this->active = false;
-				this->text = "";
-				this->rect.w = 0;
-				return true;
-			}
-			else
-			{
-				this->active = true;
-			}
-
 			text = newText;
 			return ReloadSprite();
 		}
@@ -170,6 +155,21 @@ namespace Birb
 		bool Text::ReloadSprite()
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Reload sprite", PROFILER_COLOR);
+
+			/* If the new text would be empty, simply disable the text entity. If the
+			 * entity then gets some actual text, toggle the entity back on and set the
+			 * text */
+			if (text.empty())
+			{
+				this->active = false;
+				this->rect.w = 0;
+				return true;
+			}
+			else
+			{
+				this->active = true;
+			}
+
 
 			/* Destroy the old sprite */
 			if (sprite.isLoaded())
