@@ -111,6 +111,7 @@ namespace Birb
 			if (newText.empty())
 			{
 				this->active = false;
+				this->text = "";
 				return true;
 			}
 			else
