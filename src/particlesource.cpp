@@ -44,7 +44,7 @@ namespace Birb
 				particles[i].pos += particles[i].direction * timestep->deltaTime;
 
 				/* Handle gravity */
-				particles[i].direction.y += particles[i].gravity;
+				particles[i].direction.y += particles[i].gravity * timestep->deltaTime * 10;
 
 			}
 

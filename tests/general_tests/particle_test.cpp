@@ -111,7 +111,7 @@ namespace BirbTest
 					ps->spawn_area.h -= 40;
 
 					ps->reference_particle.particle_speed = 300;
-					ps->reference_particle.gravity = 5.0f;
+					ps->reference_particle.gravity = 100.0f;
 					ps->reference_particle.life = 4.0f;
 					break;
 				}
