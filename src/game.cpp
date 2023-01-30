@@ -125,7 +125,6 @@ namespace Birb
 	void Game::WindowDisplayMultithread(Window& game_window)
 	{
 		std::future<void> fixed_update_future;
-		std::future<void> post_render_future;
 
 		/* Start the fixed update thread and refresh statistics */
 		if (timeStep.ShouldRunFixedUpdate())
@@ -141,14 +140,11 @@ namespace Birb
 			statistics.Render();
 
 		/* Start the post render thread */
-		post_render_future = std::async(std::launch::async, post_render);
+		std::future<void> post_render_future = std::async(std::launch::async, post_render);
 
 		game_window.Display();
 
-		/* We don't *necessarily* need to wait for fixed update to finish,
-		 * since its kind of separate from the update loop. Toggle this line
-		 * back on when biological matter hits the fan */
-		//fixed_update_future.wait();
+		fixed_update_future.wait();
 
 		/* Join the post render thread */
 		post_render_future.wait();
