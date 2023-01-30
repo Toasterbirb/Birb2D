@@ -2,7 +2,7 @@
 #include "Game.hpp"
 #include "Values.hpp"
 
-#if BIRB_MT == 1
+#ifdef BIRB_MT
 #include <future>
 #endif /* BIRB_MT */
 
@@ -33,11 +33,6 @@ namespace Birb
 
 	void Game::Start()
 	{
-#if BIRB_MT == 1
-		std::future<void> fixed_update_future;
-		std::future<void> post_render_future;
-#endif
-
 		application_running = true;
 
 		/* Create the game window */
@@ -81,44 +76,10 @@ namespace Birb
 			game_window.Clear();
 			render(*this);
 
-
-#if BIRB_MT == 1
-			/* Start the fixed update thread and refresh statistics */
-			if (timeStep.ShouldRunFixedUpdate())
-			{
-				fixed_update_future = std::async(std::launch::async, fixed_update);
-
-				if (Diagnostics::Debugging::Overlays::ResourceMonitor)
-					statistics.Refresh();
-			}
-
-			/* Render the statistics overlay if debugging is enabled */
-			if (Diagnostics::Debugging::Overlays::ResourceMonitor)
-				statistics.Render();
-
-			/* Start the post render thread */
-			post_render_future = std::async(std::launch::async, post_render);
-#endif /* __WINDOWS__ */
-			game_window.Display();
-
-#if BIRB_MT == 0
-			/* mingw doesn't really like std::future yet,
-			 * so we'll have to skip on multithreading on
-			 * Windows for now :( */
-			if (timeStep.ShouldRunFixedUpdate())
-			{
-				fixed_update();
-			}
-
-			post_render();
-#endif /* __WINDOWS__ */
-
-#if BIRB_MT == 1
-			/* Join the fixed update thread */
-			fixed_update_future.wait();
-
-			/* Join the post render thread */
-			post_render_future.wait();
+#ifdef BIRB_MT
+			WindowDisplayMultithread(game_window);
+#else
+			WindowDisplay(game_window);
 #endif
 
 			/* End of timestep */
@@ -159,6 +120,53 @@ namespace Birb
 	{
 		return &timeStep;
 	}
+
+#ifdef BIRB_MT
+	void Game::WindowDisplayMultithread(Window& game_window)
+	{
+		std::future<void> fixed_update_future;
+		std::future<void> post_render_future;
+
+		/* Start the fixed update thread and refresh statistics */
+		if (timeStep.ShouldRunFixedUpdate())
+		{
+			fixed_update_future = std::async(std::launch::async, fixed_update);
+
+			if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+				statistics.Refresh();
+		}
+
+		/* Render the statistics overlay if debugging is enabled */
+		if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+			statistics.Render();
+
+		/* Start the post render thread */
+		post_render_future = std::async(std::launch::async, post_render);
+
+		game_window.Display();
+
+		/* Join the fixed update thread */
+		fixed_update_future.wait();
+
+		/* Join the post render thread */
+		post_render_future.wait();
+	}
+#else
+	void Game::WindowDisplay(Window& game_window)
+	{
+		game_window.Display();
+
+		/* mingw doesn't really like std::future yet,
+		 * so we'll have to skip on multithreading on
+		 * Windows for now :( */
+		if (timeStep.ShouldRunFixedUpdate())
+		{
+			fixed_update();
+		}
+
+		post_render();
+	}
+#endif
 
 	void Game::fixed_update_placeholder()
 	{}

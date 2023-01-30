@@ -72,9 +72,7 @@ if (STATIC_SDL)
 endif()
 
 if (MULTITHREAD)
-	add_compile_definitions(BIRB_MT=1)
-else()
-	add_compile_definitions(BIRB_MT=0)
+	add_compile_definitions(BIRB_MT)
 endif()
 
 # Include the microprofiler. It should get disabled by the

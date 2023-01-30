@@ -8,7 +8,7 @@
 #include <vector>
 #include <unordered_map>
 
-#if BIRB_MT == 1
+#ifdef BIRB_MT
 #include <mutex>
 #endif /* BIRB_MT */
 
@@ -93,7 +93,7 @@ namespace Birb
 		static inline std::unordered_map<std::string, Asset> lazy_assets;
 		static inline std::vector<std::string> lazy_asset_list;
 
-#if BIRB_MT == 1
+#ifdef BIRB_MT
 		std::mutex lazyloaded_assets_lock;
 #endif
 

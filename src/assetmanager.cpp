@@ -7,7 +7,7 @@
 #include <algorithm>
 
 #ifdef DISTCC
-#if BIRB_MT == 1
+#ifdef BIRB_MT
 #include <execution>
 #endif /* BIRB_MT */
 
@@ -33,7 +33,7 @@ namespace Birb
 
 	void AssetManager::LazyLoad()
 	{
-#if BIRB_MT == 1
+#ifdef BIRB_MT
 		std::for_each(std::execution::par, lazyload_queue.begin(), lazyload_queue.end(),
 			[this](std::pair<std::string, AssetType> lazy_asset)
 			{
