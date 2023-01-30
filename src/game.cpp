@@ -145,8 +145,10 @@ namespace Birb
 
 		game_window.Display();
 
-		/* Join the fixed update thread */
-		fixed_update_future.wait();
+		/* We don't *necessarily* need to wait for fixed update to finish,
+		 * since its kind of separate from the update loop. Toggle this line
+		 * back on when biological matter hits the fan */
+		//fixed_update_future.wait();
 
 		/* Join the post render thread */
 		post_render_future.wait();
