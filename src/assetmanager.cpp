@@ -8,6 +8,7 @@
 
 #ifdef DISTCC
 #ifdef BIRB_MT
+#include <mutex>
 #include <execution>
 #endif /* BIRB_MT */
 
@@ -18,6 +19,11 @@
 #include "AssetBundle.hpp"
 #include "cppcodec/base64_rfc4648.hpp"
 #endif
+
+#ifdef BIRB_MT
+static std::mutex lazyloaded_assets_lock;
+#endif
+
 
 namespace Birb
 {

@@ -2,16 +2,12 @@
 
 #include "ErrorFuse.hpp"
 #include <tuple>
+
 #ifndef DISTCC
 #include "STD.hpp"
 #else
 #include <vector>
 #include <unordered_map>
-
-#ifdef BIRB_MT
-#include <mutex>
-#endif /* BIRB_MT */
-
 #endif /* DISTCC */
 
 #include "Font.hpp"
@@ -92,10 +88,6 @@ namespace Birb
 		std::vector<std::pair<std::string, AssetType>> lazyload_queue;
 		static inline std::unordered_map<std::string, Asset> lazy_assets;
 		static inline std::vector<std::string> lazy_asset_list;
-
-#ifdef BIRB_MT
-		std::mutex lazyloaded_assets_lock;
-#endif
 
 		/* Maps for different asset types */
 		std::unordered_map<std::string, Texture> textures;
