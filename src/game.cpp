@@ -154,15 +154,22 @@ namespace Birb
 #else
 	void Game::WindowDisplay(Window& game_window)
 	{
-		game_window.Display();
-
 		/* mingw doesn't really like std::future yet,
 		 * so we'll have to skip on multithreading on
 		 * Windows for now :( */
 		if (timeStep.ShouldRunFixedUpdate())
 		{
 			fixed_update();
+
+			if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+				statistics.Refresh();
 		}
+
+		/* Render the statistics overlay if debugging is enabled */
+		if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+			statistics.Render();
+
+		game_window.Display();
 
 		post_render();
 	}
