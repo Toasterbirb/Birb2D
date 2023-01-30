@@ -1,17 +1,155 @@
 #include "AssetManager.hpp"
-#include "Logger.hpp"
+#include "Diagnostics.hpp"
 #include "Filesystem.hpp"
+#include "Logger.hpp"
+#include "Resources.hpp"
+#include "Values.hpp"
+#include <algorithm>
+
+#ifdef DISTCC
+#ifdef BIRB_MT
+#include <mutex>
+#include <execution>
+#endif /* BIRB_MT */
+
+#include <fstream>
+#endif /* DISTCC */
 
 #ifdef BUNDLED_ASSETS
 #include "AssetBundle.hpp"
 #include "cppcodec/base64_rfc4648.hpp"
 #endif
 
+#ifdef BIRB_MT
+static std::mutex lazyloaded_assets_lock;
+#endif
+
+
 namespace Birb
 {
 	void Asset::Free()
 	{
 		free(buffer);
+	}
+
+	void AssetManager::LazyLoadQueue(const std::string &file_path, AssetType type)
+	{
+		lazyload_queue.push_back(std::make_pair(file_path, type));
+	}
+
+	void AssetManager::LazyLoad()
+	{
+#ifdef BIRB_MT
+		std::for_each(std::execution::par, lazyload_queue.begin(), lazyload_queue.end(),
+			[this](std::pair<std::string, AssetType> lazy_asset)
+			{
+				if (Diagnostics::Debugging::AssetLoading)
+					Debug::Log("Loading: " + lazy_asset.first);
+
+				std::ifstream file(Global::FilePaths::Resources + lazy_asset.first, std::ifstream::binary);
+				if (file)
+				{
+					Asset asset;
+					asset.type = lazy_asset.second;
+
+					/* Get the file length */
+					file.seekg(0, file.end);
+					asset.size = file.tellg();
+
+					/* Go back to the beginning */
+					file.seekg(0, file.beg);
+
+					/* Beg the operating system for some memory */
+					asset.buffer = new char[asset.size];
+
+					/* Read the file in */
+					file.read(asset.buffer, asset.size);
+
+					if (!file)
+						BlowErrorFuse();
+
+					/* Finally close the file */
+					file.close();
+
+					/* Add the lazy loaded data into a map */
+					lazyloaded_assets_lock.lock();
+					lazy_assets[lazy_asset.first] = asset;
+					lazy_asset_list.push_back(lazy_asset.first);
+					lazyloaded_assets_lock.unlock();
+				}
+				else
+				{
+					/* Something went wrong, like file not found etc. */
+					BlowErrorFuse();
+				}
+			});
+
+#else
+		/* Read the files sequentially if muiltithreading is disabled */
+		for (size_t i = 0; i < lazyload_queue.size(); ++i)
+		{
+			if (Diagnostics::Debugging::AssetLoading)
+				Debug::Log("Loading: " + lazyload_queue[i].first);
+
+			std::ifstream file(Global::FilePaths::Resources + lazyload_queue[i].first, std::ifstream::binary);
+			if (file)
+			{
+				Asset asset;
+				asset.type = lazyload_queue[i].second;
+
+				/* Get the file length */
+				file.seekg(0, file.end);
+				asset.size = file.tellg();
+
+				/* Go back to the beginning */
+				file.seekg(0, file.beg);
+
+				/* Beg the operating system for some memory */
+				asset.buffer = new char[asset.size];
+
+				/* Read the file in */
+				file.read(asset.buffer, asset.size);
+
+				if (!file)
+					BlowErrorFuse();
+
+				/* Finally close the file */
+				file.close();
+
+				/* Add the lazy loaded data into a map */
+				assets[lazyload_queue[i].first] = asset;
+				asset_list.push_back(lazyload_queue[i].first);
+			}
+			else
+			{
+				/* Something went wrong, like file not found etc. */
+				BlowErrorFuse();
+			}
+		}
+#endif
+
+		/* Clear the queue after it has been processed */
+		lazyload_queue.clear();
+
+		/* After the asset files have been read in, let SDL turn them into usable data */
+		for (size_t i = 0; i < lazy_asset_list.size(); ++i)
+		{
+			switch (lazy_assets[lazy_asset_list[i]].type)
+			{
+				case (TEXTURE):
+					textures[lazy_asset_list[i]] = Texture(Resources::LoadTextureFromMem(lazy_assets[lazy_asset_list[i]]));
+					break;
+
+				default:
+					break;
+			};
+		}
+
+		/* Free the asset list after they have been processed into textures, fonts, sounds etc. */
+		for (size_t i = 0; i < AssetManager::lazy_asset_list.size(); ++i)
+		{
+			AssetManager::lazy_assets[AssetManager::lazy_asset_list[i]].Free();
+		}
 	}
 
 	AssetManager::AssetManager()
@@ -64,21 +202,22 @@ namespace Birb
 #endif /* BUNDLED_ASSETS */
 	}
 
-#ifdef BUNDLED_ASSETS
-	SDL_RWops* AssetManager::sdl_mem_read(const std::string& file_path)
+	SDL_RWops* AssetManager::sdl_mem_read_bundle(const std::string& file_path)
 	{
 		return SDL_RWFromMem(AssetManager::assets[file_path].buffer, AssetManager::assets[file_path].size);
 	}
-#endif
+
+	SDL_RWops* AssetManager::sdl_mem_read(const Asset& asset)
+	{
+		return SDL_RWFromMem(asset.buffer, asset.size);
+	}
 
 	void AssetManager::FreeBundledAssets()
 	{
-#ifdef BUNDLED_ASSETS
 		for (size_t i = 0; i < AssetManager::asset_list.size(); ++i)
 		{
 			AssetManager::assets[AssetManager::asset_list[i]].Free();
 		}
-#endif
 	}
 
 	void AssetManager::Free()

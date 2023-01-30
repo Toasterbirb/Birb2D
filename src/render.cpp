@@ -67,10 +67,10 @@ namespace Birb
 				return false;
 			}
 
-			Vector2Int centerPoint(texture.dimensions().x / 2, texture.dimensions().y / 2);
-			SDL_Point center = { centerPoint.x, centerPoint.y };
+			Vector2Int centerPoint(texture.dimensions().x / 2.0f, texture.dimensions().y / 2.0f);
+			//SDL_Point center = { centerPoint.x, centerPoint.y };
 
-			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, texture.sdlTexture(), &src, &dst, angle, &center, SDL_FLIP_NONE) < 0)
+			if (SDL_RenderCopyEx(Global::RenderVars::Renderer, texture.sdlTexture(), &src, &dst, angle, NULL, SDL_FLIP_NONE) < 0)
 			{
 				Debug::Log("Error rendering a texture with dimensions [ " + texture.dimensions().ToString() + " ]. SDL Error: " + SDL_GetError(), Debug::error);
 				return false;

@@ -16,45 +16,24 @@ namespace Birb
 	:needs_sorting(false), active(isActive), positionOffset(0, 0)
 	{}
 
+	void Scene::AddObject(SceneObject& obj)
+	{
+		this->AddObjectSafe(&obj);
+	}
+
 	void Scene::AddObject(SceneObject* obj)
 	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add SceneObject", PROFILER_COLOR);
+		this->AddObjectSafe(obj);
+	}
 
-		/* Make sure that the object being added isn't the scene itself */
-		if (obj == this)
-		{
-			PrintCircularDependendencyWarning();
-			return;
-		}
-
-		/* Add the object into the scene object list */
-		objects.push_back(obj);
-
-		/* If the positionOffset has changed, apply that to new objects */
-		obj->SetPos(positionOffset);
-
-		/* If the object has non-zero rendering priority, enable scene sorting */
-		if (obj->renderingPriority != 0)
-			needs_sorting = true;
-
-		if (needs_sorting)
-			SortObjects();
-
-		/* Make sure that the world / screen space settings are correct */
-		SetNewObjectWorldSpace(obj);
+	void Scene::AddObjectFast(SceneObject& obj)
+	{
+		AddObjectUnSafe(&obj);
 	}
 
 	void Scene::AddObjectFast(SceneObject* obj)
 	{
-		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add SceneObject (fast)", PROFILER_COLOR);
-
-		objects.push_back(obj);
-
-		/* If the positionOffset has changed, apply that to new objects */
-		obj->SetPos(positionOffset);
-
-		/* Apply world_space settings */
-		SetNewObjectWorldSpace(obj);
+		AddObjectUnSafe(obj);
 	}
 
 	void Scene::AddObject(SceneObject* obj[], int objCount)
@@ -220,6 +199,47 @@ namespace Birb
 			}
 			objects[j + 1] = tmpObject;
 		}
+	}
+
+	void Scene::AddObjectSafe(SceneObject* obj)
+	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add SceneObject", PROFILER_COLOR);
+
+		/* Make sure that the object being added isn't the scene itself */
+		if (obj == this)
+		{
+			PrintCircularDependendencyWarning();
+			return;
+		}
+
+		/* Add the object into the scene object list */
+		objects.push_back(obj);
+
+		/* If the positionOffset has changed, apply that to new objects */
+		obj->SetPos(positionOffset);
+
+		/* If the object has non-zero rendering priority, enable scene sorting */
+		if (obj->renderingPriority != 0)
+			needs_sorting = true;
+
+		if (needs_sorting)
+			SortObjects();
+
+		/* Make sure that the world / screen space settings are correct */
+		SetNewObjectWorldSpace(obj);
+	}
+
+	void Scene::AddObjectUnSafe(SceneObject* obj)
+	{
+		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add SceneObject (fast)", PROFILER_COLOR);
+
+		objects.push_back(obj);
+
+		/* If the positionOffset has changed, apply that to new objects */
+		obj->SetPos(positionOffset);
+
+		/* Apply world_space settings */
+		SetNewObjectWorldSpace(obj);
 	}
 
 	void Scene::SetNewObjectWorldSpace(SceneObject* obj)

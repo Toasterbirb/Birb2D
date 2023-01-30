@@ -12,6 +12,10 @@ namespace Birb
 {
 	namespace Particles
 	{
+		ParticleSource::ParticleSource()
+		:type(ParticleType::Circle), particle_count(1), timestep(nullptr)
+		{}
+
 		ParticleSource::ParticleSource(TimeStep* timestep)
 		:type(ParticleType::Circle), particle_count(1), timestep(timestep)
 		{}
@@ -40,7 +44,7 @@ namespace Birb
 				particles[i].pos += particles[i].direction * timestep->deltaTime;
 
 				/* Handle gravity */
-				particles[i].direction.y += particles[i].gravity;
+				particles[i].direction.y += particles[i].gravity * timestep->deltaTime * 10;
 
 			}
 
@@ -82,6 +86,7 @@ namespace Birb
 					particles[dead_particle_index].direction.y = next_dir.y * particles[dead_particle_index].particle_speed;
 					particles[dead_particle_index].alive = true;
 					particles[dead_particle_index].life = reference_particle.life;
+					particles[dead_particle_index].color = reference_particle.color;
 				}
 			}
 		}

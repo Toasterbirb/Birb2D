@@ -24,6 +24,7 @@ option(WINDOWS_BUILD "Enable some windows specific options" OFF)
 option(PROFILER "Enable the profiler timers" OFF)
 option(BUNDLED_ASSETS "Bundle game assets directly into the game binary" OFF)
 option(DISTCC "Disable precompiled headers for better distcc performance" OFF)
+option(MULTITHREAD "Enable multithreading. Mingw can have issues with this" ON)
 
 if (BUNDLED_ASSETS)
 	add_definitions(-DBUNDLED_ASSETS)
@@ -68,6 +69,10 @@ endif()
 
 if (STATIC_SDL)
 	set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build the library as a shared library")
+endif()
+
+if (MULTITHREAD)
+	add_compile_definitions(BIRB_MT)
 endif()
 
 # Include the microprofiler. It should get disabled by the

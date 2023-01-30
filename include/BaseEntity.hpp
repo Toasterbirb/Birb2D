@@ -23,6 +23,7 @@ namespace Birb
 	{
 	public:
 		BaseEntity();
+		~BaseEntity();
 		BaseEntity(const std::string& p_name); ///< Creates an empty Entity object
 		BaseEntity(const std::string& p_name, const Rect& rect, const int& rendering_priority = 0); ///< Creates an empty Entity object with size and position
 

@@ -44,7 +44,7 @@ namespace Birb
 		}
 
 		Text::Text(const std::string& text, const Vector2Int& pos, Font* font, const Color& color)
-		:color(color), text(text), font(font), has_background_color(false)
+		:color(color), text(text), font(font), wrapLength(0), has_background_color(false)
 		{
 			this->rect = pos;
 			ReloadSprite();
@@ -155,6 +155,21 @@ namespace Birb
 		bool Text::ReloadSprite()
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Reload sprite", PROFILER_COLOR);
+
+			/* If the new text would be empty, simply disable the text entity. If the
+			 * entity then gets some actual text, toggle the entity back on and set the
+			 * text */
+			if (text.empty())
+			{
+				this->active = false;
+				this->rect.w = 0;
+				return true;
+			}
+			else
+			{
+				this->active = true;
+			}
+
 
 			/* Destroy the old sprite */
 			if (sprite.isLoaded())

@@ -9,10 +9,14 @@ namespace Birb
 {
 	namespace Diagnostics
 	{
-		ResourceMonitor::ResourceMonitor() {}
+		ResourceMonitor::ResourceMonitor()
+		{
+			ResourceMonitor::EntityCount = 0;
+		}
 
 		ResourceMonitor::ResourceMonitor(TimeStep* timestep)
 		{
+			ResourceMonitor::EntityCount = 0;
 			scene.world_space = false;
 
 			/* Load the debug font */
@@ -69,6 +73,7 @@ namespace Birb
 			debug_text += "\nFPS avg.: " + 		utils::CleanDecimals(Math::Round(fps_average, 1));
 			debug_text += "\nFPS 1% low: " + 	utils::CleanDecimals(Math::Round(lowest_framerate, 1));
 			debug_text += "\nFramebudget: " + 	utils::CleanDecimals(Math::Round(timestep->FrameBudget(), 1)) + "%";
+			debug_text += "\nEntity count: " + 	std::to_string(ResourceMonitor::EntityCount);
 
 
 #ifndef __WINDOWS__

@@ -16,6 +16,7 @@ namespace Birb
         {
             static inline bool Buttons 			= false;
 			static inline bool InitMessages		= false;
+			static inline bool AssetLoading 	= false;
 
 			struct Overlays
 			{

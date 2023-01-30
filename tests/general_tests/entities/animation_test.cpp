@@ -48,6 +48,22 @@ namespace BirbTest
 		CHECK_FALSE(animation.ErrorFuseStatus());
 	}
 
+	TEST_CASE("Late construct an animation entity")
+	{
+		Entity::Animation animation;
+		animation.Construct(Global::Placeholder::empty_texture, Vector2Int(4, 4), 16, 10);
+
+		CHECK_FALSE(animation.ErrorFuseStatus());
+		CHECK(animation.sprite == Global::Placeholder::empty_texture);
+		CHECK(animation.spriteSize == Vector2Int(4, 4));
+		CHECK(animation.frameCount == 16);
+		CHECK(animation.fps == 10);
+		CHECK_FALSE(animation.animationQueued);
+		CHECK(animation.frameIndex == 0);
+		CHECK_FALSE(animation.loop);
+		CHECK(animation.rect == Rect(0, 0, 0, 0));
+	}
+
 	TEST_CASE("Rendering: Animation entity")
 	{
 		Window window("Animation entity", Vector2Int(300, 300), 60, false);

@@ -5,7 +5,6 @@
 #include "STD.hpp"
 #else
 #include <functional>
-#include <future>
 #endif
 
 #include "ResourceMonitor.hpp"
@@ -83,9 +82,18 @@ namespace Birb
 		/// Game window that the game loop class creates
 		Window* window;
 
+		/// A shortcut to the event variable in the window variable
+		SDL_Event* event;
+
 		TimeStep* time_step();
 
 	private:
+#ifdef BIRB_MT
+		void WindowDisplayMultithread(Window& game_window);
+#else
+		void WindowDisplay(Window& game_window);
+#endif
+
 		/* Placeholder functions for optional game loop functions */
 		static void fixed_update_placeholder();
 		static void post_render_placeholder();
@@ -94,13 +102,6 @@ namespace Birb
 		TimeStep timeStep;
 		WindowOpts window_options;
 
-
 		Diagnostics::ResourceMonitor statistics;
-//#endif
-
-#ifndef __WINDOWS__
-		std::future<void> fixed_update_future;
-		std::future<void> post_render_future;
-#endif
 	};
 }

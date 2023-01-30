@@ -38,6 +38,7 @@ namespace Birb
 			void SetFont(Font* font); 			///< Change the font in Text and reload the sprite
 			void SetTextColor(const Color& color); 			///< Change the color in Text and reload the sprite
 			void SetTextBgColor(const Color& color);
+			bool ReloadSprite(); /// Force a sprite reload
 
 			Vector2Int sprite_dimensions() const;
 
@@ -81,7 +82,6 @@ namespace Birb
 			Color color; 	///< Surface color of the text
 			Color bgColor; 	///< Background color for the text component
 
-			bool ReloadSprite();
 			bool LoadSprite();
 			Texture sprite;
 			std::string text;

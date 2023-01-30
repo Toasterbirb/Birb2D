@@ -16,7 +16,9 @@ namespace Birb
 	public:
 		Scene();
 		Scene(const bool& isActive);
+		void AddObject(SceneObject& obj); ///< Add SceneObject to the scene and sort the scene
 		void AddObject(SceneObject* obj); ///< Add SceneObject to the scene and sort the scene
+		void AddObjectFast(SceneObject& obj); ///< Add SceneObject to the scene, but skip sorting
 		void AddObjectFast(SceneObject* obj); ///< Add SceneObject to the scene, but skip sorting
 		void AddObject(SceneObject** obj, int objCount); ///< Add multiple SceneObjects to the scene and sort the scene
 		void PreAllocate(const int& objCount); ///< If you know approximately how many objects you are going to add
@@ -43,6 +45,9 @@ namespace Birb
 		void SortObjects(); ///< Sort objects according to their priority
 
 	private:
+		void AddObjectSafe(SceneObject* obj);
+		void AddObjectUnSafe(SceneObject* obj);
+
 		bool needs_sorting; ///< Set this to true if a SceneObject gets added with
 							/// rendering priority != 0
 

@@ -68,6 +68,16 @@ namespace BirbTest
 			CHECK(changingText.GetBgColor() == Colors::LightGray);
 			testScene.AddObject(&changingText);
 
+			/* Spam change text from nothing to something for a few times to test empty string handling */
+			std::string testing_text = "Hello world!";
+			for (int i = 0; i < 6; ++i)
+			{
+				if (i % 2 == 0)
+					changingText.SetText(testing_text);
+				else
+					changingText.SetText("");
+			}
+
 			/* Render 24 frames to test changing text. This test should last about 1,5 seconds */
 			const int frame_count = 24;
 
