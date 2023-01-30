@@ -16,9 +16,8 @@ namespace Birb
 		currentTime = utils::hireTimeInSeconds();
 		mainWindow = p_mainWindow;
 
-		/* Use the target fps as the amount of samples
-		 * for the frame budget average calculation */
-		frame_budget_values = std::vector<double>(mainWindow->refresh_rate);
+		/* Sample 3 seconds worth of frames for frame budget calculations */
+		frame_budget_values = std::vector<double>(mainWindow->refresh_rate * 3);
 
 		/* Set fixed update frequency to 25fps by default */
 		fixedUpdateFrequency = 25;
