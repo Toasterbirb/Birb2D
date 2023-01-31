@@ -238,7 +238,6 @@ target_link_libraries(birb2d
 	SDL2_mixer
 	SDL2_gfx
 	microprofile
-	tbb
 )
 
 if (${ZLIB_FOUND})
