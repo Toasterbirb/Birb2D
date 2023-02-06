@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 
 namespace Birb
 {
@@ -12,7 +13,7 @@ namespace Birb
 
 		/// Blow the error fuse in this object. This function is mainly used for
 		/// automated testing purposes
-		void BlowErrorFuse();
+		void BlowErrorFuse(const std::string& message = "¯\\_(ツ)_/¯");
 
 		/// Check the status of the error fuse.
 		/// If this function returns true, something has gone

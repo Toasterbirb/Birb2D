@@ -79,7 +79,7 @@ namespace Birb
 			/* Re-create the text sprite and blow the fuse if something
 			 * goes wrong */
 			if (!LoadSprite())
-				BlowErrorFuse();
+				BlowErrorFuse("Late constructing a text sprite");
 		}
 
 		std::string Text::GetText() const
@@ -179,7 +179,7 @@ namespace Birb
 
 			/* Check if everything is okay with the sprite */
 			if (sprite.ErrorFuseStatus() || !result)
-				BlowErrorFuse();
+				BlowErrorFuse("Text sprite reloading");
 
 			/* Create new text sprite */
 			return result;

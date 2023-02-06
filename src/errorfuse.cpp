@@ -7,12 +7,12 @@ namespace Birb
 	ErrorFuse::ErrorFuse()
 	:error_fuse(false) {}
 
-	void ErrorFuse::BlowErrorFuse()
+	void ErrorFuse::BlowErrorFuse(const std::string& message)
 	{
 		error_fuse = true;
 
 		if (Diagnostics::Debugging::FuseDebug)
-			Debug::Log("Error fuse got triggered! This could be an indicator for an engine bug :(", Debug::warning);
+			Debug::Log("Error fuse got triggered! Message: " + message, Debug::warning);
 	}
 
 	bool ErrorFuse::ErrorFuseStatus() const
