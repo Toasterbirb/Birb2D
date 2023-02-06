@@ -17,6 +17,7 @@ namespace Birb
             static inline bool Buttons 			= false;
 			static inline bool InitMessages		= false;
 			static inline bool AssetLoading 	= false;
+			static inline bool FuseDebug 		= true; ///< Show a warning message whenever a fuse blows
 
 			struct Overlays
 			{
