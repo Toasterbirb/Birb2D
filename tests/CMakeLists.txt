@@ -69,6 +69,14 @@ target_link_libraries(input_test
 	birb2d
 )
 
+add_executable(imgui_test
+	ui_tests/imgui_test.cpp)
+
+target_compile_options(imgui_test PRIVATE -Wall -Wextra -Wpedantic -Werror)
+target_link_libraries(imgui_test
+	birb2d
+)
+
 # Compartmentalized tests for finding memory leaks
 add_subdirectory(mem_leak_tests)
 

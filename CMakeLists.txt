@@ -79,6 +79,9 @@ endif()
 # MICROPROFILER_ENABLED variable if it is set to zero
 add_subdirectory(vendor/microprofile)
 
+# Include IMGUI headers
+include_directories(vendor/imgui vendor/imgui/backends)
+
 # Include libzip and cppcodec if bunedled assets were enabled
 if (BUNDLED_ASSETS)
 	find_package(ZLIB)
@@ -152,6 +155,15 @@ endif()
 
 include_directories(include/)
 
+set(IMGUI_SRC
+	vendor/imgui/backends/imgui_impl_sdl2.cpp
+	vendor/imgui/backends/imgui_impl_sdlrenderer.cpp
+	vendor/imgui/imgui.cpp
+	vendor/imgui/imgui_draw.cpp
+	vendor/imgui/imgui_tables.cpp
+	vendor/imgui/imgui_widgets.cpp
+)
+
 set(CORE_SRC
 	src/appinfo.cpp
 	src/assetmanager.cpp
@@ -212,6 +224,7 @@ set(CORE_SRC
 	src/ParticlePatterns/stablesquare.cpp
 )
 
+add_library(imgui STATIC ${IMGUI_SRC})
 add_library(birb2d STATIC ${CORE_SRC})
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
 
@@ -238,6 +251,7 @@ target_link_libraries(birb2d
 	SDL2_mixer
 	SDL2_gfx
 	microprofile
+	imgui
 )
 
 if (${ZLIB_FOUND})
