@@ -32,7 +32,7 @@ namespace Birb
 		this->sdlTex = Resources::LoadTexture(filePath);
 
 		if (sdlTex == NULL)
-			BlowErrorFuse("Got a NULL texture from Resources::LoadTexture()");
+			BlowErrorFuse();
 
 		textureLoaded = true;
 		UpdateDimensions();

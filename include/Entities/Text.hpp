@@ -64,7 +64,7 @@ namespace Birb
 
 				/* Reload the sprite using the new information */
 				if (!this->ReloadSprite())
-					this->BlowErrorFuse("Text entity copy constructor");
+					BlowErrorFuse();
 
 				return *this;
 			}

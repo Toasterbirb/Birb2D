@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#define BlowErrorFuse() __BlowErrorFuse(__FILE__, __LINE__)
 
 namespace Birb
 {
@@ -13,7 +14,7 @@ namespace Birb
 
 		/// Blow the error fuse in this object. This function is mainly used for
 		/// automated testing purposes
-		void BlowErrorFuse(const std::string& message = "¯\\_(ツ)_/¯");
+		void __BlowErrorFuse(const char* file, int line);
 
 		/// Check the status of the error fuse.
 		/// If this function returns true, something has gone
