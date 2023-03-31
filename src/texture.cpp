@@ -74,10 +74,6 @@ namespace Birb
 			SDL_DestroyTexture(sdlTex);
 			textureLoaded = false;
 		}
-		else
-		{
-			BlowErrorFuse();
-		}
 	}
 
 	Vector2Int Texture::dimensions() const
