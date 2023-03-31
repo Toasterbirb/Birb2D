@@ -188,7 +188,7 @@ namespace Birb
 				if (main_menu_running)
 					main_menu_running = window_running;
 
-				if (mouse_down)
+				if (mouse_down && settings_scene.isActive())
 				{
 					float old_volume = volume_slider.button.value;
 					volume_slider.button.SetValueFromRelativePoint(game->window->CursorPosition().ToFloat());
