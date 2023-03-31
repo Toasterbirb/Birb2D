@@ -37,10 +37,6 @@ namespace Birb
 		menu_scene.AddObject(&background);
 
 		/* Initialize any entities */
-		//title_text = Entity("Title text",
-		//		settings.title.position,
-		//		EntityComponent::Text(settings.title.text, &this->settings->title.font, &this->settings->title.color),
-		//		1);
 		title_text = Entity::Text(settings.title.text, &this->settings->title.font, this->settings->title.color);
 		title_text.rect = this->settings->title.position;
 		menu_scene.AddObject(&title_text);
@@ -54,13 +50,6 @@ namespace Birb
 
 		for (size_t i = 0; i < menu_buttons.size(); ++i)
 		{
-			//menu_buttons[i] = Entity("Main menu button text",
-			//		Vector2Int(this->settings->buttons[i]->rect.x + this->settings->button_text_padding, this->settings->buttons[i]->rect.y + 7),
-			//		EntityComponent::Text(this->settings->buttons[i]->text,
-			//			&this->settings->buttons[i]->font,
-			//			&this->settings->buttons[i]->text_color),
-			//		2);
-
 			menu_buttons[i] = Entity::Text(this->settings->buttons[i]->text,
 					Vector2Int(this->settings->buttons[i]->rect.x + this->settings->button_text_padding, this->settings->buttons[i]->rect.y + 7),
 					&this->settings->buttons[i]->font,
@@ -82,12 +71,6 @@ namespace Birb
 		settings_scene.AddObject(&this->settings->settings_menu.window.background);
 		settings_scene.AddObject(&this->settings->settings_menu.window.top_bar);
 
-		//window_title_text = Entity("Settings title text",
-		//		Vector2Int(this->settings->settings_menu.window.top_bar.x + 4, this->settings->settings_menu.window.top_bar.y + 4),
-		//		EntityComponent::Text("Settings",
-		//			&this->settings->settings_menu.window.title_font,
-		//			&this->settings->settings_menu.window.title_color),
-		//		4);
 		window_title_text = Entity::Text("Settings",
 				Vector2Int(this->settings->settings_menu.window.top_bar.x + 4, this->settings->settings_menu.window.top_bar.y + 4),
 				&this->settings->settings_menu.window.title_font,
@@ -102,12 +85,6 @@ namespace Birb
 		/** Construct the credits page **/
 		credits_scene.Deactivate();
 
-		//credits_text = Entity("Credits text",
-		//		Vector2Int(this->settings->credits_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding),
-		//		EntityComponent::Text(this->settings->credits_menu.credits_text,
-		//			&this->settings->credits_menu.text_font,
-		//			&this->settings->credits_menu.window.text_color),
-		//		4);
 		credits_text = Entity::Text(this->settings->credits_menu.credits_text,
 				Vector2Int(this->settings->credits_menu.window.top_bar.x + option_padding, this->settings->settings_menu.window.top_bar.y + this->settings->settings_menu.window.top_bar.h + option_padding),
 				&this->settings->credits_menu.text_font,
@@ -257,11 +234,6 @@ namespace Birb
 	MainMenu::Setting::Setting(const Vector2Int& pos, const std::string& text, SettingType type, MainMenuSettings& settings)
 	:position(pos)
 	{
-		//this->text = Entity("Setting option text", pos,
-		//		EntityComponent::Text(text,
-		//			&settings.settings_menu.setting_font,
-		//			&settings.settings_menu.window.text_color),
-		//		5);
 		this->text.Construct(text, pos, &settings.settings_menu.setting_font, settings.settings_menu.window.text_color);
 		this->text.renderingPriority = 5;
 
@@ -269,9 +241,6 @@ namespace Birb
 		{
 			case (SLIDER):
 			{
-				//this->button = Entity("Setting option button",
-				//		Rect(pos.x + this->text.sprite.dimensions().x + 8, pos.y + 2, 128, 16),
-				//		3);
 				this->button = Entity::ProgressBar(1,
 						settings.settings_menu.slider_border_color,
 						settings.settings_menu.slider_background_color,
