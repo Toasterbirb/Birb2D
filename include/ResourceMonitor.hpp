@@ -39,6 +39,11 @@ namespace Birb
 			void Render();
 			void Free(); ///< Free the font
 
+			float fps; 				///< Current FPS
+			float fps_average; 		///< Temporal average FPS
+			float lowest_framerate; ///< Lowest FPS of the rolling fps counter
+			long resident_memory_usage;
+
 		private:
 			Scene scene;
 

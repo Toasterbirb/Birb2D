@@ -17,6 +17,7 @@ namespace Birb
 		ResourceMonitor::ResourceMonitor(TimeStep* timestep)
 		{
 			ResourceMonitor::EntityCount = 0;
+			resident_memory_usage = 0;
 			scene.world_space = false;
 
 			/* Load the debug font */
@@ -52,12 +53,12 @@ namespace Birb
 		void ResourceMonitor::Refresh()
 		{
 			/* Get all of the required data */
-			float fps = 1.0f / timestep->deltaTime;
+			fps = 1.0f / timestep->deltaTime;
 			rolling_framerate_list[current_framerate_index++] = fps;
 			if (current_framerate_index > framerate_avg_accuracy - 1)
 				current_framerate_index = 0;
 
-			float lowest_framerate = rolling_framerate_list[0];
+			lowest_framerate = rolling_framerate_list[0];
 			float fps_total = 0;
 			for (int i = 0; i < framerate_avg_accuracy; ++i)
 			{
@@ -67,7 +68,7 @@ namespace Birb
 					lowest_framerate = rolling_framerate_list[i];
 			}
 
-			float fps_average = fps_total / framerate_avg_accuracy;
+			fps_average = fps_total / framerate_avg_accuracy;
 
 			debug_text = "FPS: " + 				utils::CleanDecimals(Math::Round(fps, 1));
 			debug_text += "\nFPS avg.: " + 		utils::CleanDecimals(Math::Round(fps_average, 1));
@@ -78,7 +79,7 @@ namespace Birb
 
 #ifndef __WINDOWS__
 			getrusage(PID, &memory_usage);
-			long resident_memory_usage = memory_usage.ru_maxrss;
+			resident_memory_usage = memory_usage.ru_maxrss;
 
 			debug_text += "\n\nMemory usage: " + std::to_string(resident_memory_usage / 1024) + " MB";
 #endif

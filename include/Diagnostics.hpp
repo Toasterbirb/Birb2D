@@ -21,7 +21,7 @@ namespace Birb
 
 			struct Overlays
 			{
-				static inline bool ResourceMonitor 	= false;
+				static inline bool Debug = false;
 			};
         };
 

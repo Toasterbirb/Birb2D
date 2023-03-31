@@ -7,6 +7,10 @@
 #include <functional>
 #endif
 
+#include "imgui.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer.h"
+
 #include "ResourceMonitor.hpp"
 #include "Timestep.hpp"
 #include "Vector/Vector2Int.hpp"
@@ -103,5 +107,8 @@ namespace Birb
 		WindowOpts window_options;
 
 		Diagnostics::ResourceMonitor statistics;
+
+		ImGuiIO* imgui_io;
+		float f;
 	};
 }

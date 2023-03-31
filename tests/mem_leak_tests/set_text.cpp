@@ -60,7 +60,7 @@ void start(Game& game)
 	scene.AddObject(&text_2);
 
 	/* Enable the resource monitor to check if there's a memory leak */
-	Diagnostics::Debugging::Overlays::ResourceMonitor = true;
+	Diagnostics::Debugging::Overlays::Debug = true;
 }
 
 /* input() is called at the beginning of the frame

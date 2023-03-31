@@ -1,5 +1,6 @@
 #include "Diagnostics.hpp"
 #include "Game.hpp"
+#include "Utils.hpp"
 #include "Values.hpp"
 
 #ifdef BIRB_MT
@@ -46,6 +47,14 @@ namespace Birb
 		/* Initialize timestep */
 		timeStep.Init(&game_window);
 
+		/* Initialize ImGui */
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		imgui_io = &ImGui::GetIO(); (void)imgui_io;
+		imgui_io->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+
+		ImGui_ImplSDL2_InitForSDLRenderer(window->win, window->renderer);
+		ImGui_ImplSDLRenderer_Init(window->renderer);
 
 		/* Initialize statistics */
 		statistics = Diagnostics::ResourceMonitor(&timeStep);
@@ -63,6 +72,10 @@ namespace Birb
 				while (window->PollEvents())
 				{
 					window->EventTick(window->event, &application_running);
+
+					if (Diagnostics::Debugging::Overlays::Debug)
+						ImGui_ImplSDL2_ProcessEvent(event);
+
 					input(*this);
 				}
 
@@ -72,9 +85,37 @@ namespace Birb
 			/* Handle any game logic */
 			update(*this);
 
-			/* Handle rendering */
+			/* Handle rendering and ImGui */
 			game_window.Clear();
 			render(*this);
+
+			if (Diagnostics::Debugging::Overlays::Debug)
+			{
+				ImGui_ImplSDLRenderer_NewFrame();
+				ImGui_ImplSDL2_NewFrame();
+				ImGui::NewFrame();
+
+				{
+					ImGui::Begin("Resource monitor");
+
+					ImGui::Text("FPS: %s", utils::CleanDecimals(Math::Round(statistics.fps, 2)).c_str());
+					ImGui::Text("FPS avg.: %s", utils::CleanDecimals(Math::Round(statistics.fps_average, 2)).c_str());
+					ImGui::Text("FPS 1%% low: %s", utils::CleanDecimals(Math::Round(statistics.lowest_framerate, 2)).c_str());
+					ImGui::Text("Framebudget: %s%%", utils::CleanDecimals(Math::Round(timeStep.FrameBudget(), 1)).c_str());
+					ImGui::Text("Entity count: %d", statistics.EntityCount);
+					ImGui::Spacing();
+
+					ImGui::BeginChild("Memory usage");
+					ImGui::Text("Memory usage: %ld MB", statistics.resident_memory_usage / 1024);
+					ImGui::EndChild();
+
+					ImGui::End();
+				}
+
+				ImGui::Render();
+				SDL_RenderSetScale(window->renderer, imgui_io->DisplayFramebufferScale.x, imgui_io->DisplayFramebufferScale.y);
+				ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+			}
 
 #ifdef BIRB_MT
 			WindowDisplayMultithread(game_window);
@@ -91,6 +132,11 @@ namespace Birb
 
 		statistics.Free();
 		cleanup();
+
+		/* Stop ImGui */
+		ImGui_ImplSDLRenderer_Shutdown();
+		ImGui_ImplSDL2_Shutdown();
+		ImGui::DestroyContext();
 
 		/* Quit SDL things */
 
@@ -131,13 +177,13 @@ namespace Birb
 		{
 			fixed_update_future = std::async(std::launch::async, fixed_update);
 
-			if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+			if (Diagnostics::Debugging::Overlays::Debug)
 				statistics.Refresh();
 		}
 
 		/* Render the statistics overlay if debugging is enabled */
-		if (Diagnostics::Debugging::Overlays::ResourceMonitor)
-			statistics.Render();
+		//if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+		//	statistics.Render();
 
 		/* Start the post render thread */
 		std::future<void> post_render_future = std::async(std::launch::async, post_render);
@@ -159,13 +205,13 @@ namespace Birb
 		{
 			fixed_update();
 
-			if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+			if (Diagnostics::Debugging::Overlays::Debug)
 				statistics.Refresh();
 		}
 
 		/* Render the statistics overlay if debugging is enabled */
-		if (Diagnostics::Debugging::Overlays::ResourceMonitor)
-			statistics.Render();
+		//if (Diagnostics::Debugging::Overlays::ResourceMonitor)
+		//	statistics.Render();
 
 		game_window.Display();
 
