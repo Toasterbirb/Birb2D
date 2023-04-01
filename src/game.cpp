@@ -73,6 +73,13 @@ namespace Birb
 				{
 					window->EventTick(window->event, &application_running);
 
+					if (window->isKeyDown())
+					{
+						/* Toggle the debug overlay */
+						if (event->key.keysym.scancode == SDL_SCANCODE_F8)
+							Diagnostics::Debugging::Overlays::Debug = !Diagnostics::Debugging::Overlays::Debug;
+					}
+
 					if (Diagnostics::Debugging::Overlays::Debug)
 						ImGui_ImplSDL2_ProcessEvent(event);
 
