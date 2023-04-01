@@ -109,6 +109,5 @@ namespace Birb
 		Diagnostics::ResourceMonitor statistics;
 
 		ImGuiIO* imgui_io;
-		float f;
 	};
 }

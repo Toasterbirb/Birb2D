@@ -119,6 +119,11 @@ namespace Birb
 					ImGui::End();
 				}
 
+				{
+					ImGui::Begin("Entities");
+					ImGui::End();
+				}
+
 				ImGui::Render();
 				SDL_RenderSetScale(window->renderer, imgui_io->DisplayFramebufferScale.x, imgui_io->DisplayFramebufferScale.y);
 				ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());

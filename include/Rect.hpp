@@ -87,6 +87,32 @@ namespace Birb
 			return *this;
 		}
 
+		constexpr float& operator[] (int i)
+		{
+			switch (i)
+			{
+				case (0):
+					return x;
+					break;
+
+				case (1):
+					return y;
+					break;
+
+				case (2):
+					return w;
+					break;
+
+				case (3):
+					return h;
+					break;
+
+				default:
+					return x;
+					break;
+			}
+		}
+
 	private:
 		void RenderFunc() override;
 		void SetPos(const Vector2& delta) override;
