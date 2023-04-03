@@ -17,6 +17,26 @@ namespace BirbTest
 
 	}
 
+	TEST_CASE("Rect value access via array operator")
+	{
+		Rect rect(10, 20, 30, 40);
+		CHECK(rect[0] == 10);
+		CHECK(rect[1] == 20);
+		CHECK(rect[2] == 30);
+		CHECK(rect[3] == 40);
+		CHECK(rect[4] == 10);
+
+		rect[0] = 110;
+		rect[1] = 120;
+		rect[2] = 130;
+		rect[3] = 140;
+
+		CHECK(rect[0] == 110);
+		CHECK(rect[1] == 120);
+		CHECK(rect[2] == 130);
+		CHECK(rect[3] == 140);
+	}
+
 	TEST_CASE("Rect with arguments")
 	{
 		Rect customRect(10.54, 20, 30.234, 40.6668);
