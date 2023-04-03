@@ -42,6 +42,7 @@ namespace BirbTest
 
 		game_reached_text = new Entity::Text("Game reached", Vector2Int(128, 128), "This is the game", font, Colors::Nord::Frost::nord9);
 		game_reached_text->renderingPriority = 1;
+		game_reached_text->Debug("Game reached");
 		game_scene.AddObject(game_reached_text);
 
 		/* Show the splash screen */

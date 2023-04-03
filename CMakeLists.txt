@@ -171,6 +171,7 @@ set(CORE_SRC
 	src/baseentity.cpp
 	src/circle.cpp
 	src/color.cpp
+	src/debugmenu.cpp
 	src/errorfuse.cpp
 	src/filesystem.cpp
 	src/font.cpp

@@ -1,3 +1,4 @@
+#include "DebugMenu.hpp"
 #include "Diagnostics.hpp"
 #include "Game.hpp"
 #include "Utils.hpp"
@@ -102,27 +103,8 @@ namespace Birb
 				ImGui_ImplSDL2_NewFrame();
 				ImGui::NewFrame();
 
-				{
-					ImGui::Begin("Resource monitor");
-
-					ImGui::Text("FPS: %s", utils::CleanDecimals(Math::Round(statistics.fps, 2)).c_str());
-					ImGui::Text("FPS avg.: %s", utils::CleanDecimals(Math::Round(statistics.fps_average, 2)).c_str());
-					ImGui::Text("FPS 1%% low: %s", utils::CleanDecimals(Math::Round(statistics.lowest_framerate, 2)).c_str());
-					ImGui::Text("Framebudget: %s%%", utils::CleanDecimals(Math::Round(timeStep.FrameBudget(), 1)).c_str());
-					ImGui::Text("Entity count: %d", statistics.EntityCount);
-					ImGui::Spacing();
-
-					ImGui::BeginChild("Memory usage");
-					ImGui::Text("Memory usage: %ld MB", statistics.resident_memory_usage / 1024);
-					ImGui::EndChild();
-
-					ImGui::End();
-				}
-
-				{
-					ImGui::Begin("Entities");
-					ImGui::End();
-				}
+				DebugMenu::ResouceMonitor(statistics, timeStep);
+				DebugMenu::EntityMenu();
 
 				ImGui::Render();
 				SDL_RenderSetScale(window->renderer, imgui_io->DisplayFramebufferScale.x, imgui_io->DisplayFramebufferScale.y);
