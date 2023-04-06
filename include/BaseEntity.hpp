@@ -26,7 +26,6 @@ namespace Birb
 		~BaseEntity();
 		BaseEntity(const std::string& p_name); ///< Creates an empty Entity object
 		BaseEntity(const std::string& p_name, const Rect& rect, const int& rendering_priority = 0); ///< Creates an empty Entity object with size and position
-		void Debug(std::string name); ///< Add this entity into the debug menu entity list
 
 		std::string name; 		///< Name of the entity. Used for debugging
 
@@ -42,7 +41,6 @@ namespace Birb
 
 	private:
 		bool error_fuse;
-		int debug_menu_index;
 	};
 
 	std::ostream &operator<<(std::ostream &stream, const BaseEntity &other);

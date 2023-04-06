@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DebugMenu.hpp"
 #include "ErrorFuse.hpp"
 #ifndef DISTCC
 #include "STD.hpp"
@@ -88,6 +89,10 @@ namespace Birb
 
 		/// A shortcut to the event variable in the window variable
 		SDL_Event* event;
+
+		/// ImGui menu for holding different runtime editor-like
+		/// tools
+		DebugMenu debug_menu;
 
 		TimeStep* time_step();
 

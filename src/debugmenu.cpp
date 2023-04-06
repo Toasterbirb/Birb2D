@@ -11,15 +11,18 @@ namespace Birb
 	:deleted(false)
 	{}
 
-	int DebugMenu::AddEntity(BaseEntity& entity)
+	void DebugMenu::AddEntity(BaseEntity& entity)
 	{
 		EntityInfo info;
 		info.name 	= &entity.name;
 		info.rect 	= &entity.rect;
 		info.angle 	= &entity.angle;
 		_entities.push_back(info);
+	}
 
-		return _entities.size() - 1;
+	void DebugMenu::AddEntity(Entity::Text& text_entity)
+	{
+
 	}
 
 	void DebugMenu::EntityMenu()
@@ -33,20 +36,27 @@ namespace Birb
 			{
 				if (*DebugMenu::_entities[i].name != "Default Entity")
 				{
-					if (ImGui::CollapsingHeader(DebugMenu::_entities[i].name->c_str()))
+					// BaseEntities
+					if (_entities.size() > 0)
 					{
-						ImGui::DragFloat("Angle", DebugMenu::_entities[i].angle);
-						ImGui::Spacing();
-
-						ImGui::BeginChild("Rect");
-						if (ImGui::CollapsingHeader("Rect"))
+						ImGui::PushItemWidth(70);
+						if (ImGui::CollapsingHeader(DebugMenu::_entities[i].name->c_str()))
 						{
+							ImGui::Text("Rect");
 							ImGui::DragFloat("x", &DebugMenu::_entities[i].rect->x);
+							ImGui::SameLine();
 							ImGui::DragFloat("y", &DebugMenu::_entities[i].rect->y);
+							ImGui::SameLine();
 							ImGui::DragFloat("w", &DebugMenu::_entities[i].rect->w);
+							ImGui::SameLine();
 							ImGui::DragFloat("h", &DebugMenu::_entities[i].rect->h);
+							ImGui::SameLine();
+
+							ImGui::Spacing();
+							ImGui::Spacing();
+
+							ImGui::DragFloat("Angle", DebugMenu::_entities[i].angle);
 						}
-						ImGui::EndChild();
 					}
 				}
 			}

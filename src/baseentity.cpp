@@ -8,7 +8,7 @@
 namespace Birb
 {
 	BaseEntity::BaseEntity()
-	:name("Default Entity"), angle(0), error_fuse(false), debug_menu_index(-1)
+	:name("Default Entity"), angle(0), error_fuse(false)
 	{
 		++Diagnostics::ResourceMonitor::EntityCount;
 	}
@@ -16,22 +16,12 @@ namespace Birb
 	BaseEntity::BaseEntity(const std::string& p_name)
 	:name(p_name), angle(0), error_fuse(false)
 	{
-		debug_menu_index = DebugMenu::AddEntity(*this);
 		++Diagnostics::ResourceMonitor::EntityCount;
 	}
 
 	BaseEntity::~BaseEntity()
 	{
-		if (debug_menu_index != -1)
-			DebugMenu::_entities[debug_menu_index].deleted = true;
-
 		--Diagnostics::ResourceMonitor::EntityCount;
-	}
-
-	void BaseEntity::Debug(std::string name)
-	{
-		this->name = name;
-		debug_menu_index = DebugMenu::AddEntity(*this);
 	}
 
     std::ostream &operator<<(std::ostream &stream, const BaseEntity &other)

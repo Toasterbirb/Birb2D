@@ -104,7 +104,7 @@ namespace Birb
 				ImGui::NewFrame();
 
 				DebugMenu::ResouceMonitor(statistics, timeStep);
-				DebugMenu::EntityMenu();
+				debug_menu.EntityMenu();
 
 				ImGui::Render();
 				SDL_RenderSetScale(window->renderer, imgui_io->DisplayFramebufferScale.x, imgui_io->DisplayFramebufferScale.y);
