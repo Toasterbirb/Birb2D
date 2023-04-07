@@ -255,6 +255,10 @@ target_link_libraries(birb2d
 	imgui
 )
 
+if (TBB)
+	target_link_libraries(birb2d tbb)
+endif()
+
 if (${ZLIB_FOUND})
 	target_link_libraries(birb2d zip)
 endif()
