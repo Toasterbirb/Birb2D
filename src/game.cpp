@@ -123,7 +123,7 @@ namespace Birb
 		}
 
 		/* Free memory allocations and stuff. Up to the user to decide */
-
+		debug_menu.Clear();
 		statistics.Free();
 		cleanup();
 

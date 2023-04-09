@@ -1,3 +1,5 @@
+#include "BaseEntity.hpp"
+#include "Entities/Empty.hpp"
 #include "Entities/Text.hpp"
 #include "Font.hpp"
 #include "Game.hpp"
@@ -22,6 +24,7 @@ namespace BirbTest
 	Font* font;
 
 	Entity::Text* game_reached_text;
+	Entity::Empty test_entity;
 	Scene game_scene;
 
 
@@ -44,6 +47,12 @@ namespace BirbTest
 		game_reached_text->renderingPriority = 1;
 		game.debug_menu.AddEntity(*game_reached_text);
 		game_scene.AddObject(game_reached_text);
+
+		test_entity.rect = Rect( 256, 256, 256, 256 );
+		test_entity.rect.color = 0x112233;
+		test_entity.name = "Rectangle entity";
+		game.debug_menu.AddEntity(test_entity);
+		game_scene.AddObject(test_entity);
 
 		/* Show the splash screen */
 		Splash splash(*game.window);
