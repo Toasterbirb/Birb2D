@@ -79,7 +79,7 @@ namespace Birb
 		Vector3Int 	Lerp(const Vector3Int& a, const Vector3Int& b, const float& t);
 		Color 		Lerp(const Color& a, const Color& b, const float& t);
 
-		float 	CenterPoint(const float& a, const float& b); ///< Calculate the "center" value between two 1D floats
+		float 	CenterPoint(float a, float b); ///< Calculate the "center" value between two 1D floats
 		Vector2 CenterPoint(const Vector2& a, const Vector2& b); ///< Calculate the center point between two 2D floating point vectors
 		Vector2 CenterPoint(const Vector2Int& a, const Vector2Int& b); ///< Calculate the center point between two 2D integer vectors
 		Vector3 CenterPoint(const Vector3& a, const Vector3& b); ///< Calculate the center point between two 3D floating point vectors
@@ -173,7 +173,7 @@ namespace Birb
 		}
 
 		template<typename T>
-		double Average(T* values, const int& valueCount)
+		double Average(T* values, int valueCount)
 		{
 			double total = 0;
 			for (int i = 0; i < valueCount; i++)
@@ -190,6 +190,6 @@ namespace Birb
 			return total / values.size();
 		}
 
-		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum);
+		double 	Normalize(double value, double min, double max, double normalized_maximum);
 	}
 }

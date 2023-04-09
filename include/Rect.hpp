@@ -26,11 +26,11 @@ namespace Birb
 		constexpr Rect()
 		:x(0.0f), y(0.0f), w(0.0f), h(0.0f), color(Color(255, 255, 255)) {}
 
-		constexpr Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h)
-		:x(p_x), y(p_y), w(p_w), h(p_h), color(Color(255, 255, 255)) {}
+		constexpr Rect(float x, float y, float w, float h)
+		:x(x), y(y), w(w), h(h), color(Color(255, 255, 255)) {}
 
-		constexpr Rect(const float& p_x, const float& p_y, const float& p_w, const float& p_h, const Color& color)
-		:x(p_x), y(p_y), w(p_w), h(p_h), color(color) {}
+		constexpr Rect(float x, float y, float w, float h, const Color& color)
+		:x(x), y(y), w(w), h(h), color(color) {}
 
 		std::string toString() const;
 		Polygon toPolygon() const;

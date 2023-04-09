@@ -20,7 +20,7 @@ namespace Birb
 		:x(0.0f), y(0.0f)
 		{}
 
-        constexpr Vector2(const float& x, const float& y)
+        constexpr Vector2(float x, float y)
 		:x(x), y(y)
 		{}
 

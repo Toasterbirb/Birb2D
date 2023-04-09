@@ -20,7 +20,7 @@ namespace Birb
 		:x(0), y(0)
 		{}
 
-        constexpr Vector2Int(const int& x, const int& y)
+        constexpr Vector2Int(int x, int y)
 		:x(x), y(y)
 		{}
 
@@ -28,7 +28,7 @@ namespace Birb
 		:x(values[0]), y(values[1])
 		{}
 
-        constexpr Vector2Int(const float& x, const float& y)
+        constexpr Vector2Int(float x, float y)
 		:x(0), y(0)
 		{
 			this->x = std::round(x);

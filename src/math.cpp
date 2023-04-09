@@ -23,7 +23,7 @@ namespace Birb
 		}
 
 
-		float CenterPoint(const float& a, const float& b)
+		float CenterPoint(float a, float b)
 		{
 			return (a + b) / 2;
 		}
@@ -156,7 +156,7 @@ namespace Birb
 			return currentClosestPoint;
 		}
 
-		double 	Normalize(const double& value, const double& min, const double& max, const double& normalized_maximum)
+		double 	Normalize(double value, double min, double max, double normalized_maximum)
 		{
 			return ((value - min) / (max - min)) * normalized_maximum;
 		}

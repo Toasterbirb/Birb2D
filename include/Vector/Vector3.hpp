@@ -21,7 +21,7 @@ namespace Birb
 		:x(0.0f), y(0.0f), z(0.0f)
 		{}
 
-        constexpr Vector3(const float& x, const float& y, const float& z)
+        constexpr Vector3(float x, float y, float z)
 		:x(x), y(y), z(z)
 		{}
 

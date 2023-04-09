@@ -22,7 +22,7 @@ namespace Birb
 		:x(0), y(0), z(0)
 		{}
 
-        constexpr Vector3Int(const int& x, const int& y, const int& z)
+        constexpr Vector3Int(int x, int y, int z)
 		:x(x), y(y), z(z)
 		{}
 
@@ -34,7 +34,7 @@ namespace Birb
 		:x(vec2.x), y(vec2.y), z(0)
 		{}
 
-        constexpr Vector3Int(const float& x, const float& y, const float& z)
+        constexpr Vector3Int(float x, float y, float z)
 		:x(0), y(0), z(0)
 		{
 			this->x = std::round(x);
