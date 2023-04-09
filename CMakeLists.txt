@@ -40,6 +40,12 @@ if (RELEASE)
 else()
 	set(CMAKE_BUILD_TYPE Debug)
 
+	# Memory sanitizer flags
+	set(SANITIZER_FLAGS "-fsanitize=address")
+	set(CMAKE_CXX_FLAGS "${SANITIZER_FLAGS}")
+	set(CMAKE_CC_FLAGS "${SANITIZER_FLAGS}")
+	set(CMAKE_LINKER_FLAGS "${SANITIZER_FLAGS}")
+
 	# Disable debug postfixes
 	set(DISABLE_FORCE_DEBUG_POSTFIX ON CACHE BOOL "Disable forced debug
 	postfixes")
