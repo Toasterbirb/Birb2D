@@ -29,7 +29,7 @@ namespace Birb
 {
 	void Asset::Free()
 	{
-		free(buffer);
+		delete[] buffer;
 	}
 
 	void AssetManager::LazyLoadQueue(const std::string &file_path, AssetType type)
