@@ -37,6 +37,11 @@ endif()
 if (RELEASE)
 	set(CMAKE_BUILD_TYPE Release)
 	set(STATIC_SDL ON)
+
+	# Some custom build flags
+	set(RELEASE_BUILD_FLAGS "-s -flto")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${RELEASE_BUILD_FLAGS}")
+	set(CMAKE_CC_FLAGS "${CMAKE_CC_FLAGS} ${RELEASE_BUILD_FLAGS}")
 else()
 	set(CMAKE_BUILD_TYPE Debug)
 
