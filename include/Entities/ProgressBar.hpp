@@ -15,8 +15,8 @@ namespace Birb
 		{
 		public:
 			ProgressBar();
-			ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color);
-			ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color, const int& min_value, const int& max_value, const int& value);
+			ProgressBar(int border_width, const Color& border_color, const Color& background_color, const Color& fill_color);
+			ProgressBar(int border_width, const Color& border_color, const Color& background_color, const Color& fill_color, int min_value, int max_value, int value);
 
 			int borderWidth; ///< Sets the thickness of the borders around the progress bar
 			Color borderColor; ///< Border color around the fill area

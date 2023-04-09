@@ -15,7 +15,7 @@ namespace Birb
 		class FrametimeGraph
 		{
 		public:
-			FrametimeGraph(const Rect& rect, const int& pointCount, TimeStep& timeStep);
+			FrametimeGraph(const Rect& rect, int pointCount, TimeStep& timeStep);
 			void Render();
 			bool enabled;
 			int pointCount;

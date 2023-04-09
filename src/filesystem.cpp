@@ -79,7 +79,7 @@ namespace Birb
 				return file_contents;
 			}
 
-			bool Write(const std::string& fpath, const std::string& content, const bool& overwrite)
+			bool Write(const std::string& fpath, const std::string& content, bool overwrite)
 			{
 				/* Check if a file exists if overwrite protection is enabled */
 				if (!overwrite && Exists(fpath))

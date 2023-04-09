@@ -12,7 +12,7 @@ namespace Birb
 	:needs_sorting(false), active(true), positionOffset(0, 0)
 	{}
 
-	Scene::Scene(const bool& isActive)
+	Scene::Scene(bool isActive)
 	:needs_sorting(false), active(isActive), positionOffset(0, 0)
 	{}
 
@@ -50,7 +50,7 @@ namespace Birb
 		SortObjects();
 	}
 
-	void Scene::PreAllocate(const int& objCount)
+	void Scene::PreAllocate(int objCount)
 	{
 		objects.reserve(objCount);
 	}

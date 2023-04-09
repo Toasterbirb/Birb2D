@@ -139,7 +139,7 @@ namespace Birb
 		return texture;
 	}
 
-	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color, const Color& bgColor, const int& wrapLength)
+	SDL_Texture* Resources::TextSprite(const std::string& text, const Font& font, const Color& color, const Color& bgColor, int wrapLength)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Render text sprite with background color", PROFILER_COLOR);
 

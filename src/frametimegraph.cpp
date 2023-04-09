@@ -4,7 +4,7 @@ namespace Birb
 {
 	namespace Diagnostics
 	{
-		FrametimeGraph::FrametimeGraph(const Rect& rect, const int& pointCount, TimeStep& timeStep)
+		FrametimeGraph::FrametimeGraph(const Rect& rect, int pointCount, TimeStep& timeStep)
 		:pointCount(pointCount), rect(rect), timeStep(timeStep)
 		{
 			enabled = true;

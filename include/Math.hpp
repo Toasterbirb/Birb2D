@@ -23,7 +23,7 @@ namespace Birb
 	{
 		/// Multiply the value with itself (power of two)
 		template<typename T>
-		constexpr T Square(const T& value)
+		constexpr T Square(T value)
 		{
 			return value * value;
 		}
@@ -53,7 +53,7 @@ namespace Birb
 		}
 
 		template<typename T>
-		constexpr T Clamp(const T& value, const T& min, const T& max)
+		constexpr T Clamp(T value, T min, T max)
 		{
 			if (value < min)
 				return min;
@@ -64,20 +64,20 @@ namespace Birb
 		}
 
 		template<typename T>
-		constexpr T Lerp(const T& a, const T& b, const float& t)
+		constexpr T Lerp(T a, T b, float t)
 		{
 			return (a + (b - a) * Clamp(t, 0.0f, 1.0f));
 		}
 
 		template<>
-		constexpr int Lerp(const int& a, const int& b, const float& t)
+		constexpr int Lerp(int a, int b, float t)
 		{
 			return std::round(a + (b - a) * Clamp(t, 0.0f, 1.0f));
 		}
 
-		Vector2Int 	Lerp(const Vector2Int& a, const Vector2Int& b, const float& t);
-		Vector3Int 	Lerp(const Vector3Int& a, const Vector3Int& b, const float& t);
-		Color 		Lerp(const Color& a, const Color& b, const float& t);
+		Vector2Int 	Lerp(const Vector2Int& a, const Vector2Int& b, float t);
+		Vector3Int 	Lerp(const Vector3Int& a, const Vector3Int& b, float t);
+		Color 		Lerp(const Color& a, const Color& b, float t);
 
 		float 	CenterPoint(float a, float b); ///< Calculate the "center" value between two 1D floats
 		Vector2 CenterPoint(const Vector2& a, const Vector2& b); ///< Calculate the center point between two 2D floating point vectors
@@ -88,14 +88,14 @@ namespace Birb
 		/// @param circle 	Circle object
 		/// @param angle 	Angle in degrees
 		/// @return 		A point on the circle rotated by the angle.
-		Vector2 FindPointOnCircle(const Circle& circle, const float& angle);
+		Vector2 FindPointOnCircle(const Circle& circle, float angle);
 
 		/// Find the closest point in an array to the given Vector2Int point
 		/// @param point 		The current point
 		/// @param points 		List of points that we are comparing point to
 		/// @param pointCount 	Size of the points array
 		/// @return 			Closest point in the array
-		Vector2Int FindClosestPoint(const Vector2Int& point, Vector2Int points[], const int& pointCount);
+		Vector2Int FindClosestPoint(const Vector2Int& point, Vector2Int points[], int pointCount);
 		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points);
 		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points, const std::vector<Vector2Int>& ignoredPoints);
 
@@ -103,7 +103,7 @@ namespace Birb
 		//double Round(const double& value, const int& decimal_points); ///< Rounds the given floating point value with specified accuracy
 
 		template<typename T>
-		constexpr double Round(const T& value, const int& decimal_points)
+		constexpr double Round(T value, int decimal_points)
 		{
 			/* How this thing works:
 			 * 1. Multiply the value with 10 ^ decimal points. This will leave the needed values before the decimal point
@@ -115,14 +115,14 @@ namespace Birb
 
 		/// Check if the given value has any decimal points
 		template<typename T>
-		constexpr bool IsDigit(const T& value)
+		constexpr bool IsDigit(T value)
 		{
 			return (static_cast<int>(value) == value);
 		}
 
 		/// Find the highest value in an array
 		template<typename T>
-		constexpr T FindHighestValue(T* values, const int& valueCount)
+		constexpr T FindHighestValue(T* values, int valueCount)
 		{
 			T result = values[0];
 			for (int i = 1; i < valueCount; i++)
@@ -148,7 +148,7 @@ namespace Birb
 
 		/// Find the lowest value in an array
 		template<typename T>
-		T FindLowestValue(T* values, const int& valueCount)
+		T FindLowestValue(T* values, int valueCount)
 		{
 			T result = values[0];
 			for (int i = 1; i < valueCount; i++)

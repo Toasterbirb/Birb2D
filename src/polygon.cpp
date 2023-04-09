@@ -18,13 +18,13 @@ namespace Birb
 		angle = 0;
 	}
 
-	Polygon::Polygon(const Vector2 points[], const int& pointCount)
+	Polygon::Polygon(const Vector2 points[], int pointCount)
 	{
 		this->points = std::vector<Vector2>(points, points + pointCount);
 		angle = 0;
 	}
 
-	Polygon::Polygon(const Vector2 points[], const int& pointCount, const Color& color)
+	Polygon::Polygon(const Vector2 points[], int pointCount, const Color& color)
 	:color(color)
 	{
 		this->points = std::vector<Vector2>(points, points + pointCount);
@@ -44,7 +44,7 @@ namespace Birb
 		angle = 0;
 	}
 
-	void Polygon::AddPoints(const Vector2 points[], const int& pointCount)
+	void Polygon::AddPoints(const Vector2 points[], int pointCount)
 	{
 		this->points.insert(std::end(this->points), points, points + pointCount);
 	}
@@ -54,12 +54,12 @@ namespace Birb
 		this->points.insert(std::end(this->points), std::begin(points), std::end(points));
 	}
 
-	void Polygon::SetRotation(const float& new_angle)
+	void Polygon::SetRotation(float new_angle)
 	{
 		SetRotation(new_angle, CenterPoint());
 	}
 
-	void Polygon::SetRotation(const float& new_angle, const Vector2& pivot_point)
+	void Polygon::SetRotation(float new_angle, const Vector2& pivot_point)
 	{
 		/* Calculate the difference between the new angle and the old angle
 		 * since the rotation math is done on the current position of the points

@@ -14,14 +14,14 @@ namespace Birb
 		color = 0xFFFFFF;
 	}
 
-	Circle::Circle(const float& radius)
+	Circle::Circle(float radius)
 	:radius(radius)
 	{
 		pos = {0, 0};
 		color = 0xFFFFFF;
 	}
 
-	Circle::Circle(const float& radius, const Vector2Int& pos, Color color)
+	Circle::Circle(float radius, const Vector2Int& pos, Color color)
 	:radius(radius), pos(pos), color(color)
 	{}
 

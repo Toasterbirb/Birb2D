@@ -17,19 +17,19 @@ namespace Birb
 	public:
 		Polygon();
 		Polygon(const Color& color);
-		Polygon(const Vector2 points[], const int& pointCount);
-		Polygon(const Vector2 points[], const int& pointCount, const Color& color);
+		Polygon(const Vector2 points[], int pointCount);
+		Polygon(const Vector2 points[], int pointCount, const Color& color);
 		Polygon(const std::vector<Vector2>& points);
 		Polygon(const std::vector<Vector2>& points, const Color& color);
 
-		void AddPoints(const Vector2 points[], const int& pointCount);
+		void AddPoints(const Vector2 points[], int pointCount);
 		void AddPoints(const std::vector<Vector2>& points);
 
 		/// Rotates all of the points in the polygon around its center off mass
-		void SetRotation(const float& new_angle);
+		void SetRotation(float new_angle);
 
 		/// Rotates all of the points in the polygon around a custom pivot point
-		void SetRotation(const float& new_angle, const Vector2& pivot_point);
+		void SetRotation(float new_angle, const Vector2& pivot_point);
 
 		/// Move the polygon relatively
 		void Translate(const Vector2& delta);

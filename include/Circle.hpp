@@ -12,8 +12,8 @@ namespace Birb
 	{
 	public:
 		Circle();
-		Circle(const float& radius);
-		Circle(const float& radius, const Vector2Int& pos, Color color = 0xFFFFFF);
+		Circle(float radius);
+		Circle(float radius, const Vector2Int& pos, Color color = 0xFFFFFF);
 
 		float Circumference() const;
 		float Diameter() const;

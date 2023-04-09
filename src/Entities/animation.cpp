@@ -16,7 +16,7 @@ namespace Birb
 			animationQueued = false;
 		}
 
-		Animation::Animation(const Texture& sprite, const Vector2Int& sprite_size, const int& frame_count, const int& fps)
+		Animation::Animation(const Texture& sprite, const Vector2Int& sprite_size, int frame_count, int fps)
 		:spriteSize(sprite_size), frameCount(frame_count), fps(fps), lastFrame(frame_count - 1), sprite(sprite)
 		{
 			frameIndex 		= 0;
@@ -26,7 +26,7 @@ namespace Birb
 			rect.h 			= sprite.dimensions().y;
 		}
 
-		Animation::Animation(const Texture& sprite, const Vector2Int& sprite_size, const int& frame_count, const int& fps, const bool& loop)
+		Animation::Animation(const Texture& sprite, const Vector2Int& sprite_size, int frame_count, int fps, bool loop)
 		:spriteSize(sprite_size), frameCount(frame_count), fps(fps), loop(loop), lastFrame(frame_count - 1), sprite(sprite)
 		{
 			frameIndex 		= 0;
@@ -35,7 +35,7 @@ namespace Birb
 			rect.h 			= sprite.dimensions().y;
 		}
 
-		void Animation::Construct(const Texture& sprite, const Vector2Int& sprite_size, const int& frame_count, const int& fps, const bool& loop)
+		void Animation::Construct(const Texture& sprite, const Vector2Int& sprite_size, int frame_count, int fps, bool loop)
 		{
 			this->sprite = sprite;
 			this->spriteSize = sprite_size;
@@ -61,21 +61,21 @@ namespace Birb
 			animationQueued = true;
 		}
 
-		void Animation::StartAnimation(const int& p_startFrame)
+		void Animation::StartAnimation(int p_startFrame)
 		{
 			frameIndex = p_startFrame;
 			lastFrame = frameCount - 1;
 			animationQueued = true;
 		}
 
-		void Animation::StartAnimation(const int& p_startFrame, const int& p_lastFrame)
+		void Animation::StartAnimation(int p_startFrame, int p_lastFrame)
 		{
 			frameIndex = p_startFrame;
 			lastFrame = p_lastFrame;
 			animationQueued = true;
 		}
 
-		Vector2Int Animation::getAtlasPosition(const int& frame)
+		Vector2Int Animation::getAtlasPosition(int frame)
 		{
 			Vector2Int pos;
 			int index = frame;

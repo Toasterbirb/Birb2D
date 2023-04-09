@@ -17,18 +17,18 @@ namespace Birb
 	public:
 		Font();
 		Font(const Font& other);
-		Font(const std::string& filePath, const int& fontSize = 12);
+		Font(const std::string& filePath, int fontSize = 12);
 		~Font();
 
 		std::string filePath;
 
-		void LoadFont(const std::string& filePath, const int& fontSize = 12);
+		void LoadFont(const std::string& filePath, int fontSize = 12);
 		bool isLoaded() const;
 
 		TTF_Font* ttf() const;
 
 		int GetSize() const;
-		void SetSize(const int& size);
+		void SetSize(int size);
 
 		/* Copy assignment */
 		Birb::Font& operator=(const Font& other)

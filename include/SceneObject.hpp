@@ -10,10 +10,10 @@ namespace Birb
 		constexpr SceneObject()
 		:renderingPriority(0), sceneActive(true), active(true), world_space(true), parallax_multiplier(1) {}
 
-		SceneObject(const int& priority)
+		SceneObject(int priority)
 		:renderingPriority(priority), sceneActive(true), active(true), world_space(true), parallax_multiplier(1) {}
 
-		constexpr SceneObject(const int& priority, const bool& active)
+		constexpr SceneObject(int priority, bool active)
 		:renderingPriority(priority), sceneActive(true), active(active), world_space(true), parallax_multiplier(1) {}
 
 		//virtual ~SceneObject() 						= default;

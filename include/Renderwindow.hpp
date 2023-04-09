@@ -22,7 +22,7 @@ namespace Birb
 	public:
 		Window(); ///< Initializes a window without any parameters. Shouldn't be used
 		~Window();
-		Window(const std::string& p_title, const Vector2Int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable); ///< Creates a window and initializes SDL2 stuff and a renderer
+		Window(const std::string& title, const Vector2Int& window_dimensions, int refresh_rate, bool resizable); ///< Creates a window and initializes SDL2 stuff and a renderer
 
 		/* -- Init stuff functions -- */
 		static void InitSDL(); ///< Initializes SDL2 (if its not already initialized)

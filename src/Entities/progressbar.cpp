@@ -20,7 +20,7 @@ namespace Birb
 			value = 0;
 		}
 
-		ProgressBar::ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color)
+		ProgressBar::ProgressBar(int border_width, const Color& border_color, const Color& background_color, const Color& fill_color)
 		:borderWidth(border_width), borderColor(border_color), backgroundColor(background_color), fillColor(fill_color)
 		{
 			minValue = 0;
@@ -28,7 +28,7 @@ namespace Birb
 			value = 0.25f;
 		}
 
-		ProgressBar::ProgressBar(const int& border_width, const Color& border_color, const Color& background_color, const Color& fill_color, const int& min_value, const int& max_value, const int& value)
+		ProgressBar::ProgressBar(int border_width, const Color& border_color, const Color& background_color, const Color& fill_color, int min_value, int max_value, int value)
 		:borderWidth(border_width), borderColor(border_color), backgroundColor(background_color), fillColor(fill_color), minValue(min_value), maxValue(max_value), value(value)
 		{}
 

@@ -33,7 +33,7 @@ namespace Birb
 				SDL_SetRenderDrawBlendMode(Global::RenderVars::Renderer, SDL_BLENDMODE_NONE);
 		}
 
-		bool DrawTexture(const Texture& texture, const Rect& rect, const bool& world_space, const float& angle)
+		bool DrawTexture(const Texture& texture, const Rect& rect, bool world_space, float angle)
 		{
 			SDL_Rect src;
 			SDL_Rect dst;
@@ -49,7 +49,7 @@ namespace Birb
 			return DrawTexture(texture, src, dst, angle);
 		}
 
-		bool DrawTexture(const Texture& texture, const SDL_Rect& src, const SDL_Rect& dst, const float& angle)
+		bool DrawTexture(const Texture& texture, const SDL_Rect& src, const SDL_Rect& dst, float angle)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw texture", PROFILER_COLOR);
 
@@ -109,7 +109,7 @@ namespace Birb
 			return success;
 		}
 
-		bool DrawRect(const Color& color, const Rect& dimensions, const int& width)
+		bool DrawRect(const Color& color, const Rect& dimensions, int width)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw hollow rect", PROFILER_COLOR);
 
@@ -137,7 +137,7 @@ namespace Birb
 			return result_1 + result_2 + result_3 + result_4;
 		}
 
-		void DrawLine(const Color& color, const Vector2Int& pointA, const Vector2Int& pointB, const bool& world_space, const float& parallax_multiplier)
+		void DrawLine(const Color& color, const Vector2Int& pointA, const Vector2Int& pointB, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (int)", PROFILER_COLOR);
 			SetRenderDrawColor(color);
@@ -149,7 +149,7 @@ namespace Birb
 			ResetDrawColor();
 		}
 
-		void DrawLine(const Color& color, const Vector2& pointA, const Vector2& pointB, const bool& world_space, const float& parallax_multiplier)
+		void DrawLine(const Color& color, const Vector2& pointA, const Vector2& pointB, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw line (float)", PROFILER_COLOR);
 			SetRenderDrawColor(color);
@@ -166,7 +166,7 @@ namespace Birb
 			DrawLine(line.color, line.pointA, line.pointB, line.world_space, line.parallax_multiplier);
 		}
 
-		void DrawLine(const Line& line, const int& thickness)
+		void DrawLine(const Line& line, int thickness)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon line", PROFILER_COLOR);
 			/* Use a polygon to draw a thicker line */
@@ -181,7 +181,7 @@ namespace Birb
 			DrawPolygon(line.color, points, POINT_COUNT, line.world_space);
 		}
 
-		void DrawLines(const Color& color, Vector2Int* points, const int& pointCount, const bool& world_space, const float& parallax_multiplier)
+		void DrawLines(const Color& color, Vector2Int* points, int pointCount, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw multiple lines", PROFILER_COLOR);
 			SDL_Point* sdlPoints = new SDL_Point[pointCount];
@@ -199,7 +199,7 @@ namespace Birb
 			ResetDrawColor();
 		}
 
-		void DrawLines(const Color& color, Vector2* points, const int& pointCount, const bool& world_space, const float& parallax_multiplier)
+		void DrawLines(const Color& color, Vector2* points, int pointCount, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw multiple lines", PROFILER_COLOR);
 			SDL_FPoint* sdlPoints = new SDL_FPoint[pointCount];
@@ -222,7 +222,7 @@ namespace Birb
 			return DrawCircle(circle.color, circle.pos, circle.radius, circle.world_space);
 		}
 
-		bool DrawCircle(const Color& color, const Vector2Int& pos, const int& radius, const bool& world_space, const float& parallax_multiplier)
+		bool DrawCircle(const Color& color, const Vector2Int& pos, int radius, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw multiple lines", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
@@ -264,7 +264,7 @@ namespace Birb
 			}
 		}
 
-		bool DrawPolygon(const Color& color, Vector2Int* points, const int& pointCount, const bool& world_space, const float& parallax_multiplier)
+		bool DrawPolygon(const Color& color, Vector2Int* points, int pointCount, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
@@ -281,7 +281,7 @@ namespace Birb
 			return _DrawFilledPolygon(Global::RenderVars::Renderer, vx, vy, pointCount, uColor);
 		}
 
-		bool DrawPolygon(const Color& color, const std::vector<Vector2Int>& points, const bool& world_space, const float& parallax_multiplier)
+		bool DrawPolygon(const Color& color, const std::vector<Vector2Int>& points, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Uint32 uColor = (255<<24) + (int(color.b)<<16) + (int(color.g)<<8) + int(color.r);;
@@ -300,7 +300,7 @@ namespace Birb
 
 		/* filledPolygonColor works only with integers, so this will just
 		 * round the floating point vlues into integers */
-		bool DrawPolygon(const Color& color, Vector2* points, const int& pointCount, const bool& world_space, const float& parallax_multiplier)
+		bool DrawPolygon(const Color& color, Vector2* points, int pointCount, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Vector2Int* intPoints = new Vector2Int[pointCount];
@@ -314,7 +314,7 @@ namespace Birb
 			return success;
 		}
 
-		bool DrawPolygon(const Color& color, const std::vector<Vector2>& points, const bool& world_space, const float& parallax_multiplier)
+		bool DrawPolygon(const Color& color, const std::vector<Vector2>& points, bool world_space, float parallax_multiplier)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw polygon", PROFILER_COLOR);
 			Vector2Int* intPoints = new Vector2Int[points.size()];

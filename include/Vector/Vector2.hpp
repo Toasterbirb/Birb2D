@@ -85,7 +85,7 @@ namespace Birb
 			return *this;
         }
 
-        constexpr Vector2 operator*(const float& other) const
+        constexpr Vector2 operator*(float other) const
         {
 			return Vector2(x * other, y * other);
         }
@@ -102,7 +102,7 @@ namespace Birb
 			return *this;
         }
 
-        constexpr Vector2 operator/(const float& other) const
+        constexpr Vector2 operator/(float other) const
         {
 			return Vector2(x / other, y / other);
         }

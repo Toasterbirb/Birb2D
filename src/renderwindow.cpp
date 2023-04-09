@@ -18,8 +18,8 @@ namespace Birb
 		InitSDL_image();
 	}
 
-	Window::Window(const std::string& p_title, const Vector2Int& p_window_dimensions, const int& p_refresh_rate, const bool& resizable)
-	:win_title(p_title), refresh_rate(p_refresh_rate), dimensions(p_window_dimensions), original_window_dimensions(p_window_dimensions)
+	Window::Window(const std::string& title, const Vector2Int& window_dimensions, int refresh_rate, bool resizable)
+	:win_title(title), refresh_rate(refresh_rate), dimensions(window_dimensions), original_window_dimensions(window_dimensions)
 	{
 
 		Debug::Log("Creating window '" + win_title + "'...");
@@ -29,9 +29,9 @@ namespace Birb
 		InitSDL_image();
 
 		if (resizable)
-			win = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_window_dimensions.x, p_window_dimensions.y, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+			win = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window_dimensions.x, window_dimensions.y, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		else
-			win = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_window_dimensions.x, p_window_dimensions.y, SDL_WINDOW_SHOWN);
+			win = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window_dimensions.x, window_dimensions.y, SDL_WINDOW_SHOWN);
 
 		if (win == NULL)
 		{

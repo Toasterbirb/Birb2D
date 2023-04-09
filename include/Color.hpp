@@ -16,19 +16,19 @@ namespace Birb
 		{}
 
 		/* Int constructors */
-		constexpr Color(const int& r, const int& g, const int& b)
+		constexpr Color(int r, int g, int b)
 		:r(Math::Clamp(r, 0, 255)), g(Math::Clamp(g, 0, 255)), b(Math::Clamp(b, 0, 255)), a(255) {}
 
-		constexpr Color(const int& r, const int& g, const int& b, const int& a)
+		constexpr Color(int r, int g, int b, int a)
 		:r(Math::Clamp(r, 0, 255)), g(Math::Clamp(g, 0, 255)), b(Math::Clamp(b, 0, 255)), a(Math::Clamp(a, 0, 255)) {}
 
 		/* Float constructors */
-		constexpr Color(const float& r, const float& g, const float& b)
+		constexpr Color(float r, float g, float b)
 		:r(static_cast<int>(std::round(Math::Lerp(0, 255, r)))),
 		g(static_cast<int>(std::round(Math::Lerp(0, 255, g)))),
 		b(static_cast<int>(std::round(Math::Lerp(0, 255, b)))), a(255) {}
 
-		constexpr Color(const float& r, const float& g, const float& b, const float& a)
+		constexpr Color(float r, float g, float b, float a)
 		:r(static_cast<int>(std::round(Math::Lerp(0, 255, r)))),
 		g(static_cast<int>(std::round(Math::Lerp(0, 255, g)))),
 		b(static_cast<int>(std::round(Math::Lerp(0, 255, b)))),
@@ -48,14 +48,14 @@ namespace Birb
 		constexpr Color(const SDL_Color& sdl_color)
 		:r(sdl_color.r), g(sdl_color.g), b(sdl_color.b), a(sdl_color.a) {}
 
-		constexpr Color(const int& hex)
+		constexpr Color(int hex)
 		:r((hex & 0xff0000) >> 16), g((hex & 0xff00) >> 8), b((hex & 0xff) >> 0), a(255)
 		{}
 
 		SDL_Color sdl() const; ///< Convert Color to SDL_Color
 		Uint8 r, g, b, a;
 
-		void ChangeIntensity(const int& delta);
+		void ChangeIntensity(int delta);
 
 
 		constexpr bool operator==(const Color& other) const

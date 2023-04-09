@@ -81,7 +81,7 @@ namespace Birb
 			return *this;
         }
 
-        constexpr Vector2Int operator*(const int& other) const
+        constexpr Vector2Int operator*(int other) const
         {
 			return Vector2Int(x * other, y * other);
         }
@@ -100,7 +100,7 @@ namespace Birb
 			return *this;
         }
 
-        constexpr Vector2Int operator/(const int& other) const
+        constexpr Vector2Int operator/(int other) const
         {
             return Vector2Int(
                 static_cast<int>(std::round(static_cast<float>(x) / other)),

@@ -25,7 +25,7 @@ namespace Birb
 		BaseEntity();
 		~BaseEntity();
 		BaseEntity(const std::string& p_name); ///< Creates an empty Entity object
-		BaseEntity(const std::string& p_name, const Rect& rect, const int& rendering_priority = 0); ///< Creates an empty Entity object with size and position
+		BaseEntity(const std::string& p_name, const Rect& rect, int rendering_priority = 0); ///< Creates an empty Entity object with size and position
 
 		std::string name; 		///< Name of the entity. Used for debugging
 

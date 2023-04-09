@@ -27,7 +27,7 @@ namespace Birb
 		Line(const Vector2& pointA, const Vector2& pointB, const Color& color)
 		:pointA(pointA), pointB(pointB), color(color), thickness(1) {}
 
-		Line(const Vector2& pointA, const Vector2& pointB, const Color& color, const int& renderingPriority)
+		Line(const Vector2& pointA, const Vector2& pointB, const Color& color, int renderingPriority)
 		:pointA(pointA), pointB(pointB), color(color), thickness(1)
 		{
 			this->renderingPriority = renderingPriority;

@@ -10,12 +10,12 @@ namespace Birb
 	class Random
 	{
 	public:
-		int RandomInt(const int& min, const int& max);
-		float RandomFloat(const float& min, const float& max );
+		int RandomInt(int min, int max);
+		float RandomFloat(float min, float max );
 
 		/// Shuffles an array of any type
 		template<typename T>
-		static void ShuffleArray(T* values, const int& size)
+		static void ShuffleArray(T* values, int size)
 		{
 			Random rand;
 			int newIndex;

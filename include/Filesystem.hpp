@@ -26,7 +26,7 @@ namespace Birb
 			bool Exists(const std::string& fpath); ///< Check if path points to a file and it exists
 
 			std::string Read(const std::string& fpath); ///< Read file contents
-			bool Write(const std::string& fpath, const std::string& content, const bool& overwrite = true); ///< Write text to a file. Returns true if successful
+			bool Write(const std::string& fpath, const std::string& content, bool overwrite = true); ///< Write text to a file. Returns true if successful
 		}
 	}
 }

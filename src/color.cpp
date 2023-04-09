@@ -11,7 +11,7 @@ namespace Birb
 		return SDL_Color( { r, g, b, a } );
 	}
 
-	void Color::ChangeIntensity(const int& delta)
+	void Color::ChangeIntensity(int delta)
 	{
 		int temp_r = r + delta;
 		r = Math::Clamp(temp_r, 0, 255);

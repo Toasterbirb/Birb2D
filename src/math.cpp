@@ -7,17 +7,17 @@ namespace Birb
 {
 	namespace Math
 	{
-		Vector2Int Lerp(const Vector2Int& a, const Vector2Int& b, const float& t)
+		Vector2Int Lerp(const Vector2Int& a, const Vector2Int& b, float t)
 		{
 			return Vector2Int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
 		}
 
-		Vector3Int Lerp(const Vector3Int& a, const Vector3Int& b, const float& t)
+		Vector3Int Lerp(const Vector3Int& a, const Vector3Int& b, float t)
 		{
 			return Vector3Int(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
 		}
 
-		Color Lerp(const Color& a, const Color& b, const float& t)
+		Color Lerp(const Color& a, const Color& b, float t)
 		{
 			return Color(Lerp(a.r, b.r, t), Lerp(a.g, b.g, t), Lerp(a.b, b.b, t));
 		}
@@ -49,7 +49,7 @@ namespace Birb
 		}
 
 
-		Vector2 FindPointOnCircle(const Circle& circle, const float& angle)
+		Vector2 FindPointOnCircle(const Circle& circle, float angle)
 		{
 			/* Convert the angle into radians */
 			float radians = (M_PI / 180) * angle;
@@ -60,7 +60,7 @@ namespace Birb
 			return Vector2(x, y);
 		}
 
-		Vector2Int FindClosestPoint(const Vector2Int& point, Vector2Int points[], const int& pointCount)
+		Vector2Int FindClosestPoint(const Vector2Int& point, Vector2Int points[], int pointCount)
 		{
 			Vector2Int currentClosestPoint = points[0];
 			float currentClosestDistance = VectorDistance(point, points[0]);

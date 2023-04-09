@@ -8,7 +8,7 @@ static std::random_device random_machine;
 
 namespace Birb
 {
-	int Random::RandomInt(const int& min, const int& max)
+	int Random::RandomInt(int min, int max)
 	{
 		if (max < min)
 			return min;
@@ -16,7 +16,7 @@ namespace Birb
 		return random_machine() % (max + 1 - min) + min;
 	}
 
-	float Random::RandomFloat(const float& min, const float& max)
+	float Random::RandomFloat(float min, float max)
 	{
 		if (max < min)
 			return min;

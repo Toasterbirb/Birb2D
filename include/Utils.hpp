@@ -28,12 +28,12 @@ namespace Birb
 			return t;
 		}
 
-		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2Int& pixelPosition, const int& textureWidth);
+		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2Int& pixelPosition, int textureWidth);
 
 		std::vector<Vector2Int> SortPath(const Vector2Int& startPoint, const std::vector<Vector2Int>& points);
-		std::string CleanDecimals(const double& value); ///< Returns a string with without trailing zeroes in decimals
+		std::string CleanDecimals(double value); ///< Returns a string with without trailing zeroes in decimals
 
-		std::vector<Line> PolygonToLines(const Vector2 polygon[], const int& polygonSize);
+		std::vector<Line> PolygonToLines(const Vector2 polygon[], int polygonSize);
 
 		int FlatIndex(const Vector2Int& array_position, const Vector2Int& array_dimensions); ///< Returns a 1 dimensional index for a 2 dimensional array
 	}

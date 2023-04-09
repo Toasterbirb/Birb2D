@@ -24,7 +24,7 @@ namespace Birb
 		LoadFont(other.filePath, size);
 	}
 
-	Font::Font(const std::string& filePath, const int& fontSize)
+	Font::Font(const std::string& filePath, int fontSize)
 	{
 		LoadFont(filePath, fontSize);
 	}
@@ -38,7 +38,7 @@ namespace Birb
 		}
 	}
 
-	void Font::LoadFont(const std::string& filePath, const int& fontSize)
+	void Font::LoadFont(const std::string& filePath, int fontSize)
 	{
 		std::string resource_path = Global::FilePaths::Resources + filePath;
 		this->filePath 	= filePath;
@@ -78,7 +78,7 @@ namespace Birb
 		return size;
 	}
 
-	void Font::SetSize(const int& size)
+	void Font::SetSize(int size)
 	{
 		this->size = size;
 

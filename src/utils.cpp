@@ -7,7 +7,7 @@ namespace Birb
 {
 	namespace utils
 	{
-		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2Int& pixelPosition, const int& textureWidth)
+		SDL_Color TexturePixelToColor(Uint8* pixels, const Vector2Int& pixelPosition, int textureWidth)
 		{
 			// Some weird BGRA format
 			Uint8 b = pixels[4 * (pixelPosition.y * textureWidth + pixelPosition.x) + 0]; // Blue
@@ -39,7 +39,7 @@ namespace Birb
 			return result;
 		}
 
-		std::string CleanDecimals(const double& value)
+		std::string CleanDecimals(double value)
 		{
 			if (Math::IsDigit(value))
 			{
@@ -62,7 +62,7 @@ namespace Birb
 			}
 		}
 
-		std::vector<Line> PolygonToLines(const Vector2 polygon[], const int& polygonSize)
+		std::vector<Line> PolygonToLines(const Vector2 polygon[], int polygonSize)
 		{
 			std::vector<Line> lines;
 
