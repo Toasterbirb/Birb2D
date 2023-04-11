@@ -221,6 +221,8 @@ set(CORE_SRC
 	src/Vector/vector2.cpp
 	src/Vector/vector2int.cpp
 
+	src/CharacterControllers/topdown.cpp
+
 	src/Entities/animation.cpp
 	src/Entities/button.cpp
 	src/Entities/empty.cpp

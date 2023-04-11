@@ -1,6 +1,7 @@
 #pragma once
 #include "AssetManager.hpp"
 #include "Audio.hpp"
+#include "CharacterControllers/TopDown.hpp"
 #include "Circle.hpp"
 #include "Color.hpp"
 #include "Diagnostics.hpp"

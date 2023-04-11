@@ -6,6 +6,27 @@ namespace Birb
 {
 	namespace Input
 	{
+		Vector2 DirectionalInput()
+		{
+			/* Reset the direction */
+			Vector2 direction = {0, 0};
+
+			const Uint8 *state = SDL_GetKeyboardState(NULL);
+			if (state[SDL_SCANCODE_LEFT] || state[SDL_SCANCODE_A])
+				direction = direction + Vector2::Right();
+
+			if (state[SDL_SCANCODE_RIGHT] || state[SDL_SCANCODE_D])
+				direction = direction + Vector2::Left();
+
+			if (state[SDL_SCANCODE_UP] || state[SDL_SCANCODE_W])
+				direction = direction + Vector2::Up();
+
+			if (state[SDL_SCANCODE_DOWN] || state[SDL_SCANCODE_S])
+				direction = direction + Vector2::Down();
+
+			return direction;
+		}
+
 		KeyCode EventToKeycode(const SDL_Event& event)
 		{
 			/* Skip events that don't have anything to do with

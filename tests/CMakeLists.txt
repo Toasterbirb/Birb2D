@@ -80,5 +80,8 @@ target_link_libraries(imgui_test
 # Compartmentalized tests for finding memory leaks
 add_subdirectory(mem_leak_tests)
 
+# Feature specific game tests
+add_subdirectory(game_tests)
+
 file(COPY ./res DESTINATION ./)
 file(COPY ../birb2d_res DESTINATION ./res/)
