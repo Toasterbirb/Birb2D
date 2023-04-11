@@ -34,58 +34,61 @@ namespace Birb
 
 	void DebugMenu::EntityMenu()
 	{
-		ImGui::Begin("Entity list");
-
-		/* Create collapse menu for each entity that has a name other than "Default Entity" */
-		for (size_t i = 0; i < DebugMenu::_entities.size(); ++i)
+		if (_entities.size() > 0)
 		{
-			if (!DebugMenu::_entities[i].deleted)
+			ImGui::Begin("Entity list");
+
+			/* Create collapse menu for each entity that has a name other than "Default Entity" */
+			for (size_t i = 0; i < DebugMenu::_entities.size(); ++i)
 			{
-				if (*DebugMenu::_entities[i].name != "Default Entity")
+				if (!DebugMenu::_entities[i].deleted)
 				{
-					// BaseEntities
-					if (_entities.size() > 0)
+					if (*DebugMenu::_entities[i].name != "Default Entity")
 					{
-						ImGui::PushID(i);
-						if (ImGui::CollapsingHeader(DebugMenu::_entities[i].name->c_str()))
+						// BaseEntities
+						if (_entities.size() > 0)
 						{
+							ImGui::PushID(i);
+							if (ImGui::CollapsingHeader(DebugMenu::_entities[i].name->c_str()))
 							{
+								{
+									ImGui::PushItemWidth(70);
+									ImGui::Text("Rect");
+
+									ImGui::DragFloat("x", &_entities[i].rect->x);
+									ImGui::SameLine();
+									ImGui::DragFloat("y", &_entities[i].rect->y);
+									ImGui::SameLine();
+									ImGui::DragFloat("w", &_entities[i].rect->w);
+									ImGui::SameLine();
+									ImGui::DragFloat("h", &_entities[i].rect->h);
+								}
+
+								ImGui::PushItemWidth(240);
+								ImGui::ColorEdit3("Color", _entities[i].rect_color);
+								ImGui::SameLine();
+								if (ImGui::Button("Apply"))
+								{
+									_entities[i].rect->color.r = 255 * _entities[i].rect_color[0];
+									_entities[i].rect->color.g = 255 * _entities[i].rect_color[1];
+									_entities[i].rect->color.b = 255 * _entities[i].rect_color[2];
+									_entities[i].rect->color.a = 255 * _entities[i].rect_color[3];
+								}
+
+								ImGui::Spacing();
+								ImGui::Spacing();
+
 								ImGui::PushItemWidth(70);
-								ImGui::Text("Rect");
-
-								ImGui::DragFloat("x", &_entities[i].rect->x);
-								ImGui::SameLine();
-								ImGui::DragFloat("y", &_entities[i].rect->y);
-								ImGui::SameLine();
-								ImGui::DragFloat("w", &_entities[i].rect->w);
-								ImGui::SameLine();
-								ImGui::DragFloat("h", &_entities[i].rect->h);
+								ImGui::DragFloat("Angle", DebugMenu::_entities[i].angle);
 							}
-
-							ImGui::PushItemWidth(240);
-							ImGui::ColorEdit3("Color", _entities[i].rect_color);
-							ImGui::SameLine();
-							if (ImGui::Button("Apply"))
-							{
-								_entities[i].rect->color.r = 255 * _entities[i].rect_color[0];
-								_entities[i].rect->color.g = 255 * _entities[i].rect_color[1];
-								_entities[i].rect->color.b = 255 * _entities[i].rect_color[2];
-								_entities[i].rect->color.a = 255 * _entities[i].rect_color[3];
-							}
-
-							ImGui::Spacing();
-							ImGui::Spacing();
-
-							ImGui::PushItemWidth(70);
-							ImGui::DragFloat("Angle", DebugMenu::_entities[i].angle);
+							ImGui::PopID();
 						}
-						ImGui::PopID();
 					}
 				}
 			}
-		}
 
-		ImGui::End();
+			ImGui::End();
+		}
 	}
 
 	void DebugMenu::ResouceMonitor(const Diagnostics::ResourceMonitor& statistics, const TimeStep& timeStep)
