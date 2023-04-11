@@ -126,14 +126,14 @@ else()
 	if (STATIC_SDL)
 		set(BUILD_STATIC ON CACHE BOOL "Build static libs")
 
-		set(SDL2IMAGE_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
-		set(SDL2MIXER_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
-		set(SDL2TTF_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
-
 		add_definitions(-DSTATIC_SDL)
 	else()
 		set(BUILD_SHARED_LIBS ON CACHE BOOL "Build the library as a shared library")
 	endif()
+
+	set(SDL2IMAGE_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
+	set(SDL2MIXER_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
+	set(SDL2TTF_VENDORED ON CACHE BOOL "Use vendored third-party libraries")
 
 	# Disable some unnecessary SDL stuff
 	set(SDL2_DISABLE_SDL2MAIN OFF CACHE BOOL "Disable building/installation of
@@ -236,8 +236,14 @@ set(CORE_SRC
 	src/ParticlePatterns/stablesquare.cpp
 )
 
-add_library(imgui STATIC ${IMGUI_SRC})
-add_library(birb2d STATIC ${CORE_SRC})
+if (RELEASE OR STATIC_SDL)
+	add_library(imgui STATIC ${IMGUI_SRC})
+	add_library(birb2d STATIC ${CORE_SRC})
+else()
+	add_library(imgui SHARED ${IMGUI_SRC})
+	add_library(birb2d SHARED ${CORE_SRC})
+endif()
+
 target_include_directories(birb2d PUBLIC vendor/SDL2_gfx)
 
 
@@ -256,7 +262,6 @@ else()
 endif()
 
 target_link_libraries(birb2d
-	#SDL2
 	SDL2main
 	SDL2_image
 	SDL2_ttf
@@ -265,6 +270,10 @@ target_link_libraries(birb2d
 	microprofile
 	imgui
 )
+
+if (NOT STATIC_SDL)
+	target_link_libraries(birb2d SDL2)
+endif()
 
 if (TBB)
 	target_link_libraries(birb2d tbb)
