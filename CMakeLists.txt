@@ -25,6 +25,8 @@ option(PROFILER "Enable the profiler timers" OFF)
 option(BUNDLED_ASSETS "Bundle game assets directly into the game binary" OFF)
 option(DISTCC "Disable precompiled headers for better distcc performance" OFF)
 option(MULTITHREAD "Enable multithreading. Mingw can have issues with this" ON)
+option(SANITIZE "Build the engine with address sanitizer. Can cause trouble
+when building with a game project" OFF)
 
 if (BUNDLED_ASSETS)
 	add_definitions(-DBUNDLED_ASSETS)
@@ -46,10 +48,12 @@ else()
 	set(CMAKE_BUILD_TYPE Debug)
 
 	# Memory sanitizer and debugging flags
-	set(SANITIZER_FLAGS "-fsanitize=address -ggdb")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SANITIZER_FLAGS}")
-	set(CMAKE_CC_FLAGS "${CMAKE_CC_FLAGS} ${SANITIZER_FLAGS}")
-	set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} ${SANITIZER_FLAGS}")
+	if (SANITIZE)
+		set(SANITIZER_FLAGS "-fsanitize=address -ggdb")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SANITIZER_FLAGS}")
+		set(CMAKE_CC_FLAGS "${CMAKE_CC_FLAGS} ${SANITIZER_FLAGS}")
+		set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} ${SANITIZER_FLAGS}")
+	endif()
 
 	# Disable debug postfixes
 	set(DISABLE_FORCE_DEBUG_POSTFIX ON CACHE BOOL "Disable forced debug
