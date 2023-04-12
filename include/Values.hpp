@@ -57,6 +57,6 @@ namespace Birb
 			static inline Texture empty_texture;
 		};
 
-		static inline Random random;
+		inline Random random;
 	}
 }
