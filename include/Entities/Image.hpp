@@ -12,6 +12,7 @@ namespace Birb
 		public:
 			Image();
 			Image(Texture& texture, const Rect& rect);
+			virtual ~Image();
 
 			/// This is here just for compatiblitys sake
 			Image(const std::string& name, const Vector2Int& pos, Texture& texture);
