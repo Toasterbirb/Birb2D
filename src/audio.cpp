@@ -53,6 +53,7 @@ namespace Birb
 	void Audio::SetGlobalVolume(float volume_percent)
 	{
 		Mix_Volume(-1, MIX_MAX_VOLUME * volume_percent);
+		Mix_VolumeMusic(MIX_MAX_VOLUME * volume_percent);
 	}
 
 	float Audio::GetCurrentGlobalVolume()
