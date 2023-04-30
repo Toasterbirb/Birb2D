@@ -13,7 +13,7 @@ BUILD_DIR="./build_win"
 mkdir -pv "$BUILD_DIR"
 cd "$BUILD_DIR"
 
-cmake .. -DRELEASE=on -DDEBUG=Off -DWINDOWS=on -DTESTS=off -DUTILS=off -DSTATIC_SDL=on -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_C_FLAGS="-fstack-protector -static" -DCMAKE_CXX_FLAGS="-fstack-protector -static -static-libstdc++" -DMINGW=TRUE
+cmake .. -DMULTITHREAD=off -DRELEASE=on -DDEBUG=Off -DWINDOWS=on -DTESTS=off -DUTILS=off -DSTATIC_SDL=on -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_C_FLAGS="-fstack-protector -static" -DCMAKE_CXX_FLAGS="-fstack-protector -static -static-libstdc++" -DMINGW=TRUE
 
 # Compile
 make -j$(nproc)
