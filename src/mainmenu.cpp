@@ -43,6 +43,7 @@ namespace Birb
 			background.h = game.window->dimensions.y;
 			background.color = this->settings->background_color;
 			menu_scene.AddObject(&background);
+			using_background_texture = false;
 		}
 		else
 		{
