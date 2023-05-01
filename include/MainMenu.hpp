@@ -40,6 +40,9 @@ namespace Birb
 		Entity::Text title_text;
 		Rect background;
 
+		Entity::Image* background_image;
+		bool using_background_texture;
+
 		Entity::Text window_title_text;
 
 		/* Settings panel */

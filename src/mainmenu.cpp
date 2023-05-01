@@ -31,10 +31,27 @@ namespace Birb
 		//	background.rect = Rect(0, 0, this->game->window->dimensions.x, this->game->window->dimensions.y);
 		//	background.rect.color = this->settings->background_color;
 		//}
-		background.w = game.window->dimensions.x;
-		background.h = game.window->dimensions.y;
-		background.color = this->settings->background_color;
-		menu_scene.AddObject(&background);
+
+		/* Use solid background if the background texture
+		 * hasn't been set in the main menu settings
+		 *
+		 * However if the texture has been loaded,
+		 * use that instead and skip the solid color */
+		if (!this->settings->background_texture.isLoaded())
+		{
+			background.w = game.window->dimensions.x;
+			background.h = game.window->dimensions.y;
+			background.color = this->settings->background_color;
+			menu_scene.AddObject(&background);
+		}
+		else
+		{
+			background_image = new Entity::Image("Background image",
+					Rect(0, 0, game.window->dimensions.x, game.window->dimensions.y),
+					this->settings->background_texture);
+			menu_scene.AddObject(background_image);
+			using_background_texture = true;
+		}
 
 		/* Initialize any entities */
 		title_text = Entity::Text(settings.title.text, &this->settings->title.font, this->settings->title.color);
@@ -226,6 +243,10 @@ namespace Birb
 		for (size_t i = 0; i < menu_buttons.size(); ++i)
 			if (menu_buttons[i].ErrorFuseStatus())
 				BlowErrorFuse();
+
+		/* Do any required cleanup */
+		if (using_background_texture)
+			delete background_image;
 	}
 
 	MainMenu::Setting::Setting()
