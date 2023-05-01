@@ -97,11 +97,7 @@ namespace Birb
 		TimeStep* time_step();
 
 	private:
-#ifdef BIRB_MT
-		void WindowDisplayMultithread(Window& game_window);
-#else
 		void WindowDisplay(Window& game_window);
-#endif
 
 		/* Placeholder functions for optional game loop functions */
 		static void fixed_update_placeholder();

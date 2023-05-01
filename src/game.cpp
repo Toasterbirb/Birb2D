@@ -4,9 +4,6 @@
 #include "Utils.hpp"
 #include "Values.hpp"
 
-#ifdef BIRB_MT
-#include <future>
-#endif /* BIRB_MT */
 
 namespace Birb
 {
@@ -111,11 +108,7 @@ namespace Birb
 				ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 			}
 
-#ifdef BIRB_MT
-			WindowDisplayMultithread(game_window);
-#else
 			WindowDisplay(game_window);
-#endif
 
 			/* End of timestep */
 			timeStep.End();
@@ -161,35 +154,6 @@ namespace Birb
 		return &timeStep;
 	}
 
-#ifdef BIRB_MT
-	void Game::WindowDisplayMultithread(Window& game_window)
-	{
-		std::future<void> fixed_update_future;
-
-		/* Start the fixed update thread and refresh statistics */
-		if (timeStep.ShouldRunFixedUpdate())
-		{
-			fixed_update_future = std::async(std::launch::async, fixed_update);
-
-			if (Diagnostics::Debugging::Overlays::Debug)
-				statistics.Refresh();
-		}
-
-		/* Render the statistics overlay if debugging is enabled */
-		//if (Diagnostics::Debugging::Overlays::ResourceMonitor)
-		//	statistics.Render();
-
-		/* Start the post render thread */
-		std::future<void> post_render_future = std::async(std::launch::async, post_render);
-
-		game_window.Display();
-
-		fixed_update_future.wait();
-
-		/* Join the post render thread */
-		post_render_future.wait();
-	}
-#else
 	void Game::WindowDisplay(Window& game_window)
 	{
 		/* mingw doesn't really like std::future yet,
@@ -211,7 +175,6 @@ namespace Birb
 
 		post_render();
 	}
-#endif
 
 	void Game::fixed_update_placeholder()
 	{}
