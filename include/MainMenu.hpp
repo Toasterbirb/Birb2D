@@ -29,7 +29,7 @@ namespace Birb
 	public:
 		MainMenu();
 		MainMenu(Game& game, MainMenuSettings& settings);
-		void Launch();
+		bool Launch();
 
 	private:
 		Game* game;
@@ -75,5 +75,9 @@ namespace Birb
 		std::vector<Entity::Text> menu_buttons;
 
 		void StartGame();
+
+		/// This variable gets set to false if the
+		/// "Quit" button was pressed in the menu
+		bool start_game = true;
 	};
 }

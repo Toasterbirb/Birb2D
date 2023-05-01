@@ -120,7 +120,7 @@ namespace Birb
 		credits_scene.AddObject(&this->window_title_text);
 	}
 
-	void MainMenu::Launch()
+	bool MainMenu::Launch()
 	{
 		/* Add setting buttons to settings scene */
 		volume_slider.AddToScene(&settings_scene);
@@ -184,7 +184,8 @@ namespace Birb
 
 									case (MainMenuSettings::QUIT):
 									{
-										window_running = false;
+										window_running 	= false;
+										start_game 		= false;
 										break;
 									}
 								}
@@ -248,6 +249,8 @@ namespace Birb
 		/* Do any required cleanup */
 		if (using_background_texture)
 			delete background_image;
+
+		return start_game;
 	}
 
 	MainMenu::Setting::Setting()
