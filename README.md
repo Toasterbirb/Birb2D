@@ -16,6 +16,7 @@ Birb2D is not meant to be *production* quality, but there's a chance it can be u
 - [Void](https://github.com/Toasterbirb/Void)
 - [Tic-Tac-Toe](https://github.com/Toasterbirb/tic-tac-toe)
 - [Let's get this bread (Ludum Dare 52)](https://ldjam.com/events/ludum-dare/52/lets-get-this-bread)
+- [Silence is just a pipe dream (Ludum Dare 53)](https://ldjam.com/events/ludum-dare/53/silence-is-just-a-pipe-dream)
 
 ## External libraries
 - SDL2
