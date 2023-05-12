@@ -36,6 +36,7 @@ namespace Birb
 
 		/* -- Cursor functions -- */
 		Vector2Int CursorPosition() const; ///< Returns the current cursor position relative to the window
+		Vector2Int CursorPositionWorld() const;
 		bool CursorInRect(const Rect& rect) const; ///< Checks if the cursor is inside of the given rect dimensions
 		/* ---------------------- */
 

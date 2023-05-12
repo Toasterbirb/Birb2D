@@ -149,6 +149,11 @@ namespace Birb
 		return pos;
 	}
 
+	Vector2Int Window::CursorPositionWorld() const
+	{
+		return CursorPosition() + Global::RenderVars::CameraPosition.ToInt();
+	}
+
 	bool Window::CursorInRect(const Rect& rect) const
 	{
 		return Physics::PointInRect(rect, CursorPosition());
