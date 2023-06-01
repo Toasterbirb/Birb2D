@@ -37,38 +37,34 @@ namespace BirbTest
 		SUBCASE("Basic fade transition")
 		{
 			transition = new Transition::Fade(0x000000);
-			transition->set_color(Colors::Nord::Aurora::nord14);
 		}
 
 		SUBCASE("Block fade transition")
 		{
 			transition = new Transition::BlockFade(0x000000, 8);
-			transition->set_color(Colors::Nord::Aurora::nord14);
 		}
 
 		SUBCASE("Wipe transition left")
 		{
 			transition = new Transition::Wipe(0x000000, Transition::LEFT);
-			transition->set_color(Colors::Nord::Aurora::nord14);
 		}
 
 		SUBCASE("Wipe transition right")
 		{
 			transition = new Transition::Wipe(0x000000, Transition::RIGHT);
-			transition->set_color(Colors::Nord::Aurora::nord14);
 		}
 
 		SUBCASE("Wipe transition up")
 		{
 			transition = new Transition::Wipe(0x000000, Transition::UP);
-			transition->set_color(Colors::Nord::Aurora::nord14);
 		}
 
 		SUBCASE("Wipe transition down")
 		{
 			transition = new Transition::Wipe(0x000000, Transition::DOWN);
-			transition->set_color(Colors::Nord::Aurora::nord14);
 		}
+
+		transition->set_color(Colors::Nord::Aurora::nord14);
 
 		Game game(transition_test_win_opts, transition_start, transition_input, transition_update, transition_render);
 		game.Start();
