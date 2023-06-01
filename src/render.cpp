@@ -31,6 +31,8 @@ namespace Birb
 				SDL_SetRenderDrawBlendMode(Global::RenderVars::Renderer, SDL_BLENDMODE_BLEND);
 			else
 				SDL_SetRenderDrawBlendMode(Global::RenderVars::Renderer, SDL_BLENDMODE_NONE);
+
+			Global::RenderVars::AlphaBlendingEnabled = state;
 		}
 
 		bool DrawTexture(const Texture& texture, const Rect& rect, bool world_space, float angle)

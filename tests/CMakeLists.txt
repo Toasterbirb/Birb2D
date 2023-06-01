@@ -41,6 +41,7 @@ add_executable(test
 	general_tests/splash_test.cpp
 	general_tests/texture_test.cpp
 	general_tests/timer_test.cpp
+	general_tests/transition_test.cpp
 	general_tests/utils_test.cpp
 	general_tests/values_test.cpp
 	general_tests/var_test.cpp

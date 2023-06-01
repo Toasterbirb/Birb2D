@@ -205,4 +205,66 @@ namespace BirbTest
 
 		CHECK(result);
 	}
+
+	TEST_CASE("Shuffle an integer array")
+	{
+		Random rand;
+		std::vector<int> values = {
+			0,
+			1,
+			2,
+			3,
+			4
+		};
+
+		rand.ShuffleVector(values);
+
+		/* Confirm that all of the values are still there */
+		int sum = 0;
+		for (int i = 0; i < 5; i++)
+			sum += values[i];
+
+		CHECK(sum == 10);
+	}
+
+	TEST_CASE("Shuffle a string vector")
+	{
+		std::string originalValues[5] = {
+			"One",
+			"Two",
+			"Three",
+			"Four",
+			"Five"
+		};
+
+		std::vector<std::string> values = {
+			"One",
+			"Two",
+			"Three",
+			"Four",
+			"Five"
+		};
+
+		Random::ShuffleVector(values);
+
+		/* Confirm that all of the values are still there */
+		bool valueFound[5];
+
+		for (int i = 0; i < 5; i++)
+			for (int j = 0; j < 5; j++)
+				if (i == j)
+					valueFound[i] = true;
+
+		/* Check the results */
+		bool result = true;
+
+		for (int i = 0; i < 5; i++)
+			if (valueFound[i] == false)
+			{
+				result = false;
+				break;
+			}
+
+		CHECK(result);
+	}
 }

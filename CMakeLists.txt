@@ -240,6 +240,11 @@ set(CORE_SRC
 	src/ParticlePatterns/spiral.cpp
 	src/ParticlePatterns/stablecircle.cpp
 	src/ParticlePatterns/stablesquare.cpp
+
+	src/transition.cpp
+	src/Transitions/blockfade.cpp
+	src/Transitions/fade.cpp
+	src/Transitions/wipe.cpp
 )
 
 if (RELEASE OR STATIC_SDL)

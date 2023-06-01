@@ -37,6 +37,7 @@ namespace Birb
 		{
 			static inline int RefreshRate = 240;
 			static inline Vector2Int WindowDimensions = {0, 0};
+			static inline bool AlphaBlendingEnabled = false;
 
 			static inline SDL_Window* MainWindow = NULL;
 			static inline SDL_Renderer* Renderer = NULL;
