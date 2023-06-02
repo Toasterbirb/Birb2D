@@ -7,6 +7,10 @@ namespace Birb
 		FrametimeGraph::FrametimeGraph(const Rect& rect, int pointCount, TimeStep& timeStep)
 		:pointCount(pointCount), rect(rect), timeStep(timeStep)
 		{
+			assert(rect.w > 0);
+			assert(rect.h > 0);
+			assert(pointCount > 1);
+
 			enabled = true;
 
 			graph = Widgets::Graph(Widgets::GraphType::Line, rect);
@@ -18,6 +22,7 @@ namespace Birb
 			graph.rect.world_space 	= false;
 
 			font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 14);
+			assert(font.isLoaded());
 			fps_text = Entity::Text("", &font, Colors::White);
 			fps_text.rect.x = rect.x + rect.w + 8;
 			fps_text.rect.y = rect.y + 8;

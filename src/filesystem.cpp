@@ -1,5 +1,6 @@
 #include "Filesystem.hpp"
 #include "Logger.hpp"
+#include <cassert>
 
 #ifdef DISTCC
 #include <filesystem>
@@ -14,17 +15,20 @@ namespace Birb
 		{
 			void Create(const std::string& dpath)
 			{
+				assert(dpath.size() > 0);
 				std::filesystem::create_directories(dpath);
 			}
 
 			void Remove(const std::string& dpath)
 			{
+				assert(dpath.size() > 0);
 				if (std::filesystem::is_directory(dpath))
 					std::filesystem::remove(dpath);
 			}
 
 			bool Exists(const std::string& dpath)
 			{
+				assert(dpath.size() > 0);
 				return (std::filesystem::exists(dpath) && std::filesystem::is_directory(dpath));
 			}
 		}
@@ -33,6 +37,7 @@ namespace Birb
 		{
 			void CreateEmpty(const std::string& fpath)
 			{
+				assert(fpath.size() > 0);
 				if (!std::filesystem::exists(fpath))
 					std::ofstream output(fpath);
 				else
@@ -41,6 +46,7 @@ namespace Birb
 
 			void Remove(const std::string& fpath)
 			{
+				assert(fpath.size() > 0);
 				if (Exists(fpath))
 					std::filesystem::remove(fpath);
 				else
@@ -49,11 +55,14 @@ namespace Birb
 
 			bool Exists(const std::string& fpath)
 			{
+				assert(fpath.size() > 0);
 				return (std::filesystem::exists(fpath) && std::filesystem::is_regular_file(fpath));
 			}
 
 			std::string Read(const std::string& fpath)
 			{
+				assert(fpath.size() > 0);
+
 				/* Make sure the file exists */
 				if (!Exists(fpath))
 				{
@@ -81,6 +90,8 @@ namespace Birb
 
 			bool Write(const std::string& fpath, const std::string& content, bool overwrite)
 			{
+				assert(fpath.size() > 0);
+
 				/* Check if a file exists if overwrite protection is enabled */
 				if (!overwrite && Exists(fpath))
 				{

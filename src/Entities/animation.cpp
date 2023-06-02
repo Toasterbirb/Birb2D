@@ -57,12 +57,14 @@ namespace Birb
 
 		void Animation::StartAnimation()
 		{
+			assert(sprite.isLoaded());
 			ResetAnimationAtlas();
 			animationQueued = true;
 		}
 
 		void Animation::StartAnimation(int p_startFrame)
 		{
+			assert(sprite.isLoaded());
 			frameIndex = p_startFrame;
 			lastFrame = frameCount - 1;
 			animationQueued = true;
@@ -70,6 +72,8 @@ namespace Birb
 
 		void Animation::StartAnimation(int p_startFrame, int p_lastFrame)
 		{
+			assert(sprite.isLoaded());
+			assert(p_startFrame < p_lastFrame);
 			frameIndex = p_startFrame;
 			lastFrame = p_lastFrame;
 			animationQueued = true;
@@ -77,6 +81,8 @@ namespace Birb
 
 		Vector2Int Animation::getAtlasPosition(int frame)
 		{
+			assert(frame >= 0);
+
 			Vector2Int pos;
 			int index = frame;
 
@@ -111,6 +117,7 @@ namespace Birb
 				dst.w = rect.w; // * entity->localScale.x;
 				dst.h = rect.h; // * entity->localScale.y;
 
+				assert(fps != 0 && "Zero division");
 				if (frameTimer.running && frameTimer.ElapsedSeconds() >= (1.0 / fps))
 				{
 					if (frameIndex < lastFrame)

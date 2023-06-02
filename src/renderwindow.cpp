@@ -21,6 +21,7 @@ namespace Birb
 	Window::Window(const std::string& title, const Vector2Int& window_dimensions, int refresh_rate, bool resizable)
 	:win_title(title), refresh_rate(refresh_rate), dimensions(window_dimensions), original_window_dimensions(window_dimensions)
 	{
+		assert(refresh_rate > 0);
 
 		Debug::Log("Creating window '" + win_title + "'...");
 
@@ -47,10 +48,11 @@ namespace Birb
 		}
 
 		/* Set some global rendering variables */
-		Global::RenderVars::RefreshRate 		= refresh_rate;
-		Global::RenderVars::WindowDimensions 	= dimensions;
-		Global::RenderVars::MainWindow 			= win;
-		Global::RenderVars::Renderer 			= renderer;
+		Global::RenderVars::RefreshRate 			= refresh_rate;
+		Global::RenderVars::WindowDimensions 		= dimensions;
+		Global::RenderVars::MainWindow 				= win;
+		Global::RenderVars::Renderer 				= renderer;
+		Global::RenderVars::AlphaBlendingEnabled 	= false;
 
 		/* Define callback functions to some default values */
 		OnWindowResize = DefaultOnWindowResize;

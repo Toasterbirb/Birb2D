@@ -33,6 +33,8 @@ namespace Birb
 
 	void Line::RenderFunc()
 	{
+		assert(thickness > 0);
+
 		/* Don't draw invisible lines */
 		if (pointA == pointB)
 			return;
@@ -41,8 +43,6 @@ namespace Birb
 			Render::DrawLine(*this);
 		else if (thickness > 1)
 			Render::DrawLine(*this, thickness);
-		else
-			Debug::Log("Tried to render a line with thickness <=0", Debug::error);
 	}
 
 	void Line::SetPos(const Vector2& delta)

@@ -32,8 +32,6 @@ namespace BirbTest
 		transition_test_win_opts.refresh_rate = 240;
 		transition_test_win_opts.title = "Transition animation tests";
 
-		Render::AlphaBlendingToggle(true);
-
 		SUBCASE("Basic fade transition")
 		{
 			transition = new Transition::Fade(0x000000);
@@ -67,6 +65,7 @@ namespace BirbTest
 		transition->set_color(Colors::Nord::Aurora::nord14);
 
 		Game game(transition_test_win_opts, transition_start, transition_input, transition_update, transition_render);
+
 		game.Start();
 
 		CHECK_FALSE(game.ErrorFuseStatus());
@@ -78,6 +77,7 @@ namespace BirbTest
 
 	void transition_start(Game& game)
 	{
+		Render::AlphaBlendingToggle(true);
 		test_timer.Start();
 	}
 

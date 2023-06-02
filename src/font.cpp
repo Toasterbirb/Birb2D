@@ -22,6 +22,9 @@ namespace Birb
 
 		// TODO: Copy the memory instead of opening the font-file again
 		LoadFont(other.filePath, size);
+
+		assert(fontLoaded);
+		assert(ttfFont != nullptr);
 	}
 
 	Font::Font(const std::string& filePath, int fontSize)
@@ -80,6 +83,7 @@ namespace Birb
 
 	void Font::SetSize(int size)
 	{
+		assert(size > 0 && "Attempted to set font size to invisible");
 		this->size = size;
 
 		/* Reload the font with a different size */

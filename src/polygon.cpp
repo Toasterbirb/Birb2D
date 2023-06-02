@@ -20,6 +20,8 @@ namespace Birb
 
 	Polygon::Polygon(const Vector2 points[], int pointCount)
 	{
+		assert(points != NULL);
+		assert(pointCount > 2);
 		this->points = std::vector<Vector2>(points, points + pointCount);
 		angle = 0;
 	}
@@ -27,12 +29,15 @@ namespace Birb
 	Polygon::Polygon(const Vector2 points[], int pointCount, const Color& color)
 	:color(color)
 	{
+		assert(points != NULL);
+		assert(pointCount > 2);
 		this->points = std::vector<Vector2>(points, points + pointCount);
 		angle = 0;
 	}
 
 	Polygon::Polygon(const std::vector<Vector2>& points)
 	{
+		assert(points.size() > 2);
 		this->points = points;
 		angle = 0;
 	}
@@ -40,17 +45,21 @@ namespace Birb
 	Polygon::Polygon(const std::vector<Vector2>& points, const Color& color)
 	:color(color)
 	{
+		assert(points.size() > 2);
 		this->points = points;
 		angle = 0;
 	}
 
 	void Polygon::AddPoints(const Vector2 points[], int pointCount)
 	{
+		assert(points != NULL);
+		assert(pointCount > 0);
 		this->points.insert(std::end(this->points), points, points + pointCount);
 	}
 
 	void Polygon::AddPoints(const std::vector<Vector2>& points)
 	{
+		assert(points.size() > 0);
 		this->points.insert(std::end(this->points), std::begin(points), std::end(points));
 	}
 
@@ -98,6 +107,8 @@ namespace Birb
 			result.x += points[i].x;
 			result.y += points[i].y;
 		}
+
+		assert(points.size() > 0 && "Zero division");
 		result.x /= points.size();
 		result.y /= points.size();
 

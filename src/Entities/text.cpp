@@ -30,6 +30,7 @@ namespace Birb
 		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color)
 		:color(color), text(text), font(font), wrapLength(0), has_background_color(false)
 		{
+			assert(font != NULL);
 			this->name = name;
 			this->rect = pos;
 			ReloadSprite();
@@ -38,6 +39,7 @@ namespace Birb
 		Text::Text(const std::string& name, const Vector2Int& pos, const std::string& text, Font* font, const Color& color, const Color& bg_color)
 		:color(color), bgColor(bg_color), text(text), font(font), wrapLength(0), has_background_color(true)
 		{
+			assert(font != NULL);
 			this->name = name;
 			this->rect = pos;
 			ReloadSprite();
@@ -46,6 +48,7 @@ namespace Birb
 		Text::Text(const std::string& text, const Vector2Int& pos, Font* font, const Color& color)
 		:color(color), text(text), font(font), wrapLength(0), has_background_color(false)
 		{
+			assert(font != NULL);
 			this->rect = pos;
 			ReloadSprite();
 		}
@@ -53,6 +56,7 @@ namespace Birb
 		Text::Text(const std::string& text, Font* font, const Color& color)
 		:color(color), text(text), font(font), has_background_color(false)
 		{
+			assert(font != NULL);
 			wrapLength = 0;
 			ReloadSprite();
 		}
@@ -60,12 +64,15 @@ namespace Birb
 		Text::Text(const std::string& text, Font* font, const Color& color, const Color& bg_color)
 		:color(color), bgColor(bg_color), text(text), font(font), has_background_color(true)
 		{
+			assert(font != NULL);
 			wrapLength = 0;
 			ReloadSprite();
 		}
 
 		void Text::Construct(const std::string& text, const Vector2Int& pos, Font* font, const Color& color)
 		{
+			assert(font != NULL);
+
 			/* If this text entity already had some text on it,
 			 * we can assume that its sprite has been generated
 			 * so we can safely clean it out */
@@ -111,6 +118,8 @@ namespace Birb
 
 		void Text::SetFont(Font* font)
 		{
+			assert(font != NULL);
+
 			/* Don't do anything if the font hasn't changed at all */
 			if (&this->font == &font)
 				return;
@@ -155,6 +164,8 @@ namespace Birb
 		bool Text::ReloadSprite()
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Reload sprite", PROFILER_COLOR);
+
+			assert(font->isLoaded());
 
 			/* If the new text would be empty, simply disable the text entity. If the
 			 * entity then gets some actual text, toggle the entity back on and set the

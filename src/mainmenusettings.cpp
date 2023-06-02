@@ -13,6 +13,7 @@ namespace Birb
 
 		/* Set some default values */
 		title.font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 55);
+		assert(title.font.isLoaded());
 		title.text 		= "Placeholder title";
 		title.position 	= Vector2Int(64, 64);
 		title.color 	= Colors::Nord::SnowStorm::nord4;
@@ -43,6 +44,7 @@ namespace Birb
 	MainMenuSettings::Button::Button()
 	{
 		font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 32);
+		assert(font.isLoaded());
 		text_color 			= Colors::Nord::SnowStorm::nord6;
 		background_color 	= Colors::Nord::PolarNight::nord2;
 		highlight_color 	= Colors::Nord::Aurora::nord15;
@@ -61,6 +63,7 @@ namespace Birb
 	MainMenuSettings::Window::Window()
 	{
 		title_font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 24);
+		assert(title_font.isLoaded());
 		title_color 	= Colors::Nord::Frost::nord9;
 
 		background = Rect(500, 420, 300, 100);
@@ -77,6 +80,7 @@ namespace Birb
 	MainMenuSettings::Settings::Settings()
 	{
 		setting_font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 20);
+		assert(setting_font.isLoaded());
 
 		slider_fill_color 		= Colors::Nord::Aurora::nord14;
 		slider_background_color = Colors::Nord::PolarNight::nord3;
@@ -87,5 +91,6 @@ namespace Birb
 	{
 		credits_text 			= "Someone really cool made this game";
 		text_font.LoadFont("birb2d_res/fonts/manaspace/manaspc.ttf", 16);
+		assert(text_font.isLoaded());
 	}
 }

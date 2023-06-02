@@ -62,6 +62,9 @@ namespace Birb
 
 		Vector2Int FindClosestPoint(const Vector2Int& point, Vector2Int points[], int pointCount)
 		{
+			assert(pointCount > 0);
+			assert(points != NULL);
+
 			Vector2Int currentClosestPoint = points[0];
 			float currentClosestDistance = VectorDistance(point, points[0]);
 
@@ -82,6 +85,8 @@ namespace Birb
 
 		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points)
 		{
+			assert(points.size() > 0);
+
 			Vector2Int currentClosestPoint = points[0];
 			float currentClosestDistance = VectorDistance(point, points[0]);
 
@@ -103,6 +108,8 @@ namespace Birb
 
 		Vector2Int FindClosestPoint(const Vector2Int& point, const std::vector<Vector2Int>& points, const std::vector<Vector2Int>& ignoredPoints)
 		{
+			assert(points.size() > 0);
+
 			/* Find the first non-ignored point */
 			Vector2Int firstNotIgnored;
 			for (size_t i = 0; i < points.size(); ++i)
@@ -158,6 +165,7 @@ namespace Birb
 
 		double 	Normalize(double value, double min, double max, double normalized_maximum)
 		{
+			assert(max - min != 0);
 			return ((value - min) / (max - min)) * normalized_maximum;
 		}
 	}

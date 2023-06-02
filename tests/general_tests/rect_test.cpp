@@ -190,7 +190,11 @@ namespace BirbTest
 		CHECK(Render::DrawRect(rectA));
 		CHECK(Render::DrawRect(rectB.color, rectB));
 		CHECK(Render::DrawRect(rectC.color, rectC, 128));
+
+		Render::AlphaBlendingToggle(true);
 		CHECK(Render::DrawRect(transparent_rect));
+		Render::AlphaBlendingToggle(false);
+
 		window.Display();
 		SDL_Delay(500);
 	}

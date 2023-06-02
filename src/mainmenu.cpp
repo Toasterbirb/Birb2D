@@ -55,6 +55,7 @@ namespace Birb
 		}
 
 		/* Initialize any entities */
+		assert(this->settings->title.font.isLoaded());
 		title_text = Entity::Text(settings.title.text, &this->settings->title.font, this->settings->title.color);
 		title_text.rect = this->settings->title.position;
 		menu_scene.AddObject(&title_text);
@@ -89,6 +90,7 @@ namespace Birb
 		settings_scene.AddObject(&this->settings->settings_menu.window.background);
 		settings_scene.AddObject(&this->settings->settings_menu.window.top_bar);
 
+		assert(this->settings->settings_menu.window.title_font.isLoaded());
 		window_title_text = Entity::Text("Settings",
 				Vector2Int(this->settings->settings_menu.window.top_bar.x + 4, this->settings->settings_menu.window.top_bar.y + 4),
 				&this->settings->settings_menu.window.title_font,
@@ -259,6 +261,7 @@ namespace Birb
 	MainMenu::Setting::Setting(const Vector2Int& pos, const std::string& text, SettingType type, MainMenuSettings& settings)
 	:position(pos)
 	{
+		assert(text.empty() == false);
 		this->text.Construct(text, pos, &settings.settings_menu.setting_font, settings.settings_menu.window.text_color);
 		this->text.renderingPriority = 5;
 

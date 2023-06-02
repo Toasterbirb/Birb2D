@@ -27,6 +27,7 @@ namespace Birb
 			background_plane.renderingPriority = -1;
 
 			asset_manager.LoadTexture("logo", res_base_path + "/logo.png");
+			assert(asset_manager.texture("logo").isLoaded());
 			float birb_tex_height = static_cast<float>(window.dimensions.y) / asset_manager.texture("logo").dimensions().y * 2;
 			float size_multiplier = birb_tex_height / asset_manager.texture("logo").dimensions().y;
 
@@ -36,8 +37,10 @@ namespace Birb
 				birb_tex_height);
 
 			birb2d_logo = Entity::Image(asset_manager.texture("logo"), logo_rect);
+			assert(birb2d_logo.sprite.isLoaded());
 
 			manaspace.LoadFont(res_base_path + "/fonts/manaspace/manaspc.ttf", static_cast<float>(window.dimensions.y) / asset_manager.texture("logo").dimensions().y - 4);
+			assert(manaspace.isLoaded());
 			//birb2d_text = Entity("Birb2D logo text",
 			//		Vector2Int(birb2d_logo.rect.x + birb2d_logo.rect.w + 32, birb2d_logo.rect.y + (birb2d_logo.rect.y / 8)),
 			//		EntityComponent::Text("", &manaspace, &Colors::White));
@@ -60,6 +63,7 @@ namespace Birb
 	void Splash::Run()
 	{
 		manaspace_small.LoadFont(res_base_path + "/fonts/manaspace/manaspc.ttf", 24);
+		assert(manaspace_small.isLoaded());
 
 		//loading_text_entity = Entity("Loading text",
 		//		Vector2Int(32, 32),

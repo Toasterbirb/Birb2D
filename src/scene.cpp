@@ -2,6 +2,7 @@
 #include "Logger.hpp"
 #include "Renderwindow.hpp"
 #include "microprofile.h"
+#include <cassert>
 
 #define PROFILER_GROUP "Scenes"
 #define PROFILER_COLOR MP_WHITE
@@ -18,27 +19,34 @@ namespace Birb
 
 	void Scene::AddObject(SceneObject& obj)
 	{
+		assert(&obj != NULL);
 		this->AddObjectSafe(&obj);
 	}
 
 	void Scene::AddObject(SceneObject* obj)
 	{
+		assert(obj != NULL);
 		this->AddObjectSafe(obj);
 	}
 
 	void Scene::AddObjectFast(SceneObject& obj)
 	{
+		assert(&obj != NULL);
 		AddObjectUnSafe(&obj);
 	}
 
 	void Scene::AddObjectFast(SceneObject* obj)
 	{
+		assert(obj != NULL);
 		AddObjectUnSafe(obj);
 	}
 
 	void Scene::AddObject(SceneObject* obj[], int objCount)
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add multiple SceneObjects", PROFILER_COLOR);
+
+		assert(obj != NULL);
+		assert(objCount > 0);
 
 		for (int i = 0; i < objCount; ++i)
 		{
@@ -52,6 +60,7 @@ namespace Birb
 
 	void Scene::PreAllocate(int objCount)
 	{
+		assert(objCount > 0);
 		objects.reserve(objCount);
 	}
 
@@ -176,8 +185,11 @@ namespace Birb
 
 		/* Draw objects */
 		for (size_t i = 0; i < objects.size(); ++i)
+		{
+			assert(objects[i] != NULL);
 			if (objects[i]->active)
 				objects[i]->RenderFunc();
+		}
 	}
 
 	void Scene::SortObjects()
@@ -233,6 +245,9 @@ namespace Birb
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Add SceneObject (fast)", PROFILER_COLOR);
 
+		/* Adding the object into itself will cause problems */
+		assert(obj != this);
+
 		objects.push_back(obj);
 
 		/* If the positionOffset has changed, apply that to new objects */
@@ -244,6 +259,7 @@ namespace Birb
 
 	void Scene::SetNewObjectWorldSpace(SceneObject* obj)
 	{
+		assert(obj != NULL);
 		obj->world_space 			= this->world_space;
 		obj->parallax_multiplier 	= this->parallax_multiplier;
 	}

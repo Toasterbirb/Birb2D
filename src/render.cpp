@@ -17,11 +17,16 @@ namespace Birb
 
 		void ResetDrawColor()
 		{
+			assert(Global::RenderVars::Renderer != NULL);
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, Global::RenderVars::BackgroundColor.r, Global::RenderVars::BackgroundColor.g, Global::RenderVars::BackgroundColor.b, 255);
 		}
 
 		void SetRenderDrawColor(const Color& color)
 		{
+			/* Handle alpha */
+			assert(color.a == 255 || Global::RenderVars::AlphaBlendingEnabled == true);
+
+			assert(Global::RenderVars::Renderer != NULL);
 			SDL_SetRenderDrawColor(Global::RenderVars::Renderer, color.r, color.g, color.b, color.a);
 		}
 
@@ -54,6 +59,7 @@ namespace Birb
 		bool DrawTexture(const Texture& texture, const SDL_Rect& src, const SDL_Rect& dst, float angle)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Draw texture", PROFILER_COLOR);
+			assert(Global::RenderVars::Renderer != NULL);
 
 			/* Make sure that the texture is loaded */
 			if (!texture.isLoaded())
@@ -98,14 +104,7 @@ namespace Birb
 			rectangle.x -= (Global::RenderVars::CameraPosition.x * dimensions.world_space * dimensions.parallax_multiplier);
 			rectangle.y -= (Global::RenderVars::CameraPosition.y * dimensions.world_space * dimensions.parallax_multiplier);
 
-			/* Handle alpha */
-			if (color.a != 255)
-				AlphaBlendingToggle(true);
-
 			bool success = !SDL_RenderFillRect(Global::RenderVars::Renderer, &rectangle);
-
-			if (color.a != 255)
-				AlphaBlendingToggle(false);
 
 			ResetDrawColor();
 			return success;
@@ -246,6 +245,11 @@ namespace Birb
 		/* Draw a filled polygon and free the heap allocated point integer arrays */
 		bool _DrawFilledPolygon(SDL_Renderer* renderer, Sint16* vx, Sint16* vy, int point_count, Uint32 color)
 		{
+			assert(renderer != NULL);
+			assert(vx != NULL);
+			assert(vy != NULL);
+			assert(point_count > 2 && "Polygon with less than 3 points would be invisible");
+
 			if (filledPolygonColor(renderer, vx, vy, point_count, color) == 0)
 			{
 				/* Cleanup */

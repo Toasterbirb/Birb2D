@@ -18,6 +18,9 @@ namespace Birb
 	{
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Load SDL_Texture", PROFILER_COLOR);
 
+		assert(p_filePath.size() > 0);
+		assert(Global::RenderVars::Renderer != NULL);
+
 		SDL_Texture* texture = NULL;
 
 #ifdef BUNDLED_ASSETS
@@ -39,6 +42,9 @@ namespace Birb
 
 	SDL_Texture* Resources::LoadTextureFromMem(const std::string& file_path)
 	{
+		assert(file_path.size() > 0);
+		assert(Global::RenderVars::Renderer != NULL);
+
 		SDL_Texture* texture = IMG_LoadTexture_RW(Global::RenderVars::Renderer, AssetManager::sdl_mem_read_bundle(file_path), true);
 
 		if (texture == NULL)
@@ -49,6 +55,10 @@ namespace Birb
 
 	SDL_Texture* Resources::LoadTextureFromMem(const Asset& asset)
 	{
+		assert(asset.buffer != NULL);
+		assert(asset.size > 0);
+		assert(Global::RenderVars::Renderer != NULL);
+
 		SDL_Texture* texture = IMG_LoadTexture_RW(Global::RenderVars::Renderer, AssetManager::sdl_mem_read(asset), true);
 
 		if (texture == NULL)
@@ -111,11 +121,7 @@ namespace Birb
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Render text sprite", PROFILER_COLOR);
 
 		/* Check if the arguments are valid */
-		if (!font.isLoaded())
-		{
-			Debug::Log("Tried to render text with invalid font!");
-			return NULL;
-		}
+		assert(font.isLoaded());
 
 		SDL_Surface* surface;
 
@@ -144,11 +150,7 @@ namespace Birb
 		MICROPROFILE_SCOPEI(PROFILER_GROUP, "Render text sprite with background color", PROFILER_COLOR);
 
 		/* Check if the arguments are valid */
-		if (!font.isLoaded())
-		{
-			Debug::Log("Tried to render text with invalid font!");
-			return NULL;
-		}
+		assert(font.isLoaded());
 
 		//SDL_Surface* surface = TTF_RenderText_Shaded(font.ttf(), text.c_str(), color.sdl(), bgColor.sdl());
 		SDL_Surface* surface = TTF_RenderText_Shaded_Wrapped(font.ttf(), text.c_str(), color.sdl(), bgColor.sdl(), wrapLength);

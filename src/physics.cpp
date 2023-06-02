@@ -155,6 +155,10 @@ namespace Birb
 		bool PointInPolygon(Vector2 points[], const int& pointCount, const Vector2& point)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Point in polygon", PROFILER_COLOR);
+
+			assert(points != NULL);
+			assert(pointCount > 2 && "Invalid polygon");
+
 			int j = pointCount - 1;
 			bool oddNodes = false; /* If the node count is odd, the point is in the polygon */
 
@@ -178,6 +182,12 @@ namespace Birb
 		bool PolygonCollision(Vector2 polygonA[], const int& polygonAsize, Vector2 polygonB[], const int& polygonBsize)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Polygon collision", PROFILER_COLOR);
+
+			assert(polygonA != NULL);
+			assert(polygonB != NULL);
+			assert(polygonAsize > 2 && "Invalid polygon");
+			assert(polygonBsize > 2 && "Invalid polygon");
+
 			/* First test if any of the points of either polygon is inside of the other one
 			 * start with polygon A and then repeat the process the other way around */
 			for (int i = 0; i < polygonAsize; ++i)
@@ -208,16 +218,22 @@ namespace Birb
 
 		bool PolygonCollision(std::vector<Vector2> polygonA, std::vector<Vector2> polygonB)
 		{
+			assert(polygonA.size() > 2 && "Invalid polygon");
+			assert(polygonB.size() > 2 && "Invalid polygon");
 			return PolygonCollision(&polygonA[0], polygonA.size(), &polygonB[0], polygonB.size());
 		}
 
 		bool PolygonCollision(const Polygon& polygonA, const Polygon& polygonB)
 		{
+			assert(polygonA.size() > 2 && "Invalid polygon");
+			assert(polygonB.size() > 2 && "Invalid polygon");
 			return PolygonCollision(polygonA.points, polygonB.points);
 		}
 
 		bool PolygonCollision(std::vector<Polygon> polygons)
 		{
+			assert(polygons.size() > 1 && "No point in checking if a lonely polygon collides with itself");
+
 			bool collision = false;
 			for (size_t i = 0; i < polygons.size() && !collision; ++i)
 			{
@@ -297,6 +313,7 @@ namespace Birb
 				return false;
 
 			/* Lets first calculate the formula for the line */
+			assert(line.pointB.x - line.pointA.x && "Zero division");
 			float slope = (line.pointB.y - line.pointA.y) / (line.pointB.x - line.pointA.x);
 			float y_intersection = line.pointA.y - (line.pointA.x * slope);
 
@@ -329,6 +346,7 @@ namespace Birb
 		bool CircleCollision(const Circle& circle, const Polygon& polygon)
 		{
 			MICROPROFILE_SCOPEI(PROFILER_GROUP, "Circle collision with a polygon", PROFILER_COLOR);
+			assert(polygon.size() > 2 && "Invalid polygon");
 
 			/* Check if any of the polygon points are inside of the circle */
 			for (int i = 0; i < polygon.size(); i++)

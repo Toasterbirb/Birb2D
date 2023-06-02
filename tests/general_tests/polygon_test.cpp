@@ -223,20 +223,22 @@ namespace BirbTest
 			};
 		}
 
-		SUBCASE("Invalid polygon A")
-		{
-			points = {
-				{0, 1},
-				{0, 2}
-			};
-		}
+		// TODO: Disable these cases for now, since the constructor prevents you from
+		//       creating invalid polygons
+		//SUBCASE("Invalid polygon A")
+		//{
+		//	points = {
+		//		{0, 1},
+		//		{0, 2}
+		//	};
+		//}
 
-		SUBCASE("Invalid polygon B")
-		{
-			points = {
-				{0, 0}
-			};
-		}
+		//SUBCASE("Invalid polygon B")
+		//{
+		//	points = {
+		//		{0, 0}
+		//	};
+		//}
 
 		Polygon polygon(points);
 		polygon.Optimize();

@@ -37,6 +37,7 @@ namespace Birb
 
 		void Image::RenderFunc()
 		{
+			assert(sprite.isLoaded());
 			if (!Render::DrawTexture(sprite, rect, world_space, angle))
 				BlowErrorFuse();
 		}
