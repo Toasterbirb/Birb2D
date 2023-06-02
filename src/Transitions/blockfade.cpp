@@ -27,7 +27,6 @@ namespace Birb
 					int index = utils::FlatIndex({i, j}, block_count);
 					blocks[index] = Rect(i * block_width, j * block_width, block_width, block_width, color);
 					blocks[index].color.a = 0;
-					std::cout << blocks[index] << std::endl;
 				}
 			}
 
