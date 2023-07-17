@@ -24,7 +24,7 @@ option(WINDOWS_BUILD "Enable some windows specific options" OFF)
 option(PROFILER "Enable the profiler timers" OFF)
 option(BUNDLED_ASSETS "Bundle game assets directly into the game binary" OFF)
 option(DISTCC "Disable precompiled headers for better distcc performance" OFF)
-option(MULTITHREAD "Enable multithreading. Mingw can have issues with this" ON)
+option(MULTITHREAD "Enable multithreading. Mingw can have issues with this" OFF)
 option(SANITIZE "Build the engine with address sanitizer. Can cause trouble
 when building with a game project" OFF)
 
