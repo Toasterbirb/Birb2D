@@ -19,7 +19,6 @@ namespace Birb
 
 	void Scene::AddObject(SceneObject& obj)
 	{
-		assert(&obj != NULL);
 		this->AddObjectSafe(&obj);
 	}
 
@@ -31,7 +30,6 @@ namespace Birb
 
 	void Scene::AddObjectFast(SceneObject& obj)
 	{
-		assert(&obj != NULL);
 		AddObjectUnSafe(&obj);
 	}
 
