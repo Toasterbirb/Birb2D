@@ -4,6 +4,7 @@
 #include "STD.hpp"
 #else
 #include <vector>
+#include <cassert>
 #endif
 
 #include "Color.hpp"

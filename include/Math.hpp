@@ -3,6 +3,7 @@
 #ifndef DISTCC
 #include "STD.hpp"
 #else
+#include <cassert>
 #include <vector>
 #endif
 

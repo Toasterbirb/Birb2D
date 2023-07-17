@@ -5,6 +5,7 @@
 #else
 #include <string>
 #include <vector>
+#include <cassert>
 #endif
 
 #include "Color.hpp"
