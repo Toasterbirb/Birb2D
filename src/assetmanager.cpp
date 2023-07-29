@@ -5,23 +5,15 @@
 #include "Resources.hpp"
 #include "Values.hpp"
 #include <algorithm>
+#include <string>
 
 #ifdef DISTCC
-#ifdef BIRB_MT
-#include <mutex>
-#include <execution>
-#endif /* BIRB_MT */
-
 #include <fstream>
 #endif /* DISTCC */
 
 #ifdef BUNDLED_ASSETS
 #include "AssetBundle.hpp"
 #include "cppcodec/base64_rfc4648.hpp"
-#endif
-
-#ifdef BIRB_MT
-static std::mutex lazyloaded_assets_lock;
 #endif
 
 
@@ -39,53 +31,7 @@ namespace Birb
 
 	void AssetManager::LazyLoad()
 	{
-#ifdef BIRB_MT
-		std::for_each(std::execution::par, lazyload_queue.begin(), lazyload_queue.end(),
-			[this](std::pair<std::string, AssetType> lazy_asset)
-			{
-				if (Diagnostics::Debugging::AssetLoading)
-					Debug::Log("Loading: " + lazy_asset.first);
-
-				std::ifstream file(Global::FilePaths::Resources + lazy_asset.first, std::ifstream::binary);
-				if (file)
-				{
-					Asset asset;
-					asset.type = lazy_asset.second;
-
-					/* Get the file length */
-					file.seekg(0, file.end);
-					asset.size = file.tellg();
-
-					/* Go back to the beginning */
-					file.seekg(0, file.beg);
-
-					/* Beg the operating system for some memory */
-					asset.buffer = new char[asset.size];
-
-					/* Read the file in */
-					file.read(asset.buffer, asset.size);
-
-					if (!file)
-						BlowErrorFuse();
-
-					/* Finally close the file */
-					file.close();
-
-					/* Add the lazy loaded data into a map */
-					lazyloaded_assets_lock.lock();
-					lazy_assets[lazy_asset.first] = asset;
-					lazy_asset_list.push_back(lazy_asset.first);
-					lazyloaded_assets_lock.unlock();
-				}
-				else
-				{
-					/* Something went wrong, like file not found etc. */
-					BlowErrorFuse();
-				}
-			});
-
-#else
-		/* Read the files sequentially if muiltithreading is disabled */
+		/* Read the files sequentially */
 		for (size_t i = 0; i < lazyload_queue.size(); ++i)
 		{
 			if (Diagnostics::Debugging::AssetLoading)
@@ -106,6 +52,8 @@ namespace Birb
 
 				/* Beg the operating system for some memory */
 				asset.buffer = new char[asset.size];
+				if (Diagnostics::Debugging::AssetLoading)
+					Debug::Log("File found with size of " + std::to_string(asset.size) + " bytes");
 
 				/* Read the file in */
 				file.read(asset.buffer, asset.size);
@@ -117,8 +65,8 @@ namespace Birb
 				file.close();
 
 				/* Add the lazy loaded data into a map */
-				assets[lazyload_queue[i].first] = asset;
-				asset_list.push_back(lazyload_queue[i].first);
+				lazy_assets[lazyload_queue[i].first] = asset;
+				lazy_asset_list.push_back(lazyload_queue[i].first);
 			}
 			else
 			{
@@ -126,12 +74,14 @@ namespace Birb
 				BlowErrorFuse();
 			}
 		}
-#endif
 
 		/* Clear the queue after it has been processed */
 		lazyload_queue.clear();
 
 		/* After the asset files have been read in, let SDL turn them into usable data */
+		if (Diagnostics::Debugging::AssetLoading)
+			Debug::Log("Loading " + std::to_string(lazy_asset_list.size()) + " assets from memory into an Asset Manager");
+
 		for (size_t i = 0; i < lazy_asset_list.size(); ++i)
 		{
 			switch (lazy_assets[lazy_asset_list[i]].type)
