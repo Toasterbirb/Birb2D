@@ -31,8 +31,8 @@ void gui_start(Game& game)
 	io = &ImGui::GetIO(); (void)io;
 	io->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 
-	ImGui_ImplSDL2_InitForSDLRenderer(game.window->win, game.window->renderer);
-	ImGui_ImplSDLRenderer_Init(game.window->renderer);
+	//ImGui_ImplSDL2_InitForSDLRenderer(game.window->win, game.window->renderer);
+	//ImGui_ImplSDLRenderer_Init(game.window->renderer);
 }
 
 void gui_input(Game& game)
